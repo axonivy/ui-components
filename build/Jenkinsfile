@@ -16,7 +16,7 @@ pipeline {
           catchError(buildResult: 'UNSTABLE', stageResult: 'UNSTABLE') {
             docker.build('node', '-f build/Dockerfile .').inside {
               sh 'build/use-mirror-npm.sh'
-              sh 'yarn generate'
+              sh 'yarn build'
             }
           }
           archiveArtifacts artifacts: '**/src-gen/**', allowEmptyArchive: true

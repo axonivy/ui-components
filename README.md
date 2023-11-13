@@ -10,4 +10,4 @@ This repo contains the icons for the web-based UI's.
 
 ## Inspect icon font
 
-Open the [ivy-icons.html](src-gen/ivy-icons.html) in a browser to inspect the icons.
+Open the [ivy-icons.html](/packages/icons/src-gen/ivy-icons.html) in a browser to inspect the icons.
