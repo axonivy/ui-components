@@ -1,0 +1,47 @@
+pipeline {
+  agent any
+
+  options {
+    buildDiscarder(logRotator(numToKeepStr: '30', artifactNumToKeepStr: '5'))
+  }
+
+  triggers {
+    cron '@midnight'
+  }
+
+  stages {
+    stage('Icons') {
+      steps {
+        script {
+          catchError(buildResult: 'UNSTABLE', stageResult: 'UNSTABLE') {
+            docker.build('node', '-f build/Dockerfile .').inside {
+              sh 'build/use-mirror-npm.sh'
+              sh 'yarn generate'
+            }
+          }
+          archiveArtifacts artifacts: '**/src-gen/**', allowEmptyArchive: true
+          currentBuild.description = "<a href=${BUILD_URL}artifact/src-gen/ivy-icons.html>&raquo; Icons</a>"
+        }
+      }
+    }
+
+    stage('Publish next') {
+      when {
+        expression { isReleaseOrMasterBranch() && currentBuild.changeSets.size() > 0 }
+      }
+      steps {
+        script {
+          docker.build('node', '-f build/Dockerfile .').inside {
+            withNPM(npmrcConfig:'npmjs-registry.ivyteam.io') {
+              sh 'yarn publish:next'
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+def isReleaseOrMasterBranch() {
+  return env.BRANCH_NAME == 'master' || env.BRANCH_NAME.startsWith('release/') 
+}

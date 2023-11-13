@@ -1,0 +1,33 @@
+{
+  "name": "@axonivy/ui-icons",
+  "version": "11.2.1-next",
+  "description": "The icon font for the Axon Ivy Editors",
+  "private": false,
+  "author": "Axon Ivy AG",
+  "homepage": "https://developer.axonivy.com/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/axonivy/client-icons"
+  },
+  "files": [
+    "lib",
+    "src-gen"
+  ],
+  "type": "module",
+  "types": "lib",
+  "module": "lib",
+  "source": "src-gen",
+  "devDependencies": {
+    "fantasticon": "^1.2.3",
+    "rimraf": "^5.0.1",
+    "lerna": "^6.6.2",
+    "typescript": "^5.2.2"
+  },
+  "scripts": {
+    "clean": "rimraf src-gen/ivy-icons.* tsconfig.tsbuildinfo",
+    "build": "tsc",
+    "build:clean": "yarn clean && yarn build",
+    "generate": "fantasticon && yarn build",
+    "publish:next": "lerna publish --exact --canary --preid next --tag-version-prefix beta --pre-dist-tag next --no-git-tag-version --no-push --ignore-scripts --yes"
+  }
+}
