@@ -1,0 +1,44 @@
+{
+  "name": "@axonivy/ui-components",
+  "version": "11.3.0-next",
+  "private": false,
+  "license": "(EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0)",
+  "author": "Axon Ivy AG",
+  "homepage": "https://developer.axonivy.com/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/axonivy/inscription-client"
+  },
+  "files": [
+    "lib",
+    "src"
+  ],
+  "dependencies": {
+    "@axonivy/ui-icons": "11.3.0-next",
+    "react": "^18.2.0"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^6.1.5",
+    "@testing-library/react": "^14.1.2",
+    "@testing-library/user-event": "^14.5.1",
+    "@types/react": "^18.2.45",
+    "eslint-plugin-testing-library": "^6.2.0",
+    "vitest": "^1.1.0",
+    "jsdom": "^23.0.1"
+  },
+  "type": "module",
+  "module": "lib/index",
+  "types": "lib/index",
+  "source": "src/index",
+  "scripts": {
+    "clean": "rimraf lib *.tsbuildinfo",
+    "build": "tsc --build && tscp",
+    "package": "tsc -p tsconfig.production.json && tscp",
+    "build:clean": "yarn clean && yarn build",
+    "type": "tsc --noEmit",
+    "lint": "eslint --ext .ts,.tsx ./src",
+    "lint:fix": "eslint --fix --ext .ts,.tsx ./src",
+    "test": "yarn vitest",
+    "test:ci": "yarn test --watch=false"
+  }
+}
