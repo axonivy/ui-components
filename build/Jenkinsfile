@@ -10,17 +10,25 @@ pipeline {
   }
 
   stages {
-    stage('Icons') {
+    stage('Build') {
       steps {
         script {
           catchError(buildResult: 'UNSTABLE', stageResult: 'UNSTABLE') {
             docker.build('node', '-f build/Dockerfile .').inside {
-              sh 'npm install'
-              sh 'npm run build'
+              sh 'npm run ci'
             }
           }
           archiveArtifacts artifacts: '**/src-gen/**', allowEmptyArchive: true
-          currentBuild.description = "<a href=${BUILD_URL}artifact/packages/icons/src-gen/ivy-icons.html>&raquo; Icons</a>"
+          archiveArtifacts artifacts: '**/storybook-static/**', allowEmptyArchive: true
+          currentBuild.description = "<a href=${BUILD_URL}artifact/packages/icons/src-gen/ivy-icons.html>&raquo; Icons</a><br>" + 
+            "<a href=${BUILD_URL}artifact/packages/components/storybook-static/index.html>&raquo; Components</a>"
+
+          withChecks('ESLint') {
+            recordIssues enabledForFailure: true, publishAllIssues: true, aggregatingResults: true, tools: [esLint(pattern: 'packages/**/eslint.xml,integration/**/eslint.xml', skipSymbolicLinks: true)], qualityGates: [[threshold: 1, type: 'TOTAL', unstable: true]]
+          }
+          withChecks('Tests') {
+            junit testDataPublishers: [[$class: 'StabilityTestDataPublisher']], testResults: 'packages/**/report.xml'
+          }
         }
       }
     }

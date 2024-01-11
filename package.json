@@ -8,14 +8,33 @@
     "node": "20.10.0"
   },
   "scripts": {
+    "ci": "npm install && npm run generate && npm run package && npm run lint:ci && npm run test:ci",
+    "generate": "npm run generate --workspace=@axonivy/ui-icons",
     "build": "lerna run build",
+    "package": "lerna run package",
     "clean": "lerna run clean",
+    "type": "lerna run type",
+    "lint": "lerna run lint --",
+    "lint:ci": "npm run lint -- -o eslint.xml -f checkstyle",
+    "lint:fix": "lerna run lint:fix --",
+    "dev": "npm run dev --workspace=@axonivy/ui-components",
+    "test": "npm run test --workspace=@axonivy/ui-components",
+    "test:ci": "lerna run test:ci",
     "publish:next": "lerna publish --exact --canary --preid next --pre-dist-tag next --no-git-tag-version --no-push --ignore-scripts --yes"
   },
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^6.15.0",
+    "@typescript-eslint/parser": "^6.15.0",
+    "@types/node": "^20.10.0",
+    "eslint": "^8.56.0",
+    "eslint-import-resolver-typescript": "^3.6.1",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
     "lerna": "^8.0.2",
     "rimraf": "^5.0.5",
-    "typescript": "^5.3.3"
+    "typescript": "~5.3.3",
+    "typescript-cp": "^0.1.9"
   },
   "workspaces": {
     "packages": [
