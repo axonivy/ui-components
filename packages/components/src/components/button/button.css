@@ -8,7 +8,7 @@
   justify-content: center;
   gap: var(--size-1);
   padding: var(--size-1) var(--size-2) var(--size-1) var(--size-2);
-  --button-bg: var(--background);
+  --button-bg: transparent;
   background-color: var(--button-bg);
 }
 .button:hover {

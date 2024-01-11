@@ -4,6 +4,7 @@ import { IvyIcons } from '@axonivy/ui-icons';
 import IvyIcon from '../icon/icon.js';
 import { cn } from '../../utils/class-name.js';
 import './accordion.css';
+import { Button } from '../button/button.js';
 
 type WithClassName = { className?: string };
 
@@ -36,7 +37,7 @@ const AccordionTrigger = React.forwardRef<
     </AccordionPrimitive.Trigger>
     {control && (
       <div className='accordion-controls'>
-        <IvyIcon icon={control.icon} />
+        <Button icon={control.icon} size='icon' onClick={control.action} aria-label={control.label} />
       </div>
     )}
   </AccordionPrimitive.Header>
