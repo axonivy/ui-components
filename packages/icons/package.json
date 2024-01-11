@@ -24,6 +24,6 @@
   "scripts": {
     "clean": "rimraf lib src-gen/ivy-icons.* tsconfig.tsbuildinfo",
     "build": "fantasticon && tsc",
-    "build:clean": "yarn clean && yarn build"
+    "build:clean": "npm run clean && npm run build"
   }
 }

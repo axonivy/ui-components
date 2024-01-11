@@ -34,7 +34,7 @@ pipeline {
           docker.build('node', '-f build/Dockerfile .').inside {
             sh 'git checkout yarn.lock'
             sh 'yarn build'
-            withNPM(npmrcConfig:'npmjs-registry.ivyteam.io') {
+            withNPM(npmrcConfig:'npmjs-registry.ivyteam.ch') {
               sh 'yarn publish:next'
             }
           }
