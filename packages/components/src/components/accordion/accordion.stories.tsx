@@ -4,7 +4,14 @@ import { IvyIcons } from '@axonivy/ui-icons/src-gen';
 
 const meta: Meta<typeof Accordion> = {
   title: 'Accordion',
-  component: Accordion
+  component: Accordion,
+  tags: ['autodocs'],
+  args: {
+    type: 'single'
+  },
+  argTypes: {
+    type: { control: 'select', defaultValue: 'single', options: ['single', 'multiple'] }
+  }
 };
 
 export default meta;
@@ -12,8 +19,8 @@ export default meta;
 type Story = StoryObj<typeof Accordion>;
 
 export const Default: Story = {
-  render: () => (
-    <Accordion type='single' collapsible className='w-full'>
+  render: ({ type }) => (
+    <Accordion type={type} collapsible>
       <AccordionItem value='item-1'>
         <AccordionTrigger>Is it accessible?</AccordionTrigger>
         <AccordionContent>
@@ -38,7 +45,7 @@ export const Default: Story = {
 
 export const State: Story = {
   render: () => (
-    <Accordion type='single' collapsible className='w-full'>
+    <Accordion type='single' collapsible>
       <AccordionItem value='item-1'>
         <AccordionTrigger>No state</AccordionTrigger>
         <AccordionContent>
@@ -69,7 +76,7 @@ export const State: Story = {
 
 export const Controls: Story = {
   render: () => (
-    <Accordion type='single' collapsible className='w-full'>
+    <Accordion type='single' collapsible>
       <AccordionItem value='item-1'>
         <AccordionTrigger>No control</AccordionTrigger>
         <AccordionContent>

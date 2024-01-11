@@ -1,6 +1,5 @@
 html,
-body,
-#root {
+body {
   height: 100%;
   overflow: hidden;
 }
@@ -84,6 +83,8 @@ code {
 .editor-root {
   color-scheme: light;
   background: var(--background);
+  color: var(--body);
+  font-size: 12px;
   height: 100%;
 }
 
