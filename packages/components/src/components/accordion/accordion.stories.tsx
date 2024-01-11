@@ -6,9 +6,6 @@ const meta: Meta<typeof Accordion> = {
   title: 'Accordion',
   component: Accordion,
   tags: ['autodocs'],
-  args: {
-    type: 'single'
-  },
   argTypes: {
     type: { control: 'select', defaultValue: 'single', options: ['single', 'multiple'] }
   }
