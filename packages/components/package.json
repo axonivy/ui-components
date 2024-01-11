@@ -16,6 +16,7 @@
   "dependencies": {
     "@axonivy/ui-icons": "11.3.0-next",
     "@radix-ui/react-accordion": "^1.1.2",
+    "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
     "react": "^18.2.0"
   },
@@ -35,7 +36,6 @@
     "eslint-plugin-storybook": "^0.6.15",
     "eslint-plugin-testing-library": "^6.2.0",
     "jsdom": "^23.0.1",
-    "prop-types": "^15.8.1",
     "react-dom": "^18.2.0",
     "storybook": "^7.6.7",
     "vitest": "^1.1.0"

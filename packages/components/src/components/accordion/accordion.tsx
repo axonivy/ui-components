@@ -5,15 +5,17 @@ import IvyIcon from '../icon/icon.js';
 import { cn } from '../../utils/class-name.js';
 import './accordion.css';
 
+type WithClassName = { className?: string };
+
 const Accordion = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Root>,
-  React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Root>
+  React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Root> & WithClassName
 >(({ className, ...props }, ref) => <AccordionPrimitive.Root ref={ref} className={cn('accordion-root', className)} {...props} />);
 Accordion.displayName = 'AccordionRoot';
 
 const AccordionItem = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Item>,
-  React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Item>
+  React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Item> & WithClassName
 >(({ className, ...props }, ref) => <AccordionPrimitive.Item ref={ref} className={cn('accordion-item', className)} {...props} />);
 AccordionItem.displayName = 'AccordionItem';
 
@@ -24,7 +26,7 @@ type AccordionTriggerProps = {
 
 const AccordionTrigger = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Trigger>,
-  React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Trigger> & AccordionTriggerProps
+  React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Trigger> & AccordionTriggerProps & WithClassName
 >(({ state, control, className, children, ...props }, ref) => (
   <AccordionPrimitive.Header className='accordion-header'>
     <AccordionPrimitive.Trigger ref={ref} className={cn('accordion-trigger', className)} {...props}>
@@ -43,7 +45,7 @@ AccordionTrigger.displayName = AccordionPrimitive.Trigger.displayName;
 
 const AccordionContent = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Content>,
-  React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Content>
+  React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Content> & WithClassName
 >(({ className, children, ...props }, ref) => (
   <AccordionPrimitive.Content ref={ref} className='accordion-content' {...props}>
     <div className={cn('accordion-content-data', className)}>{children}</div>
