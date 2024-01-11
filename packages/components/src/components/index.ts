@@ -1,1 +1,2 @@
-export const empty = 'placeholder';
+export * from './accordion/accordion';
+export * from './icon/icon';
