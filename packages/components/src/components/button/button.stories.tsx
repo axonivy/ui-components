@@ -9,7 +9,8 @@ const meta: Meta<typeof Button> = {
   argTypes: {
     variant: { control: 'select', defaultValue: 'default', options: ['default', 'primary', 'outline'] },
     size: { control: 'select', defaultValue: 'default', options: ['default', 'icon'] },
-    icon: { control: 'select', options: IvyIcons }
+    icon: { control: 'select', options: IvyIcons },
+    toggle: { control: 'boolean' }
   }
 };
 
@@ -18,8 +19,8 @@ export default meta;
 type Story = StoryObj<typeof Button>;
 
 export const Default: Story = {
-  render: ({ variant, size, icon }) => (
-    <Button variant={variant} size={size} icon={icon}>
+  render: ({ variant, size, icon, toggle }) => (
+    <Button variant={variant} size={size} icon={icon} toggle={toggle}>
       Click
     </Button>
   )
@@ -29,8 +30,8 @@ export const WithIcon: Story = {
   args: {
     icon: IvyIcons.Home
   },
-  render: ({ variant, size, icon }) => (
-    <Button variant={variant} size={size} icon={icon}>
+  render: ({ variant, size, icon, toggle }) => (
+    <Button variant={variant} size={size} icon={icon} toggle={toggle}>
       Home
     </Button>
   )
@@ -41,5 +42,5 @@ export const IconOnly: Story = {
     icon: IvyIcons.Home,
     size: 'icon'
   },
-  render: ({ variant, size, icon }) => <Button variant={variant} size={size} icon={icon} />
+  render: ({ variant, size, icon, toggle }) => <Button variant={variant} size={size} icon={icon} toggle={toggle} />
 };

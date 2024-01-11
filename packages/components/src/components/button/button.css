@@ -10,6 +10,9 @@
   padding: var(--size-1) var(--size-2) var(--size-1) var(--size-2);
   --button-bg: transparent;
   background-color: var(--button-bg);
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 0.15s;
 }
 .button:hover {
   cursor: pointer;
@@ -32,4 +35,7 @@
 }
 .button.outline {
   border: 1px solid var(--N200);
+}
+.button[data-state='on'] {
+  background-color: color-mix(in srgb, var(--button-bg), var(--body) 15%);
 }
