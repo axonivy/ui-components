@@ -5,7 +5,9 @@
     "outDir": "lib",
     "paths": {
       "test-utils": ["./src/test-utils/test-utils"]
-    }
+    },
+    "allowImportingTsExtensions": true,
+    "emitDeclarationOnly": true
   },
   "include": ["src"],
   "references": [{ "path": "../icons/tsconfig.json" }]

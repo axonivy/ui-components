@@ -1,6 +1,7 @@
 import type { Preview } from '@storybook/react';
 import '../src/global.css';
 import './preview.css';
+import '@axonivy/ui-icons/lib/ivy-icons.css';
 import React from 'react';
 
 const preview: Preview = {

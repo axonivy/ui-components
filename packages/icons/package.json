@@ -26,6 +26,6 @@
     "build": "tsc --build && tscp",
     "package": "tsc && tscp",
     "build:clean": "npm run clean && npm run build",
-    "generate": "fantasticon && yarn build"
+    "generate": "fantasticon && npm run build"
   }
 }

@@ -1,5 +1,4 @@
 import type { IvyIcons } from '@axonivy/ui-icons';
-import '@axonivy/ui-icons/lib/ivy-icons.css';
 
 export type IvyIconProps = {
   icon: IvyIcons;

@@ -14,11 +14,13 @@
     "src"
   ],
   "dependencies": {
-    "@axonivy/ui-icons": "11.3.0-next",
     "@radix-ui/react-accordion": "^1.1.2",
     "@radix-ui/react-collapsible": "^1.0.3",
     "class-variance-authority": "^0.7.0",
-    "clsx": "^2.1.0",
+    "clsx": "^2.1.0"
+  },
+  "peerDependencies": {
+    "@axonivy/ui-icons": "^11.3.0-next",
     "react": "^18.2.0"
   },
   "devDependencies": {
@@ -34,28 +36,37 @@
     "@testing-library/react": "^14.1.2",
     "@testing-library/user-event": "^14.5.1",
     "@types/react": "^18.2.45",
+    "@vanilla-extract/css": "^1.14.0",
+    "@vanilla-extract/vite-plugin": "^3.9.3",
     "eslint-plugin-storybook": "^0.6.15",
     "eslint-plugin-testing-library": "^6.2.0",
     "jsdom": "^23.0.1",
+    "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "rollup-plugin-visualizer": "5.12.0",
     "storybook": "^7.6.7",
+    "vite": "^5.0.11",
     "vitest": "^1.1.0"
   },
   "type": "module",
-  "module": "lib/index",
-  "types": "lib/index",
-  "source": "src/index",
+  "types": "./lib/index",
+  "module": "./lib/components.js",
+  "exports": {
+    ".": {
+      "import": "./lib/components.js"
+    }
+  },
   "scripts": {
     "clean": "rimraf lib *.tsbuildinfo",
-    "build": "tsc --build && tscp",
-    "package": "tsc -p tsconfig.production.json && tscp && npm run build:storybook",
-    "build:clean": "yarn clean && yarn build",
+    "build": "tsc --build tsconfig.production.json",
+    "package": "vite build && npm run build && npm run build:storybook",
+    "build:clean": "npm run clean && npm run build",
     "build:storybook": "storybook build",
     "dev": "storybook dev -p 6006",
-    "type": "tsc --noEmit",
+    "type": "tsc --noEmit --emitDeclarationOnly false",
     "lint": "eslint --ext .ts,.tsx ./src",
     "lint:fix": "eslint --fix --ext .ts,.tsx ./src",
-    "test": "yarn vitest",
-    "test:ci": "yarn test --watch=false"
+    "test": "vitest",
+    "test:ci": "vitest --watch=false"
   }
 }

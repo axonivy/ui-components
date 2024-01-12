@@ -5,6 +5,7 @@ import type { WithClassName } from '../../types/types.js';
 import { Button } from '../button/button';
 import { IvyIcons } from '@axonivy/ui-icons';
 import './collapsible.css';
+import { header } from './collapsible.css.ts';
 
 const Collapsible = React.forwardRef<
   React.ElementRef<typeof CollapsiblePrimitive.Root>,
@@ -21,7 +22,7 @@ const CollapsibleTrigger = React.forwardRef<
   React.ElementRef<typeof CollapsiblePrimitive.CollapsibleTrigger>,
   React.ComponentPropsWithoutRef<typeof CollapsiblePrimitive.CollapsibleTrigger> & CollapsibleTriggerProps & WithClassName
 >(({ state, control, className, children, ...props }, ref) => (
-  <div className='collapsible-header'>
+  <div className={cn(header)}>
     <CollapsiblePrimitive.CollapsibleTrigger ref={ref} className={cn('collapsible-trigger', className)} asChild {...props}>
       <Button icon={IvyIcons.Toggle} size='small'>
         {children}

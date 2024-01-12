@@ -1,9 +1,3 @@
-.collapsible-root .collapsible-header {
-  display: flex;
-  align-items: center;
-  gap: var(--size-1);
-}
-
 .collapsible-root[data-state='open'] .collapsible-header {
   justify-content: space-between;
 }
