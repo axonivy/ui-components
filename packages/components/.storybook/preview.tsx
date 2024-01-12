@@ -40,7 +40,7 @@ const preview: Preview = {
       const theme = context.globals.theme;
       return (
         <div className='editor-root' data-theme={theme}>
-          <style>{`body {background-color: ${context.parameters.backgrounds.values.find(t => t.name === theme).value}`}</style>
+          <style>{`body {background-color: ${context.parameters.backgrounds.values.find(t => t.name === theme).value}}`}</style>
           <StoryFn />
         </div>
       );
