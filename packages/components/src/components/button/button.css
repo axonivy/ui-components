@@ -31,7 +31,7 @@
 }
 .button.primary {
   --button-bg: var(--A300);
-  color: var(--background);
+  color: white;
 }
 .button.outline {
   border: 1px solid var(--N200);
