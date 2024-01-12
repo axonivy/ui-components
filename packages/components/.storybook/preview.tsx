@@ -11,6 +11,13 @@ const preview: Preview = {
         color: /(background|color)$/i,
         date: /Date$/i
       }
+    },
+    backgrounds: {
+      default: 'light',
+      values: [
+        { name: 'light', value: '#ffffff' },
+        { name: 'dark', value: '#2c2c2c' }
+      ]
     }
   },
   globalTypes: {
@@ -20,18 +27,21 @@ const preview: Preview = {
       toolbar: {
         title: 'Theme',
         icon: 'circlehollow',
-        items: ['light', 'dark'],
-        // // Change title based on selected value
-        dynamicTitle: true
+        items: [
+          { value: 'light', icon: 'circlehollow', title: 'light' },
+          { value: 'dark', icon: 'cirlce', title: 'dark' }
+        ],
+        showName: true
       }
     }
   },
   decorators: [
-    (Story, context) => {
+    (StoryFn, context) => {
       const theme = context.globals.theme;
       return (
         <div className='editor-root' data-theme={theme}>
-          <Story />
+          <style>{`body {background-color: ${context.parameters.backgrounds.values.find(t => t.name === theme).value}`}</style>
+          <StoryFn />
         </div>
       );
     }
