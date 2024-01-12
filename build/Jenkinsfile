@@ -15,8 +15,8 @@ pipeline {
         script {
           catchError(buildResult: 'UNSTABLE', stageResult: 'UNSTABLE') {
             docker.build('node', '-f build/Dockerfile .').inside {
-              sh 'build/use-mirror-npm.sh'
-              sh 'yarn build'
+              sh 'npm install'
+              sh 'npm run build'
             }
           }
           archiveArtifacts artifacts: '**/src-gen/**', allowEmptyArchive: true
@@ -32,10 +32,9 @@ pipeline {
       steps {
         script {
           docker.build('node', '-f build/Dockerfile .').inside {
-            sh 'git checkout yarn.lock'
-            sh 'yarn build'
+            sh 'npm run build'
             withNPM(npmrcConfig:'npmjs-registry.ivyteam.ch') {
-              sh 'yarn publish:next'
+              sh 'npm run publish:next'
             }
           }
         }
