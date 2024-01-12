@@ -5,8 +5,7 @@ import IvyIcon from '../icon/icon.js';
 import { cn } from '../../utils/class-name.js';
 import './accordion.css';
 import { Button } from '../button/button.js';
-
-type WithClassName = { className?: string };
+import type { WithClassName } from '../../types/types.js';
 
 const Accordion = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Root>,

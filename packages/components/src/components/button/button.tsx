@@ -15,6 +15,7 @@ const buttonVariants = cva('button', {
     },
     size: {
       default: '',
+      small: 'small',
       icon: 'icon-only'
     }
   },
