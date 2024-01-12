@@ -6,6 +6,7 @@ lib
 dist
 src-gen
 storybook-static
+eslint.xml
 
 # misc
 .DS_Store

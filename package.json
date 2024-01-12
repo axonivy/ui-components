@@ -8,8 +8,9 @@
     "node": "20.10.0"
   },
   "scripts": {
-    "ci": "npm install && npm run build && npm run lint && npm run package",
+    "ci": "npm install && npm run package && npm run lint:ci && npm run test:ci",
     "build": "lerna run build",
+    "package": "lerna run package",
     "clean": "lerna run clean",
     "type": "lerna run type",
     "lint": "lerna run lint --",
