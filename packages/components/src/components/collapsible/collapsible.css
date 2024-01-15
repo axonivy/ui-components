@@ -1,0 +1,73 @@
+.collapsible-root[data-state='open'] .collapsible-header {
+  justify-content: space-between;
+}
+.collapsible-root[data-state='open'] .collapsible-header .collapsible-state {
+  display: none;
+}
+.collapsible-root[data-state='closed'] .collapsible-header .collapsible-controls {
+  display: none;
+}
+.collapsible-header .collapsible-state {
+  height: 0.5rem;
+  width: 0.5rem;
+  border-radius: 0.5rem;
+  background-color: var(--transparent);
+}
+.collapsible-header .collapsible-state[data-state='configured'] {
+  background-color: var(--N400);
+}
+.collapsible-header .collapsible-state[data-state='warning'] {
+  background-color: var(--warning-color);
+}
+.collapsible-header .collapsible-state[data-state='error'] {
+  background-color: var(--error-color);
+}
+
+.collapsible-root .collapsible-trigger .ivy-toggle {
+  font-size: 20px;
+  transition: transform 200ms cubic-bezier(0.87, 0, 0.13, 1);
+}
+.collapsible-root .collapsible-trigger[data-state='open'] .ivy-toggle {
+  transform: rotate(90deg);
+}
+
+.collapsible-root .collapsible-content {
+  overflow: hidden;
+  padding: 1px;
+}
+.collapsible-root .collapsible-content .collapsible-content-data {
+  margin-top: var(--size-1);
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-3);
+}
+.collapsible-root .collapsible-content[data-state='open'] {
+  animation: collapsableSlideDown 200ms cubic-bezier(0.87, 0, 0.13, 1);
+}
+.collapsible-root .collapsible-content[data-state='closed'] {
+  animation: collapsableSlideUp 200ms cubic-bezier(0.87, 0, 0.13, 1);
+}
+
+@media (prefers-reduced-motion) {
+  .collapsible-root .collapsible-content {
+    animation: none !important;
+  }
+}
+
+@keyframes collapsableSlideDown {
+  from {
+    height: 0;
+  }
+  to {
+    height: var(--radix-collapsible-content-height);
+  }
+}
+
+@keyframes collapsableSlideUp {
+  from {
+    height: var(--radix-collapsible-content-height);
+  }
+  to {
+    height: 0;
+  }
+}

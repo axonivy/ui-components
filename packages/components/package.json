@@ -1,0 +1,72 @@
+{
+  "name": "@axonivy/ui-components",
+  "version": "11.3.0-next",
+  "private": false,
+  "license": "(EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0)",
+  "author": "Axon Ivy AG",
+  "homepage": "https://developer.axonivy.com/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/axonivy/inscription-client"
+  },
+  "files": [
+    "lib",
+    "src"
+  ],
+  "dependencies": {
+    "@radix-ui/react-accordion": "^1.1.2",
+    "@radix-ui/react-collapsible": "^1.0.3",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.0"
+  },
+  "peerDependencies": {
+    "@axonivy/ui-icons": "^11.3.0-next",
+    "react": "^18.2.0"
+  },
+  "devDependencies": {
+    "@storybook/addon-essentials": "^7.6.8",
+    "@storybook/addon-interactions": "^7.6.8",
+    "@storybook/addon-links": "^7.6.8",
+    "@storybook/addon-onboarding": "^1.0.10",
+    "@storybook/blocks": "^7.6.8",
+    "@storybook/react": "^7.6.8",
+    "@storybook/react-vite": "^7.6.8",
+    "@storybook/test": "^7.6.8",
+    "@testing-library/jest-dom": "^6.2.0",
+    "@testing-library/react": "^14.1.2",
+    "@testing-library/user-event": "^14.5.2",
+    "@types/react": "^18.2.48",
+    "@vanilla-extract/css": "^1.14.0",
+    "@vanilla-extract/vite-plugin": "^3.9.3",
+    "eslint-plugin-storybook": "^0.6.15",
+    "eslint-plugin-testing-library": "^6.2.0",
+    "jsdom": "^23.2.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "rollup-plugin-visualizer": "5.12.0",
+    "storybook": "^7.6.8",
+    "vite": "^5.0.11",
+    "vitest": "^1.2.0"
+  },
+  "type": "module",
+  "types": "./lib/index.d.ts",
+  "module": "./lib/components.js",
+  "exports": {
+    ".": {
+      "import": "./lib/components.js"
+    }
+  },
+  "scripts": {
+    "clean": "rimraf lib *.tsbuildinfo",
+    "build": "tsc --build tsconfig.production.json",
+    "package": "vite build && npm run build && npm run build:storybook",
+    "build:clean": "npm run clean && npm run build",
+    "build:storybook": "storybook build",
+    "dev": "storybook dev -p 6006",
+    "type": "tsc --noEmit --emitDeclarationOnly false",
+    "lint": "eslint --ext .ts,.tsx ./src",
+    "lint:fix": "eslint --fix --ext .ts,.tsx ./src",
+    "test": "vitest",
+    "test:ci": "vitest --watch=false"
+  }
+}

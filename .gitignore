@@ -5,6 +5,9 @@ node_modules
 lib
 dist
 src-gen
+storybook-static
+eslint.xml
+stats.html
 
 # misc
 .DS_Store
@@ -14,7 +17,5 @@ src-gen
 .env.production.local
 
 npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
 
 tsconfig.*tsbuildinfo
