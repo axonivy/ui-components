@@ -51,11 +51,6 @@
   "type": "module",
   "types": "./lib/index.d.ts",
   "module": "./lib/components.js",
-  "exports": {
-    ".": {
-      "import": "./lib/components.js"
-    }
-  },
   "scripts": {
     "clean": "rimraf lib *.tsbuildinfo",
     "build": "tsc --build tsconfig.production.json",
