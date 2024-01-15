@@ -18,8 +18,8 @@ pipeline {
               sh 'npm run ci'
             }
           }
-          archiveArtifacts artifacts: '**/src-gen/**', allowEmptyArchive: true
-          archiveArtifacts artifacts: '**/storybook-static/**', allowEmptyArchive: true
+          archiveArtifacts artifacts: 'packages/**/src-gen/**', allowEmptyArchive: true
+          archiveArtifacts artifacts: 'packages/**/storybook-static/**', allowEmptyArchive: true
           currentBuild.description = "<a href=${BUILD_URL}artifact/packages/icons/src-gen/ivy-icons.html>&raquo; Icons</a><br>" + 
             "<a href=${BUILD_URL}artifact/packages/components/storybook-static/index.html>&raquo; Components</a>"
 
@@ -41,7 +41,9 @@ pipeline {
         script {
           docker.build('node', '-f build/Dockerfile .').inside {
             sh 'npm run build'
-            withNPM(npmrcConfig:'npmjs-registry.ivyteam.ch') {
+            sh 'git checkout .'
+            withCredentials([string(credentialsId: 'npmjs-registry.ivyteam.ch-auth-token', variable: 'NPM_AUTH_TOKEN')]) {
+              sh 'npm set "//npmjs-registry.ivyteam.ch/:_authToken = $NPM_AUTH_TOKEN"'
               sh 'npm run publish:next'
             }
           }
