@@ -22,22 +22,14 @@ export default meta;
 type Story = StoryObj<typeof Button>;
 
 export const Default: Story = {
-  render: ({ variant, size, icon, toggle, disabled }) => (
-    <Button variant={variant} size={size} icon={icon} toggle={toggle} disabled={disabled}>
-      Click
-    </Button>
-  )
+  render: props => <Button {...props}>Click</Button>
 };
 
 export const WithIcon: Story = {
   args: {
     icon: IvyIcons.Home
   },
-  render: ({ variant, size, icon, toggle, disabled }) => (
-    <Button variant={variant} size={size} icon={icon} toggle={toggle} disabled={disabled}>
-      Home
-    </Button>
-  )
+  render: props => <Button {...props}>Home</Button>
 };
 
 export const IconOnly: Story = {
@@ -45,7 +37,5 @@ export const IconOnly: Story = {
     icon: IvyIcons.Home,
     size: 'icon'
   },
-  render: ({ variant, size, icon, toggle, disabled }) => (
-    <Button variant={variant} size={size} icon={icon} toggle={toggle} disabled={disabled} />
-  )
+  render: props => <Button {...props} />
 };

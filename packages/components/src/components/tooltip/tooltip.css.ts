@@ -7,7 +7,7 @@ export const tooltipContent = style({
   backgroundColor: 'var(--N100)',
   boxShadow: 'var(--box-shadow)',
   userSelect: 'none',
-  animationDuration: '400ms',
+  animationDuration: '200ms',
   animationTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)',
   willChange: 'transform, opacity',
   selectors: {
@@ -22,6 +22,11 @@ export const tooltipContent = style({
     },
     '&[data-state="delayed-open"][data-side="left"]': {
       animationName: slideRightAndFade
+    }
+  },
+  '@media': {
+    '(prefers-reduced-motion)': {
+      animation: 'none'
     }
   }
 });

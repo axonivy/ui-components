@@ -16,9 +16,9 @@ export default meta;
 type Story = StoryObj<typeof Checkbox>;
 
 export const Default: Story = {
-  render: ({ disabled }) => (
+  render: props => (
     <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
-      <Checkbox id='terms' disabled={disabled} />
+      <Checkbox id='terms' {...props} />
       <Label htmlFor='terms'>Accept terms and conditions</Label>
     </div>
   )
