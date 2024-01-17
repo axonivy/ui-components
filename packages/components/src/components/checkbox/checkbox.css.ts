@@ -1,12 +1,12 @@
-import { globalStyle, style } from '@vanilla-extract/css';
+import { style } from '@vanilla-extract/css';
 import { disabled } from '../../styles/disabled';
 
 export const checkboxRoot = style({
   backgroundColor: 'var(--background)',
   borderRadius: 'var(--border-radius)',
   border: 'var(--basic-border)',
-  width: 20,
-  height: 20,
+  width: 17,
+  height: 17,
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
@@ -28,8 +28,9 @@ export const checkboxRoot = style({
   }
 });
 
-export const checkboxIndicator = style({});
-
-globalStyle(`${checkboxIndicator} svg path`, {
-  fill: 'var(--radio-checkbox-icon-color)'
+export const checkboxIndicator = style({
+  display: 'flex',
+  alignItems: 'center',
+  justifyItems: 'center',
+  color: 'var(--radio-checkbox-icon-color)'
 });
