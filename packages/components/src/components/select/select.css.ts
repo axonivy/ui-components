@@ -14,7 +14,10 @@ export const trigger = style({
   alignItems: 'center',
   gap: 'var(--size-1)',
   width: '100%',
-  ':disabled': disabled
+  ':disabled': disabled,
+  ':focus': {
+    border: 'var(--activ-border)'
+  }
 });
 
 export const scrollButton = style({

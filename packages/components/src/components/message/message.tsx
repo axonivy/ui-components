@@ -4,10 +4,10 @@ import { cn } from '../../utils/class-name';
 import IvyIcon from '../icon/icon';
 import type { WithClassName } from '../../types/types';
 import { IvyIcons } from '@axonivy/ui-icons';
-import { message as messageClass } from './message.css';
+import { message } from './message.css';
 import { cva, type VariantProps } from 'class-variance-authority';
 
-const messageVariants = cva(messageClass, {
+const messageVariants = cva(message, {
   variants: {
     variant: {
       default: '',
