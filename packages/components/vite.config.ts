@@ -5,6 +5,12 @@ import { visualizer } from 'rollup-plugin-visualizer';
 
 export default defineConfig({
   plugins: [veVitePlugin(), visualizer()],
+  resolve: {
+    alias: {
+      '@axonivy/ui-icons': resolve(__dirname, '../../packages/icons/src-gen'),
+      '@': resolve(__dirname, './src')
+    }
+  },
   build: {
     outDir: 'lib',
     lib: {

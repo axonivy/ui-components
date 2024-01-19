@@ -6,7 +6,6 @@ export default defineConfig({
     dir: 'src',
     include: ['**/*.test.ts?(x)'],
     alias: {
-      '@axonivy/ui-icons': resolve(__dirname, '../../packages/icons/src-gen'),
       'test-utils': resolve(__dirname, 'src/test-utils/test-utils.tsx')
     },
     globals: true,
