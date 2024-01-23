@@ -1,32 +1,11 @@
 import * as React from 'react';
 import { cn } from '@/utils/class-name';
-import type { VariantProps } from 'class-variance-authority';
-import { cva } from 'class-variance-authority';
 import type { IvyIcons } from '@axonivy/ui-icons';
-import { button, iconOnly } from './button.css';
+import { button, iconOnly, type ButtonVariants } from './button.css';
 import { IvyIcon } from '@/components/common';
 
-const buttonVariants = cva(button, {
-  variants: {
-    variant: {
-      default: '',
-      primary: 'primary',
-      outline: 'outline'
-    },
-    size: {
-      default: '',
-      small: 'small',
-      large: 'large'
-    }
-  },
-  defaultVariants: {
-    variant: 'default',
-    size: 'default'
-  }
-});
-
 export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> &
-  VariantProps<typeof buttonVariants> & {
+  ButtonVariants & {
     icon?: IvyIcons;
     toggle?: boolean;
   };
@@ -45,7 +24,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(({ className, ic
   const toggleProps = useToggle(toggle);
   return (
     <button
-      className={cn(buttonVariants({ className, variant, size }), children === undefined && iconOnly)}
+      className={cn(button({ variant, size }), className, children === undefined && iconOnly({ size }))}
       ref={ref}
       {...toggleProps}
       {...props}

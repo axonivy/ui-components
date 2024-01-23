@@ -1,22 +1,23 @@
 import { style } from '@vanilla-extract/css';
 import { slideDownAndFade, slideLeftAndFade, slideRightAndFade, slideUpAndFade } from '@/styles/keyframes.css';
 import { disabled } from '@/styles/disabled';
+import { vars } from '@/styles/theme.css';
 
 export const trigger = style({
   cursor: 'pointer',
-  padding: 'var(--input-padding)',
+  padding: vars.padding.input,
   fontSize: 12,
-  borderRadius: 'var(--border-radius)',
-  border: 'var(--basic-border)',
-  background: 'var(--background)',
+  borderRadius: vars.border.radius,
+  border: vars.border.basic,
+  background: vars.color.background,
   display: 'inline-flex',
   justifyContent: 'space-between',
   alignItems: 'center',
-  gap: 'var(--size-1)',
+  gap: vars.size.s1,
   width: '100%',
   ':disabled': disabled,
   ':focus': {
-    border: 'var(--activ-border)'
+    border: vars.border.active
   }
 });
 
@@ -24,20 +25,20 @@ export const scrollButton = style({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  padding: 'var(--size-1)'
+  padding: vars.size.s1
 });
 
 export const content = style({
   maxHeight: '20rem',
   width: 'var(--radix-popper-anchor-width)',
-  backgroundColor: 'var(--background)',
+  backgroundColor: vars.color.background,
   padding: 0,
   zIndex: 10,
-  boxShadow: 'var(--editor-shadow)',
-  borderRadius: 'var(--border-radius)',
+  boxShadow: vars.shadow.editor,
+  borderRadius: vars.border.radius,
   overflow: 'hidden',
   position: 'relative',
-  borderWidth: 1,
+  border: vars.border.basic,
   animationDuration: '200ms',
   selectors: {
     '&[data-state="open"][data-side="top"]': {
@@ -61,11 +62,11 @@ export const content = style({
 });
 
 export const viewport = style({
-  padding: 'var(--size-1)'
+  padding: vars.size.s1
 });
 
 export const label = style({
-  padding: 'var(--size-2)',
+  padding: vars.size.s2,
   paddingLeft: '2rem',
   fontWeight: 'bold'
 });
@@ -73,19 +74,19 @@ export const label = style({
 export const item = style({
   display: 'flex',
   position: 'relative',
-  padding: 'var(--size-2)',
+  padding: vars.size.s2,
   paddingLeft: '2rem',
   alignItems: 'center',
   outline: 0,
   userSelect: 'none',
-  ':hover': {
-    background: 'var(--A50)'
-  },
-  ':focus': {
-    background: 'var(--A300)',
-    color: 'var(--selected-row-text-color)'
-  },
   selectors: {
+    '&[data-highlighted]': {
+      background: vars.color.p50
+    },
+    '&[data-state="checked"]': {
+      background: vars.color.p300,
+      color: 'white'
+    },
     '&[data-disabled]': disabled
   }
 });
@@ -101,8 +102,8 @@ export const itemIcon = style({
 });
 
 export const seperator = style({
-  marginBlock: 'var(--size-1)',
-  marginInline: 'calc(-1 * var(--size-1))',
+  marginBlock: vars.size.s1,
+  marginInline: `calc(-1 * ${vars.size.s1})`,
   height: 1,
-  backgroundColor: 'var(--N300)'
+  backgroundColor: vars.color.n200
 });

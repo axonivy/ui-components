@@ -1,6 +1,6 @@
 import * as React from 'react';
 import type { WithClassName } from '@/types/types';
-import { toolbar, toolbarContainer, toolbarHeader, toolbarTitle } from './toolbar.css';
+import { toolbar, toolbarContainer, toolbarHeader, toolbarTitle, type ToolbarContainerVariants } from './toolbar.css';
 import { cn } from '@/utils/class-name';
 
 const Toolbar = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement> & WithClassName>(
@@ -25,14 +25,10 @@ const ToolbarTitle = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLD
 );
 ToolbarTitle.displayName = 'ToolbarTitle';
 
-type ToolbarContainerProps = React.HTMLAttributes<HTMLDivElement> & {
-  maxWidth: number;
-};
-
-const ToolbarContainer = React.forwardRef<HTMLDivElement, ToolbarContainerProps & WithClassName>(
-  ({ maxWidth, className, children, ...props }, ref) => {
+const ToolbarContainer = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement> & ToolbarContainerVariants & WithClassName>(
+  ({ width, className, children, ...props }, ref) => {
     return (
-      <div style={{ '--toolbar-container-max-width': `${maxWidth}px` }} className={cn(toolbarContainer, className)} ref={ref} {...props}>
+      <div className={cn(toolbarContainer({ width }), className)} ref={ref} {...props}>
         {children}
       </div>
     );

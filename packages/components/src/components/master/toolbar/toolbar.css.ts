@@ -1,4 +1,6 @@
+import { vars } from '@/styles/theme.css';
 import { createContainer, style } from '@vanilla-extract/css';
+import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
 
 const container = createContainer();
 
@@ -8,8 +10,8 @@ export const toolbar = style({
   width: '100%',
   height: 48,
   flex: '0 0 48px',
-  background: 'var(--background)',
-  boxShadow: 'var(--editor-shadow)',
+  background: vars.color.background,
+  boxShadow: vars.shadow.editor,
   zIndex: 10,
   containerName: container,
   containerType: 'inline-size',
@@ -17,7 +19,7 @@ export const toolbar = style({
 });
 
 export const toolbarHeader = style({
-  marginInline: 'var(--size-3)',
+  marginInline: vars.size.s3,
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center',
@@ -29,10 +31,21 @@ export const toolbarTitle = style({
   fontSize: '14px'
 });
 
-export const toolbarContainer = style({
+const createQuery = (width?: number) => ({
   '@container': {
-    [`${container} (max-width: var(--toolbar-container-max-width))`]: {
+    [`${container} (width < ${width}px)`]: {
       display: 'none'
     }
   }
 });
+
+export const toolbarContainer = recipe({
+  variants: {
+    width: {
+      450: createQuery(450),
+      650: createQuery(650)
+    }
+  }
+});
+
+export type ToolbarContainerVariants = RecipeVariants<typeof toolbarContainer>;

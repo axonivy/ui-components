@@ -1,5 +1,6 @@
 import type { Preview } from '@storybook/react';
-import '../src/global.css';
+import './preview.css';
+import '../src/styles/global.css';
 import '@axonivy/ui-icons/ivy-icons.css';
 import React from 'react';
 
@@ -13,7 +14,6 @@ const preview: Preview = {
       }
     },
     backgrounds: {
-      default: 'light',
       values: [
         { name: 'light', value: '#ffffff' },
         { name: 'dark', value: '#2c2c2c' }
@@ -38,12 +38,12 @@ const preview: Preview = {
   decorators: [
     (StoryFn, context) => {
       const theme = context.globals.theme;
-      return (
-        <div className={theme === 'dark' ? 'dark' : ''}>
-          <style>{`body {background-color: ${context.parameters.backgrounds.values.find(t => t.name === theme).value}}`}</style>
-          <StoryFn />
-        </div>
-      );
+      const color = context.parameters.backgrounds.values.find(t => t.name === theme).value;
+      const body = document.body;
+      body.classList.remove('dark', 'light');
+      body.classList.add(theme);
+      body.style.background = color;
+      return <StoryFn />;
     }
   ]
 };

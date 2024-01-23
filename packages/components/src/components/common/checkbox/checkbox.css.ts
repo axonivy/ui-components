@@ -1,29 +1,30 @@
 import { style } from '@vanilla-extract/css';
 import { disabled } from '@/styles/disabled';
+import { vars } from '@/styles/theme.css';
 
 export const checkboxRoot = style({
-  backgroundColor: 'var(--background)',
-  borderRadius: 'var(--border-radius)',
-  border: 'var(--basic-border)',
+  backgroundColor: vars.color.background,
+  borderRadius: vars.border.radius,
+  border: vars.border.basic,
   width: 17,
   height: 17,
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
   flexShrink: 0,
+  cursor: 'pointer',
   ':hover': {
-    cursor: 'pointer',
-    backgroundColor: 'var(--background-radio-checkbox)',
-    border: 'var(--radio-checkbox-border)'
+    backgroundColor: vars.color.p50,
+    border: vars.border.active
   },
   ':focus-visible': {
-    boxShadow: 'var(--focus-shadow)'
+    boxShadow: vars.shadow.focus
   },
   ':disabled': disabled,
   selectors: {
     '&[data-state="checked"]': {
-      backgroundColor: 'var(--background-radio-checkbox)',
-      border: 'var(--radio-checkbox-border)'
+      backgroundColor: vars.color.p50,
+      border: vars.border.active
     }
   }
 });
@@ -32,5 +33,5 @@ export const checkboxIndicator = style({
   display: 'flex',
   alignItems: 'center',
   justifyItems: 'center',
-  color: 'var(--radio-checkbox-icon-color)'
+  color: vars.color.p300
 });

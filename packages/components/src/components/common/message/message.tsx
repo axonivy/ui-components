@@ -4,25 +4,9 @@ import { cn } from '@/utils/class-name';
 import { IvyIcon } from '@/components/common';
 import type { WithClassName } from '@/types/types';
 import { IvyIcons } from '@axonivy/ui-icons';
-import { message } from './message.css';
-import { cva, type VariantProps } from 'class-variance-authority';
+import { message as messageClass, type MessageVariants } from './message.css';
 
-const messageVariants = cva(message, {
-  variants: {
-    variant: {
-      default: '',
-      description: 'description',
-      info: 'info',
-      warning: 'warning',
-      error: 'error'
-    }
-  },
-  defaultVariants: {
-    variant: 'default'
-  }
-});
-
-const ivyIconForSeverity = (variant: VariantProps<typeof messageVariants>['variant']) => {
+const ivyIconForSeverity = (variant: NonNullable<MessageVariants>['variant']) => {
   switch (variant) {
     case 'info':
       return IvyIcons.InfoCircle;
@@ -34,14 +18,14 @@ const ivyIconForSeverity = (variant: VariantProps<typeof messageVariants>['varia
   return undefined;
 };
 
-export type MessageProps = React.HTMLAttributes<HTMLParagraphElement> & VariantProps<typeof messageVariants> & { message?: string };
+export type MessageProps = React.HTMLAttributes<HTMLParagraphElement> & MessageVariants & { message?: string };
 
 const Message = React.forwardRef<HTMLParagraphElement, MessageProps & WithClassName>(
   ({ message, variant, className, children, ...props }, ref) => {
     const body = message ? message : children;
     const icon = ivyIconForSeverity(variant);
     return (
-      <p ref={ref} className={cn(messageVariants({ variant }), className)} title={message} {...props}>
+      <p ref={ref} className={cn(messageClass({ variant }), className)} title={message} {...props}>
         {icon && <IvyIcon icon={icon} />}
         {body}
       </p>

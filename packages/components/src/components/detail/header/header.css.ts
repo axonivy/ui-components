@@ -1,12 +1,13 @@
+import { vars } from '@/styles/theme.css';
 import { style } from '@vanilla-extract/css';
 
 export const header = style({
   display: 'flex',
   justifyContent: 'space-between',
-  backgroundColor: 'var(--background)',
-  paddingInline: 'var(--size-3)',
-  gap: 'var(--size-2)',
-  borderBottom: 'var(--basic-border)',
+  backgroundColor: vars.color.background,
+  paddingInline: vars.size.s3,
+  gap: vars.size.s2,
+  borderBottom: vars.border.basic,
   fontSize: '14px',
   fontWeight: 500,
   height: 48,
@@ -29,8 +30,8 @@ export const headerIcon = style({
 });
 
 export const headerMessage = style({
-  padding: 'var(--size-1) var(--size-4)',
-  borderBottom: 'var(--basic-border)',
-  maxHeight: 'calc(15px * 2 + var(--size-1) * 2)',
+  padding: `${vars.size.s1} ${vars.size.s4}`,
+  borderBottom: vars.border.basic,
+  maxHeight: `calc(2em + 3 * ${vars.size.s1})`,
   overflow: 'auto'
 });

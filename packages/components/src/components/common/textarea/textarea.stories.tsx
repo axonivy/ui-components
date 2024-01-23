@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Label } from '@/components/common';
+import { Flex, Label } from '@/components/common';
 import { Textarea } from './textarea';
 
 const meta: Meta<typeof Textarea> = {
@@ -22,9 +22,9 @@ export const Default: Story = {
 
 export const WithLabel: Story = {
   render: props => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 5, width: '100%' }}>
+    <Flex direction='column' gap={1}>
       <Label htmlFor='name'>Name</Label>
       <Textarea id='name' {...props} />
-    </div>
+    </Flex>
   )
 };

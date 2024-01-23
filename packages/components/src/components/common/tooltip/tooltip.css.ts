@@ -1,11 +1,12 @@
 import { style } from '@vanilla-extract/css';
 import { slideDownAndFade, slideLeftAndFade, slideRightAndFade, slideUpAndFade } from '@/styles/keyframes.css';
+import { vars } from '@/styles/theme.css';
 
 export const tooltipContent = style({
-  borderRadius: 'var(--border-radius)',
-  padding: 'var(--size-1) var(--size-2)',
-  backgroundColor: 'var(--N100)',
-  boxShadow: 'var(--box-shadow)',
+  borderRadius: vars.border.radius,
+  padding: `${vars.size.s1} ${vars.size.s2}`,
+  backgroundColor: vars.color.n100,
+  boxShadow: vars.shadow.editor,
   userSelect: 'none',
   animationDuration: '200ms',
   animationTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)',
