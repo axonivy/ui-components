@@ -23,7 +23,9 @@
       "@typescript-eslint/parser": [".ts", ".tsx"]
     },
     "import/resolver": {
-      "typescript": {}
+      "typescript": {
+        "project": ["packages/components/tsconfig.json", "packages/icons/tsconfig.json"]
+      }
     },
     "react": {
       "version": "detect"
