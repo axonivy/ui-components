@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Input } from './input';
-import { Label, Button } from '@/components/common';
+import { Label, Button, Flex } from '@/components/common';
 import { IvyIcons } from '@axonivy/ui-icons';
 
 const meta: Meta<typeof Input> = {
@@ -22,21 +22,21 @@ export const Default: Story = {
 
 export const WithLabel: Story = {
   render: props => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 5, width: '100%' }}>
+    <Flex direction='column' gap={1}>
       <Label htmlFor='name'>Name</Label>
       <Input id='name' {...props} />
-    </div>
+    </Flex>
   )
 };
 
 export const WithButton: Story = {
   render: props => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 5, width: '100%' }}>
+    <Flex direction='column' gap={1}>
       <Label htmlFor='name'>Name</Label>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
+      <Flex alignItems='center' gap={1}>
         <Input id='name' {...props} />
         <Button type='submit' icon={IvyIcons.ListSearch} />
-      </div>
-    </div>
+      </Flex>
+    </Flex>
   )
 };

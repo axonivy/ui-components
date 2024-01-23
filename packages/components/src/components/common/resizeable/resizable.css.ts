@@ -1,3 +1,4 @@
+import { vars } from '@/styles/theme.css';
 import { style } from '@vanilla-extract/css';
 
 export const resizableGroup = style({});
@@ -8,9 +9,9 @@ export const resizableLine = style({
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
-  backgroundColor: 'var(--N300)',
+  backgroundColor: vars.color.n200,
   ':hover': {
-    backgroundColor: 'var(--A300)'
+    backgroundColor: vars.color.p300
   },
   selectors: {
     '&[data-panel-group-direction="vertical"]': {
@@ -18,7 +19,7 @@ export const resizableLine = style({
       height: 1
     },
     '&[data-resize-handle-active]': {
-      backgroundColor: 'var(--A300)'
+      backgroundColor: vars.color.p300
     }
   }
 });
@@ -27,7 +28,7 @@ export const resizableHandle = style({
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
-  backgroundColor: 'var(--N300)',
+  backgroundColor: vars.color.n200,
   borderWidth: '1px',
   borderRadius: '3px',
   width: '.75rem',

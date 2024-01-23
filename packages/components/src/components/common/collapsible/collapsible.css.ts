@@ -1,3 +1,4 @@
+import { vars } from '@/styles/theme.css';
 import { globalStyle, keyframes, style } from '@vanilla-extract/css';
 
 export const root = style({});
@@ -5,7 +6,7 @@ export const root = style({});
 export const header = style({
   display: 'flex',
   alignItems: 'center',
-  gap: 'var(--size-1)',
+  gap: vars.size.s1,
   selectors: {
     [`${root}[data-state='open'] &`]: {
       justifyContent: 'space-between'

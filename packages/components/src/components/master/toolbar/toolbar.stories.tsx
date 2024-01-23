@@ -17,7 +17,7 @@ export const Default = ({ sideBarCollapse }: { sideBarCollapse?: () => void }) =
         <Button icon={IvyIcons.SelectionTool} size='large' toggle={true} />
         <Button icon={IvyIcons.MultiSelection} size='large' />
       </Flex>
-      <ToolbarContainer maxWidth={450}>
+      <ToolbarContainer width={650}>
         <Flex>
           <Separator orientation='vertical' style={{ height: '26px' }} />
           <Flex gap={1}>

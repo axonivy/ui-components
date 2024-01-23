@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from './resizable';
 import { Flex } from '@/components/common';
+import { vars } from '@/styles/theme.css';
 
 const meta: Meta<typeof ResizablePanelGroup> = {
   title: 'Common/Resizeable',
@@ -24,7 +25,7 @@ export const Default: Story = {
       <ResizablePanelGroup
         autoSaveId='ivy-resizable'
         direction={direction}
-        style={{ minHeight: '200px', border: '1px solid var(--N300)', borderRadius: '10px' }}
+        style={{ minHeight: '200px', border: vars.border.basic, borderRadius: vars.border.radius }}
       >
         <ResizablePanel defaultSize={75} minSize={50}>
           <Flex justifyContent='center' alignItems='center' style={{ height: '100%' }}>

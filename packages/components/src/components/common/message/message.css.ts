@@ -1,22 +1,25 @@
-import { style } from '@vanilla-extract/css';
+import { vars } from '@/styles/theme.css';
+import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
 
-export const message = style({
-  display: 'inline-flex',
-  alignItems: 'center',
-  gap: 'var(--size-1)',
-  margin: 0,
-  paddingInline: 'var(--size-1)',
-  fontSize: 12,
-  fontWeight: 400,
-  selectors: {
-    '&.error': {
-      color: 'var(--error-color)'
-    },
-    '&.warning': {
-      color: 'var(--warning-color)'
-    },
-    '&.description': {
-      color: 'var(--N700)'
+export const message = recipe({
+  base: {
+    display: 'inline-flex',
+    alignItems: 'center',
+    gap: vars.size.s1,
+    margin: 0,
+    paddingInline: vars.size.s1,
+    fontSize: 12,
+    fontWeight: 400
+  },
+
+  variants: {
+    variant: {
+      description: { color: vars.color.n700 },
+      info: {},
+      warning: { color: vars.color.warning },
+      error: { color: vars.color.error }
     }
   }
 });
+
+export type MessageVariants = RecipeVariants<typeof message>;

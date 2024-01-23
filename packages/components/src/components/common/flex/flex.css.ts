@@ -1,3 +1,4 @@
+import { vars } from '@/styles/theme.css';
 import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
 
 export const flex = recipe({
@@ -11,10 +12,10 @@ export const flex = recipe({
       row: { flexDirection: 'row' }
     },
     gap: {
-      1: { gap: 'var(--size-1)' },
-      2: { gap: 'var(--size-2)' },
-      3: { gap: 'var(--size-3)' },
-      4: { gap: 'var(--size-4)' }
+      1: { gap: vars.size.s1 },
+      2: { gap: vars.size.s2 },
+      3: { gap: vars.size.s3 },
+      4: { gap: vars.size.s4 }
     },
     alignItems: {
       center: { alignItems: 'center' }
