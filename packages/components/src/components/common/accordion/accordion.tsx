@@ -3,7 +3,6 @@ import * as AccordionPrimitive from '@radix-ui/react-accordion';
 import { IvyIcons } from '@axonivy/ui-icons';
 import { cn } from '@/utils/class-name';
 import { Button, StateDot, Flex, IvyIcon } from '@/components/common';
-import type { WithClassName } from '@/types/types';
 import {
   root,
   header,
@@ -18,13 +17,13 @@ import {
 
 const Accordion = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Root>,
-  React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Root> & WithClassName
+  React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Root>
 >(({ className, ...props }, ref) => <AccordionPrimitive.Root ref={ref} className={cn(root, className)} {...props} />);
 Accordion.displayName = 'AccordionRoot';
 
 const AccordionItem = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Item>,
-  React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Item> & WithClassName
+  React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Item>
 >(({ className, ...props }, ref) => <AccordionPrimitive.Item ref={ref} className={cn(item, className)} {...props} />);
 AccordionItem.displayName = 'AccordionItem';
 
@@ -35,7 +34,7 @@ type AccordionTriggerProps = {
 
 const AccordionTrigger = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Trigger>,
-  React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Trigger> & AccordionTriggerProps & WithClassName
+  React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Trigger> & AccordionTriggerProps
 >(({ state, control, className, children, ...props }, ref) => (
   <AccordionPrimitive.Header className={cn(header, 'accordion-header')}>
     <AccordionPrimitive.Trigger ref={ref} className={cn(trigger, className)} {...props}>
@@ -48,7 +47,7 @@ const AccordionTrigger = React.forwardRef<
 ));
 AccordionTrigger.displayName = AccordionPrimitive.Trigger.displayName;
 
-const AccordionState = React.forwardRef<React.ElementRef<typeof StateDot>, React.ComponentPropsWithoutRef<typeof StateDot> & WithClassName>(
+const AccordionState = React.forwardRef<React.ElementRef<typeof StateDot>, React.ComponentPropsWithoutRef<typeof StateDot>>(
   ({ className, ...props }, ref) => <StateDot ref={ref} className={cn(stateClass, className)} {...props} />
 );
 AccordionState.displayName = 'AccordionState';
@@ -59,7 +58,7 @@ type AccordionControlProps = {
 
 const AccordionControl = React.forwardRef<
   React.ElementRef<typeof Flex>,
-  React.ComponentPropsWithoutRef<typeof Flex> & AccordionControlProps & WithClassName
+  React.ComponentPropsWithoutRef<typeof Flex> & AccordionControlProps
 >(({ controls, className, ...props }, ref) => (
   <Flex gap={1} className={cn(controlsClass, className)} ref={ref} {...props}>
     {controls.map(control => (
@@ -71,7 +70,7 @@ AccordionControl.displayName = 'AccordionControl';
 
 const AccordionContent = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Content>,
-  React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Content> & WithClassName
+  React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Content>
 >(({ className, children, ...props }, ref) => (
   <AccordionPrimitive.Content ref={ref} className={cn(content, className)} {...props}>
     <div className={contentData}>{children}</div>
