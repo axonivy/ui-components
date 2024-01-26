@@ -36,7 +36,7 @@ const AccordionTrigger = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Trigger>,
   React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Trigger> & AccordionTriggerProps
 >(({ state, control, className, children, ...props }, ref) => (
-  <AccordionPrimitive.Header className={cn(header, 'accordion-header')}>
+  <AccordionPrimitive.Header className={cn(header)}>
     <AccordionPrimitive.Trigger ref={ref} className={cn(trigger, className)} {...props}>
       <IvyIcon icon={IvyIcons.Chevron} />
       <div className={triggerContent}>{children}</div>

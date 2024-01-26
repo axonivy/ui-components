@@ -11,7 +11,7 @@ export const toolbar = style({
   height: 48,
   flex: '0 0 48px',
   background: vars.color.background,
-  boxShadow: vars.shadow.editor,
+  borderBottom: vars.border.basic,
   zIndex: 10,
   containerName: container,
   containerType: 'inline-size',

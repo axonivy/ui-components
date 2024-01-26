@@ -10,6 +10,7 @@ export const trigger = style({
   borderRadius: vars.border.radius,
   border: vars.border.basic,
   background: vars.color.background,
+  color: vars.color.body,
   display: 'inline-flex',
   justifyContent: 'space-between',
   alignItems: 'center',
@@ -85,7 +86,7 @@ export const item = style({
     },
     '&[data-state="checked"]': {
       background: vars.color.p300,
-      color: 'white'
+      color: vars.color.background
     },
     '&[data-disabled]': disabled
   }
