@@ -60,7 +60,7 @@
   "scripts": {
     "clean": "rimraf lib *.tsbuildinfo",
     "build": "tsc --build tsconfig.production.json",
-    "package": "vite build && npm run build && npm run build:storybook",
+    "package": "npm run clean && vite build && npm run build && npm run build:storybook",
     "build:clean": "npm run clean && npm run build",
     "build:storybook": "storybook build",
     "dev": "storybook dev -p 6006 --no-open",
