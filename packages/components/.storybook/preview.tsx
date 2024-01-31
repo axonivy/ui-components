@@ -42,7 +42,6 @@ const preview: Preview = {
       const body = document.body;
       body.classList.remove('dark', 'light');
       body.classList.add(theme);
-      body.style.background = color;
       return <StoryFn />;
     }
   ]

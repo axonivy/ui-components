@@ -42,3 +42,45 @@ export const Default: Story = {
     </Flex>
   )
 };
+
+export const Conditional: StoryObj<{ showLeftPanel: boolean; showRightPanel: boolean }> = {
+  args: {
+    showLeftPanel: true,
+    showRightPanel: true
+  },
+  render: ({ showLeftPanel, showRightPanel }) => (
+    <Flex justifyContent='center' alignItems='center'>
+      <ResizablePanelGroup
+        autoSaveId='conditional'
+        direction='horizontal'
+        style={{ minHeight: '200px', border: vars.border.basic, borderRadius: vars.border.radius }}
+      >
+        {showLeftPanel && (
+          <>
+            <ResizablePanel id='left' order={1}>
+              <Flex justifyContent='center' alignItems='center' style={{ height: '100%' }}>
+                <span>Left</span>
+              </Flex>
+            </ResizablePanel>
+            <ResizableHandle />
+          </>
+        )}
+        <ResizablePanel id='center' order={2}>
+          <Flex justifyContent='center' alignItems='center' style={{ height: '100%' }}>
+            <span>Middle</span>
+          </Flex>
+        </ResizablePanel>
+        {showRightPanel && (
+          <>
+            <ResizableHandle />
+            <ResizablePanel id='right' order={3}>
+              <Flex justifyContent='center' alignItems='center' style={{ height: '100%' }}>
+                <span>Right</span>
+              </Flex>
+            </ResizablePanel>
+          </>
+        )}
+      </ResizablePanelGroup>
+    </Flex>
+  )
+};
