@@ -21,7 +21,12 @@ const StateDot = React.forwardRef<HTMLDivElement, StateDotProps>(({ state, messa
     <TooltipProvider>
       <Tooltip delayDuration={500}>
         <TooltipTrigger asChild>
-          <div ref={ref} className={cn(dot({ state: stateFromMessages(messages) ?? state }), className)} data-state={state} {...props} />
+          <div
+            ref={ref}
+            className={cn(dot({ state: stateFromMessages(messages) ?? state }), className, 'ui-state-dot')}
+            data-state={state}
+            {...props}
+          />
         </TooltipTrigger>
         {messages.length > 0 && (
           <TooltipContent collisionPadding={10} sideOffset={10}>

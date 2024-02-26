@@ -9,7 +9,7 @@ export interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextArea
 const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
   ({ autoResize, value, onChange, maxRows, className, style, ...props }, ref) => {
     const { style: height, ...resize } = useAutoResize({ autoResize, value, onChange, maxRows });
-    return <textarea className={cn(textarea, className)} ref={ref} style={{ ...height, ...style }} {...props} {...resize} />;
+    return <textarea className={cn(textarea, className, 'ui-textarea')} ref={ref} style={{ ...height, ...style }} {...props} {...resize} />;
   }
 );
 Textarea.displayName = 'Textarea';

@@ -8,7 +8,7 @@ const Switch = React.forwardRef<
   React.ElementRef<typeof SwitchPrimitives.Root>,
   React.ComponentPropsWithoutRef<typeof SwitchPrimitives.Root> & SwitchVariants
 >(({ size, className, ...props }, ref) => (
-  <SwitchPrimitives.Root className={cn(root, switchSize({ size }), className)} {...props} ref={ref}>
+  <SwitchPrimitives.Root className={cn(root, switchSize({ size }), className, 'ui-switch')} {...props} ref={ref}>
     <SwitchPrimitives.Thumb className={cn(thumb)} />
   </SwitchPrimitives.Root>
 ));

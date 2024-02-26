@@ -6,7 +6,7 @@ import { flex } from './flex.css';
 const Flex = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement> & FlexVariants>(
   ({ direction, gap, alignItems, justifyContent, className, children, ...props }, ref) => {
     return (
-      <div className={cn(flex({ direction, gap, alignItems, justifyContent }), className)} ref={ref} {...props}>
+      <div className={cn(flex({ direction, gap, alignItems, justifyContent }), className, 'ui-flex')} ref={ref} {...props}>
         {children}
       </div>
     );

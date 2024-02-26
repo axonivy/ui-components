@@ -17,7 +17,7 @@ import {
 const Collapsible = React.forwardRef<
   React.ElementRef<typeof CollapsiblePrimitive.Root>,
   React.ComponentPropsWithoutRef<typeof CollapsiblePrimitive.Root>
->(({ className, ...props }, ref) => <CollapsiblePrimitive.Root ref={ref} className={cn(root, 'collapsible-root', className)} {...props} />);
+>(({ className, ...props }, ref) => <CollapsiblePrimitive.Root ref={ref} className={cn(root, className, 'ui-collapsible')} {...props} />);
 Collapsible.displayName = 'CollapsibleRoot';
 
 type CollapsibleTriggerProps = {
@@ -30,7 +30,7 @@ const CollapsibleTrigger = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof CollapsiblePrimitive.CollapsibleTrigger> & CollapsibleTriggerProps
 >(({ state, control, className, children, ...props }, ref) => (
   <div className={cn(header)}>
-    <CollapsiblePrimitive.CollapsibleTrigger ref={ref} className={cn(trigger, className)} {...props}>
+    <CollapsiblePrimitive.CollapsibleTrigger ref={ref} className={cn(trigger, className, 'ui-collapsible-trigger')} {...props}>
       <Flex alignItems='center' gap={2}>
         {children}
         {state}
@@ -67,7 +67,7 @@ const CollapsibleContent = React.forwardRef<
   React.ElementRef<typeof CollapsiblePrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof CollapsiblePrimitive.Content>
 >(({ className, children, ...props }, ref) => (
-  <CollapsiblePrimitive.Content ref={ref} className={cn(content, className)} {...props}>
+  <CollapsiblePrimitive.Content ref={ref} className={cn(content, className, 'ui-collapsible-content')} {...props}>
     <div className={contentData}>{children}</div>
   </CollapsiblePrimitive.Content>
 ));

@@ -27,7 +27,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const toggleProps = useToggle(toggle);
     return (
       <button
-        className={cn(button({ variant, size }), className, children === undefined && iconOnly({ size }))}
+        className={cn(button({ variant, size }), className, children === undefined && iconOnly({ size }), 'ui-button')}
         ref={ref}
         {...toggleProps}
         {...props}

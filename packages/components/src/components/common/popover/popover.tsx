@@ -15,7 +15,13 @@ const PopoverContent = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof PopoverPrimitive.Content>
 >(({ className, align = 'center', sideOffset = 4, ...props }, ref) => (
   <PopoverPrimitive.Portal>
-    <PopoverPrimitive.Content ref={ref} align={align} sideOffset={sideOffset} className={cn(content, className)} {...props} />
+    <PopoverPrimitive.Content
+      ref={ref}
+      align={align}
+      sideOffset={sideOffset}
+      className={cn(content, className, 'ui-popover-content')}
+      {...props}
+    />
   </PopoverPrimitive.Portal>
 ));
 PopoverContent.displayName = PopoverPrimitive.Content.displayName;
@@ -23,7 +29,7 @@ PopoverContent.displayName = PopoverPrimitive.Content.displayName;
 const PopoverClose = React.forwardRef<
   React.ElementRef<typeof PopoverPrimitive.Close>,
   React.ComponentPropsWithoutRef<typeof PopoverPrimitive.Close>
->(({ className, ...props }, ref) => <PopoverPrimitive.Close ref={ref} className={cn(close, className)} {...props} />);
+>(({ className, ...props }, ref) => <PopoverPrimitive.Close ref={ref} className={cn(close, className, 'ui-popover-close')} {...props} />);
 PopoverClose.displayName = PopoverPrimitive.Close.displayName;
 
 const PopoverArrow = React.forwardRef<
