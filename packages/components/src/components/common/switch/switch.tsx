@@ -3,15 +3,24 @@ import * as SwitchPrimitives from '@radix-ui/react-switch';
 
 import { cn } from '@/utils/class-name';
 import { root, thumb, type SwitchVariants, switchSize } from './switch.css';
+import { useReadonly } from '@/context';
 
 const Switch = React.forwardRef<
   React.ElementRef<typeof SwitchPrimitives.Root>,
   React.ComponentPropsWithoutRef<typeof SwitchPrimitives.Root> & SwitchVariants
->(({ size, className, ...props }, ref) => (
-  <SwitchPrimitives.Root className={cn(root, switchSize({ size }), className)} {...props} ref={ref}>
-    <SwitchPrimitives.Thumb className={cn(thumb)} />
-  </SwitchPrimitives.Root>
-));
+>(({ size, disabled, className, ...props }, ref) => {
+  const readonly = useReadonly();
+  return (
+    <SwitchPrimitives.Root
+      className={cn(root, switchSize({ size }), className, 'ui-switch')}
+      disabled={readonly || disabled}
+      {...props}
+      ref={ref}
+    >
+      <SwitchPrimitives.Thumb className={cn(thumb)} />
+    </SwitchPrimitives.Root>
+  );
+});
 Switch.displayName = SwitchPrimitives.Root.displayName;
 
 export { Switch };

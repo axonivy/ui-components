@@ -24,7 +24,7 @@ const Message = React.forwardRef<HTMLParagraphElement, MessageProps>(({ message,
   const body = message ? message : children;
   const icon = ivyIconForSeverity(variant);
   return (
-    <p ref={ref} className={cn(messageClass({ variant }), className)} title={message} {...props}>
+    <p ref={ref} className={cn(messageClass({ variant }), className, 'ui-message')} title={message} {...props}>
       {icon && <IvyIcon icon={icon} />}
       {body}
     </p>

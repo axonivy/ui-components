@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Accordion, AccordionItem, AccordionContent, AccordionTrigger, AccordionControl, AccordionState } from './accordion';
+import { Accordion, AccordionItem, AccordionContent, AccordionTrigger, AccordionState, type AccordionControlProps } from './accordion';
 import { IvyIcons } from '@axonivy/ui-icons';
+import { ButtonGroup } from '..';
 
 const meta: Meta<typeof Accordion> = {
   title: 'Common/Accordion',
@@ -75,8 +76,9 @@ export const State: Story = {
 
 export const Controls: Story = {
   render: () => {
-    const control = (
-      <AccordionControl
+    const control = (props: AccordionControlProps) => (
+      <ButtonGroup
+        {...props}
         controls={[
           { icon: IvyIcons.Undo, onClick: () => alert('Reset'), title: 'Reset' },
           { icon: IvyIcons.Search, onClick: () => console.log('yey'), title: 'Search', toggle: true }

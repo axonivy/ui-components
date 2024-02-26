@@ -1,6 +1,6 @@
 /* eslint-disable import/export */
 import type { ReactElement, ReactNode } from 'react';
-import { ReadonlyContextProvider } from '../context';
+import { ReadonlyProvider } from '../context';
 import { render, renderHook } from '@testing-library/react';
 import type { queries, Queries, RenderHookOptions, RenderOptions } from '@testing-library/react';
 
@@ -13,7 +13,7 @@ const ContextHelper = (
     children: ReactNode;
   }
 ) => {
-  return <ReadonlyContextProvider readonly={props.readonly ?? false}>{props.children}</ReadonlyContextProvider>;
+  return <ReadonlyProvider readonly={props.readonly ?? false}>{props.children}</ReadonlyProvider>;
 };
 
 const customRender = (ui: ReactElement, options?: Omit<RenderOptions, 'wrapper'> & { wrapperProps: ContextHelperProps }) =>

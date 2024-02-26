@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Message } from './message';
-import { Label, Input } from '@/components/common';
+import { Input, Fieldset } from '@/components/common';
 
 const meta: Meta<typeof Message> = {
   title: 'Common/Message',
@@ -23,12 +23,10 @@ export const Default: Story = {
 };
 
 export const WithInput: Story = {
-  render: props => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 5, width: '100%' }}>
-      <Label htmlFor='name'>Name</Label>
-      <Input id='name' />
-      <Message {...props} />
-    </div>
+  render: ({ message, variant }) => (
+    <Fieldset label='Name' message={{ message, variant }}>
+      <Input />
+    </Fieldset>
   )
 };
 

@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as AccordionPrimitive from '@radix-ui/react-accordion';
 import { IvyIcons } from '@axonivy/ui-icons';
 import { cn } from '@/utils/class-name';
-import { Button, StateDot, Flex, IvyIcon, type Control } from '@/components/common';
+import { StateDot, Flex, IvyIcon } from '@/components/common';
 import {
   root,
   header,
@@ -18,32 +18,34 @@ import {
 const Accordion = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Root>,
   React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Root>
->(({ className, ...props }, ref) => <AccordionPrimitive.Root ref={ref} className={cn(root, className)} {...props} />);
+>(({ className, ...props }, ref) => <AccordionPrimitive.Root ref={ref} className={cn(root, className, 'ui-accordion')} {...props} />);
 Accordion.displayName = 'AccordionRoot';
 
 const AccordionItem = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Item>,
   React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Item>
->(({ className, ...props }, ref) => <AccordionPrimitive.Item ref={ref} className={cn(item, className)} {...props} />);
+>(({ className, ...props }, ref) => <AccordionPrimitive.Item ref={ref} className={cn(item, className, 'ui-accordion-item')} {...props} />);
 AccordionItem.displayName = 'AccordionItem';
+
+export type AccordionControlProps = { className: string };
 
 type AccordionTriggerProps = {
   state?: React.ReactNode;
-  control?: React.ReactNode;
+  control?: (props: AccordionControlProps) => React.ReactNode;
 };
 
 const AccordionTrigger = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Trigger>,
   React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Trigger> & AccordionTriggerProps
 >(({ state, control, className, children, ...props }, ref) => (
-  <AccordionPrimitive.Header className={cn(header)}>
-    <AccordionPrimitive.Trigger ref={ref} className={cn(trigger, className)} {...props}>
+  <AccordionPrimitive.Header className={cn(header, 'ui-accordion-header')}>
+    <AccordionPrimitive.Trigger ref={ref} className={cn(trigger, className, 'ui-accordion-trigger')} {...props}>
       <Flex alignItems='center' gap={2}>
         {children}
         {state}
       </Flex>
     </AccordionPrimitive.Trigger>
-    {control}
+    {control && control({ className: controlsClass })}
     <AccordionPrimitive.Trigger asChild className={triggerChevron}>
       <IvyIcon icon={IvyIcons.Chevron} />
     </AccordionPrimitive.Trigger>
@@ -56,28 +58,14 @@ const AccordionState = React.forwardRef<React.ElementRef<typeof StateDot>, React
 );
 AccordionState.displayName = 'AccordionState';
 
-type AccordionControlProps = { controls: Array<Control> };
-
-const AccordionControl = React.forwardRef<
-  React.ElementRef<typeof Flex>,
-  React.ComponentPropsWithoutRef<typeof Flex> & AccordionControlProps
->(({ controls, className, ...props }, ref) => (
-  <Flex gap={1} className={cn(controlsClass, className)} ref={ref} {...props}>
-    {controls.map(control => (
-      <Button key={control.title} {...control} />
-    ))}
-  </Flex>
-));
-AccordionControl.displayName = 'AccordionControl';
-
 const AccordionContent = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Content>
 >(({ className, children, ...props }, ref) => (
-  <AccordionPrimitive.Content ref={ref} className={cn(content, className)} {...props}>
+  <AccordionPrimitive.Content ref={ref} className={cn(content, className, 'ui-accordion-content')} {...props}>
     <div className={contentData}>{children}</div>
   </AccordionPrimitive.Content>
 ));
 AccordionContent.displayName = AccordionPrimitive.Content.displayName;
 
-export { Accordion, AccordionItem, AccordionTrigger, AccordionState, AccordionControl, AccordionContent };
+export { Accordion, AccordionItem, AccordionTrigger, AccordionState, AccordionContent };

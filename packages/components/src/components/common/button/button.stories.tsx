@@ -11,8 +11,8 @@ const meta: Meta<typeof Button> = {
     disabled: false
   },
   argTypes: {
-    variant: { control: 'select', defaultValue: 'default', options: ['default', 'primary', 'outline'] },
-    size: { control: 'select', defaultValue: 'default', options: ['default', 'large', 'small'] },
+    variant: { control: 'select', defaultValue: 'undefined', options: ['undefined', 'primary', 'outline'] },
+    size: { control: 'select', defaultValue: 'undefined', options: ['undefined', 'large', 'small'] },
     icon: { control: 'select', options: IvyIcons },
     toggle: { control: 'boolean' }
   }
@@ -36,7 +36,7 @@ export const WithIcon: Story = {
 export const IconOnly: Story = {
   args: {
     icon: IvyIcons.Home,
-    size: 'default'
+    size: undefined
   },
   render: props => <Button {...props} />
 };
