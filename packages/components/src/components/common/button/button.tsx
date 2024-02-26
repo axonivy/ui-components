@@ -10,7 +10,7 @@ export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> &
   ButtonVariants &
   Partial<IvyIconProps> & {
     toggle?: boolean;
-  } & Control;
+  };
 
 const useToggle = (toggle?: boolean) => {
   if (toggle === undefined) {

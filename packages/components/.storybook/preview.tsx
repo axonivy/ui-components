@@ -3,6 +3,8 @@ import './preview.css';
 import '../src/styles/global.css';
 import '@axonivy/ui-icons/ivy-icons.css';
 import React from 'react';
+import { ReadonlyProvider } from '../src/context/useReadonly';
+import { ThemeProvider } from '../src/context/useTheme';
 
 const preview: Preview = {
   parameters: {
@@ -33,6 +35,17 @@ const preview: Preview = {
         ],
         showName: true
       }
+    },
+    readonly: {
+      defaultValue: false,
+      toolbar: {
+        icon: 'unlock',
+        items: [
+          { value: false, icon: 'unlock', title: 'Read & Write' },
+          { value: true, icon: 'lock', title: 'Readonly' }
+        ],
+        showName: false
+      }
     }
   },
   decorators: [
@@ -42,7 +55,11 @@ const preview: Preview = {
       const body = document.body;
       body.classList.remove('dark', 'light');
       body.classList.add(theme);
-      return <StoryFn />;
+      return (
+        <ReadonlyProvider readonly={context.globals.readonly}>
+          <StoryFn />
+        </ReadonlyProvider>
+      );
     }
   ]
 };

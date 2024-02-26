@@ -5,8 +5,17 @@ import { cn } from '@/utils/class-name';
 import { IvyIcon } from '@/components/common';
 import { IvyIcons } from '@axonivy/ui-icons';
 import { content, item, itemIcon, label, scrollButton, seperator, trigger, viewport } from './select.css';
+import { useReadonly } from '@/context';
 
-const Select = SelectPrimitive.Root;
+const Select = ({ disabled, children, ...props }: SelectPrimitive.SelectProps) => {
+  const readonly = useReadonly();
+  return (
+    <SelectPrimitive.Root disabled={readonly || disabled} {...props}>
+      {children}
+    </SelectPrimitive.Root>
+  );
+};
+Select.displayName = SelectPrimitive.Root.displayName;
 
 const SelectGroup = SelectPrimitive.Group;
 
