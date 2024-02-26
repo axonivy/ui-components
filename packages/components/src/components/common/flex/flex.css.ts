@@ -21,7 +21,8 @@ export const flex = recipe({
       center: { alignItems: 'center' }
     },
     justifyContent: {
-      center: { justifyContent: 'center' }
+      center: { justifyContent: 'center' },
+      'space-between': { justifyContent: 'space-between' }
     }
   }
 });

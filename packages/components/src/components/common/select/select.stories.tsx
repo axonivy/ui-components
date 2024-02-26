@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectSeparator, SelectTrigger, SelectValue } from './select';
-import { Flex, Label } from '@/components/common';
+import { Fieldset } from '@/components/common';
 
 const meta: Meta<typeof Select> = {
   title: 'Common/Select',
@@ -37,10 +37,9 @@ export const Default: Story = {
 
 export const ScrollableWithLabel: Story = {
   render: props => (
-    <Flex direction='column' gap={1}>
-      <Label htmlFor='select'>Name</Label>
+    <Fieldset label='Name'>
       <Select {...props}>
-        <SelectTrigger id='select'>
+        <SelectTrigger>
           <SelectValue placeholder='Select a timezone' />
         </SelectTrigger>
         <SelectContent>
@@ -92,6 +91,6 @@ export const ScrollableWithLabel: Story = {
           </SelectGroup>
         </SelectContent>
       </Select>
-    </Flex>
+    </Fieldset>
   )
 };

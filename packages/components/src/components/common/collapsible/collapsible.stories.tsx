@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Collapsible, CollapsibleContent, CollapsibleControl, CollapsibleState, CollapsibleTrigger } from './collapsible';
+import { Collapsible, CollapsibleContent, CollapsibleState, CollapsibleTrigger } from './collapsible';
 import { IvyIcons } from '@axonivy/ui-icons';
-import type { MessageData } from '@/components';
+import { ButtonGroup, type CollapsibleControlProps, type MessageData } from '@/components';
 
 const meta: Meta<typeof Collapsible> = {
   title: 'Common/Collapsible',
@@ -51,8 +51,9 @@ export const State: StoryObj<MessageData & typeof CollapsibleState> = {
 
 export const Controls: Story = {
   render: () => {
-    const control = (
-      <CollapsibleControl
+    const control = (props: CollapsibleControlProps) => (
+      <ButtonGroup
+        {...props}
         controls={[
           { icon: IvyIcons.ArrowsMaximize, onClick: () => alert('Maximize'), title: 'Maximize' },
           { icon: IvyIcons.Search, onClick: () => console.log('yey'), title: 'Search', toggle: true }

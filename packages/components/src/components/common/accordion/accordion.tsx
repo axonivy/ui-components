@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as AccordionPrimitive from '@radix-ui/react-accordion';
 import { IvyIcons } from '@axonivy/ui-icons';
 import { cn } from '@/utils/class-name';
-import { Button, StateDot, Flex, IvyIcon, type Control } from '@/components/common';
+import { StateDot, Flex, IvyIcon } from '@/components/common';
 import {
   root,
   header,
@@ -27,9 +27,11 @@ const AccordionItem = React.forwardRef<
 >(({ className, ...props }, ref) => <AccordionPrimitive.Item ref={ref} className={cn(item, className, 'ui-accordion-item')} {...props} />);
 AccordionItem.displayName = 'AccordionItem';
 
+export type AccordionControlProps = { className: string };
+
 type AccordionTriggerProps = {
   state?: React.ReactNode;
-  control?: React.ReactNode;
+  control?: (props: AccordionControlProps) => React.ReactNode;
 };
 
 const AccordionTrigger = React.forwardRef<
@@ -43,7 +45,7 @@ const AccordionTrigger = React.forwardRef<
         {state}
       </Flex>
     </AccordionPrimitive.Trigger>
-    {control}
+    {control && control({ className: controlsClass })}
     <AccordionPrimitive.Trigger asChild className={triggerChevron}>
       <IvyIcon icon={IvyIcons.Chevron} />
     </AccordionPrimitive.Trigger>
@@ -56,20 +58,6 @@ const AccordionState = React.forwardRef<React.ElementRef<typeof StateDot>, React
 );
 AccordionState.displayName = 'AccordionState';
 
-type AccordionControlProps = { controls: Array<Control> };
-
-const AccordionControl = React.forwardRef<
-  React.ElementRef<typeof Flex>,
-  React.ComponentPropsWithoutRef<typeof Flex> & AccordionControlProps
->(({ controls, className, ...props }, ref) => (
-  <Flex gap={1} className={cn(controlsClass, className)} ref={ref} {...props}>
-    {controls.map(control => (
-      <Button key={control.title} {...control} />
-    ))}
-  </Flex>
-));
-AccordionControl.displayName = 'AccordionControl';
-
 const AccordionContent = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Content>
@@ -80,4 +68,4 @@ const AccordionContent = React.forwardRef<
 ));
 AccordionContent.displayName = AccordionPrimitive.Content.displayName;
 
-export { Accordion, AccordionItem, AccordionTrigger, AccordionState, AccordionControl, AccordionContent };
+export { Accordion, AccordionItem, AccordionTrigger, AccordionState, AccordionContent };

@@ -1,7 +1,7 @@
 import * as CollapsiblePrimitive from '@radix-ui/react-collapsible';
 import * as React from 'react';
 import { cn } from '@/utils/class-name';
-import { Button, StateDot, Flex, IvyIcon, type Control } from '@/components/common';
+import { StateDot, Flex, IvyIcon } from '@/components/common';
 import { IvyIcons } from '@axonivy/ui-icons';
 import {
   root,
@@ -20,9 +20,11 @@ const Collapsible = React.forwardRef<
 >(({ className, ...props }, ref) => <CollapsiblePrimitive.Root ref={ref} className={cn(root, className, 'ui-collapsible')} {...props} />);
 Collapsible.displayName = 'CollapsibleRoot';
 
+export type CollapsibleControlProps = { className: string };
+
 type CollapsibleTriggerProps = {
   state?: React.ReactNode;
-  control?: React.ReactNode;
+  control?: (props: CollapsibleControlProps) => React.ReactNode;
 };
 
 const CollapsibleTrigger = React.forwardRef<
@@ -36,7 +38,7 @@ const CollapsibleTrigger = React.forwardRef<
         {state}
       </Flex>
     </CollapsiblePrimitive.CollapsibleTrigger>
-    {control}
+    {control && control({ className: controlsClass })}
     <CollapsiblePrimitive.CollapsibleTrigger asChild className={triggerChevron}>
       <IvyIcon icon={IvyIcons.Chevron} />
     </CollapsiblePrimitive.CollapsibleTrigger>
@@ -49,20 +51,6 @@ const CollapsibleState = React.forwardRef<React.ElementRef<typeof StateDot>, Rea
 );
 CollapsibleState.displayName = 'CollapsibleState';
 
-type CollapsibleControlProps = { controls: Array<Control> };
-
-const CollapsibleControl = React.forwardRef<
-  React.ElementRef<typeof Flex>,
-  React.ComponentPropsWithoutRef<typeof Flex> & CollapsibleControlProps
->(({ controls, className, ...props }, ref) => (
-  <Flex gap={1} className={cn(controlsClass, className)} ref={ref} {...props}>
-    {controls.map(control => (
-      <Button key={control.title} {...control} />
-    ))}
-  </Flex>
-));
-CollapsibleControl.displayName = 'CollapsibleControl';
-
 const CollapsibleContent = React.forwardRef<
   React.ElementRef<typeof CollapsiblePrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof CollapsiblePrimitive.Content>
@@ -73,4 +61,4 @@ const CollapsibleContent = React.forwardRef<
 ));
 CollapsibleContent.displayName = CollapsiblePrimitive.Content.displayName;
 
-export { Collapsible, CollapsibleTrigger, CollapsibleControl, CollapsibleState, CollapsibleContent };
+export { Collapsible, CollapsibleTrigger, CollapsibleState, CollapsibleContent };
