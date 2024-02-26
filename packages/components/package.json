@@ -25,6 +25,7 @@
     "@radix-ui/react-switch": "^1.0.3",
     "@radix-ui/react-tooltip": "^1.0.7",
     "clsx": "^2.1.0",
+    "downshift": "^8.3.2",
     "react-resizable-panels": "^1.0.9"
   },
   "peerDependencies": {
