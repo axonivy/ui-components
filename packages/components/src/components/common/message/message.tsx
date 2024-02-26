@@ -16,8 +16,9 @@ const ivyIconForSeverity = (variant: NonNullable<MessageVariants>['variant']) =>
   }
   return undefined;
 };
+export type MessageData = MessageVariants & { message?: string };
 
-export type MessageProps = React.HTMLAttributes<HTMLParagraphElement> & MessageVariants & { message?: string };
+export type MessageProps = React.HTMLAttributes<HTMLParagraphElement> & MessageData;
 
 const Message = React.forwardRef<HTMLParagraphElement, MessageProps>(({ message, variant, className, children, ...props }, ref) => {
   const body = message ? message : children;

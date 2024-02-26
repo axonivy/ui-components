@@ -1,10 +1,41 @@
 import * as React from 'react';
 import { cn } from '@/utils/class-name';
 import { dot, type DotVariants } from './state.css';
+import type { MessageData } from '@/components';
+import { Flex, TooltipProvider, Tooltip, TooltipTrigger, TooltipContent, Message } from '@/components/common';
 
-const StateDot = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement> & DotVariants>(
-  ({ state, className, ...props }, ref) => <div ref={ref} className={cn(dot({ state }), className)} data-state={state} {...props} />
-);
+const stateFromMessages = (messages: Array<MessageData>): NonNullable<DotVariants>['state'] => {
+  if (messages.find(({ variant }) => variant === 'warning')) {
+    return 'warning';
+  }
+  if (messages.find(({ variant }) => variant === 'error')) {
+    return 'error';
+  }
+  return undefined;
+};
+
+type StateDotProps = React.HTMLAttributes<HTMLDivElement> & DotVariants & { messages?: Array<MessageData> };
+
+const StateDot = React.forwardRef<HTMLDivElement, StateDotProps>(({ state, messages = [], className, ...props }, ref) => {
+  return (
+    <TooltipProvider>
+      <Tooltip delayDuration={500}>
+        <TooltipTrigger asChild>
+          <div ref={ref} className={cn(dot({ state: stateFromMessages(messages) ?? state }), className)} data-state={state} {...props} />
+        </TooltipTrigger>
+        {messages.length > 0 && (
+          <TooltipContent collisionPadding={10} sideOffset={10}>
+            <Flex direction='column'>
+              {messages.map((msg, index) => (
+                <Message key={index} {...msg} />
+              ))}
+            </Flex>
+          </TooltipContent>
+        )}
+      </Tooltip>
+    </TooltipProvider>
+  );
+});
 StateDot.displayName = 'StateDot';
 
 export { StateDot };

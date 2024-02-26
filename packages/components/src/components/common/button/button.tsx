@@ -2,12 +2,15 @@ import * as React from 'react';
 import { cn } from '@/utils/class-name';
 import { button, iconOnly, type ButtonVariants } from './button.css';
 import { IvyIcon, type IvyIconProps } from '@/components/common';
+import type { IvyIcons } from '@axonivy/ui-icons';
+
+export type Control = { title: string; icon: IvyIcons; onClick: () => void; toggle?: boolean };
 
 export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> &
   ButtonVariants &
   Partial<IvyIconProps> & {
     toggle?: boolean;
-  };
+  } & Control;
 
 const useToggle = (toggle?: boolean) => {
   if (toggle === undefined) {

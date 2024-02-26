@@ -2,17 +2,17 @@ import * as React from 'react';
 import * as AccordionPrimitive from '@radix-ui/react-accordion';
 import { IvyIcons } from '@axonivy/ui-icons';
 import { cn } from '@/utils/class-name';
-import { Button, StateDot, Flex, IvyIcon } from '@/components/common';
+import { Button, StateDot, Flex, IvyIcon, type Control } from '@/components/common';
 import {
   root,
   header,
   trigger,
-  triggerContent,
   content,
   contentData,
   controls as controlsClass,
   state as stateClass,
-  item
+  item,
+  triggerChevron
 } from './accordion.css';
 
 const Accordion = React.forwardRef<
@@ -38,11 +38,15 @@ const AccordionTrigger = React.forwardRef<
 >(({ state, control, className, children, ...props }, ref) => (
   <AccordionPrimitive.Header className={cn(header)}>
     <AccordionPrimitive.Trigger ref={ref} className={cn(trigger, className)} {...props}>
-      <IvyIcon icon={IvyIcons.Chevron} />
-      <div className={triggerContent}>{children}</div>
-      {state}
+      <Flex alignItems='center' gap={2}>
+        {children}
+        {state}
+      </Flex>
     </AccordionPrimitive.Trigger>
     {control}
+    <AccordionPrimitive.Trigger asChild className={triggerChevron}>
+      <IvyIcon icon={IvyIcons.Chevron} />
+    </AccordionPrimitive.Trigger>
   </AccordionPrimitive.Header>
 ));
 AccordionTrigger.displayName = AccordionPrimitive.Trigger.displayName;
@@ -52,9 +56,7 @@ const AccordionState = React.forwardRef<React.ElementRef<typeof StateDot>, React
 );
 AccordionState.displayName = 'AccordionState';
 
-type AccordionControlProps = {
-  controls: { title: string; icon: IvyIcons; onClick: () => void }[];
-};
+type AccordionControlProps = { controls: Array<Control> };
 
 const AccordionControl = React.forwardRef<
   React.ElementRef<typeof Flex>,

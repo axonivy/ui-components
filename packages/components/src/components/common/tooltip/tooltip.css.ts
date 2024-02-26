@@ -5,7 +5,7 @@ import { vars } from '@/styles/theme.css';
 export const tooltipContent = style({
   borderRadius: vars.border.radius,
   padding: `${vars.size.s1} ${vars.size.s2}`,
-  backgroundColor: vars.color.n100,
+  backgroundColor: vars.color.n25,
   boxShadow: vars.shadow.editor,
   userSelect: 'none',
   animationDuration: '200ms',

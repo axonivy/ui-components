@@ -1,31 +1,45 @@
 import { vars } from '@/styles/theme.css';
-import { globalStyle, keyframes, style } from '@vanilla-extract/css';
+import { keyframes, style } from '@vanilla-extract/css';
 
-export const root = style({});
+export const root = style({
+  border: vars.border.basic,
+  borderRadius: vars.border.radius
+});
 
 export const header = style({
   display: 'flex',
   alignItems: 'center',
-  gap: vars.size.s1,
+  gap: vars.size.s2
+});
+
+export const trigger = style({
+  all: 'unset',
+  flex: '0 1 100%',
+  padding: vars.size.s2,
+  cursor: 'pointer',
+  ':focus-visible': {
+    boxShadow: vars.shadow.focus
+  },
   selectors: {
     [`${root}[data-state='open'] &`]: {
-      justifyContent: 'space-between'
+      color: vars.color.p300
     }
   }
 });
 
-export const trigger = style({});
-
-globalStyle(`${trigger} .ivy-toggle`, {
-  fontSize: '20px',
-  transition: 'transform 200ms cubic-bezier(0.87, 0, 0.13, 1)'
-});
-
-globalStyle(`${trigger}[data-state="open"] .ivy-toggle`, {
-  transform: 'rotate(90deg)'
+export const triggerChevron = style({
+  padding: vars.size.s2,
+  cursor: 'pointer',
+  transition: 'transform 200ms cubic-bezier(0.87, 0, 0.13, 1)',
+  selectors: {
+    '&[data-state="open"]': {
+      transform: 'rotate(90deg)'
+    }
+  }
 });
 
 export const state = style({
+  flex: '0 0 auto',
   selectors: {
     [`${root}[data-state='open'] &`]: {
       display: 'none'
@@ -53,7 +67,6 @@ const collapsableSlideUp = keyframes({
 
 export const content = style({
   overflow: 'hidden',
-  padding: '1px',
   animationDuration: '200ms',
   animationTimingFunction: 'cubic-bezier(0.87, 0, 0.13, 1)',
   willChange: 'height',
@@ -70,4 +83,9 @@ export const content = style({
       animationName: collapsableSlideUp
     }
   }
+});
+
+export const contentData = style({
+  padding: vars.size.s2,
+  paddingBlockStart: 0
 });

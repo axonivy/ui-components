@@ -57,13 +57,13 @@ export const State: Story = {
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value='item-3'>
-          <AccordionTrigger state={<AccordionState state='warning' />}>Warning</AccordionTrigger>
+          <AccordionTrigger state={<AccordionState messages={[{ message: 'warning', variant: 'warning' }]} />}>Warning</AccordionTrigger>
           <AccordionContent>
             <span>Yes. It&apos;s animated by default, but you can disable it if you prefer.</span>
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value='item-4'>
-          <AccordionTrigger state={<AccordionState state='error' />}>Error</AccordionTrigger>
+          <AccordionTrigger state={<AccordionState messages={[{ message: 'error', variant: 'error' }]} />}>Error</AccordionTrigger>
           <AccordionContent>
             <span>Yes. It&apos;s animated by default, but you can disable it if you prefer.</span>
           </AccordionContent>
@@ -79,7 +79,7 @@ export const Controls: Story = {
       <AccordionControl
         controls={[
           { icon: IvyIcons.Undo, onClick: () => alert('Reset'), title: 'Reset' },
-          { icon: IvyIcons.Search, onClick: () => console.log('yey'), title: 'Search' }
+          { icon: IvyIcons.Search, onClick: () => console.log('yey'), title: 'Search', toggle: true }
         ]}
       />
     );
