@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { Button, Flex, Input, IvyIcon, Popover, PopoverAnchor, PopoverContent, useFieldset } from '@/components/common';
+import { Button, Flex, Input, InputGroup, IvyIcon, Popover, PopoverAnchor, PopoverContent, useField } from '@/components/common';
 import { IvyIcons } from '@axonivy/ui-icons';
 import { useReadonly } from '@/context';
 import { useCombobox } from 'downshift';
@@ -72,13 +72,13 @@ const Combobox = <T extends ComboboxOption>({
     setFilteredItems(options);
   }, [options, selectItem, value]);
 
-  const { inputProps } = useFieldset();
+  const { inputProps } = useField();
   const readonly = useReadonly();
   return (
     <Popover open={isOpen}>
       <div className='ui-combobox'>
         <PopoverAnchor asChild>
-          <Flex alignItems='center' gap={1}>
+          <InputGroup>
             <Input {...getInputProps()} {...inputProps} {...props} disabled={readonly || disabled} />
             <Button
               {...getToggleButtonProps()}
@@ -87,7 +87,7 @@ const Combobox = <T extends ComboboxOption>({
               aria-label='toggle menu'
               disabled={readonly || disabled}
             />
-          </Flex>
+          </InputGroup>
         </PopoverAnchor>
         <PopoverContent onOpenAutoFocus={e => e.preventDefault()} className={cn(content, 'ui-combobox-menu')} {...getMenuProps()}>
           {isOpen &&

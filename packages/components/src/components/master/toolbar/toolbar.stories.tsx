@@ -1,6 +1,18 @@
 import type { Meta } from '@storybook/react';
 import { Toolbar, ToolbarContainer, ToolbarTitle } from './toolbar';
-import { Button, Separator, Flex } from '@/components/common';
+import {
+  Button,
+  Separator,
+  Flex,
+  PopoverTrigger,
+  Popover,
+  PopoverContent,
+  IvyIcon,
+  PopoverArrow,
+  Switch,
+  Field,
+  Label
+} from '@/components/common';
 import { IvyIcons } from '@axonivy/ui-icons';
 
 const meta: Meta<typeof Toolbar> = {
@@ -28,6 +40,34 @@ export const Default = ({ sideBarCollapse }: { sideBarCollapse?: () => void }) =
       </ToolbarContainer>
     </Flex>
     <Flex>
+      <Popover>
+        <PopoverTrigger asChild>
+          <Button icon={IvyIcons.Settings} size='large' />
+        </PopoverTrigger>
+        <PopoverContent sideOffset={12}>
+          <Flex direction='column' gap={2}>
+            <Field direction='row' alignItems='center' justifyContent='space-between' gap={4}>
+              <Label>
+                <Flex alignItems='center' gap={1}>
+                  <IvyIcon icon={IvyIcons.DarkMode} />
+                  Theme
+                </Flex>
+              </Label>
+              <Switch defaultChecked={false} size='small' />
+            </Field>
+            <Field direction='row' alignItems='center' justifyContent='space-between' gap={4}>
+              <Label>
+                <Flex alignItems='center' gap={1}>
+                  <IvyIcon icon={IvyIcons.GridDots} />
+                  Grid
+                </Flex>
+              </Label>
+              <Switch defaultChecked={true} size='small' />
+            </Field>
+          </Flex>
+          <PopoverArrow />
+        </PopoverContent>
+      </Popover>
       <Button icon={IvyIcons.LayoutSidebarRightCollapse} size='large' onClick={sideBarCollapse} />
     </Flex>
   </Toolbar>

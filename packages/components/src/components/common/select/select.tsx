@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as SelectPrimitive from '@radix-ui/react-select';
 
 import { cn } from '@/utils/class-name';
-import { IvyIcon, useFieldset } from '@/components/common';
+import { IvyIcon, useField } from '@/components/common';
 import { IvyIcons } from '@axonivy/ui-icons';
 import { content, item, itemIcon, label, scrollButton, seperator, trigger, viewport } from './select.css';
 import { useReadonly } from '@/context';
@@ -25,7 +25,7 @@ const SelectTrigger = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Trigger>,
   React.ComponentPropsWithoutRef<typeof SelectPrimitive.Trigger>
 >(({ className, children, ...props }, ref) => {
-  const { inputProps } = useFieldset();
+  const { inputProps } = useField();
   return (
     <SelectPrimitive.Trigger ref={ref} className={cn(trigger, className, 'ui-select-trigger')} {...inputProps} {...props}>
       {children}

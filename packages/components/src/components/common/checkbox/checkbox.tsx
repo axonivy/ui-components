@@ -4,7 +4,7 @@ import * as CheckboxPrimitive from '@radix-ui/react-checkbox';
 import { cn } from '@/utils/class-name';
 import { checkboxIndicator, checkboxRoot } from './checkbox.css';
 import { IvyIcons } from '@axonivy/ui-icons';
-import { IvyIcon } from '@/components/common';
+import { IvyIcon, useField } from '@/components/common';
 import { useReadonly } from '@/context';
 
 const Checkbox = React.forwardRef<
@@ -12,8 +12,15 @@ const Checkbox = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root>
 >(({ disabled, className, ...props }, ref) => {
   const readonly = useReadonly();
+  const { inputProps } = useField();
   return (
-    <CheckboxPrimitive.Root ref={ref} className={cn(checkboxRoot, className, 'ui-checkbox')} disabled={readonly || disabled} {...props}>
+    <CheckboxPrimitive.Root
+      ref={ref}
+      className={cn(checkboxRoot, className, 'ui-checkbox')}
+      disabled={readonly || disabled}
+      {...inputProps}
+      {...props}
+    >
       <CheckboxPrimitive.Indicator className={cn(checkboxIndicator)}>
         <IvyIcon icon={IvyIcons.Check} />
       </CheckboxPrimitive.Indicator>

@@ -8,9 +8,10 @@ type FieldsetContextValue = {
 
 const FieldsetContext = React.createContext<FieldsetContextValue>({} as FieldsetContextValue);
 
-export const useFieldset = () => {
+export const useField = () => {
   const { id } = React.useContext(FieldsetContext);
-  return createIds(id);
+  const newId = React.useId();
+  return createIds(id ?? newId);
 };
 
 const createIds = (id: string) => {
@@ -33,28 +34,34 @@ const createIds = (id: string) => {
   };
 };
 
+const Field = React.forwardRef<React.ElementRef<typeof Flex>, React.ComponentPropsWithoutRef<typeof Flex>>(
+  ({ direction = 'column', gap = 1, className, ...props }, ref) => {
+    const id = React.useId();
+    return (
+      <FieldsetContext.Provider value={{ id }}>
+        <Flex direction={direction} gap={gap} ref={ref} className={cn(className, 'ui-field')} {...props} />
+      </FieldsetContext.Provider>
+    );
+  }
+);
+Field.displayName = 'Field';
+
 export type FieldsetProps = React.HTMLAttributes<HTMLDivElement> & {
   label?: string;
   control?: React.ReactNode;
   message?: MessageData;
 };
 
-const Fieldset = React.forwardRef<HTMLDivElement, FieldsetProps>(({ label, control, message, className, children, ...props }, ref) => {
-  const id = React.useId();
-  const { labelProps, messageProps } = createIds(id);
-  return (
-    <FieldsetContext.Provider value={{ id }}>
-      <Flex direction='column' gap={1} ref={ref} className={cn(className, 'ui-fieldset')} {...props}>
-        <Flex alignItems='center' justifyContent='space-between' className={cn('ui-fieldset-label')}>
-          <Label {...labelProps}>{label}</Label>
-          {control}
-        </Flex>
-        {children}
-        {message && <Message {...messageProps} {...message} />}
-      </Flex>
-    </FieldsetContext.Provider>
-  );
-});
+const Fieldset = React.forwardRef<HTMLDivElement, FieldsetProps>(({ label, control, message, className, children, ...props }, ref) => (
+  <Field ref={ref} className={className} {...props}>
+    <Flex alignItems='center' justifyContent='space-between' className={cn('ui-fieldset-label')}>
+      <Label>{label}</Label>
+      {control}
+    </Flex>
+    {children}
+    {message && <Message {...message} />}
+  </Field>
+));
 Fieldset.displayName = 'Fieldset';
 
-export { Fieldset };
+export { Field, Fieldset };
