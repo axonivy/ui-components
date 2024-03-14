@@ -33,13 +33,13 @@ export enum ClientState {
   ServerError
 }
 
-export interface RcpClient extends Disposable {
+export interface RpcClient extends Disposable {
   readonly state: ClientState;
   start(): Promise<void>;
   stop(): Promise<void>;
 }
 
-export class BaseRcpClient implements RcpClient {
+export class BaseRpcClient implements RpcClient {
   protected toDispose = new DisposableCollection();
   protected _state: ClientState = ClientState.Initial;
 
