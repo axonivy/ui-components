@@ -8,7 +8,6 @@ import { ThemeProvider } from '../src/context/useTheme';
 
 const preview: Preview = {
   parameters: {
-    actions: { argTypesRegex: '^on[A-Z].*' },
     controls: {
       matchers: {
         color: /(background|color)$/i,
@@ -30,8 +29,8 @@ const preview: Preview = {
         title: 'Theme',
         icon: 'circlehollow',
         items: [
-          { value: 'light', icon: 'circlehollow', title: 'light' },
-          { value: 'dark', icon: 'cirlce', title: 'dark' }
+          { value: 'light', title: 'light' },
+          { value: 'dark', title: 'dark' }
         ],
         showName: true
       }
