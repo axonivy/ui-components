@@ -6,6 +6,7 @@
   },
   "references": [
     { "path": "packages/components/tsconfig.json" },
-    { "path": "packages/icons/tsconfig.json" }
+    { "path": "packages/icons/tsconfig.json" },
+    { "path": "packages/jsonrpc/tsconfig.json" }
   ]
 }
