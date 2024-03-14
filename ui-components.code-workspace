@@ -15,6 +15,10 @@
       "name": "package/icons",
       "path": "./packages/icons"
     },
+    {
+      "name": "package/jsonrpc",
+      "path": "./packages/jsonrpc"
+    }
   ],
   "settings": {
     "task.autoDetect": "off",
