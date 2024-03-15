@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Switch } from './switch';
-import { Flex, Label } from '@/components';
+import { Field, Label } from '@/components';
 
 const meta: Meta<typeof Switch> = {
   title: 'Common/Switch',
@@ -20,9 +20,9 @@ type Story = StoryObj<typeof Switch>;
 
 export const Default: Story = {
   render: props => (
-    <Flex alignItems='center' gap={2}>
-      <Switch id='airplane-mode' {...props} />
-      <Label htmlFor='airplane-mode'>Airplane Mode</Label>
-    </Flex>
+    <Field direction='row' alignItems='center' gap={2}>
+      <Switch {...props} />
+      <Label>Airplane Mode</Label>
+    </Field>
   )
 };

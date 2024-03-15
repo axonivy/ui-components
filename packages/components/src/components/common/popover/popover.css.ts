@@ -6,7 +6,7 @@ const contentBg = createVar();
 
 export const content = style({
   vars: {
-    [contentBg]: vars.color.n25
+    [contentBg]: vars.color.background
   },
   borderRadius: vars.border.radius,
   maxWidth: `calc(var(--radix-popover-content-available-width) - 2 * ${vars.size.s2})`,

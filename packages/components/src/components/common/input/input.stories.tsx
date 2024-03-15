@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Input } from './input';
-import { Button, Flex, Fieldset } from '@/components/common';
+import { Input, InputGroup } from './input';
+import { Button, Fieldset } from '@/components/common';
 import { IvyIcons } from '@axonivy/ui-icons';
 
 const meta: Meta<typeof Input> = {
@@ -31,10 +31,10 @@ export const WithLabel: Story = {
 export const WithButton: Story = {
   render: props => (
     <Fieldset label='Name'>
-      <Flex alignItems='center' gap={1}>
+      <InputGroup>
         <Input {...props} />
         <Button type='submit' icon={IvyIcons.ListSearch} />
-      </Flex>
+      </InputGroup>
     </Fieldset>
   )
 };

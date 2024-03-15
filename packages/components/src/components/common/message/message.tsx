@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { cn } from '@/utils/class-name';
-import { IvyIcon } from '@/components/common';
+import { IvyIcon, useField } from '@/components/common';
 import { IvyIcons } from '@axonivy/ui-icons';
 import { message as messageClass, type MessageVariants } from './message.css';
 
@@ -21,10 +21,11 @@ export type MessageData = MessageVariants & { message?: string };
 export type MessageProps = React.HTMLAttributes<HTMLParagraphElement> & MessageData;
 
 const Message = React.forwardRef<HTMLParagraphElement, MessageProps>(({ message, variant, className, children, ...props }, ref) => {
+  const { messageProps } = useField();
   const body = message ? message : children;
   const icon = ivyIconForSeverity(variant);
   return (
-    <p ref={ref} className={cn(messageClass({ variant }), className, 'ui-message')} title={message} {...props}>
+    <p ref={ref} className={cn(messageClass({ variant }), className, 'ui-message')} title={message} {...messageProps} {...props}>
       {icon && <IvyIcon icon={icon} />}
       {body}
     </p>

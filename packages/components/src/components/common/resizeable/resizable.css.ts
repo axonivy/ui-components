@@ -10,13 +10,13 @@ export const resizableLine = style({
   justifyContent: 'center',
   alignItems: 'center',
   backgroundColor: vars.color.n200,
-  ':hover': {
-    backgroundColor: vars.color.p300
-  },
   selectors: {
     '&[data-panel-group-direction="vertical"]': {
       width: '100%',
       height: 1
+    },
+    '&[data-resize-handle-state=hover]': {
+      backgroundColor: vars.color.p300
     },
     '&[data-resize-handle-active]': {
       backgroundColor: vars.color.p300

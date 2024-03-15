@@ -4,6 +4,7 @@ import * as RadioGroupPrimitive from '@radix-ui/react-radio-group';
 import { cn } from '@/utils/class-name';
 import { radioGroup, radioGroupIdicator, radioGroupItem } from './radio.css';
 import { useReadonly } from '@/context';
+import { useField } from '@/components';
 
 const RadioGroup = React.forwardRef<
   React.ElementRef<typeof RadioGroupPrimitive.Root>,
@@ -25,8 +26,9 @@ const RadioGroupItem = React.forwardRef<
   React.ElementRef<typeof RadioGroupPrimitive.Item>,
   React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Item>
 >(({ className, ...props }, ref) => {
+  const { inputProps } = useField();
   return (
-    <RadioGroupPrimitive.Item ref={ref} className={cn(radioGroupItem, className, 'ui-radio-group-item')} {...props}>
+    <RadioGroupPrimitive.Item ref={ref} className={cn(radioGroupItem, className, 'ui-radio-group-item')} {...inputProps} {...props}>
       <RadioGroupPrimitive.Indicator className={cn(radioGroupIdicator)} />
     </RadioGroupPrimitive.Item>
   );
