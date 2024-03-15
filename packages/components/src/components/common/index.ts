@@ -15,5 +15,6 @@ export * from './select/select';
 export * from './separator/separator';
 export * from './state/state';
 export * from './switch/switch';
+export * from './table';
 export * from './textarea/textarea';
 export * from './tooltip/tooltip';

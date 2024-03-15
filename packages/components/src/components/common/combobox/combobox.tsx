@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { Button, Flex, Input, InputGroup, IvyIcon, Popover, PopoverAnchor, PopoverContent, useField } from '@/components/common';
+import { Button, Flex, Input, InputGroup, IvyIcon, Popover, PopoverAnchor, PopoverContent } from '@/components/common';
 import { IvyIcons } from '@axonivy/ui-icons';
 import { useReadonly } from '@/context';
 import { useCombobox } from 'downshift';
@@ -34,6 +34,7 @@ const Combobox = <T extends ComboboxOption>({
   optionFilter = defaultFilter,
   itemRender = option => <span>{option.value}</span>,
   disabled,
+  className,
   ...props
 }: ComboboxProps<T>) => {
   const [filteredItems, setFilteredItems] = React.useState(options);
@@ -72,14 +73,13 @@ const Combobox = <T extends ComboboxOption>({
     setFilteredItems(options);
   }, [options, selectItem, value]);
 
-  const { inputProps } = useField();
   const readonly = useReadonly();
   return (
     <Popover open={isOpen}>
       <div className='ui-combobox'>
         <PopoverAnchor asChild>
-          <InputGroup>
-            <Input {...getInputProps()} {...inputProps} {...props} disabled={readonly || disabled} />
+          <InputGroup className={className}>
+            <Input {...getInputProps()} className={className} {...props} disabled={readonly || disabled} />
             <Button
               {...getToggleButtonProps()}
               icon={IvyIcons.Chevron}
@@ -89,9 +89,9 @@ const Combobox = <T extends ComboboxOption>({
             />
           </InputGroup>
         </PopoverAnchor>
-        <PopoverContent onOpenAutoFocus={e => e.preventDefault()} className={cn(content, 'ui-combobox-menu')} {...getMenuProps()}>
-          {isOpen &&
-            filteredItems.map((item, index) => (
+        <div {...getMenuProps()}>
+          <PopoverContent onOpenAutoFocus={e => e.preventDefault()} className={cn(content, 'ui-combobox-menu')}>
+            {filteredItems.map((item, index) => (
               <Flex
                 gap={2}
                 className={cn(itemClass, 'ui-combobox-item')}
@@ -103,7 +103,8 @@ const Combobox = <T extends ComboboxOption>({
                 {itemRender(item)}
               </Flex>
             ))}
-        </PopoverContent>
+          </PopoverContent>
+        </div>
       </div>
     </Popover>
   );

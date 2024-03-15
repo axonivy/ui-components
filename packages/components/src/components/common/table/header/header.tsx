@@ -1,0 +1,59 @@
+import { flexRender, type Column, type HeaderContext, type HeaderGroup } from '@tanstack/react-table';
+import { TableHead, TableHeader, TableRow } from '../table';
+import { Button, Flex } from '@/components';
+import { IvyIcons } from '@axonivy/ui-icons';
+import { resizer, sortButton, sortHead } from './header.css';
+
+const ColumnResizer = <TData,>({ header }: { header: HeaderContext<TData, unknown> }) => {
+  return (
+    <div
+      onMouseDown={header.header.getResizeHandler()}
+      onTouchStart={header.header.getResizeHandler()}
+      className={resizer}
+      data-resize-state={header.column.getIsResizing() ? 'active' : 'inactive'}
+    />
+  );
+};
+
+type TableResizableHeaderProps<TData> = React.HTMLAttributes<HTMLTableRowElement> & {
+  headerGroups: Array<HeaderGroup<TData>>;
+};
+
+const TableResizableHeader = <TData,>({ headerGroups, ...props }: TableResizableHeaderProps<TData>) => (
+  <TableHeader>
+    {headerGroups.map(headerGroup => (
+      <TableRow key={headerGroup.id} onDoubleClick={() => headerGroup.headers.forEach(header => header.column.resetSize())} {...props}>
+        {headerGroup.headers.map((header, index) => (
+          <TableHead key={header.id} colSpan={header.colSpan} style={{ width: header.getSize() }}>
+            <Flex direction='row' justifyContent='space-between' alignItems='center' gap={2}>
+              {flexRender(header.column.columnDef.header, header.getContext())}
+              {headerGroup.headers.length !== index + 1 && <ColumnResizer header={header.getContext()} />}
+            </Flex>
+          </TableHead>
+        ))}
+      </TableRow>
+    ))}
+  </TableHeader>
+);
+TableResizableHeader.displayName = 'TableResizableHeader';
+
+type SortableHeaderProps<TData> = { column: Column<TData, unknown>; name: string };
+
+const SortableHeader = <TData,>({ column, name }: SortableHeaderProps<TData>) => {
+  return (
+    <Flex direction='row' justifyContent='space-between' alignItems='center' className={sortHead}>
+      <span>{name}</span>
+      <Button
+        className={sortButton}
+        aria-label={`Sort by ${name}`}
+        onClick={column.getToggleSortingHandler()}
+        data-sort-state={column.getIsSorted()}
+        icon={column.getIsSorted() ? IvyIcons.Chevron : IvyIcons.Straighten}
+        rotate={90}
+      />
+    </Flex>
+  );
+};
+SortableHeader.displayName = 'SortableHeader';
+
+export { TableResizableHeader, SortableHeader };

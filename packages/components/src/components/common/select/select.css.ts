@@ -15,7 +15,9 @@ export const trigger = style({
   justifyContent: 'space-between',
   alignItems: 'center',
   gap: vars.size.s1,
+  outline: 'none',
   width: '100%',
+  userSelect: 'none',
   ':disabled': disabled,
   ':focus': {
     border: vars.border.active
