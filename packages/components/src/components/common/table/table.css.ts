@@ -26,7 +26,10 @@ export const header = style({
 });
 
 export const body = style({
-  borderBottom: vars.border.basic
+  borderBottom: vars.border.basic,
+  ':last-child': {
+    borderBottom: 'none'
+  }
 });
 
 export const footer = style({
