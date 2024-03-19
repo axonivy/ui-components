@@ -20,6 +20,15 @@ export const sortButton = style({
   }
 });
 
+export const expandButton = style({
+  transform: 'rotate(90deg)',
+  selectors: {
+    '&[data-state=collapsed]': {
+      transform: 'rotate(0deg)'
+    }
+  }
+});
+
 export const resizer = style({
   width: 3,
   borderRadius: vars.border.radius,

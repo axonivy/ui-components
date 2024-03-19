@@ -1,5 +1,13 @@
 import { SearchInput } from '@/components';
-import { getFilteredRowModel, getSortedRowModel, type SortingState, type TableOptions, type TableState } from '@tanstack/react-table';
+import {
+  getFilteredRowModel,
+  getSortedRowModel,
+  type ExpandedState,
+  type SortingState,
+  type TableOptions,
+  type TableState,
+  getExpandedRowModel
+} from '@tanstack/react-table';
 import * as React from 'react';
 
 type UseTableGlobalFilterRetunValue<TData> = {
@@ -47,5 +55,18 @@ export const useTableSort = <TData,>(): UseTableSortRetunValue<TData> => {
   return {
     options: { onSortingChange: setSorting, getSortedRowModel: getSortedRowModel() },
     tableState: { sorting }
+  };
+};
+
+type UseTableExpandReturnValue<TData> = {
+  options: Required<Pick<TableOptions<TData>, 'onExpandedChange' | 'getSubRows' | 'getExpandedRowModel'>>;
+  tableState: Partial<TableState>;
+};
+
+export const useTableExpand = <TData extends { children: Array<TData> }>(): UseTableExpandReturnValue<TData> => {
+  const [expanded, setExpanded] = React.useState<ExpandedState>(true);
+  return {
+    options: { onExpandedChange: setExpanded, getSubRows: row => row.children, getExpandedRowModel: getExpandedRowModel() },
+    tableState: { expanded }
   };
 };

@@ -2,7 +2,7 @@ import { flexRender, type Column, type HeaderContext, type HeaderGroup } from '@
 import { TableHead, TableHeader, TableRow } from '../table';
 import { Button, Flex } from '@/components';
 import { IvyIcons } from '@axonivy/ui-icons';
-import { resizer, sortButton, sortHead } from './header.css';
+import { expandButton, resizer, sortButton, sortHead } from './header.css';
 
 const ColumnResizer = <TData,>({ header }: { header: HeaderContext<TData, unknown> }) => {
   return (
@@ -39,21 +39,38 @@ TableResizableHeader.displayName = 'TableResizableHeader';
 
 type SortableHeaderProps<TData> = { column: Column<TData, unknown>; name: string };
 
-const SortableHeader = <TData,>({ column, name }: SortableHeaderProps<TData>) => {
-  return (
-    <Flex direction='row' justifyContent='space-between' alignItems='center' className={sortHead}>
-      <span>{name}</span>
-      <Button
-        className={sortButton}
-        aria-label={`Sort by ${name}`}
-        onClick={column.getToggleSortingHandler()}
-        data-sort-state={column.getIsSorted()}
-        icon={column.getIsSorted() ? IvyIcons.Chevron : IvyIcons.Straighten}
-        rotate={90}
-      />
-    </Flex>
-  );
-};
+const SortableHeader = <TData,>({ column, name }: SortableHeaderProps<TData>) => (
+  <Flex direction='row' justifyContent='space-between' alignItems='center' className={sortHead}>
+    <span>{name}</span>
+    <Button
+      className={sortButton}
+      aria-label={`Sort by ${name}`}
+      onClick={column.getToggleSortingHandler()}
+      data-sort-state={column.getIsSorted()}
+      icon={column.getIsSorted() ? IvyIcons.Chevron : IvyIcons.Straighten}
+      rotate={90}
+    />
+  </Flex>
+);
 SortableHeader.displayName = 'SortableHeader';
 
-export { TableResizableHeader, SortableHeader };
+type ExpandableHeaderProps<TData> = {
+  header: HeaderContext<TData, string>;
+  name: string;
+};
+
+const ExpandableHeader = <TData,>({ header, name }: ExpandableHeaderProps<TData>) => (
+  <Flex direction='row' alignItems='center' gap={1}>
+    <Button
+      icon={IvyIcons.Chevron}
+      className={expandButton}
+      aria-label={header.table.getIsAllRowsExpanded() ? 'Collapse tree' : 'Expand tree'}
+      data-state={header.table.getIsAllRowsExpanded() ? 'expanded' : 'collapsed'}
+      onClick={header.table.getToggleAllRowsExpandedHandler()}
+    />
+    <span>{name}</span>
+  </Flex>
+);
+ExpandableHeader.displayName = 'ExpandableHeader';
+
+export { TableResizableHeader, SortableHeader, ExpandableHeader };
