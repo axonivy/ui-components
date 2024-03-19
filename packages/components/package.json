@@ -24,6 +24,8 @@
     "@radix-ui/react-separator": "^1.0.3",
     "@radix-ui/react-switch": "^1.0.3",
     "@radix-ui/react-tooltip": "^1.0.7",
+    "@react-aria/dnd": "^3.5.3",
+    "@tanstack/react-table": "^8.13.2",
     "clsx": "^2.1.0",
     "downshift": "^8.5.0",
     "react-resizable-panels": "^2.0.13"

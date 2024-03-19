@@ -1,5 +1,6 @@
 import { disabled } from '@/styles/disabled';
 import { vars } from '@/styles/theme.css';
+import { transitionColors } from '@/styles/transition.css';
 import { createVar, style } from '@vanilla-extract/css';
 import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
 
@@ -21,28 +22,30 @@ export const switchSize = recipe({
 
 export type SwitchVariants = RecipeVariants<typeof switchSize>;
 
-export const root = style({
-  all: 'unset',
-  width: size,
-  height: `calc(${size} * 0.5 + 4px)`,
-  backgroundColor: vars.color.n100,
-  borderRadius: 9999,
-  position: 'relative',
-  WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)',
-  transitionProperty: 'color, background-color, border-color, text-decoration-color, fill, stroke',
-  transitionTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)',
-  transitionDuration: '0.15s',
-  cursor: 'pointer',
-  ':focus-visible': {
-    boxShadow: vars.shadow.focus
-  },
-  ':disabled': disabled,
-  selectors: {
-    '&[data-state="checked"]': {
-      backgroundColor: vars.color.p75
+export const root = style([
+  transitionColors,
+  {
+    width: size,
+    height: `calc(${size} * 0.5 + 4px)`,
+    backgroundColor: vars.color.n100,
+    borderRadius: 9999,
+    position: 'relative',
+    WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)',
+    border: 'none',
+    outline: 'none',
+    padding: 0,
+    cursor: 'pointer',
+    ':focus-visible': {
+      boxShadow: vars.shadow.focus
+    },
+    ':disabled': disabled,
+    selectors: {
+      '&[data-state="checked"]': {
+        backgroundColor: vars.color.p75
+      }
     }
   }
-});
+]);
 
 export const thumb = style({
   display: 'block',

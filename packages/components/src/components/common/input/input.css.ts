@@ -1,6 +1,7 @@
 import { style } from '@vanilla-extract/css';
 import { disabled } from '@/styles/disabled';
 import { vars } from '@/styles/theme.css';
+import { editCell } from '../table/edit/edit.css';
 
 const base = style({
   borderRadius: vars.border.radius,
@@ -11,12 +12,16 @@ const base = style({
 export const inputGroup = style([
   base,
   {
-    paddingInlineEnd: vars.size.s2,
+    paddingInline: vars.size.s2,
     ':focus-within': {
       border: vars.border.active
     }
   }
 ]);
+
+export const searchIcon = style({
+  fontSize: 16
+});
 
 export const input = style([
   base,
@@ -34,7 +39,11 @@ export const input = style([
     },
     selectors: {
       [`${inputGroup} > &`]: {
-        border: 'none'
+        border: 'none',
+        paddingInline: 0
+      },
+      [`${editCell} &`]: {
+        padding: 0
       }
     }
   }

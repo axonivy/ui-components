@@ -105,6 +105,31 @@ const SelectSeparator = React.forwardRef<
 ));
 SelectSeparator.displayName = SelectPrimitive.Separator.displayName;
 
+export type SimpleSelectProps = SelectPrimitive.SelectProps & {
+  items: Array<{ value: string; label: string }>;
+  className?: string;
+};
+
+const SimpleSelect = ({ items, className, ...props }: SimpleSelectProps) => {
+  return (
+    <Select {...props}>
+      <SelectTrigger className={className}>
+        <SelectValue />
+      </SelectTrigger>
+      <SelectContent>
+        <SelectGroup>
+          {items.map(item => (
+            <SelectItem key={item.value} value={item.value}>
+              {item.label}
+            </SelectItem>
+          ))}
+        </SelectGroup>
+      </SelectContent>
+    </Select>
+  );
+};
+SimpleSelect.displayName = 'SimpleSelect';
+
 export {
   Select,
   SelectGroup,
@@ -115,5 +140,6 @@ export {
   SelectItem,
   SelectSeparator,
   SelectScrollUpButton,
-  SelectScrollDownButton
+  SelectScrollDownButton,
+  SimpleSelect
 };

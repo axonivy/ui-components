@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Input, InputGroup } from './input';
+import { Input, InputGroup, SearchInput } from './input';
 import { Button, Fieldset } from '@/components/common';
 import { IvyIcons } from '@axonivy/ui-icons';
 
@@ -37,4 +37,10 @@ export const WithButton: Story = {
       </InputGroup>
     </Fieldset>
   )
+};
+
+export const Search: StoryObj<typeof SearchInput> = {
+  render: props => {
+    return <SearchInput {...props} placeholder='Search...' />;
+  }
 };
