@@ -6,6 +6,11 @@ export interface Connection {
   writer: MessageWriter;
 }
 
+export const urlBuilder = (baseUrl: string | URL, path: string) => {
+  const url = `${baseUrl}/${path}`;
+  return url.replace(/([^:])(\/\/+)/g, '$1/');
+};
+
 export async function createWebSocketConnection(url: string | URL): Promise<Connection> {
   return new Promise<Connection>((resolve, reject) => {
     const webSocket = new WebSocket(url);
