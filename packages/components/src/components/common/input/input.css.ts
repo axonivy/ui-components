@@ -4,9 +4,9 @@ import { vars } from '@/styles/theme.css';
 import { editCell } from '../table/edit/edit.css';
 
 const base = style({
-  borderRadius: vars.border.radius,
+  borderRadius: vars.border.r1,
   border: vars.border.basic,
-  background: vars.color.background
+  background: vars.color.n25
 });
 
 export const inputGroup = style([
@@ -32,9 +32,9 @@ export const input = style([
     textAlign: 'start',
     padding: vars.padding.input,
     width: `calc(100% - 2 * ${vars.padding.input} - 2px)`,
-    outline: 'none',
     ':disabled': disabled,
     ':focus': {
+      outline: 'none',
       border: vars.border.active
     },
     selectors: {

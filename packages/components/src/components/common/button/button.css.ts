@@ -11,7 +11,7 @@ export const button = recipe({
   base: [
     transitionColors,
     {
-      borderRadius: vars.border.radius,
+      borderRadius: vars.border.r1,
       fontWeight: 500,
       fontSize: '14px',
       display: 'flex',
@@ -24,7 +24,7 @@ export const button = recipe({
       outline: 'none',
       color: 'currentColor',
       vars: {
-        [buttonBg]: vars.color.transparent
+        [buttonBg]: 'transparent'
       },
       backgroundColor: buttonBg,
       cursor: 'pointer',

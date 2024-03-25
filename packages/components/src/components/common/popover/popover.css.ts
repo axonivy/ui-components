@@ -8,7 +8,7 @@ export const content = style({
   vars: {
     [contentBg]: vars.color.background
   },
-  borderRadius: vars.border.radius,
+  borderRadius: vars.border.r2,
   maxWidth: `calc(var(--radix-popover-content-available-width) - 2 * ${vars.size.s2})`,
   backgroundColor: contentBg,
   boxShadow: vars.shadow.popover,

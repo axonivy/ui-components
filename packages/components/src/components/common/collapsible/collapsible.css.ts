@@ -2,8 +2,8 @@ import { vars } from '@/styles/theme.css';
 import { keyframes, style } from '@vanilla-extract/css';
 
 export const root = style({
-  border: vars.border.basic,
-  borderRadius: vars.border.radius
+  border: `1px solid ${vars.color.n100}`,
+  borderRadius: vars.border.r2
 });
 
 export const header = style({
