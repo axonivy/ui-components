@@ -22,8 +22,7 @@ const colors = createGlobalThemeContract({
     p500: 'P500',
     error: 'error-color',
     warning: 'warning-color',
-    success: 'success-color',
-    transparent: 'transparent'
+    success: 'success-color'
   }
 });
 
@@ -49,8 +48,7 @@ createGlobalTheme(':root', colors, {
     p500: '#004e69',
     error: '#ee4a52',
     warning: '#ffac5e',
-    success: '#47c46b',
-    transparent: 'rgba(0, 0, 0, 0)'
+    success: '#47c46b'
   }
 });
 
@@ -77,8 +75,7 @@ createGlobalTheme('.dark', colors, {
     p500: '#004e69',
     error: '#ee4a52',
     warning: '#ffac5e',
-    success: '#47c46b',
-    transparent: 'rgba(0, 0, 0, 0)'
+    success: '#47c46b'
   }
 });
 
@@ -93,7 +90,8 @@ const root = createGlobalThemeContract({
     input: 'input-padding'
   },
   border: {
-    radius: 'border-radius',
+    r1: 'border-r1',
+    r2: 'border-r2',
     basic: 'basic-border',
     active: 'activ-border',
     dashed: 'dashed-border',
@@ -118,7 +116,8 @@ createGlobalTheme(':root, .dark', root, {
     input: '10px'
   },
   border: {
-    radius: '5px',
+    r1: '3px',
+    r2: '5px',
     basic: `1px solid ${colors.color.n200}`,
     active: `1px solid ${colors.color.p300}`,
     dashed: `1px dashed ${colors.color.n400}`,

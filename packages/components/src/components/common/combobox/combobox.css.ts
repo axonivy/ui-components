@@ -10,7 +10,7 @@ export const content = style({
   padding: 0,
   zIndex: 10,
   boxShadow: vars.shadow.editor,
-  borderRadius: vars.border.radius,
+  borderRadius: vars.border.r2,
   overflow: 'auto',
   position: 'relative',
   border: vars.border.basic,

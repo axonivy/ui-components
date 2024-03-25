@@ -15,7 +15,7 @@ export const radioGroup = style({
 
 export const radioGroupItem = style({
   all: 'unset',
-  backgroundColor: vars.color.background,
+  backgroundColor: vars.color.n25,
   width: 15,
   height: 15,
   borderRadius: '100%',

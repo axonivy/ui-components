@@ -3,7 +3,7 @@ import { transitionColors } from '@/styles/transition.css';
 import { style } from '@vanilla-extract/css';
 
 export const root = style({
-  borderRadius: vars.border.radius,
+  borderRadius: vars.border.r1,
   overflow: 'auto',
   border: vars.border.basic
 });
@@ -14,7 +14,7 @@ export const table = style({
   width: '100%',
   maxWidth: '100%',
   borderSpacing: 0,
-  background: vars.color.background,
+  background: vars.color.n25,
   tableLayout: 'fixed',
   borderCollapse: 'collapse',
   fontSize: '12px'

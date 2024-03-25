@@ -2,16 +2,19 @@ import { flexRender, type Column, type HeaderContext, type HeaderGroup } from '@
 import { TableHead, TableHeader, TableRow } from '../table';
 import { Button, Flex } from '@/components';
 import { IvyIcons } from '@axonivy/ui-icons';
-import { expandButton, resizer, sortButton, sortHead } from './header.css';
+import { expandButton, resizer, resizerLine, sortButton, sortHead } from './header.css';
 
 const ColumnResizer = <TData,>({ header }: { header: HeaderContext<TData, unknown> }) => {
   return (
-    <div
+    <Flex
+      justifyContent='center'
       onMouseDown={header.header.getResizeHandler()}
       onTouchStart={header.header.getResizeHandler()}
       className={resizer}
       data-resize-state={header.column.getIsResizing() ? 'active' : 'inactive'}
-    />
+    >
+      <div className={resizerLine} />
+    </Flex>
   );
 };
 

@@ -25,7 +25,7 @@ export const Default: Story = {
       <ResizablePanelGroup
         autoSaveId='ivy-resizable'
         direction={direction}
-        style={{ minHeight: '200px', border: vars.border.basic, borderRadius: vars.border.radius }}
+        style={{ minHeight: '200px', border: vars.border.basic, borderRadius: vars.border.r2 }}
       >
         <ResizablePanel defaultSize={75} minSize={50}>
           <Flex justifyContent='center' alignItems='center' style={{ height: '100%' }}>
@@ -53,7 +53,7 @@ export const Conditional: StoryObj<{ showLeftPanel: boolean; showRightPanel: boo
       <ResizablePanelGroup
         autoSaveId='conditional'
         direction='horizontal'
-        style={{ minHeight: '200px', border: vars.border.basic, borderRadius: vars.border.radius }}
+        style={{ minHeight: '200px', border: vars.border.basic, borderRadius: vars.border.r2 }}
       >
         {showLeftPanel && (
           <>

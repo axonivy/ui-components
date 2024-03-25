@@ -3,8 +3,8 @@ import { disabled } from '@/styles/disabled';
 import { vars } from '@/styles/theme.css';
 
 export const checkboxRoot = style({
-  backgroundColor: vars.color.background,
-  borderRadius: vars.border.radius,
+  backgroundColor: vars.color.n25,
+  borderRadius: vars.border.r1,
   border: vars.border.basic,
   width: 17,
   height: 17,

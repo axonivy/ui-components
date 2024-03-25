@@ -5,9 +5,9 @@ import { vars } from '@/styles/theme.css';
 export const textarea = style({
   all: 'unset',
   display: 'flex',
-  borderRadius: vars.border.radius,
+  borderRadius: vars.border.r1,
   border: vars.border.basic,
-  background: vars.color.background,
+  background: vars.color.n25,
   fontSize: 12,
   lineHeight: '14px',
   color: vars.color.body,

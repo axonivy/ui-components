@@ -6,7 +6,7 @@ export const selectedRowText = createVar();
 
 export const selectedRow = style({
   vars: {
-    [selectedRowBg]: vars.color.background,
+    [selectedRowBg]: vars.color.n25,
     [selectedRowText]: vars.color.body
   },
   backgroundColor: selectedRowBg,

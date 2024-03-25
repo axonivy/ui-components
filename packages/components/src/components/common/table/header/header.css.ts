@@ -1,5 +1,5 @@
 import { vars } from '@/styles/theme.css';
-import { style } from '@vanilla-extract/css';
+import { createVar, style } from '@vanilla-extract/css';
 
 export const sortHead = style({
   width: '100%'
@@ -29,17 +29,27 @@ export const expandButton = style({
   }
 });
 
+const resizerBg = createVar();
+
 export const resizer = style({
-  width: 3,
-  borderRadius: vars.border.radius,
+  width: 5,
   height: 18,
-  backgroundColor: vars.color.n200,
   cursor: 'col-resize',
   userSelect: 'none',
   touchAction: 'none',
+  vars: {
+    [resizerBg]: vars.color.n200
+  },
   selectors: {
     '&:where(:hover, [data-resize-state="active"])': {
-      backgroundColor: vars.color.p300
+      vars: {
+        [resizerBg]: vars.color.p300
+      }
     }
   }
+});
+
+export const resizerLine = style({
+  width: 1,
+  backgroundColor: resizerBg
 });

@@ -6,7 +6,7 @@ export const dot = recipe({
     height: '0.5rem',
     width: '0.5rem',
     borderRadius: '50%',
-    backgroundColor: vars.color.transparent
+    backgroundColor: 'transparent'
   },
 
   variants: {
