@@ -60,7 +60,7 @@ export const button = recipe({
         paddingBlock: 0,
         paddingInline: vars.size.s1
       },
-      large: { fontSize: '16px' }
+      large: { fontSize: '14px', height: 26, fontWeight: 500 }
     }
   }
 });
