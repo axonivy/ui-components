@@ -58,9 +58,10 @@ function EditTableDemo() {
       ...tableSelection.tableState
     },
     meta: {
-      updateData: (rowIndex, columnId, value) => {
+      updateData: (rowId, columnId, value) => {
         setData(old => {
           const newData = old.map((row, index) => {
+            const rowIndex = parseInt(rowId);
             if (index === rowIndex) {
               return {
                 ...data[rowIndex]!,

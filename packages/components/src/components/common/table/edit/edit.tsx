@@ -8,7 +8,7 @@ import { cn } from '@/utils';
 declare module '@tanstack/react-table' {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   interface TableMeta<TData extends RowData> {
-    updateData: (rowIndex: number, columnId: string, value: unknown) => void;
+    updateData: (rowId: string, columnId: string, value: unknown) => void;
   }
 }
 
@@ -20,7 +20,7 @@ const useEditCell = <TData,>(cell: CellContext<TData, string>) => {
   }, [initialValue]);
   const updateValue = (value: string) => {
     setValue(value);
-    cell.table.options.meta?.updateData(cell.row.index, cell.column.id, value);
+    cell.table.options.meta?.updateData(cell.row.id, cell.column.id, value);
   };
   const onBlur = () => updateValue(value);
   return { value, setValue, updateValue, onBlur };

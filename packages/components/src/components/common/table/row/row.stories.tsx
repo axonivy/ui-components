@@ -189,7 +189,7 @@ function ReorderTableDemo() {
         {table.getRowModel().rows.map(row => (
           <ReorderRow key={row.id} row={row} id={row.original.id} updateOrder={updateOrder}>
             {row.getVisibleCells().map(cell => (
-              <TableCell key={cell.id} onClick={() => table.options.meta?.updateData(row.index, cell.column.id, cell.getValue() + '1')}>
+              <TableCell key={cell.id} onClick={() => table.options.meta?.updateData(row.id, cell.column.id, cell.getValue() + '1')}>
                 {flexRender(cell.column.columnDef.cell, cell.getContext())}
               </TableCell>
             ))}
