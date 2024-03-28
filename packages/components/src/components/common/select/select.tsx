@@ -110,14 +110,24 @@ export type SimpleSelectProps = SelectPrimitive.SelectProps & {
   className?: string;
 };
 
-const SimpleSelect = ({ items, className, ...props }: SimpleSelectProps) => {
+const SimpleSelect = ({ items, className, value, defaultValue, ...props }: SimpleSelectProps) => {
+  const unknownValue = React.useMemo(() => {
+    if (defaultValue && items.find(item => item.value === defaultValue) === undefined) {
+      return defaultValue;
+    }
+    if (value && items.find(item => item.value === value) === undefined) {
+      return value;
+    }
+    return undefined;
+  }, [defaultValue, items, value]);
   return (
-    <Select {...props}>
+    <Select value={value} defaultValue={defaultValue} {...props}>
       <SelectTrigger className={className}>
         <SelectValue />
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
+          {unknownValue && <SelectItem value={unknownValue}>{unknownValue}</SelectItem>}
           {items.map(item => (
             <SelectItem key={item.value} value={item.value}>
               {item.label}

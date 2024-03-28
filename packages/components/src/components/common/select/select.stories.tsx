@@ -1,5 +1,15 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectSeparator, SelectTrigger, SelectValue } from './select';
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectSeparator,
+  SelectTrigger,
+  SelectValue,
+  SimpleSelect
+} from './select';
 import { Fieldset } from '@/components/common';
 
 const meta: Meta<typeof Select> = {
@@ -32,6 +42,18 @@ export const Default: Story = {
         </SelectGroup>
       </SelectContent>
     </Select>
+  )
+};
+
+export const UnknownValue: StoryObj<typeof SimpleSelect> = {
+  render: () => (
+    <SimpleSelect
+      defaultValue='grapes'
+      items={[
+        { value: 'apple', label: 'Apple' },
+        { value: 'banana', label: 'Banana' }
+      ]}
+    />
   )
 };
 
