@@ -56,7 +56,7 @@ export type ReorderRowProps<TData> = SelectRowProps<TData> & {
   updateOrder: (moveId: string, targetId: string) => void;
 };
 
-const ReorderRow = <TData,>({ id, updateOrder, row, ...props }: ReorderRowProps<TData>) => {
+const ReorderRow = <TData,>({ id, updateOrder, row, className, ...props }: ReorderRowProps<TData>) => {
   const DND_TYPE = 'text/id';
 
   const { dragProps, isDragging } = useDrag({
@@ -90,7 +90,7 @@ const ReorderRow = <TData,>({ id, updateOrder, row, ...props }: ReorderRowProps<
       row={row}
       data-drag-state={isDragging}
       data-drop-target-state={isDropTarget}
-      className={cn(dndRow, 'ui-dnd-row')}
+      className={cn(dndRow, className, 'ui-dnd-row')}
       {...props}
     />
   );
