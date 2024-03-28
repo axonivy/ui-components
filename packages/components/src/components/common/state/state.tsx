@@ -17,16 +17,12 @@ const stateFromMessages = (messages: Array<MessageData>): NonNullable<DotVariant
 type StateDotProps = React.HTMLAttributes<HTMLDivElement> & DotVariants & { messages?: Array<MessageData> };
 
 const StateDot = React.forwardRef<HTMLDivElement, StateDotProps>(({ state, messages = [], className, ...props }, ref) => {
+  const dotState = stateFromMessages(messages) ?? state;
   return (
     <TooltipProvider>
       <Tooltip delayDuration={500}>
         <TooltipTrigger asChild>
-          <div
-            ref={ref}
-            className={cn(dot({ state: stateFromMessages(messages) ?? state }), className, 'ui-state-dot')}
-            data-state={state}
-            {...props}
-          />
+          <div ref={ref} className={cn(dot({ state: dotState }), className, 'ui-state-dot')} data-state={dotState} {...props} />
         </TooltipTrigger>
         {messages.length > 0 && (
           <TooltipContent collisionPadding={10} sideOffset={10}>

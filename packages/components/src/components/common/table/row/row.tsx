@@ -18,7 +18,7 @@ const SelectRow = <TData,>({ row, className, onClick, ...props }: SelectRowProps
   };
   return (
     <TableRow
-      className={cn(selectedRow, className)}
+      className={cn(selectedRow, className, 'ui-select-row')}
       data-state={row.getIsSelected() ? 'selected' : ''}
       onClick={event => {
         if (event.detail === 1) {
@@ -42,7 +42,7 @@ const MessageRow = ({ message, className, columnCount, ...props }: MessageRowPro
     return null;
   }
   return (
-    <TableRow className={cn(className)} {...props}>
+    <TableRow className={cn(className, 'ui-message-row')} {...props}>
       <TableCell colSpan={columnCount}>
         <Message message={message.message} variant={message.variant} />
       </TableCell>
@@ -90,7 +90,7 @@ const ReorderRow = <TData,>({ id, updateOrder, row, ...props }: ReorderRowProps<
       row={row}
       data-drag-state={isDragging}
       data-drop-target-state={isDropTarget}
-      className={dndRow}
+      className={cn(dndRow, 'ui-dnd-row')}
       {...props}
     />
   );
@@ -100,7 +100,7 @@ ReorderRow.displayName = 'ReorderRow';
 const ReorderHandleWrapper = ({ children }: React.HTMLAttributes<HTMLTableCellElement>) => (
   <Flex direction='row' alignItems='center' gap={3}>
     {children}
-    <div className={reorderHandleIcon}>
+    <div className={cn(reorderHandleIcon, 'ui-dnd-row-handle')}>
       <IvyIcon icon={IvyIcons.ChangeType} />
     </div>
   </Flex>
