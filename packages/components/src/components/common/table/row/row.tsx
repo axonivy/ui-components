@@ -1,7 +1,7 @@
 import type { Row } from '@tanstack/react-table';
 import { TableRow, type MessageData, TableCell, Message, IvyIcon, Flex } from '@/components';
 import * as React from 'react';
-import { dndRow, reorderHandleIcon, selectedRow } from './row.css';
+import { dndRow, reorderHandle, reorderHandleIcon, selectedRow } from './row.css';
 import { cn } from '@/utils';
 import { IvyIcons } from '@axonivy/ui-icons';
 import { useDrag, useDrop, type TextDropItem } from '@react-aria/dnd';
@@ -97,12 +97,10 @@ const ReorderRow = <TData,>({ id, updateOrder, row, className, ...props }: Reord
 };
 ReorderRow.displayName = 'ReorderRow';
 
-const ReorderHandleWrapper = ({ children }: React.HTMLAttributes<HTMLTableCellElement>) => (
-  <Flex direction='row' alignItems='center' gap={3} justifyContent='space-between'>
+const ReorderHandleWrapper = ({ children, className }: React.HTMLAttributes<HTMLTableCellElement>) => (
+  <Flex direction='row' alignItems='center' gap={3} className={cn(reorderHandle, 'ui-dnd-row-handle', className)}>
     {children}
-    <div className={cn(reorderHandleIcon, 'ui-dnd-row-handle')}>
-      <IvyIcon icon={IvyIcons.ChangeType} />
-    </div>
+    <IvyIcon icon={IvyIcons.ChangeType} className={cn(reorderHandleIcon, 'ui-dnd-row-handleicon')} />
   </Flex>
 );
 ReorderHandleWrapper.displayName = 'ReorderHandleWrapper';

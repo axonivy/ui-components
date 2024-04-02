@@ -1,5 +1,5 @@
 import { vars } from '@/styles/theme.css';
-import { createVar, style } from '@vanilla-extract/css';
+import { createVar, globalStyle, style } from '@vanilla-extract/css';
 
 export const selectedRowBg = createVar();
 export const selectedRowText = createVar();
@@ -35,9 +35,15 @@ export const dndRow = style({
   }
 });
 
+export const reorderHandle = style({});
+
+globalStyle(`${reorderHandle} :first-child`, {
+  width: '100%'
+});
+
 export const reorderHandleIcon = style({
   cursor: 'grab',
   fontSize: 15,
-  width: 15,
-  height: 15
+  height: 15,
+  flex: '0 0 15'
 });
