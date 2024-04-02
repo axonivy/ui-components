@@ -98,7 +98,7 @@ const ReorderRow = <TData,>({ id, updateOrder, row, className, ...props }: Reord
 ReorderRow.displayName = 'ReorderRow';
 
 const ReorderHandleWrapper = ({ children }: React.HTMLAttributes<HTMLTableCellElement>) => (
-  <Flex direction='row' alignItems='center' gap={3}>
+  <Flex direction='row' alignItems='center' gap={3} justifyContent='space-between'>
     {children}
     <div className={cn(reorderHandleIcon, 'ui-dnd-row-handle')}>
       <IvyIcon icon={IvyIcons.ChangeType} />

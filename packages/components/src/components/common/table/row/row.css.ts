@@ -39,6 +39,5 @@ export const reorderHandleIcon = style({
   cursor: 'grab',
   fontSize: 15,
   width: 15,
-  height: 15,
-  marginLeft: 'auto'
+  height: 15
 });
