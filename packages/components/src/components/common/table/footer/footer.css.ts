@@ -11,6 +11,7 @@ export const addRowBtn = style({
   color: vars.color.p300,
   width: 14,
   height: 14,
+  fontSize: 14,
   borderRadius: 10,
   ':hover': {
     color: vars.color.p300
