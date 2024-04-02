@@ -11,9 +11,6 @@ globalStyle('body', {
     "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif",
   WebkitFontSmoothing: 'antialiased',
   MozOsxFontSmoothing: 'grayscale',
-  colorScheme: 'light',
-  background: vars.color.background,
-  color: vars.color.body,
   fontSize: '12px'
 });
 
@@ -23,6 +20,12 @@ globalStyle('code', {
 
 globalStyle('.dark', {
   colorScheme: 'dark',
+  background: vars.color.background,
+  color: vars.color.body
+});
+
+globalStyle('.light', {
+  colorScheme: 'light',
   background: vars.color.background,
   color: vars.color.body
 });
