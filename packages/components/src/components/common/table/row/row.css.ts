@@ -20,7 +20,7 @@ export const selectedRow = style({
     '&[data-state="selected"]': {
       vars: {
         [selectedRowBg]: vars.color.p300,
-        [selectedRowText]: '#ffffff'
+        [selectedRowText]: vars.color.background
       }
     }
   }

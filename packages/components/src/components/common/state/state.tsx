@@ -5,11 +5,11 @@ import type { MessageData } from '@/components';
 import { Flex, TooltipProvider, Tooltip, TooltipTrigger, TooltipContent, Message } from '@/components/common';
 
 const stateFromMessages = (messages: Array<MessageData>): NonNullable<DotVariants>['state'] => {
-  if (messages.find(({ variant }) => variant === 'warning')) {
-    return 'warning';
-  }
   if (messages.find(({ variant }) => variant === 'error')) {
     return 'error';
+  }
+  if (messages.find(({ variant }) => variant === 'warning')) {
+    return 'warning';
   }
   return undefined;
 };
