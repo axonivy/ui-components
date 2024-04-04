@@ -50,7 +50,7 @@ export const button = recipe({
         vars: {
           [buttonBg]: vars.color.p300
         },
-        color: 'white'
+        color: vars.color.background
       },
       outline: { border: vars.border.basic }
     },
