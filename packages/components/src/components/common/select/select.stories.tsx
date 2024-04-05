@@ -11,6 +11,7 @@ import {
   SimpleSelect
 } from './select';
 import { Fieldset } from '@/components/common';
+import { useState } from 'react';
 
 const meta: Meta<typeof Select> = {
   title: 'Common/Select',
@@ -55,6 +56,24 @@ export const UnknownValue: StoryObj<typeof SimpleSelect> = {
       ]}
     />
   )
+};
+
+export const EmptyValue: StoryObj<typeof SimpleSelect> = {
+  render: () => {
+    const [value, setValue] = useState('');
+    return (
+      <SimpleSelect
+        value={value}
+        onValueChange={setValue}
+        items={[
+          { value: 'apple', label: 'Apple' },
+          { value: 'banana', label: 'Banana' }
+        ]}
+        emptyItem={true}
+        placeholder='Placeholder'
+      />
+    );
+  }
 };
 
 export const ScrollableWithLabel: Story = {

@@ -105,12 +105,14 @@ const SelectSeparator = React.forwardRef<
 ));
 SelectSeparator.displayName = SelectPrimitive.Separator.displayName;
 
-export type SimpleSelectProps = SelectPrimitive.SelectProps & {
-  items: Array<{ value: string; label: string }>;
-  className?: string;
-};
+export type SimpleSelectProps = SelectPrimitive.SelectProps &
+  Pick<SelectPrimitive.SelectValueProps, 'placeholder'> & {
+    items: Array<{ value: string; label: string }>;
+    emptyItem?: boolean;
+    className?: string;
+  };
 
-const SimpleSelect = ({ items, className, value, defaultValue, ...props }: SimpleSelectProps) => {
+const SimpleSelect = ({ items, emptyItem, className, placeholder, value, onValueChange, defaultValue, ...props }: SimpleSelectProps) => {
   const unknownValue = React.useMemo(() => {
     if (defaultValue && items.find(item => item.value === defaultValue) === undefined) {
       return defaultValue;
@@ -120,13 +122,22 @@ const SimpleSelect = ({ items, className, value, defaultValue, ...props }: Simpl
     }
     return undefined;
   }, [defaultValue, items, value]);
+  const onInternalValueChange = (value: string) => {
+    if (value === ' ') {
+      value = '';
+    }
+    if (onValueChange) {
+      onValueChange(value);
+    }
+  };
   return (
-    <Select value={value} defaultValue={defaultValue} {...props}>
+    <Select value={value} onValueChange={onInternalValueChange} defaultValue={defaultValue} {...props}>
       <SelectTrigger className={className}>
-        <SelectValue />
+        <SelectValue placeholder={placeholder} />
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
+          {emptyItem && value !== '' && <SelectItem value=' '></SelectItem>}
           {unknownValue && <SelectItem value={unknownValue}>{unknownValue}</SelectItem>}
           {items.map(item => (
             <SelectItem key={item.value} value={item.value}>
