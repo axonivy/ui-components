@@ -6,7 +6,7 @@ export const textarea = style({
   all: 'unset',
   display: 'flex',
   borderRadius: vars.border.r1,
-  border: vars.border.basic,
+  border: vars.dynamic.inputBorder,
   background: vars.color.n25,
   fontSize: 12,
   lineHeight: '14px',

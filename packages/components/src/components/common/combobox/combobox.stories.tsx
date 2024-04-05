@@ -45,9 +45,9 @@ export const WithExtendedItem: Story = {
   )
 };
 
-export const WithLabel: Story = {
+export const WithFieldset: Story = {
   render: ({ disabled }) => (
-    <Fieldset label='Many entries'>
+    <Fieldset label='Many entries' message={{ message: 'this is a warning', variant: 'warning' }}>
       <Combobox value='' onChange={() => {}} options={[...languages, ...languages]} disabled={disabled} />
     </Fieldset>
   )

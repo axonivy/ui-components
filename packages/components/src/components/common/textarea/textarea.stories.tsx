@@ -20,9 +20,9 @@ export const Default: Story = {
   render: props => <Textarea placeholder='Email' {...props} />
 };
 
-export const WithLabel: Story = {
+export const WithFieldset: Story = {
   render: props => (
-    <Fieldset label='Name'>
+    <Fieldset label='Name' message={{ message: 'this is a warning', variant: 'warning' }}>
       <Textarea {...props} />
     </Fieldset>
   )

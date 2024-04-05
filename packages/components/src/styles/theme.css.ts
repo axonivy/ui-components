@@ -97,6 +97,9 @@ const root = createGlobalThemeContract({
     warning: 'warning-border',
     error: 'error-border'
   },
+  dynamic: {
+    inputBorder: 'input-border'
+  },
   shadow: {
     editor: 'editor-shadow',
     focus: 'focus-shadow',
@@ -122,6 +125,9 @@ createGlobalTheme(':root, .dark', root, {
     dashed: `1px dashed ${colors.color.n400}`,
     warning: `1px solid ${colors.color.warning}`,
     error: `1px solid ${colors.color.error}`
+  },
+  dynamic: {
+    inputBorder: root.border.basic
   },
   shadow: {
     editor:
