@@ -8,7 +8,7 @@ export const trigger = style({
   padding: vars.padding.input,
   fontSize: 12,
   borderRadius: vars.border.r1,
-  border: vars.border.basic,
+  border: vars.dynamic.inputBorder,
   background: vars.color.n25,
   color: vars.color.body,
   display: 'inline-flex',

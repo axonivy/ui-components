@@ -76,7 +76,21 @@ export const EmptyValue: StoryObj<typeof SimpleSelect> = {
   }
 };
 
-export const ScrollableWithLabel: Story = {
+export const WithFieldset: Story = {
+  render: () => (
+    <Fieldset label='Many entries' message={{ message: 'this is a warning', variant: 'warning' }}>
+      <SimpleSelect
+        defaultValue='apple'
+        items={[
+          { value: 'apple', label: 'Apple' },
+          { value: 'banana', label: 'Banana' }
+        ]}
+      />
+    </Fieldset>
+  )
+};
+
+export const Scrollable: Story = {
   render: props => (
     <Fieldset label='Name'>
       <Select {...props}>

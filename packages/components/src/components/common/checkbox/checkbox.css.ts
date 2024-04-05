@@ -20,7 +20,10 @@ export const checkboxRoot = style({
   ':focus-visible': {
     boxShadow: vars.shadow.focus
   },
-  ':disabled': disabled,
+  ':disabled': {
+    ...disabled,
+    border: vars.border.basic
+  },
   selectors: {
     '&[data-state="checked"]': {
       backgroundColor: vars.color.p50,

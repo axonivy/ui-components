@@ -1,6 +1,7 @@
 import { Flex, Label, Message, type MessageData } from '@/components';
 import { cn } from '@/utils/class-name';
 import * as React from 'react';
+import { fieldset } from './fieldset.css';
 
 type FieldsetContextValue = {
   id: string;
@@ -53,7 +54,7 @@ export type FieldsetProps = React.HTMLAttributes<HTMLDivElement> & {
 };
 
 const Fieldset = React.forwardRef<HTMLDivElement, FieldsetProps>(({ label, control, message, className, children, ...props }, ref) => (
-  <Field ref={ref} className={className} {...props}>
+  <Field ref={ref} className={cn(className, fieldset, 'ui-fieldset')} data-message-state={message ? message.variant : undefined} {...props}>
     <Flex alignItems='center' justifyContent='space-between' className={cn('ui-fieldset-label')}>
       <Label>{label}</Label>
       {control}

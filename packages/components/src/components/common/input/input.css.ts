@@ -5,7 +5,7 @@ import { editCell } from '../table/edit/edit.css';
 
 const base = style({
   borderRadius: vars.border.r1,
-  border: vars.border.basic,
+  border: vars.dynamic.inputBorder,
   background: vars.color.n25
 });
 
@@ -15,6 +15,9 @@ export const inputGroup = style([
     paddingInline: vars.size.s2,
     ':focus-within': {
       border: vars.border.active
+    },
+    selectors: {
+      '&:has(:disabled)': disabled
     }
   }
 ]);
