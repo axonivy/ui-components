@@ -1,6 +1,8 @@
 import type { CSSProperties } from '@vanilla-extract/css';
+import { vars } from './theme.css';
 
 export const disabled: CSSProperties = {
-  opacity: 0.6,
+  backgroundColor: vars.color.n100,
+  color: vars.color.n700,
   cursor: 'not-allowed'
 };
