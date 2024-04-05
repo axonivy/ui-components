@@ -2,13 +2,13 @@ import { vanillaExtractPlugin as veVitePlugin } from '@vanilla-extract/vite-plug
 import { resolve } from 'path';
 import { defineConfig } from 'vite';
 import { visualizer } from 'rollup-plugin-visualizer';
-import react from "@vitejs/plugin-react";
+import react from '@vitejs/plugin-react';
+import dts from 'vite-plugin-dts';
 
 export default defineConfig({
-  plugins: [veVitePlugin(), visualizer(), react()],
+  plugins: [veVitePlugin(), visualizer(), react(), dts({ tsconfigPath: './tsconfig.production.json' })],
   resolve: {
     alias: {
-      '@axonivy/ui-icons': resolve(__dirname, '../../packages/icons/src-gen'),
       '@': resolve(__dirname, './src')
     }
   },
