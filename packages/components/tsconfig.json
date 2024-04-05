@@ -8,7 +8,7 @@
       "@/*": ["./src/*"]
     },
     "allowImportingTsExtensions": true,
-    "emitDeclarationOnly": true
+    "noEmit": true
   },
   "include": ["src"],
   "references": [{ "path": "../icons/tsconfig.json" }]
