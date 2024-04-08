@@ -13,7 +13,7 @@ const meta: Meta<typeof Button> = {
   argTypes: {
     variant: { control: 'select', defaultValue: 'undefined', options: ['undefined', 'primary', 'outline'] },
     size: { control: 'select', defaultValue: 'undefined', options: ['undefined', 'large', 'small'] },
-    icon: { control: 'select', options: IvyIcons },
+    icon: { control: 'select', options: Object.values(IvyIcons) },
     toggle: { control: 'boolean' }
   }
 };

@@ -7,7 +7,7 @@ const meta: Meta<typeof SidebarHeader> = {
   title: 'Detail/SidebarHeader',
   component: SidebarHeader,
   argTypes: {
-    icon: { control: 'select', options: IvyIcons }
+    icon: { control: 'select', options: Object.values(IvyIcons) }
   }
 };
 
