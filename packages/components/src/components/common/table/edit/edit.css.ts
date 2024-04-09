@@ -21,10 +21,12 @@ export const editCell = style([
         border: 'none'
       },
       [`${row} &::placeholder`]: {
-        color: selectedRowPlaceholderText
+        color: selectedRowPlaceholderText,
+        fontStyle: 'italic'
       },
       [`${row} &[data-placeholder]`]: {
-        color: selectedRowPlaceholderText
+        color: selectedRowPlaceholderText,
+        fontStyle: 'italic'
       }
     }
   }
