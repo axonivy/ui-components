@@ -1,8 +1,8 @@
 export type Payment = {
   id: string;
-  amount: number;
-  status: 'pending' | 'processing' | 'success' | 'failed';
-  email: string;
+  amount?: number;
+  status?: 'pending' | 'processing' | 'success' | 'failed';
+  email?: string;
 };
 
 export const tableData: Payment[] = [
@@ -47,5 +47,11 @@ export const tableData: Payment[] = [
     amount: 300,
     status: 'processing',
     email: 'hans@example.com'
+  },
+  {
+    id: 'empty',
+    amount: undefined,
+    status: undefined,
+    email: undefined
   }
 ];

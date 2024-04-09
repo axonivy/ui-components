@@ -7,13 +7,9 @@ import { IvyIcons } from '@axonivy/ui-icons';
 import { content, item, itemIcon, label, scrollButton, seperator, trigger, viewport } from './select.css';
 import { useReadonly } from '@/context';
 
-const Select = ({ disabled, children, ...props }: SelectPrimitive.SelectProps) => {
+const Select = ({ disabled, ...props }: SelectPrimitive.SelectProps) => {
   const readonly = useReadonly();
-  return (
-    <SelectPrimitive.Root disabled={readonly || disabled} {...props}>
-      {children}
-    </SelectPrimitive.Root>
-  );
+  return <SelectPrimitive.Root disabled={readonly || disabled} {...props} />;
 };
 Select.displayName = SelectPrimitive.Root.displayName;
 

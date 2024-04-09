@@ -1,5 +1,5 @@
 import { style } from '@vanilla-extract/css';
-import { selectedRowBg, selectedRowText } from '../row/row.css';
+import { selectedRowBg, selectedRowPlaceholderText, selectedRowText } from '../row/row.css';
 import { transitionColors } from '@/styles/transition.css';
 import { vars } from '@/styles/theme.css';
 import { row } from '../table.css';
@@ -19,6 +19,12 @@ export const editCell = style([
       },
       [`${row} &:focus-within`]: {
         border: 'none'
+      },
+      [`${row} &::placeholder`]: {
+        color: selectedRowPlaceholderText
+      },
+      [`${row} &[data-placeholder]`]: {
+        color: selectedRowPlaceholderText
       }
     }
   }
