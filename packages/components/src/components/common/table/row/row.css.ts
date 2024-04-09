@@ -3,11 +3,13 @@ import { createVar, globalStyle, style } from '@vanilla-extract/css';
 
 export const selectedRowBg = createVar();
 export const selectedRowText = createVar();
+export const selectedRowPlaceholderText = createVar();
 
 export const selectedRow = style({
   vars: {
     [selectedRowBg]: vars.color.n25,
-    [selectedRowText]: vars.color.body
+    [selectedRowText]: vars.color.body,
+    [selectedRowPlaceholderText]: vars.color.n500
   },
   backgroundColor: selectedRowBg,
   color: selectedRowText,
@@ -20,7 +22,8 @@ export const selectedRow = style({
     '&[data-state="selected"]': {
       vars: {
         [selectedRowBg]: vars.color.p300,
-        [selectedRowText]: vars.color.background
+        [selectedRowText]: vars.color.background,
+        [selectedRowPlaceholderText]: vars.color.n300
       }
     }
   }

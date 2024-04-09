@@ -30,18 +30,19 @@ const columns: ColumnDef<Payment, string>[] = [
           { value: 'success', label: 'Success' },
           { value: 'failed', label: 'Failed' }
         ]}
+        placeholder={'Select a state'}
       />
     )
   },
   {
     accessorKey: 'email',
     header: () => <span>Input</span>,
-    cell: cell => <InputCell cell={cell} />
+    cell: cell => <InputCell cell={cell} placeholder='Enter an email address' />
   },
   {
     accessorKey: 'amount',
     header: () => <span>Combobox</span>,
-    cell: cell => <ComboCell cell={cell} options={[{ value: '123' }, { value: '456' }, { value: '789' }]} />
+    cell: cell => <ComboCell cell={cell} options={[{ value: '123' }, { value: '456' }, { value: '789' }]} placeholder='Enter amount' />
   }
 ];
 
