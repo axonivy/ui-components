@@ -55,6 +55,7 @@ export const head = style({
 
 export const cell = style({
   verticalAlign: 'middle',
+  overflow: 'hidden',
   padding: vars.size.s2,
   selectors: {
     [`&:has(.ui-table-edit-cell)`]: {
