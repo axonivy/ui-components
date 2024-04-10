@@ -23,7 +23,7 @@ export const trigger = style({
   selectors: {
     [`${root}[data-state='open'] &`]: {
       color: vars.color.p300,
-      fontWeight: 500
+      fontWeight: 600
     }
   }
 });
