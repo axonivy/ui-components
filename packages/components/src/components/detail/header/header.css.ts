@@ -2,8 +2,6 @@ import { vars } from '@/styles/theme.css';
 import { style } from '@vanilla-extract/css';
 
 export const header = style({
-  display: 'flex',
-  justifyContent: 'space-between',
   backgroundColor: vars.color.background,
   paddingInline: vars.size.s3,
   gap: vars.size.s2,
