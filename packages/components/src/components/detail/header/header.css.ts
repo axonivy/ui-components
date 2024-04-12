@@ -24,7 +24,11 @@ export const headerTitle = style({
 });
 
 export const headerIcon = style({
-  fontSize: '1.3rem'
+  selectors: {
+    [`${header} &`]: {
+      fontSize: '1.3rem'
+    }
+  }
 });
 
 export const headerMessage = style({
