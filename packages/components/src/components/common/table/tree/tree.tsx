@@ -1,19 +1,19 @@
+import type * as React from 'react';
 import { Button, Flex, IvyIcon } from '@/components';
 import { IvyIcons } from '@axonivy/ui-icons';
 import type { CellContext, Row } from '@tanstack/react-table';
 import { expandButton } from './tree.css';
 
-type LazyExpand = { isLoaded: boolean; loadChildren: () => void };
+type LazyExpand<TData> = { isLoaded: boolean; loadChildren: (row: Row<TData>) => void };
 
 type ExpandableCellProps<TData> = {
   cell: CellContext<TData, string>;
   icon?: IvyIcons;
-  title?: string; //not supported yet
-  additionalInfo?: string; //not supported yet
-  lazy?: LazyExpand; //not supported yet
+  lazy?: LazyExpand<TData>;
+  children?: React.ReactNode;
 };
 
-const expanedButton = <TData,>(row: Row<TData>, lazy?: LazyExpand) => {
+const expanedButton = <TData,>(row: Row<TData>, lazy?: LazyExpand<TData>) => {
   if (row.getCanExpand()) {
     return (
       <Button
@@ -27,7 +27,7 @@ const expanedButton = <TData,>(row: Row<TData>, lazy?: LazyExpand) => {
   }
   if (lazy && lazy.isLoaded === false) {
     const loadLazy = () => {
-      lazy.loadChildren();
+      lazy.loadChildren(row);
       row.toggleExpanded(true);
     };
     return <Button icon={IvyIcons.Chevron} className={expandButton} aria-label='Expand row' onClick={loadLazy} data-state='collapsed' />;
@@ -35,25 +35,22 @@ const expanedButton = <TData,>(row: Row<TData>, lazy?: LazyExpand) => {
   return null;
 };
 
-const rotIndent = <TData,>(row: Row<TData>, icon?: IvyIcons) => {
+const indent = <TData,>(row: Row<TData>, icon?: IvyIcons, lazy?: LazyExpand<TData>) => {
   const indent = row.depth * 20;
-  if (row.getCanExpand()) {
+  if (row.getCanExpand() || (lazy && lazy.isLoaded === false)) {
     return indent;
   }
   const base = row.depth > 0 && icon ? 24 : 0;
   return base + indent;
 };
 
-const ExpandableCell = <TData,>({ cell, icon, lazy }: ExpandableCellProps<TData>) => {
-  const row = cell.row;
-  return (
-    <Flex direction='row' alignItems='center' gap={1} style={{ paddingLeft: `${rotIndent(cell.row, icon)}px` }}>
-      {expanedButton(row, lazy)}
-      {icon && <IvyIcon icon={icon} />}
-      <span>{cell.getValue()}</span>
-    </Flex>
-  );
-};
+const ExpandableCell = <TData,>({ cell, icon, lazy, children }: ExpandableCellProps<TData>) => (
+  <Flex direction='row' alignItems='center' gap={1} style={{ paddingLeft: `${indent(cell.row, icon, lazy)}px` }}>
+    {expanedButton(cell.row, lazy)}
+    {icon && <IvyIcon icon={icon} />}
+    {children ? children : <span>{cell.getValue()}</span>}
+  </Flex>
+);
 ExpandableCell.displayName = 'ExpandableCell';
 
 export { ExpandableCell };
