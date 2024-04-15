@@ -23,7 +23,6 @@
   "settings": {
     "task.autoDetect": "off",
     "typescript.tsdk": "node_modules/typescript/lib",
-    "vitest.disabledWorkspaceFolders": ["root", "packages/icons"],
     "editor.formatOnSave": true,
     "editor.codeActionsOnSave": {
       "source.fixAll.eslint": "explicit"
