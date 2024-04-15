@@ -25,7 +25,7 @@ const expanedButton = <TData,>(row: Row<TData>, lazy?: LazyExpand<TData>) => {
       />
     );
   }
-  if (lazy && lazy.isLoaded === false) {
+  if (lazy?.isLoaded === false) {
     const loadLazy = () => {
       lazy.loadChildren(row);
       row.toggleExpanded(true);
@@ -37,7 +37,7 @@ const expanedButton = <TData,>(row: Row<TData>, lazy?: LazyExpand<TData>) => {
 
 const indent = <TData,>(row: Row<TData>, icon?: IvyIcons, lazy?: LazyExpand<TData>) => {
   const indent = row.depth * 20;
-  if (row.getCanExpand() || (lazy && lazy.isLoaded === false)) {
+  if (row.getCanExpand() || lazy?.isLoaded === false) {
     return indent;
   }
   const base = row.depth > 0 && icon ? 24 : 0;

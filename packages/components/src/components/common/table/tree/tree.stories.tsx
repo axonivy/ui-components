@@ -50,7 +50,7 @@ export const Tree: Story = {
       {
         accessorKey: 'name',
         header: header => <ExpandableHeader name='Expand' header={header} />,
-        cell: cell => <ExpandableCell cell={cell} icon={IvyIcons.User} />,
+        cell: cell => <ExpandableCell cell={cell} />,
         minSize: 50
       },
       {
@@ -116,7 +116,7 @@ export const Lazy: Story = {
 
     const loadLazy = (row: Row<Variable>) => {
       setData(old => loadChildrenFor(old));
-      console.log('lazy laod on row', row.id);
+      console.log('lazy laod on row', row);
     };
 
     const columns: ColumnDef<Variable, string>[] = [
