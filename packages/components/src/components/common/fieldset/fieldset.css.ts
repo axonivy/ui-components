@@ -7,6 +7,11 @@ export const fieldset = style({
       vars: assignVars(vars.dynamic, {
         inputBorder: vars.border.warning
       })
+    },
+    '&[data-message-state="error"]': {
+      vars: assignVars(vars.dynamic, {
+        inputBorder: vars.border.error
+      })
     }
   }
 });
