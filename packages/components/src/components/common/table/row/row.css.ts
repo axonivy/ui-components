@@ -40,13 +40,17 @@ export const dndRow = style({
 
 export const reorderHandle = style({});
 
-globalStyle(`${reorderHandle} :first-child`, {
+globalStyle(`${reorderHandle} > :first-child`, {
   width: '100%'
 });
 
 export const reorderHandleIcon = style({
   cursor: 'grab',
-  fontSize: 15,
   height: 15,
-  flex: '0 0 15'
+  flex: '0 0 15px',
+  selectors: {
+    [`${reorderHandle} &`]: {
+      fontSize: 15
+    }
+  }
 });
