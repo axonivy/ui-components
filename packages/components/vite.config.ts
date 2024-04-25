@@ -12,6 +12,9 @@ export default defineConfig({
       '@': resolve(__dirname, './src')
     }
   },
+  esbuild: {
+    sourcemap: 'inline'
+  },
   build: {
     outDir: 'lib',
     lib: {
