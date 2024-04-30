@@ -4,25 +4,33 @@ import { dot, type DotVariants } from './state.css';
 import type { MessageData } from '@/components';
 import { Flex, TooltipProvider, Tooltip, TooltipTrigger, TooltipContent, Message } from '@/components/common';
 
-const stateFromMessages = (messages: Array<MessageData>): NonNullable<DotVariants>['state'] => {
+type State = NonNullable<DotVariants>['state'];
+
+export const evalDotState = (messages: Array<MessageData>, state: State) => {
   if (messages.find(({ variant }) => variant === 'error')) {
     return 'error';
   }
   if (messages.find(({ variant }) => variant === 'warning')) {
     return 'warning';
   }
-  return undefined;
+  return state;
 };
 
 type StateDotProps = React.HTMLAttributes<HTMLDivElement> & DotVariants & { messages?: Array<MessageData> };
 
 const StateDot = React.forwardRef<HTMLDivElement, StateDotProps>(({ state, messages = [], className, ...props }, ref) => {
-  const dotState = stateFromMessages(messages) ?? state;
+  const dotState = evalDotState(messages, state);
   return (
     <TooltipProvider>
       <Tooltip delayDuration={500}>
         <TooltipTrigger asChild>
-          <div ref={ref} className={cn(dot({ state: dotState }), className, 'ui-state-dot')} data-state={dotState} {...props} />
+          <div
+            ref={ref}
+            className={cn(dot({ state: dotState }), className, 'ui-state-dot')}
+            data-state={dotState}
+            role='tooltip'
+            {...props}
+          />
         </TooltipTrigger>
         {messages.length > 0 && (
           <TooltipContent collisionPadding={10} sideOffset={10}>

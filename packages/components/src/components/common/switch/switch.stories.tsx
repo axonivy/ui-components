@@ -1,10 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Switch } from './switch';
-import { Field, Label } from '@/components';
+import { BasicSwitch } from './switch';
 
-const meta: Meta<typeof Switch> = {
+const meta: Meta<typeof BasicSwitch> = {
   title: 'Common/Switch',
-  component: Switch,
+  component: BasicSwitch,
   tags: ['autodocs'],
   args: {
     disabled: false
@@ -16,13 +15,8 @@ const meta: Meta<typeof Switch> = {
 
 export default meta;
 
-type Story = StoryObj<typeof Switch>;
+type Story = StoryObj<typeof BasicSwitch>;
 
 export const Default: Story = {
-  render: props => (
-    <Field direction='row' alignItems='center' gap={2}>
-      <Switch {...props} />
-      <Label>Airplane Mode</Label>
-    </Field>
-  )
+  render: ({ label, ...props }) => <BasicSwitch {...props} label={label ? label : 'Airplane Mode'} />
 };

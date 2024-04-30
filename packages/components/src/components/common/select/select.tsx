@@ -101,14 +101,14 @@ const SelectSeparator = React.forwardRef<
 ));
 SelectSeparator.displayName = SelectPrimitive.Separator.displayName;
 
-export type SimpleSelectProps = SelectPrimitive.SelectProps &
+export type BasicSelectProps = SelectPrimitive.SelectProps &
   Pick<SelectPrimitive.SelectValueProps, 'placeholder'> & {
     items: Array<{ value: string; label: string }>;
     emptyItem?: boolean;
     className?: string;
   };
 
-const SimpleSelect = ({ items, emptyItem, className, placeholder, value, onValueChange, defaultValue, ...props }: SimpleSelectProps) => {
+const BasicSelect = ({ items, emptyItem, className, placeholder, value, onValueChange, defaultValue, ...props }: BasicSelectProps) => {
   const unknownValue = React.useMemo(() => {
     if (defaultValue && items.find(item => item.value === defaultValue) === undefined) {
       return defaultValue;
@@ -145,6 +145,17 @@ const SimpleSelect = ({ items, emptyItem, className, placeholder, value, onValue
     </Select>
   );
 };
+BasicSelect.displayName = 'BasicSelect';
+
+/**
+ * @deprecated use BasicSelectProps
+ */
+export type SimpleSelectProps = BasicSelectProps;
+
+/**
+ * @deprecated use BasicSelect
+ */
+const SimpleSelect = BasicSelect;
 SimpleSelect.displayName = 'SimpleSelect';
 
 export {
@@ -158,5 +169,6 @@ export {
   SelectSeparator,
   SelectScrollUpButton,
   SelectScrollDownButton,
+  BasicSelect,
   SimpleSelect
 };

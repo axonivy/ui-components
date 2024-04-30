@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import {
+  BasicSelect,
   Select,
   SelectContent,
   SelectGroup,
@@ -7,15 +8,14 @@ import {
   SelectLabel,
   SelectSeparator,
   SelectTrigger,
-  SelectValue,
-  SimpleSelect
+  SelectValue
 } from './select';
 import { Fieldset } from '@/components/common';
 import { useState } from 'react';
 
-const meta: Meta<typeof Select> = {
+const meta: Meta<typeof BasicSelect> = {
   title: 'Common/Select',
-  component: Select,
+  component: BasicSelect,
   tags: ['autodocs'],
   args: {
     disabled: false
@@ -24,7 +24,7 @@ const meta: Meta<typeof Select> = {
 
 export default meta;
 
-type Story = StoryObj<typeof Select>;
+type Story = StoryObj<typeof BasicSelect>;
 
 export const Default: Story = {
   render: props => (
@@ -46,9 +46,9 @@ export const Default: Story = {
   )
 };
 
-export const UnknownValue: StoryObj<typeof SimpleSelect> = {
+export const UnknownValue: StoryObj<typeof BasicSelect> = {
   render: () => (
-    <SimpleSelect
+    <BasicSelect
       defaultValue='grapes'
       items={[
         { value: 'apple', label: 'Apple' },
@@ -58,11 +58,11 @@ export const UnknownValue: StoryObj<typeof SimpleSelect> = {
   )
 };
 
-export const EmptyValue: StoryObj<typeof SimpleSelect> = {
+export const EmptyValue: StoryObj<typeof BasicSelect> = {
   render: () => {
     const [value, setValue] = useState('');
     return (
-      <SimpleSelect
+      <BasicSelect
         value={value}
         onValueChange={setValue}
         items={[
@@ -79,7 +79,7 @@ export const EmptyValue: StoryObj<typeof SimpleSelect> = {
 export const WithFieldset: Story = {
   render: () => (
     <Fieldset label='Many entries' message={{ message: 'this is a error', variant: 'error' }}>
-      <SimpleSelect
+      <BasicSelect
         defaultValue='apple'
         items={[
           { value: 'apple', label: 'Apple' },
