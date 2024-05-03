@@ -55,7 +55,7 @@ const CollapsibleContent = React.forwardRef<
   React.ElementRef<typeof CollapsiblePrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof CollapsiblePrimitive.Content>
 >(({ className, children, ...props }, ref) => (
-  <CollapsiblePrimitive.Content ref={ref} className={cn(content, className, 'ui-collapsible-content')} {...props}>
+  <CollapsiblePrimitive.Content ref={ref} className={cn(content, className, 'ui-collapsible-content')} role='region' {...props}>
     <div className={contentData}>{children}</div>
   </CollapsiblePrimitive.Content>
 ));

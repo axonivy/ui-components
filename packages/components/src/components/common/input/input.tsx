@@ -17,7 +17,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(({ disabled, classN
 });
 Input.displayName = 'Input';
 
-type SearchInputProps = Omit<InputProps, 'value' | 'onChange'> & { value?: string; onChange: (change: string) => void };
+type SearchInputProps = Omit<InputProps, 'value' | 'onChange'> & { value?: string; onChange?: (change: string) => void };
 
 const SearchInput = React.forwardRef<HTMLInputElement, SearchInputProps>(({ value, onChange, ...props }, ref) => {
   const [filter, setFilter] = React.useState(value ?? '');
@@ -26,13 +26,15 @@ const SearchInput = React.forwardRef<HTMLInputElement, SearchInputProps>(({ valu
   }, [value]);
   const updateValue = (change: string) => {
     setFilter(change);
-    onChange(change);
+    if (onChange) {
+      onChange(change);
+    }
   };
   return (
     <InputGroup>
       <IvyIcon icon={IvyIcons.Search} className={searchIcon} />
       <Input value={filter} onChange={e => updateValue(e.target.value)} {...props} ref={ref} />
-      {filter.length > 0 && <Button icon={IvyIcons.Close} onClick={() => updateValue('')} />}
+      {filter.length > 0 && <Button icon={IvyIcons.Close} onClick={() => updateValue('')} title='Clean' />}
     </InputGroup>
   );
 });

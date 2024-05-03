@@ -1,10 +1,10 @@
 import * as React from 'react';
 import * as SwitchPrimitives from '@radix-ui/react-switch';
+import { Field, Label, useField } from '@/components/common';
 
 import { cn } from '@/utils/class-name';
 import { root, thumb, type SwitchVariants, switchSize } from './switch.css';
 import { useReadonly } from '@/context';
-import { useField } from '..';
 
 const Switch = React.forwardRef<
   React.ElementRef<typeof SwitchPrimitives.Root>,
@@ -26,4 +26,16 @@ const Switch = React.forwardRef<
 });
 Switch.displayName = SwitchPrimitives.Root.displayName;
 
-export { Switch };
+export type BasicSwitchProps = React.ComponentPropsWithoutRef<typeof Switch> & {
+  label: string;
+};
+
+const BasicSwitch = ({ label, ...props }: BasicSwitchProps) => (
+  <Field direction='row' alignItems='center' gap={2}>
+    <Switch {...props} />
+    <Label>{label}</Label>
+  </Field>
+);
+BasicSwitch.displayName = 'BasicSwitch';
+
+export { Switch, BasicSwitch };

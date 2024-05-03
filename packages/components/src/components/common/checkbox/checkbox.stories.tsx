@@ -1,10 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Checkbox } from './checkbox';
-import { Field, Label } from '@/components/common';
+import { BasicCheckbox } from './checkbox';
 
-const meta: Meta<typeof Checkbox> = {
+const meta: Meta<typeof BasicCheckbox> = {
   title: 'Common/Checkbox',
-  component: Checkbox,
+  component: BasicCheckbox,
   tags: ['autodocs'],
   args: {
     disabled: false
@@ -13,13 +12,8 @@ const meta: Meta<typeof Checkbox> = {
 
 export default meta;
 
-type Story = StoryObj<typeof Checkbox>;
+type Story = StoryObj<typeof BasicCheckbox>;
 
 export const Default: Story = {
-  render: props => (
-    <Field direction='row' alignItems='center' gap={2}>
-      <Checkbox {...props} />
-      <Label>Accept terms and conditions</Label>
-    </Field>
-  )
+  render: ({ label, ...props }) => <BasicCheckbox {...props} label={label ? label : 'Accept terms and conditions'} />
 };
