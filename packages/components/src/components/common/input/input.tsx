@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { cn } from '@/utils/class-name';
 import { input, inputGroup, searchIcon } from './input.css';
-import { useReadonly } from '@/context';
+import { ReadonlyProvider, useReadonly } from '@/context';
 import { Button, Flex, IvyIcon, useField } from '@/components';
 import { IvyIcons } from '@axonivy/ui-icons';
 
@@ -31,11 +31,13 @@ const SearchInput = React.forwardRef<HTMLInputElement, SearchInputProps>(({ valu
     }
   };
   return (
-    <InputGroup>
-      <IvyIcon icon={IvyIcons.Search} className={searchIcon} />
-      <Input value={filter} onChange={e => updateValue(e.target.value)} {...props} ref={ref} />
-      {filter.length > 0 && <Button icon={IvyIcons.Close} onClick={() => updateValue('')} title='Clean' />}
-    </InputGroup>
+    <ReadonlyProvider readonly={false}>
+      <InputGroup>
+        <IvyIcon icon={IvyIcons.Search} className={searchIcon} />
+        <Input value={filter} onChange={e => updateValue(e.target.value)} {...props} ref={ref} />
+        {filter.length > 0 && <Button icon={IvyIcons.Close} onClick={() => updateValue('')} title='Clean' />}
+      </InputGroup>
+    </ReadonlyProvider>
   );
 });
 SearchInput.displayName = 'SearchInput';

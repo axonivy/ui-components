@@ -41,3 +41,8 @@ test('search', async () => {
   await act(async () => await userEvent.click(cleanBtn));
   expect(input).toHaveValue('');
 });
+
+test('search readonly', async () => {
+  render(<SearchInput />, { wrapperProps: { readonly: true } });
+  expect(screen.getByRole('textbox')).not.toBeDisabled();
+});
