@@ -25,11 +25,11 @@ const ThemeProviderContext = createContext<ThemeProviderState>(initialState);
 export const ThemeProvider = ({
   children,
   defaultTheme = 'system',
-  storageKey = 'ivy-ui-theme',
+  storageKey,
   root = window.document.documentElement,
   ...props
 }: ThemeProviderProps) => {
-  const [theme, setTheme] = useState<Theme>(() => (localStorage.getItem(storageKey) as Theme) || defaultTheme);
+  const [theme, setTheme] = useState<Theme>(() => (storageKey && (localStorage.getItem(storageKey) as Theme)) || defaultTheme);
 
   useEffect(() => {
     root.classList.remove('light', 'dark');
@@ -44,7 +44,9 @@ export const ThemeProvider = ({
   const value = {
     theme,
     setTheme: (theme: Theme) => {
-      localStorage.setItem(storageKey, theme);
+      if (storageKey) {
+        localStorage.setItem(storageKey, theme);
+      }
       setTheme(theme);
     }
   };
