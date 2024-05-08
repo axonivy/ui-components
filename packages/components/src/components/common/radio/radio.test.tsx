@@ -37,7 +37,7 @@ test('toggle by label', async () => {
 test('toggled with keyboard', async () => {
   render(<Radio />);
   const radios = screen.getAllByRole('radio');
-  await userEvent.tab();
+  await act(async () => await userEvent.tab());
   expect(radios.at(0)).toHaveFocus();
   expect(radios.at(0)).toBeChecked();
 
@@ -54,7 +54,6 @@ test('toggled with keyboard', async () => {
 
 test('readonly mode', () => {
   render(<Radio />, { wrapperProps: { readonly: true } });
-  screen.debug();
   expect(screen.getByRole('radiogroup')).toHaveAttribute('data-disabled');
   expect(screen.getAllByRole('radio').at(0)).toBeDisabled();
 });
