@@ -11,20 +11,26 @@ function getAbsolutePath(value) {
 /** @type { import('@storybook/react-vite').StorybookConfig } */
 const config = {
   stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
+
   addons: [
     getAbsolutePath('@storybook/addon-links'),
     getAbsolutePath('@storybook/addon-essentials'),
     getAbsolutePath('@storybook/addon-interactions')
   ],
+
   framework: {
     name: getAbsolutePath('@storybook/react-vite'),
     options: {}
   },
-  docs: {
-    autodocs: 'tag'
-  },
+
+  docs: {},
+
   core: {
     disableTelemetry: true
+  },
+
+  typescript: {
+    reactDocgen: 'react-docgen-typescript'
   }
 };
 export default config;
