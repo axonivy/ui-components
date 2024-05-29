@@ -18,3 +18,4 @@ export * from './switch/switch';
 export * from './table';
 export * from './textarea/textarea';
 export * from './tooltip/tooltip';
+export * from './propertyDialog/propertyDialog';
