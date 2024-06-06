@@ -18,4 +18,5 @@ export * from './state/state';
 export * from './switch/switch';
 export * from './table';
 export * from './textarea/textarea';
+export * from './toaster/toaster';
 export * from './tooltip/tooltip';
