@@ -14,6 +14,7 @@ export * from './resizeable/resizable';
 export * from './select/select';
 export * from './separator/separator';
 export * from './skeleton/skeleton';
+export * from './spinner/spinner';
 export * from './state/state';
 export * from './switch/switch';
 export * from './table';
