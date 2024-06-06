@@ -13,6 +13,7 @@ export * from './radio/radio';
 export * from './resizeable/resizable';
 export * from './select/select';
 export * from './separator/separator';
+export * from './skeleton/skeleton';
 export * from './state/state';
 export * from './switch/switch';
 export * from './table';
