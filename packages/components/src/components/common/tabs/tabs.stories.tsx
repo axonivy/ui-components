@@ -19,7 +19,7 @@ type Story = StoryObj<typeof Tabs>;
 export const Default: Story = {
   render: props => (
     <Tabs defaultValue='attribute' {...props}>
-      <Flex direction={props.orientation === 'horizontal' ? 'column' : 'row'} gap={4}>
+      <Flex direction={props.orientation === 'vertical' ? 'row' : 'column'} gap={4} style={{ width: 300 }}>
         <TabsList>
           <TabsTrigger value='attribute'>
             <IvyIcon icon={IvyIcons.Attribute} />
