@@ -46,8 +46,8 @@ createGlobalTheme(':root', colors, {
     p75: '#97c4d4',
     p300: '#007095',
     p500: '#004e69',
-    error: '#ee4a52',
-    warning: '#ffac5e',
+    error: '#e5151c',
+    warning: '#ff7300',
     success: '#47c46b'
   }
 });
@@ -72,8 +72,8 @@ createGlobalTheme('.dark', colors, {
     p75: '#7e7e7e',
     p300: '#fafafa',
     p500: '#004e69',
-    error: '#ee4a52',
-    warning: '#ffac5e',
+    error: '#e5151c',
+    warning: '#ff7300',
     success: '#47c46b'
   }
 });
