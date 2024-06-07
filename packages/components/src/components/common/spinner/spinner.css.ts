@@ -13,9 +13,9 @@ const rotation = keyframes({
 
 export const spinner = recipe({
   base: {
-    width: 48,
-    height: 48,
-    border: `5px solid ${vars.color.n800}`,
+    width: 36,
+    height: 36,
+    border: `4px solid ${vars.color.n800}`,
     borderBottomColor: 'transparent',
     borderRadius: '50%',
     display: 'inline-block',
@@ -25,9 +25,14 @@ export const spinner = recipe({
   variants: {
     size: {
       small: {
+        width: 12,
+        height: 12,
+        borderWidth: 2
+      },
+      medium: {
         width: 24,
         height: 24,
-        borderWidth: 2
+        borderWidth: 3
       },
       large: {}
     }

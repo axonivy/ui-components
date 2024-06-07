@@ -1,6 +1,9 @@
 import { useTheme } from '@/context';
-import { Toaster as Sonner } from 'sonner';
-import { description } from './toaster.css';
+import { Toaster as Sonner, toast } from 'sonner';
+import { toaster, description, error, success, warning, closeBtn } from './toaster.css';
+import { IvyIcon } from '../icon/icon';
+import { IvyIcons } from '@axonivy/ui-icons';
+import { Spinner } from '../spinner/spinner';
 
 type ToasterProps = React.ComponentProps<typeof Sonner>;
 
@@ -12,12 +15,25 @@ const Toaster = ({ ...props }: ToasterProps) => {
       className='ui-toaster'
       toastOptions={{
         classNames: {
-          description: description
+          toast: toaster,
+          description: description,
+          error: error,
+          success: success,
+          warning: warning,
+          closeButton: closeBtn
         }
+      }}
+      icons={{
+        success: <IvyIcon icon={IvyIcons.Check} />,
+        info: <IvyIcon icon={IvyIcons.InfoCircle} />,
+        warning: <IvyIcon icon={IvyIcons.Caution} />,
+        error: <IvyIcon icon={IvyIcons.ErrorXMark} />,
+        loading: <Spinner size='small' />
       }}
       {...props}
     />
   );
 };
+Toaster.displayName = 'Toaster';
 
-export { Toaster };
+export { Toaster, toast };
