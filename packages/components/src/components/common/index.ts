@@ -2,6 +2,8 @@ export * from './accordion/accordion';
 export * from './button/button';
 export * from './checkbox/checkbox';
 export * from './collapsible/collapsible';
+export * from './combobox/combobox';
+export * from './dialog/dialog';
 export * from './fieldset/fieldset';
 export * from './flex/flex';
 export * from './icon/icon';

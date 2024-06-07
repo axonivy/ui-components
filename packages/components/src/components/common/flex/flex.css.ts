@@ -9,7 +9,8 @@ export const flex = recipe({
   variants: {
     direction: {
       column: { flexDirection: 'column' },
-      row: { flexDirection: 'row' }
+      row: { flexDirection: 'row' },
+      'row-reverse': { flexDirection: 'row-reverse' }
     },
     gap: {
       1: { gap: vars.size.s1 },
