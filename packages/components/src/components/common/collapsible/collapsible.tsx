@@ -51,14 +51,32 @@ const CollapsibleState = React.forwardRef<React.ElementRef<typeof StateDot>, Rea
 );
 CollapsibleState.displayName = 'CollapsibleState';
 
-const CollapsibleContent = React.forwardRef<
-  React.ElementRef<typeof CollapsiblePrimitive.Content>,
-  React.ComponentPropsWithoutRef<typeof CollapsiblePrimitive.Content>
->(({ className, children, ...props }, ref) => (
-  <CollapsiblePrimitive.Content ref={ref} className={cn(content, className, 'ui-collapsible-content')} role='region' {...props}>
-    <div className={contentData}>{children}</div>
-  </CollapsiblePrimitive.Content>
-));
+type CollapsibleContentProps = React.ComponentPropsWithoutRef<typeof CollapsiblePrimitive.Content>;
+
+const CollapsibleContent = React.forwardRef<React.ElementRef<typeof CollapsiblePrimitive.Content>, CollapsibleContentProps>(
+  ({ className, children, style, ...props }, ref) => (
+    <CollapsiblePrimitive.Content ref={ref} className={cn(content, className, 'ui-collapsible-content')} role='region' {...props}>
+      <div className={contentData} style={style}>
+        {children}
+      </div>
+    </CollapsiblePrimitive.Content>
+  )
+);
 CollapsibleContent.displayName = CollapsiblePrimitive.Content.displayName;
 
-export { Collapsible, CollapsibleTrigger, CollapsibleState, CollapsibleContent };
+export type BasicCollapsibleProps = CollapsibleTriggerProps &
+  CollapsibleContentProps & {
+    label: string;
+  };
+
+const BasicCollapsible = ({ label, state, control, ...props }: BasicCollapsibleProps) => (
+  <Collapsible>
+    <CollapsibleTrigger state={state} control={control}>
+      {label}
+    </CollapsibleTrigger>
+    <CollapsibleContent {...props} />
+  </Collapsible>
+);
+BasicCollapsible.displayName = 'BasicCollapsible';
+
+export { Collapsible, CollapsibleTrigger, CollapsibleState, CollapsibleContent, BasicCollapsible };
