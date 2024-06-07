@@ -25,8 +25,10 @@ export const closeBtn = style({
   backgroundColor: vars.color.background,
   color: 'var(--normal-text)',
   border: '1px solid var(--normal-border)',
-  ':hover': {
-    backgroundColor: vars.color.n75,
-    borderColor: 'var(--normal-border)'
+  selectors: {
+    [`${toaster} &:hover`]: {
+      backgroundColor: vars.color.n75,
+      borderColor: 'var(--normal-border)'
+    }
   }
 });
