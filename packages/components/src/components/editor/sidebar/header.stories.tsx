@@ -4,7 +4,7 @@ import { IvyIcons } from '@axonivy/ui-icons';
 import { Button, Message } from '@/components/common';
 
 const meta: Meta<typeof SidebarHeader> = {
-  title: 'Detail/SidebarHeader',
+  title: 'Editor/SidebarHeader',
   component: SidebarHeader,
   argTypes: {
     icon: { control: 'select', options: Object.values(IvyIcons) }
