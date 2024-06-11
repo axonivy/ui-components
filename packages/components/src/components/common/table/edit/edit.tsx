@@ -1,4 +1,4 @@
-import { Input, type InputProps, SimpleSelect, type SimpleSelectProps } from '@/components';
+import { Input, type InputProps, BasicSelect, type BasicSelectProps } from '@/components';
 import type { CellContext, RowData } from '@tanstack/react-table';
 import * as React from 'react';
 import { editCell } from './edit.css';
@@ -36,13 +36,13 @@ const InputCell = <TData,>({ cell, className, ...props }: InputCellProps<TData>)
 };
 InputCell.displayName = 'InputCell';
 
-type SelectCellProps<TData> = SimpleSelectProps & {
+type SelectCellProps<TData> = BasicSelectProps & {
   cell: CellContext<TData, string>;
 };
 
 const SelectCell = <TData,>({ cell, className, ...props }: SelectCellProps<TData>) => {
   const { value, updateValue, className: editCell } = useEditCell(cell);
-  return <SimpleSelect value={value} onValueChange={updateValue} className={cn(editCell, className)} {...props} />;
+  return <BasicSelect value={value} onValueChange={updateValue} className={cn(editCell, className)} {...props} />;
 };
 SelectCell.displayName = 'SelectCell';
 

@@ -21,7 +21,10 @@ const expanedButton = <TData,>(row: Row<TData>, lazy?: LazyExpand<TData>) => {
         className={expandButton}
         aria-label={row.getIsExpanded() ? 'Collapse row' : 'Expand row'}
         data-state={row.getIsExpanded() ? 'expanded' : 'collapsed'}
-        onClick={row.getToggleExpandedHandler()}
+        onMouseDown={row.getToggleExpandedHandler()}
+        onKeyDown={e => {
+          if (e.key === 'Enter' || e.key === ' ') row.getToggleExpandedHandler()();
+        }}
       />
     );
   }

@@ -1,5 +1,4 @@
 import { vars } from '@/styles/theme.css';
-import { transitionColors } from '@/styles/transition.css';
 import { style } from '@vanilla-extract/css';
 
 export const root = style({
@@ -36,15 +35,12 @@ export const footer = style({
   backgroundColor: vars.color.n100
 });
 
-export const row = style([
-  transitionColors,
-  {
-    borderBottom: vars.border.basic,
-    ':last-child': {
-      borderBottom: 'none'
-    }
+export const row = style({
+  borderBottom: vars.border.basic,
+  ':last-child': {
+    borderBottom: 'none'
   }
-]);
+});
 
 export const head = style({
   height: 20,
