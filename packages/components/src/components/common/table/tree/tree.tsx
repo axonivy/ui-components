@@ -43,7 +43,7 @@ const indent = <TData,>(row: Row<TData>, icon?: IvyIcons, lazy?: LazyExpand<TDat
   if (row.getCanExpand() || (lazy && lazy.isLoaded === false)) {
     return indent;
   }
-  const base = row.depth > 0 && icon ? 24 : 0;
+  const base = icon ? 24 : 0;
   return base + indent;
 };
 

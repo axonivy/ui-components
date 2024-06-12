@@ -7,6 +7,11 @@ export interface Variable {
 
 export const treeData: Array<Variable> = [
   {
+    name: 'rootScalar',
+    value: 'value',
+    children: []
+  },
+  {
     name: 'param.procurementRequest',
     value: '',
     children: [
