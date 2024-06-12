@@ -9,7 +9,8 @@ export const root = style({
 export const header = style({
   display: 'flex',
   alignItems: 'center',
-  gap: vars.size.s2
+  gap: vars.size.s2,
+  overflow: 'hidden'
 });
 
 export const trigger = style({
@@ -88,5 +89,6 @@ export const content = style({
 
 export const contentData = style({
   padding: vars.size.s2,
-  paddingBlockStart: 0
+  paddingBlockStart: 0,
+  overflow: 'auto'
 });

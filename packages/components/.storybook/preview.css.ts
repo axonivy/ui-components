@@ -4,3 +4,7 @@ import { vars } from '../src/styles/theme.css';
 globalStyle('.dark .docs-story', {
   background: vars.color.background
 });
+
+globalStyle('#storybook-root', {
+  height: '100%'
+});

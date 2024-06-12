@@ -16,7 +16,7 @@ import {
 import { IvyIcons } from '@axonivy/ui-icons';
 
 const meta: Meta<typeof Toolbar> = {
-  title: 'Master/Toolbar',
+  title: 'Editor/Toolbar',
   component: Toolbar
 };
 

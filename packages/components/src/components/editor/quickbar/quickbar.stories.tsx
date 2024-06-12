@@ -5,7 +5,7 @@ import { Quickbar } from './quickbar';
 import { useRef, useState } from 'react';
 
 const meta: Meta<typeof Quickbar> = {
-  title: 'Master/Quickbar',
+  title: 'Editor/Quickbar',
   component: Quickbar
 };
 

@@ -4,7 +4,7 @@ import { style } from '@vanilla-extract/css';
 export const tabsList = style({
   display: 'inline-flex',
   flexDirection: 'row',
-  justifyContent: 'center',
+  justifyContent: 'flex-start',
   alignItems: 'center',
   selectors: {
     '&[data-orientation="vertical"]': {
@@ -19,7 +19,8 @@ export const tabsTrigger = style({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  flex: '1 0 auto',
+  flex: '0',
+  gap: vars.size.s1,
   padding: '0.5rem 1rem',
   fontSize: '14px',
   color: vars.color.n900,

@@ -63,8 +63,8 @@ type UseTableExpandReturnValue<TData> = {
   tableState: Partial<TableState>;
 };
 
-export const useTableExpand = <TData extends { children: Array<TData> }>(): UseTableExpandReturnValue<TData> => {
-  const [expanded, setExpanded] = React.useState<ExpandedState>(true);
+export const useTableExpand = <TData extends { children: Array<TData> }>(initState?: ExpandedState): UseTableExpandReturnValue<TData> => {
+  const [expanded, setExpanded] = React.useState<ExpandedState>(initState ?? true);
   return {
     options: { onExpandedChange: setExpanded, getSubRows: row => row.children, getExpandedRowModel: getExpandedRowModel() },
     tableState: { expanded }
