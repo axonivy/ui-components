@@ -2,7 +2,7 @@ import type * as React from 'react';
 import { Button, Flex, IvyIcon } from '@/components';
 import { IvyIcons } from '@axonivy/ui-icons';
 import type { CellContext, Row } from '@tanstack/react-table';
-import { expandButton } from './tree.css';
+import { cellIcon, expandButton } from './tree.css';
 
 type LazyExpand<TData> = { isLoaded: boolean; loadChildren: (row: Row<TData>) => void };
 
@@ -50,7 +50,7 @@ const indent = <TData,>(row: Row<TData>, icon?: IvyIcons, lazy?: LazyExpand<TDat
 const ExpandableCell = <TData,>({ cell, icon, lazy, children }: ExpandableCellProps<TData>) => (
   <Flex direction='row' alignItems='center' gap={1} style={{ paddingLeft: `${indent(cell.row, icon, lazy)}px` }}>
     {expanedButton(cell.row, lazy)}
-    {icon && <IvyIcon icon={icon} />}
+    {icon && <IvyIcon icon={icon} className={cellIcon} />}
     {children ? children : <span>{cell.getValue()}</span>}
   </Flex>
 );
