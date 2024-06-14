@@ -100,7 +100,7 @@ ReorderRow.displayName = 'ReorderRow';
 const ReorderHandleWrapper = ({ children, className }: React.HTMLAttributes<HTMLTableCellElement>) => (
   <Flex direction='row' alignItems='center' gap={3} className={cn(reorderHandle, 'ui-dnd-row-handle', className)}>
     {children}
-    <IvyIcon icon={IvyIcons.ChangeType} className={cn(reorderHandleIcon, 'ui-dnd-row-handleicon')} />
+    <IvyIcon icon={IvyIcons.EditDots} className={cn(reorderHandleIcon, 'ui-dnd-row-handleicon')} />
   </Flex>
 );
 ReorderHandleWrapper.displayName = 'ReorderHandleWrapper';
