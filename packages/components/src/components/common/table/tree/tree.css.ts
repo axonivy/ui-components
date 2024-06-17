@@ -8,3 +8,7 @@ export const expandButton = style({
     }
   }
 });
+
+export const cellIcon = style({
+  fontSize: '16px'
+});
