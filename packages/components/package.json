@@ -31,7 +31,7 @@
     "react-resizable-panels": "^2.0.13"
   },
   "peerDependencies": {
-    "@axonivy/ui-icons": "~11.3.2-next",
+    "@axonivy/ui-icons": "*",
     "react": "^18.2.0"
   },
   "devDependencies": {
