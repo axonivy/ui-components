@@ -31,7 +31,6 @@ export const overlay = style({
   animationName: enterOverlay,
   animationDuration: '.15s',
   backgroundColor: 'rgba(0, 0, 0, .8)',
-  zIndex: 50,
   inset: 0,
   position: 'fixed',
   selectors: {
@@ -62,7 +61,6 @@ export const content = style({
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  zIndex: 50,
   selectors: {
     '&[data-state="closed"]': {
       animationName: exit
