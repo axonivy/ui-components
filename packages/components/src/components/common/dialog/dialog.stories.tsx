@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from './dialog';
-import { Button, Fieldset, Flex, Input, Textarea } from '@/components';
+import { BasicSelect, Button, Fieldset, Flex, Input, Textarea } from '@/components';
 
 const meta: Meta<typeof Dialog> = {
   title: 'Common/Dialog',
@@ -33,6 +33,14 @@ export const Default: Story = {
           </Fieldset>
           <Fieldset label='Comment'>
             <Textarea />
+          </Fieldset>
+          <Fieldset label='Comment'>
+            <BasicSelect
+              items={[
+                { value: 'apple', label: 'Apple' },
+                { value: 'banana', label: 'Banana' }
+              ]}
+            />
           </Fieldset>
         </Flex>
         <DialogFooter>
