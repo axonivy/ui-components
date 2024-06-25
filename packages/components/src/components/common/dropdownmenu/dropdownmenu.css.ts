@@ -69,10 +69,9 @@ export const menuItemWithIndicator = style({
 export const menuItemIndicator = style({
   display: 'flex',
   position: 'absolute',
-  left: '.5rem',
+  left: '.7rem',
   alignItems: 'center',
   justifyContent: 'center',
-  fontSize: '15px',
   width: 15
 });
 
