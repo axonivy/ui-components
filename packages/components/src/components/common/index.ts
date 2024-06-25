@@ -4,6 +4,7 @@ export * from './checkbox/checkbox';
 export * from './collapsible/collapsible';
 export * from './combobox/combobox';
 export * from './dialog/dialog';
+export * from './dropdownmenu/dropdownmenu';
 export * from './fieldset/fieldset';
 export * from './flex/flex';
 export * from './icon/icon';
