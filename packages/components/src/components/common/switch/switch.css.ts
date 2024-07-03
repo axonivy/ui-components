@@ -48,7 +48,9 @@ export const root = style([
 ]);
 
 export const thumb = style({
-  display: 'block',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
   width: `calc(${size} * 0.5)`,
   aspectRatio: '1 / 1',
   backgroundColor: vars.color.background,
@@ -59,7 +61,24 @@ export const thumb = style({
   selectors: {
     '&[data-state="checked"]': {
       backgroundColor: vars.color.p300,
-      transform: `translateX(calc(${size} - (${size} * 0.5) - 2px))`
+      transform: `translateX(calc(${size} - (${size} * 0.5) - 2px))`,
+      color: vars.color.background
+    }
+  }
+});
+
+export const thumbIcon = recipe({
+  base: {
+    fontSize: '12px'
+  },
+  variants: {
+    size: {
+      small: {
+        fontSize: '9px'
+      },
+      large: {
+        fontSize: '16px'
+      }
     }
   }
 });
