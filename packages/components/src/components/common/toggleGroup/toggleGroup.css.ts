@@ -6,7 +6,6 @@ export const toggleGroup = recipe({
     display: 'inline-flex',
     alignItems: 'center',
     gap: vars.size.s2,
-    padding: '10px',
     backgroundColor: vars.color.background,
     borderRadius: vars.border.r2
   },
