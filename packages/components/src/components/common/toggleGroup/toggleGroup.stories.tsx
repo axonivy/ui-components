@@ -46,10 +46,10 @@ export const OnlyIcon: Story = {
         <Button icon={IvyIcons.EventStart} size='large' />
       </ToggleGroupItem>
       <ToggleGroupItem value='tablet' asChild>
-        <Button icon={IvyIcons.LaneSwimlanes} size='large' />
+        <Button icon={IvyIcons.DeviceTablet} size='large' />
       </ToggleGroupItem>
       <ToggleGroupItem value='mobile' asChild>
-        <Button icon={IvyIcons.ChangeType} size='large' />
+        <Button icon={IvyIcons.DeviceMobile} size='large' />
       </ToggleGroupItem>
     </ToggleGroup>
   )

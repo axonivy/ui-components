@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Default as ToolbarStory } from './toolbar/toolbar.stories';
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup, Flex } from '@/components/common';
-import { SidebarHeader } from './sidebar/header';
+import { SidebarHeader } from './sidebar/header/header';
 import { IvyIcons } from '@axonivy/ui-icons';
 import * as React from 'react';
 
