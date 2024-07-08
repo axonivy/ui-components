@@ -23,7 +23,7 @@ import { vars } from '@/styles/theme.css';
 import { fullHeight, overflowAuto, overflowHidden } from './browser.css';
 import { cn } from '@/utils';
 
-export type BrowserNode<TData = undefined> = {
+export type BrowserNode<TData = unknown> = {
   value: string;
   info: string;
   icon: IvyIcons;
@@ -64,7 +64,7 @@ export const useBrowser = (data: Array<BrowserNode>) => {
   return { table, globalFilter: { filter, setFilter } };
 };
 
-type BrowserValue<TData = undefined> = {
+type BrowserValue<TData = unknown> = {
   cursor: string;
   data?: TData;
   firstLine?: string;
