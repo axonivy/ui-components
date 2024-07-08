@@ -21,9 +21,9 @@ const ToolbarTitle = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLD
 ToolbarTitle.displayName = 'ToolbarTitle';
 
 const ToolbarContainer = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement> & ToolbarContainerVariants>(
-  ({ width, className, children, ...props }, ref) => {
+  ({ maxWidth, minWidth, className, children, ...props }, ref) => {
     return (
-      <div className={cn(toolbarContainer({ width }), className)} ref={ref} {...props}>
+      <div className={cn(toolbarContainer({ maxWidth, minWidth }), className)} ref={ref} {...props}>
         {children}
       </div>
     );

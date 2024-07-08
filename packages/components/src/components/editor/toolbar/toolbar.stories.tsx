@@ -29,12 +29,21 @@ export const Default = ({ sideBarCollapse }: { sideBarCollapse?: () => void }) =
         <Button icon={IvyIcons.SelectionTool} size='large' toggle={true} />
         <Button icon={IvyIcons.MultiSelection} size='large' />
       </Flex>
-      <ToolbarContainer width={650}>
+      <ToolbarContainer maxWidth={650}>
         <Flex>
           <Separator orientation='vertical' style={{ height: '26px' }} />
           <Flex gap={1}>
             <Button icon={IvyIcons.Undo} size='large' />
             <Button icon={IvyIcons.Redo} size='large' />
+          </Flex>
+        </Flex>
+      </ToolbarContainer>
+      <ToolbarContainer minWidth={650}>
+        <Flex>
+          <Separator orientation='vertical' style={{ height: '26px' }} />
+          <Flex gap={1}>
+            <Button icon={IvyIcons.DeviceMobile} size='large' />
+            <Button icon={IvyIcons.EventStart} size='large' />
           </Flex>
         </Flex>
       </ToolbarContainer>

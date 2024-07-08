@@ -30,9 +30,17 @@ export const toolbarTitle = style({
   fontSize: '14px'
 });
 
-const createQuery = (width?: number) => ({
+const createMaxWidthQuery = (maxWidth?: number) => ({
   '@container': {
-    [`${container} (width < ${width}px)`]: {
+    [`${container} (width < ${maxWidth}px)`]: {
+      display: 'none'
+    }
+  }
+});
+
+const createMinWidthQuery = (minWidth?: number) => ({
+  '@container': {
+    [`${container} (width > ${minWidth}px)`]: {
       display: 'none'
     }
   }
@@ -40,9 +48,13 @@ const createQuery = (width?: number) => ({
 
 export const toolbarContainer = recipe({
   variants: {
-    width: {
-      450: createQuery(450),
-      650: createQuery(650)
+    maxWidth: {
+      450: createMaxWidthQuery(450),
+      650: createMaxWidthQuery(650)
+    },
+    minWidth: {
+      450: createMinWidthQuery(450),
+      650: createMinWidthQuery(650)
     }
   }
 });
