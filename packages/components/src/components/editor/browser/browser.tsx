@@ -23,10 +23,11 @@ import { vars } from '@/styles/theme.css';
 import { fullHeight, overflowAuto, overflowHidden } from './browser.css';
 import { cn } from '@/utils';
 
-export type BrowserNode = {
+export type BrowserNode<TData = undefined> = {
   value: string;
   info: string;
   icon: IvyIcons;
+  data?: TData;
   children: Array<BrowserNode>;
 };
 
@@ -63,8 +64,9 @@ export const useBrowser = (data: Array<BrowserNode>) => {
   return { table, globalFilter: { filter, setFilter } };
 };
 
-type BrowserValue = {
+type BrowserValue<TData = undefined> = {
   cursor: string;
+  data?: TData;
   firstLine?: string;
 };
 
@@ -100,13 +102,14 @@ const BrowsersView = ({ browsers, apply }: BrowsersViewProps) => {
   const applyHandler = (row?: Row<BrowserNode>) => {
     const selected = row ?? selectedRow();
     const value = selected?.original.value;
+    const data = selected?.original.data;
     const browser = browsers.find(b => b.name === tab);
     if (!value || !browser) {
       return; // nothing selected
     }
     let modifier = browser.applyModifier;
     if (!modifier) {
-      modifier = (value: string) => ({ cursor: value });
+      modifier = (value: string) => ({ cursor: value, data: data });
     }
     apply(modifier(value), browser.name);
   };
