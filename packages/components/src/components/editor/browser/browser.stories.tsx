@@ -3,7 +3,7 @@ import { BrowsersView, useBrowser } from './browser';
 import { attrData, cmsData, funcData, roleData } from './data';
 import { IvyIcons } from '@axonivy/ui-icons';
 import { CmsInfoProvider, FunctionInfoProvider } from './browser-info-provider';
-import { Button, Dialog, DialogContent, DialogTrigger, Input, InputGroup } from '@/components/common';
+import { Button, Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, Input, InputGroup } from '@/components/common';
 import { useState } from 'react';
 
 const meta: Meta<typeof BrowsersView> = {
@@ -66,6 +66,34 @@ export const DialogBrowser: Story = {
           </DialogTrigger>
         </InputGroup>
         <DialogContent style={{ height: '80vh' }}>
+          <DefaultBrowser
+            applyFn={value => {
+              if (value) setInput(value);
+              setOpen(false);
+            }}
+          />
+        </DialogContent>
+      </Dialog>
+    );
+  }
+};
+
+export const DialogBrowserWithTitle: Story = {
+  render: () => {
+    const [open, setOpen] = useState(false);
+    const [input, setInput] = useState('');
+    return (
+      <Dialog open={open} onOpenChange={setOpen}>
+        <InputGroup>
+          <Input value={input} onChange={e => setInput(e.target.value)} />
+          <DialogTrigger asChild>
+            <Button icon={IvyIcons.ListSearch} aria-label='Browser' />
+          </DialogTrigger>
+        </InputGroup>
+        <DialogContent style={{ height: '80vh', gridTemplateRows: 'auto 1fr' }}>
+          <DialogHeader>
+            <DialogTitle>Choose a browser...</DialogTitle>
+          </DialogHeader>
           <DefaultBrowser
             applyFn={value => {
               if (value) setInput(value);
