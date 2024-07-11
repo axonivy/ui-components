@@ -7,8 +7,13 @@ import * as React from 'react';
 const meta: Meta<typeof EmptyDetail> = {
   title: 'Editor/EmptyDetail',
   component: EmptyDetail,
+  tags: ['autodocs'],
+  args: {
+    message: 'This is a message'
+  },
   argTypes: {
-    message: { control: 'text' }
+    message: { control: 'text' },
+    mode: { control: 'radio' }
   }
 };
 
@@ -18,9 +23,10 @@ type Story = StoryObj<typeof EmptyDetail>;
 
 export const Default: Story = {
   args: {
-    message: 'Nothing there yet. Select an Element to edit its properties.'
+    message: 'Nothing there yet. Select an Element to edit its properties.',
+    mode: 'column'
   },
-  render: props => <EmptyDetail message={props.message} />
+  render: props => <EmptyDetail message={props.message} mode={props.mode} />
 };
 
 type StoryWithEditor = StoryObj;
@@ -41,7 +47,7 @@ const EditorWithEmptyDetailStory = () => {
         <>
           <ResizableHandle />
           <ResizablePanel defaultSize={25} minSize={10}>
-            <EmptyDetail message='Nothing there yet. Select an Element to edit its properties.' />
+            <EmptyDetail message='Nothing there yet. Select an Element to edit its properties.' mode='column' />
           </ResizablePanel>
         </>
       )}
