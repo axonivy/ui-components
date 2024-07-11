@@ -7,6 +7,7 @@ export const trigger = style({
   cursor: 'pointer',
   padding: vars.padding.input,
   fontSize: 12,
+  height: 36,
   borderRadius: vars.border.r1,
   border: vars.dynamic.inputBorder,
   background: vars.color.n25,
