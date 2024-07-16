@@ -32,7 +32,7 @@ export const toolbarTitle = style({
 
 const createMaxWidthQuery = (maxWidth?: number) => ({
   '@container': {
-    [`${container} (width < ${maxWidth}px)`]: {
+    [`${container} (width <= ${maxWidth}px)`]: {
       display: 'none'
     }
   }
