@@ -27,16 +27,25 @@ export type BrowserNode<TData = unknown> = {
   value: string;
   info: string;
   icon: IvyIcons;
+  children: Array<BrowserNode<TData>>;
   data?: TData;
-  children: Array<BrowserNode>;
+  isLoaded?: boolean;
 };
 
-export const useBrowser = (data: Array<BrowserNode>) => {
+export const useBrowser = (data: Array<BrowserNode>, loadChildren?: (row: Row<BrowserNode>) => void) => {
   const columns: ColumnDef<BrowserNode, string>[] = [
     {
       accessorKey: 'value',
       cell: cell => (
-        <ExpandableCell cell={cell} icon={cell.row.original.icon}>
+        <ExpandableCell
+          cell={cell}
+          icon={cell.row.original.icon}
+          lazy={
+            cell.row.original.isLoaded !== undefined && loadChildren !== undefined
+              ? { isLoaded: cell.row.original.isLoaded, loadChildren }
+              : undefined
+          }
+        >
           <span>{cell.getValue()}</span>
           <span style={{ color: vars.color.n500 }}>{cell.row.original.info}</span>
         </ExpandableCell>
@@ -64,23 +73,24 @@ export const useBrowser = (data: Array<BrowserNode>) => {
   return { table, globalFilter: { filter, setFilter } };
 };
 
-type BrowserValue<TData = unknown> = {
-  cursor: string;
+export type BrowserResult<TData = unknown> = {
+  value: string;
   data?: TData;
   firstLine?: string;
 };
 
-type Browser = {
+export type Browser = {
   name: string;
   icon: IvyIcons;
   browser: ReturnType<typeof useBrowser>;
+  header?: React.ReactNode;
   infoProvider?: (row?: Row<BrowserNode>) => React.ReactNode;
-  applyModifier?: (value: string) => BrowserValue;
+  applyModifier?: (row: Row<BrowserNode>) => BrowserResult;
 };
 
-type BrowsersViewProps = {
+export type BrowsersViewProps = {
   browsers: Array<Browser>;
-  apply: (value?: BrowserValue, type?: string) => void;
+  apply: (browserName: string, result?: BrowserResult) => void;
 };
 
 const BrowsersView = ({ browsers, apply }: BrowsersViewProps) => {
@@ -99,19 +109,19 @@ const BrowsersView = ({ browsers, apply }: BrowsersViewProps) => {
     }
     return row?.original.value;
   };
-  const applyHandler = (row?: Row<BrowserNode>) => {
-    const selected = row ?? selectedRow();
-    const value = selected?.original.value;
-    const data = selected?.original.data;
+  const applyHandler = (doubleClickRow?: Row<BrowserNode>) => {
+    const row = doubleClickRow ?? selectedRow();
     const browser = browsers.find(b => b.name === tab);
-    if (!value || !browser) {
+    if (!row || !browser) {
       return; // nothing selected
     }
-    let modifier = browser.applyModifier;
-    if (!modifier) {
-      modifier = (value: string) => ({ cursor: value, data: data });
+    const value = row.original.value;
+    const data = row.original.data;
+    let result: BrowserResult = { value, data };
+    if (browser.applyModifier !== undefined) {
+      result = browser.applyModifier(row);
     }
-    apply(modifier(value), browser.name);
+    apply(browser.name, result);
   };
   return (
     <Tabs value={tab} onValueChange={setTab} className={cn(fullHeight, overflowHidden)}>
@@ -126,9 +136,10 @@ const BrowsersView = ({ browsers, apply }: BrowsersViewProps) => {
         </TabsList>
 
         <Flex direction='column' gap={1} justifyContent='space-between' className={cn(fullHeight, overflowAuto)}>
-          {browsers.map(({ name, browser: { table, globalFilter } }) => (
+          {browsers.map(({ name, header, browser: { table, globalFilter } }) => (
             <TabsContent key={name} value={name} asChild>
               <Flex direction='column' gap={1} className={cn(fullHeight, overflowAuto)}>
+                {header}
                 <SearchInput placeholder='Search' autoFocus={true} value={globalFilter.filter} onChange={globalFilter.setFilter} />
                 <div className={overflowAuto}>
                   <Table>
@@ -150,7 +161,7 @@ const BrowsersView = ({ browsers, apply }: BrowsersViewProps) => {
             {infoProvider(selectedRow())}
           </BasicCollapsible>
           <Flex direction='row' justifyContent='flex-end' gap={1}>
-            <Button aria-label='Cancel' onClick={() => apply()} size='large'>
+            <Button aria-label='Cancel' onClick={() => apply(tab)} size='large'>
               Cancel
             </Button>
             <Button aria-label='Apply' onClick={() => applyHandler()} size='large' variant='primary'>

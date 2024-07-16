@@ -14,6 +14,12 @@ type ExpandableCellProps<TData> = {
 };
 
 const expanedButton = <TData,>(row: Row<TData>, lazy?: LazyExpand<TData>) => {
+  const expandHandlerProps = (handler: () => void) => ({
+    onMouseDown: handler,
+    onKeyDown: (e: React.KeyboardEvent<HTMLButtonElement>) => {
+      if (e.key === 'Enter' || e.key === ' ') handler();
+    }
+  });
   if (row.getCanExpand()) {
     return (
       <Button
@@ -21,10 +27,7 @@ const expanedButton = <TData,>(row: Row<TData>, lazy?: LazyExpand<TData>) => {
         className={expandButton}
         aria-label={row.getIsExpanded() ? 'Collapse row' : 'Expand row'}
         data-state={row.getIsExpanded() ? 'expanded' : 'collapsed'}
-        onMouseDown={row.getToggleExpandedHandler()}
-        onKeyDown={e => {
-          if (e.key === 'Enter' || e.key === ' ') row.getToggleExpandedHandler()();
-        }}
+        {...expandHandlerProps(row.getToggleExpandedHandler())}
       />
     );
   }
@@ -33,7 +36,15 @@ const expanedButton = <TData,>(row: Row<TData>, lazy?: LazyExpand<TData>) => {
       lazy.loadChildren(row);
       row.toggleExpanded(true);
     };
-    return <Button icon={IvyIcons.Chevron} className={expandButton} aria-label='Expand row' onClick={loadLazy} data-state='collapsed' />;
+    return (
+      <Button
+        icon={IvyIcons.Chevron}
+        className={expandButton}
+        aria-label='Expand row'
+        data-state='collapsed'
+        {...expandHandlerProps(loadLazy)}
+      />
+    );
   }
   return null;
 };

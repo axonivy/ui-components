@@ -1,33 +1,59 @@
 import { IvyIcons } from '@axonivy/ui-icons';
-import type { BrowserNode } from './browser';
+import { useBrowser, type BrowserNode } from './browser';
+import { useState } from 'react';
+import type { Row } from '@tanstack/react-table';
 
-export const attrData: Array<BrowserNode> = [
-  {
-    value: 'param',
-    info: '<>',
-    icon: IvyIcons.Attribute,
-    children: [
-      {
-        value: 'out',
-        info: 'ProcurementRequest',
-        icon: IvyIcons.Attribute,
-        children: [
-          { value: 'accepted', info: 'Boolean', icon: IvyIcons.Attribute, children: [] },
-          {
-            value: 'requester',
-            info: 'User',
-            icon: IvyIcons.Attribute,
-            children: [
-              { value: 'email', info: 'String', icon: IvyIcons.Attribute, children: [] },
-              { value: 'fullName', info: 'String', icon: IvyIcons.Attribute, children: [] },
-              { value: 'role', info: 'String', icon: IvyIcons.Attribute, children: [] }
-            ]
-          }
-        ]
+export const useAttrBrowser = () => {
+  const [attr, setAttr] = useState<Array<BrowserNode>>([
+    {
+      value: 'param',
+      info: '<>',
+      icon: IvyIcons.Attribute,
+      isLoaded: true,
+      children: [
+        {
+          value: 'out',
+          info: 'ProcurementRequest',
+          icon: IvyIcons.Attribute,
+          isLoaded: true,
+          children: [
+            { value: 'accepted', info: 'Boolean', icon: IvyIcons.Attribute, children: [] },
+            {
+              value: 'requester',
+              info: 'User',
+              icon: IvyIcons.Attribute,
+              isLoaded: false,
+              children: []
+            }
+          ]
+        }
+      ]
+    }
+  ]);
+
+  const loadChildrenFor = (tree: Array<BrowserNode>): Array<BrowserNode> => {
+    return tree.map(node => {
+      if (node.isLoaded === false) {
+        node.children = [
+          { value: 'email', info: 'String', icon: IvyIcons.Attribute, children: [] },
+          { value: 'fullName', info: 'String', icon: IvyIcons.Attribute, children: [] },
+          { value: 'role', info: 'String', icon: IvyIcons.Attribute, children: [] }
+        ];
+        node.isLoaded = true;
+      } else {
+        loadChildrenFor(node.children);
       }
-    ]
-  }
-];
+      return node;
+    });
+  };
+
+  const loadLazy = (row: Row<BrowserNode>) => {
+    setAttr(old => loadChildrenFor(old));
+    console.log('lazy load attrs for ', row.original.value);
+  };
+
+  return useBrowser(attr, loadLazy);
+};
 
 export const funcData: Array<BrowserNode> = [
   {
