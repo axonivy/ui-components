@@ -1,9 +1,19 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { BrowsersView, useBrowser } from './browser';
-import { attrData, cmsData, funcData, roleData } from './data';
+import { cmsData, funcData, roleData, useAttrBrowser } from './data';
 import { IvyIcons } from '@axonivy/ui-icons';
 import { CmsInfoProvider, FunctionInfoProvider } from './browser-info-provider';
-import { Button, Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, Input, InputGroup } from '@/components/common';
+import {
+  BasicCheckbox,
+  Button,
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  Input,
+  InputGroup
+} from '@/components/common';
 import { useState } from 'react';
 
 const meta: Meta<typeof BrowsersView> = {
@@ -17,33 +27,41 @@ type Story = StoryObj<typeof BrowsersView>;
 
 const DefaultBrowser = ({ applyFn }: { applyFn?: (value?: string) => void }) => {
   const roles = useBrowser(roleData);
-  const attrs = useBrowser(attrData);
+  const attrs = useAttrBrowser();
   const funcs = useBrowser(funcData);
   const cms = useBrowser(cmsData);
+
   return (
     <BrowsersView
       browsers={[
-        { name: 'Roles', icon: IvyIcons.Users, browser: roles },
-        { name: 'Attribute', icon: IvyIcons.Attribute, browser: attrs },
+        {
+          name: 'Roles',
+          icon: IvyIcons.Users,
+          browser: roles,
+          header: <BasicCheckbox checked={true} label='You can also render a checkbox here' />
+        },
+        { name: 'Attribute', icon: IvyIcons.Attribute, browser: attrs, header: `Info: Lazy loaded row 'requester (User)'` },
         {
           name: 'Functions',
           icon: IvyIcons.Function,
           browser: funcs,
+          header: 'Info: Lazy loaded info content (1s timeout)',
           infoProvider: row => <FunctionInfoProvider row={row} />,
-          applyModifier: value => ({ cursor: `function: ${value}` })
+          applyModifier: row => ({ value: `function: ${row?.original.value}` })
         },
         {
           name: 'CMS',
           icon: IvyIcons.Cms,
           browser: cms,
+          header: 'Info: More info content (with language details) / value modified with macro tags',
           infoProvider: row => <CmsInfoProvider row={row} />,
-          applyModifier: value => ({ cursor: `<%= ivy.co('${value}') %>` })
+          applyModifier: row => ({ value: `<%= ivy.co('${row?.original.value}') %>` })
         }
       ]}
-      apply={(value, type) => {
-        console.log('apply', value, type);
-        if (applyFn) applyFn(value?.cursor);
-        else if (value) alert(`Browser '${type}' apply: ${value.cursor}`);
+      apply={(browserName, result) => {
+        console.log('apply', browserName, result);
+        if (applyFn) applyFn(result?.value);
+        else if (result) alert(`Browser '${browserName}' apply: ${result.value}`);
       }}
     />
   );
