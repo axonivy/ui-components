@@ -2,13 +2,13 @@ import { style } from '@vanilla-extract/css';
 import { vars } from '@/styles/theme.css';
 import { recipe } from '@vanilla-extract/recipes';
 
-export const emptyDetail = style({
+export const panel = style({
   height: '100%',
   color: vars.color.n800,
   margin: '20px'
 });
 
-export const emptyDetailIcon = recipe({
+export const panelIcon = recipe({
   base: {
     fontSize: '54px',
     textAlign: 'center'
@@ -21,7 +21,7 @@ export const emptyDetailIcon = recipe({
   }
 });
 
-export const emptyDetailMessage = style({
+export const panelMessage = style({
   fontSize: '14px',
   textAlign: 'center'
 });

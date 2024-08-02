@@ -11,6 +11,7 @@ export * from './icon/icon';
 export * from './input/input';
 export * from './label/label';
 export * from './message/message';
+export * from './panelMessage/panelMessage';
 export * from './popover/popover';
 export * from './radio/radio';
 export * from './resizeable/resizable';
