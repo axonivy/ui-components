@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Default as ToolbarStory } from './toolbar/toolbar.stories';
-import { ResizableHandle, ResizablePanel, ResizablePanelGroup, Flex } from '@/components/common';
+import { ResizableHandle, ResizablePanel, ResizablePanelGroup, Flex, PanelMessage } from '@/components/common';
 import { SidebarHeader } from './sidebar/header/header';
 import { IvyIcons } from '@axonivy/ui-icons';
 import * as React from 'react';
@@ -20,9 +20,7 @@ const EditorStory = () => {
       <ResizablePanel defaultSize={75} minSize={50}>
         <Flex direction='column' style={{ height: '100%' }}>
           <ToolbarStory sideBarCollapse={() => setSideBar(old => !old)} />
-          <Flex justifyContent='center' alignItems='center' style={{ height: '100%' }}>
-            <span>Content</span>
-          </Flex>
+          <PanelMessage message='content' />
         </Flex>
       </ResizablePanel>
       {sideBar && (
@@ -31,9 +29,7 @@ const EditorStory = () => {
           <ResizablePanel defaultSize={25} minSize={10}>
             <Flex direction='column' style={{ height: '100%' }}>
               <SidebarHeader icon={IvyIcons.Script} title='Script' />
-              <Flex justifyContent='center' alignItems='center' style={{ height: '100%' }}>
-                <span>Sidebar</span>
-              </Flex>
+              <PanelMessage mode='row' message='sidebar' icon={IvyIcons.Settings} />
             </Flex>
           </ResizablePanel>
         </>
