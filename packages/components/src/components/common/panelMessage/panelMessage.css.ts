@@ -3,14 +3,14 @@ import { vars } from '@/styles/theme.css';
 import { recipe } from '@vanilla-extract/recipes';
 
 export const panel = style({
-  height: '100%',
+  height: 'calc(100% - 40px)',
   color: vars.color.n800,
-  margin: '20px'
+  margin: 20
 });
 
 export const panelIcon = recipe({
   base: {
-    fontSize: '54px',
+    fontSize: 54,
     textAlign: 'center'
   },
   variants: {
