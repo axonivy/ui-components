@@ -12,7 +12,7 @@ type SelectRowProps<TData> = React.ComponentProps<typeof TableRow> & {
 
 const SelectRow = <TData,>({ row, className, onClick, ...props }: SelectRowProps<TData>) => {
   const selectRow = () => {
-    if (!row.getIsSelected()) {
+    if (row.getCanMultiSelect() || !row.getIsSelected()) {
       row.toggleSelected();
     }
   };
