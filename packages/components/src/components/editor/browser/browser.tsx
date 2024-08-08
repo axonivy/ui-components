@@ -19,8 +19,7 @@ import {
   useTableSelect
 } from '@/components/common';
 import type { IvyIcons } from '@axonivy/ui-icons';
-import { vars } from '@/styles/theme.css';
-import { fullHeight, overflowAuto, overflowHidden } from './browser.css';
+import { fullHeight, info, overflowAuto, overflowHidden } from './browser.css';
 import { cn } from '@/utils';
 
 export type BrowserNode<TData = unknown> = {
@@ -47,7 +46,7 @@ export const useBrowser = (data: Array<BrowserNode>, loadChildren?: (row: Row<Br
           }
         >
           <span>{cell.getValue()}</span>
-          <span style={{ color: vars.color.n500 }}>{cell.row.original.info}</span>
+          <span className={info}>{cell.row.original.info}</span>
         </ExpandableCell>
       )
     }
@@ -91,9 +90,10 @@ export type Browser = {
 export type BrowsersViewProps = {
   browsers: Array<Browser>;
   apply: (browserName: string, result?: BrowserResult) => void;
+  applyBtn?: { label?: string; icon?: IvyIcons };
 };
 
-const BrowsersView = ({ browsers, apply }: BrowsersViewProps) => {
+const BrowsersView = ({ browsers, apply, applyBtn }: BrowsersViewProps) => {
   const [tab, setTab] = React.useState(browsers[0].name);
   const selectedRow = () => {
     const table = browsers.find(b => b.name === tab)?.browser?.table;
@@ -164,8 +164,14 @@ const BrowsersView = ({ browsers, apply }: BrowsersViewProps) => {
             <Button aria-label='Cancel' onClick={() => apply(tab)} size='large'>
               Cancel
             </Button>
-            <Button aria-label='Apply' onClick={() => applyHandler()} size='large' variant='primary'>
-              Apply
+            <Button
+              aria-label={applyBtn?.label ?? 'Apply'}
+              icon={applyBtn?.icon}
+              onClick={() => applyHandler()}
+              size='large'
+              variant='primary'
+            >
+              {applyBtn?.label ?? 'Apply'}
             </Button>
           </Flex>
         </Flex>
