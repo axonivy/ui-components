@@ -111,7 +111,12 @@ export const roleData: Array<BrowserNode> = [
         children: [{ value: 'Developer', info: 'ivy team', icon: IvyIcons.Users, children: [] }]
       },
       { value: 'Teamleader', info: 'All teamleaders', icon: IvyIcons.Users, children: [] },
-      { value: 'Boss', info: 'All bosses', icon: IvyIcons.Users, children: [] }
+      {
+        value: 'Boss',
+        info: "All bosses with a very long description text that don't fit into the cell. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text.",
+        icon: IvyIcons.Users,
+        children: []
+      }
     ]
   }
 ];

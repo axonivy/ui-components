@@ -25,7 +25,7 @@ export default meta;
 
 type Story = StoryObj<typeof BrowsersView>;
 
-const DefaultBrowser = ({ applyFn }: { applyFn?: (value?: string) => void }) => {
+const DefaultBrowser = ({ applyFn, applyBtn }: { applyFn?: (value?: string) => void; applyBtn?: { label?: string; icon?: IvyIcons } }) => {
   const roles = useBrowser(roleData);
   const attrs = useAttrBrowser();
   const funcs = useBrowser(funcData);
@@ -63,6 +63,7 @@ const DefaultBrowser = ({ applyFn }: { applyFn?: (value?: string) => void }) => 
         if (applyFn) applyFn(result?.value);
         else if (result) alert(`Browser '${browserName}' apply: ${result.value}`);
       }}
+      applyBtn={applyBtn}
     />
   );
 };
@@ -117,6 +118,7 @@ export const DialogBrowserWithTitle: Story = {
               if (value) setInput(value);
               setOpen(false);
             }}
+            applyBtn={{ label: 'Import', icon: IvyIcons.Download }}
           />
         </DialogContent>
       </Dialog>
