@@ -1,11 +1,10 @@
-import { disabled } from '@/styles/disabled';
 import { vars } from '@/styles/theme.css';
 import { transitionColors } from '@/styles/transition.css';
 import { createVar } from '@vanilla-extract/css';
 import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
 
 const buttonBg = createVar();
-const backgroundMix = `color-mix(in srgb, ${buttonBg}, ${vars.color.body} 15%)`;
+const activeBg = `color-mix(in srgb, ${buttonBg}, ${vars.color.body} 15%)`;
 
 export const button = recipe({
   base: [
@@ -29,16 +28,19 @@ export const button = recipe({
       backgroundColor: buttonBg,
       cursor: 'pointer',
       ':hover': {
-        backgroundColor: backgroundMix
+        backgroundColor: activeBg
       },
       ':focus-visible': {
-        backgroundColor: backgroundMix,
+        backgroundColor: activeBg,
         boxShadow: vars.shadow.focus
       },
-      ':disabled': disabled,
+      ':disabled': {
+        opacity: 0.6,
+        cursor: 'not-allowed'
+      },
       selectors: {
         '&[data-state="on"]': {
-          backgroundColor: backgroundMix
+          backgroundColor: activeBg
         }
       }
     }

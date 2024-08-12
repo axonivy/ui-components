@@ -34,7 +34,7 @@ export const Default = ({ sideBarCollapse }: { sideBarCollapse?: () => void }) =
           <Separator orientation='vertical' style={{ height: '26px' }} />
           <Flex gap={1}>
             <Button icon={IvyIcons.Undo} size='large' />
-            <Button icon={IvyIcons.Redo} size='large' />
+            <Button icon={IvyIcons.Redo} size='large' disabled={true} />
           </Flex>
         </Flex>
       </ToolbarContainer>
