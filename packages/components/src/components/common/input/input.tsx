@@ -42,9 +42,27 @@ const SearchInput = React.forwardRef<HTMLInputElement, SearchInputProps>(({ valu
 });
 SearchInput.displayName = 'SearchInput';
 
+type PasswordInputProps = Omit<InputProps, 'value' | 'onChange' | 'type'> & { value?: string; onChange?: (change: string) => void };
+
+const PasswordInput = React.forwardRef<HTMLInputElement, PasswordInputProps>(({ value, onChange, ...props }, ref) => {
+  const [showPassword, setShowPassword] = React.useState(false);
+  const updateValue = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (onChange) {
+      onChange(event.target.value);
+    }
+  };
+  return (
+    <InputGroup>
+      <Input value={value} onChange={updateValue} type={showPassword ? 'text' : 'password'} {...props} ref={ref} />
+      <Button icon={IvyIcons.Eye} onClick={() => setShowPassword(!showPassword)} aria-label='Show password' />
+    </InputGroup>
+  );
+});
+PasswordInput.displayName = 'PasswordInput';
+
 const InputGroup = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(({ className, ...props }, ref) => (
   <Flex ref={ref} direction='row' gap={1} alignItems='center' className={cn(inputGroup, className, 'ui-inputgroup')} {...props} />
 ));
 InputGroup.displayName = 'InputGroup';
 
-export { Input, InputGroup, SearchInput };
+export { Input, InputGroup, SearchInput, PasswordInput };
