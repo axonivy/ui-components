@@ -1,4 +1,4 @@
-import { SearchInput } from '@/components';
+import { SearchInput } from '@/components/common/input/input';
 import {
   getFilteredRowModel,
   getSortedRowModel,

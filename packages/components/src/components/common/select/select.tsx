@@ -2,10 +2,11 @@ import * as React from 'react';
 import * as SelectPrimitive from '@radix-ui/react-select';
 
 import { cn } from '@/utils/class-name';
-import { IvyIcon, useField } from '@/components/common';
 import { IvyIcons } from '@axonivy/ui-icons';
 import { content, item, itemIcon, label, scrollButton, seperator, trigger, viewport } from './select.css';
-import { useReadonly } from '@/context';
+import { useField } from '@/components/common/fieldset/fieldset';
+import { IvyIcon } from '@/components/common/icon/icon';
+import { useReadonly } from '@/context/useReadonly';
 
 const Select = ({ disabled, ...props }: SelectPrimitive.SelectProps) => {
   const readonly = useReadonly();

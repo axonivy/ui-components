@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { ToggleGroup, ToggleGroupItem } from './toggleGroup';
 import { IvyIcons } from '@axonivy/ui-icons';
-import { Button } from '../button/button';
+import { Button } from '@/components/common/button/button';
 
 const meta: Meta<typeof ToggleGroup> = {
   title: 'Common/ToggleGroup',

@@ -1,11 +1,15 @@
 import * as React from 'react';
 
-import { Button, Flex, Input, InputGroup, IvyIcon, Popover, PopoverAnchor, PopoverContent } from '@/components/common';
 import { IvyIcons } from '@axonivy/ui-icons';
-import { useReadonly } from '@/context';
 import { useCombobox } from 'downshift';
 import { cn } from '@/utils/class-name';
-import { content, item as itemClass, itemIcon, itemInfo } from './combobox.css';
+import { content, item as itemClass } from './combobox.css';
+import { Button } from '@/components/common/button/button';
+import { useField } from '@/components/common/fieldset/fieldset';
+import { Flex } from '@/components/common/flex/flex';
+import { InputGroup, Input } from '@/components/common/input/input';
+import { useReadonly } from '@/context/useReadonly';
+import { Popover, PopoverAnchor, PopoverContent } from '@/components/common/popover/popover';
 
 export type ComboboxOption = {
   value: string;
@@ -40,8 +44,12 @@ const Combobox = <T extends ComboboxOption>({
   const [filteredItems, setFilteredItems] = React.useState(options);
   React.useEffect(() => setFilteredItems(options), [options]);
 
+  const { inputProps } = useField();
+
   const { isOpen, getToggleButtonProps, getMenuProps, getInputProps, highlightedIndex, getItemProps, selectedItem, selectItem } =
     useCombobox({
+      inputId: inputProps.id,
+      labelId: inputProps['aria-labelledby'],
       onSelectedItemChange(change) {
         setFilteredItems(options);
         if (change.inputValue !== value) {
@@ -111,49 +119,4 @@ const Combobox = <T extends ComboboxOption>({
 };
 Combobox.displayName = 'Combobox';
 
-const ComboboxItemIcon = ({ icon }: { icon?: IvyIcons }) => {
-  if (icon === undefined) {
-    return null;
-  }
-  return <IvyIcon className={itemIcon} icon={icon} />;
-};
-
-const ComboboxItemInfo = ({ info }: { info?: string }) => {
-  if (info === undefined) {
-    return null;
-  }
-  return <span className={itemInfo}>{info}</span>;
-};
-
-export type ExtendedComboboxOption = ComboboxOption & {
-  label?: string;
-  info?: string;
-  icon?: IvyIcons;
-};
-
-export const extendedOptionFilter = (option: ExtendedComboboxOption, input?: string) => {
-  if (!input) {
-    return true;
-  }
-  const filter = input.toLowerCase();
-  const filterIncludes = (value?: string) => {
-    if (value === undefined) {
-      return true;
-    }
-    return value.toLocaleLowerCase().includes(filter);
-  };
-  return filterIncludes(option.value) || filterIncludes(option.label) || filterIncludes(option.info);
-};
-
-const ExtendedComboboxItem = (option: ExtendedComboboxOption) => (
-  <>
-    <Flex direction='column' gap={1}>
-      <Flex gap={1}>
-        <ComboboxItemIcon icon={option.icon} />
-        <span>{option.label ?? option.value}</span>
-      </Flex>
-      <ComboboxItemInfo info={option.info} />
-    </Flex>
-  </>
-);
-export { Combobox, ComboboxItemInfo, ExtendedComboboxItem };
+export { Combobox };

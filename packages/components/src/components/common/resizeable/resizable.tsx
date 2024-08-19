@@ -1,9 +1,9 @@
 import * as ResizablePrimitive from 'react-resizable-panels';
 
 import { cn } from '@/utils/class-name';
-import { IvyIcon } from '@/components/common';
 import { IvyIcons } from '@axonivy/ui-icons';
 import { resizableHandle, resizableLine } from './resizable.css';
+import { IvyIcon } from '@/components/common/icon/icon';
 
 const ResizablePanelGroup = ({ className, ...props }: React.ComponentProps<typeof ResizablePrimitive.PanelGroup>) => (
   <ResizablePrimitive.PanelGroup className={cn(className, 'ui-resizable')} {...props} />

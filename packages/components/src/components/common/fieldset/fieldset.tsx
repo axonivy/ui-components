@@ -1,7 +1,9 @@
-import { Flex, Label, Message, type MessageData } from '@/components/common';
 import { cn } from '@/utils/class-name';
 import * as React from 'react';
 import { fieldset } from './fieldset.css';
+import { Flex } from '@/components/common/flex/flex';
+import { type MessageData, Message } from '@/components/common/message/message';
+import { Label } from '@/components/common/label/label';
 
 type FieldsetContextValue = {
   id: string;

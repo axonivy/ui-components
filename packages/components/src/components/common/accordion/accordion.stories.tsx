@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Accordion, AccordionItem, AccordionContent, AccordionTrigger, AccordionState, type AccordionControlProps } from './accordion';
 import { IvyIcons } from '@axonivy/ui-icons';
-import { ButtonGroup } from '..';
+import { ButtonGroup } from '@/components/common/button/button';
 
 const meta: Meta<typeof Accordion> = {
   title: 'Common/Accordion',

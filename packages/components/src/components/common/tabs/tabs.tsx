@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as TabsPrimitive from '@radix-ui/react-tabs';
-import { cn } from '@/utils';
 import { tabsList, tabsTrigger } from './tabs.css';
+import { cn } from '@/utils/class-name';
 
 const Tabs = TabsPrimitive.Root;
 

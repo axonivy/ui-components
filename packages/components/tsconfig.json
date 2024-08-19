@@ -5,7 +5,10 @@
     "outDir": "lib",
     "paths": {
       "test-utils": ["./src/test-utils/test-utils"],
-      "@/*": ["./src/*"]
+      "@/components/*": ["./src/components/*"],
+      "@/context/*": ["./src/context/*"],
+      "@/styles/*": ["./src/styles/*"],
+      "@/utils/*": ["./src/utils/*"]
     },
     "allowImportingTsExtensions": true,
     "noEmit": true

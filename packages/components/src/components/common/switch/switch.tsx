@@ -1,10 +1,11 @@
 import * as React from 'react';
 import * as SwitchPrimitives from '@radix-ui/react-switch';
-import { Field, IvyIcon, Label, useField, type IvyIconProps } from '@/components/common';
-
 import { cn } from '@/utils/class-name';
 import { root, thumb, type SwitchVariants, switchSize, thumbIcon } from './switch.css';
-import { useReadonly } from '@/context';
+import { useField, Field } from '@/components/common/fieldset/fieldset';
+import { type IvyIconProps, IvyIcon } from '@/components/common/icon/icon';
+import { useReadonly } from '@/context/useReadonly';
+import { Label } from '@/components/common/label/label';
 
 const Switch = React.forwardRef<
   React.ElementRef<typeof SwitchPrimitives.Root>,

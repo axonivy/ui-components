@@ -1,8 +1,9 @@
 import { flexRender, type Column, type HeaderContext, type HeaderGroup } from '@tanstack/react-table';
 import { TableHead, TableHeader, TableRow } from '../table';
-import { Button, Flex } from '@/components';
 import { IvyIcons } from '@axonivy/ui-icons';
 import { expandButton, resizer, resizerLine, sortButton, sortHead } from './header.css';
+import { Button } from '@/components/common/button/button';
+import { Flex } from '@/components/common/flex/flex';
 
 const ColumnResizer = <TData,>({ header }: { header: HeaderContext<TData, unknown> }) => {
   return (

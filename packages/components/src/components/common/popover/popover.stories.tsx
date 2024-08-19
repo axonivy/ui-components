@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Popover, PopoverArrow, PopoverClose, PopoverContent, PopoverTrigger } from './popover';
-import { Button } from '@/components';
 import { IvyIcons } from '@axonivy/ui-icons';
+import { Button } from '@/components/common/button/button';
 
 const meta: Meta<typeof Popover> = {
   title: 'Common/Popover',

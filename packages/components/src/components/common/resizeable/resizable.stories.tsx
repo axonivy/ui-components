@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from './resizable';
-import { Flex } from '@/components/common';
 import { vars } from '@/styles/theme.css';
+import { Flex } from '@/components/common/flex/flex';
 
 const meta: Meta<typeof ResizablePanelGroup> = {
   title: 'Common/Resizeable',

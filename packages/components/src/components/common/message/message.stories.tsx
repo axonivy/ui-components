@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Message } from './message';
-import { Input, Fieldset } from '@/components/common';
+import { Input } from '@/components/common/input/input';
+import { Fieldset } from '@/components/common/fieldset/fieldset';
 
 const meta: Meta<typeof Message> = {
   title: 'Common/Message',

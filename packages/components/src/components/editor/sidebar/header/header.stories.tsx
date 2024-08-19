@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { SidebarHeader, SidebarMessages } from './header';
 import { IvyIcons } from '@axonivy/ui-icons';
-import { Button, Message } from '@/components/common';
+import { Button } from '@/components/common/button/button';
+import { Message } from '@/components/common/message/message';
 
 const meta: Meta<typeof SidebarHeader> = {
   title: 'Editor/SidebarHeader',

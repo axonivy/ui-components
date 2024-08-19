@@ -1,4 +1,4 @@
-import { cn } from '@/utils';
+import { cn } from '@/utils/class-name';
 import { spinner, type SpinnerVariants } from './spinner.css';
 
 type SpinnerProps = React.HTMLAttributes<HTMLSpanElement> & SpinnerVariants;

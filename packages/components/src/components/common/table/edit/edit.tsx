@@ -1,9 +1,10 @@
-import { Input, type InputProps, BasicSelect, type BasicSelectProps } from '@/components';
 import type { CellContext, RowData } from '@tanstack/react-table';
 import * as React from 'react';
 import { editCell } from './edit.css';
-import { Combobox, type ComboboxOption, type ComboboxProps } from '../../combobox/combobox';
-import { cn } from '@/utils';
+import { cn } from '@/utils/class-name';
+import { Input, type InputProps } from '@/components/common/input/input';
+import { type ComboboxOption, type ComboboxProps, Combobox } from '@/components/common/combobox/combobox';
+import { type BasicSelectProps, BasicSelect } from '@/components/common/select/select';
 
 declare module '@tanstack/react-table' {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

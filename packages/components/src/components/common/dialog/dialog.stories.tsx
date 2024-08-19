@@ -1,6 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from './dialog';
-import { BasicSelect, Button, Fieldset, Flex, Input, Textarea } from '@/components';
+import { Button } from '@/components/common/button/button';
+import { Fieldset } from '@/components/common/fieldset/fieldset';
+import { Flex } from '@/components/common/flex/flex';
+import { Input } from '@/components/common/input/input';
+import { BasicSelect } from '@/components/common/select/select';
+import { Textarea } from '@/components/common/textarea/textarea';
 
 const meta: Meta<typeof Dialog> = {
   title: 'Common/Dialog',

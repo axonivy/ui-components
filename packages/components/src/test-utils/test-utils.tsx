@@ -1,8 +1,8 @@
 /* eslint-disable import/export */
 import type { ReactElement, ReactNode } from 'react';
-import { ReadonlyProvider } from '../context';
 import { render, renderHook } from '@testing-library/react';
 import type { queries, Queries, RenderHookOptions, RenderOptions } from '@testing-library/react';
+import { ReadonlyProvider } from '@/context/useReadonly';
 
 type ContextHelperProps = {
   readonly?: boolean;

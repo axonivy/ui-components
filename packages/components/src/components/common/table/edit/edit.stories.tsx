@@ -101,6 +101,6 @@ function EditTableDemo() {
   );
 }
 
-export const Input: Story = {
+export const Default: Story = {
   render: () => <EditTableDemo />
 };

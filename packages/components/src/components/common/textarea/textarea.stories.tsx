@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Fieldset } from '@/components/common';
 import { Textarea } from './textarea';
+import { Fieldset } from '@/components/common/fieldset/fieldset';
 
 const meta: Meta<typeof Textarea> = {
   title: 'Common/Textarea',

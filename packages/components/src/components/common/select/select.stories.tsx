@@ -10,8 +10,8 @@ import {
   SelectTrigger,
   SelectValue
 } from './select';
-import { Fieldset } from '@/components/common';
 import { useState } from 'react';
+import { Fieldset } from '@/components/common/fieldset/fieldset';
 
 const meta: Meta<typeof BasicSelect> = {
   title: 'Common/Select',

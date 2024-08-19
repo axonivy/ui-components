@@ -1,9 +1,9 @@
-import { useTheme } from '@/context';
 import { Toaster as Sonner, toast } from 'sonner';
 import { toaster, description, error, success, warning, closeBtn } from './toaster.css';
 import { IvyIcon } from '../icon/icon';
 import { IvyIcons } from '@axonivy/ui-icons';
 import { Spinner } from '../spinner/spinner';
+import { useTheme } from '@/context/useTheme';
 
 type ToasterProps = React.ComponentProps<typeof Sonner>;
 

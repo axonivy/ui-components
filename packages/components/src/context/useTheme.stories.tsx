@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Button } from '@/components/common';
 import { IvyIcons } from '@axonivy/ui-icons';
-import { ThemeProvider, useTheme } from '.';
+import { Button } from '@/components/common/button/button';
+import { ThemeProvider, useTheme } from '@/context/useTheme';
 
 const meta: Meta<typeof ThemeProvider> = {
   title: 'Context/Theme',

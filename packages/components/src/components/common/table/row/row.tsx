@@ -1,10 +1,13 @@
 import type { Row } from '@tanstack/react-table';
-import { TableRow, type MessageData, TableCell, Message, IvyIcon, Flex } from '@/components';
 import * as React from 'react';
 import { dndRow, reorderHandle, reorderHandleIcon, selectedRow } from './row.css';
-import { cn } from '@/utils';
+import { cn } from '@/utils/class-name';
 import { IvyIcons } from '@axonivy/ui-icons';
 import { useDrag, useDrop, type TextDropItem } from '@react-aria/dnd';
+import { Flex } from '@/components/common/flex/flex';
+import { IvyIcon } from '@/components/common/icon/icon';
+import { type MessageData, Message } from '@/components/common/message/message';
+import { TableRow, TableCell } from '@/components/common/table/table';
 
 type SelectRowProps<TData> = React.ComponentProps<typeof TableRow> & {
   row: Row<TData>;
@@ -19,7 +22,7 @@ const SelectRow = <TData,>({ row, className, onClick, ...props }: SelectRowProps
   return (
     <TableRow
       className={cn(selectedRow, className, 'ui-select-row')}
-      data-state={row.getIsSelected() ? 'selected' : ''}
+      data-state={row.getIsSelected() ? 'selected' : 'unselected'}
       onClick={event => {
         if (event.detail === 1) {
           selectRow();

@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Button } from './button';
 import { IvyIcons } from '@axonivy/ui-icons';
-import { Flex } from '@/components/common';
+import { Flex } from '@/components/common/flex/flex';
 
 const meta: Meta<typeof Button> = {
   title: 'Common/Button',

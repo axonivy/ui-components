@@ -1,4 +1,4 @@
-import { cn } from '@/utils';
+import { cn } from '@/utils/class-name';
 import { skeleton } from './skeleton.css';
 
 function Skeleton({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {

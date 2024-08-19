@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Input, InputGroup, PasswordInput, SearchInput } from './input';
-import { Button, Fieldset } from '@/components/common';
 import { IvyIcons } from '@axonivy/ui-icons';
+import { Button } from '@/components/common/button/button';
+import { Fieldset } from '@/components/common/fieldset/fieldset';
 
 const meta: Meta<typeof Input> = {
   title: 'Common/Input',
