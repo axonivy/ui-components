@@ -4,8 +4,10 @@ import * as CheckboxPrimitive from '@radix-ui/react-checkbox';
 import { cn } from '@/utils/class-name';
 import { checkboxIndicator, checkboxRoot } from './checkbox.css';
 import { IvyIcons } from '@axonivy/ui-icons';
-import { Field, IvyIcon, Label, useField } from '@/components/common';
-import { useReadonly } from '@/context';
+import { useField, Field } from '@/components/common/fieldset/fieldset';
+import { IvyIcon } from '@/components/common/icon/icon';
+import { useReadonly } from '@/context/useReadonly';
+import { Label } from '@/components/common/label/label';
 
 const Checkbox = React.forwardRef<
   React.ElementRef<typeof CheckboxPrimitive.Root>,

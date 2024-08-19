@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Field, Label } from '@/components/common';
 import { RadioGroup, RadioGroupItem } from './radio';
+import { Field } from '@/components/common/fieldset/fieldset';
+import { Label } from '@/components/common/label/label';
 
 const meta: Meta<typeof RadioGroup> = {
   title: 'Common/RadioGroup',

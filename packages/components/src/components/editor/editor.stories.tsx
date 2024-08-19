@@ -1,9 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Default as ToolbarStory } from './toolbar/toolbar.stories';
-import { ResizableHandle, ResizablePanel, ResizablePanelGroup, Flex, PanelMessage } from '@/components/common';
 import { SidebarHeader } from './sidebar/header/header';
 import { IvyIcons } from '@axonivy/ui-icons';
 import * as React from 'react';
+import { Flex } from '@/components/common/flex/flex';
+import { PanelMessage } from '@/components/common/panelMessage/panelMessage';
+import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from '@/components/common/resizeable/resizable';
 
 const meta: Meta = {
   title: 'Editor'

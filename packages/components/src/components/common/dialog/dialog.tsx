@@ -1,9 +1,10 @@
 import * as React from 'react';
 import * as DialogPrimitive from '@radix-ui/react-dialog';
-import { cn } from '@/utils';
 import { IvyIcons } from '@axonivy/ui-icons';
-import { Button, Flex } from '@/components/common';
 import { overlay, content, header, title, description, contentClose, footer } from './dialog.css';
+import { cn } from '@/utils/class-name';
+import { Button } from '@/components/common/button/button';
+import { Flex } from '@/components/common/flex/flex';
 
 const Dialog = DialogPrimitive.Root;
 

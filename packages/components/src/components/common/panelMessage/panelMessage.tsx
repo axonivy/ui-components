@@ -1,7 +1,9 @@
 import * as React from 'react';
 import { IvyIcons } from '@axonivy/ui-icons';
-import { Flex, IvyIcon, Message } from '@/components/common';
 import { panel, panelIcon, panelMessage } from './panelMessage.css';
+import { Flex } from '@/components/common/flex/flex';
+import { IvyIcon } from '@/components/common/icon/icon';
+import { Message } from '@/components/common/message/message';
 
 type PanelMessageProps = {
   mode?: 'column' | 'row';

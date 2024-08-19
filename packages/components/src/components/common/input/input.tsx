@@ -2,9 +2,12 @@ import * as React from 'react';
 
 import { cn } from '@/utils/class-name';
 import { input, inputGroup, searchIcon } from './input.css';
-import { ReadonlyProvider, useReadonly } from '@/context';
-import { Button, Flex, IvyIcon, useField } from '@/components';
 import { IvyIcons } from '@axonivy/ui-icons';
+import { Button } from '@/components/common/button/button';
+import { useField } from '@/components/common/fieldset/fieldset';
+import { Flex } from '@/components/common/flex/flex';
+import { IvyIcon } from '@/components/common/icon/icon';
+import { useReadonly, ReadonlyProvider } from '@/context/useReadonly';
 
 export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {}
 

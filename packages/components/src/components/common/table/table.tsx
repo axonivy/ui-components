@@ -1,7 +1,7 @@
 import { cn } from '@/utils/class-name';
 import * as React from 'react';
 import { table, root, header, body, cell, footer, head, row } from './table.css';
-import { Field } from '@/components';
+import { Field } from '@/components/common/fieldset/fieldset';
 
 const Table = React.forwardRef<HTMLTableElement, React.HTMLAttributes<HTMLTableElement>>(({ className, ...props }, ref) => (
   <Field className={cn(root, 'ui-table-root')}>

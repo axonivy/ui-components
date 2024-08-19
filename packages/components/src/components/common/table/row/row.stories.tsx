@@ -4,9 +4,9 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '.
 import { MessageRow, ReorderRow, ReorderHandleWrapper, SelectRow } from './row';
 import { useTableSelect } from '../hooks/hooks';
 import { Fragment } from 'react/jsx-runtime';
-import { arraymove, indexOf } from '@/utils';
 import * as React from 'react';
 import { tableData, type Payment } from '../data';
+import { arraymove, indexOf } from '@/utils/array';
 
 const meta: Meta<typeof Table> = {
   title: 'Common/Table/Row',

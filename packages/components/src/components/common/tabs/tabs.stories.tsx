@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './tabs';
 import { IvyIcon } from '../icon/icon';
 import { IvyIcons } from '@axonivy/ui-icons';
-import { Flex } from '@/components';
+import { Flex } from '@/components/common/flex/flex';
 
 const meta: Meta<typeof Tabs> = {
   title: 'Common/Tabs',

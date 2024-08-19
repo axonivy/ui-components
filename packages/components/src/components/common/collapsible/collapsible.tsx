@@ -1,7 +1,6 @@
 import * as CollapsiblePrimitive from '@radix-ui/react-collapsible';
 import * as React from 'react';
 import { cn } from '@/utils/class-name';
-import { StateDot, Flex, IvyIcon } from '@/components/common';
 import { IvyIcons } from '@axonivy/ui-icons';
 import {
   root,
@@ -13,6 +12,9 @@ import {
   contentData,
   triggerChevron
 } from './collapsible.css';
+import { Flex } from '@/components/common/flex/flex';
+import { IvyIcon } from '@/components/common/icon/icon';
+import { StateDot } from '@/components/common/state/state';
 
 const Collapsible = React.forwardRef<
   React.ElementRef<typeof CollapsiblePrimitive.Root>,

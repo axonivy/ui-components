@@ -16,10 +16,11 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger
 } from './dropdownmenu';
-import { Button, IvyIcon } from '@/components';
 import { IvyIcons } from '@axonivy/ui-icons';
 import { useState } from 'react';
 import type { DropdownMenuCheckboxItemProps } from '@radix-ui/react-dropdown-menu';
+import { Button } from '@/components/common/button/button';
+import { IvyIcon } from '@/components/common/icon/icon';
 
 const meta: Meta<typeof DropdownMenu> = {
   title: 'Common/DropdownMenu',

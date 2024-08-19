@@ -1,6 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Input, Field, Fieldset, Button, Label } from '@/components/common';
 import { IvyIcons } from '@axonivy/ui-icons';
+import { Button } from '@/components/common/button/button';
+import { Field, Fieldset } from '@/components/common/fieldset/fieldset';
+import { Input } from '@/components/common/input/input';
+import { Label } from '@/components/common/label/label';
 
 const meta: Meta<typeof Field> = {
   title: 'Common/Field',

@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { flexRender, type ColumnDef, useReactTable, getCoreRowModel } from '@tanstack/react-table';
 import { Table, TableBody, TableCell, TableRow } from '../table';
-import { Flex } from '@/components';
 import { SortableHeader, TableResizableHeader } from './header';
 import { useTableGlobalFilter, useTableSort } from '../hooks/hooks';
 import { tableData, type Payment } from '../data';
+import { Flex } from '@/components/common/flex/flex';
 
 const meta: Meta<typeof Table> = {
   title: 'Common/Table/Header',

@@ -3,7 +3,7 @@ import { Toaster, toast } from './toaster';
 import { Button } from '../button/button';
 import { IvyIcon } from '../icon/icon';
 import { IvyIcons } from '@axonivy/ui-icons';
-import { Flex } from '@/components';
+import { Flex } from '@/components/common/flex/flex';
 
 const meta: Meta<typeof Toaster> = {
   title: 'Common/Toaster',

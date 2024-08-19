@@ -1,19 +1,14 @@
 import type { Meta } from '@storybook/react';
 import { Toolbar, ToolbarContainer, ToolbarTitle } from './toolbar';
-import {
-  Button,
-  Separator,
-  Flex,
-  PopoverTrigger,
-  Popover,
-  PopoverContent,
-  IvyIcon,
-  PopoverArrow,
-  Switch,
-  Field,
-  Label
-} from '@/components/common';
 import { IvyIcons } from '@axonivy/ui-icons';
+import { Button } from '@/components/common/button/button';
+import { Field } from '@/components/common/fieldset/fieldset';
+import { Flex } from '@/components/common/flex/flex';
+import { IvyIcon } from '@/components/common/icon/icon';
+import { Separator } from '@/components/common/separator/separator';
+import { Popover, PopoverArrow, PopoverContent, PopoverTrigger } from '@/components/common/popover/popover';
+import { Label } from '@/components/common/label/label';
+import { Switch } from '@/components/common/switch/switch';
 
 const meta: Meta<typeof Toolbar> = {
   title: 'Editor/Toolbar',

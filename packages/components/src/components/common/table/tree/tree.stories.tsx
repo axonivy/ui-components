@@ -2,10 +2,11 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { flexRender, type ColumnDef, useReactTable, getCoreRowModel, type Row } from '@tanstack/react-table';
 import { Table, TableBody, TableCell, TableRow } from '../table';
 import { ExpandableCell } from './tree';
-import { ExpandableHeader, TableResizableHeader, useTableExpand } from '..';
 import { treeData, type Variable } from './data';
 import { IvyIcons } from '@axonivy/ui-icons';
 import { useState } from 'react';
+import { ExpandableHeader, TableResizableHeader } from '@/components/common/table/header/header';
+import { useTableExpand } from '@/components/common/table/hooks/hooks';
 
 const meta: Meta<typeof Table> = {
   title: 'Common/Table/Tree',
@@ -44,7 +45,7 @@ function TreeTableDemo({ data, columns }: { data?: Variable[]; columns: ColumnDe
   );
 }
 
-export const Tree: Story = {
+export const Default: Story = {
   render: () => {
     const columns: ColumnDef<Variable, string>[] = [
       {

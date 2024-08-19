@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Collapsible, CollapsibleContent, CollapsibleState, CollapsibleTrigger } from './collapsible';
+import { Collapsible, CollapsibleContent, CollapsibleState, CollapsibleTrigger, type CollapsibleControlProps } from './collapsible';
 import { IvyIcons } from '@axonivy/ui-icons';
-import { ButtonGroup, type CollapsibleControlProps, type MessageData } from '@/components';
+import { ButtonGroup } from '@/components/common/button/button';
+import type { MessageData } from '@/components/common/message/message';
 
 const meta: Meta<typeof Collapsible> = {
   title: 'Common/Collapsible',

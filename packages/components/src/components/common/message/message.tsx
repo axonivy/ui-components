@@ -1,9 +1,10 @@
 import * as React from 'react';
 
 import { cn } from '@/utils/class-name';
-import { IvyIcon, useField } from '@/components/common';
 import { IvyIcons } from '@axonivy/ui-icons';
 import { message as messageClass, type MessageVariants } from './message.css';
+import { IvyIcon } from '@/components/common/icon/icon';
+import { useField } from '@/components/common/fieldset/fieldset';
 
 const ivyIconForSeverity = (variant: NonNullable<MessageVariants>['variant']) => {
   switch (variant) {

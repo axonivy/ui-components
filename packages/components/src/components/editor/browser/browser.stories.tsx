@@ -3,18 +3,11 @@ import { BrowsersView, useBrowser } from './browser';
 import { cmsData, funcData, roleData, useAttrBrowser } from './data';
 import { IvyIcons } from '@axonivy/ui-icons';
 import { CmsInfoProvider, FunctionInfoProvider } from './browser-info-provider';
-import {
-  BasicCheckbox,
-  Button,
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-  Input,
-  InputGroup
-} from '@/components/common';
 import { useState } from 'react';
+import { Button } from '@/components/common/button/button';
+import { BasicCheckbox } from '@/components/common/checkbox/checkbox';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/common/dialog/dialog';
+import { InputGroup, Input } from '@/components/common/input/input';
 
 const meta: Meta<typeof BrowsersView> = {
   title: 'Editor/BrowsersView',

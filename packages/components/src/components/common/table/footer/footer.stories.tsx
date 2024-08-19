@@ -6,8 +6,9 @@ import { useTableSelect } from '../hooks/hooks';
 import { SelectRow } from '../row/row';
 import { TableAddRow } from './footer';
 import * as React from 'react';
-import { Button, Fieldset } from '@/components';
 import { IvyIcons } from '@axonivy/ui-icons';
+import { Button } from '@/components/common/button/button';
+import { Fieldset } from '@/components/common/fieldset/fieldset';
 
 const meta: Meta<typeof Table> = {
   title: 'Common/Table/Footer',

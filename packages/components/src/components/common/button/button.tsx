@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { cn } from '@/utils/class-name';
 import { button, iconOnly, type ButtonVariants } from './button.css';
-import { Flex, IvyIcon, type IvyIconProps } from '@/components/common';
 import type { IvyIcons } from '@axonivy/ui-icons';
+import { Flex } from '@/components/common/flex/flex';
+import { type IvyIconProps, IvyIcon } from '@/components/common/icon/icon';
 
 export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> &
   ButtonVariants &

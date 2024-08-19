@@ -57,6 +57,7 @@
     "[yaml]": {
       "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
-    "testing.automaticallyOpenPeekView": "never"
+    "testing.automaticallyOpenPeekView": "never",
+    "typescript.preferences.importModuleSpecifier": "non-relative"
   }
 }

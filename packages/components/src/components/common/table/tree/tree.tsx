@@ -1,8 +1,10 @@
 import type * as React from 'react';
-import { Button, Flex, IvyIcon } from '@/components';
 import { IvyIcons } from '@axonivy/ui-icons';
 import type { CellContext, Row } from '@tanstack/react-table';
 import { cellIcon, expandButton } from './tree.css';
+import { Button } from '@/components/common/button/button';
+import { Flex } from '@/components/common/flex/flex';
+import { IvyIcon } from '@/components/common/icon/icon';
 
 type LazyExpand<TData> = { isLoaded: boolean; loadChildren: (row: Row<TData>) => void };
 

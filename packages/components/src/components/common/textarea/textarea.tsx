@@ -3,8 +3,8 @@ import * as React from 'react';
 import { cn } from '@/utils/class-name';
 import { textarea } from './textarea.css';
 import { useAutoResize, type AutoResizeProps } from './useAutoResize';
-import { useReadonly } from '@/context';
-import { useField } from '..';
+import { useReadonly } from '@/context/useReadonly';
+import { useField } from '@/components/common/fieldset/fieldset';
 
 export interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement>, AutoResizeProps {}
 

@@ -2,7 +2,6 @@ import * as React from 'react';
 import * as AccordionPrimitive from '@radix-ui/react-accordion';
 import { IvyIcons } from '@axonivy/ui-icons';
 import { cn } from '@/utils/class-name';
-import { StateDot, Flex, IvyIcon } from '@/components/common';
 import {
   root,
   header,
@@ -14,6 +13,9 @@ import {
   item,
   triggerChevron
 } from './accordion.css';
+import { Flex } from '@/components/common/flex/flex';
+import { IvyIcon } from '@/components/common/icon/icon';
+import { StateDot } from '@/components/common/state/state';
 
 const Accordion = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Root>,

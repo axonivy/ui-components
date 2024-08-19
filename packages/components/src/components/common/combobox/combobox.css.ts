@@ -51,11 +51,3 @@ export const item = style({
     '&[data-disabled]': disabled
   }
 });
-
-export const itemInfo = style({
-  color: vars.color.n700
-});
-
-export const itemIcon = style({
-  fontSize: '1rem'
-});

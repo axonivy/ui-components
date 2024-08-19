@@ -2,7 +2,8 @@ import * as React from 'react';
 import { header, headerIcon, headerLeft, headerMessage, headerTitle } from './header.css';
 import { cn } from '@/utils/class-name';
 import type { IvyIcons } from '@axonivy/ui-icons';
-import { Flex, IvyIcon } from '@/components/common';
+import { Flex } from '@/components/common/flex/flex';
+import { IvyIcon } from '@/components/common/icon/icon';
 
 export type SidebarHeaderProps = React.HTMLAttributes<HTMLDivElement> & {
   icon?: IvyIcons;

@@ -1,26 +1,18 @@
 import * as React from 'react';
 import { flexRender, getCoreRowModel, getFilteredRowModel, useReactTable, type ColumnDef, type Row } from '@tanstack/react-table';
-import {
-  BasicCollapsible,
-  Button,
-  ExpandableCell,
-  Flex,
-  IvyIcon,
-  SearchInput,
-  SelectRow,
-  Table,
-  TableBody,
-  TableCell,
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-  useTableExpand,
-  useTableSelect
-} from '@/components/common';
 import type { IvyIcons } from '@axonivy/ui-icons';
 import { fullHeight, info, overflowAuto, overflowHidden } from './browser.css';
-import { cn } from '@/utils';
+import { ExpandableCell } from '@/components/common/table/tree/tree';
+import { Button } from '@/components/common/button/button';
+import { BasicCollapsible } from '@/components/common/collapsible/collapsible';
+import { Flex } from '@/components/common/flex/flex';
+import { IvyIcon } from '@/components/common/icon/icon';
+import { SearchInput } from '@/components/common/input/input';
+import { useTableExpand, useTableSelect } from '@/components/common/table/hooks/hooks';
+import { SelectRow } from '@/components/common/table/row/row';
+import { Table, TableBody, TableCell } from '@/components/common/table/table';
+import { cn } from '@/utils/class-name';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/common/tabs/tabs';
 
 export type BrowserNode<TData = unknown> = {
   value: string;

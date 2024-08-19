@@ -1,7 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Combobox, ExtendedComboboxItem, extendedOptionFilter } from './combobox';
-import { Fieldset } from '..';
+import { Combobox, type ComboboxOption } from './combobox';
 import { IvyIcons } from '@axonivy/ui-icons';
+import { Fieldset } from '@/components/common/fieldset/fieldset';
+import { Flex } from '@/components/common/flex/flex';
+import { IvyIcon } from '@/components/common/icon/icon';
+import { vars } from '@/styles/theme.css';
 
 const meta: Meta<typeof Combobox> = {
   title: 'Common/Combobox',
@@ -32,17 +35,41 @@ export const Default: Story = {
   render: ({ disabled }) => <Combobox value='' onChange={() => {}} options={languages} disabled={disabled} />
 };
 
+type ExtendedComboboxOption = ComboboxOption & {
+  label: string;
+  info?: string;
+  icon?: IvyIcons;
+};
+
 export const WithExtendedItem: Story = {
-  render: ({ disabled }) => (
-    <Combobox
-      value=''
-      onChange={() => {}}
-      options={languages}
-      disabled={disabled}
-      itemRender={option => <ExtendedComboboxItem {...option} />}
-      optionFilter={extendedOptionFilter}
-    />
-  )
+  render: ({ disabled }) => {
+    const extendedOptionFilter = ({ value, label, info }: ExtendedComboboxOption, input?: string) => {
+      if (!input) {
+        return true;
+      }
+      const filterIncludes = (value?: string) => (value ? value.toLocaleLowerCase().includes(input.toLowerCase()) : false);
+      return filterIncludes(value) || filterIncludes(label) || filterIncludes(info);
+    };
+
+    const ExtendedComboboxItem = ({ icon, label, info }: ExtendedComboboxOption) => (
+      <Flex gap={1} alignItems='center'>
+        {icon && <IvyIcon icon={icon} />}
+        <span>{label}</span>
+        <span style={{ color: vars.color.n700 }}>{info}</span>
+      </Flex>
+    );
+
+    return (
+      <Combobox
+        value=''
+        onChange={() => {}}
+        options={languages}
+        disabled={disabled}
+        itemRender={option => <ExtendedComboboxItem {...option} />}
+        optionFilter={extendedOptionFilter}
+      />
+    );
+  }
 };
 
 export const WithFieldset: Story = {
