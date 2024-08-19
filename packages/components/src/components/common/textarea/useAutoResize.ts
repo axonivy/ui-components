@@ -20,7 +20,9 @@ export const useAutoResize = ({ autoResize, value, onChange, maxRows }: AutoResi
   const updateValue = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const update = event.target.value;
     setCurrentValue(update);
-    onChange && onChange(event);
+    if (onChange) {
+      onChange(event);
+    }
   };
   const height = useMemo(() => {
     if (autoResize) {
