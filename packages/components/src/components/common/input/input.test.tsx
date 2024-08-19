@@ -1,11 +1,12 @@
 import { composeStory } from '@storybook/react';
 import { act, render, screen, userEvent } from 'test-utils';
 import { expect, test } from 'vitest';
-import Meta, { Default, WithLabel, Search } from './input.stories';
+import Meta, { Default, WithLabel, Search, Password } from './input.stories';
 
 const Input = composeStory(Default, Meta);
 const LabelInput = composeStory(WithLabel, Meta);
 const SearchInput = composeStory(Search, Meta);
+const PasswordInput = composeStory(Password, Meta);
 
 test('by label', async () => {
   render(<LabelInput />);
@@ -45,4 +46,12 @@ test('search', async () => {
 test('search readonly', async () => {
   render(<SearchInput />, { wrapperProps: { readonly: true } });
   expect(screen.getByRole('textbox')).not.toBeDisabled();
+});
+
+test('password', async () => {
+  render(<PasswordInput />);
+  const input = screen.getByLabelText('Password');
+  expect(input).toHaveAttribute('type', 'password');
+  await act(async () => await userEvent.click(screen.getByRole('button', { name: 'Show password' })));
+  expect(input).toHaveAttribute('type', 'text');
 });

@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Input, InputGroup, SearchInput } from './input';
+import { Input, InputGroup, PasswordInput, SearchInput } from './input';
 import { Button, Fieldset } from '@/components/common';
 import { IvyIcons } from '@axonivy/ui-icons';
 
@@ -35,6 +35,14 @@ export const WithButton: Story = {
         <Input {...props} />
         <Button type='submit' icon={IvyIcons.ListSearch} />
       </InputGroup>
+    </Fieldset>
+  )
+};
+
+export const Password: StoryObj<typeof PasswordInput> = {
+  render: props => (
+    <Fieldset label='Password'>
+      <PasswordInput {...props} />
     </Fieldset>
   )
 };
