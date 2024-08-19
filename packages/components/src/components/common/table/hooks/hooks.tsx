@@ -12,7 +12,7 @@ import * as React from 'react';
 
 type UseTableGlobalFilterRetunValue<TData> = {
   filter: React.ReactNode;
-  options: Required<Pick<TableOptions<TData>, 'onGlobalFilterChange' | 'getFilteredRowModel'>>;
+  options: Required<Pick<TableOptions<TData>, 'onGlobalFilterChange' | 'getFilteredRowModel' | 'filterFromLeafRows'>>;
   tableState: Partial<TableState>;
 };
 
@@ -20,7 +20,7 @@ export const useTableGlobalFilter = <TData,>(active = true): UseTableGlobalFilte
   const [globalFilter, setGlobalFilter] = React.useState('');
   return {
     filter: active ? <SearchInput placeholder='Search' value={globalFilter} onChange={setGlobalFilter} /> : null,
-    options: { onGlobalFilterChange: setGlobalFilter, getFilteredRowModel: getFilteredRowModel() },
+    options: { onGlobalFilterChange: setGlobalFilter, getFilteredRowModel: getFilteredRowModel(), filterFromLeafRows: true },
     tableState: { globalFilter }
   };
 };
