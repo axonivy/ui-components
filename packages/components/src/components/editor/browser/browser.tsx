@@ -55,6 +55,7 @@ export const useBrowser = (data: Array<BrowserNode>, loadChildren?: (row: Row<Br
     getCoreRowModel: getCoreRowModel(),
     onGlobalFilterChange: setFilter,
     getFilteredRowModel: getFilteredRowModel(),
+    filterFromLeafRows: true,
     state: {
       globalFilter: filter,
       ...expanded.tableState,

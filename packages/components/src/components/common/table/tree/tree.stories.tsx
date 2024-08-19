@@ -1,12 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { flexRender, type ColumnDef, useReactTable, getCoreRowModel, type Row } from '@tanstack/react-table';
+import { flexRender, type ColumnDef, useReactTable, getCoreRowModel, type Row, type Table as ReactTable } from '@tanstack/react-table';
 import { Table, TableBody, TableCell, TableRow } from '../table';
 import { ExpandableCell } from './tree';
 import { treeData, type Variable } from './data';
 import { IvyIcons } from '@axonivy/ui-icons';
 import { useState } from 'react';
 import { ExpandableHeader, TableResizableHeader } from '@/components/common/table/header/header';
-import { useTableExpand } from '@/components/common/table/hooks/hooks';
+import { useTableExpand, useTableGlobalFilter } from '@/components/common/table/hooks/hooks';
+import { Flex } from '@/components/common/flex/flex';
 
 const meta: Meta<typeof Table> = {
   title: 'Common/Table/Tree',
@@ -17,33 +18,20 @@ export default meta;
 
 type Story = StoryObj<typeof Table>;
 
-function TreeTableDemo({ data, columns }: { data?: Variable[]; columns: ColumnDef<Variable, string>[] }) {
-  const expanded = useTableExpand<Variable>();
-  const table = useReactTable({
-    ...expanded.options,
-    data: data ?? treeData,
-    columns,
-    getCoreRowModel: getCoreRowModel(),
-    state: {
-      ...expanded.tableState
-    }
-  });
-
-  return (
-    <Table>
-      <TableResizableHeader headerGroups={table.getHeaderGroups()} />
-      <TableBody>
-        {table.getRowModel().rows.map(row => (
-          <TableRow key={row.id}>
-            {row.getVisibleCells().map(cell => (
-              <TableCell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
-            ))}
-          </TableRow>
-        ))}
-      </TableBody>
-    </Table>
-  );
-}
+const TreeTableDemo = ({ table }: { table: ReactTable<Variable> }) => (
+  <Table>
+    <TableResizableHeader headerGroups={table.getHeaderGroups()} />
+    <TableBody>
+      {table.getRowModel().rows.map(row => (
+        <TableRow key={row.id}>
+          {row.getVisibleCells().map(cell => (
+            <TableCell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
+          ))}
+        </TableRow>
+      ))}
+    </TableBody>
+  </Table>
+);
 
 export const Default: Story = {
   render: () => {
@@ -60,7 +48,17 @@ export const Default: Story = {
         cell: cell => <div>{cell.getValue()}</div>
       }
     ];
-    return <TreeTableDemo columns={columns} />;
+    const expanded = useTableExpand<Variable>();
+    const table = useReactTable({
+      ...expanded.options,
+      data: treeData,
+      columns,
+      getCoreRowModel: getCoreRowModel(),
+      state: {
+        ...expanded.tableState
+      }
+    });
+    return <TreeTableDemo table={table} />;
   }
 };
 
@@ -86,7 +84,18 @@ export const CustomValue: Story = {
         cell: cell => <div>{cell.getValue()}</div>
       }
     ];
-    return <TreeTableDemo columns={columns} />;
+
+    const expanded = useTableExpand<Variable>();
+    const table = useReactTable({
+      ...expanded.options,
+      data: treeData,
+      columns,
+      getCoreRowModel: getCoreRowModel(),
+      state: {
+        ...expanded.tableState
+      }
+    });
+    return <TreeTableDemo table={table} />;
   }
 };
 
@@ -139,6 +148,55 @@ export const Lazy: Story = {
         cell: cell => <div>{cell.getValue()}</div>
       }
     ];
-    return <TreeTableDemo data={data} columns={columns} />;
+
+    const expanded = useTableExpand<Variable>();
+    const table = useReactTable({
+      ...expanded.options,
+      data,
+      columns,
+      getCoreRowModel: getCoreRowModel(),
+      state: {
+        ...expanded.tableState
+      }
+    });
+    return <TreeTableDemo table={table} />;
+  }
+};
+
+export const Search: Story = {
+  render: () => {
+    const columns: ColumnDef<Variable, string>[] = [
+      {
+        accessorKey: 'name',
+        header: header => <ExpandableHeader name='Expand' header={header} />,
+        cell: cell => <ExpandableCell cell={cell} icon={IvyIcons.User} />,
+        minSize: 50
+      },
+      {
+        accessorKey: 'value',
+        header: () => <span>Value</span>,
+        cell: cell => <div>{cell.getValue()}</div>
+      }
+    ];
+
+    const expanded = useTableExpand<Variable>();
+    const globalFilter = useTableGlobalFilter<Variable>();
+    const table = useReactTable({
+      ...expanded.options,
+      ...globalFilter.options,
+      data: treeData,
+      columns,
+      getCoreRowModel: getCoreRowModel(),
+      state: {
+        ...expanded.tableState,
+        ...globalFilter.tableState
+      }
+    });
+    return (
+      <Flex direction='column' gap={1}>
+        {globalFilter.filter}
+        <TreeTableDemo table={table} />
+      </Flex>
+    );
   }
 };
