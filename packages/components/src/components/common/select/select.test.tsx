@@ -40,13 +40,15 @@ test('select can be handled with keyboard', async () => {
   const option2 = screen.getByRole('option', { name: 'Banana' });
   expect(option1).toHaveAttribute('data-state', 'checked');
   expect(option2).toHaveAttribute('data-state', 'unchecked');
-  async () => await userEvent.keyboard('[ArrowDown]');
-  expect(option1).toHaveAttribute('data-state', 'checked');
-  expect(option2).toHaveAttribute('data-state', 'unchecked');
+  expect(option1).toHaveAttribute('data-highlighted');
+  expect(option2).not.toHaveAttribute('data-highlighted');
+  await act(async () => await userEvent.keyboard('[ArrowDown]'));
+  expect(option1).not.toHaveAttribute('data-highlighted');
+  expect(option2).toHaveAttribute('data-highlighted');
 
   await act(async () => await userEvent.keyboard('[Enter]'));
   expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
-  expect(select).toHaveTextContent('Apple');
+  expect(select).toHaveTextContent('Banana');
 });
 
 test('unknown value', async () => {

@@ -10,7 +10,7 @@ afterEach(() => {
 test('no context', async () => {
   const { result } = renderHook(useTheme);
   expect(result.current.theme).toEqual('system');
-  expect(window.document.documentElement.className).to.be.empty;
+  expect(window.document.documentElement.className).toHaveLength(0);
 });
 
 test('dark theme', async () => {
@@ -35,7 +35,7 @@ test('body element', async () => {
   const root = window.document.body;
   const { result } = renderHook(useTheme, { wrapper: props => <ThemeProvider {...props} root={root} /> });
   expect(result.current.theme).toEqual('system');
-  expect(window.document.documentElement.className).to.be.empty;
+  expect(window.document.documentElement.className).toHaveLength(0);
   expect(root.className).includes('light');
 });
 
