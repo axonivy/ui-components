@@ -5,7 +5,7 @@ import { Button } from '@/components/common/button/button';
 import { Message } from '@/components/common/message/message';
 
 const meta: Meta<typeof SidebarHeader> = {
-  title: 'Editor/SidebarHeader',
+  title: 'Editor/Sidebar/Header',
   component: SidebarHeader,
   argTypes: {
     icon: { control: 'select', options: Object.values(IvyIcons) }

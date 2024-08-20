@@ -34,6 +34,7 @@ export const root = style([
     border: 'none',
     outline: 'none',
     padding: 0,
+    flexShrink: 0,
     cursor: 'pointer',
     ':focus-visible': {
       boxShadow: vars.shadow.focus

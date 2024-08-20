@@ -7,8 +7,7 @@ import type { MessageData } from '@/components/common/message/message';
 const meta: Meta<typeof Collapsible> = {
   title: 'Common/Collapsible',
   component: Collapsible,
-  tags: ['autodocs'],
-  argTypes: {}
+  tags: ['autodocs']
 };
 
 export default meta;
@@ -29,13 +28,14 @@ export const Default: Story = {
 
 export const State: StoryObj<MessageData & typeof CollapsibleState> = {
   argTypes: {
-    state: { control: 'select', defaultValue: undefined, options: ['configured', 'warning', 'error'] }
+    state: { control: 'select', options: ['configured', 'warning', 'error'] }
   },
   args: {
     messages: [
       { variant: 'warning', message: 'this is a warning' },
       { variant: 'info', message: 'info message' }
-    ]
+    ],
+    state: undefined
   },
   render: ({ state, messages }) => {
     return (
