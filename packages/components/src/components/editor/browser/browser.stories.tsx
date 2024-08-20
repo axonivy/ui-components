@@ -18,8 +18,14 @@ export default meta;
 
 type Story = StoryObj<typeof BrowsersView>;
 
-const DefaultBrowser = ({ applyFn, applyBtn }: { applyFn?: (value?: string) => void; applyBtn?: { label?: string; icon?: IvyIcons } }) => {
-  const roles = useBrowser(roleData);
+type DefaultBrowserProps = {
+  applyFn?: (value?: string) => void;
+  applyBtn?: { label?: string; icon?: IvyIcons };
+  initSearch?: string;
+};
+
+const DefaultBrowser = ({ applyFn, applyBtn, initSearch }: DefaultBrowserProps) => {
+  const roles = useBrowser(roleData, undefined, initSearch);
   const attrs = useAttrBrowser();
   const funcs = useBrowser(funcData);
   const cms = useBrowser(cmsData);
@@ -33,7 +39,13 @@ const DefaultBrowser = ({ applyFn, applyBtn }: { applyFn?: (value?: string) => v
           browser: roles,
           header: <BasicCheckbox checked={true} label='You can also render a checkbox here' />
         },
-        { name: 'Attribute', icon: IvyIcons.Attribute, browser: attrs, header: `Info: Lazy loaded row 'requester (User)'` },
+        {
+          name: 'Attribute',
+          icon: IvyIcons.Attribute,
+          browser: attrs,
+          header: `Info: Lazy loaded row 'requester (User)'`,
+          emptyMessage: 'No attributes found'
+        },
         {
           name: 'Functions',
           icon: IvyIcons.Function,
@@ -83,6 +95,7 @@ export const DialogBrowser: Story = {
               if (value) setInput(value);
               setOpen(false);
             }}
+            initSearch={input}
           />
         </DialogContent>
       </Dialog>

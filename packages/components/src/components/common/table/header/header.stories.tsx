@@ -5,6 +5,7 @@ import { SortableHeader, TableResizableHeader } from './header';
 import { useTableGlobalFilter, useTableSort } from '../hooks/hooks';
 import { tableData, type Payment } from '../data';
 import { Flex } from '@/components/common/flex/flex';
+import { MessageRow } from '@/components/common/table/row/row';
 
 const meta: Meta<typeof Table> = {
   title: 'Common/Table/Header',
@@ -76,9 +77,7 @@ function DataTableDemo() {
               </TableRow>
             ))
           ) : (
-            <TableRow>
-              <TableCell colSpan={columns.length}>No results.</TableCell>
-            </TableRow>
+            <MessageRow message={{ message: 'No results', variant: 'info' }} columnCount={columns.length} />
           )}
         </TableBody>
       </Table>
