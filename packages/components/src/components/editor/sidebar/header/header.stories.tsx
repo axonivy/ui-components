@@ -23,7 +23,7 @@ export const Default: Story = {
   },
   render: props => (
     <SidebarHeader {...props}>
-      <Button icon={IvyIcons.Help} />
+      <Button icon={IvyIcons.Help} aria-label='Help' />
     </SidebarHeader>
   )
 };

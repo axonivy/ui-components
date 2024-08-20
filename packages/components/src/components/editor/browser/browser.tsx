@@ -9,7 +9,7 @@ import { Flex } from '@/components/common/flex/flex';
 import { IvyIcon } from '@/components/common/icon/icon';
 import { SearchInput } from '@/components/common/input/input';
 import { useTableExpand, useTableSelect } from '@/components/common/table/hooks/hooks';
-import { SelectRow } from '@/components/common/table/row/row';
+import { MessageRow, SelectRow } from '@/components/common/table/row/row';
 import { Table, TableBody, TableCell } from '@/components/common/table/table';
 import { cn } from '@/utils/class-name';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/common/tabs/tabs';
@@ -23,7 +23,7 @@ export type BrowserNode<TData = unknown> = {
   isLoaded?: boolean;
 };
 
-export const useBrowser = (data: Array<BrowserNode>, loadChildren?: (row: Row<BrowserNode>) => void) => {
+export const useBrowser = (data: Array<BrowserNode>, loadChildren?: (row: Row<BrowserNode>) => void, initialSearch?: string) => {
   const columns: ColumnDef<BrowserNode, string>[] = [
     {
       accessorKey: 'value',
@@ -44,7 +44,7 @@ export const useBrowser = (data: Array<BrowserNode>, loadChildren?: (row: Row<Br
     }
   ];
 
-  const [filter, setFilter] = React.useState('');
+  const [filter, setFilter] = React.useState(initialSearch ?? '');
   const expanded = useTableExpand<BrowserNode>({ '0': true });
   const select = useTableSelect<BrowserNode>();
   const table = useReactTable({
@@ -76,6 +76,7 @@ export type Browser = {
   icon: IvyIcons;
   browser: ReturnType<typeof useBrowser>;
   header?: React.ReactNode;
+  emptyMessage?: string;
   infoProvider?: (row?: Row<BrowserNode>) => React.ReactNode;
   applyModifier?: (row: Row<BrowserNode>) => BrowserResult;
 };
@@ -129,7 +130,7 @@ const BrowsersView = ({ browsers, apply, applyBtn }: BrowsersViewProps) => {
         </TabsList>
 
         <Flex direction='column' gap={1} justifyContent='space-between' className={cn(fullHeight, overflowAuto)}>
-          {browsers.map(({ name, header, browser: { table, globalFilter } }) => (
+          {browsers.map(({ name, header, emptyMessage, browser: { table, globalFilter } }) => (
             <TabsContent key={name} value={name} asChild>
               <Flex direction='column' gap={1} className={cn(fullHeight, overflowAuto)}>
                 {header}
@@ -137,13 +138,17 @@ const BrowsersView = ({ browsers, apply, applyBtn }: BrowsersViewProps) => {
                 <div className={overflowAuto}>
                   <Table>
                     <TableBody>
-                      {table.getRowModel().rows.map(row => (
-                        <SelectRow key={row.id} row={row} onDoubleClick={() => applyHandler(row)}>
-                          {row.getVisibleCells().map(cell => (
-                            <TableCell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
-                          ))}
-                        </SelectRow>
-                      ))}
+                      {table.getRowModel().rows?.length ? (
+                        table.getRowModel().rows.map(row => (
+                          <SelectRow key={row.id} row={row} onDoubleClick={() => applyHandler(row)}>
+                            {row.getVisibleCells().map(cell => (
+                              <TableCell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
+                            ))}
+                          </SelectRow>
+                        ))
+                      ) : (
+                        <MessageRow message={{ message: emptyMessage ?? 'No results', variant: 'info' }} columnCount={1} />
+                      )}
                     </TableBody>
                   </Table>
                 </div>

@@ -22,6 +22,14 @@ test('filter', async () => {
   expect(screen.getAllByRole('row')).toHaveLength(4);
 });
 
+test('no results', async () => {
+  render(<Table />);
+  const search = screen.getByRole('textbox');
+  await act(async () => await userEvent.type(search, 'adsf'));
+  expect(screen.getAllByRole('row')).toHaveLength(2);
+  expect(screen.getAllByRole('row')[1]).toHaveTextContent('No results');
+});
+
 test('sort', async () => {
   render(<Table />);
   expectSort(['Status', 'success', 'success', 'processing', 'success', 'failed', 'pending', 'processing', 'NaN']);
