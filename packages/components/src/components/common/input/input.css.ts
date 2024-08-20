@@ -40,6 +40,11 @@ export const input = style([
       outline: 'none',
       border: vars.border.active
     },
+    '::file-selector-button': {
+      background: 'transparent',
+      border: 'none',
+      fontWeight: 500
+    },
     selectors: {
       [`${inputGroup} > &`]: {
         border: 'none',

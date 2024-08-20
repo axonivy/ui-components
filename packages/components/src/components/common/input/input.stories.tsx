@@ -40,6 +40,14 @@ export const WithButton: Story = {
   )
 };
 
+export const File: Story = {
+  render: props => (
+    <Fieldset label='File'>
+      <Input type='file' {...props} />
+    </Fieldset>
+  )
+};
+
 export const Password: StoryObj<typeof PasswordInput> = {
   render: props => (
     <Fieldset label='Password'>
