@@ -25,6 +25,10 @@ export const trigger = style({
   }
 });
 
+export const triggerIcon = style({
+  fontSize: 16
+});
+
 export const scrollButton = style({
   display: 'flex',
   alignItems: 'center',

@@ -10,7 +10,7 @@ export const button = recipe({
   base: [
     transitionColors,
     {
-      borderRadius: vars.border.r1,
+      borderRadius: vars.border.r2,
       fontWeight: 500,
       fontSize: '14px',
       display: 'flex',
@@ -60,7 +60,8 @@ export const button = recipe({
       small: {
         fontSize: '12px',
         paddingBlock: 0,
-        paddingInline: vars.size.s1
+        paddingInline: vars.size.s1,
+        borderRadius: vars.border.r1
       },
       large: { fontSize: '14px', height: 26, fontWeight: 500 }
     }

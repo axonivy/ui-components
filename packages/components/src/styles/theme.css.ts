@@ -91,6 +91,7 @@ const root = createGlobalThemeContract({
   border: {
     r1: 'border-r1',
     r2: 'border-r2',
+    r3: 'border-r3',
     basic: 'basic-border',
     active: 'activ-border',
     dashed: 'dashed-border',
@@ -120,6 +121,7 @@ createGlobalTheme(':root, .dark', root, {
   border: {
     r1: '3px',
     r2: '5px',
+    r3: '10px',
     basic: `1px solid ${colors.color.n200}`,
     active: `1px solid ${colors.color.p300}`,
     dashed: `1px dashed ${colors.color.n400}`,
