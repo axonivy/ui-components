@@ -31,7 +31,7 @@ const DialogContent = React.forwardRef<
     <DialogPrimitive.Content ref={ref} className={cn(content, className, 'ui-dialog-content')} {...props}>
       {children}
       <DialogPrimitive.Close asChild>
-        <Button size='small' icon={IvyIcons.Close} className={contentClose} />
+        <Button icon={IvyIcons.Close} className={contentClose} />
       </DialogPrimitive.Close>
     </DialogPrimitive.Content>
   </DialogPortal>
