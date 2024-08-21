@@ -5,7 +5,8 @@ import { globalStyle, style } from '@vanilla-extract/css';
 
 export const outlineContainer = style({
   overflow: 'auto',
-  paddingInline: vars.size.s2
+  paddingInline: vars.size.s2,
+  paddingBlockStart: vars.size.s2
 });
 
 globalStyle(`${outlineContainer} ${root}`, {

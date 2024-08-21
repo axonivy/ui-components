@@ -67,7 +67,7 @@ const Outline = ({ outline, selection, onClick, onDoubleClick }: OutlineProps) =
         <TableBody>
           {table.getRowModel().rows.map(row => (
             <SelectRow
-              key={row.id}
+              key={row.original.id}
               row={row}
               onClick={() => onClick && onClick(row.original.id)}
               onDoubleClick={() => onDoubleClick && onDoubleClick()}

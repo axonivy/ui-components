@@ -19,7 +19,7 @@ export const Default = () => {
   const [outline, setOutline] = React.useState(false);
   const [element, setElement] = React.useState<string>();
   return (
-    <Flex direction='column' gap={4} style={{ height: '100%' }}>
+    <Flex direction='column' style={{ height: '100%' }}>
       <SidebarHeader icon={IvyIcons.Script} title='Script'>
         <Switch icon={{ icon: IvyIcons.List }} checked={outline} onCheckedChange={setOutline} />
         <Button icon={IvyIcons.Help} aria-label='Help' />
