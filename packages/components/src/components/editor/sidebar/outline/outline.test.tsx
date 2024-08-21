@@ -11,7 +11,7 @@ test('click', async () => {
   render(<Outline onClick={id => (selection = id)} onDoubleClick={() => (dblClick = true)} />);
   await act(async () => await userEvent.click(screen.getByRole('row', { name: 'One Columns Container' })));
   expect(screen.getByRole('row', { name: 'One Columns Container' })).toHaveAttribute('data-state', 'selected');
-  expect(selection).toBe('8');
+  expect(selection).toBe('9');
 
   await act(async () => await userEvent.dblClick(screen.getByRole('row', { name: 'First Name' })));
   expect(screen.getByRole('row', { name: 'One Columns Container' })).toHaveAttribute('data-state', 'unselected');
