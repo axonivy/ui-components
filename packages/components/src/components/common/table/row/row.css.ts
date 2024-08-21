@@ -7,7 +7,7 @@ export const selectedRowPlaceholderText = createVar();
 
 export const selectedRow = style({
   vars: {
-    [selectedRowBg]: vars.color.n25,
+    [selectedRowBg]: 'transparent',
     [selectedRowText]: vars.color.body,
     [selectedRowPlaceholderText]: vars.color.n500
   },

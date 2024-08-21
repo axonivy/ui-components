@@ -1,11 +1,10 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 import { Default as ToolbarStory } from './toolbar/toolbar.stories';
-import { SidebarHeader } from './sidebar/header/header';
-import { IvyIcons } from '@axonivy/ui-icons';
 import * as React from 'react';
 import { Flex } from '@/components/common/flex/flex';
 import { PanelMessage } from '@/components/common/panelMessage/panelMessage';
 import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from '@/components/common/resizeable/resizable';
+import { Default as Sidebar } from '@/components/editor/sidebar/sidebar.stories';
 
 const meta: Meta = {
   title: 'Editor'
@@ -29,10 +28,7 @@ const EditorStory = () => {
         <>
           <ResizableHandle />
           <ResizablePanel defaultSize={25} minSize={10}>
-            <Flex direction='column' style={{ height: '100%' }}>
-              <SidebarHeader icon={IvyIcons.Script} title='Script' />
-              <PanelMessage mode='row' message='sidebar' icon={IvyIcons.Settings} />
-            </Flex>
+            <Sidebar />
           </ResizablePanel>
         </>
       )}

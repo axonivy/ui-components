@@ -11,7 +11,12 @@ import { InputGroup, Input } from '@/components/common/input/input';
 
 const meta: Meta<typeof BrowsersView> = {
   title: 'Editor/BrowsersView',
-  component: BrowsersView
+  component: BrowsersView,
+  argTypes: {
+    apply: { control: false },
+    applyBtn: { control: false },
+    browsers: { control: false }
+  }
 };
 
 export default meta;

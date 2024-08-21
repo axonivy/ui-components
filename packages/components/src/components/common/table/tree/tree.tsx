@@ -1,7 +1,7 @@
 import type * as React from 'react';
 import { IvyIcons } from '@axonivy/ui-icons';
 import type { CellContext, Row } from '@tanstack/react-table';
-import { cellIcon, expandButton } from './tree.css';
+import { cellIcon, expandButton, expandCell, indent } from './tree.css';
 import { Button } from '@/components/common/button/button';
 import { Flex } from '@/components/common/flex/flex';
 import { IvyIcon } from '@/components/common/icon/icon';
@@ -51,22 +51,19 @@ const expanedButton = <TData,>(row: Row<TData>, lazy?: LazyExpand<TData>) => {
   return null;
 };
 
-const indent = <TData,>(row: Row<TData>, icon?: IvyIcons, lazy?: LazyExpand<TData>) => {
-  const indent = row.depth * 20;
-  if (row.getCanExpand() || (lazy && lazy.isLoaded === false)) {
-    return indent;
-  }
-  const base = icon ? 24 : 0;
-  return base + indent;
+const ExpandableCell = <TData,>({ cell, icon, lazy, children }: ExpandableCellProps<TData>) => {
+  const expButton = expanedButton(cell.row, lazy);
+  return (
+    <Flex direction='row' alignItems='center' gap={1} className={expandCell}>
+      {Array.from({ length: cell.row.depth }, (_, i) => (
+        <div key={i} className={indent} />
+      ))}
+      {expButton}
+      {icon && <IvyIcon style={expButton ? {} : { paddingLeft: 24 }} icon={icon} className={cellIcon} />}
+      {children ? children : <span>{cell.getValue()}</span>}
+    </Flex>
+  );
 };
-
-const ExpandableCell = <TData,>({ cell, icon, lazy, children }: ExpandableCellProps<TData>) => (
-  <Flex direction='row' alignItems='center' gap={1} style={{ paddingLeft: `${indent(cell.row, icon, lazy)}px` }}>
-    {expanedButton(cell.row, lazy)}
-    {icon && <IvyIcon icon={icon} className={cellIcon} />}
-    {children ? children : <span>{cell.getValue()}</span>}
-  </Flex>
-);
 ExpandableCell.displayName = 'ExpandableCell';
 
 export { ExpandableCell };

@@ -40,6 +40,7 @@ export * from './components/common/tooltip/tooltip';
 /* Editor Components */
 export * from './components/editor/browser/browser';
 export * from './components/editor/sidebar/header/header';
+export * from './components/editor/sidebar/outline/outline';
 export * from './components/editor/toolbar/toolbar';
 
 /* Context */
