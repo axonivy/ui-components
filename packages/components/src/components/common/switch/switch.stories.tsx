@@ -3,15 +3,16 @@ import { Switch, BasicSwitch } from './switch';
 
 import { IvyIcons } from '@axonivy/ui-icons';
 
-const meta: Meta<typeof BasicSwitch> = {
+const meta: Meta<typeof Switch> = {
   title: 'Common/Switch',
-  component: BasicSwitch,
+  component: Switch,
   tags: ['autodocs'],
-  args: {
-    disabled: false
-  },
   argTypes: {
-    size: { control: 'select', defaultValue: 'default', options: ['default', 'small', 'large'] }
+    size: { control: 'select', options: [undefined, 'small', 'large'] }
+  },
+  args: {
+    disabled: false,
+    size: undefined
   }
 };
 

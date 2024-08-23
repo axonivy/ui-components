@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Combobox, type ComboboxOption } from './combobox';
 import { IvyIcons } from '@axonivy/ui-icons';
-import { Fieldset } from '@/components/common/fieldset/fieldset';
 import { Flex } from '@/components/common/flex/flex';
 import { IvyIcon } from '@/components/common/icon/icon';
 import { vars } from '@/styles/theme.css';
+import { BasicField } from '@/components/common/field/field';
 
 const meta: Meta<typeof Combobox> = {
   title: 'Common/Combobox',
@@ -74,8 +74,8 @@ export const WithExtendedItem: Story = {
 
 export const WithFieldset: Story = {
   render: ({ disabled }) => (
-    <Fieldset label='Many entries' message={{ message: 'this is a warning', variant: 'warning' }}>
+    <BasicField label='Many entries' message={{ message: 'this is a warning', variant: 'warning' }}>
       <Combobox value='' onChange={() => {}} options={[...languages, ...languages]} disabled={disabled} />
-    </Fieldset>
+    </BasicField>
   )
 };

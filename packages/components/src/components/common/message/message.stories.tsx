@@ -1,17 +1,18 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Message } from './message';
 import { Input } from '@/components/common/input/input';
-import { Fieldset } from '@/components/common/fieldset/fieldset';
+import { BasicField } from '@/components/common/field/field';
 
 const meta: Meta<typeof Message> = {
   title: 'Common/Message',
   component: Message,
   tags: ['autodocs'],
-  args: {
-    message: 'This is a message'
-  },
   argTypes: {
-    variant: { control: 'select', defaultValue: 'default', options: ['default', 'description', 'info', 'warning', 'error'] }
+    variant: { type: 'string', control: 'select', defaultValue: 'default', options: [undefined, 'description', 'info', 'warning', 'error'] }
+  },
+  args: {
+    message: 'This is a message',
+    variant: undefined
   }
 };
 
@@ -25,9 +26,9 @@ export const Default: Story = {
 
 export const WithInput: Story = {
   render: ({ message, variant }) => (
-    <Fieldset label='Name' message={{ message, variant }}>
+    <BasicField label='Name' message={{ message, variant }}>
       <Input />
-    </Fieldset>
+    </BasicField>
   )
 };
 

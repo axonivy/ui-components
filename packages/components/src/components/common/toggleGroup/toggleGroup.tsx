@@ -8,6 +8,9 @@ type ToggleGroupProps = React.ComponentPropsWithoutRef<typeof ToggleGroupPrimiti
   gap?: 1 | 2 | 3 | 4 | undefined;
 };
 
+/**
+ * ToggleGroup, based on {@link https://www.radix-ui.com/docs/primitives/components/toggle-group | Radix UI ToggleGroup}
+ */
 const ToggleGroup = React.forwardRef<React.ElementRef<typeof ToggleGroupPrimitive.Root>, ToggleGroupProps>(
   ({ className, gap, ...props }, ref) => (
     <ToggleGroupPrimitive.Root className={cn(toggleGroup({ gap }), className, 'ui-toggle-group')} {...props} ref={ref} />

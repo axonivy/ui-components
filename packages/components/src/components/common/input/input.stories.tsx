@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Input, InputGroup, PasswordInput, SearchInput } from './input';
 import { IvyIcons } from '@axonivy/ui-icons';
 import { Button } from '@/components/common/button/button';
-import { Fieldset } from '@/components/common/fieldset/fieldset';
+import { BasicField } from '@/components/common/field/field';
 
 const meta: Meta<typeof Input> = {
   title: 'Common/Input',
@@ -23,36 +23,36 @@ export const Default: Story = {
 
 export const WithLabel: Story = {
   render: props => (
-    <Fieldset label='Name'>
+    <BasicField label='Name'>
       <Input {...props} />
-    </Fieldset>
+    </BasicField>
   )
 };
 
 export const WithButton: Story = {
   render: props => (
-    <Fieldset label='Name'>
+    <BasicField label='Name'>
       <InputGroup>
         <Input {...props} />
         <Button type='submit' icon={IvyIcons.ListSearch} />
       </InputGroup>
-    </Fieldset>
+    </BasicField>
   )
 };
 
 export const File: Story = {
   render: props => (
-    <Fieldset label='File'>
+    <BasicField label='File'>
       <Input type='file' {...props} />
-    </Fieldset>
+    </BasicField>
   )
 };
 
 export const Password: StoryObj<typeof PasswordInput> = {
   render: props => (
-    <Fieldset label='Password'>
+    <BasicField label='Password'>
       <PasswordInput {...props} />
-    </Fieldset>
+    </BasicField>
   )
 };
 

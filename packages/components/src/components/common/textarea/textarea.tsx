@@ -4,7 +4,7 @@ import { cn } from '@/utils/class-name';
 import { textarea } from './textarea.css';
 import { useAutoResize, type AutoResizeProps } from './useAutoResize';
 import { useReadonly } from '@/context/useReadonly';
-import { useField } from '@/components/common/fieldset/fieldset';
+import { useField } from '@/components/common/field/field';
 
 export interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement>, AutoResizeProps {}
 

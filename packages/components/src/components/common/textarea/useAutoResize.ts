@@ -4,7 +4,9 @@ import { splitNewLine } from '@/utils/utils';
 type TextAreaValueProps = Pick<React.TextareaHTMLAttributes<HTMLTextAreaElement>, 'value' | 'onChange'>;
 
 export type AutoResizeProps = TextAreaValueProps & {
+  /** Auto resize the textarea to fit the content */
   autoResize?: boolean;
+  /** Max rows of the textarea */
   maxRows?: number;
 };
 

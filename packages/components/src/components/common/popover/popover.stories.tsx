@@ -5,7 +5,8 @@ import { Button } from '@/components/common/button/button';
 
 const meta: Meta<typeof Popover> = {
   title: 'Common/Popover',
-  component: Popover
+  component: Popover,
+  tags: ['autodocs']
 };
 
 export default meta;

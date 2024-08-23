@@ -11,11 +11,11 @@ import {
   SelectValue
 } from './select';
 import { useState } from 'react';
-import { Fieldset } from '@/components/common/fieldset/fieldset';
+import { BasicField } from '@/components/common/field/field';
 
 const meta: Meta<typeof BasicSelect> = {
   title: 'Common/Select',
-  component: BasicSelect,
+  component: Select,
   tags: ['autodocs'],
   args: {
     disabled: false
@@ -78,7 +78,7 @@ export const EmptyValue: StoryObj<typeof BasicSelect> = {
 
 export const WithFieldset: Story = {
   render: () => (
-    <Fieldset label='Many entries' message={{ message: 'this is a error', variant: 'error' }}>
+    <BasicField label='Many entries' message={{ message: 'this is a error', variant: 'error' }}>
       <BasicSelect
         defaultValue='apple'
         items={[
@@ -86,13 +86,13 @@ export const WithFieldset: Story = {
           { value: 'banana', label: 'Banana' }
         ]}
       />
-    </Fieldset>
+    </BasicField>
   )
 };
 
 export const Scrollable: Story = {
   render: props => (
-    <Fieldset label='Name'>
+    <BasicField label='Name'>
       <Select {...props}>
         <SelectTrigger>
           <SelectValue placeholder='Select a timezone' />
@@ -146,6 +146,6 @@ export const Scrollable: Story = {
           </SelectGroup>
         </SelectContent>
       </Select>
-    </Fieldset>
+    </BasicField>
   )
 };

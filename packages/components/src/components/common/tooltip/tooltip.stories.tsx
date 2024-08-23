@@ -13,9 +13,7 @@ const meta: Meta<typeof Tooltip> = {
 
 export default meta;
 
-type Story = StoryObj<typeof Tooltip>;
-
-export const Default: Story = {
+export const Default: StoryObj<typeof Tooltip> = {
   render: ({ delayDuration }) => (
     <TooltipProvider>
       <Tooltip delayDuration={delayDuration}>

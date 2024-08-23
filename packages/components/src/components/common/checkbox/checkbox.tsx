@@ -4,11 +4,15 @@ import * as CheckboxPrimitive from '@radix-ui/react-checkbox';
 import { cn } from '@/utils/class-name';
 import { checkboxIndicator, checkboxRoot } from './checkbox.css';
 import { IvyIcons } from '@axonivy/ui-icons';
-import { useField, Field } from '@/components/common/fieldset/fieldset';
+import { useField, Field } from '@/components/common/field/field';
 import { IvyIcon } from '@/components/common/icon/icon';
 import { useReadonly } from '@/context/useReadonly';
 import { Label } from '@/components/common/label/label';
 
+/**
+ * Checkbox, based on {@link https://www.radix-ui.com/docs/primitives/components/checkbox | Radix UI Checkbox}
+ * Use the {@link BasicCheckbox} component for a Checkbox with a label
+ */
 const Checkbox = React.forwardRef<
   React.ElementRef<typeof CheckboxPrimitive.Root>,
   React.ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root>

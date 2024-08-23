@@ -1,15 +1,16 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from './dialog';
 import { Button } from '@/components/common/button/button';
-import { Fieldset } from '@/components/common/fieldset/fieldset';
 import { Flex } from '@/components/common/flex/flex';
 import { Input } from '@/components/common/input/input';
 import { BasicSelect } from '@/components/common/select/select';
 import { Textarea } from '@/components/common/textarea/textarea';
+import { BasicField } from '@/components/common/field/field';
 
 const meta: Meta<typeof Dialog> = {
   title: 'Common/Dialog',
   component: Dialog,
+  tags: ['autodocs'],
   args: {
     modal: true
   }
@@ -33,20 +34,20 @@ export const Default: Story = {
           </DialogDescription>
         </DialogHeader>
         <Flex direction='column' gap={2}>
-          <Fieldset label='Name'>
+          <BasicField label='Name'>
             <Input />
-          </Fieldset>
-          <Fieldset label='Comment'>
+          </BasicField>
+          <BasicField label='Comment'>
             <Textarea />
-          </Fieldset>
-          <Fieldset label='Comment'>
+          </BasicField>
+          <BasicField label='Comment'>
             <BasicSelect
               items={[
                 { value: 'apple', label: 'Apple' },
                 { value: 'banana', label: 'Banana' }
               ]}
             />
-          </Fieldset>
+          </BasicField>
         </Flex>
         <DialogFooter>
           <Button variant='primary' size='large' type='submit'>

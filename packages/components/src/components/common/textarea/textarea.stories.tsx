@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Textarea } from './textarea';
-import { Fieldset } from '@/components/common/fieldset/fieldset';
+import { BasicField } from '@/components/common/field/field';
 
 const meta: Meta<typeof Textarea> = {
   title: 'Common/Textarea',
@@ -22,8 +22,8 @@ export const Default: Story = {
 
 export const WithFieldset: Story = {
   render: props => (
-    <Fieldset label='Name' message={{ message: 'this is a warning', variant: 'warning' }}>
+    <BasicField label='Name' message={{ message: 'this is a warning', variant: 'warning' }}>
       <Textarea {...props} />
-    </Fieldset>
+    </BasicField>
   )
 };

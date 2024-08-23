@@ -5,7 +5,7 @@ import { useCombobox } from 'downshift';
 import { cn } from '@/utils/class-name';
 import { content, item as itemClass } from './combobox.css';
 import { Button } from '@/components/common/button/button';
-import { useField } from '@/components/common/fieldset/fieldset';
+import { useField } from '@/components/common/field/field';
 import { Flex } from '@/components/common/flex/flex';
 import { InputGroup, Input } from '@/components/common/input/input';
 import { useReadonly } from '@/context/useReadonly';
@@ -31,6 +31,9 @@ const defaultFilter = (option: ComboboxOption, input?: string): boolean => {
   return option.value.toLowerCase().includes(filter);
 };
 
+/**
+ * Combobox, based on {@link https://www.downshift-js.com/use-combobox | Downshift JS useCombobox}
+ */
 const Combobox = <T extends ComboboxOption>({
   value,
   onChange,

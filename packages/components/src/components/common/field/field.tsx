@@ -1,18 +1,18 @@
 import { cn } from '@/utils/class-name';
 import * as React from 'react';
-import { fieldset } from './fieldset.css';
+import { field } from './field.css';
 import { Flex } from '@/components/common/flex/flex';
 import { type MessageData, Message } from '@/components/common/message/message';
 import { Label } from '@/components/common/label/label';
 
-type FieldsetContextValue = {
+type FieldContextValue = {
   id: string;
 };
 
-const FieldsetContext = React.createContext<FieldsetContextValue>({} as FieldsetContextValue);
+const FieldContext = React.createContext<FieldContextValue>({} as FieldContextValue);
 
 export const useField = () => {
-  const { id } = React.useContext(FieldsetContext);
+  const { id } = React.useContext(FieldContext);
   const newId = React.useId();
   return createIds(id ?? newId);
 };
@@ -37,26 +37,31 @@ const createIds = (id: string) => {
   };
 };
 
+/**
+ * Field is a wrapper for Labels and Inputs so they are linked automatically together.
+ * Use the {@link useField} hook to access the FieldContext properties.
+ * Use the {@link BasicField} component for a Field with predefined Label and Message block.
+ */
 const Field = React.forwardRef<React.ElementRef<typeof Flex>, React.ComponentPropsWithoutRef<typeof Flex>>(
   ({ direction = 'column', gap = 1, className, ...props }, ref) => {
     const id = React.useId();
     return (
-      <FieldsetContext.Provider value={{ id }}>
+      <FieldContext.Provider value={{ id }}>
         <Flex direction={direction} gap={gap} ref={ref} className={cn(className, 'ui-field')} {...props} />
-      </FieldsetContext.Provider>
+      </FieldContext.Provider>
     );
   }
 );
 Field.displayName = 'Field';
 
-export type FieldsetProps = React.HTMLAttributes<HTMLDivElement> & {
+export type BasicFieldProps = React.HTMLAttributes<HTMLDivElement> & {
   label?: string;
   control?: React.ReactNode;
   message?: MessageData;
 };
 
-const Fieldset = React.forwardRef<HTMLDivElement, FieldsetProps>(({ label, control, message, className, children, ...props }, ref) => (
-  <Field ref={ref} className={cn(className, fieldset, 'ui-fieldset')} data-message-state={message ? message.variant : undefined} {...props}>
+const BasicField = React.forwardRef<HTMLDivElement, BasicFieldProps>(({ label, control, message, className, children, ...props }, ref) => (
+  <Field ref={ref} className={cn(className, field, 'ui-fieldset')} data-message-state={message ? message.variant : undefined} {...props}>
     <Flex alignItems='center' justifyContent='space-between' className={cn('ui-fieldset-label')}>
       <Label>{label}</Label>
       {control}
@@ -65,6 +70,11 @@ const Fieldset = React.forwardRef<HTMLDivElement, FieldsetProps>(({ label, contr
     {message && <Message {...message} />}
   </Field>
 ));
-Fieldset.displayName = 'Fieldset';
+BasicField.displayName = 'BasicField';
 
-export { Field, Fieldset };
+/** @deprecated use {@link BasicFieldProps} instead */
+export type FieldsetProps = BasicFieldProps;
+/** @deprecated use {@link BasicField} instead */
+const Fieldset = BasicField;
+
+export { Field, BasicField, Fieldset };

@@ -7,8 +7,12 @@ import { Flex } from '@/components/common/flex/flex';
 const meta: Meta<typeof Tabs> = {
   title: 'Common/Tabs',
   component: Tabs,
+  tags: ['autodocs'],
   argTypes: {
-    orientation: { control: 'select', defaultValue: 'horizontal', options: ['horizontal', 'vertical'] }
+    orientation: { type: 'string', control: 'select', options: ['horizontal', 'vertical'] }
+  },
+  args: {
+    orientation: 'horizontal'
   }
 };
 
