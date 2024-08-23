@@ -55,6 +55,7 @@ export const thumb = style({
   width: `calc(${size} * 0.5)`,
   aspectRatio: '1 / 1',
   backgroundColor: vars.color.background,
+  color: vars.color.body,
   borderRadius: 9999,
   transition: 'transform 100ms',
   transform: 'translateX(2px)',
