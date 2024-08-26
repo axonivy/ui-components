@@ -6,7 +6,11 @@ import { cn } from '@/utils/class-name';
 import { Button } from '@/components/common/button/button';
 import { Flex } from '@/components/common/flex/flex';
 
-const Dialog = DialogPrimitive.Root;
+/**
+ * Dialog, based on {@link https://www.radix-ui.com/docs/primitives/components/dialog | Radix UI Dialog}
+ */
+const Dialog = (props: React.ComponentProps<typeof DialogPrimitive.Root>) => <DialogPrimitive.Root {...props} />;
+Dialog.displayName = DialogPrimitive.Root.displayName;
 
 const DialogTrigger = DialogPrimitive.Trigger;
 

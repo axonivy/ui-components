@@ -8,7 +8,7 @@ import { TableAddRow } from './footer';
 import * as React from 'react';
 import { IvyIcons } from '@axonivy/ui-icons';
 import { Button } from '@/components/common/button/button';
-import { Fieldset } from '@/components/common/fieldset/fieldset';
+import { BasicField } from '@/components/common/field/field';
 
 const meta: Meta<typeof Table> = {
   title: 'Common/Table/Footer',
@@ -81,7 +81,7 @@ function AddRemoveTableDemo() {
   });
 
   return (
-    <Fieldset
+    <BasicField
       label='Table'
       control={table.getSelectedRowModel().rows.length > 0 && <Button icon={IvyIcons.Trash} aria-label='Remove row' onClick={removeRow} />}
     >
@@ -108,7 +108,7 @@ function AddRemoveTableDemo() {
         </TableBody>
       </Table>
       <TableAddRow addRow={addRow} />
-    </Fieldset>
+    </BasicField>
   );
 }
 

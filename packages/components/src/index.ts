@@ -8,7 +8,7 @@ export * from './components/common/collapsible/collapsible';
 export * from './components/common/combobox/combobox';
 export * from './components/common/dialog/dialog';
 export * from './components/common/dropdownmenu/dropdownmenu';
-export * from './components/common/fieldset/fieldset';
+export * from './components/common/field/field';
 export * from './components/common/flex/flex';
 export * from './components/common/icon/icon';
 export * from './components/common/input/input';

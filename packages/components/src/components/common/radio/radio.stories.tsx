@@ -1,17 +1,18 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { RadioGroup, RadioGroupItem } from './radio';
-import { Field } from '@/components/common/fieldset/fieldset';
+import { Field } from '@/components/common/field/field';
 import { Label } from '@/components/common/label/label';
 
 const meta: Meta<typeof RadioGroup> = {
   title: 'Common/RadioGroup',
   component: RadioGroup,
   tags: ['autodocs'],
-  args: {
-    disabled: false
-  },
   argTypes: {
-    orientation: { control: 'select', defaultValue: 'horizontal', options: ['horizontal', 'vertical'] }
+    orientation: { control: 'select', options: ['horizontal', 'vertical'] }
+  },
+  args: {
+    disabled: false,
+    orientation: 'horizontal'
   }
 };
 

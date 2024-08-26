@@ -6,7 +6,7 @@ import Meta, { Default } from './button.stories';
 const Button = composeStory(Default, Meta);
 
 test('toggle', async () => {
-  render(<Button>Button</Button>);
+  render(<Button toggle={undefined}>Button</Button>);
   const checkbox = screen.getByRole('button');
   expect(checkbox).not.toHaveAttribute('data-state');
   expect(checkbox).not.toHaveAttribute('aria-pressed');

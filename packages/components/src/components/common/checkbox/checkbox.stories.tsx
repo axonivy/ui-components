@@ -1,13 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { BasicCheckbox } from './checkbox';
+import { BasicCheckbox, Checkbox } from './checkbox';
 
 const meta: Meta<typeof BasicCheckbox> = {
   title: 'Common/Checkbox',
-  component: BasicCheckbox,
+  component: Checkbox,
   tags: ['autodocs'],
-  argTypes: {
-    asChild: { control: false }
-  },
   args: {
     label: 'Accept terms and conditions',
     disabled: false

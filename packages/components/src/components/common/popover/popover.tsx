@@ -4,7 +4,11 @@ import * as PopoverPrimitive from '@radix-ui/react-popover';
 import { cn } from '@/utils/class-name';
 import { arrow, close, content } from './popover.css';
 
-const Popover = PopoverPrimitive.Root;
+/**
+ * Popover, based on {@link https://www.radix-ui.com/docs/primitives/components/popover | Radix UI Popover}
+ */
+const Popover = (props: React.ComponentProps<typeof PopoverPrimitive.Root>) => <PopoverPrimitive.Root {...props} />;
+Popover.displayName = PopoverPrimitive.Root.displayName;
 
 const PopoverTrigger = PopoverPrimitive.Trigger;
 

@@ -4,7 +4,7 @@ import { cn } from '@/utils/class-name';
 import { input, inputGroup, searchIcon } from './input.css';
 import { IvyIcons } from '@axonivy/ui-icons';
 import { Button } from '@/components/common/button/button';
-import { useField } from '@/components/common/fieldset/fieldset';
+import { useField } from '@/components/common/field/field';
 import { Flex } from '@/components/common/flex/flex';
 import { IvyIcon } from '@/components/common/icon/icon';
 import { useReadonly, ReadonlyProvider } from '@/context/useReadonly';

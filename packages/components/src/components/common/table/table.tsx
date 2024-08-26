@@ -1,8 +1,11 @@
 import { cn } from '@/utils/class-name';
 import * as React from 'react';
 import { table, root, header, body, cell, footer, head, row } from './table.css';
-import { Field } from '@/components/common/fieldset/fieldset';
+import { Field } from '@/components/common/field/field';
 
+/**
+ * Table, based on {@link https://tanstack.com/table/v8 | Tanstack Table}
+ */
 const Table = React.forwardRef<HTMLTableElement, React.HTMLAttributes<HTMLTableElement>>(({ className, ...props }, ref) => (
   <Field className={cn(root, 'ui-table-root')}>
     <table ref={ref} className={cn(table, className, 'ui-table')} {...props} />

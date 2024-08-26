@@ -8,7 +8,10 @@ const meta: Meta<typeof Accordion> = {
   component: Accordion,
   tags: ['autodocs'],
   argTypes: {
-    type: { control: 'select', defaultValue: 'single', options: ['single', 'multiple'] }
+    type: { control: 'select', description: 'Multiple open or only one', options: ['single', 'multiple'] }
+  },
+  args: {
+    type: 'single'
   }
 };
 

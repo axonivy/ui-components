@@ -6,7 +6,11 @@ import { tooltipContent } from './tooltip.css';
 
 const TooltipProvider = TooltipPrimitive.Provider;
 
-const Tooltip = TooltipPrimitive.Root;
+/**
+ * Tooltip, based on {@link https://www.radix-ui.com/docs/primitives/components/tooltip | Radix UI Tooltip}
+ */
+const Tooltip = (props: React.ComponentProps<typeof TooltipPrimitive.Root>) => <TooltipPrimitive.Root {...props} />;
+Tooltip.displayName = TooltipPrimitive.Root.displayName;
 
 const TooltipTrigger = TooltipPrimitive.Trigger;
 

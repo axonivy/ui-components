@@ -5,6 +5,9 @@ import { IvyIcons } from '@axonivy/ui-icons';
 import { resizableHandle, resizableLine } from './resizable.css';
 import { IvyIcon } from '@/components/common/icon/icon';
 
+/**
+ * ResizablePanelGroup, based on {@link https://github.com/bvaughn/react-resizable-panels | React Resizable Panels}
+ */
 const ResizablePanelGroup = ({ className, ...props }: React.ComponentProps<typeof ResizablePrimitive.PanelGroup>) => (
   <ResizablePrimitive.PanelGroup className={cn(className, 'ui-resizable')} {...props} />
 );

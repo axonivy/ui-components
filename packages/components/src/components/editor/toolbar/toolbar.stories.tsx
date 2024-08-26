@@ -2,7 +2,7 @@ import type { Meta } from '@storybook/react';
 import { Toolbar, ToolbarContainer, ToolbarTitle } from './toolbar';
 import { IvyIcons } from '@axonivy/ui-icons';
 import { Button } from '@/components/common/button/button';
-import { Field } from '@/components/common/fieldset/fieldset';
+import { Field } from '@/components/common/field/field';
 import { Flex } from '@/components/common/flex/flex';
 import { IvyIcon } from '@/components/common/icon/icon';
 import { Separator } from '@/components/common/separator/separator';

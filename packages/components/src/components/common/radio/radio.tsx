@@ -3,9 +3,12 @@ import * as RadioGroupPrimitive from '@radix-ui/react-radio-group';
 
 import { cn } from '@/utils/class-name';
 import { radioGroup, radioGroupIdicator, radioGroupItem } from './radio.css';
-import { useField } from '@/components/common/fieldset/fieldset';
+import { useField } from '@/components/common/field/field';
 import { useReadonly } from '@/context/useReadonly';
 
+/**
+ * RadioGroup, based on {@link https://www.radix-ui.com/docs/primitives/components/radio-group | Radix UI RadioGroup}
+ */
 const RadioGroup = React.forwardRef<
   React.ElementRef<typeof RadioGroupPrimitive.Root>,
   React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Root>

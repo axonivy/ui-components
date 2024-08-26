@@ -15,7 +15,11 @@ import {
   shortcut
 } from './dropdownmenu.css';
 
-const DropdownMenu = DropdownMenuPrimitive.Root;
+/**
+ * DropdownMenu, based on {@link https://www.radix-ui.com/docs/primitives/components/dropdown-menu | Radix UI DropdownMenu}
+ */
+const DropdownMenu = (props: React.ComponentProps<typeof DropdownMenuPrimitive.Root>) => <DropdownMenuPrimitive.Root {...props} />;
+DropdownMenu.displayName = DropdownMenuPrimitive.Root.displayName;
 
 const DropdownMenuTrigger = DropdownMenuPrimitive.Trigger;
 

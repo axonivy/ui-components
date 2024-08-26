@@ -4,8 +4,12 @@ import { Spinner } from './spinner';
 const meta: Meta<typeof Spinner> = {
   title: 'Common/Spinner',
   component: Spinner,
+  tags: ['autodocs'],
   argTypes: {
-    size: { control: 'select', defaultValue: 'undefined', options: ['undefined', 'large', 'medium', 'small'] }
+    size: { type: 'string', control: 'select', options: [undefined, 'large', 'medium', 'small'] }
+  },
+  args: {
+    size: undefined
   }
 };
 
