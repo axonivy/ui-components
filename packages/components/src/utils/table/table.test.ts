@@ -1,136 +1,89 @@
-import type { RowSelectionState, Table, Updater } from '@tanstack/react-table';
-import { createTable, getCoreRowModel } from '@tanstack/react-table';
-import { beforeEach, describe, expect, test } from 'vitest';
-import { addRow, deleteFirstSelectedRow, getFirstSelectedRow, selectRow } from './table';
-import type { TestData } from './test-utils/types';
+import { setupTable } from '@/utils/table/test-utils/setup';
+import { describe, expect, test } from 'vitest';
+import { addRow, deleteFirstSelectedRow, selectRow } from './table';
 
-let data: Array<TestData>;
-let newRowData: TestData;
+const newRowData = { name: 'newDataName', value: 'newDataValue' };
 
-let table: Table<TestData>;
-let onRowSelectionChangeValue: Updater<RowSelectionState>;
-
-beforeEach(() => {
-  data = [
-    { name: 'NameData0', value: 'ValueData0' },
-    { name: 'NameData1', value: 'ValueData1' },
-    { name: 'NameData2', value: 'ValueData2' }
-  ];
-  newRowData = { name: 'newDataName', value: 'newDataValue' };
-
-  table = createTable({
-    columns: [],
-    data: data,
-    getCoreRowModel: getCoreRowModel(),
-    onStateChange: () => {},
-    onRowSelectionChange: (value: Updater<RowSelectionState>) => {
-      onRowSelectionChangeValue = value;
-    },
-    renderFallbackValue: undefined,
-    state: {}
+describe('selectRow', () => {
+  test('default', () => {
+    const { table, onRowSelectionChangeValues } = setupTable();
+    selectRow(table, '1');
+    expect(onRowSelectionChangeValues).toEqual([{ '1': true }]);
   });
-  onRowSelectionChangeValue = {};
+
+  describe('rowIdNotProvided', () => {
+    test('undefined', () => {
+      const { table, onRowSelectionChangeValues } = setupTable();
+      selectRow(table, undefined);
+      expect(onRowSelectionChangeValues).toEqual([{}]);
+    });
+
+    test('empty', () => {
+      const { table, onRowSelectionChangeValues } = setupTable();
+      selectRow(table, '');
+      expect(onRowSelectionChangeValues).toEqual([{}]);
+    });
+  });
 });
 
-describe('table', () => {
-  describe('selectRow', () => {
-    test('default', () => {
-      selectRow(table, '1');
-      expect(onRowSelectionChangeValue).toEqual({ '1': true });
-    });
+test('addRow', () => {
+  const { data, table, onRowSelectionChangeValues } = setupTable();
+  const originalData = structuredClone(data);
+  const newData = addRow(table, data, newRowData);
+  expect(data).toEqual(originalData);
+  expect(newData).not.toBe(data);
+  expect(newData).toHaveLength(4);
+  expect(newData[3]).toEqual(newRowData);
+  expect(onRowSelectionChangeValues).toEqual([{ '3': true }]);
+});
 
-    describe('rowIdNotProvided', () => {
-      test('undefined', () => {
-        onRowSelectionChangeValue = { '1': true };
-        selectRow(table, undefined);
-        expect(onRowSelectionChangeValue).toEqual({});
-      });
-
-      test('empty', () => {
-        onRowSelectionChangeValue = { '1': true };
-        selectRow(table, '');
-        expect(onRowSelectionChangeValue).toEqual({});
-      });
-    });
-  });
-
-  describe('getFirstSelectedRow', () => {
-    test('present', () => {
-      table.getState().rowSelection = { '1': true };
-      const selectedRow = getFirstSelectedRow(table);
-      expect(selectedRow).toBeDefined();
-      expect(selectedRow!.original).toEqual(data[1]);
-    });
-
-    describe('missing', () => {
-      test('empty', () => {
-        table.getState().rowSelection = {};
-        expect(getFirstSelectedRow(table)).toBeUndefined();
-      });
-
-      test('notFound', () => {
-        table.getState().rowSelection = { '42': true };
-        expect(getFirstSelectedRow(table)).toBeUndefined();
-      });
-    });
-  });
-
-  test('addRow', () => {
+describe('deleteFirstSelectedRow', () => {
+  test('default', () => {
+    const { data, table, onRowSelectionChangeValues } = setupTable();
     const originalData = structuredClone(data);
-    const newData = addRow(table, data, newRowData);
+    table.getState().rowSelection = { '1': true };
+    const newData = deleteFirstSelectedRow(table, data);
     expect(data).toEqual(originalData);
     expect(newData).not.toBe(data);
-    expect(newData).toHaveLength(4);
-    expect(newData[3]).toEqual(newRowData);
-    expect(onRowSelectionChangeValue).toEqual({ '3': true });
+    expect(newData).toHaveLength(2);
+    expect(newData[0]).toEqual(data[0]);
+    expect(newData[1]).toEqual(data[2]);
+    expect(onRowSelectionChangeValues).toEqual([]);
   });
 
-  describe('deleteFirstSelectedRow', () => {
-    test('default', () => {
-      const originalData = structuredClone(data);
-      table.getState().rowSelection = { '1': true };
-      onRowSelectionChangeValue = { '1': true };
-      const newData = deleteFirstSelectedRow(table, data);
-      expect(data).toEqual(originalData);
-      expect(newData).not.toBe(data);
-      expect(newData).toHaveLength(2);
-      expect(newData[0]).toEqual(data[0]);
-      expect(newData[1]).toEqual(data[2]);
-      expect(onRowSelectionChangeValue).toEqual({ '1': true });
-    });
+  test('lastElementInList', () => {
+    const { data, table, onRowSelectionChangeValues } = setupTable();
+    const originalData = structuredClone(data);
+    table.getState().rowSelection = { '2': true };
+    const newData = deleteFirstSelectedRow(table, data);
+    expect(data).toEqual(originalData);
+    expect(newData).not.toBe(data);
+    expect(newData).toHaveLength(2);
+    expect(newData[0]).toEqual(data[0]);
+    expect(newData[1]).toEqual(data[1]);
+    expect(onRowSelectionChangeValues).toEqual([{ '1': true }]);
+  });
 
-    test('lastElementInList', () => {
-      const originalData = structuredClone(data);
-      table.getState().rowSelection = { '2': true };
-      const newData = deleteFirstSelectedRow(table, data);
-      expect(data).toEqual(originalData);
-      expect(newData).not.toBe(data);
-      expect(newData).toHaveLength(2);
-      expect(newData[0]).toEqual(data[0]);
-      expect(newData[1]).toEqual(data[1]);
-      expect(onRowSelectionChangeValue).toEqual({ '1': true });
-    });
+  test('lastRemainingElement', () => {
+    const { table, onRowSelectionChangeValues } = setupTable();
+    const data = [{ name: 'NameData0', value: 'ValueData0' }];
+    const originalData = structuredClone(data);
+    table.getState().rowSelection = { '0': true };
+    const newData = deleteFirstSelectedRow(table, data);
+    expect(data).toEqual(originalData);
+    expect(newData).not.toBe(data);
+    expect(newData).toHaveLength(0);
+    expect(onRowSelectionChangeValues).toEqual([{}]);
+  });
 
-    test('lastRemainingElement', () => {
-      data = [{ name: 'NameData0', value: 'ValueData0' }];
-      const originalData = structuredClone(data);
-      table.getState().rowSelection = { '0': true };
-      onRowSelectionChangeValue = { '0': true };
-      const newData = deleteFirstSelectedRow(table, data);
-      expect(data).toEqual(originalData);
-      expect(newData).not.toBe(data);
-      expect(newData).toHaveLength(0);
-      expect(onRowSelectionChangeValue).toEqual({});
-    });
-
-    test('noSelection', () => {
-      const originalData = structuredClone(data);
-      table.getState().rowSelection = {};
-      const newData = deleteFirstSelectedRow(table, data);
-      expect(data).toEqual(originalData);
-      expect(newData).not.toBe(data);
-      expect(newData).toEqual(data);
-      expect(onRowSelectionChangeValue).toEqual({});
-    });
+  test('noSelection', () => {
+    const { data, table, onRowSelectionChangeValues } = setupTable();
+    const originalData = structuredClone(data);
+    table.getState().rowSelection = {};
+    const newData = deleteFirstSelectedRow(table, data);
+    expect(data).toEqual(originalData);
+    expect(newData).not.toBe(data);
+    expect(newData).toEqual(data);
+    expect(onRowSelectionChangeValues).toEqual([]);
   });
 });

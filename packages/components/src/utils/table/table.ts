@@ -4,19 +4,8 @@ export const selectRow = <TData>(table: Table<TData>, rowId?: string) => {
   if (!rowId || rowId === '') {
     table.setRowSelection({});
   } else {
-    table.setRowSelection({ [`${rowId}`]: true });
+    table.setRowSelection({ [rowId]: true });
   }
-};
-
-export const getFirstSelectedRow = <TData>(table: Table<TData>) => {
-  return getRow(table, Object.keys(table.getState().rowSelection)[0]);
-};
-
-const getRow = <TData>(table: Table<TData>, rowId?: string) => {
-  if (!rowId || rowId === '') {
-    return;
-  }
-  return table.getRowModel().rowsById[rowId];
 };
 
 export const addRow = <TData>(table: Table<TData>, data: Array<TData>, newRowData: TData) => {
@@ -28,7 +17,7 @@ export const addRow = <TData>(table: Table<TData>, data: Array<TData>, newRowDat
 
 export const deleteFirstSelectedRow = <TData>(table: Table<TData>, data: Array<TData>) => {
   const newData = structuredClone(data);
-  const selectedRow = getFirstSelectedRow(table);
+  const selectedRow = table.getSelectedRowModel().flatRows[0];
   if (!selectedRow) {
     return newData;
   }
@@ -44,6 +33,3 @@ const adjustSelectionAfterDeletionOfRow = <TData>(data: Array<TData>, table: Tab
     selectRow(table, String(data.length - 1));
   }
 };
-
-/* workaround for "table.getIsSomeRowsSelected" as it returns false if only last remaining row is selected */
-export const isRowSelected = <TData>(table: Table<TData>) => Object.keys(table.getState().rowSelection).length > 0;
