@@ -52,3 +52,5 @@ export * from './utils/array';
 export * from './utils/class-name';
 export * from './utils/equals';
 export * from './utils/utils';
+export * from './utils/table/table';
+export * from './utils/table/table-data';
