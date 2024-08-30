@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState, type CSSProperties } from 'react';
-import { splitNewLine } from '@/utils/utils';
+import { splitNewLine } from '@/utils/string';
 
 type TextAreaValueProps = Pick<React.TextareaHTMLAttributes<HTMLTextAreaElement>, 'value' | 'onChange'>;
 
