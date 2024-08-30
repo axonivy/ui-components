@@ -17,7 +17,8 @@ const meta: Meta<typeof Button> = {
     variant: undefined,
     size: undefined,
     icon: undefined,
-    toggle: false
+    toggle: false,
+    spin: false
   }
 };
 
@@ -26,6 +27,9 @@ export default meta;
 type Story = StoryObj<typeof Button>;
 
 export const Default: Story = {
+  args: {
+    variant: 'outline'
+  },
   render: props => <Button {...props}>Click</Button>
 };
 
@@ -34,6 +38,16 @@ export const WithIcon: Story = {
     icon: IvyIcons.Home
   },
   render: props => <Button {...props}>Home</Button>
+};
+
+export const Loading: Story = {
+  args: {
+    icon: IvyIcons.Spinner,
+    spin: true,
+    disabled: true,
+    variant: 'primary'
+  },
+  render: props => <Button {...props}>Loading</Button>
 };
 
 export const IconOnly: Story = {
