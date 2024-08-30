@@ -22,7 +22,7 @@ const useToggle = (toggle?: boolean) => {
 };
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, icon, rotate, variant, size, toggle, children, ...props }, ref) => {
+  ({ className, icon, rotate, spin, variant, size, toggle, children, ...props }, ref) => {
     const toggleProps = useToggle(toggle);
     return (
       <button
@@ -31,7 +31,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         {...toggleProps}
         {...props}
       >
-        {icon && <IvyIcon icon={icon} rotate={rotate} />}
+        {icon && <IvyIcon icon={icon} rotate={rotate} spin={spin} />}
         {children}
       </button>
     );
