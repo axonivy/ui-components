@@ -16,10 +16,20 @@ type UseTableGlobalFilterRetunValue<TData> = {
   tableState: Partial<TableState>;
 };
 
-export const useTableGlobalFilter = <TData,>(active = true): UseTableGlobalFilterRetunValue<TData> => {
+type UseTableGlobalFilterOptions = { searchActive?: boolean; searchPlaceholder?: string; searchAutoFocus?: boolean };
+
+export const useTableGlobalFilter = <TData,>(options?: UseTableGlobalFilterOptions): UseTableGlobalFilterRetunValue<TData> => {
   const [globalFilter, setGlobalFilter] = React.useState('');
+  const searchActive = options?.searchActive === undefined || options?.searchActive;
   return {
-    filter: active ? <SearchInput placeholder='Search' value={globalFilter} onChange={setGlobalFilter} /> : null,
+    filter: searchActive ? (
+      <SearchInput
+        placeholder={options?.searchPlaceholder ?? 'Search'}
+        value={globalFilter}
+        onChange={setGlobalFilter}
+        autoFocus={options?.searchAutoFocus}
+      />
+    ) : null,
     options: { onGlobalFilterChange: setGlobalFilter, getFilteredRowModel: getFilteredRowModel(), filterFromLeafRows: true },
     tableState: { globalFilter }
   };

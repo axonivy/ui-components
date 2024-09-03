@@ -21,7 +21,7 @@ export type OutlineNode = {
 export type OutlineProps = { outline: Array<OutlineNode>; selection?: string; onClick?: (id: string) => void; onDoubleClick?: () => void };
 
 const Outline = ({ outline, selection, onClick, onDoubleClick }: OutlineProps) => {
-  const globalFilter = useTableGlobalFilter();
+  const globalFilter = useTableGlobalFilter({ searchAutoFocus: true });
   const expanded = useTableExpand<OutlineNode>();
   const select = useTableSelect<OutlineNode>();
   const columns: ColumnDef<OutlineNode, string>[] = [
