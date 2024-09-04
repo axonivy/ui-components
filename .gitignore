@@ -8,6 +8,7 @@ src-gen
 storybook-static
 eslint.xml
 stats.html
+report.xml
 
 # misc
 .DS_Store
