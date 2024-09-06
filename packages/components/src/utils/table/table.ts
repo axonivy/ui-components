@@ -19,17 +19,21 @@ export const deleteFirstSelectedRow = <TData>(table: Table<TData>, data: Array<T
   const newData = structuredClone(data);
   const selectedRow = table.getSelectedRowModel().flatRows[0];
   if (!selectedRow) {
-    return newData;
+    return { newData };
   }
   newData.splice(selectedRow.index, 1);
-  adjustSelectionAfterDeletionOfRow(newData, table, selectedRow);
-  return newData;
+  const selection = adjustSelectionAfterDeletionOfRow(newData, table, selectedRow);
+  return { newData, selection };
 };
 
 const adjustSelectionAfterDeletionOfRow = <TData>(data: Array<TData>, table: Table<TData>, row: Row<TData>) => {
   if (data.length === 0) {
     selectRow(table);
+    return;
   } else if (row.index === data.length) {
-    selectRow(table, String(data.length - 1));
+    const selection = data.length - 1;
+    selectRow(table, String(selection));
+    return selection;
   }
+  return row.index;
 };
