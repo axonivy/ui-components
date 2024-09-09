@@ -60,11 +60,7 @@
     "happy-dom": "^14.12.3",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "rollup-plugin-visualizer": "^5.12.0",
-    "storybook": "^8.2.9",
-    "vite": "^5.4.1",
-    "vite-plugin-dts": "^4.0.3",
-    "vitest": "^2.0.5"
+    "storybook": "^8.2.9"
   },
   "type": "module",
   "types": "./lib/index.d.ts",
@@ -74,7 +70,6 @@
     "clean": "rimraf lib *.tsbuildinfo",
     "build": "tsc --build tsconfig.production.json",
     "package": "npm run clean && vite build && npm run build && npm run build:storybook",
-    "build:clean": "npm run clean && npm run build",
     "build:storybook": "storybook build",
     "dev": "storybook dev -p 6006 --no-open",
     "type": "tsc --noEmit --emitDeclarationOnly false",

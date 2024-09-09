@@ -18,16 +18,20 @@
     "vscode-ws-jsonrpc": "^3.0.0"
   },
   "type": "module",
-  "types": "lib/index",
-  "module": "lib/index",
-  "source": "src/index",
+  "types": "lib/index.d.ts",
+  "main": "lib/jsonrpc.js",
+  "module": "lib/jsonrpc.js",
   "scripts": {
-    "clean": "rimraf lib tsconfig.tsbuildinfo",
-    "build": "tsc --build && tscp",
-    "package": "tsc && tscp",
-    "build:clean": "npm clean && npm build",
+    "clean": "rimraf lib *.tsbuildinfo",
+    "build": "tsc --build tsconfig.production.json",
+    "package": "npm run clean && vite build && npm run build",
     "type": "tsc --noEmit",
     "lint": "eslint --ext .ts,.tsx ./src",
-    "lint:fix": "eslint --fix --ext .ts,.tsx ./src"
+    "lint:fix": "eslint --fix --ext .ts,.tsx ./src",
+    "test": "vitest",
+    "test:ci": "vitest --watch=false"
+  },
+  "devDependencies": {
+    "vitest-websocket-mock": "^0.4.0"
   }
 }
