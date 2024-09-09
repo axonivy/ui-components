@@ -6,7 +6,9 @@ import { cn } from '@/utils/class-name';
 /**
  * Tabs, based on {@link https://www.radix-ui.com/docs/primitives/components/tabs | Radix UI Tabs}
  */
-const Tabs = (props: React.ComponentProps<typeof TabsPrimitive.Root>) => <TabsPrimitive.Root {...props} />;
+const Tabs = React.forwardRef<React.ElementRef<typeof TabsPrimitive.Root>, React.ComponentPropsWithoutRef<typeof TabsPrimitive.Root>>(
+  ({ className, ...props }, ref) => <TabsPrimitive.Root ref={ref} className={cn(className, 'ui-tabs')} {...props} />
+);
 Tabs.displayName = TabsPrimitive.Root.displayName;
 
 const TabsList = React.forwardRef<React.ElementRef<typeof TabsPrimitive.List>, React.ComponentPropsWithoutRef<typeof TabsPrimitive.List>>(
