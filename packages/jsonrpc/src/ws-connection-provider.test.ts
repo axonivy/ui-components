@@ -1,9 +1,8 @@
 import { describe, test, afterEach, expect, vi } from 'vitest';
 import { WS } from 'vitest-websocket-mock';
-import { webSocketConnection, type WebSocketConnectionHandler, type WebSocketOptions } from './ws-connection-provider';
+import { webSocketConnection, type Connection, type WebSocketConnectionHandler, type WebSocketOptions } from './ws-connection-provider';
 import { createMessageConnection, type MessageConnection } from 'vscode-jsonrpc';
 import { BaseRpcClient } from './base-rpc-client';
-import type { Connection } from './connection-util';
 
 afterEach(async () => {
   WS.clean();
