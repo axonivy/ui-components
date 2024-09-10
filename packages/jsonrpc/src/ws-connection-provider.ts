@@ -1,6 +1,10 @@
-import type { Logger } from 'vscode-jsonrpc';
+import type { Logger, MessageReader, MessageWriter } from 'vscode-jsonrpc';
 import { WebSocketMessageReader, WebSocketMessageWriter, wrap } from './ws-connection';
-import type { Connection } from './connection-util';
+
+export interface Connection {
+  reader: MessageReader;
+  writer: MessageWriter;
+}
 
 export type WebSocketConnectionHandler<TConnection> = {
   onConnection: (connection: Connection) => TConnection | Promise<TConnection>;
