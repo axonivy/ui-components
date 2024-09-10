@@ -1,4 +1,4 @@
-import { type Logger } from 'vscode-jsonrpc';
+import type { Logger } from 'vscode-jsonrpc';
 import { WebSocketMessageReader, WebSocketMessageWriter, wrap } from './ws-connection';
 import type { Connection } from './connection-util';
 
