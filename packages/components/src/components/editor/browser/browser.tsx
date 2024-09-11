@@ -1,5 +1,13 @@
 import * as React from 'react';
-import { flexRender, getCoreRowModel, getFilteredRowModel, useReactTable, type ColumnDef, type Row } from '@tanstack/react-table';
+import {
+  flexRender,
+  getCoreRowModel,
+  getFilteredRowModel,
+  useReactTable,
+  type ColumnDef,
+  type ExpandedState,
+  type Row
+} from '@tanstack/react-table';
 import type { IvyIcons } from '@axonivy/ui-icons';
 import { fullHeight, info, overflowAuto, overflowHidden } from './browser.css';
 import { ExpandableCell } from '@/components/common/table/tree/tree';
@@ -10,7 +18,7 @@ import { IvyIcon } from '@/components/common/icon/icon';
 import { SearchInput } from '@/components/common/input/input';
 import { useTableExpand, useTableSelect } from '@/components/common/table/hooks/hooks';
 import { MessageRow, SelectRow } from '@/components/common/table/row/row';
-import { Table, TableBody, TableCell } from '@/components/common/table/table';
+import { Table, TableBody, TableCell, TableRow } from '@/components/common/table/table';
 import { cn } from '@/utils/class-name';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/common/tabs/tabs';
 
@@ -20,10 +28,16 @@ export type BrowserNode<TData = unknown> = {
   icon: IvyIcons;
   children: Array<BrowserNode<TData>>;
   data?: TData;
+  notSelectable?: boolean;
   isLoaded?: boolean;
 };
 
-export const useBrowser = (data: Array<BrowserNode>, loadChildren?: (row: Row<BrowserNode>) => void, initialSearch?: string) => {
+export const useBrowser = (
+  data: Array<BrowserNode>,
+  loadChildren?: (row: Row<BrowserNode>) => void,
+  initialSearch?: string,
+  expandedState?: ExpandedState
+) => {
   const columns: ColumnDef<BrowserNode, string>[] = [
     {
       accessorKey: 'value',
@@ -45,7 +59,7 @@ export const useBrowser = (data: Array<BrowserNode>, loadChildren?: (row: Row<Br
   ];
 
   const [filter, setFilter] = React.useState(initialSearch ?? '');
-  const expanded = useTableExpand<BrowserNode>({ '0': true });
+  const expanded = useTableExpand<BrowserNode>(expandedState ? expandedState : { '0': true });
   const select = useTableSelect<BrowserNode>();
   const table = useReactTable({
     ...expanded.options,
@@ -140,11 +154,21 @@ const BrowsersView = ({ browsers, apply, applyBtn }: BrowsersViewProps) => {
                     <TableBody>
                       {table.getRowModel().rows?.length ? (
                         table.getRowModel().rows.map(row => (
-                          <SelectRow key={row.id} row={row} onDoubleClick={() => applyHandler(row)}>
-                            {row.getVisibleCells().map(cell => (
-                              <TableCell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
-                            ))}
-                          </SelectRow>
+                          <>
+                            {row.original.notSelectable ? (
+                              <TableRow key={row.id}>
+                                {row.getVisibleCells().map(cell => (
+                                  <TableCell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
+                                ))}
+                              </TableRow>
+                            ) : (
+                              <SelectRow key={row.id} row={row} onDoubleClick={() => applyHandler(row)}>
+                                {row.getVisibleCells().map(cell => (
+                                  <TableCell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
+                                ))}
+                              </SelectRow>
+                            )}
+                          </>
                         ))
                       ) : (
                         <MessageRow message={{ message: emptyMessage ?? 'No results', variant: 'info' }} columnCount={1} />

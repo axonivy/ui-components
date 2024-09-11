@@ -45,8 +45,8 @@ test('info provider', async () => {
   await act(async () => await userEvent.click(screen.getByRole('tab', { name: 'Attribute' })));
   expect(screen.getByRole('region')).toHaveTextContent('');
 
-  await act(async () => await userEvent.click(screen.getByRole('row', { name: 'param <>' })));
-  expect(screen.getByRole('region')).toHaveTextContent('param');
+  await act(async () => await userEvent.click(screen.getByRole('row', { name: 'out ProcurementRequest' })));
+  expect(screen.getByRole('region')).toHaveTextContent('out');
 
   await act(async () => await userEvent.click(screen.getByRole('tab', { name: 'Roles' })));
   expect(screen.getByRole('region')).toHaveTextContent('Teamleader');
