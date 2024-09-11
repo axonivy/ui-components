@@ -7,9 +7,10 @@ export const useAttrBrowser = () => {
   const [attr, setAttr] = useState<Array<BrowserNode>>([
     {
       value: 'param',
-      info: '<>',
+      info: '<> (not selectable)',
       icon: IvyIcons.Attribute,
       isLoaded: true,
+      notSelectable: true,
       children: [
         {
           value: 'out',
