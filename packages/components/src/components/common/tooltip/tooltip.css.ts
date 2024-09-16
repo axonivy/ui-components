@@ -3,6 +3,7 @@ import { slideDownAndFade, slideLeftAndFade, slideRightAndFade, slideUpAndFade }
 import { vars } from '@/styles/theme.css';
 
 export const tooltipContent = style({
+  color: vars.color.body,
   borderRadius: vars.border.r2,
   padding: `${vars.size.s1} ${vars.size.s2}`,
   backgroundColor: vars.color.n25,
