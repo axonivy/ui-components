@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { cn } from '@/utils/class-name';
 import { button, iconOnly, type ButtonVariants } from './button.css';
-import type { IvyIcons } from '@axonivy/ui-icons';
 import { Flex } from '@/components/common/flex/flex';
 import { type IvyIconProps, IvyIcon } from '@/components/common/icon/icon';
 
@@ -39,8 +38,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 );
 Button.displayName = 'Button';
 
-export type Control = { title: string; icon: IvyIcons; onClick: () => void; toggle?: boolean };
-export type ButtonGroupProps = React.ComponentPropsWithoutRef<typeof Flex> & { controls: Array<Control> };
+export type ButtonGroupProps = React.ComponentPropsWithoutRef<typeof Flex> & { controls: Array<ButtonProps> };
 
 const ButtonGroup = React.forwardRef<React.ElementRef<typeof Flex>, ButtonGroupProps>(({ controls, className, ...props }, ref) => (
   <Flex gap={1} className={cn(className, 'ui-button-group')} ref={ref} {...props}>
