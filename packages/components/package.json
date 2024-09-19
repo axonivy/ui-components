@@ -40,13 +40,13 @@
     "react": "^18.2.0"
   },
   "devDependencies": {
-    "@storybook/addon-essentials": "^8.2.9",
-    "@storybook/addon-interactions": "^8.2.9",
-    "@storybook/addon-links": "^8.2.9",
-    "@storybook/blocks": "^8.2.9",
-    "@storybook/react": "^8.2.9",
-    "@storybook/react-vite": "^8.2.9",
-    "@storybook/test": "^8.2.9",
+    "@storybook/addon-essentials": "^8.3.1",
+    "@storybook/addon-interactions": "^8.3.1",
+    "@storybook/addon-links": "^8.3.1",
+    "@storybook/blocks": "^8.3.1",
+    "@storybook/react": "^8.3.1",
+    "@storybook/react-vite": "^8.3.1",
+    "@storybook/test": "^8.3.1",
     "@testing-library/jest-dom": "^6.4.8",
     "@testing-library/react": "^16.0.0",
     "@testing-library/user-event": "^14.5.2",
@@ -60,7 +60,7 @@
     "happy-dom": "^14.12.3",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "storybook": "^8.2.9"
+    "storybook": "^8.3.1"
   },
   "type": "module",
   "types": "./lib/index.d.ts",
@@ -69,7 +69,7 @@
   "scripts": {
     "clean": "rimraf lib *.tsbuildinfo",
     "build": "tsc --build tsconfig.production.json",
-    "package": "npm run clean && vite build && npm run build && npm run build:storybook",
+    "package": "npm run clean && vite build && npm run build",
     "build:storybook": "storybook build",
     "dev": "storybook dev -p 6006 --no-open",
     "type": "tsc --noEmit --emitDeclarationOnly false",

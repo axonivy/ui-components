@@ -15,7 +15,7 @@ pipeline {
         script {
           catchError(buildResult: 'UNSTABLE', stageResult: 'UNSTABLE') {
             docker.build('node', '-f build/Dockerfile .').inside {
-              sh 'npm run ci'
+              sh 'npm run ci && npm run build:storybook --workspace=@axonivy/ui-components'
             }
           }
           archiveArtifacts artifacts: 'packages/**/src-gen/**', allowEmptyArchive: true
