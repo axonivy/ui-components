@@ -1,4 +1,3 @@
-import { expect, test } from 'vitest';
 import { evalDotState } from './state';
 
 test('evalDotState messages', async () => {

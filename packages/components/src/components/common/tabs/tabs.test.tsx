@@ -1,6 +1,5 @@
 import { composeStory } from '@storybook/react';
 import { act, render, screen, userEvent } from 'test-utils';
-import { expect, test } from 'vitest';
 import Meta, { Default } from './tabs.stories';
 
 const Tabs = composeStory(Default, Meta);

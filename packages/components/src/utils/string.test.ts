@@ -1,4 +1,3 @@
-import { expect, test } from 'vitest';
 import { capitalize, labelText, splitByCamelCase, splitNewLine } from './string';
 
 test('capitalize', () => {

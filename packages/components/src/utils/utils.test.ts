@@ -1,5 +1,4 @@
 import { generateId } from './utils';
-import { test, expect } from 'vitest';
 
 test('generateId', () => {
   expect(generateId()).toEqual('0');

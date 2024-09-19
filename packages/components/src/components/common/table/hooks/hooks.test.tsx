@@ -1,6 +1,5 @@
 import { useTableGlobalFilter } from '@/components/common/table/hooks/hooks';
 import { cleanup, render, renderHook, screen } from 'test-utils';
-import { expect, describe, test } from 'vitest';
 
 const TableSearch = ({ options }: { options?: Parameters<typeof useTableGlobalFilter>[0] }) => {
   const globalFilter = useTableGlobalFilter(options);

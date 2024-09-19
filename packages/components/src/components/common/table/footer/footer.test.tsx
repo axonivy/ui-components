@@ -1,6 +1,5 @@
 import { composeStory } from '@storybook/react';
 import { act, render, screen, userEvent } from 'test-utils';
-import { expect, test } from 'vitest';
 import Meta, { AddRemove } from './footer.stories';
 
 const Table = composeStory(AddRemove, Meta);
