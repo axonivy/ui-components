@@ -1,6 +1,5 @@
 import { composeStory } from '@storybook/react';
 import { render, screen } from 'test-utils';
-import { expect, test } from 'vitest';
 import Meta, { Default, WithLink } from './message.stories';
 
 const Message = composeStory(Default, Meta);

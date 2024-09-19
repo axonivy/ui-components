@@ -1,4 +1,3 @@
-import { afterEach, expect, test } from 'vitest';
 import { ThemeProvider, useTheme } from './useTheme';
 import { act, renderHook } from '@testing-library/react';
 

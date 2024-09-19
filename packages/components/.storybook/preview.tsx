@@ -4,19 +4,13 @@ import '../src/styles/global.css';
 import '@axonivy/ui-icons/lib/ivy-icons.css';
 import React from 'react';
 import { ReadonlyProvider } from '../src/context/useReadonly';
-import { ThemeProvider } from '../src/context/useTheme';
 
 const preview: Preview = {
   parameters: {
     controls: {
       exclude: ['asChild', 'className']
     },
-    backgrounds: {
-      values: [
-        { name: 'light', value: '#ffffff' },
-        { name: 'dark', value: '#2c2c2c' }
-      ]
-    }
+    backgrounds: { disable: true }
   },
   globalTypes: {
     theme: {

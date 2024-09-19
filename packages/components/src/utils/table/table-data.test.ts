@@ -1,5 +1,4 @@
 import { setupData } from '@/utils/table/test-utils/setup';
-import { describe, expect, test } from 'vitest';
 import { updateRowData } from './table-data';
 
 const newRowData = { name: 'newDataName', value: 'newDataValue' };

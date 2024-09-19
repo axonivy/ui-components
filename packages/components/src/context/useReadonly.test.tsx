@@ -1,5 +1,4 @@
 import { renderHook } from 'test-utils';
-import { expect, test } from 'vitest';
 import { useReadonly } from './useReadonly';
 
 test('off', async () => {

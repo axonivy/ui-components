@@ -1,5 +1,4 @@
 import { setupTable } from '@/utils/table/test-utils/setup';
-import { describe, expect, test } from 'vitest';
 import { addRow, deleteFirstSelectedRow, selectRow } from './table';
 
 const newRowData = { name: 'newDataName', value: 'newDataValue' };

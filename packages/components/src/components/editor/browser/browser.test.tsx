@@ -1,8 +1,6 @@
 import { composeStory } from '@storybook/react';
 import { act, render, screen, userEvent, waitFor } from 'test-utils';
-import { expect, test, vi } from 'vitest';
 import Meta, { Default, DialogBrowser, DialogBrowserWithTitle } from './browser.stories';
-import { afterEach } from 'node:test';
 
 const Browser = composeStory(Default, Meta);
 const Dialog = composeStory(DialogBrowser, Meta);

@@ -11,7 +11,8 @@
       "@/utils/*": ["./src/utils/*"]
     },
     "allowImportingTsExtensions": true,
-    "noEmit": true
+    "noEmit": true,
+    "types": ["vitest/globals"]
   },
   "include": ["src"],
   "references": [{ "path": "../icons/tsconfig.json" }]
