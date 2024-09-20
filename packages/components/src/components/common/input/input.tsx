@@ -20,6 +20,19 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(({ disabled, classN
 });
 Input.displayName = 'Input';
 
+const BasicInput = React.forwardRef<HTMLInputElement, InputProps>(({ value, onChange, defaultValue, ...props }, ref) => {
+  const [currentValue, setCurrentValue] = React.useState(value ?? defaultValue ?? '');
+  React.useEffect(() => {
+    setCurrentValue(value ?? defaultValue ?? '');
+  }, [value, defaultValue]);
+  const updateValue = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setCurrentValue(event.target.value);
+    onChange?.(event);
+  };
+  return <Input ref={ref} value={currentValue} onChange={updateValue} {...props} />;
+});
+BasicInput.displayName = 'BasicInput';
+
 type SearchInputProps = Omit<InputProps, 'value' | 'onChange'> & { value?: string; onChange?: (change: string) => void };
 
 const SearchInput = React.forwardRef<HTMLInputElement, SearchInputProps>(({ value, onChange, ...props }, ref) => {
@@ -29,9 +42,7 @@ const SearchInput = React.forwardRef<HTMLInputElement, SearchInputProps>(({ valu
   }, [value]);
   const updateValue = (change: string) => {
     setFilter(change);
-    if (onChange) {
-      onChange(change);
-    }
+    onChange?.(change);
   };
   return (
     <ReadonlyProvider readonly={false}>
@@ -47,16 +58,11 @@ SearchInput.displayName = 'SearchInput';
 
 type PasswordInputProps = Omit<InputProps, 'value' | 'onChange' | 'type'> & { value?: string; onChange?: (change: string) => void };
 
-const PasswordInput = React.forwardRef<HTMLInputElement, PasswordInputProps>(({ value, onChange, ...props }, ref) => {
+const PasswordInput = React.forwardRef<HTMLInputElement, PasswordInputProps>(({ onChange, ...props }, ref) => {
   const [showPassword, setShowPassword] = React.useState(false);
-  const updateValue = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (onChange) {
-      onChange(event.target.value);
-    }
-  };
   return (
     <InputGroup>
-      <Input value={value} onChange={updateValue} type={showPassword ? 'text' : 'password'} {...props} ref={ref} />
+      <BasicInput type={showPassword ? 'text' : 'password'} onChange={e => onChange?.(e.target.value)} {...props} ref={ref} />
       <Button icon={IvyIcons.Eye} onClick={() => setShowPassword(!showPassword)} aria-label='Show password' />
     </InputGroup>
   );
@@ -68,4 +74,4 @@ const InputGroup = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDiv
 ));
 InputGroup.displayName = 'InputGroup';
 
-export { Input, InputGroup, SearchInput, PasswordInput };
+export { Input, BasicInput, InputGroup, SearchInput, PasswordInput };
