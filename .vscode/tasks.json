@@ -23,6 +23,25 @@
       "isBackground": true
     },
     {
+      "label": "Start Monaco Dev Server",
+      "type": "shell",
+      "command": "npm run dev:monaco",
+      "problemMatcher": [
+        {
+          "owner": "typescript",
+          "pattern": {
+            "regexp": ""
+          },
+          "background": {
+            "activeOnStart": true,
+            "beginsPattern": ".*",
+            "endsPattern": ".*"
+          }
+        }
+      ],
+      "isBackground": true
+    },
+    {
       "label": "Terminate All Tasks",
       "command": "echo ${input:terminate}",
       "type": "shell",
