@@ -15,7 +15,9 @@ import {
 } from './accordion.css';
 import { Flex } from '@/components/common/flex/flex';
 import { IvyIcon } from '@/components/common/icon/icon';
-import { StateDot } from '@/components/common/state/state';
+import { StateDot, type StateDotProps } from '@/components/common/state/state';
+import { ButtonGroup, type ButtonGroupProps } from '@/components/common/button/button';
+import { useSticky, type UseStickyProps } from '@/components/common/accordion/useSticky';
 
 /**
  * Accordion, based on {@link https://www.radix-ui.com/docs/primitives/components/accordion | Radix UI Accordion}
@@ -63,14 +65,39 @@ const AccordionState = React.forwardRef<React.ElementRef<typeof StateDot>, React
 );
 AccordionState.displayName = 'AccordionState';
 
-const AccordionContent = React.forwardRef<
-  React.ElementRef<typeof AccordionPrimitive.Content>,
-  React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Content>
->(({ className, children, ...props }, ref) => (
-  <AccordionPrimitive.Content ref={ref} className={cn(content, className, 'ui-accordion-content')} {...props}>
-    <div className={contentData}>{children}</div>
-  </AccordionPrimitive.Content>
-));
+type AccordionContentProps = React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Content>;
+
+const AccordionContent = React.forwardRef<React.ElementRef<typeof AccordionPrimitive.Content>, AccordionContentProps>(
+  ({ className, children, ...props }, ref) => (
+    <AccordionPrimitive.Content ref={ref} className={cn(content, className, 'ui-accordion-content')} {...props}>
+      <div className={contentData}>{children}</div>
+    </AccordionPrimitive.Content>
+  )
+);
 AccordionContent.displayName = AccordionPrimitive.Content.displayName;
 
-export { Accordion, AccordionItem, AccordionTrigger, AccordionState, AccordionContent };
+export type BasicAccordionItemProps = AccordionContentProps &
+  Partial<Pick<ButtonGroupProps, 'controls'>> & {
+    label: string;
+    state?: StateDotProps;
+    stickyOptions?: UseStickyProps;
+  };
+
+const BasicAccordionItem = ({ label, state, controls, stickyOptions, ...props }: BasicAccordionItemProps) => {
+  const { ref, isSticky } = useSticky(stickyOptions);
+  return (
+    <AccordionItem value={label} data-sticky={isSticky ? 'true' : undefined}>
+      <AccordionTrigger
+        ref={ref}
+        control={props => controls && <ButtonGroup controls={controls} {...props} />}
+        state={<AccordionState {...state} />}
+      >
+        {label}
+      </AccordionTrigger>
+      <AccordionContent {...props} />
+    </AccordionItem>
+  );
+};
+BasicAccordionItem.displayName = 'BasicAccordionItem';
+
+export { Accordion, AccordionItem, AccordionTrigger, AccordionState, AccordionContent, BasicAccordionItem };
