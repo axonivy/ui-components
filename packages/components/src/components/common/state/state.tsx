@@ -17,35 +17,37 @@ export const evalDotState = (messages: Array<MessageData>, state: State) => {
   return state;
 };
 
-type StateDotProps = React.HTMLAttributes<HTMLDivElement> & DotVariants & { messages?: Array<MessageData> };
+export type StateDotProps = DotVariants & { messages?: Array<MessageData> };
 
-const StateDot = React.forwardRef<HTMLDivElement, StateDotProps>(({ state, messages = [], className, ...props }, ref) => {
-  const dotState = evalDotState(messages, state);
-  return (
-    <TooltipProvider>
-      <Tooltip delayDuration={500}>
-        <TooltipTrigger asChild>
-          <div
-            ref={ref}
-            className={cn(dot({ state: dotState }), className, 'ui-state-dot')}
-            data-state={dotState}
-            role='tooltip'
-            {...props}
-          />
-        </TooltipTrigger>
-        {messages.length > 0 && (
-          <TooltipContent collisionPadding={10} sideOffset={10}>
-            <Flex direction='column'>
-              {messages.map((msg, index) => (
-                <Message key={index} {...msg} />
-              ))}
-            </Flex>
-          </TooltipContent>
-        )}
-      </Tooltip>
-    </TooltipProvider>
-  );
-});
+const StateDot = React.forwardRef<HTMLDivElement, StateDotProps & React.HTMLAttributes<HTMLDivElement>>(
+  ({ state, messages = [], className, ...props }, ref) => {
+    const dotState = evalDotState(messages, state);
+    return (
+      <TooltipProvider>
+        <Tooltip delayDuration={500}>
+          <TooltipTrigger asChild>
+            <div
+              ref={ref}
+              className={cn(dot({ state: dotState }), className, 'ui-state-dot')}
+              data-state={dotState}
+              role='tooltip'
+              {...props}
+            />
+          </TooltipTrigger>
+          {messages.length > 0 && (
+            <TooltipContent collisionPadding={10} sideOffset={10}>
+              <Flex direction='column'>
+                {messages.map((msg, index) => (
+                  <Message key={index} {...msg} />
+                ))}
+              </Flex>
+            </TooltipContent>
+          )}
+        </Tooltip>
+      </TooltipProvider>
+    );
+  }
+);
 StateDot.displayName = 'StateDot';
 
 export { StateDot };

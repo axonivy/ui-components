@@ -14,7 +14,8 @@ import {
 } from './collapsible.css';
 import { Flex } from '@/components/common/flex/flex';
 import { IvyIcon } from '@/components/common/icon/icon';
-import { StateDot } from '@/components/common/state/state';
+import { StateDot, type StateDotProps } from '@/components/common/state/state';
+import { ButtonGroup, type ButtonGroupProps } from '@/components/common/button/button';
 
 /**
  * Collapsible, based on {@link https://www.radix-ui.com/docs/primitives/components/collapsible | Radix UI Collapsible}
@@ -69,19 +70,33 @@ const CollapsibleContent = React.forwardRef<React.ElementRef<typeof CollapsibleP
 );
 CollapsibleContent.displayName = CollapsiblePrimitive.Content.displayName;
 
-export type BasicCollapsibleProps = CollapsibleTriggerProps &
-  CollapsibleContentProps & {
+export type BasicCollapsibleProps = CollapsibleContentProps &
+  Partial<Pick<ButtonGroupProps, 'controls'>> & {
     label: string;
+    open?: boolean;
+    defaultOpen?: boolean;
+    state?: StateDotProps;
   };
 
-const BasicCollapsible = ({ label, state, control, ...props }: BasicCollapsibleProps) => (
-  <Collapsible>
-    <CollapsibleTrigger state={state} control={control}>
-      {label}
-    </CollapsibleTrigger>
-    <CollapsibleContent {...props} />
-  </Collapsible>
-);
+const BasicCollapsible = ({ label, open, defaultOpen, state, controls, ...props }: BasicCollapsibleProps) => {
+  const [openState, setOpenState] = React.useState(open || (state?.messages?.length ?? 0) > 0 || defaultOpen);
+  React.useEffect(() => {
+    if (open !== undefined) {
+      setOpenState(open);
+    }
+  }, [open]);
+  return (
+    <Collapsible open={openState} onOpenChange={setOpenState}>
+      <CollapsibleTrigger
+        state={<CollapsibleState {...state} />}
+        control={props => controls && <ButtonGroup controls={controls} {...props} />}
+      >
+        {label}
+      </CollapsibleTrigger>
+      <CollapsibleContent {...props} />
+    </Collapsible>
+  );
+};
 BasicCollapsible.displayName = 'BasicCollapsible';
 
 export { Collapsible, CollapsibleTrigger, CollapsibleState, CollapsibleContent, BasicCollapsible };

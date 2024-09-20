@@ -1,8 +1,15 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Collapsible, CollapsibleContent, CollapsibleState, CollapsibleTrigger, type CollapsibleControlProps } from './collapsible';
+import {
+  BasicCollapsible,
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleState,
+  CollapsibleTrigger,
+  type CollapsibleControlProps
+} from './collapsible';
 import { IvyIcons } from '@axonivy/ui-icons';
 import { ButtonGroup } from '@/components/common/button/button';
-import type { MessageData } from '@/components/common/message/message';
+import { Message, type MessageData } from '@/components/common/message/message';
 
 const meta: Meta<typeof Collapsible> = {
   title: 'Common/Collapsible',
@@ -69,6 +76,24 @@ export const Controls: Story = {
           <div>@stitches/react</div>
         </CollapsibleContent>
       </Collapsible>
+    );
+  }
+};
+
+export const Basic: StoryObj<typeof BasicCollapsible> = {
+  args: {
+    open: undefined,
+    state: { messages: [{ variant: 'warning', message: 'there is a warning in here' }] },
+    controls: [
+      { icon: IvyIcons.ArrowsMaximize, onClick: () => alert('Maximize'), title: 'Maximize' },
+      { icon: IvyIcons.Search, onClick: () => console.log('yey'), title: 'Search', toggle: true }
+    ]
+  },
+  render: props => {
+    return (
+      <BasicCollapsible {...props} label='Basic' defaultOpen={false}>
+        <Message variant='warning' message='there is a warning in here' />
+      </BasicCollapsible>
     );
   }
 };
