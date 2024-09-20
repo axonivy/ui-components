@@ -1,5 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Accordion, AccordionItem, AccordionContent, AccordionTrigger, AccordionState, type AccordionControlProps } from './accordion';
+import {
+  Accordion,
+  AccordionItem,
+  AccordionContent,
+  AccordionTrigger,
+  AccordionState,
+  type AccordionControlProps,
+  BasicAccordionItem
+} from './accordion';
 import { IvyIcons } from '@axonivy/ui-icons';
 import { ButtonGroup } from '@/components/common/button/button';
 
@@ -116,4 +124,26 @@ export const Controls: Story = {
       </Accordion>
     );
   }
+};
+
+export const Basic: StoryObj<typeof BasicAccordionItem> = {
+  render: () => (
+    <Accordion type='single' collapsible>
+      <BasicAccordionItem label='Sticky header'>
+        <div style={{ height: '100vh' }}>Very much content, so you need to scroll down to see all.</div>
+      </BasicAccordionItem>
+      <BasicAccordionItem label='With message' state={{ messages: [{ variant: 'warning', message: 'there is a warning in here' }] }}>
+        <div style={{ height: '100vh' }}>Yes. It comes with default styles that matches the other components&apos; aesthetic.</div>
+      </BasicAccordionItem>
+      <BasicAccordionItem
+        label='With controls'
+        controls={[
+          { icon: IvyIcons.ArrowsMaximize, onClick: () => alert('Maximize'), title: 'Maximize' },
+          { icon: IvyIcons.Search, onClick: () => console.log('yey'), title: 'Search', toggle: true }
+        ]}
+      >
+        <div style={{ height: '100vh' }}>Yes. It&apos;s animated by default, but you can disable it if you prefer.</div>
+      </BasicAccordionItem>
+    </Accordion>
+  )
 };
