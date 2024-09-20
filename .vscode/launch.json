@@ -10,8 +10,7 @@
       "request": "launch",
       "url": "http://localhost:6006",
       "preLaunchTask": "Start Dev Server",
-      "postDebugTask": "Terminate All Tasks",
-      "webRoot": "${workspaceFolder}/packages/components"
+      "postDebugTask": "Terminate All Tasks"
     }
   ]
 }
