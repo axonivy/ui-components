@@ -4,7 +4,7 @@ import type { CodeEditorProps } from './CodeEditor';
 import { CodeEditor } from './CodeEditor';
 import { useMove } from '@react-aria/interactions';
 
-type ResizableCodeEditorProps = Omit<CodeEditorProps, 'height' | 'context'> & {
+export type ResizableCodeEditorProps = Omit<CodeEditorProps, 'height'> & {
   initHeight?: number;
 };
 

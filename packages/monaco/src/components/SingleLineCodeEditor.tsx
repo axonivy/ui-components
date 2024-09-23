@@ -3,9 +3,9 @@ import type * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
 import type { CodeEditorProps } from './CodeEditor';
 import { CodeEditor } from './CodeEditor';
 import { MonacoEditorUtil, SINGLE_LINE_MONACO_OPTIONS } from '../monaco-editor-util';
-import { monacoAutoFocus } from './useCodeEditor';
+import { monacoAutoFocus } from './monaco-utils';
 
-type EditorOptions = {
+export type EditorOptions = {
   editorOptions?: {
     fixedOverflowWidgets?: boolean;
   };
@@ -17,7 +17,9 @@ type EditorOptions = {
   modifyAction?: (value: string) => string;
 };
 
-export const SingleLineCodeEditor = ({ onChange, onMountFuncs, editorOptions, keyActions, ...props }: CodeEditorProps & EditorOptions) => {
+export type SingleLineCodeEditorProps = CodeEditorProps & EditorOptions;
+
+export const SingleLineCodeEditor = ({ onChange, onMountFuncs, editorOptions, keyActions, ...props }: SingleLineCodeEditorProps) => {
   const mountFuncs = onMountFuncs ? onMountFuncs : [];
 
   const singleLineMountFuncs = (editor: monaco.editor.IStandaloneCodeEditor) => {
