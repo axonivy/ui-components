@@ -11,3 +11,12 @@ export function arraymove<TArr>(arr: TArr[], fromIndex: number, toIndex: number)
   arr.splice(fromIndex, 1);
   arr.splice(toIndex, 0, element);
 }
+
+export function groupBy<T>(artifacts: T[], resolveKey: (t: T) => string) {
+  return artifacts.reduce<Record<string, T[]>>((prev, curr) => {
+    const groupKey = resolveKey(curr);
+    const group = prev[groupKey] || [];
+    group.push(curr);
+    return { ...prev, [groupKey]: group };
+  }, {});
+}
