@@ -34,6 +34,11 @@ export const dndRow = style({
     '&[data-drop-target-state=true]': {
       borderTop: vars.border.active,
       borderTopWidth: 2
+    },
+    '&[data-drag-state=true] ~ &[data-drop-target-state=true]': {
+      borderTop: vars.border.basic,
+      borderBottom: vars.border.active,
+      borderBottomWidth: 2
     }
   }
 });
