@@ -6,12 +6,12 @@ export const useShortcut = (key: string, callback: () => void, modifiers?: { ctr
     callbackRef.current = callback;
   });
 
+  const ctrl = modifiers ? modifiers.ctrl : true;
+  const alt = modifiers ? modifiers.alt : true;
+  const shift = modifiers ? modifiers.shift : false;
+
   const handleKeyPress = useCallback(
     (event: KeyboardEvent) => {
-      const ctrl = modifiers ? modifiers.ctrl : true;
-      const alt = modifiers ? modifiers.alt : true;
-      const shift = modifiers ? modifiers.shift : false;
-
       const ctrlNotRequiredOrPressed = !ctrl || (isMac() ? event.metaKey : event.ctrlKey);
       const altNotRequiredOrPressed = !alt || event.altKey;
       const shiftNotRequiredOrPressed = !shift || event.shiftKey;
@@ -20,13 +20,16 @@ export const useShortcut = (key: string, callback: () => void, modifiers?: { ctr
         callbackRef.current();
       }
     },
-    [key, modifiers]
+    [key, ctrl, alt, shift]
   );
 
   useEffect(() => {
     document.addEventListener('keydown', handleKeyPress);
     return () => document.removeEventListener('keydown', handleKeyPress);
   });
+
+  const shortcutParts = [ctrl ? (isMac() ? 'Cmd' : 'Ctrl') : '', alt ? 'Alt' : '', shift ? 'Shift' : '', key.toUpperCase()];
+  return shortcutParts.filter(part => part.length !== 0).join('+');
 };
 
 const isMac = () => {
