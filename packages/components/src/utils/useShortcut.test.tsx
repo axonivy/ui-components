@@ -1,5 +1,6 @@
 import { useShortcut } from '@/utils/useShortcut';
-import { fireEvent, render } from '@testing-library/react';
+import { render } from '@testing-library/react';
+import { userEvent } from 'test-utils';
 
 type TestComponentProps = {
   shortcutKey: string;
@@ -12,41 +13,41 @@ const TestComponent = ({ shortcutKey: key, callback, modifiers }: TestComponentP
   return <div>Test Component</div>;
 };
 
-test('default', () => {
+test('default', async () => {
   let shortcutTriggered = false;
   render(<TestComponent shortcutKey={'a'} callback={() => (shortcutTriggered = true)} />);
 
-  fireEvent.keyDown(document, { key: 'a', ctrlKey: true, shiftKey: true });
+  await userEvent.keyboard('{Control>}{Shift>}{a}');
   expect(shortcutTriggered).toBeFalsy();
 
-  fireEvent.keyDown(document, { key: 'a', altKey: true, shiftKey: true });
+  await userEvent.keyboard('{Alt>}{Shift>}{a}');
   expect(shortcutTriggered).toBeFalsy();
 
-  fireEvent.keyDown(document, { key: 'z', ctrlKey: true, altKey: true });
+  await userEvent.keyboard('{Control>}{Alt>}{z}');
   expect(shortcutTriggered).toBeFalsy();
 
-  fireEvent.keyDown(document, { key: 'a', ctrlKey: true, altKey: true });
+  await userEvent.keyboard('{Control>}{Alt>}{a}');
   expect(shortcutTriggered).toBeTruthy();
 });
 
-test('custom', () => {
+test('custom', async () => {
   let shortcutTriggered = false;
   render(<TestComponent shortcutKey={'a'} callback={() => (shortcutTriggered = true)} modifiers={{ shift: true }} />);
 
-  fireEvent.keyDown(document, { key: 'a', ctrlKey: true });
+  await userEvent.keyboard('{Control>}{a}');
   expect(shortcutTriggered).toBeFalsy();
 
-  fireEvent.keyDown(document, { key: 'a', altKey: true });
+  await userEvent.keyboard('{Alt>}{a}');
   expect(shortcutTriggered).toBeFalsy();
 
-  fireEvent.keyDown(document, { key: 'z', shiftKey: true });
+  await userEvent.keyboard('{Shift>}{z}');
   expect(shortcutTriggered).toBeFalsy();
 
-  fireEvent.keyDown(document, { key: 'a', shiftKey: true });
+  await userEvent.keyboard('{Shift>}{a}');
   expect(shortcutTriggered).toBeTruthy();
 });
 
-test('mac', () => {
+test('mac', async () => {
   Object.defineProperty(window.navigator, 'userAgent', {
     value: 'Mac'
   });
@@ -54,9 +55,9 @@ test('mac', () => {
   let shortcutTriggered = false;
   render(<TestComponent shortcutKey={'a'} callback={() => (shortcutTriggered = true)} />);
 
-  fireEvent.keyDown(document, { key: 'a', ctrlKey: true, altKey: true });
+  await userEvent.keyboard('{Control>}{Alt>}{a}');
   expect(shortcutTriggered).toBeFalsy();
 
-  fireEvent.keyDown(document, { key: 'a', metaKey: true, altKey: true });
+  await userEvent.keyboard('{Meta>}{Alt>}{a}');
   expect(shortcutTriggered).toBeTruthy();
 });
