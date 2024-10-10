@@ -90,6 +90,7 @@ export type Browser = {
   icon: IvyIcons;
   browser: ReturnType<typeof useBrowser>;
   header?: React.ReactNode;
+  footer?: React.ReactNode;
   emptyMessage?: string;
   infoProvider?: (row?: Row<BrowserNode>) => React.ReactNode;
   applyModifier?: (row: Row<BrowserNode>) => BrowserResult;
@@ -144,7 +145,7 @@ const BrowsersView = ({ browsers, apply, applyBtn }: BrowsersViewProps) => {
         </TabsList>
 
         <Flex direction='column' gap={1} justifyContent='space-between' className={cn(fullHeight, overflowAuto)}>
-          {browsers.map(({ name, header, emptyMessage, browser: { table, globalFilter } }) => (
+          {browsers.map(({ name, header, footer, emptyMessage, browser: { table, globalFilter } }) => (
             <TabsContent key={name} value={name} asChild>
               <Flex direction='column' gap={1} className={cn(fullHeight, overflowAuto)}>
                 {header}
@@ -176,6 +177,7 @@ const BrowsersView = ({ browsers, apply, applyBtn }: BrowsersViewProps) => {
                     </TableBody>
                   </Table>
                 </div>
+                {footer}
               </Flex>
             </TabsContent>
           ))}
