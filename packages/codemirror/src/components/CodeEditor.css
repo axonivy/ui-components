@@ -1,0 +1,41 @@
+.code-editor {
+  background: var(--N25);
+  position: relative;
+}
+.code-editor .cm-focused {
+  outline: none;
+}
+.code-editor .cm-content {
+  padding: 0;
+}
+.code-editor .cm-line {
+  padding: 0;
+  padding-left: 1px;
+}
+.code-editor .cm-highlightSpace {
+  background-image: radial-gradient(circle at 50% 55%, rgb(150 150 150 / 0.3) 20%, transparent 5%);
+}
+.code-editor .cm-placeholder {
+  white-space: nowrap;
+  font-size: 12px;
+  font-style: italic;
+  color: var(--N500);
+}
+
+.code-editor .code-input {
+  border-radius: var(--border-r1);
+  border: var(--input-border);
+  font-size: 12px;
+  line-height: 12px;
+  color: var(--body);
+  text-align: start;
+  padding: var(--input-padding);
+}
+
+.code-editor .code-input:focus-within {
+  border: var(--activ-border);
+}
+
+.code-editor .header .type {
+  height: 100%;
+}

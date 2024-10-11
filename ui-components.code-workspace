@@ -18,6 +18,10 @@
     {
       "name": "package/jsonrpc",
       "path": "./packages/jsonrpc"
+    },
+    {
+      "name": "package/codemirror",
+      "path": "./packages/codemirror"
     }
   ],
   "settings": {

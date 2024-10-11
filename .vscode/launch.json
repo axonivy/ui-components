@@ -12,6 +12,15 @@
       "preLaunchTask": "Start Dev Server",
       "postDebugTask": "Terminate All Tasks",
       "webRoot": "${workspaceFolder}/packages/components"
+    },
+    {
+      "name": "CodeMirror (Chrome)",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:5173",
+      "preLaunchTask": "Start CodeMirror Dev Server",
+      "postDebugTask": "Terminate All Tasks",
+      "webRoot": "${workspaceFolder}/packages/codemirror"
     }
   ]
 }
