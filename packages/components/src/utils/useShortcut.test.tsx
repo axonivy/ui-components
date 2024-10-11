@@ -1,5 +1,5 @@
 import { useShortcut } from '@/utils/useShortcut';
-import { render } from '@testing-library/react';
+import { render, renderHook } from '@testing-library/react';
 import { userEvent } from 'test-utils';
 
 type TestComponentProps = {
@@ -48,8 +48,10 @@ test('custom', async () => {
 });
 
 test('mac', async () => {
+  const originalUserAgent = window.navigator.userAgent;
   Object.defineProperty(window.navigator, 'userAgent', {
-    value: 'Mac'
+    value: 'Mac',
+    configurable: true
   });
 
   let shortcutTriggered = false;
@@ -60,4 +62,34 @@ test('mac', async () => {
 
   await userEvent.keyboard('{Meta>}{Alt>}{a}');
   expect(shortcutTriggered).toBeTruthy();
+
+  Object.defineProperty(window.navigator, 'userAgent', {
+    value: originalUserAgent,
+    configurable: true
+  });
+});
+
+test('shortcut string', () => {
+  let view = renderHook(() => useShortcut('a', () => {}));
+  expect(view.result.current).toEqual('Ctrl+Alt+A');
+
+  view = renderHook(() => useShortcut('b', () => {}, { shift: true }));
+  expect(view.result.current).toEqual('Shift+B');
+
+  view = renderHook(() => useShortcut('c', () => {}, {}));
+  expect(view.result.current).toEqual('C');
+
+  const originalUserAgent = window.navigator.userAgent;
+  Object.defineProperty(window.navigator, 'userAgent', {
+    value: 'Mac',
+    configurable: true
+  });
+
+  view = renderHook(() => useShortcut('d', () => {}, { ctrl: true, alt: true, shift: true }));
+  expect(view.result.current).toEqual('Cmd+Alt+Shift+D');
+
+  Object.defineProperty(window.navigator, 'userAgent', {
+    value: originalUserAgent,
+    configurable: true
+  });
 });
