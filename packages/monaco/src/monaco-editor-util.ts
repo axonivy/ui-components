@@ -4,7 +4,7 @@ import { ivyScriptConf, ivyScriptLang } from './ivy-script-language';
 
 import type * as monacoEditorReact from '@monaco-editor/react';
 import { Deferred } from './utils/promises-util';
-import { MonacoUtil, type MonacoEditorApi, type MonacoLanguageClientConfig, type MonacoWorkerConfig } from './monaco-util';
+import { MonacoUtil, type MonacoEditorApi, /*type MonacoLanguageClientConfig,*/ type MonacoWorkerConfig } from './monaco-util';
 import { ConsoleTimer } from './utils/console-util';
 export type MonacoEditorReactApi = typeof monacoEditorReact;
 
@@ -142,10 +142,12 @@ export interface MonacoLoaderConfig {
 export interface MonacoConfiguration {
   loader?: MonacoLoaderConfig;
   worker?: MonacoWorkerConfig;
-  languageClient?: MonacoLanguageClientConfig;
+  // languageClient?: MonacoLanguageClientConfig;
   theme?: ThemeMode;
   debug?: boolean;
 }
+
+const socket = new WebSocket('ws://localhost:8081/ivy-script-lsp');
 
 export async function configureMonacoReactEditor(configuration?: MonacoConfiguration): Promise<MonacoEditorApi> {
   const timer = new ConsoleTimer(configuration?.debug, 'Configure Monaco React Editor');
@@ -162,7 +164,7 @@ export async function configureMonacoReactEditor(configuration?: MonacoConfigura
   // configure Monaco environment, must be called after configuring monaco
   timer.step('Start configuring Monaco Environment...');
   await MonacoUtil.configureEnvironment({
-    languageClient: configuration?.languageClient,
+    // languageClient: configuration?.languageClient,
     worker: configuration?.worker,
     debug: configuration?.debug
   });
@@ -179,6 +181,90 @@ export async function configureMonacoReactEditor(configuration?: MonacoConfigura
     extensions: ['.ivyMacro', '.ivyMacro'],
     aliases: []
   });
+
+  function sendLSPRequest(method, params) {
+    const message = {
+      jsonrpc: '2.0',
+      id: Date.now(),
+      method: method,
+      params: params
+    };
+    socket.send(JSON.stringify(message));
+  }
+
+  function initializeLSP() {
+    const initializeParams = {
+      processId: null,
+      rootUri: null,
+      capabilities: {
+        textDocument: {
+          completion: {
+            dynamicRegistration: true,
+            completionItem: {
+              snippetSupport: true
+            }
+          }
+        }
+      }
+    };
+    sendLSPRequest('initialize', initializeParams);
+  }
+
+  socket.onopen = () => initializeLSP();
+
+  monacoApi.languages.registerCompletionItemProvider('ivyScript', {
+    provideCompletionItems: (model, position, context, token) => {
+      return new Promise(resolve => {
+        const wordInfo = model.getWordUntilPosition(position);
+        const params = {
+          textDocument: { uri: model.uri.toString() },
+          position: {
+            line: position.lineNumber - 1,
+            character: position.column - 1
+          },
+          context: { triggerKind: 1 }
+        };
+
+        function initializeLSP() {
+          const initializeParams = {
+            processId: null,
+            rootUri: null,
+            capabilities: {
+              textDocument: {
+                completion: {
+                  dynamicRegistration: true,
+                  completionItem: {
+                    snippetSupport: true
+                  }
+                }
+              }
+            }
+          };
+          sendLSPRequest('initialize', initializeParams);
+        }
+        initializeLSP();
+
+        sendLSPRequest('textDocument/didOpen', { textDocument: { uri: model.uri.toString() } });
+        sendLSPRequest('textDocument/completion', params);
+
+        // This is a simplification. In a real scenario, you'd need to
+        // match the response to the request using the message ID.
+        socket.addEventListener('message', function responseHandler(event) {
+          const response = JSON.parse(event.data);
+          if (response.method === 'textDocument/completion') {
+            const suggestions = response.result.items.map(item => ({
+              label: item.label,
+              kind: monaco.languages.CompletionItemKind[item.kind] || monaco.languages.CompletionItemKind.Text,
+              insertText: item.insertText || item.label
+            }));
+            resolve({ suggestions });
+            socket.removeEventListener('message', responseHandler);
+          }
+        });
+      });
+    }
+  });
+
   monacoApi.languages.setLanguageConfiguration('ivyScript', ivyScriptConf);
   monacoApi.languages.setMonarchTokensProvider('ivyScript', ivyScriptLang);
   monacoApi.languages.setLanguageConfiguration('ivyMacro', ivyMacroConf);

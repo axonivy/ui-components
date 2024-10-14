@@ -1,7 +1,7 @@
 import { Deferred } from './utils/promises-util';
 
-import type * as monacoLanguageClient from 'monaco-languageclient';
-export type MonacoLanguageClient = typeof monacoLanguageClient;
+// import type * as monacoLanguageClient from 'monaco-languageclient';
+// export type MonacoLanguageClient = typeof monacoLanguageClient;
 
 import type * as monacoEditorWorkers from 'monaco-editor-workers';
 export type MonacoEditorWorkers = typeof monacoEditorWorkers;
@@ -25,22 +25,22 @@ export interface MonacoWorkerConfig {
   debug?: boolean;
 }
 
-export interface MonacoLanguageClientConfig extends monacoLanguageClient.InitializeServiceConfig {
-  initializationDelay?: number;
-  initializationMaxTries?: number;
+// export interface MonacoLanguageClientConfig extends monacoLanguageClient.InitializeServiceConfig {
+//   initializationDelay?: number;
+//   initializationMaxTries?: number;
 
-  skip?: boolean;
-  debug?: boolean;
-}
+//   skip?: boolean;
+//   debug?: boolean;
+// }
 
 export namespace MonacoUtil {
-  let monacoLanguageClientPromise: Promise<MonacoLanguageClient>;
-  export async function monacoLanguageClient(): Promise<MonacoLanguageClient> {
-    if (!monacoLanguageClientPromise) {
-      monacoLanguageClientPromise = import('monaco-languageclient');
-    }
-    return monacoLanguageClientPromise;
-  }
+  // let monacoLanguageClientPromise: Promise<MonacoLanguageClient>;
+  // export async function monacoLanguageClient(): Promise<MonacoLanguageClient> {
+  //   if (!monacoLanguageClientPromise) {
+  //     monacoLanguageClientPromise = import('monaco-languageclient');
+  //   }
+  //   return monacoLanguageClientPromise;
+  // }
 
   let monacoEditorWorkersPromise: Promise<MonacoEditorWorkers>;
   export async function monacoEditorWorkers(): Promise<MonacoEditorWorkers> {
@@ -63,20 +63,20 @@ export namespace MonacoUtil {
    * If complete, the vscodeApiInitialised will be set on the MonacoEnvironment.
    * You can query this flag through the 'monacoInitialized' function.
    */
-  export async function configureLanguageClient(config?: MonacoLanguageClientConfig): Promise<void> {
-    if (config?.skip) {
-      logIf(config.debug, 'Skip Monaco Language Client Configuration.');
-      return;
-    }
-    const timer = new ConsoleTimer(config?.debug, 'Configure Language Client');
-    timer.start();
-    timer.step('Start initializing Services and VS Code Extension API...');
-    const languageClient = await monacoLanguageClient();
-    await languageClient.initServices(config);
-    timer.step('Waiting for VS Code API to be initialized...');
-    await monacoInitialized(config?.initializationDelay, config?.initializationMaxTries);
-    timer.end();
-  }
+  // export async function configureLanguageClient(config?: MonacoLanguageClientConfig): Promise<void> {
+  //   if (config?.skip) {
+  //     logIf(config.debug, 'Skip Monaco Language Client Configuration.');
+  //     return;
+  //   }
+  //   const timer = new ConsoleTimer(config?.debug, 'Configure Language Client');
+  //   timer.start();
+  //   timer.step('Start initializing Services and VS Code Extension API...');
+  //   const languageClient = await monacoLanguageClient();
+  //   await languageClient.initServices(config);
+  //   timer.step('Waiting for VS Code API to be initialized...');
+  //   await monacoInitialized(config?.initializationDelay, config?.initializationMaxTries);
+  //   timer.end();
+  // }
 
   /**
    * Ensures that we have the necessary MonacoEnvironment.getWorker function available.
@@ -129,31 +129,33 @@ export namespace MonacoUtil {
 
   export async function configureEnvironment(config?: {
     worker?: MonacoWorkerConfig;
-    languageClient?: MonacoLanguageClientConfig;
+    // languageClient?: MonacoLanguageClientConfig;
     debug?: boolean;
   }): Promise<void> {
     await Promise.all([
-      MonacoUtil.configureWorkers({ ...config?.worker, debug: config?.worker?.debug ?? config?.debug }),
-      MonacoUtil.configureLanguageClient({ ...config?.languageClient, debug: config?.languageClient?.debug ?? config?.debug })
+      MonacoUtil.configureWorkers({ ...config?.worker, debug: config?.worker?.debug ?? config?.debug })
+      // MonacoUtil.configureLanguageClient({ ...config?.languageClient, debug: config?.languageClient?.debug ?? config?.debug })
     ]);
   }
 
   export async function monacoInitialized(delay: number = 100, maxTries: number = 30): Promise<void> {
     const deferred = new Deferred<void>();
-    let tries = 0;
+    // const tries = 0;
+    console.log(delay, maxTries);
     const initializationCheck = async () => {
-      try {
-        tries += 1;
-        if ((await monacoLanguageClient()).wasVscodeApiInitialized()) {
-          deferred.resolve();
-        } else if (tries < maxTries) {
-          setTimeout(initializationCheck, delay);
-        } else {
-          deferred.reject(new Error('Monaco initialization timed out.'));
-        }
-      } catch (error) {
-        deferred.reject(error);
-      }
+      deferred.resolve();
+      // try {
+      //   tries += 1;
+      //   if ((await monacoLanguageClient()).wasVscodeApiInitialized()) {
+      //     deferred.resolve();
+      //   } else if (tries < maxTries) {
+      //     setTimeout(initializationCheck, delay);
+      //   } else {
+      //     deferred.reject(new Error('Monaco initialization timed out.'));
+      //   }
+      // } catch (error) {
+      //   deferred.reject(error);
+      // }
     };
     initializationCheck();
     return deferred.promise;

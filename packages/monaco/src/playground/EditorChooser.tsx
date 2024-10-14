@@ -1,10 +1,10 @@
 import { BasicField, BasicSelect, Flex, Separator } from '@axonivy/ui-components';
 import { useState } from 'react';
 import { IvyScriptEditor } from './IvyScriptEditor';
-import { IvyScriptArea } from './IvyScriptArea';
-import { IvyScriptInput } from './IvyScriptInput';
-import { IvyMacroArea } from './IvyMacroArea';
-import { IvyMacroInput } from './IvyMacroInput';
+// import { IvyScriptArea } from './IvyScriptArea';
+// import { IvyScriptInput } from './IvyScriptInput';
+// import { IvyMacroArea } from './IvyMacroArea';
+// import { IvyMacroInput } from './IvyMacroInput';
 
 const editors = [
   { value: 'IvyScriptEditor', label: 'IvyScript Editor' },
@@ -24,10 +24,10 @@ export const EditorChooser = () => {
       </BasicField>
       <Separator />
       {editor === 'IvyScriptEditor' && <IvyScriptEditor />}
-      {editor === 'IvyScriptArea' && <IvyScriptArea />}
+      {/* {editor === 'IvyScriptArea' && <IvyScriptArea />}
       {editor === 'IvyScriptInput' && <IvyScriptInput />}
       {editor === 'IvyMacroArea' && <IvyMacroArea />}
-      {editor === 'IvyMacroInput' && <IvyMacroInput />}
+      {editor === 'IvyMacroInput' && <IvyMacroInput />} */}
     </Flex>
   );
 };
