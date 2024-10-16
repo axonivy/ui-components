@@ -97,6 +97,7 @@ const Combobox = <T extends ComboboxOption>({
               rotate={90}
               aria-label='toggle menu'
               disabled={readonly || disabled}
+              type='button'
             />
           </InputGroup>
         </PopoverAnchor>
