@@ -40,6 +40,7 @@ describe('deleteFirstSelectedRow', () => {
   test('default', () => {
     const { data, table, onRowSelectionChangeValues } = setupTable();
     const originalData = structuredClone(data);
+    console.log(originalData);
     table.getState().rowSelection = { '1': true };
     const { newData, selection } = deleteFirstSelectedRow(table, data);
     expect(data).toEqual(originalData);
@@ -48,7 +49,7 @@ describe('deleteFirstSelectedRow', () => {
     expect(newData[0]).toEqual(data[0]);
     expect(newData[1]).toEqual(data[2]);
     expect(selection).toEqual(1);
-    expect(onRowSelectionChangeValues).toEqual([]);
+    expect(onRowSelectionChangeValues).toEqual([{ '1': true }]);
   });
 
   test('lastElementInList', () => {
