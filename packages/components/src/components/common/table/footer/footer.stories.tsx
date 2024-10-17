@@ -9,6 +9,7 @@ import * as React from 'react';
 import { IvyIcons } from '@axonivy/ui-icons';
 import { Button } from '@/components/common/button/button';
 import { BasicField } from '@/components/common/field/field';
+import { deleteAllSelectedRows } from '@/utils/table/table';
 
 const meta: Meta<typeof Table> = {
   title: 'Common/Table/Footer',
@@ -114,4 +115,68 @@ function AddRemoveTableDemo() {
 
 export const AddRemove: Story = {
   render: () => <AddRemoveTableDemo />
+};
+
+function RemoveMultipleTableDemo() {
+  const [data, setData] = React.useState(tableData);
+
+  const addRow = () => {
+    const newData = [...data];
+    newData.push({ id: 'new', amount: 0, email: '', status: 'pending' });
+    setData(newData);
+  };
+
+  const removeRow = () => {
+    const { newData: newFields } = deleteAllSelectedRows(table, data);
+    let newData = structuredClone(data);
+    newData = newFields;
+    setData(newData);
+  };
+
+  const tableSelection = useTableSelect<Payment>();
+  const table = useReactTable({
+    ...tableSelection.options,
+    enableMultiRowSelection: true,
+    data,
+    columns,
+    getCoreRowModel: getCoreRowModel(),
+    state: {
+      ...tableSelection.tableState
+    }
+  });
+
+  return (
+    <BasicField
+      label='Table'
+      control={table.getSelectedRowModel().rows.length > 0 && <Button icon={IvyIcons.Trash} aria-label='Remove row' onClick={removeRow} />}
+    >
+      <Table>
+        <TableHeader>
+          {table.getHeaderGroups().map(headerGroup => (
+            <TableRow key={headerGroup.id} onClick={() => tableSelection.options.onRowSelectionChange({})}>
+              {headerGroup.headers.map(header => (
+                <TableHead key={header.id} colSpan={header.colSpan}>
+                  {flexRender(header.column.columnDef.header, header.getContext())}
+                </TableHead>
+              ))}
+            </TableRow>
+          ))}
+        </TableHeader>
+        <TableBody>
+          {table.getRowModel().rows.map(row => (
+            <SelectRow key={row.id} row={row}>
+              {row.getVisibleCells().map(cell => (
+                <TableCell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
+              ))}
+            </SelectRow>
+          ))}
+        </TableBody>
+      </Table>
+      <TableAddRow addRow={addRow} />
+    </BasicField>
+  );
+}
+
+export const RemoveMultiple: Story = {
+  render: () => <RemoveMultipleTableDemo />
 };
