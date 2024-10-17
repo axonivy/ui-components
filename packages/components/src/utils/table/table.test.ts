@@ -48,7 +48,7 @@ describe('deleteFirstSelectedRow', () => {
     expect(newData[0]).toEqual(data[0]);
     expect(newData[1]).toEqual(data[2]);
     expect(selection).toEqual(1);
-    expect(onRowSelectionChangeValues).toEqual([]);
+    expect(onRowSelectionChangeValues).toEqual([{ '1': true }]);
   });
 
   test('lastElementInList', () => {

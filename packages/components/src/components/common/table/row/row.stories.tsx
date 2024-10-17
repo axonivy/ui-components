@@ -6,7 +6,8 @@ import { useTableSelect } from '../hooks/hooks';
 import { Fragment } from 'react/jsx-runtime';
 import * as React from 'react';
 import { tableData, type Payment } from '../data';
-import { arraymove, indexOf } from '@/utils/array';
+import { arraymove, arrayMoveMultiple, indexOf } from '@/utils/array';
+import { handleMultiSelectOnCtrlRowClick, resetAndSetRowSelection } from '@/utils/table/table';
 
 const meta: Meta<typeof Table> = {
   title: 'Common/Table/Row',
@@ -182,6 +183,85 @@ export const Reorder: Story = {
         <TableBody>
           {table.getRowModel().rows.map(row => (
             <ReorderRow key={row.id} row={row} id={row.original.id} updateOrder={updateOrder}>
+              {row.getVisibleCells().map(cell => (
+                <TableCell key={cell.id} onClick={() => table.options.meta?.updateData(row.id, cell.column.id, cell.getValue() + '1')}>
+                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                </TableCell>
+              ))}
+            </ReorderRow>
+          ))}
+        </TableBody>
+      </Table>
+    );
+  }
+};
+
+export const MultiSelectWithReorder: Story = {
+  render: () => {
+    const [data, setData] = React.useState(tableData);
+
+    const reorderColumns: ColumnDef<Payment>[] = [
+      {
+        accessorKey: 'status',
+        header: () => <span>Status</span>,
+        cell: ({ row }) => <div>{row.getValue('status')}</div>,
+        minSize: 50
+      },
+      {
+        accessorKey: 'email',
+        header: () => <span>Email</span>,
+        cell: ({ row }) => (
+          <ReorderHandleWrapper>
+            <div>{row.getValue('email')}</div>
+          </ReorderHandleWrapper>
+        )
+      }
+    ];
+    const rowSelection = useTableSelect<Payment>();
+    const table = useReactTable({
+      ...rowSelection.options,
+      enableMultiRowSelection: true,
+      data,
+      columns: reorderColumns,
+      getCoreRowModel: getCoreRowModel(),
+      state: {
+        ...rowSelection.tableState
+      }
+    });
+
+    const updateOrder = (moveId: string, targetId: string) => {
+      const selectedRows = table.getSelectedRowModel().flatRows.map(r => r.original.id);
+      const moveIds = selectedRows.length > 1 ? selectedRows : [moveId];
+      const moveIndexes = moveIds.map(moveId => indexOf(data, obj => obj.id === moveId));
+      const toIndex = indexOf(data, obj => obj.id === targetId);
+      arrayMoveMultiple(data, moveIndexes, toIndex);
+      setData([...data]);
+      resetAndSetRowSelection(table, data, moveIds, row => row.id);
+    };
+
+    return (
+      <Table>
+        <TableHeader>
+          {table.getHeaderGroups().map(headerGroup => (
+            <TableRow key={headerGroup.id}>
+              {headerGroup.headers.map(header => (
+                <TableHead key={header.id} colSpan={header.colSpan}>
+                  {flexRender(header.column.columnDef.header, header.getContext())}
+                </TableHead>
+              ))}
+            </TableRow>
+          ))}
+        </TableHeader>
+        <TableBody>
+          {table.getRowModel().rows.map(row => (
+            <ReorderRow
+              key={row.id}
+              row={row}
+              id={row.original.id}
+              updateOrder={updateOrder}
+              onDrag={!row.getIsSelected() ? () => table.resetRowSelection() : undefined}
+              onClick={event => handleMultiSelectOnCtrlRowClick(table, row, event)}
+            >
               {row.getVisibleCells().map(cell => (
                 <TableCell key={cell.id} onClick={() => table.options.meta?.updateData(row.id, cell.column.id, cell.getValue() + '1')}>
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}

@@ -30,10 +30,62 @@ const adjustSelectionAfterDeletionOfRow = <TData>(data: Array<TData>, table: Tab
   if (data.length === 0) {
     selectRow(table);
     return;
-  } else if (row.index === data.length) {
+  }
+
+  if (row.index >= data.length) {
     const selection = data.length - 1;
     selectRow(table, String(selection));
     return selection;
   }
-  return row.index;
+
+  const selection = row.index;
+  selectRow(table, String(selection));
+  return selection;
+};
+
+export const deleteAllSelectedRows = <TData>(table: Table<TData>, data: Array<TData>) => {
+  const selectedRows = table.getSelectedRowModel().flatRows;
+  if (selectedRows.length === 0) {
+    return { newData: data };
+  }
+  const newData = structuredClone(data);
+  const rowIndicesToDelete = selectedRows.map(row => row.index).sort((a, b) => b - a);
+  for (const rowIndex of rowIndicesToDelete) {
+    newData.splice(rowIndex, 1);
+  }
+
+  const selection = adjustSelectionAfterDeletionOfRow(newData, table, selectedRows[0]);
+  return { newData, selection };
+};
+
+export const resetAndSetRowSelection = <TData>(
+  table: Table<TData>,
+  data: Array<TData>,
+  moveIds: string[],
+  getRowId: (row: TData) => string
+) => {
+  table.resetRowSelection();
+  const newSelection: Record<number, boolean> = data.reduce((acc: Record<number, boolean>, row, index) => {
+    if (moveIds.includes(getRowId(row))) {
+      acc[index] = true;
+    }
+    return acc;
+  }, {});
+  table.setRowSelection(newSelection);
+};
+
+export const handleMultiSelectOnCtrlRowClick = <TData>(
+  table: Table<TData>,
+  row: Row<TData>,
+  event: React.MouseEvent<HTMLTableRowElement, MouseEvent>
+) => {
+  const isMultiSelect = event.ctrlKey || event.metaKey;
+  const currentSelection = table.getState().rowSelection;
+
+  if (isMultiSelect) {
+    const newSelection = { ...currentSelection, [row.id]: !currentSelection[row.id] };
+    table.setRowSelection(newSelection);
+  } else {
+    selectRow(table, row.id);
+  }
 };
