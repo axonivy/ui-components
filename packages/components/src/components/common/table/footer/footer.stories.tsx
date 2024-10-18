@@ -9,15 +9,29 @@ import * as React from 'react';
 import { IvyIcons } from '@axonivy/ui-icons';
 import { Button } from '@/components/common/button/button';
 import { BasicField } from '@/components/common/field/field';
+import { deleteAllSelectedRows } from '@/utils/table/table';
 
-const meta: Meta<typeof Table> = {
+interface TableStoryProps {
+  enableMultiselect: boolean;
+}
+
+const meta: Meta<TableStoryProps> = {
   title: 'Common/Table/Footer',
-  component: Table
+  component: AddRemoveTableDemo,
+  argTypes: {
+    enableMultiselect: {
+      control: 'boolean',
+      description: 'Toggle for enabling or disabling multi-select'
+    }
+  },
+  args: {
+    enableMultiselect: false
+  }
 };
 
 export default meta;
 
-type Story = StoryObj<typeof Table>;
+type Story = StoryObj<TableStoryProps>;
 
 const columns: ColumnDef<Payment>[] = [
   {
@@ -48,7 +62,7 @@ const columns: ColumnDef<Payment>[] = [
   }
 ];
 
-function AddRemoveTableDemo() {
+function AddRemoveTableDemo({ enableMultiselect }: { enableMultiselect: boolean }) {
   const [data, setData] = React.useState(tableData);
 
   const addRow = () => {
@@ -58,20 +72,16 @@ function AddRemoveTableDemo() {
   };
 
   const removeRow = () => {
-    const index = table.getRowModel().rowsById[Object.keys(tableSelection.tableState.rowSelection!)[0]].index;
-    const newData = [...data];
-    newData.splice(index, 1);
-    if (newData.length === 0) {
-      tableSelection.options.onRowSelectionChange({});
-    } else if (index === data.length - 1) {
-      tableSelection.options.onRowSelectionChange({ [`${newData.length - 1}`]: true });
-    }
+    const { newData: newFields } = deleteAllSelectedRows(table, data);
+    let newData = structuredClone(data);
+    newData = newFields;
     setData(newData);
   };
 
   const tableSelection = useTableSelect<Payment>();
   const table = useReactTable({
     ...tableSelection.options,
+    enableMultiRowSelection: enableMultiselect,
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
@@ -113,5 +123,5 @@ function AddRemoveTableDemo() {
 }
 
 export const AddRemove: Story = {
-  render: () => <AddRemoveTableDemo />
+  render: args => <AddRemoveTableDemo enableMultiselect={args.enableMultiselect} />
 };

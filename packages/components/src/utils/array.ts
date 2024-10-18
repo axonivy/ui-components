@@ -20,3 +20,14 @@ export function groupBy<T>(artifacts: T[], resolveKey: (t: T) => string) {
     return { ...prev, [groupKey]: group };
   }, {});
 }
+
+export function arrayMoveMultiple<TArr>(arr: TArr[], fromIndexes: number[], toIndex: number) {
+  const sortedFromIndexes = [...fromIndexes].sort((a, b) => a - b);
+  const elementsToMove = sortedFromIndexes.map(index => arr[index]);
+  for (let i = sortedFromIndexes.length - 1; i >= 0; i--) {
+    arr.splice(sortedFromIndexes[i], 1);
+  }
+  const index = sortedFromIndexes[sortedFromIndexes.length - 1] < toIndex ? toIndex - elementsToMove.length + 1 : toIndex;
+  arr.splice(index, 0, ...elementsToMove);
+  return arr;
+}
