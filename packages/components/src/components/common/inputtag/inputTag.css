@@ -1,0 +1,35 @@
+.input-tag-output {
+  border-radius: var(--border-r1);
+  border: var(--input-border);
+  background: var(--N25);
+  font-size: 12px;
+  line-height: 12px;
+  color: var(--body);
+  text-align: start;
+  padding: var(--input-padding);
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  min-height: 14px;
+}
+.input-tag-output .input-tag-line {
+  height: 20px;
+  white-space: pre-wrap;
+}
+
+.input-tag-output .input-tag {
+  color: var(--body);
+  padding: 2px 0.24em;
+  background-color: var(--background);
+  border-radius: var(--border-r1);
+  user-select: none;
+  background-color: var(--N75);
+  border: var(--basic-border);
+}
+.input-tag-output .input-tag .input-tag-icon {
+  margin-right: var(--size-1);
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  vertical-align: bottom;
+}
