@@ -73,19 +73,3 @@ export const resetAndSetRowSelection = <TData>(
   }, {});
   table.setRowSelection(newSelection);
 };
-
-export const handleMultiSelectOnCtrlRowClick = <TData>(
-  table: Table<TData>,
-  row: Row<TData>,
-  event: React.MouseEvent<HTMLTableRowElement, MouseEvent>
-) => {
-  const isMultiSelect = event.ctrlKey || event.metaKey;
-  const currentSelection = table.getState().rowSelection;
-
-  if (isMultiSelect) {
-    const newSelection = { ...currentSelection, [row.id]: !currentSelection[row.id] };
-    table.setRowSelection(newSelection);
-  } else {
-    selectRow(table, row.id);
-  }
-};
