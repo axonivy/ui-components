@@ -1,79 +1,64 @@
-import { forwardRef, type ElementRef } from 'react';
+import { forwardRef, useMemo, type ElementRef, type ReactNode } from 'react';
 import { useField } from '../field/field';
 import { IvyIcon } from '../icon/icon';
-import { inputBadge, inputBadgeIcon, inputBadgeLine, inputBadgeOutput } from './inputBadge.css';
+import { inputBadge, inputBadgeIcon, inputBadgeLine, inputBadgeOutput, inputBadgeText } from './inputBadge.css';
 
 import type { IvyIcons } from '@axonivy/ui-icons';
+import { Flex } from '../flex/flex';
+import { splitNewLine } from '@/utils/string';
 
 export type InputBadgeProps = {
   value: string;
-  badgeRegex: BadgeRegex[];
+  badgeProps: Array<BadgeProps>;
 };
 
-type BadgeRegex = { delimiter: { start: string; end: string }; icon: IvyIcons; badgeTextGen: (text: string) => string };
+type BadgeProps = { regex: RegExp; icon: IvyIcons; badgeTextGen: (text: string) => string };
 
-export type BadgeTextProps = { icon: IvyIcons | undefined; text: string };
+const Badge = ({ icon, text }: { icon: IvyIcons; text: string }) => (
+  <Flex gap={1} alignItems='center' className={inputBadge}>
+    <IvyIcon className={inputBadgeIcon} icon={icon} />
+    {text}
+  </Flex>
+);
 
-const Badge = ({ badge }: { badge: BadgeTextProps }) => {
-  if (badge.icon) {
-    return (
-      <span className={inputBadge}>
-        <span className={inputBadgeIcon}>
-          <IvyIcon icon={badge.icon} />
-        </span>
-        {badge.text}
-      </span>
-    );
-  }
-  return <span>{badge.text}</span>;
-};
-
-export const InputBadge = ({ value, badgeRegex, ...props }: InputBadgeProps) => {
+export const InputBadge = forwardRef<ElementRef<'output'>, InputBadgeProps>(({ value, badgeProps, ...props }, forwardRef) => {
   const { inputProps } = useField();
-  const badges = findBadges(value, badgeRegex);
+  const items = useMemo(() => findBadges(value, badgeProps), [value, badgeProps]);
   return (
-    <output className={inputBadgeOutput} {...inputProps} {...props}>
-      {badges.map((badge, index) => (
-        <Badge key={index} badge={badge} />
-      ))}
+    <output className={inputBadgeOutput} {...inputProps} {...props} ref={forwardRef}>
+      {items}
     </output>
   );
-};
+});
 
-export const InputBadgeArea = forwardRef<ElementRef<'output'>, InputBadgeProps>(({ value, badgeRegex, ...props }, forwardRef) => {
+export const InputBadgeArea = forwardRef<ElementRef<'output'>, InputBadgeProps>(({ value, badgeProps, ...props }, forwardRef) => {
   const { inputProps } = useField();
-  const lines = value.split(/\r\n|\r|\n/).map(e => findBadges(e, badgeRegex));
+  const lines = useMemo(() => splitNewLine(value).map(e => findBadges(e, badgeProps)), [value, badgeProps]);
   return (
     <output className={inputBadgeOutput} {...inputProps} {...props} ref={forwardRef}>
       {lines.map((line, index) => (
-        <div key={index} className={inputBadgeLine} role='row'>
-          {line.map((badge, index) => (
-            <Badge key={index} badge={badge} />
-          ))}
-        </div>
+        <Flex key={index} className={inputBadgeLine} role='row'>
+          {line}
+        </Flex>
       ))}
     </output>
   );
 });
 
-const findBadges = (value: string, badgeRegex: BadgeRegex[]): BadgeTextProps[] => {
-  const regexStrings: string[] = [];
-  badgeRegex.forEach(reg => {
-    regexStrings.push('(?:' + reg.delimiter.start + '.*?' + reg.delimiter.end + ')');
-  });
-  const separated = value.split(new RegExp('(' + regexStrings.join('|') + ')'));
-  let badgeTextProps: BadgeTextProps[] = [];
-  badgeTextProps = separated.map(e => {
-    let prop: BadgeTextProps = { icon: undefined, text: e };
-    badgeRegex.forEach(reg => {
-      if (e && e.startsWith(reg.delimiter.start) && e.endsWith(reg.delimiter.end)) {
-        prop = {
-          icon: reg.icon,
-          text: reg.badgeTextGen(e.replace(reg.delimiter.start, '').replace(reg.delimiter.end, ''))
-        };
+const findBadges = (value: string, badgeProps: Array<BadgeProps>): Array<ReactNode> => {
+  const separated = value.split(new RegExp('(' + badgeProps.map(p => p.regex.source).join('|') + ')'));
+  return separated.map((text, index) => {
+    if (!text) return;
+    let node: ReactNode = (
+      <span key={index} className={inputBadgeText}>
+        {text}
+      </span>
+    );
+    badgeProps.forEach(prop => {
+      if (text.match(new RegExp(prop.regex))) {
+        node = <Badge key={index} text={prop.badgeTextGen(text)} icon={prop.icon} />;
       }
     });
-    return prop;
+    return node;
   });
-  return badgeTextProps;
 };

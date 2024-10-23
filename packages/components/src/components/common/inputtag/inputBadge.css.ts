@@ -2,6 +2,7 @@ import { vars } from '@/styles/theme.css';
 import { style } from '@vanilla-extract/css';
 
 export const inputBadgeOutput = style({
+  display: 'block',
   borderRadius: vars.border.r1,
   border: vars.border.basic,
   background: vars.color.n25,
@@ -16,24 +17,27 @@ export const inputBadgeOutput = style({
   minHeight: '14px'
 });
 
-export const inputBadgeLine = style({
-  height: '20px',
-  whiteSpace: 'pre-wrap'
-});
-
 export const inputBadge = style({
+  display: 'inline-flex',
   color: vars.color.body,
-  padding: '2px 0.24em',
   backgroundColor: vars.color.n75,
   borderRadius: vars.border.r1,
   userSelect: 'none',
   border: vars.border.basic
 });
 
+export const inputBadgeLine = style({
+  height: '20px',
+  whiteSpace: 'pre-wrap'
+});
+
 export const inputBadgeIcon = style({
-  marginRight: vars.size.s1,
   display: 'inline-block',
   width: '1em',
   height: '1em',
   verticalAlign: 'bottom'
+});
+
+export const inputBadgeText = style({
+  alignSelf: 'center'
 });
