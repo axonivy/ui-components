@@ -2,12 +2,12 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { flexRender, type ColumnDef, useReactTable, getCoreRowModel } from '@tanstack/react-table';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../table';
 import { MessageRow, ReorderRow, ReorderHandleWrapper, SelectRow } from './row';
-import { useTableSelect } from '../hooks/hooks';
+import { useMultiSelectRow, useTableSelect } from '../hooks/hooks';
 import { Fragment } from 'react/jsx-runtime';
 import * as React from 'react';
 import { tableData, type Payment } from '../data';
 import { arraymove, arrayMoveMultiple, indexOf } from '@/utils/array';
-import { handleMultiSelectOnCtrlRowClick, resetAndSetRowSelection } from '@/utils/table/table';
+import { resetAndSetRowSelection } from '@/utils/table/table';
 
 const meta: Meta<typeof Table> = {
   title: 'Common/Table/Row',
@@ -228,7 +228,7 @@ export const MultiSelectWithReorder: Story = {
         ...rowSelection.tableState
       }
     });
-
+    const { handleMultiSelectOnRow } = useMultiSelectRow(table);
     const updateOrder = (moveId: string, targetId: string) => {
       const selectedRows = table.getSelectedRowModel().flatRows.map(r => r.original.id);
       const moveIds = selectedRows.length > 1 ? selectedRows : [moveId];
@@ -260,7 +260,7 @@ export const MultiSelectWithReorder: Story = {
               id={row.original.id}
               updateOrder={updateOrder}
               onDrag={!row.getIsSelected() ? () => table.resetRowSelection() : undefined}
-              onClick={event => handleMultiSelectOnCtrlRowClick(table, row, event)}
+              onClick={event => handleMultiSelectOnRow(row, event)}
             >
               {row.getVisibleCells().map(cell => (
                 <TableCell key={cell.id} onClick={() => table.options.meta?.updateData(row.id, cell.column.id, cell.getValue() + '1')}>

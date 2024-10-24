@@ -1,4 +1,5 @@
 import { SearchInput } from '@/components/common/input/input';
+import { selectRow } from '@/utils/table/table';
 import {
   getFilteredRowModel,
   getSortedRowModel,
@@ -6,7 +7,9 @@ import {
   type SortingState,
   type TableOptions,
   type TableState,
-  getExpandedRowModel
+  getExpandedRowModel,
+  type Row,
+  type Table
 } from '@tanstack/react-table';
 import * as React from 'react';
 
@@ -79,4 +82,39 @@ export const useTableExpand = <TData extends { children: Array<TData> }>(initSta
     options: { onExpandedChange: setExpanded, getSubRows: row => row.children, getExpandedRowModel: getExpandedRowModel() },
     tableState: { expanded }
   };
+};
+
+export const useMultiSelectRow = <TData,>(table: Table<TData>) => {
+  const [lastSelectedRowId, setLastSelectedRowId] = React.useState<string | null>(null);
+
+  const handleMultiSelectOnRow = (row: Row<TData>, event: React.MouseEvent<HTMLTableRowElement, MouseEvent>) => {
+    const isMultiSelect = event.ctrlKey || event.metaKey;
+    const isRangeSelect = event.shiftKey;
+    const currentSelection = table.getState().rowSelection;
+
+    if (isRangeSelect && lastSelectedRowId !== null) {
+      const allRows = table.getRowModel().rows;
+      const lastSelectedRowIndex = allRows.findIndex(r => r.id === lastSelectedRowId);
+      const currentRowIndex = allRows.findIndex(r => r.id === row.id);
+
+      if (lastSelectedRowIndex !== -1 && currentRowIndex !== -1) {
+        const [start, end] = [lastSelectedRowIndex, currentRowIndex].sort((a, b) => a - b);
+        const newSelection = isMultiSelect ? { ...currentSelection } : {};
+
+        for (let i = start; i <= end; i++) {
+          newSelection[allRows[i].id] = true;
+        }
+        table.setRowSelection(newSelection);
+      }
+    } else if (isMultiSelect) {
+      const newSelection = { ...currentSelection, [row.id]: !currentSelection[row.id] };
+      table.setRowSelection(newSelection);
+      setLastSelectedRowId(row.id);
+    } else {
+      selectRow(table, row.id);
+      setLastSelectedRowId(row.id);
+    }
+  };
+
+  return { handleMultiSelectOnRow };
 };
