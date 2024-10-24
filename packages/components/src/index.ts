@@ -12,6 +12,7 @@ export * from './components/common/field/field';
 export * from './components/common/flex/flex';
 export * from './components/common/icon/icon';
 export * from './components/common/input/input';
+export * from './components/common/inputbadge/inputBadge';
 export * from './components/common/label/label';
 export * from './components/common/message/message';
 export * from './components/common/panelMessage/panelMessage';
