@@ -35,7 +35,7 @@ test('apply modifier', async () => {
 test('info provider', async () => {
   render(<Browser />);
   await act(async () => await userEvent.click(screen.getByRole('button', { name: 'Info' })));
-  expect(screen.getByRole('region')).toHaveTextContent('');
+  expect(screen.getByRole('region')).toHaveTextContent('Teamleader');
 
   await act(async () => await userEvent.click(screen.getByRole('row', { name: 'Teamleader All teamleaders' })));
   expect(screen.getByRole('region')).toHaveTextContent('Teamleader');

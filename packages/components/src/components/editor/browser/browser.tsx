@@ -6,7 +6,8 @@ import {
   useReactTable,
   type ColumnDef,
   type ExpandedState,
-  type Row
+  type Row,
+  type RowSelectionState
 } from '@tanstack/react-table';
 import type { IvyIcons } from '@axonivy/ui-icons';
 import { fullHeight, info, overflowAuto, overflowHidden } from './browser.css';
@@ -34,9 +35,12 @@ export type BrowserNode<TData = unknown> = {
 
 export const useBrowser = (
   data: Array<BrowserNode>,
-  loadChildren?: (row: Row<BrowserNode>) => void,
-  initialSearch?: string,
-  expandedState?: ExpandedState
+  options?: {
+    loadChildren?: (row: Row<BrowserNode>) => void;
+    initialSearch?: string;
+    expandedState?: ExpandedState;
+    initialSelecteState?: RowSelectionState;
+  }
 ) => {
   const columns: ColumnDef<BrowserNode, string>[] = [
     {
@@ -46,8 +50,8 @@ export const useBrowser = (
           cell={cell}
           icon={cell.row.original.icon}
           lazy={
-            cell.row.original.isLoaded !== undefined && loadChildren !== undefined
-              ? { isLoaded: cell.row.original.isLoaded, loadChildren }
+            cell.row.original.isLoaded !== undefined && options?.loadChildren !== undefined
+              ? { isLoaded: cell.row.original.isLoaded, loadChildren: options.loadChildren }
               : undefined
           }
         >
@@ -58,9 +62,9 @@ export const useBrowser = (
     }
   ];
 
-  const [filter, setFilter] = React.useState(initialSearch ?? '');
-  const expanded = useTableExpand<BrowserNode>(expandedState ? expandedState : { '0': true });
-  const select = useTableSelect<BrowserNode>();
+  const [filter, setFilter] = React.useState(options?.initialSearch ?? '');
+  const expanded = useTableExpand<BrowserNode>(options?.expandedState ? options.expandedState : { '0': true });
+  const select = useTableSelect<BrowserNode>(options?.initialSelecteState);
   const table = useReactTable({
     ...expanded.options,
     ...select.options,

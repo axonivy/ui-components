@@ -9,7 +9,8 @@ import {
   type TableState,
   getExpandedRowModel,
   type Row,
-  type Table
+  type Table,
+  type RowSelectionState
 } from '@tanstack/react-table';
 import * as React from 'react';
 
@@ -45,8 +46,8 @@ type UseTableSelectRetunValue<TData> = {
   tableState: Partial<TableState>;
 };
 
-export const useTableSelect = <TData,>(): UseTableSelectRetunValue<TData> => {
-  const [rowSelection, setRowSelection] = React.useState({});
+export const useTableSelect = <TData,>(initialSelecteState?: RowSelectionState): UseTableSelectRetunValue<TData> => {
+  const [rowSelection, setRowSelection] = React.useState(initialSelecteState ?? {});
   return {
     options: {
       onRowSelectionChange: setRowSelection,

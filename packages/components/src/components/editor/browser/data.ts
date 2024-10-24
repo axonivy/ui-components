@@ -53,7 +53,7 @@ export const useAttrBrowser = () => {
     console.log('lazy load attrs for ', row.original.value);
   };
 
-  return useBrowser(attr, loadLazy);
+  return useBrowser(attr, { loadChildren: loadLazy });
 };
 
 export const funcData: Array<BrowserNode> = [
