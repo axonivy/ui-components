@@ -23,7 +23,8 @@ export const inputBadge = style({
   backgroundColor: vars.color.n75,
   borderRadius: vars.border.r1,
   userSelect: 'none',
-  border: vars.border.basic
+  border: vars.border.basic,
+  padding: '2px'
 });
 
 export const inputBadgeLine = style({
