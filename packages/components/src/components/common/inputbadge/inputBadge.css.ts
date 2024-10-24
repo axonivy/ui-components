@@ -4,14 +4,13 @@ import { style } from '@vanilla-extract/css';
 export const inputBadgeOutput = style({
   display: 'block',
   borderRadius: vars.border.r1,
-  border: vars.border.basic,
+  border: vars.dynamic.inputBorder,
   background: vars.color.n25,
   fontSize: '12px',
   lineHeight: '12px',
   color: vars.color.body,
   textAlign: 'start',
   padding: vars.padding.input,
-  width: '100%',
   whiteSpace: 'nowrap',
   overflow: 'hidden',
   minHeight: '14px'

@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { InputBadge, InputBadgeArea } from './inputBadge';
 import { IvyIcons } from '@axonivy/ui-icons';
+import { BasicField } from '../field/field';
 
 const badgeProps = [
   {
@@ -25,8 +26,8 @@ const meta: Meta<typeof InputBadge> = {
   component: InputBadge,
   tags: ['autodocs'],
   argTypes: {
-    value: { type: 'string', description: 'field input containing badges' },
-    badgeProps: { description: 'object containing badge regex, icon & fuction to format badge-text' }
+    value: { type: 'string', description: 'Field input containing badges' },
+    badgeProps: { description: 'Object containing badge regex, icon & function to format badge-text' }
   },
   args: {
     value: '<%= ivy.log.info() %> noBadge1 #{ data.object.object.demoData }\nnoBadge2 #{ logic.demoLogic }',
@@ -42,6 +43,14 @@ export const Default: Story = {
 
 export const BadgeArea: Story = {
   render: props => <InputBadgeArea {...props} />
+};
+
+export const InputBadgeMessage: Story = {
+  render: props => (
+    <BasicField message={{ message: 'this is a message', variant: 'error' }}>
+      <InputBadge {...props} />
+    </BasicField>
+  )
 };
 
 export default meta;
