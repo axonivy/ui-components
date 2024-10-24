@@ -30,7 +30,7 @@ type DefaultBrowserProps = {
 };
 
 const DefaultBrowser = ({ applyFn, applyBtn, initSearch }: DefaultBrowserProps) => {
-  const roles = useBrowser(roleData, undefined, initSearch);
+  const roles = useBrowser(roleData, { initialSearch: initSearch, initialSelecteState: { '0.1': true } });
   const attrs = useAttrBrowser();
   const funcs = useBrowser(funcData);
   const cms = useBrowser(cmsData);
