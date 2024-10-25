@@ -5,16 +5,19 @@ import type { Row } from '@tanstack/react-table';
 
 export const FunctionInfoProvider = ({ row }: { row?: Row<BrowserNode> }) => {
   // fake loading via network
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
-    setLoading(true);
-    if (!loading) {
+    if (row?.getIsSelected()) {
+      setLoading(true);
+    }
+  }, [row]);
+  useEffect(() => {
+    if (loading) {
       setTimeout(() => {
         setLoading(false);
       }, 1000);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [row]);
+  }, [loading]);
   if (loading) {
     return <div>Loading javaDoc from backend...</div>;
   }

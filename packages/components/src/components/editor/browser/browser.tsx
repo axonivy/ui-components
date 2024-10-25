@@ -159,21 +159,21 @@ const BrowsersView = ({ browsers, apply, applyBtn }: BrowsersViewProps) => {
                     <TableBody>
                       {table.getRowModel().rows?.length ? (
                         table.getRowModel().rows.map(row => (
-                          <>
+                          <React.Fragment key={row.id}>
                             {row.original.notSelectable ? (
-                              <TableRow key={row.id}>
+                              <TableRow>
                                 {row.getVisibleCells().map(cell => (
                                   <TableCell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
                                 ))}
                               </TableRow>
                             ) : (
-                              <SelectRow key={row.id} row={row} onDoubleClick={() => applyHandler(row)}>
+                              <SelectRow row={row} onDoubleClick={() => applyHandler(row)}>
                                 {row.getVisibleCells().map(cell => (
                                   <TableCell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
                                 ))}
                               </SelectRow>
                             )}
-                          </>
+                          </React.Fragment>
                         ))
                       ) : (
                         <MessageRow message={{ message: emptyMessage ?? 'No results', variant: 'info' }} columnCount={1} />
