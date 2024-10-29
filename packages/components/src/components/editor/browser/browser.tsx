@@ -94,6 +94,7 @@ export type Browser = {
   icon: IvyIcons;
   browser: ReturnType<typeof useBrowser>;
   header?: React.ReactNode;
+  headerControl?: React.ReactNode;
   footer?: React.ReactNode;
   emptyMessage?: string;
   infoProvider?: (row?: Row<BrowserNode>) => React.ReactNode;
@@ -149,10 +150,16 @@ const BrowsersView = ({ browsers, apply, applyBtn }: BrowsersViewProps) => {
         </TabsList>
 
         <Flex direction='column' gap={1} justifyContent='space-between' className={cn(fullHeight, overflowAuto)}>
-          {browsers.map(({ name, header, footer, emptyMessage, browser: { table, globalFilter } }) => (
+          {browsers.map(({ name, header, headerControl, footer, emptyMessage, browser: { table, globalFilter } }) => (
             <TabsContent key={name} value={name} asChild>
               <Flex direction='column' gap={1} className={cn(fullHeight, overflowAuto)}>
-                {header}
+                {(header || headerControl) && (
+                  <Flex direction='row' justifyContent={header ? 'space-between' : 'flex-end'} alignItems='center'>
+                    {header}
+                    {headerControl}
+                  </Flex>
+                )}
+
                 <SearchInput placeholder='Search' autoFocus={true} value={globalFilter.filter} onChange={globalFilter.setFilter} />
                 <div className={overflowAuto}>
                   <Table>
