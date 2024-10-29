@@ -8,6 +8,8 @@ import { Button } from '@/components/common/button/button';
 import { BasicCheckbox } from '@/components/common/checkbox/checkbox';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/common/dialog/dialog';
 import { InputGroup, Input } from '@/components/common/input/input';
+import { Popover, PopoverArrow, PopoverContent, PopoverTrigger } from '@radix-ui/react-popover';
+import { Flex } from '@/components/common/flex/flex';
 
 const meta: Meta<typeof BrowsersView> = {
   title: 'Editor/BrowsersView',
@@ -65,6 +67,7 @@ const DefaultBrowser = ({ applyFn, applyBtn, initSearch }: DefaultBrowserProps) 
           icon: IvyIcons.Cms,
           browser: cms,
           header: 'Info: More info content (with language details) / value modified with macro tags',
+          headerControl: QuickActionPopover(),
           infoProvider: row => <CmsInfoProvider row={row} />,
           applyModifier: row => ({ value: `<%= ivy.co('${row?.original.value}') %>` })
         }
@@ -76,6 +79,39 @@ const DefaultBrowser = ({ applyFn, applyBtn, initSearch }: DefaultBrowserProps) 
       }}
       applyBtn={applyBtn}
     />
+  );
+};
+
+const QuickActionPopover = () => {
+  const [popoverOpen, setPopoverOpen] = useState(false);
+
+  return (
+    <Popover open={popoverOpen} onOpenChange={setPopoverOpen}>
+      <PopoverTrigger asChild>
+        <Button icon={IvyIcons.Dots} aria-label='CMS-Quickaction' title='CMS-Quickaction' />
+      </PopoverTrigger>
+      <PopoverContent sideOffset={12} collisionPadding={5}>
+        <Flex direction='column' gap={2}>
+          <Button
+            icon={IvyIcons.Process}
+            aria-label={`CMS-Quickaction-local`}
+            title={`Create content object: 'Dialogs/Bla' value: bla`}
+            onClick={() => setPopoverOpen(false)}
+          >
+            Add to local CMS
+          </Button>
+          <Button
+            icon={IvyIcons.Process}
+            aria-label={`CMS-Quickaction-global`}
+            title={`Create content object: 'Labels/Bla' value: bla`}
+            onClick={() => setPopoverOpen(false)}
+          >
+            Add to global CMS
+          </Button>
+        </Flex>
+        <PopoverArrow />
+      </PopoverContent>
+    </Popover>
   );
 };
 
