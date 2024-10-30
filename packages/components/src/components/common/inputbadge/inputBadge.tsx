@@ -1,4 +1,4 @@
-import { forwardRef, useMemo, type ElementRef, type ReactNode } from 'react';
+import { forwardRef, useMemo, type CSSProperties, type ElementRef, type ReactNode } from 'react';
 import { useField } from '../field/field';
 import { IvyIcon } from '../icon/icon';
 import { inputBadge, inputBadgeIcon, inputBadgeLine, inputBadgeOutput, inputBadgeText } from './inputBadge.css';
@@ -10,6 +10,8 @@ import { splitNewLine } from '@/utils/string';
 export type InputBadgeProps = {
   value: string;
   badgeProps: Array<BadgeProps>;
+  style?: CSSProperties;
+  className?: string;
 };
 
 type BadgeProps = { regex: RegExp; icon: IvyIcons; badgeTextGen: (text: string) => string };
@@ -21,29 +23,33 @@ const Badge = ({ icon, text }: { icon: IvyIcons; text: string }) => (
   </Flex>
 );
 
-export const InputBadge = forwardRef<ElementRef<'output'>, InputBadgeProps>(({ value, badgeProps, ...props }, forwardRef) => {
-  const { inputProps } = useField();
-  const items = useMemo(() => findBadges(value, badgeProps), [value, badgeProps]);
-  return (
-    <output className={inputBadgeOutput} {...inputProps} {...props} ref={forwardRef}>
-      {items}
-    </output>
-  );
-});
+export const InputBadge = forwardRef<ElementRef<'output'>, InputBadgeProps>(
+  ({ value, badgeProps, className, style, ...props }, forwardRef) => {
+    const { inputProps } = useField();
+    const items = useMemo(() => findBadges(value, badgeProps), [value, badgeProps]);
+    return (
+      <output className={`${inputBadgeOutput} ${className}`} style={style} {...inputProps} {...props} ref={forwardRef}>
+        {items}
+      </output>
+    );
+  }
+);
 
-export const InputBadgeArea = forwardRef<ElementRef<'output'>, InputBadgeProps>(({ value, badgeProps, ...props }, forwardRef) => {
-  const { inputProps } = useField();
-  const lines = useMemo(() => splitNewLine(value).map(e => findBadges(e, badgeProps)), [value, badgeProps]);
-  return (
-    <output className={inputBadgeOutput} {...inputProps} {...props} ref={forwardRef}>
-      {lines.map((line, index) => (
-        <Flex key={index} className={inputBadgeLine} role='row'>
-          {line}
-        </Flex>
-      ))}
-    </output>
-  );
-});
+export const InputBadgeArea = forwardRef<ElementRef<'output'>, InputBadgeProps>(
+  ({ value, badgeProps, className, style, ...props }, forwardRef) => {
+    const { inputProps } = useField();
+    const lines = useMemo(() => splitNewLine(value).map(e => findBadges(e, badgeProps)), [value, badgeProps]);
+    return (
+      <output className={`${inputBadgeOutput} ${className}`} style={style} {...inputProps} {...props} ref={forwardRef}>
+        {lines.map((line, index) => (
+          <Flex key={index} className={inputBadgeLine} role='row'>
+            {line}
+          </Flex>
+        ))}
+      </output>
+    );
+  }
+);
 
 const findBadges = (value: string, badgeProps: Array<BadgeProps>): Array<ReactNode> => {
   const separated = value.split(new RegExp('(' + badgeProps.map(p => p.regex.source).join('|') + ')'));
