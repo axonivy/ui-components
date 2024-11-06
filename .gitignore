@@ -20,3 +20,5 @@ report.xml
 npm-debug.log*
 
 tsconfig.*tsbuildinfo
+
+target
