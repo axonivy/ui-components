@@ -14,7 +14,7 @@ pipeline {
       steps {
         script {
           catchError(buildResult: 'UNSTABLE', stageResult: 'UNSTABLE') {
-            docker.build('node', '-f build/Dockerfile .').inside {
+            docker.build('node', '-f build/Dockerfile.node .').inside {
               sh 'npm run ci && npm run build:storybook --workspace=@axonivy/ui-components'
             }
           }
@@ -35,11 +35,11 @@ pipeline {
 
     stage('Publish next') {
       when {
-        expression { isReleaseOrMasterBranch() && currentBuild.changeSets.size() > 0 }
+        expression { isReleasingBranch() && currentBuild.changeSets.size() > 0 }
       }
       steps {
         script {
-          docker.build('node', '-f build/Dockerfile .').inside {
+          docker.build('node', '-f build/Dockerfile.node .').inside {
             sh 'npm run build'
             sh 'git checkout .'
             withCredentials([string(credentialsId: 'npmjs-registry.ivyteam.ch-auth-token', variable: 'NPM_AUTH_TOKEN')]) {
@@ -50,9 +50,19 @@ pipeline {
         }
       }
     }
-  }
-}
 
-def isReleaseOrMasterBranch() {
-  return env.BRANCH_NAME == 'master' || env.BRANCH_NAME.startsWith('release/') 
+    stage('Maven deploy') {
+      when {
+        expression { isReleasingBranch() }
+      }
+      steps {
+        script {
+          docker.build('maven-build', '-f build/Dockerfile.maven .').inside {
+            maven cmd: '-ntp -f packages/icons deploy -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn'
+          }
+          archiveArtifacts 'packages/icons/target/ui-icons-*.zip'
+        }
+      }
+    }
+  }
 }
