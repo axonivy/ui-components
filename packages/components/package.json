@@ -36,7 +36,7 @@
     "sonner": "1.5.0"
   },
   "peerDependencies": {
-    "@axonivy/ui-icons": "~13.1.0-next",
+    "@axonivy/ui-icons": "*",
     "react": "^18.2.0"
   },
   "devDependencies": {
