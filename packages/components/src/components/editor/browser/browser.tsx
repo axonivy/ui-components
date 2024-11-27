@@ -92,7 +92,7 @@ export type BrowserResult<TData = unknown> = {
 export type Browser = {
   name: string;
   icon: IvyIcons;
-  browser: ReturnType<typeof useBrowser>;
+  browser: ReturnType<typeof useBrowser> | React.ReactNode;
   header?: React.ReactNode;
   footer?: React.ReactNode;
   emptyMessage?: string;
@@ -106,12 +106,19 @@ export type BrowsersViewProps = {
   applyBtn?: { label?: string; icon?: IvyIcons };
 };
 
+function isUseBrowserResult(browser: Browser['browser']): browser is ReturnType<typeof useBrowser> {
+  return (browser as ReturnType<typeof useBrowser>).table !== undefined;
+}
+
 const BrowsersView = ({ browsers, apply, applyBtn }: BrowsersViewProps) => {
   const [tab, setTab] = React.useState(browsers[0].name);
   const selectedRow = () => {
-    const table = browsers.find(b => b.name === tab)?.browser?.table;
-    if (table) {
-      return table.getRowModel().rowsById[Object.keys(table.getState().rowSelection)[0]];
+    const browser = browsers.find(b => b.name === tab)?.browser;
+    if (browser && isUseBrowserResult(browser)) {
+      const table = browser.table;
+      if (table) {
+        return table.getRowModel().rowsById[Object.keys(table.getState().rowSelection)[0]];
+      }
     }
     return;
   };
@@ -149,38 +156,49 @@ const BrowsersView = ({ browsers, apply, applyBtn }: BrowsersViewProps) => {
         </TabsList>
 
         <Flex direction='column' gap={1} justifyContent='space-between' className={cn(fullHeight, overflowAuto)}>
-          {browsers.map(({ name, header, footer, emptyMessage, browser: { table, globalFilter } }) => (
+          {browsers.map(({ name, header, footer, emptyMessage, browser }) => (
             <TabsContent key={name} value={name} asChild>
               <Flex direction='column' gap={1} className={cn(fullHeight, overflowAuto)}>
                 {header}
-                <SearchInput placeholder='Search' autoFocus={true} value={globalFilter.filter} onChange={globalFilter.setFilter} />
-                <div className={overflowAuto}>
-                  <Table>
-                    <TableBody>
-                      {table.getRowModel().rows?.length ? (
-                        table.getRowModel().rows.map(row => (
-                          <React.Fragment key={row.id}>
-                            {row.original.notSelectable ? (
-                              <TableRow>
-                                {row.getVisibleCells().map(cell => (
-                                  <TableCell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
-                                ))}
-                              </TableRow>
-                            ) : (
-                              <SelectRow row={row} onDoubleClick={() => applyHandler(row)}>
-                                {row.getVisibleCells().map(cell => (
-                                  <TableCell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
-                                ))}
-                              </SelectRow>
-                            )}
-                          </React.Fragment>
-                        ))
-                      ) : (
-                        <MessageRow message={{ message: emptyMessage ?? 'No results', variant: 'info' }} columnCount={1} />
-                      )}
-                    </TableBody>
-                  </Table>
-                </div>
+                {isUseBrowserResult(browser) ? (
+                  <>
+                    <SearchInput
+                      placeholder='Search'
+                      autoFocus={true}
+                      value={browser.globalFilter.filter}
+                      onChange={browser.globalFilter.setFilter}
+                    />
+                    <div className={overflowAuto}>
+                      <Table>
+                        <TableBody>
+                          {browser.table.getRowModel().rows?.length ? (
+                            browser.table.getRowModel().rows.map(row => (
+                              <React.Fragment key={row.id}>
+                                {row.original.notSelectable ? (
+                                  <TableRow>
+                                    {row.getVisibleCells().map(cell => (
+                                      <TableCell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
+                                    ))}
+                                  </TableRow>
+                                ) : (
+                                  <SelectRow row={row} onDoubleClick={() => applyHandler(row)}>
+                                    {row.getVisibleCells().map(cell => (
+                                      <TableCell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
+                                    ))}
+                                  </SelectRow>
+                                )}
+                              </React.Fragment>
+                            ))
+                          ) : (
+                            <MessageRow message={{ message: emptyMessage ?? 'No results', variant: 'info' }} columnCount={1} />
+                          )}
+                        </TableBody>
+                      </Table>
+                    </div>
+                  </>
+                ) : (
+                  browser
+                )}
                 {footer}
               </Flex>
             </TabsContent>
