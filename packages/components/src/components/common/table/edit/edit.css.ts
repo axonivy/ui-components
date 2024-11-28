@@ -27,6 +27,14 @@ export const editCell = style([
       [`${row} &[data-placeholder]`]: {
         color: selectedRowPlaceholderText,
         fontStyle: 'italic'
+      },
+      [`${row} &:disabled`]: {
+        backgroundColor: 'transparent'
+      },
+      [`${row} &:has(:disabled)`]: {
+        vars: {
+          '--N100': 'transparent'
+        }
       }
     }
   }
