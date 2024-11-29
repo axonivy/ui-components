@@ -10,6 +10,12 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { InputGroup, Input } from '@/components/common/input/input';
 import { Popover, PopoverArrow, PopoverContent, PopoverTrigger } from '@radix-ui/react-popover';
 import { Flex } from '@/components/common/flex/flex';
+import {
+  generateConditionString,
+  logicalOperatorOptions,
+  typeOptions
+} from '@/components/editor/condition-builder/condition-builder-utils';
+import { useConditionBuilder } from '@/components/editor/condition-builder/conditionBuilder';
 
 const meta: Meta<typeof BrowsersView> = {
   title: 'Editor/BrowsersView',
@@ -29,13 +35,21 @@ type DefaultBrowserProps = {
   applyFn?: (value?: string) => void;
   applyBtn?: { label?: string; icon?: IvyIcons };
   initSearch?: string;
+  includeConditionBuilder?: boolean;
 };
 
-const DefaultBrowser = ({ applyFn, applyBtn, initSearch }: DefaultBrowserProps) => {
+const DefaultBrowser = ({ applyFn, applyBtn, initSearch, includeConditionBuilder }: DefaultBrowserProps) => {
   const roles = useBrowser(roleData, { initialSearch: initSearch, initialSelecteState: { '0.1': true } });
   const attrs = useAttrBrowser();
   const funcs = useBrowser(funcData);
   const cms = useBrowser(cmsData);
+
+  const condition = useConditionBuilder({
+    generateConditionString: generateConditionString,
+    typeOptions,
+    logicalOperatorOptions,
+    argumentInput: (value, onChange) => <DialogBrowserInput value={value} onChange={onChange} />
+  });
 
   return (
     <BrowsersView
@@ -69,7 +83,8 @@ const DefaultBrowser = ({ applyFn, applyBtn, initSearch }: DefaultBrowserProps) 
           header: <CmsHeader />,
           infoProvider: row => <CmsInfoProvider row={row} />,
           applyModifier: row => ({ value: `<%= ivy.co('${row?.original.value}') %>` })
-        }
+        },
+        ...(includeConditionBuilder ? [condition] : [])
       ]}
       apply={(browserName, result) => {
         console.log('apply', browserName, result);
@@ -118,32 +133,45 @@ const CmsHeader = () => {
 };
 
 export const Default: Story = {
-  render: () => <DefaultBrowser />
+  render: () => <DefaultBrowser includeConditionBuilder={true} />
+};
+
+const DialogBrowserInput = ({
+  value,
+  onChange,
+  includeConditionBuilder
+}: {
+  value: string;
+  onChange: (change: string) => void;
+  includeConditionBuilder?: boolean;
+}) => {
+  const [open, setOpen] = useState(false);
+  return (
+    <Dialog open={open} onOpenChange={setOpen}>
+      <InputGroup style={{ flex: '1' }}>
+        <Input value={value} onChange={e => onChange(e.target.value)} />
+        <DialogTrigger asChild>
+          <Button icon={IvyIcons.ListSearch} aria-label='Browser' />
+        </DialogTrigger>
+      </InputGroup>
+      <DialogContent style={{ height: '80vh' }}>
+        <DefaultBrowser
+          applyFn={value => {
+            if (value) onChange(value);
+            setOpen(false);
+          }}
+          initSearch={value}
+          includeConditionBuilder={includeConditionBuilder}
+        />
+      </DialogContent>
+    </Dialog>
+  );
 };
 
 export const DialogBrowser: Story = {
   render: () => {
-    const [open, setOpen] = useState(false);
     const [input, setInput] = useState('');
-    return (
-      <Dialog open={open} onOpenChange={setOpen}>
-        <InputGroup>
-          <Input value={input} onChange={e => setInput(e.target.value)} />
-          <DialogTrigger asChild>
-            <Button icon={IvyIcons.ListSearch} aria-label='Browser' />
-          </DialogTrigger>
-        </InputGroup>
-        <DialogContent style={{ height: '80vh' }}>
-          <DefaultBrowser
-            applyFn={value => {
-              if (value) setInput(value);
-              setOpen(false);
-            }}
-            initSearch={input}
-          />
-        </DialogContent>
-      </Dialog>
-    );
+    return <DialogBrowserInput value={input} onChange={setInput} />;
   }
 };
 
