@@ -97,7 +97,7 @@ export type Browser = {
   footer?: React.ReactNode;
   emptyMessage?: string;
   infoProvider?: (row?: Row<BrowserNode>) => React.ReactNode;
-  applyModifier?: (row: Row<BrowserNode>) => BrowserResult;
+  applyModifier?: (row?: Row<BrowserNode>) => BrowserResult;
 };
 
 export type BrowsersViewProps = {
@@ -130,10 +130,17 @@ const BrowsersView = ({ browsers, apply, applyBtn }: BrowsersViewProps) => {
     return row?.original.value;
   };
   const applyHandler = (doubleClickRow?: Row<BrowserNode>) => {
-    const row = doubleClickRow ?? selectedRow();
     const browser = browsers.find(b => b.name === tab);
-    if (!row || !browser) {
-      return; // nothing selected
+    if (!browser) {
+      return;
+    }
+    const row = doubleClickRow ?? selectedRow();
+    if (!row) {
+      if (browser.applyModifier !== undefined) {
+        apply(browser.name, browser.applyModifier());
+        return;
+      }
+      return;
     }
     const value = row.original.value;
     const data = row.original.data;
