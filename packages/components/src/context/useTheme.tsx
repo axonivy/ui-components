@@ -1,23 +1,26 @@
 import type { ReactNode } from 'react';
 import { createContext, useContext, useEffect, useState } from 'react';
 
-type Theme = 'dark' | 'light' | 'system';
+export type Theme = 'dark' | 'light' | 'system';
 
 type ThemeProviderProps = {
   children: ReactNode;
   defaultTheme?: Theme;
   storageKey?: string;
   root?: HTMLElement;
+  disabled?: boolean;
 };
 
 type ThemeProviderState = {
   theme: Theme;
   setTheme: (theme: Theme) => void;
+  disabled: boolean;
 };
 
 const initialState: ThemeProviderState = {
   theme: 'system',
-  setTheme: () => null
+  setTheme: () => null,
+  disabled: false
 };
 
 const ThemeProviderContext = createContext<ThemeProviderState>(initialState);
@@ -27,11 +30,15 @@ export const ThemeProvider = ({
   defaultTheme = 'system',
   storageKey,
   root = window.document.documentElement,
+  disabled = false,
   ...props
 }: ThemeProviderProps) => {
   const [theme, setTheme] = useState<Theme>(() => (storageKey && (localStorage.getItem(storageKey) as Theme)) || defaultTheme);
 
   useEffect(() => {
+    if (disabled) {
+      return;
+    }
     root.classList.remove('light', 'dark');
     if (theme === 'system') {
       const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
@@ -39,7 +46,7 @@ export const ThemeProvider = ({
       return;
     }
     root.classList.add(theme);
-  }, [root, theme]);
+  }, [disabled, root, theme]);
 
   const value = {
     theme,
@@ -48,7 +55,8 @@ export const ThemeProvider = ({
         localStorage.setItem(storageKey, theme);
       }
       setTheme(theme);
-    }
+    },
+    disabled
   };
 
   return (
