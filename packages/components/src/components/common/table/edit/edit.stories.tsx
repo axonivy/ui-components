@@ -5,7 +5,7 @@ import * as React from 'react';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../table';
 import { tableData, type Payment } from '../data';
 import { SelectRow } from '../row/row';
-import { useTableSelect } from '../hooks/hooks';
+import { useTableKeyHandler, useTableSelect } from '../hooks/hooks';
 import { ComboCell, InputCell, SelectCell } from './edit';
 
 const meta: Meta<typeof Table> = {
@@ -54,7 +54,7 @@ const columns: ColumnDef<Payment, string>[] = [
   }
 ];
 
-function EditTableDemo() {
+function EditTableDemo({ withKeyboardSupport }: { withKeyboardSupport?: boolean }) {
   const [data, setData] = React.useState(tableData);
 
   const tableSelection = useTableSelect<Payment>();
@@ -83,8 +83,10 @@ function EditTableDemo() {
     }
   });
 
+  const { handleKeyDownOnSelectRow } = useTableKeyHandler(table, tableData);
+
   return (
-    <Table>
+    <Table onKeyDown={withKeyboardSupport ? handleKeyDownOnSelectRow : undefined}>
       <TableHeader>
         {table.getHeaderGroups().map(headerGroup => (
           <TableRow key={headerGroup.id} onClick={() => tableSelection.options.onRowSelectionChange({})}>
@@ -111,4 +113,8 @@ function EditTableDemo() {
 
 export const Default: Story = {
   render: () => <EditTableDemo />
+};
+
+export const KeyboardSupport: Story = {
+  render: () => <EditTableDemo withKeyboardSupport={true} />
 };
