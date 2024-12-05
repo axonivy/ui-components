@@ -12,6 +12,10 @@ test('InputBadge', () => {
   expect(screen.getByText('demoData')).toHaveClass(inputBadge);
   expect(screen.getByText('logic.demoLogic')).toHaveClass(inputBadge);
   expect(screen.getByText('noBadge1')).toHaveClass(inputBadgeText);
+  const expBadge = screen.getByText('expression');
+  expect(expBadge).toHaveClass(inputBadge);
+  const expBadgeIcon = expBadge.parentElement?.querySelector('i.ivy-start-program');
+  expect(expBadgeIcon).toBeVisible();
 });
 
 test('InputBadgeArea', () => {

@@ -55,16 +55,15 @@ const findBadges = (value: string, badgeProps: Array<BadgeProps>): Array<ReactNo
   const separated = value.split(new RegExp('(' + badgeProps.map(p => p.regex.source).join('|') + ')'));
   return separated.map((text, index) => {
     if (!text) return;
-    let node: ReactNode = (
+    for (const prop of badgeProps) {
+      if (text.match(new RegExp(prop.regex))) {
+        return <Badge key={index} text={prop.badgeTextGen(text)} icon={prop.icon} />;
+      }
+    }
+    return (
       <span key={index} className={inputBadgeText}>
         {text}
       </span>
     );
-    badgeProps.forEach(prop => {
-      if (text.match(new RegExp(prop.regex))) {
-        node = <Badge key={index} text={prop.badgeTextGen(text)} icon={prop.icon} />;
-      }
-    });
-    return node;
   });
 };

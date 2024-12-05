@@ -16,8 +16,13 @@ const badgeProps = [
   },
   {
     regex: /<%=[^%>]+%>/,
-    icon: IvyIcons.StartProgram,
+    icon: IvyIcons.Cms,
     badgeTextGen: (text: string) => text
+  },
+  {
+    regex: /#{[^}]+}/,
+    icon: IvyIcons.StartProgram,
+    badgeTextGen: (text: string) => text.replaceAll(/#{\s*|\s*}/g, '')
   }
 ];
 
@@ -30,7 +35,7 @@ const meta: Meta<typeof InputBadge> = {
     badgeProps: { description: 'Object containing badge regex, icon & function to format badge-text' }
   },
   args: {
-    value: '<%= ivy.log.info() %> noBadge1 #{ data.object.object.demoData }\nnoBadge2 #{ logic.demoLogic }',
+    value: '<%= ivy.log.info() %> noBadge1 #{ data.object.object.demoData }\nnoBadge2 #{ logic.demoLogic } #{expression}',
     badgeProps: badgeProps
   }
 };
