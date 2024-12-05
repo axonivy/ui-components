@@ -71,6 +71,7 @@ const ExpandableHeader = <TData,>({ header, name }: ExpandableHeaderProps<TData>
       aria-label={header.table.getIsAllRowsExpanded() ? 'Collapse tree' : 'Expand tree'}
       data-state={header.table.getIsAllRowsExpanded() ? 'expanded' : 'collapsed'}
       onClick={header.table.getToggleAllRowsExpandedHandler()}
+      tabIndex={-1}
     />
     <span>{name}</span>
   </Flex>
