@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { flexRender, type ColumnDef, useReactTable, getCoreRowModel } from '@tanstack/react-table';
+import { flexRender, type ColumnDef, useReactTable, getCoreRowModel, type RowSelectionState } from '@tanstack/react-table';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../table';
 import { MessageRow, ReorderRow, ReorderHandleWrapper, SelectRow } from './row';
 import { useMultiSelectRow, useTableSelect } from '../hooks/hooks';
@@ -63,8 +63,33 @@ export const Select: StoryObj<{ enableMultiRowSelection: boolean }> = {
         ...rowSelection.tableState
       }
     });
+    const handleKeyDownOnSelectRow = (event: React.KeyboardEvent<HTMLTableElement>) => {
+      event.stopPropagation();
+      const row = table.getSelectedRowModel().flatRows[0];
+      switch (event.key) {
+        case 'ArrowUp':
+          if (row) {
+            table.getRowModel().flatRows[row.index - 1 < 0 ? table.getRowCount() - 1 : row.index - 1].toggleSelected();
+          } else {
+            table.getRowModel().flatRows[table.getRowCount() - 1].toggleSelected();
+          }
+          break;
+        case 'ArrowDown':
+          if (row) {
+            table.getRowModel().flatRows[row.index + 1 > table.getRowCount() - 1 ? 0 : row.index + 1].toggleSelected();
+          } else {
+            table.getRowModel().flatRows[0].toggleSelected();
+          }
+          break;
+        case 'Tab':
+          table.setRowSelection({});
+          break;
+        default:
+          break;
+      }
+    };
     return (
-      <Table>
+      <Table onKeyDown={handleKeyDownOnSelectRow}>
         <TableHeader>
           {table.getHeaderGroups().map(headerGroup => (
             <TableRow key={headerGroup.id} onClick={() => rowSelection.options.onRowSelectionChange({})}>
@@ -167,8 +192,50 @@ export const Reorder: Story = {
         ...rowSelection.tableState
       }
     });
+    const handleKeyDownOnReorderRow = (event: React.KeyboardEvent<HTMLTableElement>) => {
+      event.stopPropagation();
+      const isAltPressed = event.altKey;
+      const row = table.getSelectedRowModel().flatRows[0];
+      switch (event.key) {
+        case 'ArrowUp':
+          if (row) {
+            const newIndex = row.index - 1 < 0 ? table.getRowCount() - 1 : row.index - 1;
+            if (isAltPressed) {
+              const moveId = row.index;
+              arraymove(data, moveId, newIndex);
+              setData([...data]);
+              table.getRowModel().flatRows[newIndex].toggleSelected();
+            } else {
+              table.getRowModel().flatRows[newIndex].toggleSelected();
+            }
+          } else {
+            table.getRowModel().flatRows[table.getRowCount() - 1].toggleSelected();
+          }
+          break;
+        case 'ArrowDown':
+          if (row) {
+            const newIndex = row.index + 1 > table.getRowCount() - 1 ? 0 : row.index + 1;
+            if (isAltPressed) {
+              const moveId = row.index;
+              arraymove(data, moveId, newIndex);
+              setData([...data]);
+              table.getRowModel().flatRows[newIndex].toggleSelected();
+            } else {
+              table.getRowModel().flatRows[newIndex].toggleSelected();
+            }
+          } else {
+            table.getRowModel().flatRows[0].toggleSelected();
+          }
+          break;
+        case 'Tab':
+          table.setRowSelection({});
+          break;
+        default:
+          break;
+      }
+    };
     return (
-      <Table>
+      <Table onKeyDown={handleKeyDownOnReorderRow}>
         <TableHeader>
           {table.getHeaderGroups().map(headerGroup => (
             <TableRow key={headerGroup.id}>
@@ -239,8 +306,121 @@ export const MultiSelectWithReorder: Story = {
       resetAndSetRowSelection(table, data, moveIds, row => row.id);
     };
 
+    const handleKeyDownOnReorderRow = (event: React.KeyboardEvent<HTMLTableElement>) => {
+      event.stopPropagation();
+      const isAltPressed = event.altKey;
+      const isShiftPressed = event.shiftKey;
+      const rows = table.getSelectedRowModel().flatRows;
+      switch (event.key) {
+        case 'ArrowUp':
+          if (rows.length > 0 && rows.length !== table.getRowModel().flatRows.length) {
+            let newIndex = 0;
+            if (rows.length === 1) {
+              const row = table.getSelectedRowModel().flatRows[0];
+              newIndex = row.index - 1 < 0 ? table.getRowCount() - 1 : row.index - 1;
+            } else {
+              const indices = rows.map(row => row.index);
+              let gapFound = false;
+              for (let i = 0; i < indices.length - 1; i++) {
+                if (indices[i + 1] - indices[i] > 1) {
+                  newIndex = indices[i + 1] - 1;
+                  gapFound = true;
+                  break;
+                }
+              }
+              if (!gapFound) {
+                newIndex = indices[0] - 1 < 0 ? table.getRowCount() - 1 : indices[0] - 1;
+              }
+            }
+            if (isAltPressed) {
+              const moveIndexes = table.getSelectedRowModel().flatRows.map(row => row.index);
+              arrayMoveMultiple(data, moveIndexes, newIndex);
+              setData([...data]);
+              const newSelection: RowSelectionState = {};
+              if (newIndex === table.getRowCount() - 1) {
+                for (let i = 0; i <= rows.length - 1; i++) {
+                  newSelection[table.getRowCount() - 1 - i] = true;
+                }
+              } else {
+                moveIndexes.forEach(index => {
+                  newSelection[index - 1] = true;
+                });
+              }
+              table.setRowSelection({});
+              table.setRowSelection(newSelection);
+            } else {
+              if (isShiftPressed) {
+                table.getRowModel().flatRows[newIndex].toggleSelected();
+              } else {
+                table.setRowSelection({});
+                table.getRowModel().flatRows[newIndex].toggleSelected();
+              }
+            }
+          } else {
+            table.setRowSelection({});
+            table.getRowModel().flatRows[table.getRowCount() - 1].toggleSelected();
+          }
+          break;
+        case 'ArrowDown':
+          if (rows.length > 0 && rows.length !== table.getRowModel().flatRows.length) {
+            let newIndex = 0;
+            if (rows.length === 1) {
+              const row = table.getSelectedRowModel().flatRows[0];
+              newIndex = row.index + 1 > table.getRowCount() - 1 ? 0 : row.index + 1;
+            } else {
+              const indices = rows.map(row => row.index);
+              let gapFound = false;
+              for (let i = 0; i < indices.length - 1; i++) {
+                if (indices[i + 1] - indices[i] > 1) {
+                  newIndex = indices[i] + 1;
+                  gapFound = true;
+                  break;
+                }
+              }
+              if (!gapFound) {
+                newIndex = indices[indices.length - 1] + 1 > table.getRowCount() - 1 ? 0 : indices[indices.length - 1] + 1;
+              }
+            }
+
+            if (isAltPressed) {
+              const moveIndexes = table.getSelectedRowModel().flatRows.map(row => row.index);
+              arrayMoveMultiple(data, moveIndexes, newIndex);
+              setData([...data]);
+              const newSelection: RowSelectionState = {};
+              if (newIndex === 0) {
+                for (let i = 0; i <= rows.length - 1; i++) {
+                  newSelection[0 + i] = true;
+                }
+              } else {
+                moveIndexes.forEach(index => {
+                  newSelection[index + 1] = true;
+                });
+              }
+              table.setRowSelection({});
+              table.setRowSelection(newSelection);
+            } else {
+              if (isShiftPressed) {
+                table.getRowModel().flatRows[newIndex].toggleSelected();
+              } else {
+                table.setRowSelection({});
+                table.getRowModel().flatRows[newIndex].toggleSelected();
+              }
+            }
+          } else {
+            table.setRowSelection({});
+            table.getRowModel().flatRows[0].toggleSelected();
+          }
+          break;
+        case 'Tab':
+          table.setRowSelection({});
+          break;
+        default:
+          break;
+      }
+    };
+
     return (
-      <Table>
+      <Table onKeyDown={handleKeyDownOnReorderRow}>
         <TableHeader>
           {table.getHeaderGroups().map(headerGroup => (
             <TableRow key={headerGroup.id}>
