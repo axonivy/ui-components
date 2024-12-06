@@ -17,7 +17,8 @@ const badgeProps = [
   {
     regex: /<%=[^%>]+%>/,
     icon: IvyIcons.Cms,
-    badgeTextGen: (text: string) => text
+    badgeTextGen: (text: string) => text,
+    tooltip: (text: string) => <div>info: {text}</div>
   },
   {
     regex: /#{[^}]+}/,
