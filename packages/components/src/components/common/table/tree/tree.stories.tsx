@@ -6,7 +6,7 @@ import { treeData, type Variable } from './data';
 import { IvyIcons } from '@axonivy/ui-icons';
 import { useState } from 'react';
 import { ExpandableHeader, TableResizableHeader } from '@/components/common/table/header/header';
-import { useTableExpand, useTableGlobalFilter, useTableSelect } from '@/components/common/table/hooks/hooks';
+import { useTableExpand, useTableGlobalFilter, useTableKeyHandler, useTableSelect } from '@/components/common/table/hooks/hooks';
 import { Flex } from '@/components/common/flex/flex';
 import { SelectRow } from '@/components/common/table/row/row';
 
@@ -235,60 +235,7 @@ export const Select: Story = {
         ...rowSelection.tableState
       }
     });
-
-    const handleKeyDownOnSelectRow = (event: React.KeyboardEvent<HTMLTableElement>) => {
-      event.stopPropagation();
-      const row = table.getSelectedRowModel().flatRows[0];
-
-      switch (event.key) {
-        case 'ArrowUp':
-          if (row) {
-            const depth = table.getSelectedRowModel().flatRows[0].depth;
-            const allRowsOfDepth = table.getRowModel().flatRows.filter(row => row.depth === depth);
-            allRowsOfDepth[row.index - 1 < 0 ? allRowsOfDepth.length - 1 : row.index - 1].toggleSelected();
-          } else {
-            table.getRowModel().flatRows[table.getRowCount() - 1].toggleSelected();
-          }
-          break;
-        case 'ArrowDown':
-          if (row) {
-            const depth = table.getSelectedRowModel().flatRows[0].depth;
-            const allRowsOfDepth = table.getRowModel().flatRows.filter(row => row.depth === depth);
-            allRowsOfDepth[row.index + 1 > allRowsOfDepth.length - 1 ? 0 : row.index + 1].toggleSelected();
-          } else {
-            table.getRowModel().flatRows[0].toggleSelected();
-          }
-          break;
-        case 'ArrowRight':
-          if (row) {
-            const children = row.subRows;
-            if (children.length > 0) {
-              if (!row.getIsExpanded()) {
-                row.toggleExpanded();
-              }
-              children[0].toggleSelected();
-            }
-          }
-          break;
-        case 'ArrowLeft':
-          const isShiftPressed = event.shiftKey;
-          if (row) {
-            const parent = row.getParentRow();
-            if (parent) {
-              parent.toggleSelected();
-              if (isShiftPressed) {
-                parent.toggleExpanded();
-              }
-            }
-          }
-          break;
-        case 'Tab':
-          table.setRowSelection({});
-          break;
-        default:
-          break;
-      }
-    };
+    const { handleKeyDownOnSelectRow } = useTableKeyHandler(table);
 
     return (
       <Flex direction='column' gap={1}>

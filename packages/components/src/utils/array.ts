@@ -31,3 +31,23 @@ export function arrayMoveMultiple<TArr>(arr: TArr[], fromIndexes: number[], toIn
   arr.splice(index, 0, ...elementsToMove);
   return arr;
 }
+
+// Finds the new index with gaps between indices
+export function findNewIndexWithGap(indices: number[], direction: -1 | 1, arrayCount: number): number {
+  let gapFound = false;
+
+  for (let i = 0; i < indices.length - 1; i++) {
+    if (indices[i + 1] - indices[i] > 1) {
+      gapFound = true;
+      return direction === -1 ? indices[i + 1] - 1 : indices[i] + 1;
+    }
+  }
+
+  return direction === -1
+    ? indices[0] - 1 < 0
+      ? arrayCount
+      : indices[0] - 1
+    : indices[indices.length - 1] + 1 > arrayCount
+    ? 0
+    : indices[indices.length - 1] + 1;
+}
