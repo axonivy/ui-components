@@ -36,14 +36,15 @@ const Badge = ({ icon, text, originalText, tooltipGen }: BadgeProps) => (
           {text}
         </Flex>
       </TooltipTrigger>
-      {tooltipGen && (
-        <TooltipContent collisionPadding={10} sideOffset={10}>
-          {tooltipGen(originalText)}
-        </TooltipContent>
-      )}
+      <TooltipContent collisionPadding={10} sideOffset={10}>
+        <BadgeTooltip originalText={originalText} tooltipGen={tooltipGen} />
+      </TooltipContent>
     </Tooltip>
   </TooltipProvider>
 );
+
+const BadgeTooltip = ({ originalText, tooltipGen }: Pick<BadgeProps, 'originalText' | 'tooltipGen'>) =>
+  tooltipGen ? tooltipGen(originalText) : originalText;
 
 export const InputBadge = forwardRef<ElementRef<'output'>, InputBadgeProps>(({ value, badgeProps, className, ...props }, forwardRef) => {
   const { inputProps } = useField();
