@@ -10,45 +10,40 @@ import { cn } from '@/utils/class-name';
 
 export type InputBadgeProps = React.HTMLAttributes<HTMLOutputElement> & {
   value: string;
-  badgeProps: Array<BadgeProps>;
+  badgeProps: Array<BadgeType>;
 };
 
-type BadgeProps = {
+export type BadgeType = {
   regex: RegExp;
   icon: IvyIcons;
   badgeTextGen: (text: string) => string;
   tooltip?: (value: string) => ReactNode;
 };
 
-const Badge = ({
-  icon,
-  text,
-  originalText,
-  tooltipGen
-}: {
+type BadgeProps = {
   icon: IvyIcons;
   text: string;
   originalText: string;
   tooltipGen?: (text: string) => ReactNode;
-}) => {
-  return (
-    <TooltipProvider>
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <Flex gap={1} alignItems='center' className={inputBadge}>
-            <IvyIcon className={inputBadgeIcon} icon={icon} />
-            {text}
-          </Flex>
-        </TooltipTrigger>
-        {tooltipGen && (
-          <TooltipContent collisionPadding={10} sideOffset={10}>
-            {tooltipGen(originalText)}
-          </TooltipContent>
-        )}
-      </Tooltip>
-    </TooltipProvider>
-  );
 };
+
+const Badge = ({ icon, text, originalText, tooltipGen }: BadgeProps) => (
+  <TooltipProvider>
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <Flex gap={1} alignItems='center' className={inputBadge}>
+          <IvyIcon className={inputBadgeIcon} icon={icon} />
+          {text}
+        </Flex>
+      </TooltipTrigger>
+      {tooltipGen && (
+        <TooltipContent collisionPadding={10} sideOffset={10}>
+          {tooltipGen(originalText)}
+        </TooltipContent>
+      )}
+    </Tooltip>
+  </TooltipProvider>
+);
 
 export const InputBadge = forwardRef<ElementRef<'output'>, InputBadgeProps>(({ value, badgeProps, className, ...props }, forwardRef) => {
   const { inputProps } = useField();
@@ -76,7 +71,7 @@ export const InputBadgeArea = forwardRef<ElementRef<'output'>, InputBadgeProps>(
   }
 );
 
-const findBadges = (value: string, badgeProps: Array<BadgeProps>): Array<ReactNode> => {
+const findBadges = (value: string, badgeProps: Array<BadgeType>): Array<ReactNode> => {
   const separated = value.split(new RegExp(`(${badgeProps.map(p => p.regex.source).join('|')})`));
   return separated.map((text, index) => {
     if (!text) return;
