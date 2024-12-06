@@ -1,8 +1,8 @@
 import { forwardRef, useMemo, type CSSProperties, type ElementRef, type ReactNode } from 'react';
 import { useField } from '../field/field';
 import { IvyIcon } from '../icon/icon';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../tooltip/tooltip';
 import { inputBadge, inputBadgeIcon, inputBadgeLine, inputBadgeOutput, inputBadgeText } from './inputBadge.css';
-
 import type { IvyIcons } from '@axonivy/ui-icons';
 import { Flex } from '../flex/flex';
 import { splitNewLine } from '@/utils/string';
@@ -14,14 +14,42 @@ export type InputBadgeProps = {
   className?: string;
 };
 
-type BadgeProps = { regex: RegExp; icon: IvyIcons; badgeTextGen: (text: string) => string };
+type BadgeProps = {
+  regex: RegExp;
+  icon: IvyIcons;
+  badgeTextGen: (text: string) => string;
+  tooltip?: (value: string) => ReactNode;
+};
 
-const Badge = ({ icon, text }: { icon: IvyIcons; text: string }) => (
-  <Flex gap={1} alignItems='center' className={inputBadge}>
-    <IvyIcon className={inputBadgeIcon} icon={icon} />
-    {text}
-  </Flex>
-);
+const Badge = ({
+  icon,
+  text,
+  originalText,
+  tooltipGen
+}: {
+  icon: IvyIcons;
+  text: string;
+  originalText: string;
+  tooltipGen?: (text: string) => ReactNode;
+}) => {
+  return (
+    <TooltipProvider>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <Flex gap={1} alignItems='center' className={inputBadge}>
+            <IvyIcon className={inputBadgeIcon} icon={icon} />
+            {text}
+          </Flex>
+        </TooltipTrigger>
+        {tooltipGen && (
+          <TooltipContent collisionPadding={10} sideOffset={10}>
+            {tooltipGen(originalText)}
+          </TooltipContent>
+        )}
+      </Tooltip>
+    </TooltipProvider>
+  );
+};
 
 export const InputBadge = forwardRef<ElementRef<'output'>, InputBadgeProps>(
   ({ value, badgeProps, className, style, ...props }, forwardRef) => {
@@ -57,7 +85,7 @@ const findBadges = (value: string, badgeProps: Array<BadgeProps>): Array<ReactNo
     if (!text) return;
     for (const prop of badgeProps) {
       if (text.match(new RegExp(prop.regex))) {
-        return <Badge key={index} text={prop.badgeTextGen(text)} icon={prop.icon} />;
+        return <Badge key={index} text={prop.badgeTextGen(text)} icon={prop.icon} originalText={text} tooltipGen={prop.tooltip} />;
       }
     }
     return (
