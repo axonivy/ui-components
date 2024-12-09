@@ -138,7 +138,7 @@ const BasicSelect = ({ items, emptyItem, className, placeholder, value, onValueC
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
-          {emptyItem && value !== '' && <SelectItem value=' '></SelectItem>}
+          {emptyItem && value && <SelectItem value=' '></SelectItem>}
           {unknownValue && <SelectItem value={unknownValue}>{unknownValue}</SelectItem>}
           {items.map(item => (
             <SelectItem key={item.value} value={item.value}>
