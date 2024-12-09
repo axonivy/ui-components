@@ -29,6 +29,7 @@ const expanedButton = <TData,>(row: Row<TData>, lazy?: LazyExpand<TData>) => {
         className={expandButton}
         aria-label={row.getIsExpanded() ? 'Collapse row' : 'Expand row'}
         data-state={row.getIsExpanded() ? 'expanded' : 'collapsed'}
+        tabIndex={-1}
         {...expandHandlerProps(row.getToggleExpandedHandler())}
       />
     );

@@ -8,7 +8,7 @@ import { Field } from '@/components/common/field/field';
  */
 const Table = React.forwardRef<HTMLTableElement, React.HTMLAttributes<HTMLTableElement>>(({ className, ...props }, ref) => (
   <Field className={cn(root, 'ui-table-root')}>
-    <table ref={ref} className={cn(table, className, 'ui-table')} {...props} />
+    <table ref={ref} className={cn(table, className, 'ui-table')} tabIndex={0} {...props} />
   </Field>
 ));
 Table.displayName = 'Table';
