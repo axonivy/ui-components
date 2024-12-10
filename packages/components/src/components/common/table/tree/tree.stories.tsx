@@ -235,12 +235,12 @@ export const Select: Story = {
         ...rowSelection.tableState
       }
     });
-    const { handleKeyDownOnSelectRow } = useTableKeyHandler(table, treeData);
+    const { handleKeyDown } = useTableKeyHandler({ table, data: treeData });
 
     return (
       <Flex direction='column' gap={1}>
         {globalFilter.filter}
-        <Table onKeyDown={handleKeyDownOnSelectRow}>
+        <Table onKeyDown={handleKeyDown}>
           <TableResizableHeader headerGroups={table.getHeaderGroups()} />
           <TableBody>
             {table.getRowModel().rows.map(row => (

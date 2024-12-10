@@ -80,8 +80,8 @@ export const useBrowser = (
       ...select.tableState
     }
   });
-  const { handleKeyDownOnSelectRow } = useTableKeyHandler(table, data);
-  return { table, globalFilter: { filter, setFilter }, handleKeyDownOnSelectRow };
+  const { handleKeyDown } = useTableKeyHandler({ table, data, options: { lazyLoadChildren: options?.loadChildren } });
+  return { table, globalFilter: { filter, setFilter }, handleKeyDown };
 };
 
 export type BrowserResult<TData = unknown> = {
@@ -177,7 +177,7 @@ const BrowsersView = ({ browsers, apply, applyBtn }: BrowsersViewProps) => {
                       onChange={browser.globalFilter.setFilter}
                     />
                     <div className={overflowAuto}>
-                      <Table onKeyDown={e => browser.handleKeyDownOnSelectRow(e, applyHandler)}>
+                      <Table onKeyDown={e => browser.handleKeyDown(e, applyHandler)}>
                         <TableBody>
                           {browser.table.getRowModel().rows?.length ? (
                             browser.table.getRowModel().rows.map(row => (

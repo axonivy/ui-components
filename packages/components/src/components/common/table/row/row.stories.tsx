@@ -63,9 +63,11 @@ export const Select: StoryObj<{ enableMultiRowSelection: boolean }> = {
         ...rowSelection.tableState
       }
     });
-    const { handleKeyDownOnSelectRow } = useTableKeyHandler(table, tableData);
+
+    const { handleKeyDown } = useTableKeyHandler({ table, data: tableData });
+
     return (
-      <Table onKeyDown={handleKeyDownOnSelectRow}>
+      <Table onKeyDown={handleKeyDown}>
         <TableHeader>
           {table.getHeaderGroups().map(headerGroup => (
             <TableRow key={headerGroup.id} onClick={() => rowSelection.options.onRowSelectionChange({})}>
@@ -171,10 +173,14 @@ export const Reorder: Story = {
         ...rowSelection.tableState
       }
     });
-    const { handleKeyDownOnReorderRow } = useTableKeyHandler(table, data);
+    const { handleKeyDown } = useTableKeyHandler({
+      table,
+      data,
+      options: { reorder: { updateOrder: updateDataArray, getRowId: row => row.id } }
+    });
 
     return (
-      <Table onKeyDown={e => handleKeyDownOnReorderRow(e, updateDataArray, row => row.id)}>
+      <Table onKeyDown={handleKeyDown}>
         <TableHeader>
           {table.getHeaderGroups().map(headerGroup => (
             <TableRow key={headerGroup.id}>
@@ -247,10 +253,17 @@ export const MultiSelectWithReorder: Story = {
       updateDataArray(moveIndexes, toIndex);
       resetAndSetRowSelection(table, data, moveIds, row => row.id);
     };
-    const { handleKeyDownOnReorderRow } = useTableKeyHandler(table, data);
+    const { handleKeyDown } = useTableKeyHandler({
+      table,
+      data,
+      options: {
+        multiSelect: true,
+        reorder: { updateOrder: updateDataArray, getRowId: row => row.id }
+      }
+    });
 
     return (
-      <Table onKeyDown={e => handleKeyDownOnReorderRow(e, updateDataArray, row => row.id)}>
+      <Table onKeyDown={handleKeyDown}>
         <TableHeader>
           {table.getHeaderGroups().map(headerGroup => (
             <TableRow key={headerGroup.id}>
