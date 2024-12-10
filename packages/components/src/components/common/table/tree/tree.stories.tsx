@@ -6,8 +6,9 @@ import { treeData, type Variable } from './data';
 import { IvyIcons } from '@axonivy/ui-icons';
 import { useState } from 'react';
 import { ExpandableHeader, TableResizableHeader } from '@/components/common/table/header/header';
-import { useTableExpand, useTableGlobalFilter } from '@/components/common/table/hooks/hooks';
+import { useTableExpand, useTableGlobalFilter, useTableKeyHandler, useTableSelect } from '@/components/common/table/hooks/hooks';
 import { Flex } from '@/components/common/flex/flex';
+import { SelectRow } from '@/components/common/table/row/row';
 
 const meta: Meta<typeof Table> = {
   title: 'Common/Table/Tree',
@@ -192,10 +193,65 @@ export const Search: Story = {
         ...globalFilter.tableState
       }
     });
+
     return (
       <Flex direction='column' gap={1}>
         {globalFilter.filter}
         <TreeTableDemo table={table} />
+      </Flex>
+    );
+  }
+};
+
+export const Select: Story = {
+  render: () => {
+    const columns: ColumnDef<Variable, string>[] = [
+      {
+        accessorKey: 'name',
+        header: header => <ExpandableHeader name='Expand' header={header} />,
+        cell: cell => <ExpandableCell cell={cell} icon={IvyIcons.User} />,
+        minSize: 50
+      },
+      {
+        accessorKey: 'value',
+        header: () => <span>Value</span>,
+        cell: cell => <div>{cell.getValue()}</div>
+      }
+    ];
+
+    const expanded = useTableExpand<Variable>();
+    const globalFilter = useTableGlobalFilter<Variable>();
+    const rowSelection = useTableSelect<Variable>();
+    const table = useReactTable({
+      ...rowSelection.options,
+      ...expanded.options,
+      ...globalFilter.options,
+      data: treeData,
+      columns,
+      getCoreRowModel: getCoreRowModel(),
+      state: {
+        ...expanded.tableState,
+        ...globalFilter.tableState,
+        ...rowSelection.tableState
+      }
+    });
+    const { handleKeyDown } = useTableKeyHandler({ table, data: treeData });
+
+    return (
+      <Flex direction='column' gap={1}>
+        {globalFilter.filter}
+        <Table onKeyDown={handleKeyDown}>
+          <TableResizableHeader headerGroups={table.getHeaderGroups()} />
+          <TableBody>
+            {table.getRowModel().rows.map(row => (
+              <SelectRow key={row.id} row={row}>
+                {row.getVisibleCells().map(cell => (
+                  <TableCell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
+                ))}
+              </SelectRow>
+            ))}
+          </TableBody>
+        </Table>
       </Flex>
     );
   }
