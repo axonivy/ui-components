@@ -16,7 +16,12 @@ export const table = style({
   background: vars.color.n25,
   tableLayout: 'fixed',
   borderCollapse: 'collapse',
-  fontSize: '12px'
+  fontSize: '12px',
+  selectors: {
+    '&:focus-visible': {
+      border: vars.border.active
+    }
+  }
 });
 
 export const header = style({

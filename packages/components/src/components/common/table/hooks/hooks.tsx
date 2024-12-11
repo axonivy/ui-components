@@ -1,5 +1,5 @@
 import { SearchInput } from '@/components/common/input/input';
-import { selectRow } from '@/utils/table/table';
+import { resetAndSetRowSelection, selectRow } from '@/utils/table/table';
 import {
   getFilteredRowModel,
   getSortedRowModel,
@@ -118,4 +118,129 @@ export const useMultiSelectRow = <TData,>(table: Table<TData>) => {
   };
 
   return { handleMultiSelectOnRow };
+};
+
+interface KeyHandlerOptions<TData> {
+  multiSelect?: boolean;
+  reorder?: { updateOrder?: (moveIndexes: number[], toIndex: number) => void; getRowId?: (row: TData) => string };
+  lazyLoadChildren?: (row: Row<TData>) => void;
+}
+
+interface TableKeyboardHandlerProps<TData> {
+  table: Table<TData>;
+  data: Array<TData>;
+  options?: KeyHandlerOptions<TData>;
+}
+
+export const useTableKeyHandler = <TData,>({ table, data, options }: TableKeyboardHandlerProps<TData>) => {
+  const [rootIndex, setRootIndex] = React.useState<number | undefined>(undefined);
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLTableElement>, onEnterAction?: (row: Row<TData>) => void) => {
+    event.stopPropagation();
+
+    const actions: Record<string, () => void> = {
+      ArrowUp: () => handleArrowKeyUpDown(event, -1),
+      ArrowDown: () => handleArrowKeyUpDown(event, 1),
+      ArrowLeft: () => toggleExpand(table.getSelectedRowModel().flatRows[0], true, options?.lazyLoadChildren),
+      ArrowRight: () => toggleExpand(table.getSelectedRowModel().flatRows[0], false, options?.lazyLoadChildren),
+      Tab: () => table.resetRowSelection(),
+      Enter: () => onEnterAction?.(table.getSelectedRowModel().flatRows[0])
+    };
+
+    actions[event.key]?.();
+  };
+
+  const handleArrowKeyUpDown = (event: React.KeyboardEvent<HTMLTableElement>, direction: -1 | 1) => {
+    const { multiSelect = false, reorder } = options || {};
+    const allRows = table.getRowModel().rows;
+    const selectedRows = table.getSelectedRowModel().flatRows;
+
+    const newReorderIndex = calculateNewReorderIndex({
+      direction,
+      firstSelectedRowIndex: allRows.indexOf(selectedRows[0]),
+      lastSelectedRowIndex: allRows.indexOf(selectedRows[selectedRows.length - 1]),
+      selectedRowsCount: selectedRows.length,
+      allRowsCount: allRows.length
+    });
+    const newSelectIndex = calculateNewSelectIndex(direction, newReorderIndex, allRows.length);
+    if (event.altKey && reorder?.updateOrder && reorder.getRowId) {
+      const moveIndexes = selectedRows.map(row => row.index);
+      const moveIds = selectedRows.map(row => reorder.getRowId!(row.original));
+      reorder.updateOrder(moveIndexes, newReorderIndex);
+      resetAndSetRowSelection(table, data, moveIds, reorder.getRowId);
+      setRootIndex(newReorderIndex);
+    } else if (event.shiftKey && multiSelect) {
+      toggleMultiRowSelection(direction, newSelectIndex, allRows, selectedRows);
+    } else {
+      table.resetRowSelection();
+      allRows[newReorderIndex].toggleSelected();
+      setRootIndex(newReorderIndex);
+    }
+  };
+
+  const toggleMultiRowSelection = <TData,>(
+    direction: -1 | 1,
+    newIndex: number | undefined,
+    allRows: Array<Row<TData>>,
+    selectedRows: Array<Row<TData>>
+  ): void => {
+    if (newIndex === undefined) {
+      return;
+    }
+    if (rootIndex === undefined && selectedRows.length === 1) {
+      setRootIndex(selectedRows[0].index);
+    }
+    if (direction === 1) {
+      if (rootIndex === allRows.indexOf(selectedRows[0]) || selectedRows.length === 1) {
+        allRows[newIndex].toggleSelected();
+      } else {
+        selectedRows[0].toggleSelected();
+      }
+    } else {
+      if (rootIndex === allRows.indexOf(selectedRows[selectedRows.length - 1]) || selectedRows.length === 1) {
+        allRows[newIndex].toggleSelected();
+      } else {
+        selectedRows[selectedRows.length - 1].toggleSelected();
+      }
+    }
+  };
+
+  return { handleKeyDown };
+};
+
+const toggleExpand = <TData,>(row: Row<TData>, expand: boolean, loadChildren?: (row: Row<TData>) => void) => {
+  if (expand && !row.getIsExpanded()) {
+    loadChildren?.(row);
+    row.toggleExpanded();
+  } else if (!expand && row.getIsExpanded()) {
+    row.toggleExpanded();
+  }
+};
+
+interface CalculateNewReorderIndexProps {
+  direction: -1 | 1;
+  firstSelectedRowIndex: number;
+  lastSelectedRowIndex: number;
+  selectedRowsCount: number;
+  allRowsCount: number;
+}
+const calculateNewReorderIndex = ({
+  direction,
+  firstSelectedRowIndex,
+  lastSelectedRowIndex,
+  selectedRowsCount,
+  allRowsCount
+}: CalculateNewReorderIndexProps): number => {
+  if (selectedRowsCount === 0) {
+    return direction === 1 ? 0 : allRowsCount - 1;
+  }
+  const baseIndex = direction === 1 ? lastSelectedRowIndex : firstSelectedRowIndex;
+  return (baseIndex + direction + allRowsCount) % allRowsCount;
+};
+
+const calculateNewSelectIndex = (direction: -1 | 1, reorderIndex: number, allRowsCount: number): number | undefined => {
+  if ((direction === 1 && reorderIndex === 0) || (direction === -1 && reorderIndex === allRowsCount - 1)) {
+    return undefined;
+  }
+  return reorderIndex;
 };

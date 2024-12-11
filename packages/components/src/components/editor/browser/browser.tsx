@@ -17,7 +17,7 @@ import { BasicCollapsible } from '@/components/common/collapsible/collapsible';
 import { Flex } from '@/components/common/flex/flex';
 import { IvyIcon } from '@/components/common/icon/icon';
 import { SearchInput } from '@/components/common/input/input';
-import { useTableExpand, useTableSelect } from '@/components/common/table/hooks/hooks';
+import { useTableExpand, useTableKeyHandler, useTableSelect } from '@/components/common/table/hooks/hooks';
 import { MessageRow, SelectRow } from '@/components/common/table/row/row';
 import { Table, TableBody, TableCell, TableRow } from '@/components/common/table/table';
 import { cn } from '@/utils/class-name';
@@ -80,7 +80,8 @@ export const useBrowser = (
       ...select.tableState
     }
   });
-  return { table, globalFilter: { filter, setFilter } };
+  const { handleKeyDown } = useTableKeyHandler({ table, data, options: { lazyLoadChildren: options?.loadChildren } });
+  return { table, globalFilter: { filter, setFilter }, handleKeyDown };
 };
 
 export type BrowserResult<TData = unknown> = {
@@ -176,7 +177,7 @@ const BrowsersView = ({ browsers, apply, applyBtn }: BrowsersViewProps) => {
                       onChange={browser.globalFilter.setFilter}
                     />
                     <div className={overflowAuto}>
-                      <Table>
+                      <Table onKeyDown={e => browser.handleKeyDown(e, applyHandler)}>
                         <TableBody>
                           {browser.table.getRowModel().rows?.length ? (
                             browser.table.getRowModel().rows.map(row => (
