@@ -7,8 +7,8 @@ export namespace IvyScriptLanguage {
 
   export async function startClient(connection: Connection, isMonacoReady: Promise<any>) {
     await isMonacoReady;
-    const { MonacoLanguageClient } = await import('monaco-languageclient');
-    const client = new MonacoLanguageClient({
+    const monacoLanguageClient = await import('monaco-languageclient');
+    const client = new monacoLanguageClient.MonacoLanguageClient({
       name: 'IvyScript Language Client',
       clientOptions: { documentSelector: [{ language: 'ivyScript' }, { language: 'ivyMacro' }] },
       connectionProvider: { get: async () => connection }
