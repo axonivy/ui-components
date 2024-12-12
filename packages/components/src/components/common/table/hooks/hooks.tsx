@@ -124,6 +124,7 @@ interface KeyHandlerOptions<TData> {
   multiSelect?: boolean;
   reorder?: { updateOrder?: (moveIndexes: number[], toIndex: number) => void; getRowId?: (row: TData) => string };
   lazyLoadChildren?: (row: Row<TData>) => void;
+  resetSelectionOnTab?: boolean;
 }
 
 interface TableKeyboardHandlerProps<TData> {
@@ -141,9 +142,9 @@ export const useTableKeyHandler = <TData,>({ table, data, options }: TableKeyboa
     const actions: Record<string, () => void> = {
       ArrowUp: () => handleArrowKeyUpDown(event, -1),
       ArrowDown: () => handleArrowKeyUpDown(event, 1),
-      ArrowLeft: () => toggleExpand(table.getSelectedRowModel().flatRows[0], true, options?.lazyLoadChildren),
-      ArrowRight: () => toggleExpand(table.getSelectedRowModel().flatRows[0], false, options?.lazyLoadChildren),
-      Tab: () => table.resetRowSelection(),
+      ArrowLeft: () => toggleExpand(false, table.getSelectedRowModel().flatRows[0], options?.lazyLoadChildren),
+      ArrowRight: () => toggleExpand(true, table.getSelectedRowModel().flatRows[0], options?.lazyLoadChildren),
+      Tab: () => options?.resetSelectionOnTab && table.resetRowSelection(),
       Enter: () => onEnterAction?.(table.getSelectedRowModel().flatRows[0])
     };
 
@@ -151,6 +152,7 @@ export const useTableKeyHandler = <TData,>({ table, data, options }: TableKeyboa
   };
 
   const handleArrowKeyUpDown = (event: React.KeyboardEvent<HTMLTableElement>, direction: -1 | 1) => {
+    event.preventDefault();
     const { multiSelect = false, reorder } = options || {};
     const allRows = table.getRowModel().rows;
     const selectedRows = table.getSelectedRowModel().flatRows;
@@ -175,6 +177,7 @@ export const useTableKeyHandler = <TData,>({ table, data, options }: TableKeyboa
       table.resetRowSelection();
       allRows[newReorderIndex].toggleSelected();
       setRootIndex(newReorderIndex);
+      event.currentTarget.rows[newReorderIndex].scrollIntoView({ block: 'center' });
     }
   };
 
@@ -208,7 +211,10 @@ export const useTableKeyHandler = <TData,>({ table, data, options }: TableKeyboa
   return { handleKeyDown };
 };
 
-const toggleExpand = <TData,>(row: Row<TData>, expand: boolean, loadChildren?: (row: Row<TData>) => void) => {
+const toggleExpand = <TData,>(expand: boolean, row?: Row<TData>, loadChildren?: (row: Row<TData>) => void) => {
+  if (row === undefined || !row.getCanExpand()) {
+    return;
+  }
   if (expand && !row.getIsExpanded()) {
     loadChildren?.(row);
     row.toggleExpanded();

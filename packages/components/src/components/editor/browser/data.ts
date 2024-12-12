@@ -138,7 +138,13 @@ export const cmsData: Array<CmsBrowserNode> = [
         icon: IvyIcons.FolderOpen,
         children: [
           { value: 'accepted', info: 'STRING', icon: IvyIcons.ChangeType, children: [], cmsValues: { de: 'akzeptiert', en: 'accepted' } },
-          { value: 'deslined', info: 'STRING', icon: IvyIcons.ChangeType, children: [], cmsValues: { de: 'abgelehnt', en: 'deslined' } }
+          { value: 'declined', info: 'STRING', icon: IvyIcons.ChangeType, children: [], cmsValues: { de: 'abgelehnt', en: 'declined' } },
+          { value: 'pending', info: 'STRING', icon: IvyIcons.ChangeType, children: [], cmsValues: { de: 'ausstehend', en: 'pending' } },
+          { value: 'processed', info: 'STRING', icon: IvyIcons.ChangeType, children: [], cmsValues: { de: 'bearbeitet', en: 'processed' } },
+          { value: 'rejected', info: 'STRING', icon: IvyIcons.ChangeType, children: [], cmsValues: { de: 'zurück', en: 'rejected' } },
+          { value: 'confirmed', info: 'STRING', icon: IvyIcons.ChangeType, children: [], cmsValues: { de: 'bestätigt', en: 'confirmed' } },
+          { value: 'archived', info: 'STRING', icon: IvyIcons.ChangeType, children: [], cmsValues: { de: 'archiviert', en: 'archived' } },
+          { value: 'draft', info: 'STRING', icon: IvyIcons.ChangeType, children: [], cmsValues: { de: 'Entwurf', en: 'draft' } }
         ],
         cmsValues: {}
       },
