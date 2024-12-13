@@ -17,10 +17,9 @@ export const table = style({
   tableLayout: 'fixed',
   borderCollapse: 'collapse',
   fontSize: '12px',
-  selectors: {
-    '&:focus-visible': {
-      border: vars.border.active
-    }
+  ':focus-visible': {
+    outline: 'none',
+    border: vars.border.active
   }
 });
 
