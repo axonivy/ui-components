@@ -93,7 +93,7 @@ export class WebSocketMessageReader extends AbstractMessageReader {
       this.eventQueue.push({ message });
     } else if (this.state === 'listening' && typeof message === 'string') {
       const data = JSON.parse(message);
-      this.callback!(data);
+      this.callback?.(data);
     }
   }
 

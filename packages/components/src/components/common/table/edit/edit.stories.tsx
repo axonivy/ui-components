@@ -72,7 +72,7 @@ function EditTableDemo() {
           const newData = old.map((row, index) => {
             const rowIndex = parseInt(rowId);
             if (index === rowIndex) {
-              return { ...data[rowIndex]!, [columnId]: value };
+              return { ...data[rowIndex], [columnId]: value };
             }
             return row;
           });

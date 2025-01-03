@@ -167,7 +167,8 @@ export const useTableKeyHandler = <TData,>({ table, data, options }: TableKeyboa
     const newSelectIndex = calculateNewSelectIndex(direction, newReorderIndex, allRows.length);
     if (event.altKey && reorder?.updateOrder && reorder.getRowId) {
       const moveIndexes = selectedRows.map(row => row.index);
-      const moveIds = selectedRows.map(row => reorder.getRowId!(row.original));
+      const rowId = reorder.getRowId;
+      const moveIds = selectedRows.map(row => rowId(row.original));
       reorder.updateOrder(moveIndexes, newReorderIndex, data);
       resetAndSetRowSelection(table, data, moveIds, reorder.getRowId);
       setRootIndex(newReorderIndex);
