@@ -122,7 +122,7 @@ export const useMultiSelectRow = <TData,>(table: Table<TData>) => {
 
 interface KeyHandlerOptions<TData> {
   multiSelect?: boolean;
-  reorder?: { updateOrder?: (moveIndexes: number[], toIndex: number) => void; getRowId?: (row: TData) => string };
+  reorder?: { updateOrder?: (moveIndexes: number[], toIndex: number, data: TData[]) => void; getRowId?: (row: TData) => string };
   lazyLoadChildren?: (row: Row<TData>) => void;
   resetSelectionOnTab?: boolean;
 }
@@ -168,7 +168,7 @@ export const useTableKeyHandler = <TData,>({ table, data, options }: TableKeyboa
     if (event.altKey && reorder?.updateOrder && reorder.getRowId) {
       const moveIndexes = selectedRows.map(row => row.index);
       const moveIds = selectedRows.map(row => reorder.getRowId!(row.original));
-      reorder.updateOrder(moveIndexes, newReorderIndex);
+      reorder.updateOrder(moveIndexes, newReorderIndex, data);
       resetAndSetRowSelection(table, data, moveIds, reorder.getRowId);
       setRootIndex(newReorderIndex);
     } else if (event.shiftKey && multiSelect) {
