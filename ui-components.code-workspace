@@ -18,7 +18,11 @@
     {
       "name": "package/jsonrpc",
       "path": "./packages/jsonrpc"
-    }
+    },
+    {
+      "name": "package/monaco",
+      "path": "./packages/monaco"
+    },
   ],
   "settings": {
     "task.autoDetect": "off",
