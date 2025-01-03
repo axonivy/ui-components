@@ -1,7 +1,7 @@
 import { expect } from 'vitest';
 import { WS } from 'vitest-websocket-mock';
 import { webSocketConnection, type Connection, type WebSocketConnectionHandler, type WebSocketOptions } from './ws-connection-provider';
-import { createMessageConnection, type MessageConnection } from 'vscode-jsonrpc';
+import { createMessageConnection } from 'vscode-jsonrpc';
 import { BaseRpcClient } from './base-rpc-client';
 
 afterEach(async () => {
@@ -112,10 +112,6 @@ describe('reconnect', () => {
 });
 
 class TestRpcClient extends BaseRpcClient {
-  constructor(connection: MessageConnection) {
-    super(connection);
-  }
-
   sendRequest(method: string, params: unknown): Promise<unknown> {
     return this.connection.sendRequest(method, params);
   }
@@ -130,6 +126,6 @@ class TestRpcClient extends BaseRpcClient {
       };
       waitForMessages();
     });
-    return notification!;
+    return notification ?? '';
   }
 }

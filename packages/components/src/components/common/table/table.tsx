@@ -33,11 +33,13 @@ const TableRow = React.forwardRef<HTMLTableRowElement, React.HTMLAttributes<HTML
 ));
 TableRow.displayName = 'TableRow';
 
+// eslint-disable-next-line react/prop-types
 const TableHead = React.forwardRef<HTMLTableCellElement, React.ThHTMLAttributes<HTMLTableCellElement>>(({ className, ...props }, ref) => (
   <th ref={ref} className={cn(head, className, 'ui-table-head')} {...props} />
 ));
 TableHead.displayName = 'TableHead';
 
+// eslint-disable-next-line react/prop-types
 const TableCell = React.forwardRef<HTMLTableCellElement, React.TdHTMLAttributes<HTMLTableCellElement>>(({ className, ...props }, ref) => (
   <td ref={ref} className={cn(cell, className, 'ui-table-cell')} {...props} />
 ));

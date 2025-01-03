@@ -1,7 +1,6 @@
 import type { Disposable, Message, MessageConnection } from 'vscode-jsonrpc';
 import { DisposableCollection } from './disposable';
 
-// eslint-disable-next-line no-shadow
 export enum ClientState {
   /**
    * The client has been created.

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { composeStory } from '@storybook/react';
 import { act, render, screen, userEvent } from 'test-utils';
 import Meta, { Default, CustomValue, Lazy, Search } from './tree.stories';

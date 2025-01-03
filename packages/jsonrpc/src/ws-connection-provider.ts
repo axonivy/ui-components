@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import type { Logger, MessageReader, MessageWriter } from 'vscode-jsonrpc';
 import { WebSocketMessageReader, WebSocketMessageWriter, wrap } from './ws-connection';
 

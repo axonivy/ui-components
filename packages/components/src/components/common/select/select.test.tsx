@@ -29,11 +29,11 @@ test('select can be handled with keyboard', async () => {
   expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
 
   await act(async () => await userEvent.keyboard('[Enter]'));
-  expect(screen.queryByRole('listbox')).toBeInTheDocument();
+  expect(screen.getByRole('listbox')).toBeInTheDocument();
   await act(async () => await userEvent.keyboard('[Enter]'));
   expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
   await act(async () => await userEvent.keyboard('[Space]'));
-  expect(screen.queryByRole('listbox')).toBeInTheDocument();
+  expect(screen.getByRole('listbox')).toBeInTheDocument();
 
   const option1 = screen.getByRole('option', { name: 'Apple' });
   const option2 = screen.getByRole('option', { name: 'Banana' });

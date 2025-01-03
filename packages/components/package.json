@@ -7,7 +7,7 @@
   "homepage": "https://developer.axonivy.com/",
   "repository": {
     "type": "git",
-    "url": "https://github.com/axonivy/inscription-client"
+    "url": "https://github.com/axonivy/ui-components"
   },
   "files": [
     "lib",
@@ -59,7 +59,6 @@
     "@vanilla-extract/vite-plugin": "^4.0.18",
     "@vitejs/plugin-react": "^4.3.3",
     "eslint-plugin-storybook": "^0.11.1",
-    "eslint-plugin-testing-library": "^7.1.1",
     "happy-dom": "^15.11.7",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
