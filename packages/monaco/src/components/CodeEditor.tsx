@@ -29,7 +29,7 @@ export const CodeEditor = ({ contextPath, value, onChange, language, onMountFunc
     setShowPlaceholder(editor.getValue() === '');
   };
 
-  const monacoOptions = options ?? MONACO_OPTIONS;
+  const monacoOptions = { ...(options ?? MONACO_OPTIONS) };
   monacoOptions.readOnly = readonly;
 
   return (

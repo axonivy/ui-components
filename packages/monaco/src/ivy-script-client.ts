@@ -5,7 +5,7 @@ export namespace IvyScriptLanguage {
     return urlBuilder(url, 'ivy-script-lsp');
   }
 
-  export async function startClient(connection: Connection, isMonacoReady: Promise<any>) {
+  export async function startClient(connection: Connection, isMonacoReady: Promise<unknown>) {
     await isMonacoReady;
     const monacoLanguageClient = await import('monaco-languageclient');
     const client = new monacoLanguageClient.MonacoLanguageClient({

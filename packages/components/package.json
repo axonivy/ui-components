@@ -74,8 +74,6 @@
     "build:storybook": "storybook build",
     "dev": "storybook dev -p 6006 --no-open",
     "type": "tsc --noEmit --emitDeclarationOnly false",
-    "lint": "eslint --ext .ts,.tsx ./src",
-    "lint:fix": "eslint --fix --ext .ts,.tsx ./src",
     "test": "vitest",
     "test:ci": "vitest --watch=false"
   }

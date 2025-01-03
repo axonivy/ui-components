@@ -12,7 +12,11 @@ import { IvyIcons } from '@axonivy/ui-icons';
 
 export async function start(): Promise<void> {
   const server = URLParams.webSocketBase();
-  const root = createRoot(document.getElementById('root')!);
+  const rootElement = document.getElementById('root');
+  if (!rootElement) {
+    throw new Error('root element not found');
+  }
+  const root = createRoot(rootElement);
 
   const worker = await import('monaco-editor/esm/vs/editor/editor.worker?worker');
   const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
