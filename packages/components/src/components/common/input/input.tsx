@@ -9,6 +9,7 @@ import { Flex } from '@/components/common/flex/flex';
 import { IvyIcon } from '@/components/common/icon/icon';
 import { useReadonly, ReadonlyProvider } from '@/context/useReadonly';
 
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {}
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(({ disabled, className, type, ...props }, ref) => {
