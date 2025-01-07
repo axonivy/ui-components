@@ -79,7 +79,13 @@ export const base = tseslint.config(
     ...playwright.configs['flat/recommended'],
     rules: {
       ...playwright.configs['flat/recommended'].rules,
-      'playwright/expect-expect': 'off'
+      'playwright/expect-expect': 'off',
+      'playwright/no-skipped-test': [
+        'warn',
+        {
+          allowConditional: true
+        }
+      ]
     }
   },
 
@@ -101,6 +107,7 @@ export const base = tseslint.config(
       '**/node_modules/**',
       'eslint.config.*',
       '**/vite*.config.*',
+      '**/vitest.workspace.ts',
       '**/playwright.config.*',
       '**/*.d.ts',
       '**/lib/*',
