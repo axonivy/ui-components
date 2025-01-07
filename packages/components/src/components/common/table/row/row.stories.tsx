@@ -137,14 +137,14 @@ export const Message: Story = {
 export const Reorder: Story = {
   render: () => {
     const [data, setData] = React.useState(tableData);
-    const updateDataArray = (fromIndex: number[], toIndex: number) => {
+    const updateDataArray = (fromIndex: number[], toIndex: number, data: Payment[]) => {
       arraymove(data, fromIndex[0], toIndex);
       setData([...data]);
     };
     const updateOrder = (moveId: string, targetId: string) => {
       const fromIndex = indexOf(data, obj => obj.id === moveId);
       const toIndex = indexOf(data, obj => obj.id === targetId);
-      updateDataArray([fromIndex], toIndex);
+      updateDataArray([fromIndex], toIndex, data);
     };
     const reorderColumns: ColumnDef<Payment>[] = [
       {
@@ -241,7 +241,7 @@ export const MultiSelectWithReorder: Story = {
       }
     });
     const { handleMultiSelectOnRow } = useMultiSelectRow(table);
-    const updateDataArray = (moveIndexes: number[], toIndex: number) => {
+    const updateDataArray = (moveIndexes: number[], toIndex: number, data: Payment[]) => {
       arrayMoveMultiple(data, moveIndexes, toIndex);
       setData([...data]);
     };
@@ -250,8 +250,9 @@ export const MultiSelectWithReorder: Story = {
       const moveIds = selectedRows.length > 1 ? selectedRows : [moveId];
       const moveIndexes = moveIds.map(moveId => indexOf(data, obj => obj.id === moveId));
       const toIndex = indexOf(data, obj => obj.id === targetId);
-      updateDataArray(moveIndexes, toIndex);
-      resetAndSetRowSelection(table, data, moveIds, row => row.id);
+      const newData = structuredClone(data);
+      updateDataArray(moveIndexes, toIndex, newData);
+      resetAndSetRowSelection(table, newData, moveIds, row => row.id);
     };
     const { handleKeyDown } = useTableKeyHandler({
       table,
