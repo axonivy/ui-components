@@ -1,0 +1,10 @@
+const isMac = () => window.navigator.userAgent.indexOf('Mac') !== -1;
+
+type ModKey = '⌘' | 'CTRL';
+
+const modKey = (): ModKey => (isMac() ? '⌘' : 'CTRL');
+
+export const MOD_KEY = modKey();
+export const IS_MAC = isMac();
+
+export const hotkeyText = (hotkey: string): string => hotkey.replace('mod', modKey()).replace('shift', '⇧');
