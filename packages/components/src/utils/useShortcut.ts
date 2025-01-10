@@ -1,5 +1,8 @@
 import { useCallback, useEffect, useLayoutEffect, useRef } from 'react';
 
+/**
+ * @deprecated use `useHotkeys` from `react-hotkeys-hook` instead. If you want the help text, use the `hotkeyText` helper function.
+ * */
 export const useShortcut = (key: string, callback: () => void, modifiers?: { ctrl?: boolean; alt?: boolean; shift?: boolean }) => {
   const callbackRef = useRef(callback);
   useLayoutEffect(() => {
