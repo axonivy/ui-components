@@ -4,4 +4,6 @@ type ModKey = '⌘' | 'CTRL';
 
 const modKey = (): ModKey => (isMac() ? '⌘' : 'CTRL');
 
-export const hotkeyText = (hotkey: string): string => hotkey.replace('mod', modKey()).replace('shift', '⇧');
+const optKey = (): string => (isMac() ? '⌥' : 'ALT');
+
+export const hotkeyText = (hotkey: string): string => hotkey.replace('mod', modKey()).replace('alt', optKey()).replace('shift', '⇧');
