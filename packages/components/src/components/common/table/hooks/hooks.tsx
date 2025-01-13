@@ -10,7 +10,8 @@ import {
   getExpandedRowModel,
   type Row,
   type Table,
-  type RowSelectionState
+  type RowSelectionState,
+  type OnChangeFn
 } from '@tanstack/react-table';
 import * as React from 'react';
 
@@ -46,11 +47,27 @@ type UseTableSelectRetunValue<TData> = {
   tableState: Partial<TableState>;
 };
 
-export const useTableSelect = <TData,>(initialSelecteState?: RowSelectionState): UseTableSelectRetunValue<TData> => {
-  const [rowSelection, setRowSelection] = React.useState(initialSelecteState ?? {});
+type TableSelectOptions = {
+  initialSelecteState?: RowSelectionState;
+  onSelect?: (selectedRows: RowSelectionState) => void;
+};
+
+export const useTableSelect = <TData,>(options?: TableSelectOptions): UseTableSelectRetunValue<TData> => {
+  const [rowSelection, setRowSelection] = React.useState(options?.initialSelecteState ?? {});
+  const handleRowSelectionChange: OnChangeFn<RowSelectionState> = React.useCallback(
+    updaterOrValue => {
+      const newSelection = typeof updaterOrValue === 'function' ? updaterOrValue(rowSelection) : updaterOrValue;
+      setRowSelection(newSelection);
+      if (options?.onSelect) {
+        options.onSelect(newSelection);
+      }
+    },
+    [rowSelection, options]
+  );
+
   return {
     options: {
-      onRowSelectionChange: setRowSelection,
+      onRowSelectionChange: handleRowSelectionChange,
       enableRowSelection: true,
       enableMultiRowSelection: false,
       enableSubRowSelection: false

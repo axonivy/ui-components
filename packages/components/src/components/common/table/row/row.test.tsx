@@ -11,8 +11,10 @@ test('select', async () => {
   render(<SelectTable />);
   const row = screen.getAllByRole('row')[1];
   expect(row).toHaveAttribute('data-state', 'unselected');
+  expect(screen.getByTitle('selected-row')).not.toHaveTextContent('Selected Row: ken99@yahoo.com');
   await act(async () => await userEvent.click(row));
   expect(row).toHaveAttribute('data-state', 'selected');
+  expect(screen.getByTitle('selected-row')).toHaveTextContent('Selected Row: ken99@yahoo.com');
 });
 
 test('ctrl select', async () => {

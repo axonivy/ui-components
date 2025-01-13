@@ -52,7 +52,14 @@ export const Select: StoryObj<{ enableMultiRowSelection: boolean }> = {
     enableMultiRowSelection: false
   },
   render: ({ enableMultiRowSelection }) => {
-    const rowSelection = useTableSelect<Payment>();
+    const [payment, setPayment] = React.useState<Payment | null>();
+    const rowSelection = useTableSelect<Payment>({
+      onSelect: selectedRows => {
+        const selectedRowId = Object.keys(selectedRows).find(key => selectedRows[key]);
+        const selectedPayment = table.getRowModel().flatRows.find(row => row.id === selectedRowId)?.original;
+        setPayment(selectedPayment || null);
+      }
+    });
     const table = useReactTable({
       ...rowSelection.options,
       enableMultiRowSelection,
@@ -67,28 +74,31 @@ export const Select: StoryObj<{ enableMultiRowSelection: boolean }> = {
     const { handleKeyDown } = useTableKeyHandler({ table, data: tableData });
 
     return (
-      <Table onKeyDown={handleKeyDown}>
-        <TableHeader>
-          {table.getHeaderGroups().map(headerGroup => (
-            <TableRow key={headerGroup.id} onClick={() => rowSelection.options.onRowSelectionChange({})}>
-              {headerGroup.headers.map(header => (
-                <TableHead key={header.id} colSpan={header.colSpan}>
-                  {flexRender(header.column.columnDef.header, header.getContext())}
-                </TableHead>
-              ))}
-            </TableRow>
-          ))}
-        </TableHeader>
-        <TableBody>
-          {table.getRowModel().rows.map(row => (
-            <SelectRow key={row.id} row={row} onDoubleClick={() => alert(`Double click on row: ${row.id}`)}>
-              {row.getVisibleCells().map(cell => (
-                <TableCell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
-              ))}
-            </SelectRow>
-          ))}
-        </TableBody>
-      </Table>
+      <>
+        <Table onKeyDown={handleKeyDown}>
+          <TableHeader>
+            {table.getHeaderGroups().map(headerGroup => (
+              <TableRow key={headerGroup.id} onClick={() => rowSelection.options.onRowSelectionChange({})}>
+                {headerGroup.headers.map(header => (
+                  <TableHead key={header.id} colSpan={header.colSpan}>
+                    {flexRender(header.column.columnDef.header, header.getContext())}
+                  </TableHead>
+                ))}
+              </TableRow>
+            ))}
+          </TableHeader>
+          <TableBody>
+            {table.getRowModel().rows.map(row => (
+              <SelectRow key={row.id} row={row} onDoubleClick={() => alert(`Double click on row: ${row.id}`)}>
+                {row.getVisibleCells().map(cell => (
+                  <TableCell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
+                ))}
+              </SelectRow>
+            ))}
+          </TableBody>
+        </Table>
+        <div title='selected-row'>Selected Row: {payment ? payment.email : ''}</div>
+      </>
     );
   }
 };
