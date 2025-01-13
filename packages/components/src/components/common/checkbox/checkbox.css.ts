@@ -18,7 +18,8 @@ export const checkboxRoot = style({
     border: vars.border.active
   },
   ':focus-visible': {
-    boxShadow: vars.shadow.focus
+    boxShadow: vars.shadow.focus,
+    outline: 'none'
   },
   ':disabled': {
     ...disabled,

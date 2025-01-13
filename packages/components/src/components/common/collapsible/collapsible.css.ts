@@ -19,7 +19,7 @@ export const trigger = style({
   padding: vars.size.s2,
   cursor: 'pointer',
   ':focus-visible': {
-    boxShadow: vars.shadow.focus
+    border: vars.border.active
   },
   selectors: {
     [`${root}[data-state='open'] &`]: {
