@@ -1,4 +1,4 @@
-const isMac = () => window.navigator.userAgent.indexOf('Mac') !== -1;
+const isMac = () => window?.navigator?.userAgent?.indexOf('Mac') !== -1;
 
 type ModKey = '⌘' | 'CTRL';
 
