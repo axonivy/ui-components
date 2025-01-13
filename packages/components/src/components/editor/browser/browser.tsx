@@ -64,7 +64,7 @@ export const useBrowser = (
 
   const [filter, setFilter] = React.useState(options?.initialSearch ?? '');
   const expanded = useTableExpand<BrowserNode>(options?.expandedState ? options.expandedState : { '0': true });
-  const select = useTableSelect<BrowserNode>(options?.initialSelecteState);
+  const select = useTableSelect<BrowserNode>({ initialSelecteState: options?.initialSelecteState });
   const table = useReactTable({
     ...expanded.options,
     ...select.options,
