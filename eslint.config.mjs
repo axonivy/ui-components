@@ -22,10 +22,10 @@ export default tseslint.config(
     ignores: ['**/dev-packages/**', '**/.storybook/**']
   },
   {
-    name: 'packages/core',
-    files: ['packages/core/**/*.{js,mjs,cjs,ts,jsx,tsx}'],
+    name: 'packages/monaco',
+    files: ['packages/monaco/**/*.{js,mjs,cjs,ts,jsx,tsx}'],
     rules: {
-      '@typescript-eslint/no-explicit-any': 'off'
+      '@typescript-eslint/no-namespace': 'off'
     }
   }
 );
