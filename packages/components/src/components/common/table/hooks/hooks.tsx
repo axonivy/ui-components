@@ -56,13 +56,15 @@ export const useTableSelect = <TData,>(options?: TableSelectOptions): UseTableSe
   const [rowSelection, setRowSelection] = React.useState(options?.initialSelecteState ?? {});
   const handleRowSelectionChange: OnChangeFn<RowSelectionState> = React.useCallback(
     updaterOrValue => {
-      const newSelection = typeof updaterOrValue === 'function' ? updaterOrValue(rowSelection) : updaterOrValue;
-      setRowSelection(newSelection);
-      if (options?.onSelect) {
-        options.onSelect(newSelection);
-      }
+      setRowSelection(old => {
+        const newSelection = typeof updaterOrValue === 'function' ? updaterOrValue(old) : updaterOrValue;
+        if (options?.onSelect) {
+          options.onSelect(newSelection);
+        }
+        return newSelection;
+      });
     },
-    [rowSelection, options]
+    [options]
   );
 
   return {
