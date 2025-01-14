@@ -85,6 +85,49 @@ test('ctrl+shift select', async () => {
   expect(rows[5]).toHaveAttribute('data-state', 'selected');
 });
 
+test('keyboard select', async () => {
+  render(<MultiSelectWithReorderTable />);
+  const rows = screen.getAllByRole('row');
+  const user = userEvent.setup();
+  await act(async () => await user.keyboard('[Tab]'));
+  await act(async () => await user.keyboard('[ArrowDown]'));
+  expect(rows[1]).toHaveAttribute('data-state', 'selected');
+  expect(rows[2]).toHaveAttribute('data-state', 'unselected');
+  await act(async () => await user.keyboard('[ArrowDown]'));
+  expect(rows[1]).toHaveAttribute('data-state', 'unselected');
+  expect(rows[2]).toHaveAttribute('data-state', 'selected');
+});
+
+test('keyboard shift select', async () => {
+  render(<MultiSelectWithReorderTable />);
+  const rows = screen.getAllByRole('row');
+  const user = userEvent.setup();
+  await act(async () => await user.keyboard('[Tab]'));
+  await act(async () => await user.keyboard('[ArrowDown]'));
+  expect(rows[1]).toHaveAttribute('data-state', 'selected');
+  expect(rows[2]).toHaveAttribute('data-state', 'unselected');
+  await act(async () => await user.keyboard('[ShiftLeft>][ArrowDown]'));
+  expect(rows[1]).toHaveAttribute('data-state', 'selected');
+  expect(rows[2]).toHaveAttribute('data-state', 'selected');
+});
+
+test('keyboard alt reorder', async () => {
+  render(<MultiSelectWithReorderTable />);
+  const rows = screen.getAllByRole('row');
+  const user = userEvent.setup();
+  await act(async () => await user.keyboard('[Tab]'));
+  await act(async () => await user.keyboard('[ArrowDown]'));
+  expect(rows[1]).toHaveAttribute('data-state', 'selected');
+  expect(rows[1]).toHaveTextContent('successken99@yahoo.com');
+  expect(rows[2]).toHaveAttribute('data-state', 'unselected');
+  expect(rows[2]).toHaveTextContent('successAbe45@gmail.com');
+  await act(async () => await user.keyboard('[AltLeft>][ArrowDown]'));
+  expect(rows[1]).toHaveAttribute('data-state', 'unselected');
+  expect(rows[1]).toHaveTextContent('successAbe45@gmail.com');
+  expect(rows[2]).toHaveAttribute('data-state', 'selected');
+  expect(rows[2]).toHaveTextContent('successken99@yahoo.com');
+});
+
 test('message', async () => {
   render(<MessageTable />);
   const row = screen.getAllByRole('row')[4];
