@@ -156,8 +156,6 @@ export const useTableKeyHandler = <TData,>({ table, data, options }: TableKeyboa
   const [rootIndex, setRootIndex] = React.useState<number | undefined>(undefined);
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLTableElement>, onEnterAction?: (row: Row<TData>) => void) => {
-    event.stopPropagation();
-
     const actions: Record<string, () => void> = {
       ArrowUp: () => handleArrowKeyUpDown(event, -1),
       ArrowDown: () => handleArrowKeyUpDown(event, 1),
@@ -166,8 +164,11 @@ export const useTableKeyHandler = <TData,>({ table, data, options }: TableKeyboa
       Tab: () => options?.resetSelectionOnTab && table.resetRowSelection(),
       Enter: () => onEnterAction?.(table.getSelectedRowModel().flatRows[0])
     };
-
-    actions[event.key]?.();
+    const action = actions[event.key];
+    if (action) {
+      event.stopPropagation();
+      action();
+    }
   };
 
   const handleArrowKeyUpDown = (event: React.KeyboardEvent<HTMLTableElement>, direction: -1 | 1) => {
