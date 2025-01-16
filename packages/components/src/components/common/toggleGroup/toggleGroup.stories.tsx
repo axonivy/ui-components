@@ -6,7 +6,6 @@ import { Button } from '@/components/common/button/button';
 const meta: Meta<typeof ToggleGroup> = {
   title: 'Common/ToggleGroup',
   component: ToggleGroup,
-  tags: ['autodocs'],
   argTypes: {
     type: { control: 'select', options: ['single', 'multiple'] },
     gap: { control: 'select', options: [1, 2, 3, 4] }

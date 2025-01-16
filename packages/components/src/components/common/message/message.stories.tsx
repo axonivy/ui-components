@@ -6,7 +6,6 @@ import { BasicField } from '@/components/common/field/field';
 const meta: Meta<typeof Message> = {
   title: 'Common/Message',
   component: Message,
-  tags: ['autodocs'],
   argTypes: {
     variant: { type: 'string', control: 'select', defaultValue: 'default', options: [undefined, 'description', 'info', 'warning', 'error'] }
   },

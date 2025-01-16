@@ -12,6 +12,7 @@ const preview: Preview = {
     },
     backgrounds: { disable: true }
   },
+
   globalTypes: {
     theme: {
       description: 'Global theme for components',
@@ -38,6 +39,7 @@ const preview: Preview = {
       }
     }
   },
+
   decorators: [
     (StoryFn, context) => {
       const theme = context.globals.theme;
@@ -51,7 +53,9 @@ const preview: Preview = {
         </ReadonlyProvider>
       );
     }
-  ]
+  ],
+
+  tags: ['autodocs']
 };
 
 export default preview;

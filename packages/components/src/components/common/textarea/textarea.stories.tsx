@@ -5,7 +5,6 @@ import { BasicField } from '@/components/common/field/field';
 const meta: Meta<typeof Textarea> = {
   title: 'Common/Textarea',
   component: Textarea,
-  tags: ['autodocs'],
   args: {
     disabled: false,
     autoResize: false

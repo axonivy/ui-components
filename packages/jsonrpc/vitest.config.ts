@@ -1,7 +1,7 @@
-import { defineConfig } from 'vitest/config';
+import { defineProject } from 'vitest/config';
 import { resolve } from 'path';
 
-export default defineConfig({
+export default defineProject({
   plugins: [],
   resolve: {
     alias: {
@@ -9,11 +9,9 @@ export default defineConfig({
     }
   },
   test: {
-    dir: 'src',
-    include: ['**/*.test.ts?(x)'],
+    name: 'jsonrpc',
+    include: ['src/**/*.test.ts?(x)'],
     globals: true,
-    css: false,
-    reporters: process.env.CI ? ['basic', 'junit'] : ['default'],
-    outputFile: 'report.xml'
+    css: false
   }
 });

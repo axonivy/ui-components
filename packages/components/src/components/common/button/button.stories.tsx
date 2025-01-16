@@ -6,7 +6,6 @@ import { Flex } from '@/components/common/flex/flex';
 const meta: Meta<typeof Button> = {
   title: 'Common/Button',
   component: Button,
-  tags: ['autodocs'],
   argTypes: {
     variant: { type: 'string', control: 'select', options: [undefined, 'primary', 'outline'] },
     size: { type: 'string', control: 'select', options: [undefined, 'large', 'small'] },

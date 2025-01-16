@@ -7,7 +7,6 @@ import { Input } from '@/components/common/input/input';
 const meta: Meta<typeof BasicField> = {
   title: 'Common/Field',
   component: Field,
-  tags: ['autodocs'],
   argTypes: {
     message: { control: 'object' },
     control: { control: 'object' }

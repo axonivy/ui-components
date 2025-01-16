@@ -1,5 +1,5 @@
 import { composeStory } from '@storybook/react';
-import { act, render, screen, userEvent } from 'test-utils';
+import { render, screen, userEvent } from 'test-utils';
 import Meta, { Default } from './outline.stories';
 
 const Outline = composeStory(Default, Meta);
@@ -8,11 +8,11 @@ test('click', async () => {
   let selection = undefined;
   let dblClick = false;
   render(<Outline onClick={id => (selection = id)} onDoubleClick={() => (dblClick = true)} />);
-  await act(async () => await userEvent.click(screen.getByRole('row', { name: 'One Columns Container' })));
+  await userEvent.click(screen.getByRole('row', { name: 'One Columns Container' }));
   expect(screen.getByRole('row', { name: 'One Columns Container' })).toHaveAttribute('data-state', 'selected');
   expect(selection).toBe('9');
 
-  await act(async () => await userEvent.dblClick(screen.getByRole('row', { name: 'First Name' })));
+  await userEvent.dblClick(screen.getByRole('row', { name: 'First Name' }));
   expect(screen.getByRole('row', { name: 'One Columns Container' })).toHaveAttribute('data-state', 'unselected');
   expect(screen.getByRole('row', { name: 'First Name' })).toHaveAttribute('data-state', 'selected');
   expect(selection).toBe('6');
@@ -23,11 +23,11 @@ test('filter', async () => {
   render(<Outline />);
   expect(screen.getAllByRole('row')).toHaveLength(19);
 
-  await act(async () => await userEvent.type(screen.getByRole('textbox'), 'First Name'));
+  await userEvent.type(screen.getByRole('textbox'), 'First Name');
   expect(screen.getAllByRole('row')).toHaveLength(4);
 
-  await act(async () => await userEvent.clear(screen.getByRole('textbox')));
-  await act(async () => await userEvent.type(screen.getByRole('textbox'), 'info'));
+  await userEvent.clear(screen.getByRole('textbox'));
+  await userEvent.type(screen.getByRole('textbox'), 'info');
   expect(screen.getAllByRole('row')).toHaveLength(2);
 });
 

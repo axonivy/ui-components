@@ -1,5 +1,5 @@
 import type { UpdateConsumer } from '@/types/lambda';
-import { useReducer, type Reducer } from 'react';
+import { useReducer } from 'react';
 
 type HistoryState<T> = {
   history: Array<T>;
@@ -59,7 +59,7 @@ const doHistoryChange = <T>(
 };
 
 export const useHistoryData = <T>(options?: { maxHistory?: number; logger?: (message: string) => void }) => {
-  const [state, dispatch] = useReducer<Reducer<HistoryState<T>, HistoryAction<T>>>(reducer, { history: [], historyIndex: -1 });
+  const [state, dispatch] = useReducer(reducer, { history: [] as Array<T>, historyIndex: -1 });
 
   const push = (data: T) => dispatch({ type: 'PUSH', data, options });
   const undo = (updater: UpdateConsumer<T>) => dispatch({ type: 'UNDO', updater, options });

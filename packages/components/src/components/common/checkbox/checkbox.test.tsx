@@ -1,5 +1,5 @@
 import { composeStory } from '@storybook/react';
-import { act, render, screen, userEvent } from 'test-utils';
+import { render, screen, userEvent } from 'test-utils';
 import Meta, { Default } from './checkbox.stories';
 
 const Checkbox = composeStory(Default, Meta);
@@ -9,10 +9,10 @@ test('toggled by box', async () => {
   const checkbox = screen.getByRole('checkbox');
   expect(checkbox).not.toBeChecked();
 
-  await act(async () => await userEvent.click(checkbox));
+  await userEvent.click(checkbox);
   expect(checkbox).toBeChecked();
 
-  await act(async () => await userEvent.click(checkbox));
+  await userEvent.click(checkbox);
   expect(checkbox).not.toBeChecked();
 });
 
@@ -22,7 +22,7 @@ test('toggled by label', async () => {
   const checkbox = screen.getByRole('checkbox');
   expect(checkbox).not.toBeChecked();
 
-  await act(async () => await userEvent.click(label));
+  await userEvent.click(label);
   expect(checkbox).toBeChecked();
 });
 
@@ -33,10 +33,10 @@ test('toggled with keyboard', async () => {
   expect(checkbox).toHaveFocus();
   expect(checkbox).not.toBeChecked();
 
-  await act(async () => await userEvent.keyboard('[Space]'));
+  await userEvent.keyboard('[Space]');
   expect(checkbox).toBeChecked();
 
-  await act(async () => await userEvent.keyboard('[Space]'));
+  await userEvent.keyboard('[Space]');
   expect(checkbox).not.toBeChecked();
 });
 

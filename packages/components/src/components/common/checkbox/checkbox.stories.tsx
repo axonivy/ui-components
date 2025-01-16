@@ -4,7 +4,6 @@ import { BasicCheckbox, Checkbox } from './checkbox';
 const meta: Meta<typeof BasicCheckbox> = {
   title: 'Common/Checkbox',
   component: Checkbox,
-  tags: ['autodocs'],
   args: {
     label: 'Accept terms and conditions',
     disabled: false

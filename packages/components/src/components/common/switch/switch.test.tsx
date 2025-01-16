@@ -1,5 +1,5 @@
 import { composeStory } from '@storybook/react';
-import { act, render, screen, userEvent } from 'test-utils';
+import { render, screen, userEvent } from 'test-utils';
 import Meta, { Default } from './switch.stories';
 
 const Switch = composeStory(Default, Meta);
@@ -9,10 +9,10 @@ test('toggle', async () => {
   const input = screen.getByRole('switch');
   expect(input).not.toBeChecked();
 
-  await act(async () => await userEvent.click(input));
+  await userEvent.click(input);
   expect(input).toBeChecked();
 
-  await act(async () => await userEvent.click(input));
+  await userEvent.click(input);
   expect(input).not.toBeChecked();
 });
 
@@ -22,7 +22,7 @@ test('toggle by label', async () => {
   const input = screen.getByRole('switch');
   expect(input).not.toBeChecked();
 
-  await act(async () => await userEvent.click(label));
+  await userEvent.click(label);
   expect(input).toBeChecked();
 });
 
@@ -33,10 +33,10 @@ test('toggled with keyboard', async () => {
   expect(input).toHaveFocus();
   expect(input).not.toBeChecked();
 
-  await act(async () => await userEvent.keyboard('[Space]'));
+  await userEvent.keyboard('[Space]');
   expect(input).toBeChecked();
 
-  await act(async () => await userEvent.keyboard('[Enter]'));
+  await userEvent.keyboard('[Enter]');
   expect(input).not.toBeChecked();
 });
 

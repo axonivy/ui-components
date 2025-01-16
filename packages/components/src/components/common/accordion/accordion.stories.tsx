@@ -14,7 +14,6 @@ import { ButtonGroup } from '@/components/common/button/button';
 const meta: Meta<typeof Accordion> = {
   title: 'Common/Accordion',
   component: Accordion,
-  tags: ['autodocs'],
   argTypes: {
     type: { control: 'select', description: 'Multiple open or only one', options: ['single', 'multiple'] }
   },

@@ -1,5 +1,5 @@
 import { composeStory } from '@storybook/react';
-import { act, render, screen, userEvent } from 'test-utils';
+import { render, screen, userEvent } from 'test-utils';
 import Meta, { Default } from './radio.stories';
 
 const Radio = composeStory(Default, Meta);
@@ -11,12 +11,12 @@ test('toggle', async () => {
   expect(radios.at(1)).not.toBeChecked();
   expect(radios.at(2)).not.toBeChecked();
 
-  await act(async () => await userEvent.click(radios[1]));
+  await userEvent.click(radios[1]);
   expect(radios.at(0)).not.toBeChecked();
   expect(radios.at(1)).toBeChecked();
   expect(radios.at(2)).not.toBeChecked();
 
-  await act(async () => await userEvent.click(radios[2]));
+  await userEvent.click(radios[2]);
   expect(radios.at(0)).not.toBeChecked();
   expect(radios.at(1)).not.toBeChecked();
   expect(radios.at(2)).toBeChecked();
@@ -27,7 +27,7 @@ test('toggle by label', async () => {
   const radios = screen.getAllByRole('radio');
   const label = screen.getByLabelText('Option Two');
 
-  await act(async () => await userEvent.click(label));
+  await userEvent.click(label);
   expect(radios.at(0)).not.toBeChecked();
   expect(radios.at(1)).toBeChecked();
   expect(radios.at(2)).not.toBeChecked();
@@ -36,17 +36,17 @@ test('toggle by label', async () => {
 test('toggled with keyboard', async () => {
   render(<Radio />);
   const radios = screen.getAllByRole('radio');
-  await act(async () => await userEvent.tab());
+  await userEvent.tab();
   expect(radios.at(0)).toHaveFocus();
   expect(radios.at(0)).toBeChecked();
 
-  await act(async () => await userEvent.keyboard('[ArrowRight]'));
-  await act(async () => await userEvent.keyboard('[Space]'));
+  await userEvent.keyboard('[ArrowRight]');
+  await userEvent.keyboard('[Space]');
   expect(radios.at(1)).toHaveFocus();
   expect(radios.at(1)).toBeChecked();
 
-  await act(async () => await userEvent.keyboard('[ArrowLeft]'));
-  await act(async () => await userEvent.keyboard('[Space]'));
+  await userEvent.keyboard('[ArrowLeft]');
+  await userEvent.keyboard('[Space]');
   expect(radios.at(0)).toHaveFocus();
   expect(radios.at(0)).toBeChecked();
 });

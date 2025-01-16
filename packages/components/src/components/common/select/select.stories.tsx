@@ -16,7 +16,6 @@ import { BasicField } from '@/components/common/field/field';
 const meta: Meta<typeof BasicSelect> = {
   title: 'Common/Select',
   component: Select,
-  tags: ['autodocs'],
   args: {
     disabled: false
   }

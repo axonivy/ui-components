@@ -1,5 +1,5 @@
 import { composeStory } from '@storybook/react';
-import { act, render, screen, userEvent } from 'test-utils';
+import { render, screen, userEvent } from 'test-utils';
 import Meta, { Default, State, Controls } from './accordion.stories';
 
 const Accordion = composeStory(Default, Meta);
@@ -14,11 +14,11 @@ test('open', async () => {
   expect(items.at(0)).toHaveAttribute('data-state', 'closed');
   expect(screen.queryByRole('region')).not.toBeInTheDocument();
 
-  await act(async () => await userEvent.click(items[0]));
+  await userEvent.click(items[0]);
   expect(items.at(0)).toHaveAttribute('data-state', 'open');
   expect(screen.getByRole('region')).toHaveTextContent('WAI-ARIA design pattern');
 
-  await act(async () => await userEvent.click(items[1]));
+  await userEvent.click(items[1]);
   expect(items.at(0)).toHaveAttribute('data-state', 'closed');
   expect(items.at(1)).toHaveAttribute('data-state', 'open');
   expect(screen.getByRole('region')).toHaveTextContent('default styles');
@@ -36,11 +36,11 @@ test('keyboard', async () => {
   await userEvent.tab();
   expect(items.at(1)).toHaveFocus();
 
-  await act(async () => await userEvent.keyboard('[Enter]'));
+  await userEvent.keyboard('[Enter]');
   expect(items.at(1)).toHaveAttribute('data-state', 'open');
   expect(screen.getByRole('region')).toHaveTextContent('default styles');
 
-  await act(async () => await userEvent.keyboard('[Space]'));
+  await userEvent.keyboard('[Space]');
   expect(items.at(1)).toHaveAttribute('data-state', 'closed');
 });
 

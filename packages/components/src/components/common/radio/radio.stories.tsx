@@ -6,7 +6,6 @@ import { Label } from '@/components/common/label/label';
 const meta: Meta<typeof RadioGroup> = {
   title: 'Common/RadioGroup',
   component: RadioGroup,
-  tags: ['autodocs'],
   argTypes: {
     orientation: { control: 'select', options: ['horizontal', 'vertical'] }
   },

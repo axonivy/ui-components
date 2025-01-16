@@ -4,8 +4,7 @@ import { useState } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
 
 const meta: Meta = {
-  title: 'Hooks/useHotkeys',
-  tags: ['autodocs']
+  title: 'Hooks/Hotkey'
 };
 
 export default meta;

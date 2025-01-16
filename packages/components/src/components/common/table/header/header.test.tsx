@@ -1,5 +1,5 @@
 import { composeStory } from '@storybook/react';
-import { act, render, screen, userEvent } from 'test-utils';
+import { render, screen, userEvent } from 'test-utils';
 import Meta, { FilterResizeSortTable } from './header.stories';
 
 const Table = composeStory(FilterResizeSortTable, Meta);
@@ -9,22 +9,22 @@ test('filter', async () => {
   const search = screen.getByRole('textbox');
   expect(screen.getAllByRole('row')).toHaveLength(9);
 
-  await act(async () => await userEvent.type(search, 'success'));
+  await userEvent.type(search, 'success');
   expect(screen.getAllByRole('row')).toHaveLength(4);
 
-  await act(async () => await userEvent.clear(search));
-  await act(async () => await userEvent.type(search, 'ken'));
+  await userEvent.clear(search);
+  await userEvent.type(search, 'ken');
   expect(screen.getAllByRole('row')).toHaveLength(2);
 
-  await act(async () => await userEvent.clear(search));
-  await act(async () => await userEvent.type(search, '3'));
+  await userEvent.clear(search);
+  await userEvent.type(search, '3');
   expect(screen.getAllByRole('row')).toHaveLength(4);
 });
 
 test('no results', async () => {
   render(<Table />);
   const search = screen.getByRole('textbox');
-  await act(async () => await userEvent.type(search, 'adsf'));
+  await userEvent.type(search, 'adsf');
   expect(screen.getAllByRole('row')).toHaveLength(2);
   expect(screen.getAllByRole('row')[1]).toHaveTextContent('No results');
 });
@@ -33,15 +33,15 @@ test('sort', async () => {
   render(<Table />);
   expectSort(['Status', 'success', 'success', 'processing', 'success', 'failed', 'pending', 'processing', 'NaN']);
   const statusSort = screen.getByRole('button', { name: 'Sort by Status' });
-  await act(async () => await userEvent.click(statusSort));
+  await userEvent.click(statusSort);
   expectSort(['Status', 'failed', 'pending', 'processing', 'processing', 'success', 'success', 'success', 'NaN']);
-  await act(async () => await userEvent.click(statusSort));
+  await userEvent.click(statusSort);
   expectSort(['Status', 'NaN', 'success', 'success', 'success', 'processing', 'processing', 'pending', 'failed']);
 
   const emailSort = screen.getByRole('button', { name: 'Sort by Email' });
-  await act(async () => await userEvent.click(emailSort));
+  await userEvent.click(emailSort);
   expectSort(['Email', 'Abe', 'Monserrat', 'Silas', 'carmella', 'hans', 'ken', 'lukas', 'NaN']);
-  await act(async () => await userEvent.click(emailSort));
+  await userEvent.click(emailSort);
   expectSort(['Email', 'NaN', 'lukas', 'ken', 'hans', 'carmella', 'Silas', 'Monserrat', 'Abe']);
 });
 

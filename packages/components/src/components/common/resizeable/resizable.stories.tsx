@@ -6,7 +6,6 @@ import { Flex } from '@/components/common/flex/flex';
 const meta: Meta<typeof ResizablePanelGroup> = {
   title: 'Common/Resizeable',
   component: ResizablePanelGroup,
-  tags: ['autodocs'],
   argTypes: {
     direction: { control: 'select', options: ['horizontal', 'vertical'] }
   },
