@@ -50,6 +50,9 @@ export * from './components/editor/toolbar/toolbar';
 export * from './context/useReadonly';
 export * from './context/useTheme';
 
+/* Hooks */
+export * from './hooks/hotkey';
+
 /* Utils */
 export * from './utils/array';
 export * from './utils/class-name';
