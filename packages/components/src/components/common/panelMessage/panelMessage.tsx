@@ -21,9 +21,4 @@ const PanelMessage = React.forwardRef<HTMLDivElement, PanelMessageProps>(
 );
 PanelMessage.displayName = 'PanelMessage';
 
-/**
- * @deprecated Use {@link PanelMessage} instead.
- */
-const EmptyDetail = PanelMessage;
-
-export { PanelMessage, EmptyDetail };
+export { PanelMessage };

@@ -72,9 +72,4 @@ const BasicField = React.forwardRef<HTMLDivElement, BasicFieldProps>(({ label, c
 ));
 BasicField.displayName = 'BasicField';
 
-/** @deprecated use {@link BasicFieldProps} instead */
-export type FieldsetProps = BasicFieldProps;
-/** @deprecated use {@link BasicField} instead */
-const Fieldset = BasicField;
-
-export { Field, BasicField, Fieldset };
+export { Field, BasicField };

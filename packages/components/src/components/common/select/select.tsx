@@ -152,17 +152,6 @@ const BasicSelect = ({ items, emptyItem, className, placeholder, value, onValueC
 };
 BasicSelect.displayName = 'BasicSelect';
 
-/**
- * @deprecated use BasicSelectProps
- */
-export type SimpleSelectProps = BasicSelectProps;
-
-/**
- * @deprecated use BasicSelect
- */
-const SimpleSelect = BasicSelect;
-SimpleSelect.displayName = 'SimpleSelect';
-
 export {
   Select,
   SelectGroup,
@@ -174,6 +163,5 @@ export {
   SelectSeparator,
   SelectScrollUpButton,
   SelectScrollDownButton,
-  BasicSelect,
-  SimpleSelect
+  BasicSelect
 };
