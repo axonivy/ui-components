@@ -8,6 +8,7 @@ import * as React from 'react';
 import { tableData, type Payment } from '../data';
 import { arraymove, arrayMoveMultiple, indexOf } from '@/utils/array';
 import { resetAndSetRowSelection } from '@/utils/table/table';
+import { toast, Toaster } from 'sonner';
 
 const meta: Meta<typeof Table> = {
   title: 'Common/Table/Row',
@@ -275,37 +276,47 @@ export const MultiSelectWithReorder: Story = {
     });
 
     return (
-      <Table onKeyDown={handleKeyDown}>
-        <TableHeader>
-          {table.getHeaderGroups().map(headerGroup => (
-            <TableRow key={headerGroup.id}>
-              {headerGroup.headers.map(header => (
-                <TableHead key={header.id} colSpan={header.colSpan}>
-                  {flexRender(header.column.columnDef.header, header.getContext())}
-                </TableHead>
-              ))}
-            </TableRow>
-          ))}
-        </TableHeader>
-        <TableBody>
-          {table.getRowModel().rows.map(row => (
-            <ReorderRow
-              key={row.id}
-              row={row}
-              id={row.original.id}
-              updateOrder={updateOrder}
-              onDrag={!row.getIsSelected() ? () => table.resetRowSelection() : undefined}
-              onClick={event => handleMultiSelectOnRow(row, event)}
-            >
-              {row.getVisibleCells().map(cell => (
-                <TableCell key={cell.id} onClick={() => table.options.meta?.updateData(row.id, cell.column.id, cell.getValue() + '1')}>
-                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                </TableCell>
-              ))}
-            </ReorderRow>
-          ))}
-        </TableBody>
-      </Table>
+      <>
+        <Table
+          onKeyDown={e =>
+            handleKeyDown(e, {
+              onEnterAction: () => toast.info('Enter was pressed'),
+              onDeleteAction: () => toast.info('Delete was pressed')
+            })
+          }
+        >
+          <TableHeader>
+            {table.getHeaderGroups().map(headerGroup => (
+              <TableRow key={headerGroup.id}>
+                {headerGroup.headers.map(header => (
+                  <TableHead key={header.id} colSpan={header.colSpan}>
+                    {flexRender(header.column.columnDef.header, header.getContext())}
+                  </TableHead>
+                ))}
+              </TableRow>
+            ))}
+          </TableHeader>
+          <TableBody>
+            {table.getRowModel().rows.map(row => (
+              <ReorderRow
+                key={row.id}
+                row={row}
+                id={row.original.id}
+                updateOrder={updateOrder}
+                onDrag={!row.getIsSelected() ? () => table.resetRowSelection() : undefined}
+                onClick={event => handleMultiSelectOnRow(row, event)}
+              >
+                {row.getVisibleCells().map(cell => (
+                  <TableCell key={cell.id} onClick={() => table.options.meta?.updateData(row.id, cell.column.id, cell.getValue() + '1')}>
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  </TableCell>
+                ))}
+              </ReorderRow>
+            ))}
+          </TableBody>
+        </Table>
+        <Toaster />
+      </>
     );
   }
 };

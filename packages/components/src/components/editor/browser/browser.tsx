@@ -177,7 +177,7 @@ const BrowsersView = ({ browsers, apply, applyBtn }: BrowsersViewProps) => {
                       onChange={browser.globalFilter.setFilter}
                     />
                     <div className={overflowAuto}>
-                      <Table onKeyDown={e => browser.handleKeyDown(e, applyHandler)}>
+                      <Table onKeyDown={e => browser.handleKeyDown(e, { onEnterAction: applyHandler })}>
                         <TableBody>
                           {browser.table.getRowModel().rows?.length ? (
                             browser.table.getRowModel().rows.map(row => (

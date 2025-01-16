@@ -146,6 +146,11 @@ interface KeyHandlerOptions<TData> {
   resetSelectionOnTab?: boolean;
 }
 
+export interface KeyDownOptions<TData> {
+  onEnterAction?: (row: Row<TData>) => void;
+  onDeleteAction?: (row: Row<TData>) => void;
+}
+
 interface TableKeyboardHandlerProps<TData> {
   table: Table<TData>;
   data: Array<TData>;
@@ -155,14 +160,15 @@ interface TableKeyboardHandlerProps<TData> {
 export const useTableKeyHandler = <TData,>({ table, data, options }: TableKeyboardHandlerProps<TData>) => {
   const [rootIndex, setRootIndex] = React.useState<number | undefined>(undefined);
 
-  const handleKeyDown = (event: React.KeyboardEvent<HTMLTableElement>, onEnterAction?: (row: Row<TData>) => void) => {
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLTableElement>, key?: KeyDownOptions<TData>) => {
     const actions: Record<string, () => void> = {
       ArrowUp: () => handleArrowKeyUpDown(event, -1),
       ArrowDown: () => handleArrowKeyUpDown(event, 1),
       ArrowLeft: () => toggleExpand(false, table.getSelectedRowModel().flatRows[0], options?.lazyLoadChildren),
       ArrowRight: () => toggleExpand(true, table.getSelectedRowModel().flatRows[0], options?.lazyLoadChildren),
       Tab: () => options?.resetSelectionOnTab && table.resetRowSelection(),
-      Enter: () => onEnterAction?.(table.getSelectedRowModel().flatRows[0])
+      Enter: () => key?.onEnterAction?.(table.getSelectedRowModel().flatRows[0]),
+      Delete: () => key?.onDeleteAction?.(table.getSelectedRowModel().flatRows[0])
     };
     const action = actions[event.key];
     if (action) {
