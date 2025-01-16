@@ -56,7 +56,5 @@ export * from './utils/class-name';
 export * from './utils/equals';
 export * from './utils/hotkey';
 export * from './utils/string';
-export * from './utils/utils';
 export * from './utils/table/table';
 export * from './utils/table/table-data';
-export * from './utils/useShortcut';
