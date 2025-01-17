@@ -52,6 +52,10 @@ export * from './context/useTheme';
 
 /* Hooks */
 export * from './hooks/hotkey';
+export * from './hooks/useHistoryData';
+
+/* Types */
+export * from './types/lambda';
 
 /* Utils */
 export * from './utils/array';
