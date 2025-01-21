@@ -1,3 +1,4 @@
+'use no memo';
 import type { Meta, StoryObj } from '@storybook/react';
 import { Table, TableBody, TableCell, TableFooter, TableHead, TableHeader, TableRow } from './table';
 import { tableData } from './data';

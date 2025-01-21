@@ -1,3 +1,4 @@
+'use no memo';
 import type { CellContext, RowData } from '@tanstack/react-table';
 import * as React from 'react';
 import { editCell } from './edit.css';

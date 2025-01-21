@@ -1,3 +1,4 @@
+'use no memo';
 import type { Meta, StoryObj } from '@storybook/react';
 import type { ColumnDef } from '@tanstack/react-table';
 import { useReactTable, getCoreRowModel, flexRender } from '@tanstack/react-table';

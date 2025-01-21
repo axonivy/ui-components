@@ -1,3 +1,4 @@
+'use no memo';
 import type * as React from 'react';
 import { IvyIcons } from '@axonivy/ui-icons';
 import type { CellContext, Row } from '@tanstack/react-table';

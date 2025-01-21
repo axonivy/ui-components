@@ -1,3 +1,4 @@
+'use no memo';
 import { flexRender, type Column, type HeaderContext, type HeaderGroup } from '@tanstack/react-table';
 import { TableHead, TableHeader, TableRow } from '../table';
 import { IvyIcons } from '@axonivy/ui-icons';

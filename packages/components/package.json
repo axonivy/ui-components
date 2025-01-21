@@ -58,6 +58,7 @@
     "@vanilla-extract/recipes": "^0.5.5",
     "@vanilla-extract/vite-plugin": "^4.0.19",
     "@vitejs/plugin-react": "^4.3.4",
+    "babel-plugin-react-compiler": "^19.0.0-beta-decd7b8-20250118",
     "eslint-plugin-storybook": "^0.11.2",
     "happy-dom": "^16.7.1",
     "react": "^19.0.0",

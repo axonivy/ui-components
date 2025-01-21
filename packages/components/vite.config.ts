@@ -6,7 +6,12 @@ import react from '@vitejs/plugin-react';
 import dts from 'vite-plugin-dts';
 
 export default defineConfig({
-  plugins: [veVitePlugin(), visualizer(), react(), dts({ tsconfigPath: './tsconfig.production.json' })],
+  plugins: [
+    veVitePlugin(),
+    visualizer(),
+    react({ babel: { plugins: ['babel-plugin-react-compiler', {}] } }),
+    dts({ tsconfigPath: './tsconfig.production.json' })
+  ],
   resolve: {
     alias: {
       '@': resolve(__dirname, './src')

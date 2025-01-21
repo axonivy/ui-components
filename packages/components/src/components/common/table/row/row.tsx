@@ -1,3 +1,4 @@
+'use no memo';
 import type { Row } from '@tanstack/react-table';
 import * as React from 'react';
 import { dndRow, reorderHandle, reorderHandleIcon, selectedRow } from './row.css';

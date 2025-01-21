@@ -1,3 +1,4 @@
+'use no memo';
 import type { Meta, StoryObj } from '@storybook/react';
 import { BrowsersView, useBrowser } from './browser';
 import { cmsData, funcData, roleData, useAttrBrowser } from './data';
@@ -7,7 +8,7 @@ import { useState } from 'react';
 import { Button } from '@/components/common/button/button';
 import { BasicCheckbox } from '@/components/common/checkbox/checkbox';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/common/dialog/dialog';
-import { InputGroup, Input } from '@/components/common/input/input';
+import { InputGroup, Input, BasicInput } from '@/components/common/input/input';
 import { Popover, PopoverArrow, PopoverContent, PopoverTrigger } from '@radix-ui/react-popover';
 import { Flex } from '@/components/common/flex/flex';
 import {
@@ -149,7 +150,7 @@ const DialogBrowserInput = ({
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <InputGroup style={{ flex: '1' }}>
-        <Input value={value} onChange={e => onChange(e.target.value)} />
+        <BasicInput value={value} onChange={e => onChange(e.target.value)} />
         <DialogTrigger asChild>
           <Button icon={IvyIcons.ListSearch} aria-label='Browser' />
         </DialogTrigger>

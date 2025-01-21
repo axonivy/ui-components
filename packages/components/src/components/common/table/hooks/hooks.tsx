@@ -1,3 +1,4 @@
+'use no memo';
 import { SearchInput } from '@/components/common/input/input';
 import { resetAndSetRowSelection, selectRow } from '@/utils/table/table';
 import {

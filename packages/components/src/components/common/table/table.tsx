@@ -1,3 +1,4 @@
+'use no memo';
 import { cn } from '@/utils/class-name';
 import * as React from 'react';
 import { table, root, header, body, cell, footer, head, row } from './table.css';

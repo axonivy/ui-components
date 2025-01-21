@@ -1,3 +1,4 @@
+'use no memo';
 import { IvyIcons } from '@axonivy/ui-icons';
 import { addRowLine, addRowBtn, addRowBlock } from './footer.css';
 import { Button } from '@/components/common/button/button';
