@@ -9,7 +9,6 @@ import { BasicField } from '@/components/common/field/field';
 const meta: Meta<typeof Combobox> = {
   title: 'Common/Combobox',
   component: Combobox,
-  tags: ['autodocs'],
   args: {
     disabled: false
   }

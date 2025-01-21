@@ -1,5 +1,5 @@
 import { composeStory } from '@storybook/react';
-import { act, render, screen, userEvent } from 'test-utils';
+import { render, screen, userEvent } from 'test-utils';
 import Meta, { Default, State, Controls, Basic } from './collapsible.stories';
 
 const Collapsible = composeStory(Default, Meta);
@@ -14,11 +14,11 @@ test('open', async () => {
   expect(trigger).toHaveAttribute('data-state', 'closed');
   expect(screen.queryByRole('region')).not.toBeInTheDocument();
 
-  await act(async () => await userEvent.click(trigger));
+  await userEvent.click(trigger);
   expect(trigger).toHaveAttribute('data-state', 'open');
   expect(screen.getByRole('region')).toHaveTextContent('@radix-ui/colors');
 
-  await act(async () => await userEvent.click(trigger));
+  await userEvent.click(trigger);
   expect(trigger).toHaveAttribute('data-state', 'closed');
   expect(screen.queryByRole('region')).not.toBeInTheDocument();
 });
@@ -32,11 +32,11 @@ test('keyboard', async () => {
   await userEvent.tab();
   expect(trigger).toHaveFocus();
 
-  await act(async () => await userEvent.keyboard('[Enter]'));
+  await userEvent.keyboard('[Enter]');
   expect(trigger).toHaveAttribute('data-state', 'open');
   expect(screen.getByRole('region')).toHaveTextContent('@radix-ui/colors');
 
-  await act(async () => await userEvent.keyboard('[Space]'));
+  await userEvent.keyboard('[Space]');
   expect(trigger).toHaveAttribute('data-state', 'closed');
 });
 

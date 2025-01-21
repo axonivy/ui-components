@@ -1,5 +1,5 @@
 import { composeStory } from '@storybook/react';
-import { act, render, screen, userEvent } from 'test-utils';
+import { render, screen, userEvent } from 'test-utils';
 import Meta, { Default, WithFieldset } from './textarea.stories';
 
 const Textarea = composeStory(Default, Meta);
@@ -12,7 +12,7 @@ test('by label', async () => {
   expect(input).not.toHaveFocus();
   expect(screen.getByRole('paragraph')).toHaveTextContent('this is a warning');
 
-  await act(async () => await userEvent.click(label));
+  await userEvent.click(label);
   expect(input).toHaveFocus();
 });
 
@@ -37,7 +37,7 @@ test('auto resize on', async () => {
   const input = screen.getByRole('textbox');
   expect(input).toHaveAttribute('style', 'height: 14px;');
 
-  await act(async () => await userEvent.type(input, 'test\nsecond\nbla'));
+  await userEvent.type(input, 'test\nsecond\nbla');
   expect(input).toHaveValue('test\nsecond\nbla');
   expect(input).toHaveAttribute('style', 'height: 42px;');
 });

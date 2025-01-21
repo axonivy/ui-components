@@ -13,8 +13,7 @@ import { Message, type MessageData } from '@/components/common/message/message';
 
 const meta: Meta<typeof Collapsible> = {
   title: 'Common/Collapsible',
-  component: Collapsible,
-  tags: ['autodocs']
+  component: Collapsible
 };
 
 export default meta;

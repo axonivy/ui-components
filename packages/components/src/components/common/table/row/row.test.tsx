@@ -1,5 +1,5 @@
 import { composeStory } from '@storybook/react';
-import { act, render, screen, userEvent } from 'test-utils';
+import { render, screen, userEvent } from 'test-utils';
 import Meta, { Select, Message, Reorder, MultiSelectWithReorder } from './row.stories';
 
 const SelectTable = composeStory(Select, Meta);
@@ -12,7 +12,7 @@ test('select', async () => {
   const row = screen.getAllByRole('row')[1];
   expect(row).toHaveAttribute('data-state', 'unselected');
   expect(screen.getByTitle('selected-row')).not.toHaveTextContent('Selected Row: ken99@yahoo.com');
-  await act(async () => await userEvent.click(row));
+  await userEvent.click(row);
   expect(row).toHaveAttribute('data-state', 'selected');
   expect(screen.getByTitle('selected-row')).toHaveTextContent('Selected Row: ken99@yahoo.com');
 });
@@ -23,11 +23,11 @@ test('ctrl select', async () => {
   expect(rows[1]).toHaveAttribute('data-state', 'unselected');
   expect(rows[3]).toHaveAttribute('data-state', 'unselected');
   const user = userEvent.setup();
-  await act(async () => await user.click(rows[1]));
+  await user.click(rows[1]);
   expect(rows[1]).toHaveAttribute('data-state', 'selected');
 
-  await act(async () => await user.keyboard('[ControlLeft>]'));
-  await act(async () => await user.click(rows[3]));
+  await user.keyboard('[ControlLeft>]');
+  await user.click(rows[3]);
 
   expect(rows[1]).toHaveAttribute('data-state', 'selected');
   expect(rows[2]).toHaveAttribute('data-state', 'unselected');
@@ -40,17 +40,17 @@ test('shift select', async () => {
   expect(rows[1]).toHaveAttribute('data-state', 'unselected');
   expect(rows[3]).toHaveAttribute('data-state', 'unselected');
   const user = userEvent.setup();
-  await act(async () => await user.click(rows[1]));
+  await user.click(rows[1]);
   expect(rows[1]).toHaveAttribute('data-state', 'selected');
 
-  await act(async () => await user.keyboard('[ShiftLeft>]'));
-  await act(async () => await user.click(rows[3]));
+  await user.keyboard('[ShiftLeft>]');
+  await user.click(rows[3]);
 
   expect(rows[1]).toHaveAttribute('data-state', 'selected');
   expect(rows[2]).toHaveAttribute('data-state', 'selected');
   expect(rows[3]).toHaveAttribute('data-state', 'selected');
 
-  await act(async () => await user.click(rows[2]));
+  await user.click(rows[2]);
   expect(rows[1]).toHaveAttribute('data-state', 'selected');
   expect(rows[2]).toHaveAttribute('data-state', 'selected');
   expect(rows[3]).toHaveAttribute('data-state', 'unselected');
@@ -60,15 +60,15 @@ test('ctrl+shift select', async () => {
   render(<MultiSelectWithReorderTable />);
   const rows = screen.getAllByRole('row');
   const user = userEvent.setup();
-  await act(async () => await user.click(rows[1]));
+  await user.click(rows[1]);
   expect(rows[1]).toHaveAttribute('data-state', 'selected');
 
-  await act(async () => await user.keyboard('[ControlLeft>]'));
-  await act(async () => await user.click(rows[3]));
+  await user.keyboard('[ControlLeft>]');
+  await user.click(rows[3]);
   expect(rows[3]).toHaveAttribute('data-state', 'selected');
 
-  await act(async () => await user.keyboard('[ShiftLeft>]'));
-  await act(async () => await user.click(rows[5]));
+  await user.keyboard('[ShiftLeft>]');
+  await user.click(rows[5]);
 
   expect(rows[1]).toHaveAttribute('data-state', 'selected');
   expect(rows[2]).toHaveAttribute('data-state', 'unselected');
@@ -76,7 +76,7 @@ test('ctrl+shift select', async () => {
   expect(rows[4]).toHaveAttribute('data-state', 'selected');
   expect(rows[5]).toHaveAttribute('data-state', 'selected');
 
-  await act(async () => await user.click(rows[4]));
+  await user.click(rows[4]);
 
   expect(rows[1]).toHaveAttribute('data-state', 'selected');
   expect(rows[2]).toHaveAttribute('data-state', 'unselected');
@@ -89,11 +89,11 @@ test('keyboard select', async () => {
   render(<MultiSelectWithReorderTable />);
   const rows = screen.getAllByRole('row');
   const user = userEvent.setup();
-  await act(async () => await user.keyboard('[Tab]'));
-  await act(async () => await user.keyboard('[ArrowDown]'));
+  await user.keyboard('[Tab]');
+  await user.keyboard('[ArrowDown]');
   expect(rows[1]).toHaveAttribute('data-state', 'selected');
   expect(rows[2]).toHaveAttribute('data-state', 'unselected');
-  await act(async () => await user.keyboard('[ArrowDown]'));
+  await user.keyboard('[ArrowDown]');
   expect(rows[1]).toHaveAttribute('data-state', 'unselected');
   expect(rows[2]).toHaveAttribute('data-state', 'selected');
 });
@@ -102,11 +102,11 @@ test('keyboard shift select', async () => {
   render(<MultiSelectWithReorderTable />);
   const rows = screen.getAllByRole('row');
   const user = userEvent.setup();
-  await act(async () => await user.keyboard('[Tab]'));
-  await act(async () => await user.keyboard('[ArrowDown]'));
+  await user.keyboard('[Tab]');
+  await user.keyboard('[ArrowDown]');
   expect(rows[1]).toHaveAttribute('data-state', 'selected');
   expect(rows[2]).toHaveAttribute('data-state', 'unselected');
-  await act(async () => await user.keyboard('[ShiftLeft>][ArrowDown]'));
+  await user.keyboard('[ShiftLeft>][ArrowDown]');
   expect(rows[1]).toHaveAttribute('data-state', 'selected');
   expect(rows[2]).toHaveAttribute('data-state', 'selected');
 });
@@ -115,13 +115,13 @@ test('keyboard alt reorder', async () => {
   render(<MultiSelectWithReorderTable />);
   const rows = screen.getAllByRole('row');
   const user = userEvent.setup();
-  await act(async () => await user.keyboard('[Tab]'));
-  await act(async () => await user.keyboard('[ArrowDown]'));
+  await user.keyboard('[Tab]');
+  await user.keyboard('[ArrowDown]');
   expect(rows[1]).toHaveAttribute('data-state', 'selected');
   expect(rows[1]).toHaveTextContent('successken99@yahoo.com');
   expect(rows[2]).toHaveAttribute('data-state', 'unselected');
   expect(rows[2]).toHaveTextContent('successAbe45@gmail.com');
-  await act(async () => await user.keyboard('[AltLeft>][ArrowDown]'));
+  await user.keyboard('[AltLeft>][ArrowDown]');
   expect(rows[1]).toHaveAttribute('data-state', 'unselected');
   expect(rows[1]).toHaveTextContent('successAbe45@gmail.com');
   expect(rows[2]).toHaveAttribute('data-state', 'selected');

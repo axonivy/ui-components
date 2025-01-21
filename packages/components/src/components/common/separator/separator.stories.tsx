@@ -3,8 +3,7 @@ import { Separator } from './separator';
 
 const meta: Meta<typeof Separator> = {
   title: 'Common/Separator',
-  component: Separator,
-  tags: ['autodocs']
+  component: Separator
 };
 
 export default meta;

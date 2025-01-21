@@ -7,8 +7,7 @@ import { Flex } from '@/components/common/flex/flex';
 
 const meta: Meta<typeof Toaster> = {
   title: 'Common/Toaster',
-  component: Toaster,
-  tags: ['autodocs']
+  component: Toaster
 };
 
 export default meta;

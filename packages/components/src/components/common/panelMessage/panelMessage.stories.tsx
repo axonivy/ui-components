@@ -4,8 +4,7 @@ import { IvyIcons } from '@axonivy/ui-icons';
 
 const meta: Meta<typeof PanelMessage> = {
   title: 'Common/Message/PanelMessage',
-  component: PanelMessage,
-  tags: ['autodocs']
+  component: PanelMessage
 };
 
 export default meta;

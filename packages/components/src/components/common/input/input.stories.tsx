@@ -7,7 +7,6 @@ import { BasicField } from '@/components/common/field/field';
 const meta: Meta<typeof Input> = {
   title: 'Common/Input',
   component: Input,
-  tags: ['autodocs'],
   args: {
     disabled: false
   }

@@ -12,7 +12,6 @@ import { useState } from 'react';
 const meta: Meta<typeof Dialog> = {
   title: 'Common/Dialog',
   component: Dialog,
-  tags: ['autodocs'],
   args: {
     modal: true
   }

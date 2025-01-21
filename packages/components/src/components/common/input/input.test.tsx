@@ -1,5 +1,5 @@
 import { composeStory } from '@storybook/react';
-import { act, render, screen, userEvent } from 'test-utils';
+import { render, screen, userEvent } from 'test-utils';
 import Meta, { Default, WithLabel, Search, Password } from './input.stories';
 
 const Input = composeStory(Default, Meta);
@@ -13,7 +13,7 @@ test('by label', async () => {
   const input = screen.getByRole('textbox');
   expect(input).not.toHaveFocus();
 
-  await act(async () => await userEvent.click(label));
+  await userEvent.click(label);
   expect(input).toHaveFocus();
 });
 
@@ -33,12 +33,12 @@ test('search', async () => {
   expect(screen.queryByRole('button', { name: 'Clean' })).not.toBeInTheDocument();
   expect(input).toHaveAttribute('placeholder', 'Search...');
 
-  await act(async () => await userEvent.type(input, 'test'));
+  await userEvent.type(input, 'test');
   expect(input).toHaveValue('test');
   const cleanBtn = screen.getByRole('button', { name: 'Clean' });
   expect(cleanBtn).toBeVisible();
 
-  await act(async () => await userEvent.click(cleanBtn));
+  await userEvent.click(cleanBtn);
   expect(input).toHaveValue('');
 });
 
@@ -51,6 +51,6 @@ test('password', async () => {
   render(<PasswordInput />);
   const input = screen.getByLabelText('Password');
   expect(input).toHaveAttribute('type', 'password');
-  await act(async () => await userEvent.click(screen.getByRole('button', { name: 'Show password' })));
+  await userEvent.click(screen.getByRole('button', { name: 'Show password' }));
   expect(input).toHaveAttribute('type', 'text');
 });

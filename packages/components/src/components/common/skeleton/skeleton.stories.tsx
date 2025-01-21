@@ -4,8 +4,7 @@ import { Flex } from '../flex/flex';
 
 const meta: Meta<typeof Skeleton> = {
   title: 'Common/Skeleton',
-  component: Skeleton,
-  tags: ['autodocs']
+  component: Skeleton
 };
 
 export default meta;

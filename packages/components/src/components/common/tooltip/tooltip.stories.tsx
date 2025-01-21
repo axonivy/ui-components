@@ -5,7 +5,6 @@ import { Button } from '@/components/common/button/button';
 const meta: Meta<typeof Tooltip> = {
   title: 'Common/Tooltip',
   component: Tooltip,
-  tags: ['autodocs'],
   args: {
     delayDuration: 700
   }

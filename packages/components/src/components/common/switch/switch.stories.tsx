@@ -6,7 +6,6 @@ import { IvyIcons } from '@axonivy/ui-icons';
 const meta: Meta<typeof Switch> = {
   title: 'Common/Switch',
   component: Switch,
-  tags: ['autodocs'],
   argTypes: {
     size: { control: 'select', options: [undefined, 'small', 'large'] }
   },

@@ -30,7 +30,6 @@ const badgeProps = [
 const meta: Meta<typeof InputBadge> = {
   title: 'Common/InputBadge',
   component: InputBadge,
-  tags: ['autodocs'],
   argTypes: {
     value: { type: 'string', description: 'Field input containing badges' },
     badgeProps: { description: 'Object containing badge regex, icon & function to format badge-text' }

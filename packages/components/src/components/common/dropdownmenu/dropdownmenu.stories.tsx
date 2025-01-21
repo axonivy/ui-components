@@ -24,8 +24,7 @@ import { IvyIcon } from '@/components/common/icon/icon';
 
 const meta: Meta<typeof DropdownMenu> = {
   title: 'Common/DropdownMenu',
-  component: DropdownMenu,
-  tags: ['autodocs']
+  component: DropdownMenu
 };
 
 export default meta;
