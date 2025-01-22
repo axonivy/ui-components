@@ -1,4 +1,8 @@
-import { hotkeyText } from '@/utils/hotkey';
+import { hotkeyText, isMac, isWindows } from '@/utils/hotkey';
+
+afterEach(() => {
+  vi.stubGlobal('navigator', { userAgent: '' });
+});
 
 test('hotkeyText', () => {
   expect(hotkeyText('a')).toEqual('a');
@@ -12,4 +16,16 @@ test('hotkeyText', () => {
   expect(hotkeyText('mod+a')).toEqual('⌘+a');
   expect(hotkeyText('mod+shift+a')).toEqual('⌘+⇧+a');
   expect(hotkeyText('mod+alt+a')).toEqual('⌘+⌥+a');
+});
+
+test('isMac', () => {
+  expect(isMac()).toEqual(false);
+  vi.stubGlobal('navigator', { userAgent: 'Mac' });
+  expect(isMac()).toEqual(true);
+});
+
+test('isWindows', () => {
+  expect(isWindows()).toEqual(false);
+  vi.stubGlobal('navigator', { userAgent: 'Windows' });
+  expect(isWindows()).toEqual(true);
 });
