@@ -1,13 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
-import {
-  generateConditionString,
-  logicalOperatorOptions,
-  typeOptions
-} from '@/components/editor/condition-builder/condition-builder-utils';
-import { ConditionBuilderProvider } from '@/components/editor/condition-builder/conditionBuilderContext';
-import { ConditionBuilder } from '@/components/editor/condition-builder/conditionBuilder';
+import { generateConditionString, logicOperators, operators } from './condition-builder-utils';
 import { vars } from '@/styles/theme.css';
+import { ConditionBuilder } from './conditionBuilder';
 
 const meta: Meta<typeof ConditionBuilder> = {
   title: 'Editor/ConditionBuilder',
@@ -23,13 +18,12 @@ export const Default: Story = {
     const [condition, setCondition] = useState<string>();
     return (
       <>
-        <ConditionBuilderProvider
+        <ConditionBuilder
+          onChange={setCondition}
           generateConditionString={generateConditionString}
-          logicalOperatorOptions={logicalOperatorOptions}
-          typeOptions={typeOptions}
-        >
-          <ConditionBuilder onChange={setCondition} />
-        </ConditionBuilderProvider>
+          logicOperators={logicOperators}
+          operators={operators}
+        />
         <pre style={{ border: vars.border.basic, maxHeight: '80px', padding: vars.padding.input, borderRadius: vars.border.r2 }}>
           {condition}
         </pre>
