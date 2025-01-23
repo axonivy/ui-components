@@ -3,21 +3,17 @@ import { BasicSelect } from '@/components/common/select/select';
 import { Flex } from '@/components/common/flex/flex';
 import { Label } from '@radix-ui/react-label';
 import { Button } from '@/components/common/button/button';
-import { conditionGroupBorder } from '@/components/editor/condition-builder/conditionBuilder.css';
+import { conditionGroupBorder } from './conditionBuilder.css';
 import { Condition, type ConditionProps } from './condition';
-import {
-  useConditionBuilderContext,
-  type ConditionGroupData,
-  type LogicOperator
-} from '@/components/editor/condition-builder/conditionBuilderContext';
+import { useConditionContext, type ConditionGroupData, type LogicOperator } from './conditionContext';
 
 interface ConditionGroupProps extends Pick<ConditionProps, 'groupIndex'> {
   group: ConditionGroupData;
   groupCount: number;
 }
 
-export const ConditionGroup = ({ group, groupIndex, groupCount }: ConditionGroupProps) => {
-  const { updateLogicalOperator, addCondition, removeConditionGroup, conditionMode, logicalOperatorOptions } = useConditionBuilderContext();
+const ConditionGroup = ({ group, groupIndex, groupCount }: ConditionGroupProps) => {
+  const { updateLogicalOperator, addCondition, removeConditionGroup, conditionMode, logicalOperatorOptions } = useConditionContext();
   return (
     <Flex direction='column' gap={2} className='ui-condition-builder-group'>
       <Flex direction='column' className={conditionGroupBorder} data-condition-mode={conditionMode} gap={2}>
@@ -50,3 +46,6 @@ export const ConditionGroup = ({ group, groupIndex, groupCount }: ConditionGroup
     </Flex>
   );
 };
+ConditionGroup.displayName = 'ConditionGroup';
+
+export { ConditionGroup };

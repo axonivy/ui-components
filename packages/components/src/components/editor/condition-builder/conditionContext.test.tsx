@@ -1,14 +1,10 @@
 import { describe, expect } from 'vitest';
 import { renderHook } from '@testing-library/react';
 import { act } from 'react';
-import {
-  ConditionBuilderProvider,
-  useConditionBuilderContext,
-  type ConditionGroupData
-} from '@/components/editor/condition-builder/conditionBuilderContext';
-import type { ConditionMode } from '@/components/editor/condition-builder/conditionBuilder';
+import { useConditionContext, type ConditionGroupData, type ConditionMode, type LogicOperators, type Operators } from './conditionContext';
+import { ConditionBuilder } from '@/components/editor/condition-builder/conditionBuilder';
 
-const typeOptions = {
+const operators: Operators = {
   'equal to': '==',
   'not equal to': '!=',
   'is true': 'isTrue',
@@ -21,7 +17,7 @@ const typeOptions = {
   'greater or equal to': '>='
 };
 
-const logicalOperatorOptions = {
+const logicOperators: LogicOperators = {
   and: '&&',
   or: '||'
 };
@@ -29,15 +25,23 @@ const logicalOperatorOptions = {
 const simpleConditionString = (conditionMode: ConditionMode, conditionGroups: ConditionGroupData[]) => {
   const groupStrings = conditionGroups.map((group, index) => {
     if (conditionMode === 'basic-condition' && index > 0) return '';
-    return group.conditions.map(con => `${con.argument1} ${typeOptions[con.operator]} ${con.argument2}`).join('');
+    return group.conditions.map(con => `${con.argument1} ${operators[con.operator]} ${con.argument2}`).join('');
   });
   return groupStrings.join('');
 };
 
-const wrapper = ({ children }: { children: React.ReactNode }) =>
-  ConditionBuilderProvider({ children, typeOptions, logicalOperatorOptions, generateConditionString: simpleConditionString });
-
-const renderConditionBuilderHook = () => renderHook(() => useConditionBuilderContext(), { wrapper });
+const renderConditionBuilderHook = (onChange: (change: string) => void = () => {}) =>
+  renderHook(() => useConditionContext(), {
+    wrapper: props => (
+      <ConditionBuilder
+        onChange={onChange}
+        operators={operators}
+        logicOperators={logicOperators}
+        generateConditionString={simpleConditionString}
+        {...props}
+      />
+    )
+  });
 
 describe('ConditionBuilderContext', () => {
   test('initialize with one condition group', () => {
@@ -97,7 +101,8 @@ describe('ConditionBuilderContext', () => {
   });
 
   test('generate correct condition string', () => {
-    const { result } = renderConditionBuilderHook();
+    let condition = '';
+    const { result } = renderConditionBuilderHook(change => (condition = change));
 
     act(() => {
       result.current.updateCondition(0, 0, 'argument1', 'data.value');
@@ -105,8 +110,7 @@ describe('ConditionBuilderContext', () => {
       result.current.updateCondition(0, 0, 'argument2', '10');
     });
 
-    const conditionString = result.current.generateConditionString();
-    expect(conditionString).toBe('data.value == 10');
+    expect(condition).toBe('data.value == 10');
   });
 
   test('toggle condition group enabled state', () => {
