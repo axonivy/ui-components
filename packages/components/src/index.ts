@@ -42,6 +42,7 @@ export * from './components/common/tooltip/tooltip';
 export * from './components/editor/browser/browser';
 export * from './components/editor/condition-builder/conditionBuilder';
 export * from './components/editor/condition-builder/conditionContext';
+export * from './components/editor/condition-builder/useConditionBuilder';
 export * from './components/editor/sidebar/header/header';
 export * from './components/editor/sidebar/outline/outline';
 export * from './components/editor/toolbar/toolbar';
