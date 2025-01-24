@@ -108,7 +108,7 @@ SelectSeparator.displayName = SelectPrimitive.Separator.displayName;
 
 export type BasicSelectProps = SelectPrimitive.SelectProps &
   Pick<SelectPrimitive.SelectValueProps, 'placeholder'> & {
-    items: Array<{ value: string; label: string }>;
+    items: ReadonlyArray<{ value: string; label: string }>;
     emptyItem?: boolean;
     className?: string;
   };

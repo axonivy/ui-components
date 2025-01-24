@@ -10,12 +10,8 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { InputGroup, Input } from '@/components/common/input/input';
 import { Popover, PopoverArrow, PopoverContent, PopoverTrigger } from '@radix-ui/react-popover';
 import { Flex } from '@/components/common/flex/flex';
-import {
-  generateConditionString,
-  logicalOperatorOptions,
-  typeOptions
-} from '@/components/editor/condition-builder/condition-builder-utils';
-import { useConditionBuilder } from '@/components/editor/condition-builder/conditionBuilder';
+import { generateConditionString, logicOperators, operators } from '@/components/editor/condition-builder/condition-builder-utils';
+import { useConditionBuilder } from '@/components/editor/condition-builder/useConditionBuilder';
 
 const meta: Meta<typeof BrowsersView> = {
   title: 'Editor/BrowsersView',
@@ -45,9 +41,9 @@ const DefaultBrowser = ({ applyFn, applyBtn, initSearch, includeConditionBuilder
   const cms = useBrowser(cmsData);
 
   const condition = useConditionBuilder({
-    generateConditionString: generateConditionString,
-    typeOptions,
-    logicalOperatorOptions,
+    generateConditionString,
+    operators,
+    logicOperators,
     argumentInput: (value, onChange) => <DialogBrowserInput value={value} onChange={onChange} />
   });
 
