@@ -1,76 +1,140 @@
-import { IvyIcons } from '@axonivy/ui-icons';
-import { BasicSelect } from '@/components/common/select/select';
-import { Flex } from '@/components/common/flex/flex';
-import { Button } from '@/components/common/button/button';
-import { useEffect, useState } from 'react';
-import type { Browser } from '@/components/editor/browser/browser';
 import {
-  ConditionBuilderProvider,
-  useConditionBuilderContext,
-  type ConditionBuilderProviderProps
-} from '@/components/editor/condition-builder/conditionBuilderContext';
-import { ConditionGroup } from './conditionGroup';
+  ConditionContext,
+  type ConditionData,
+  type ConditionGroupData,
+  type ConditionMode,
+  type LogicOperator,
+  type LogicOperators,
+  type Operators
+} from './conditionContext';
+import { ConditionEditor } from './conditionEditor';
+import { BasicInput } from '@/components/common/input/input';
+import { type ReactNode, useState, useMemo } from 'react';
 
-interface ConditionBuilderProps {
+export interface ConditionBuilderProps {
   onChange: (value: string) => void;
+  operators: Operators;
+  logicOperators: LogicOperators;
+  generateConditionString: (conditionMode: ConditionMode, conditionGroups: Array<ConditionGroupData>) => string;
+  argumentInput?: (value: string, onChange: (change: string) => void) => ReactNode;
+  children?: ReactNode;
 }
 
-type ConditionBuilderHookProps = Omit<ConditionBuilderProviderProps, 'children'>;
+const ConditionBuilder = ({
+  onChange,
+  operators,
+  logicOperators,
+  generateConditionString,
+  argumentInput,
+  children
+}: ConditionBuilderProps) => {
+  const [conditionMode, setConditionMode] = useState<ConditionMode>('basic-condition');
+  const [conditionGroups, setConditionGroups] = useState<Array<ConditionGroupData>>([
+    { conditions: [{ argument1: '', operator: 'equal to', argument2: '', logicalOperator: 'and' }], logicalOperator: 'and' }
+  ]);
 
-const conditionModes = [
-  { label: 'Basic Condition', value: 'basic-condition' },
-  { label: 'Nested Condition', value: 'nested-condition' },
-  { label: 'Always True', value: 'always-true' },
-  { label: 'Always False', value: 'always-false' }
-];
-export type ConditionMode = (typeof conditionModes)[number]['value'];
-
-export const useConditionBuilder = (props: ConditionBuilderHookProps): Browser => {
-  const [value, setValue] = useState<string>();
-
-  return {
-    name: 'Condition',
-    browser: (
-      <ConditionBuilderProvider {...props}>
-        <ConditionBuilder onChange={setValue} />
-      </ConditionBuilderProvider>
-    ),
-    applyModifier: () => {
-      return { value: value || '' };
-    },
-    infoProvider: () => <p>{value}</p>,
-    icon: IvyIcons.Process
+  const updateConditionMode = (mode: ConditionMode) => {
+    setConditionMode(mode);
+    onChange(generateConditionString(mode, conditionGroups));
   };
-};
 
-const ConditionBuilder = ({ onChange }: ConditionBuilderProps) => {
-  const { addConditionGroup, generateConditionString, conditionGroups, conditionMode, setConditionMode } = useConditionBuilderContext();
+  const updateConditionGroups = (updater: (old: Array<ConditionGroupData>) => Array<ConditionGroupData>) => {
+    setConditionGroups(old => {
+      const newGroups = updater(old);
+      onChange(generateConditionString(conditionMode, newGroups));
+      return newGroups;
+    });
+  };
 
-  useEffect(() => {
-    onChange(generateConditionString());
-  }, [generateConditionString, onChange]);
+  const addConditionGroup = () => {
+    updateConditionGroups(old => {
+      const newGroups = structuredClone(old);
+      newGroups.push({
+        conditions: [{ argument1: '', operator: 'equal to', argument2: '', logicalOperator: 'and' }],
+        logicalOperator: 'and'
+      });
+      return newGroups;
+    });
+  };
+
+  const updateLogicalOperator = (index: number, newValue: LogicOperator) => {
+    updateConditionGroups(old => {
+      const newGroups = structuredClone(old);
+      newGroups[index].logicalOperator = newValue;
+      return newGroups;
+    });
+  };
+
+  const addCondition = (groupIndex: number) => {
+    updateConditionGroups(old => {
+      const newGroups = structuredClone(old);
+      newGroups[groupIndex].conditions.push({ argument1: '', operator: 'equal to', argument2: '', logicalOperator: 'and' });
+      return newGroups;
+    });
+  };
+
+  const removeConditionGroup = (groupIndex: number) => {
+    updateConditionGroups(old => {
+      const newGroups = structuredClone(old);
+      newGroups.splice(groupIndex, 1);
+      return newGroups;
+    });
+  };
+
+  const updateCondition = <TKey extends keyof ConditionData>(
+    groupIndex: number,
+    conditionIndex: number,
+    key: TKey,
+    newValue: ConditionData[TKey]
+  ) => {
+    updateConditionGroups(old => {
+      const newGroups = structuredClone(old);
+      newGroups[groupIndex].conditions[conditionIndex] = {
+        ...newGroups[groupIndex].conditions[conditionIndex],
+        [key]: newValue
+      };
+      return newGroups;
+    });
+  };
+
+  const removeCondition = (groupIndex: number, conditionIndex: number) => {
+    updateConditionGroups(old => {
+      const newGroups = structuredClone(old);
+      newGroups[groupIndex].conditions.splice(conditionIndex, 1);
+      return newGroups;
+    });
+  };
+
+  const defaultInput = (value: string, onChange: (change: string) => void) => (
+    <BasicInput value={value} onChange={e => onChange(e.target.value)} style={{ flex: 1 }} />
+  );
+
+  const typeOptions = useMemo(() => Object.entries(operators).map(([label]) => ({ label, value: label })), [operators]);
+  const logicalOperatorOptions = useMemo(
+    () => Object.entries(logicOperators).map(([label]) => ({ label, value: label })),
+    [logicOperators]
+  );
 
   return (
-    <Flex direction='column' gap={2}>
-      <BasicSelect items={conditionModes} value={conditionMode} onValueChange={val => setConditionMode(val as ConditionMode)} />
-      {conditionMode !== 'always-true' &&
-        conditionMode !== 'always-false' &&
-        conditionGroups
-          .filter((group, groupIndex) => !(conditionMode === 'basic-condition' && groupIndex > 0))
-          .map((group, groupIndex) => (
-            <ConditionGroup key={groupIndex} group={group} groupIndex={groupIndex} groupCount={conditionGroups.length} />
-          ))}
-      {conditionMode === 'nested-condition' && (
-        <Button onClick={addConditionGroup} icon={IvyIcons.Plus} aria-label='Add Condition Group' variant='outline'>
-          Add Condition Group
-        </Button>
-      )}
-      {conditionMode === 'basic-condition' && conditionGroups.length === 0 && (
-        <Button onClick={addConditionGroup} icon={IvyIcons.Plus} aria-label='Add Condition' variant='outline'>
-          Add Condition
-        </Button>
-      )}
-    </Flex>
+    <ConditionContext.Provider
+      value={{
+        conditionMode,
+        setConditionMode: updateConditionMode,
+        conditionGroups,
+        addConditionGroup,
+        removeConditionGroup,
+        addCondition,
+        updateCondition,
+        removeCondition,
+        typeOptions,
+        logicalOperatorOptions,
+        updateLogicalOperator,
+        argumentInput: argumentInput ? argumentInput : defaultInput
+      }}
+    >
+      <ConditionEditor />
+      {children}
+    </ConditionContext.Provider>
   );
 };
 ConditionBuilder.displayName = 'ConditionBuilder';
