@@ -270,7 +270,8 @@ export const MultiSelectWithReorder: Story = {
       options: {
         multiSelect: true,
         reorder: { updateOrder: updateDataArray, getRowId: row => row.id },
-        resetSelectionOnTab: true
+        resetSelectionOnTab: true,
+        resetSelectionOnEscape: true
       }
     });
 
