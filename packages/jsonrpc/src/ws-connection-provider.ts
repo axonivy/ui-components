@@ -49,7 +49,11 @@ const defaultOptions: Required<WebSocketOptions> = {
   closeMessage: 'Connection was closed, will not reconnect!'
 } as const;
 
-export const webSocketConnection = <TConnection = Connection>(url: string | URL, initOptions?: WebSocketOptions) => {
+export const webSocketConnection = <TConnection = Connection>(
+  url: string | URL,
+  initOptions?: WebSocketOptions,
+  abortSignal?: AbortSignal
+) => {
   const options = { ...defaultOptions, ...initOptions };
   let webSocket: WebSocket | undefined;
   let connection: TConnection | undefined;
@@ -72,6 +76,9 @@ export const webSocketConnection = <TConnection = Connection>(url: string | URL,
         const newConnection = { reader: new WebSocketMessageReader(wrappedSocket), writer: new WebSocketMessageWriter(wrappedSocket) };
 
         webSocket!.onclose = () => {
+          if (abortSignal?.aborted) {
+            return;
+          }
           const { reconnect, reconnectAttempts: attempts, reconnectDelay } = options;
           if (reconnect) {
             if (reconnectAttempts >= attempts) {
@@ -97,7 +104,13 @@ export const webSocketConnection = <TConnection = Connection>(url: string | URL,
         }
       };
     });
-
+    if (abortSignal?.aborted) {
+      webSocket?.close();
+    } else {
+      abortSignal?.addEventListener('abort', () => {
+        webSocket?.close();
+      });
+    }
     return connection;
   };
 
