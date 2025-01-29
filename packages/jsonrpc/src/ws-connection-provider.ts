@@ -35,9 +35,10 @@ export type WebSocketOptions = {
   reconnectingMessage?: string;
   reconnectFailedMessage?: string;
   closeMessage?: string;
+  abortSignal?: AbortSignal;
 };
 
-const defaultOptions: Required<WebSocketOptions> = {
+const defaultOptions: Required<Omit<WebSocketOptions, 'abortSignal'>> = {
   reconnect: true,
   reconnectAttempts: Infinity,
   reconnectDelay: 1000,
@@ -49,11 +50,7 @@ const defaultOptions: Required<WebSocketOptions> = {
   closeMessage: 'Connection was closed, will not reconnect!'
 } as const;
 
-export const webSocketConnection = <TConnection = Connection>(
-  url: string | URL,
-  initOptions?: WebSocketOptions,
-  abortSignal?: AbortSignal
-) => {
+export const webSocketConnection = <TConnection = Connection>(url: string | URL, initOptions?: WebSocketOptions) => {
   const options = { ...defaultOptions, ...initOptions };
   let webSocket: WebSocket | undefined;
   let connection: TConnection | undefined;
@@ -76,7 +73,7 @@ export const webSocketConnection = <TConnection = Connection>(
         const newConnection = { reader: new WebSocketMessageReader(wrappedSocket), writer: new WebSocketMessageWriter(wrappedSocket) };
 
         webSocket!.onclose = () => {
-          if (abortSignal?.aborted) {
+          if (options.abortSignal?.aborted) {
             return;
           }
           const { reconnect, reconnectAttempts: attempts, reconnectDelay } = options;
@@ -104,10 +101,10 @@ export const webSocketConnection = <TConnection = Connection>(
         }
       };
     });
-    if (abortSignal?.aborted) {
+    if (options.abortSignal?.aborted) {
       webSocket?.close();
     } else {
-      abortSignal?.addEventListener('abort', () => {
+      options.abortSignal?.addEventListener('abort', () => {
         webSocket?.close();
       });
     }
