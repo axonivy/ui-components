@@ -144,6 +144,7 @@ interface KeyHandlerOptions<TData> {
   reorder?: { updateOrder?: (moveIndexes: number[], toIndex: number, data: TData[]) => void; getRowId?: (row: TData) => string };
   lazyLoadChildren?: (row: Row<TData>) => void;
   resetSelectionOnTab?: boolean;
+  resetSelectionOnEscape?: boolean;
 }
 
 interface TableKeyboardHandlerProps<TData> {
@@ -162,7 +163,8 @@ export const useTableKeyHandler = <TData,>({ table, data, options }: TableKeyboa
       ArrowLeft: () => toggleExpand(false, table.getSelectedRowModel().flatRows[0], options?.lazyLoadChildren),
       ArrowRight: () => toggleExpand(true, table.getSelectedRowModel().flatRows[0], options?.lazyLoadChildren),
       Tab: () => options?.resetSelectionOnTab && table.resetRowSelection(),
-      Enter: () => onEnterAction?.(table.getSelectedRowModel().flatRows[0])
+      Enter: () => onEnterAction?.(table.getSelectedRowModel().flatRows[0]),
+      Escape: () => options?.resetSelectionOnEscape && table.resetRowSelection()
     };
     const action = actions[event.key];
     if (action) {
