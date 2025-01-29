@@ -107,7 +107,7 @@ const SelectSeparator = React.forwardRef<
 SelectSeparator.displayName = SelectPrimitive.Separator.displayName;
 
 export type BasicSelectProps = SelectPrimitive.SelectProps &
-  Pick<SelectPrimitive.SelectValueProps, 'placeholder'> & {
+  Pick<SelectPrimitive.SelectValueProps, 'placeholder' | 'tabIndex'> & {
     items: ReadonlyArray<{ value: string; label: string }>;
     emptyItem?: boolean;
     className?: string;
