@@ -35,9 +35,10 @@ export type WebSocketOptions = {
   reconnectingMessage?: string;
   reconnectFailedMessage?: string;
   closeMessage?: string;
+  abortSignal?: AbortSignal;
 };
 
-const defaultOptions: Required<WebSocketOptions> = {
+const defaultOptions: Required<Omit<WebSocketOptions, 'abortSignal'>> = {
   reconnect: true,
   reconnectAttempts: Infinity,
   reconnectDelay: 1000,
@@ -72,6 +73,9 @@ export const webSocketConnection = <TConnection = Connection>(url: string | URL,
         const newConnection = { reader: new WebSocketMessageReader(wrappedSocket), writer: new WebSocketMessageWriter(wrappedSocket) };
 
         webSocket!.onclose = () => {
+          if (options.abortSignal?.aborted) {
+            return;
+          }
           const { reconnect, reconnectAttempts: attempts, reconnectDelay } = options;
           if (reconnect) {
             if (reconnectAttempts >= attempts) {
@@ -97,7 +101,13 @@ export const webSocketConnection = <TConnection = Connection>(url: string | URL,
         }
       };
     });
-
+    if (options.abortSignal?.aborted) {
+      webSocket?.close();
+    } else {
+      options.abortSignal?.addEventListener('abort', () => {
+        webSocket?.close();
+      });
+    }
     return connection;
   };
 
