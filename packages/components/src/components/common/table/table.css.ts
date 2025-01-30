@@ -60,6 +60,9 @@ export const cell = style({
   selectors: {
     [`&:has(.ui-table-edit-cell)`]: {
       padding: 0
+    },
+    [`&:has(.ui-table-edit-cell:focus-visible), &:has(.ui-table-edit-cell:focus-within)`]: {
+      border: `1px solid black`
     }
   }
 });

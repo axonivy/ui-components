@@ -107,13 +107,23 @@ const SelectSeparator = React.forwardRef<
 SelectSeparator.displayName = SelectPrimitive.Separator.displayName;
 
 export type BasicSelectProps = SelectPrimitive.SelectProps &
-  Pick<SelectPrimitive.SelectValueProps, 'placeholder' | 'tabIndex'> & {
+  Pick<SelectPrimitive.SelectValueProps, 'placeholder' | 'tabIndex' | 'onKeyDown'> & {
     items: ReadonlyArray<{ value: string; label: string }>;
     emptyItem?: boolean;
     className?: string;
   };
 
-const BasicSelect = ({ items, emptyItem, className, placeholder, value, onValueChange, defaultValue, ...props }: BasicSelectProps) => {
+const BasicSelect = ({
+  items,
+  emptyItem,
+  className,
+  placeholder,
+  value,
+  onValueChange,
+  defaultValue,
+  onKeyDown,
+  ...props
+}: BasicSelectProps) => {
   const unknownValue = React.useMemo(() => {
     if (defaultValue && items.find(item => item.value === defaultValue) === undefined) {
       return defaultValue;
@@ -131,9 +141,10 @@ const BasicSelect = ({ items, emptyItem, className, placeholder, value, onValueC
       onValueChange(value);
     }
   };
+
   return (
     <Select value={value} onValueChange={onInternalValueChange} defaultValue={defaultValue} {...props}>
-      <SelectTrigger className={className}>
+      <SelectTrigger className={className} onKeyDown={onKeyDown}>
         <SelectValue placeholder={placeholder} />
       </SelectTrigger>
       <SelectContent>
