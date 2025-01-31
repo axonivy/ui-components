@@ -33,7 +33,25 @@ type InputCellProps<TData> = InputProps & {
 
 const InputCell = <TData,>({ cell, className, ...props }: InputCellProps<TData>) => {
   const { value, setValue, onBlur, className: editCell } = useEditCell(cell);
-  return <Input value={value} onChange={e => setValue(e.target.value)} onBlur={onBlur} className={cn(editCell, className)} {...props} />;
+  return (
+    <Input
+      value={value}
+      onChange={e => setValue(e.target.value)}
+      onBlur={onBlur}
+      className={cn(editCell, className)}
+      onKeyDown={e => {
+        if (e.key === 'ArrowDown') {
+          e.preventDefault();
+          selectNextPreviousCell(e.currentTarget as HTMLInputElement, cell, 1);
+        }
+        if (e.key === 'ArrowUp') {
+          e.preventDefault();
+          selectNextPreviousCell(e.currentTarget as HTMLInputElement, cell, -1);
+        }
+      }}
+      {...props}
+    />
+  );
 };
 InputCell.displayName = 'InputCell';
 
@@ -43,7 +61,30 @@ type SelectCellProps<TData> = BasicSelectProps & {
 
 const SelectCell = <TData,>({ cell, className, ...props }: SelectCellProps<TData>) => {
   const { value, updateValue, className: editCell } = useEditCell(cell);
-  return <BasicSelect value={value} onValueChange={updateValue} className={cn(editCell, className)} {...props} />;
+  const [open, setOpen] = React.useState(false);
+  return (
+    <BasicSelect
+      value={value}
+      onValueChange={updateValue}
+      className={cn(editCell, className)}
+      onKeyDown={e => {
+        if (e.key === 'ArrowDown') {
+          e.preventDefault();
+          selectNextPreviousCell(e.currentTarget as HTMLButtonElement, cell, 1);
+        }
+        if (e.key === 'ArrowUp') {
+          e.preventDefault();
+          selectNextPreviousCell(e.currentTarget as HTMLButtonElement, cell, -1);
+        }
+        if (e.key === 'Enter') {
+          setOpen(old => !old);
+        }
+      }}
+      onOpenChange={setOpen}
+      open={open}
+      {...props}
+    />
+  );
 };
 SelectCell.displayName = 'SelectCell';
 
@@ -53,8 +94,63 @@ type ComboCellProps<TData, TCombo extends ComboboxOption> = Omit<ComboboxProps<T
 
 const ComboCell = <TData, TCombo extends ComboboxOption>({ cell, className, ...props }: ComboCellProps<TData, TCombo>) => {
   const { value, updateValue, className: editCell } = useEditCell(cell);
-  return <Combobox {...props} value={value} onChange={updateValue} className={cn(editCell, className)} />;
+  return (
+    <Combobox
+      {...props}
+      value={value}
+      onChange={updateValue}
+      className={cn(editCell, className)}
+      onKeyDownExtended={e => {
+        if (e.key === 'ArrowDown' && !document.querySelector('.ui-combobox-menu')) {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (e.nativeEvent as any).preventDownshiftDefault = true;
+          selectNextPreviousCell(e.currentTarget as HTMLInputElement, cell, 1);
+        }
+        if (e.key === 'ArrowUp' && !document.querySelector('.ui-combobox-menu')) {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (e.nativeEvent as any).preventDownshiftDefault = true;
+          selectNextPreviousCell(e.currentTarget as HTMLInputElement, cell, -1);
+        }
+      }}
+    />
+  );
 };
 ComboCell.displayName = 'ComboCell';
 
 export { InputCell, SelectCell, ComboCell };
+
+export const selectNextPreviousCell = <TData,>(
+  htmlElement: HTMLButtonElement | HTMLInputElement | Element,
+  cell: CellContext<TData, unknown>,
+  direction: -1 | 1
+) => {
+  const focusedCell = htmlElement.closest('td');
+  if (focusedCell && focusedCell instanceof HTMLTableCellElement) {
+    const cellIndex = cell.column.getIndex();
+    const rowIndex = cell.table.getRowModel().flatRows.findIndex(row => row.id === cell.row.id) + 1;
+    const focusNextCell = (rowIndex: number, cellIndex: number) => {
+      const table = focusedCell?.closest('table');
+      if (!table) return;
+      const validRows = Array.from(table.rows).filter(row => !row.classList.contains('ui-message-row'));
+      const nextRow = validRows[rowIndex];
+      if (!nextRow) return;
+
+      const nextCell = nextRow.cells[cellIndex];
+      if (nextCell) {
+        let nextElement;
+        if (htmlElement instanceof HTMLButtonElement) {
+          nextElement = nextCell.querySelector('button');
+        } else {
+          nextElement = nextCell.querySelector('input');
+        }
+
+        if (nextElement && !nextElement.hasAttribute('disabled')) {
+          nextElement.focus();
+        } else {
+          focusNextCell(rowIndex + direction, cellIndex);
+        }
+      }
+    };
+    focusNextCell(rowIndex + direction, cellIndex);
+  }
+};

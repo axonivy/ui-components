@@ -15,12 +15,13 @@ export type ComboboxOption = {
   value: string;
 };
 
-export type ComboboxProps<T extends ComboboxOption> = Omit<React.ComponentPropsWithoutRef<'input'>, 'value' | 'onChange'> & {
+export type ComboboxProps<T extends ComboboxOption> = Omit<React.ComponentPropsWithoutRef<'input'>, 'value' | 'onChange' | 'onKeyDown'> & {
   value: string;
   onChange: (change: string) => void;
   options: T[];
   optionFilter?: (item: T, input?: string) => boolean;
   itemRender?: (item: T) => React.ReactNode;
+  onKeyDownExtended?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
 };
 
 const defaultFilter = (option: ComboboxOption, input?: string): boolean => {
@@ -42,6 +43,7 @@ const Combobox = <T extends ComboboxOption>({
   itemRender = option => <span>{option.value}</span>,
   disabled,
   className,
+  onKeyDownExtended,
   ...props
 }: ComboboxProps<T>) => {
   const [filteredItems, setFilteredItems] = React.useState(options);
@@ -49,35 +51,46 @@ const Combobox = <T extends ComboboxOption>({
 
   const { inputProps } = useField();
 
-  const { isOpen, getToggleButtonProps, getMenuProps, getInputProps, highlightedIndex, getItemProps, selectedItem, selectItem } =
-    useCombobox({
-      inputId: inputProps.id,
-      labelId: inputProps['aria-labelledby'],
-      onSelectedItemChange(change) {
-        setFilteredItems(options);
-        if (change.inputValue !== value) {
-          onChange(change.inputValue ?? '');
-        }
-      },
-      stateReducer(state, actionAndChanges) {
-        switch (actionAndChanges.type) {
-          case useCombobox.stateChangeTypes.InputBlur:
-          case useCombobox.stateChangeTypes.InputKeyDownEnter:
-            selectItem({ value: actionAndChanges.changes.inputValue ?? '' });
-        }
-        return actionAndChanges.changes;
-      },
-      onInputValueChange(change) {
-        if (change.type !== useCombobox.stateChangeTypes.FunctionSelectItem) {
-          setFilteredItems(options.filter(option => optionFilter(option, change.inputValue)));
-        }
-      },
-      items: filteredItems,
-      itemToString(item) {
-        return item?.value ?? '';
-      },
-      initialSelectedItem: { value }
-    });
+  const {
+    isOpen,
+    getToggleButtonProps,
+    getMenuProps,
+    getInputProps,
+    openMenu,
+    highlightedIndex,
+    setHighlightedIndex,
+    getItemProps,
+    selectedItem,
+    selectItem
+  } = useCombobox({
+    inputId: inputProps.id,
+    labelId: inputProps['aria-labelledby'],
+    onSelectedItemChange(change) {
+      setFilteredItems(options);
+      if (change.inputValue !== value) {
+        onChange(change.inputValue ?? '');
+      }
+    },
+    stateReducer(state, actionAndChanges) {
+      switch (actionAndChanges.type) {
+        case useCombobox.stateChangeTypes.InputBlur:
+        case useCombobox.stateChangeTypes.InputKeyDownEnter:
+          selectItem({ value: actionAndChanges.changes.inputValue ?? '' });
+      }
+      return actionAndChanges.changes;
+    },
+
+    onInputValueChange(change) {
+      if (change.type !== useCombobox.stateChangeTypes.FunctionSelectItem) {
+        setFilteredItems(options.filter(option => optionFilter(option, change.inputValue)));
+      }
+    },
+    items: filteredItems,
+    itemToString(item) {
+      return item?.value ?? '';
+    },
+    initialSelectedItem: { value }
+  });
 
   React.useEffect(() => {
     selectItem({ value });
@@ -90,7 +103,23 @@ const Combobox = <T extends ComboboxOption>({
       <div className='ui-combobox'>
         <PopoverAnchor asChild>
           <InputGroup className={className}>
-            <Input {...getInputProps()} className={className} {...props} disabled={readonly || disabled} />
+            <Input
+              {...getInputProps({
+                onKeyDown: e => {
+                  if (e.key === 'Enter') {
+                    if (!isOpen) {
+                      openMenu();
+                      setHighlightedIndex(0);
+                      return;
+                    }
+                  }
+                  onKeyDownExtended?.(e);
+                }
+              })}
+              className={className}
+              {...props}
+              disabled={readonly || disabled}
+            />
             <Button
               {...getToggleButtonProps()}
               icon={IvyIcons.Chevron}

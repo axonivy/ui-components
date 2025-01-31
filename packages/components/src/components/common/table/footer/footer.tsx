@@ -3,8 +3,9 @@ import { addRowLine, addRowBtn, addRowBlock } from './footer.css';
 import { Button } from '@/components/common/button/button';
 import { Flex } from '@/components/common/flex/flex';
 import { useReadonly } from '@/context/useReadonly';
+import type { ButtonHTMLAttributes } from 'react';
 
-const TableAddRow = ({ addRow, tabindex }: { addRow: () => void; tabindex?: number }) => {
+const TableAddRow = ({ addRow, ...props }: { addRow: () => void } & ButtonHTMLAttributes<HTMLButtonElement>) => {
   const readonly = useReadonly();
   return (
     <Flex alignItems='center' direction='row' gap={1} className={addRowBlock}>
@@ -15,7 +16,7 @@ const TableAddRow = ({ addRow, tabindex }: { addRow: () => void; tabindex?: numb
         className={addRowBtn}
         variant='outline'
         aria-label='Add row'
-        tabIndex={tabindex}
+        {...props}
       />
       <div className={addRowLine} />
     </Flex>
