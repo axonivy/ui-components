@@ -20,7 +20,7 @@
   "module": "./lib/index.js",
   "source": "src-gen",
   "devDependencies": {
-    "fantasticon": "^1.2.3"
+    "fantasticon": "^3.0.0"
   },
   "scripts": {
     "clean": "rimraf lib src-gen/ivy-icons.* tsconfig.tsbuildinfo",
