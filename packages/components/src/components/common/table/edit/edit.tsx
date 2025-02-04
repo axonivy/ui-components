@@ -127,11 +127,15 @@ export const selectNextPreviousCell = <TData,>(
   const focusedCell = htmlElement.closest('td');
   if (focusedCell && focusedCell instanceof HTMLTableCellElement) {
     const cellIndex = cell.column.getIndex();
-    const rowIndex = cell.table.getRowModel().flatRows.findIndex(row => row.id === cell.row.id) + 1;
-    const focusNextCell = (rowIndex: number, cellIndex: number) => {
+    const allRows = cell.table.getRowModel().flatRows;
+    const rowIndex = allRows.findIndex(row => row.id === cell.row.id) + 1;
+    const focusNextCell = (nextRowIndex: number, cellIndex: number) => {
       const table = focusedCell?.closest('table');
       if (!table) return;
       const validRows = Array.from(table.rows).filter(row => !row.classList.contains('ui-message-row'));
+      const hasHeaderRow = validRows.some(row => !row.classList.contains('ui-select-row'));
+      const hiddenRows = allRows.length - validRows.length + (hasHeaderRow ? 1 : 0);
+      const rowIndex = nextRowIndex - (hasHeaderRow ? 0 : 1) - hiddenRows;
       const nextRow = validRows[rowIndex];
       if (!nextRow) return;
 
@@ -147,7 +151,7 @@ export const selectNextPreviousCell = <TData,>(
         if (nextElement && !nextElement.hasAttribute('disabled')) {
           nextElement.focus();
         } else {
-          focusNextCell(rowIndex + direction, cellIndex);
+          focusNextCell(nextRowIndex + direction, cellIndex);
         }
       }
     };
