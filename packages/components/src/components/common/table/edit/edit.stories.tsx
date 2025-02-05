@@ -4,7 +4,7 @@ import { useReactTable, getCoreRowModel, flexRender } from '@tanstack/react-tabl
 import * as React from 'react';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../table';
 import { tableData, type Payment } from '../data';
-import { SelectRow } from '../row/row';
+import { MessageRow, SelectRow } from '../row/row';
 import { useTableSelect } from '../hooks/hooks';
 import { ComboCell, InputCell, SelectCell } from './edit';
 
@@ -97,12 +97,18 @@ function EditTableDemo() {
         ))}
       </TableHeader>
       <TableBody>
-        {table.getRowModel().rows.map(row => (
-          <SelectRow key={row.id} row={row}>
-            {row.getVisibleCells().map(cell => (
-              <TableCell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
-            ))}
-          </SelectRow>
+        {table.getRowModel().rows.map((row, index) => (
+          <React.Fragment key={row.id}>
+            <SelectRow row={row}>
+              {row.getVisibleCells().map(cell => (
+                <TableCell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
+              ))}
+            </SelectRow>
+            <MessageRow
+              message={index === 2 ? { message: 'This is an error', variant: 'error' } : undefined}
+              columnCount={columns.length}
+            />
+          </React.Fragment>
         ))}
       </TableBody>
     </Table>
