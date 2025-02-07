@@ -1,8 +1,6 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "local>axonivy/renovate-config:npm"
-  ],
+  "extends": ["local>axonivy/renovate-config:npm"],
+  "ignoreDeps": ["volta"],
   "dependencyDashboardApproval": true
 }
-
