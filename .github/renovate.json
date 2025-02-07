@@ -1,6 +1,12 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["local>axonivy/renovate-config:npm"],
-  "ignoreDeps": ["volta"],
-  "dependencyDashboardApproval": true
+  "dependencyDashboardApproval": true,
+  "packageRules": [
+    {
+      "matchDepTypes": ["volta"],
+      "description": "Only for local development, not every new node version should be installed",
+      "enabled": false
+    }
+  ]
 }
