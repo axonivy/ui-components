@@ -13,7 +13,7 @@
     "build": "lerna run build",
     "build:storybook": "storybook build",
     "package": "lerna run package",
-    "clean": "lerna run clean",
+    "clean": "lerna run clean -- --glob",
     "type": "lerna run type",
     "lint": "eslint",
     "lint:ci": "eslint -o eslint.xml -f checkstyle",
