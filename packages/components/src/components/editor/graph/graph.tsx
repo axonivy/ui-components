@@ -1,3 +1,4 @@
+import '@xyflow/react/dist/style.css';
 import { Button } from '@/components/common/button/button';
 import { Flex } from '@/components/common/flex/flex';
 import { CustomNode } from '@/components/editor/graph/customNode';
@@ -83,7 +84,7 @@ const Graph = ({ graphNodes, graphEdges }: GraphProps) => {
       id: node.id,
       position: { x: index * 200, y: 0 },
       data: {
-        GraphNodeData: { node }
+        GraphNodeData: node
       },
       type: 'customNode'
     }));

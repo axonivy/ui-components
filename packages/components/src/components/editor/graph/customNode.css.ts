@@ -9,15 +9,15 @@ export const customNode = style({
   display: 'inline-block'
 });
 
-export const selected = style({
+export const selectedNode = style({
   border: `2px solid ${vars.color.p500}`
 });
 
-export const original = style({
+export const originalNode = style({
   border: `2px solid ${vars.color.success}`
 });
 
-export const normal = style({
+export const normalNode = style({
   border: `1px solid ${vars.color.body}`
 });
 
