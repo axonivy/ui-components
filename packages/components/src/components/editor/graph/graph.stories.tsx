@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Graph, type CustomNodeData } from '@/components/editor/graph/graph';
 import { dataClasses, dataClassRelations, type Field } from '@/components/editor/graph/data';
-import { ReactFlowProvider } from '@xyflow/react';
 import { useState } from 'react';
 import { Flex } from '@/components/common/flex/flex';
 import { Button } from '@/components/common/button/button';
@@ -26,15 +25,13 @@ export const Default: Story = {
       };
     });
     return (
-      <ReactFlowProvider>
-        <Graph
-          graphNodes={transeFormedDataClasses}
-          graphEdges={dataClassRelations}
-          options={{
-            filter: true
-          }}
-        />
-      </ReactFlowProvider>
+      <Graph
+        graphNodes={transeFormedDataClasses}
+        graphEdges={dataClassRelations}
+        options={{
+          filter: true
+        }}
+      />
     );
   }
 };

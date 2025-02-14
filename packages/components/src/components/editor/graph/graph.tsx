@@ -16,6 +16,7 @@ import {
   MiniMap,
   Panel,
   ReactFlow,
+  ReactFlowProvider,
   useReactFlow,
   type Edge,
   type Node,
@@ -50,7 +51,7 @@ export type GraphProps = {
   };
 };
 
-const Graph = ({ graphNodes, graphEdges, options }: GraphProps) => {
+const CustomGraph = ({ graphNodes, graphEdges, options }: GraphProps) => {
   const [nodes, setNodes] = useState<Node[]>([]);
   const [edges, setEdges] = useState<Edge[]>([]);
   const [selectedNode, setSelectedNode] = useState<string>('all');
@@ -194,6 +195,13 @@ const Graph = ({ graphNodes, graphEdges, options }: GraphProps) => {
   );
 };
 
+const Graph = ({ graphNodes, graphEdges, options }: GraphProps) => {
+  return (
+    <ReactFlowProvider>
+      <CustomGraph graphNodes={graphNodes} graphEdges={graphEdges} options={options} />
+    </ReactFlowProvider>
+  );
+};
 Graph.displayName = 'Graph';
 
 export { Graph };
