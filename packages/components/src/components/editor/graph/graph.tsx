@@ -79,38 +79,36 @@ const Graph = ({ graphNodes, graphEdges }: GraphProps) => {
   );
 
   useEffect(() => {
-    // Create nodes
-    const newNodes = graphNodes.map((node, index) => ({
+    const newNodes: GraphNode[] = graphNodes.map(node => ({
       id: node.id,
-      position: { x: index * 200, y: 0 },
+      position: { x: 0, y: 0 },
       data: {
         GraphNodeData: node
       },
-      type: 'customNode'
+      type: 'custom'
     }));
 
-    // Create edges
-    const newEdges: Edge[] = [];
-    graphEdges.forEach((edge, index) => {
-      newEdges.push({
-        id: index.toString(),
-        source: edge.source,
-        target: edge.target,
-        sourceHandle: 'b',
-        targetHandle: 't',
-        type: 'floating',
-        markerEnd: {
-          type: MarkerType.Arrow,
-          width: 15,
-          height: 15
-        },
-        style: { strokeWidth: 2 }
-      });
-    });
+    const newEdges: Edge[] = graphEdges.map((edge, index) => ({
+      id: index.toString(),
+      label: edge.label,
+      source: edge.source,
+      target: edge.target,
+      sourceHandle: 'b',
+      targetHandle: 't',
+      type: 'floating',
+      markerEnd: {
+        type: MarkerType.Arrow,
+        width: 15,
+        height: 15
+      },
+      style: { strokeWidth: 2 }
+    }));
 
-    setNodes(newNodes);
-    setEdges(newEdges);
-  }, [graphEdges, graphNodes]);
+    const { nodes: layoutedNodes, edges: layoutedEdges } = getLayoutedElements({ nodes: newNodes, edges: newEdges, direction: 'TB' });
+
+    setNodes(layoutedNodes);
+    setEdges(layoutedEdges);
+  }, [fitView, graphEdges, graphNodes]);
 
   return (
     <ReactFlow
@@ -119,7 +117,7 @@ const Graph = ({ graphNodes, graphEdges }: GraphProps) => {
       onNodesChange={onNodesChange}
       onEdgesChange={onEdgesChange}
       onConnect={onConnect}
-      nodeTypes={{ customNode: CustomNode }}
+      nodeTypes={{ custom: CustomNode }}
       edgeTypes={{ floating: FloatingEdge }}
       connectionMode={ConnectionMode.Loose}
     >
