@@ -3,7 +3,7 @@ import { Button } from '@/components/common/button/button';
 import { Flex } from '@/components/common/flex/flex';
 import { CustomNode } from '@/components/editor/graph/customNode';
 import FloatingEdge from '@/components/editor/graph/floatingEdge';
-import { getLayoutedElements } from '@/components/editor/graph/getLayoutedElements';
+import { getLayoutedElements, type Direction } from '@/components/editor/graph/getLayoutedElements';
 import { IvyIcons } from '@axonivy/ui-icons';
 import {
   addEdge,
@@ -27,7 +27,6 @@ import {
 import { useCallback, useEffect, useState } from 'react';
 import { BasicSelect } from '@/components/common/select/select';
 
-export type Direction = 'TB' | 'LR';
 export type CustomNodeData = {
   id: string;
   label: string;

@@ -1,5 +1,5 @@
 import type { EdgeData } from '@/components/editor/graph/graph';
-export interface DataClassModel {
+export interface DataClass {
   id: string;
   name: string;
   fields: Field[];
@@ -10,7 +10,7 @@ export interface Field {
   type: string;
 }
 
-export const dataClasses: Array<DataClassModel> = [
+export const dataClasses: Array<DataClass> = [
   {
     id: 'user',
     name: 'User',

@@ -26,18 +26,3 @@ export const customNodeHeader = style({
   textAlign: 'center',
   marginBottom: '5px'
 });
-
-export const customNodeFields = style({
-  padding: '0 10px',
-  listStyleType: 'none',
-  margin: 0
-});
-
-export const customNodeField = style({
-  display: 'flex',
-  gap: '5px'
-});
-
-export const customNodeFieldName = style({
-  fontWeight: 'bold'
-});
