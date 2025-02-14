@@ -33,11 +33,10 @@ export type GraphNodeData = {
   highlightNode?: boolean;
 };
 
-type RelationshipType = '1:1' | '1:M' | 'M:M';
 export type GraphEdge = {
   source: string;
   target: string;
-  label?: string | RelationshipType;
+  label?: string;
 };
 
 export type GraphNode = Node<{ GraphNodeData: GraphNodeData }, 'custom'>;
@@ -106,9 +105,14 @@ const Graph = ({ graphNodes, graphEdges }: GraphProps) => {
 
     const { nodes: layoutedNodes, edges: layoutedEdges } = getLayoutedElements({ nodes: newNodes, edges: newEdges, direction: 'TB' });
 
-    setNodes(layoutedNodes);
+    setNodes(prevNodes =>
+      layoutedNodes.map(node => ({
+        ...node,
+        position: prevNodes.find(n => n.id === node.id)?.position || node.position // Keep existing position if available
+      }))
+    );
     setEdges(layoutedEdges);
-  }, [fitView, graphEdges, graphNodes]);
+  }, [graphEdges, graphNodes]);
 
   return (
     <ReactFlow
