@@ -24,39 +24,37 @@ import {
   type OnNodesChange
 } from '@xyflow/react';
 import { useCallback, useEffect, useState } from 'react';
+import { BasicSelect } from '@/components/common/select/select';
 
 export type Direction = 'TB' | 'LR';
-export type GraphNodeData = {
+export type CustomNodeData = {
   id: string;
   label: string;
   content?: React.ReactNode;
   highlightNode?: boolean;
 };
 
-export type GraphEdge = {
+export type EdgeData = {
   source: string;
   target: string;
   label?: string;
 };
 
-export type GraphNode = Node<{ GraphNodeData: GraphNodeData }, 'custom'>;
+export type GraphNode = Node<{ CustomNodeData: CustomNodeData }, 'custom'>;
 
 export type GraphProps = {
-  graphNodes: GraphNodeData[];
-  graphEdges: GraphEdge[];
+  graphNodes: CustomNodeData[];
+  graphEdges: EdgeData[];
   options: {
-    topLeftCustomControl?: React.ReactNode;
-    filter?: {
-      filterNode: string;
-      setFilterNode: (node: string) => void;
-      filterOnSelect: boolean;
-    };
+    filter?: boolean;
   };
 };
 
 const Graph = ({ graphNodes, graphEdges, options }: GraphProps) => {
   const [nodes, setNodes] = useState<Node[]>([]);
   const [edges, setEdges] = useState<Edge[]>([]);
+  const [selectedNode, setSelectedNode] = useState<string>('all');
+
   const { getNodes, getEdges, fitView } = useReactFlow<GraphNode>();
 
   const onNodesChange: OnNodesChange = useCallback(changes => setNodes(nds => applyNodeChanges(changes, nds)), [setNodes]);
@@ -93,10 +91,8 @@ const Graph = ({ graphNodes, graphEdges, options }: GraphProps) => {
     let filteredNodes = graphNodes;
     let filteredEdges = graphEdges;
 
-    if (options.filter && options.filter.filterNode !== 'all') {
-      const connectedEdges = graphEdges.filter(
-        edge => edge.source === options.filter?.filterNode || edge.target === options.filter?.filterNode
-      );
+    if (options.filter && selectedNode !== 'all') {
+      const connectedEdges = graphEdges.filter(edge => edge.source === selectedNode || edge.target === selectedNode);
       const connectedNodeIds = new Set(connectedEdges.flatMap(edge => [edge.source, edge.target]));
       filteredNodes = graphNodes.filter(node => connectedNodeIds.has(node.id));
       filteredEdges = connectedEdges;
@@ -106,7 +102,10 @@ const Graph = ({ graphNodes, graphEdges, options }: GraphProps) => {
       id: node.id,
       position: { x: 0, y: 0 },
       data: {
-        GraphNodeData: node
+        CustomNodeData: {
+          ...node,
+          highlightNode: node.highlightNode && !options.filter ? node.highlightNode : node.id === selectedNode
+        }
       },
       type: 'custom'
     }));
@@ -136,7 +135,7 @@ const Graph = ({ graphNodes, graphEdges, options }: GraphProps) => {
       }))
     );
     setEdges(layoutedEdges);
-  }, [graphEdges, graphNodes, options.filter]);
+  }, [graphEdges, graphNodes, options.filter, selectedNode]);
 
   return (
     <ReactFlow
@@ -150,7 +149,9 @@ const Graph = ({ graphNodes, graphEdges, options }: GraphProps) => {
       connectionMode={ConnectionMode.Loose}
       fitView={true}
       onNodeDoubleClick={(e, node) => {
-        options.filter?.setFilterNode(node.id);
+        if (options.filter) {
+          setSelectedNode(node.id);
+        }
       }}
     >
       <Controls />
@@ -173,7 +174,22 @@ const Graph = ({ graphNodes, graphEdges, options }: GraphProps) => {
           />
         </Flex>
       </Panel>
-      {options.topLeftCustomControl && <Panel position='top-left'>{options.topLeftCustomControl}</Panel>}
+      {options.filter && (
+        <Panel position='top-left'>
+          <BasicSelect
+            value={selectedNode}
+            onValueChange={setSelectedNode}
+            items={[
+              { value: 'all', label: 'Show all Data Classes' },
+              ...graphNodes.map(node => ({
+                value: node.id,
+                label: node.label
+              }))
+            ]}
+            menuWidth='200px'
+          />
+        </Panel>
+      )}
     </ReactFlow>
   );
 };

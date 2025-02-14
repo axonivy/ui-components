@@ -9,10 +9,10 @@ export function CustomNode({ data, selected }: NodeProps<GraphNode>) {
       <Handle type='source' position={Position.Left} id='l' style={{ pointerEvents: 'none' }} />
       <Handle type='source' position={Position.Right} id='r' style={{ pointerEvents: 'none' }} />
       <Handle type='source' position={Position.Bottom} id='b' style={{ pointerEvents: 'none' }} />
-      <div className={`${customNode} ${selected ? selectedNode : data.GraphNodeData.highlightNode ? originalNode : normalNode}`}>
-        <div className={customNodeHeader}>{data.GraphNodeData.label}</div>
-        {data.GraphNodeData.content && <hr />}
-        {data.GraphNodeData.content}
+      <div className={`${customNode} ${selected ? selectedNode : data.CustomNodeData.highlightNode ? originalNode : normalNode}`}>
+        <div className={customNodeHeader}>{data.CustomNodeData.label}</div>
+        {data.CustomNodeData.content && <hr />}
+        {data.CustomNodeData.content}
       </div>
     </>
   );
