@@ -1,8 +1,8 @@
 import { getEdgeParams } from '@/utils/graph';
 import type { EdgeProps } from '@xyflow/react';
-import { getBezierPath, useInternalNode } from '@xyflow/react';
+import { EdgeLabelRenderer, getBezierPath, useInternalNode } from '@xyflow/react';
 
-function FloatingEdge({ id, source, target, markerEnd, style }: EdgeProps) {
+function FloatingEdge({ id, source, target, markerEnd, style, label }: EdgeProps) {
   const sourceNode = useInternalNode(source);
   const targetNode = useInternalNode(target);
 
@@ -12,7 +12,7 @@ function FloatingEdge({ id, source, target, markerEnd, style }: EdgeProps) {
 
   const { sx, sy, tx, ty, sourcePos, targetPos } = getEdgeParams(sourceNode, targetNode);
 
-  const [edgePath] = getBezierPath({
+  const [edgePath, labelX, labelY] = getBezierPath({
     sourceX: sx,
     sourceY: sy,
     sourcePosition: sourcePos,
@@ -21,7 +21,29 @@ function FloatingEdge({ id, source, target, markerEnd, style }: EdgeProps) {
     targetY: ty
   });
 
-  return <path id={id} className='react-flow__edge-path' d={edgePath} strokeWidth={5} markerEnd={markerEnd} style={style} />;
+  return (
+    <>
+      <path id={id} className='react-flow__edge-path' d={edgePath} strokeWidth={2} markerEnd={markerEnd} style={style} />
+
+      {label && (
+        <EdgeLabelRenderer>
+          <div
+            style={{
+              position: 'absolute',
+              transform: `translate(-50%, -50%) translate(${labelX}px, ${labelY}px)`,
+              background: 'white',
+              padding: '2px 5px',
+              borderRadius: '4px',
+              fontSize: '12px',
+              whiteSpace: 'nowrap'
+            }}
+          >
+            {label}
+          </div>
+        </EdgeLabelRenderer>
+      )}
+    </>
+  );
 }
 
 export default FloatingEdge;
