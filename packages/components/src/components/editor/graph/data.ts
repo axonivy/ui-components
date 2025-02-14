@@ -1,4 +1,4 @@
-import type { GraphEdge } from '@/components/editor/graph/graph';
+import type { EdgeData } from '@/components/editor/graph/graph';
 export interface DataClassModel {
   id: string;
   name: string;
@@ -152,7 +152,7 @@ export const dataClasses: Array<DataClassModel> = [
   }
 ];
 
-export const dataClassRelations: Array<GraphEdge> = [
+export const dataClassRelations: Array<EdgeData> = [
   { source: 'user', target: 'order', label: '1:M' },
   { source: 'order', target: 'product', label: 'M:M' },
   { source: 'product', target: 'category', label: 'M:1' },
