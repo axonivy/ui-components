@@ -11,7 +11,7 @@ export function CustomNode({ data, selected }: NodeProps<GraphNode>) {
       <Handle type='source' position={Position.Bottom} id='b' />
       <div className={`${customNode} ${selected ? selectedNode : data.GraphNodeData.highlightNode ? originalNode : normalNode}`}>
         <div className={customNodeHeader}>{data.GraphNodeData.label}</div>
-        <hr />
+        {data.GraphNodeData.content && <hr />}
         {data.GraphNodeData.content}
       </div>
     </>
