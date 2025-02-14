@@ -21,7 +21,6 @@ function getParams(nodeA: InternalNode, nodeB: InternalNode): Params {
   if (horizontalDiff > verticalDiff) {
     position = centerA.x > centerB.x ? Position.Left : Position.Right;
   } else {
-    // here the vertical difference between the nodes is bigger, so we use Position.Top or Position.Bottom for the handle
     position = centerA.y > centerB.y ? Position.Top : Position.Bottom;
   }
 
@@ -30,7 +29,6 @@ function getParams(nodeA: InternalNode, nodeB: InternalNode): Params {
 }
 
 function getHandleCoordsByPosition(node: InternalNode, handlePosition: Position): [number, number] {
-  // all handles are of type source, that's why we use handleBounds.source here
   const handle = node.internals.handleBounds?.source?.find(h => h.position === handlePosition);
 
   if (!handle) {
@@ -40,7 +38,6 @@ function getHandleCoordsByPosition(node: InternalNode, handlePosition: Position)
   let offsetX = handle.width / 2;
   let offsetY = handle.height / 2;
 
-  // Adjust for the correct handle position offsets
   switch (handlePosition) {
     case Position.Left:
       offsetX = 0;
@@ -73,7 +70,6 @@ function getNodeCenter(node: InternalNode): { x: number; y: number } {
     y: y + height / 2
   };
 }
-// returns the parameters (sx, sy, tx, ty, sourcePos, targetPos) you need to create an edge
 export function getEdgeParams(source: InternalNode, target: InternalNode): EdgeParams {
   const [sx, sy, sourcePos] = getParams(source, target);
   const [tx, ty, targetPos] = getParams(target, source);
