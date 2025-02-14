@@ -41,15 +41,27 @@ export type GraphEdge = {
 
 export type GraphNode = Node<{ GraphNodeData: GraphNodeData }, 'custom'>;
 
-export type GraphProps = { graphNodes: GraphNodeData[]; graphEdges: GraphEdge[] };
+export type GraphProps = {
+  graphNodes: GraphNodeData[];
+  graphEdges: GraphEdge[];
+  options: {
+    topLeftCustomControl?: React.ReactNode;
+    filter?: {
+      filterNode: string;
+      setFilterNode: (node: string) => void;
+      filterOnSelect: boolean;
+    };
+  };
+};
 
-const Graph = ({ graphNodes, graphEdges }: GraphProps) => {
+const Graph = ({ graphNodes, graphEdges, options }: GraphProps) => {
   const [nodes, setNodes] = useState<Node[]>([]);
   const [edges, setEdges] = useState<Edge[]>([]);
   const { getNodes, getEdges, fitView } = useReactFlow<GraphNode>();
 
   const onNodesChange: OnNodesChange = useCallback(changes => setNodes(nds => applyNodeChanges(changes, nds)), [setNodes]);
   const onEdgesChange: OnEdgesChange = useCallback(changes => setEdges(eds => applyEdgeChanges(changes, eds)), [setEdges]);
+
   const onConnect: OnConnect = useCallback(
     params =>
       setEdges(eds =>
@@ -78,7 +90,19 @@ const Graph = ({ graphNodes, graphEdges }: GraphProps) => {
   );
 
   useEffect(() => {
-    const newNodes: GraphNode[] = graphNodes.map(node => ({
+    let filteredNodes = graphNodes;
+    let filteredEdges = graphEdges;
+
+    if (options.filter && options.filter.filterNode !== 'all') {
+      const connectedEdges = graphEdges.filter(
+        edge => edge.source === options.filter?.filterNode || edge.target === options.filter?.filterNode
+      );
+      const connectedNodeIds = new Set(connectedEdges.flatMap(edge => [edge.source, edge.target]));
+      filteredNodes = graphNodes.filter(node => connectedNodeIds.has(node.id));
+      filteredEdges = connectedEdges;
+    }
+
+    const newNodes: GraphNode[] = filteredNodes.map(node => ({
       id: node.id,
       position: { x: 0, y: 0 },
       data: {
@@ -87,7 +111,7 @@ const Graph = ({ graphNodes, graphEdges }: GraphProps) => {
       type: 'custom'
     }));
 
-    const newEdges: Edge[] = graphEdges.map((edge, index) => ({
+    const newEdges: Edge[] = filteredEdges.map((edge, index) => ({
       id: index.toString(),
       label: edge.label,
       source: edge.source,
@@ -112,7 +136,7 @@ const Graph = ({ graphNodes, graphEdges }: GraphProps) => {
       }))
     );
     setEdges(layoutedEdges);
-  }, [graphEdges, graphNodes]);
+  }, [graphEdges, graphNodes, options.filter]);
 
   return (
     <ReactFlow
@@ -124,6 +148,10 @@ const Graph = ({ graphNodes, graphEdges }: GraphProps) => {
       nodeTypes={{ custom: CustomNode }}
       edgeTypes={{ floating: FloatingEdge }}
       connectionMode={ConnectionMode.Loose}
+      fitView={true}
+      onNodeDoubleClick={(e, node) => {
+        options.filter?.setFilterNode(node.id);
+      }}
     >
       <Controls />
       <MiniMap />
@@ -133,16 +161,19 @@ const Graph = ({ graphNodes, graphEdges }: GraphProps) => {
           <Button
             icon={IvyIcons.Process}
             rotate={90}
+            size='large'
             onClick={() => onLayout('TB')}
             style={{ background: 'white', boxShadow: 'var(--xy-controls-box-shadow, var(--xy-controls-box-shadow-default))' }}
           />
           <Button
             icon={IvyIcons.Process}
+            size='large'
             onClick={() => onLayout('LR')}
             style={{ background: 'white', boxShadow: 'var(--xy-controls-box-shadow, var(--xy-controls-box-shadow-default))' }}
           />
         </Flex>
       </Panel>
+      {options.topLeftCustomControl && <Panel position='top-left'>{options.topLeftCustomControl}</Panel>}
     </ReactFlow>
   );
 };
