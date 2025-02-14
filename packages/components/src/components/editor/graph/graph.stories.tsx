@@ -14,8 +14,10 @@ type Story = StoryObj<typeof Graph>;
 
 export const Default: Story = {
   render: () => {
-    <ReactFlowProvider>
-      <Graph graphNodes={dataClasses} graphEdges={dataClassRelations} />
-    </ReactFlowProvider>;
+    return (
+      <ReactFlowProvider>
+        <Graph graphNodes={dataClasses} graphEdges={dataClassRelations} />
+      </ReactFlowProvider>
+    );
   }
 };
