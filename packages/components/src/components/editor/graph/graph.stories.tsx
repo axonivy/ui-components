@@ -21,7 +21,10 @@ export const Default: Story = {
       return {
         id: dataClass.id,
         label: dataClass.name,
-        content: <CustomNodeFieldContent fields={dataClass.fields} />
+        content: <CustomNodeFieldContent fields={dataClass.fields} />,
+        options: {
+          controls: <Button variant='outline' icon={IvyIcons.DataClass} onClick={() => console.log('Open ' + dataClass.name)} />
+        }
       };
     });
     return (

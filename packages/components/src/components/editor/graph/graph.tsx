@@ -33,8 +33,11 @@ export type CustomNodeData = {
   id: string;
   label: string;
   content?: React.ReactNode;
-  highlightNode?: boolean;
-  disableHandles?: boolean;
+  options?: {
+    highlightNode?: boolean;
+    disableHandles?: boolean;
+    controls?: React.ReactNode;
+  };
 };
 
 export type EdgeData = {
@@ -108,8 +111,11 @@ const CustomGraph = ({ graphNodes, graphEdges, options }: GraphProps) => {
       data: {
         CustomNodeData: {
           ...node,
-          highlightNode: node.highlightNode && !options?.filter ? node.highlightNode : node.id === selectedNode,
-          disableHandles: options?.circlefloatingEdges ? options?.circlefloatingEdges : false
+          options: {
+            ...node.options,
+            highlightNode: node.options?.highlightNode && !options?.filter ? node.options?.highlightNode : node.id === selectedNode,
+            disableHandles: options?.circlefloatingEdges ? options?.circlefloatingEdges : false
+          }
         }
       },
 
@@ -133,7 +139,6 @@ const CustomGraph = ({ graphNodes, graphEdges, options }: GraphProps) => {
     }));
 
     const { nodes: layoutedNodes, edges: layoutedEdges } = getLayoutedElements({ nodes: newNodes, edges: newEdges, direction: 'TB' });
-
     setNodes(prevNodes =>
       layoutedNodes.map(node => ({
         ...node,
