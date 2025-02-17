@@ -21,7 +21,7 @@ export const Default: Story = {
       return {
         id: dataClass.id,
         label: dataClass.name,
-        content: customNodeFieldContent(dataClass.fields)
+        content: <CustomNodeFieldContent fields={dataClass.fields} />
       };
     });
     return (
@@ -29,14 +29,15 @@ export const Default: Story = {
         graphNodes={transeFormedDataClasses}
         graphEdges={dataClassRelations}
         options={{
-          filter: true
+          filter: true,
+          circlefloatingEdges: true
         }}
       />
     );
   }
 };
 
-const customNodeFieldContent = (fields: Field[]) => {
+const CustomNodeFieldContent = ({ fields }: { fields: Field[] }) => {
   const [expanded, setExpanded] = useState(false);
   const fieldsToShow = expanded ? fields : fields.slice(0, 2);
 

@@ -26,12 +26,15 @@ import {
 } from '@xyflow/react';
 import { useCallback, useEffect, useState } from 'react';
 import { BasicSelect } from '@/components/common/select/select';
+import FloatingConnectionLine from '@/components/editor/graph/FloatingConnectionLine';
+import CircleFloatingEdge from '@/components/editor/graph/circleFloatingEdge';
 
 export type CustomNodeData = {
   id: string;
   label: string;
   content?: React.ReactNode;
   highlightNode?: boolean;
+  disableHandles?: boolean;
 };
 
 export type EdgeData = {
@@ -47,6 +50,7 @@ export type GraphProps = {
   graphEdges: EdgeData[];
   options?: {
     filter?: boolean;
+    circlefloatingEdges?: boolean;
   };
 };
 
@@ -104,9 +108,11 @@ const CustomGraph = ({ graphNodes, graphEdges, options }: GraphProps) => {
       data: {
         CustomNodeData: {
           ...node,
-          highlightNode: node.highlightNode && !options?.filter ? node.highlightNode : node.id === selectedNode
+          highlightNode: node.highlightNode && !options?.filter ? node.highlightNode : node.id === selectedNode,
+          disableHandles: options?.circlefloatingEdges ? options?.circlefloatingEdges : false
         }
       },
+
       type: 'custom'
     }));
 
@@ -135,7 +141,7 @@ const CustomGraph = ({ graphNodes, graphEdges, options }: GraphProps) => {
       }))
     );
     setEdges(layoutedEdges);
-  }, [graphEdges, graphNodes, options?.filter, selectedNode]);
+  }, [graphEdges, graphNodes, options?.circlefloatingEdges, options?.filter, selectedNode]);
 
   return (
     <ReactFlow
@@ -145,7 +151,7 @@ const CustomGraph = ({ graphNodes, graphEdges, options }: GraphProps) => {
       onEdgesChange={onEdgesChange}
       onConnect={onConnect}
       nodeTypes={{ custom: CustomNode }}
-      edgeTypes={{ floating: FloatingEdge }}
+      edgeTypes={{ floating: options?.circlefloatingEdges ? CircleFloatingEdge : FloatingEdge }}
       connectionMode={ConnectionMode.Loose}
       fitView={true}
       onNodeDoubleClick={(e, node) => {
@@ -153,6 +159,7 @@ const CustomGraph = ({ graphNodes, graphEdges, options }: GraphProps) => {
           setSelectedNode(node.id);
         }
       }}
+      connectionLineComponent={options?.circlefloatingEdges ? FloatingConnectionLine : undefined}
     >
       <Controls />
       <MiniMap />
