@@ -45,7 +45,7 @@ export type GraphNode = Node<{ CustomNodeData: CustomNodeData }, 'custom'>;
 export type GraphProps = {
   graphNodes: CustomNodeData[];
   graphEdges: EdgeData[];
-  options: {
+  options?: {
     filter?: boolean;
   };
 };
@@ -91,7 +91,7 @@ const CustomGraph = ({ graphNodes, graphEdges, options }: GraphProps) => {
     let filteredNodes = graphNodes;
     let filteredEdges = graphEdges;
 
-    if (options.filter && selectedNode !== 'all') {
+    if (options?.filter && selectedNode !== 'all') {
       const connectedEdges = graphEdges.filter(edge => edge.source === selectedNode || edge.target === selectedNode);
       const connectedNodeIds = new Set(connectedEdges.flatMap(edge => [edge.source, edge.target]));
       filteredNodes = graphNodes.filter(node => connectedNodeIds.has(node.id));
@@ -104,7 +104,7 @@ const CustomGraph = ({ graphNodes, graphEdges, options }: GraphProps) => {
       data: {
         CustomNodeData: {
           ...node,
-          highlightNode: node.highlightNode && !options.filter ? node.highlightNode : node.id === selectedNode
+          highlightNode: node.highlightNode && !options?.filter ? node.highlightNode : node.id === selectedNode
         }
       },
       type: 'custom'
@@ -135,7 +135,7 @@ const CustomGraph = ({ graphNodes, graphEdges, options }: GraphProps) => {
       }))
     );
     setEdges(layoutedEdges);
-  }, [graphEdges, graphNodes, options.filter, selectedNode]);
+  }, [graphEdges, graphNodes, options?.filter, selectedNode]);
 
   return (
     <ReactFlow
@@ -149,7 +149,7 @@ const CustomGraph = ({ graphNodes, graphEdges, options }: GraphProps) => {
       connectionMode={ConnectionMode.Loose}
       fitView={true}
       onNodeDoubleClick={(e, node) => {
-        if (options.filter) {
+        if (options?.filter) {
           setSelectedNode(node.id);
         }
       }}
@@ -174,13 +174,13 @@ const CustomGraph = ({ graphNodes, graphEdges, options }: GraphProps) => {
           />
         </Flex>
       </Panel>
-      {options.filter && (
+      {options?.filter && (
         <Panel position='top-left'>
           <BasicSelect
             value={selectedNode}
             onValueChange={setSelectedNode}
             items={[
-              { value: 'all', label: 'Show all Data Classes' },
+              { value: 'all', label: 'Show all' },
               ...graphNodes.map(node => ({
                 value: node.id,
                 label: node.label
