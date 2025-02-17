@@ -3,6 +3,7 @@ export interface DataClass {
   id: string;
   name: string;
   fields: Field[];
+  relations?: EdgeData[];
 }
 
 export interface Field {
@@ -22,6 +23,11 @@ export const dataClasses: Array<DataClass> = [
       { name: 'password', type: 'string' },
       { name: 'createdAt', type: 'date' },
       { name: 'address', type: 'address' } // Reference to Address dataclass
+    ],
+    relations: [
+      { id: 'order', label: '1:M' },
+      { id: 'review', label: '1:M' },
+      { id: 'address', label: '1:M' }
     ]
   },
   {
@@ -35,6 +41,11 @@ export const dataClasses: Array<DataClass> = [
       { name: 'createdAt', type: 'date' },
       { name: 'shippingAddress', type: 'address' }, // Reference to Address dataclass
       { name: 'paymentStatus', type: 'string' }
+    ],
+    relations: [
+      { id: 'product', label: 'M:M' },
+      { id: 'payment', label: '1:1' },
+      { id: 'shipment', label: '1:1' }
     ]
   },
   {
@@ -49,7 +60,8 @@ export const dataClasses: Array<DataClass> = [
       { name: 'supplier', type: 'supplier' }, // Reference to Supplier dataclass
       { name: 'category', type: 'category' }, // Reference to Category dataclass
       { name: 'createdAt', type: 'date' }
-    ]
+    ],
+    relations: [{ id: 'category', label: 'M:1' }]
   },
   {
     id: 'category',
@@ -93,7 +105,8 @@ export const dataClasses: Array<DataClass> = [
       { name: 'rating', type: 'number' },
       { name: 'comment', type: 'string' },
       { name: 'createdAt', type: 'date' }
-    ]
+    ],
+    relations: [{ id: 'product', label: 'M:1' }]
   },
   {
     id: 'address',
@@ -116,6 +129,10 @@ export const dataClasses: Array<DataClass> = [
       { name: 'name', type: 'string' },
       { name: 'contactInfo', type: 'string' },
       { name: 'address', type: 'string' }
+    ],
+    relations: [
+      { id: 'product', label: '1:M' },
+      { id: 'inventory', label: '1:M' }
     ]
   },
   {
@@ -136,6 +153,10 @@ export const dataClasses: Array<DataClass> = [
       { name: 'user', type: 'user' }, // Reference to User dataclass
       { name: 'totalAmount', type: 'number' },
       { name: 'createdAt', type: 'date' }
+    ],
+    relations: [
+      { id: 'product', label: 'M:M' },
+      { id: 'user', label: '1:1' }
     ]
   },
   {
@@ -148,23 +169,10 @@ export const dataClasses: Array<DataClass> = [
       { name: 'discountAmount', type: 'number' },
       { name: 'startDate', type: 'date' },
       { name: 'endDate', type: 'date' }
+    ],
+    relations: [
+      { id: 'product', label: 'M:M' },
+      { id: 'order', label: 'M:1' }
     ]
   }
-];
-
-export const dataClassRelations: Array<EdgeData> = [
-  { source: 'user', target: 'order', label: '1:M' },
-  { source: 'order', target: 'product', label: 'M:M' },
-  { source: 'product', target: 'category', label: 'M:1' },
-  { source: 'order', target: 'payment', label: '1:1' },
-  { source: 'order', target: 'shipment', label: '1:1' },
-  { source: 'user', target: 'review', label: '1:M' },
-  { source: 'review', target: 'product', label: 'M:1' },
-  { source: 'user', target: 'address', label: '1:M' },
-  { source: 'supplier', target: 'product', label: '1:M' },
-  { source: 'supplier', target: 'inventory', label: '1:M' },
-  { source: 'cart', target: 'product', label: 'M:M' },
-  { source: 'cart', target: 'user', label: '1:1' },
-  { source: 'discount', target: 'product', label: 'M:M' },
-  { source: 'discount', target: 'order', label: 'M:1' }
 ];

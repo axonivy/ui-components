@@ -33,6 +33,7 @@ export type CustomNodeData = {
   id: string;
   label: string;
   content?: React.ReactNode;
+  target?: Array<EdgeData>;
   options?: {
     highlightNode?: boolean;
     disableHandles?: boolean;
@@ -41,8 +42,7 @@ export type CustomNodeData = {
 };
 
 export type EdgeData = {
-  source: string;
-  target: string;
+  id: string;
   label?: string;
 };
 
@@ -50,14 +50,15 @@ export type GraphNode = Node<{ CustomNodeData: CustomNodeData }, 'custom'>;
 
 export type GraphProps = {
   graphNodes: CustomNodeData[];
-  graphEdges: EdgeData[];
   options?: {
     filter?: boolean;
-    circlefloatingEdges?: boolean;
+    circleFloatingEdges?: boolean;
+    minimap?: boolean;
+    controls?: boolean;
   };
 };
 
-const CustomGraph = ({ graphNodes, graphEdges, options }: GraphProps) => {
+const CustomGraph = ({ graphNodes, options }: GraphProps) => {
   const [nodes, setNodes] = useState<Node[]>([]);
   const [edges, setEdges] = useState<Edge[]>([]);
   const [selectedNode, setSelectedNode] = useState<string>('all');
@@ -95,16 +96,7 @@ const CustomGraph = ({ graphNodes, graphEdges, options }: GraphProps) => {
   );
 
   useEffect(() => {
-    let filteredNodes = graphNodes;
-    let filteredEdges = graphEdges;
-
-    if (options?.filter && selectedNode !== 'all') {
-      const connectedEdges = graphEdges.filter(edge => edge.source === selectedNode || edge.target === selectedNode);
-      const connectedNodeIds = new Set(connectedEdges.flatMap(edge => [edge.source, edge.target]));
-      filteredNodes = graphNodes.filter(node => connectedNodeIds.has(node.id));
-      filteredEdges = connectedEdges;
-    }
-
+    const filteredNodes = options?.filter ? filterNodesBySelectedNode(graphNodes, selectedNode) : graphNodes;
     const newNodes: GraphNode[] = filteredNodes.map(node => ({
       id: node.id,
       position: { x: 0, y: 0 },
@@ -114,29 +106,27 @@ const CustomGraph = ({ graphNodes, graphEdges, options }: GraphProps) => {
           options: {
             ...node.options,
             highlightNode: node.options?.highlightNode && !options?.filter ? node.options?.highlightNode : node.id === selectedNode,
-            disableHandles: options?.circlefloatingEdges ? options?.circlefloatingEdges : false
+            disableHandles: options?.circleFloatingEdges ? options?.circleFloatingEdges : false
           }
         }
       },
-
       type: 'custom'
     }));
 
-    const newEdges: Edge[] = filteredEdges.map((edge, index) => ({
-      id: index.toString(),
-      label: edge.label,
-      source: edge.source,
-      target: edge.target,
-      sourceHandle: 'b',
-      targetHandle: 't',
-      type: 'floating',
-      markerEnd: {
-        type: MarkerType.Arrow,
-        width: 15,
-        height: 15
-      },
-      style: { strokeWidth: 2 }
-    }));
+    const newEdges: Edge[] = graphNodes.flatMap(
+      node =>
+        node.target?.map((target, index) => ({
+          id: `${node.id}-${target.id}-${index}`,
+          source: node.id,
+          target: target.id,
+          label: target.label,
+          sourceHandle: 'b',
+          targetHandle: 't',
+          type: 'floating',
+          markerEnd: { type: MarkerType.Arrow, width: 15, height: 15 },
+          style: { strokeWidth: 2 }
+        })) || []
+    );
 
     const { nodes: layoutedNodes, edges: layoutedEdges } = getLayoutedElements({ nodes: newNodes, edges: newEdges, direction: 'TB' });
     setNodes(prevNodes =>
@@ -146,7 +136,7 @@ const CustomGraph = ({ graphNodes, graphEdges, options }: GraphProps) => {
       }))
     );
     setEdges(layoutedEdges);
-  }, [graphEdges, graphNodes, options?.circlefloatingEdges, options?.filter, selectedNode]);
+  }, [graphNodes, options?.circleFloatingEdges, options?.filter, selectedNode]);
 
   return (
     <ReactFlow
@@ -156,7 +146,7 @@ const CustomGraph = ({ graphNodes, graphEdges, options }: GraphProps) => {
       onEdgesChange={onEdgesChange}
       onConnect={onConnect}
       nodeTypes={{ custom: CustomNode }}
-      edgeTypes={{ floating: options?.circlefloatingEdges ? CircleFloatingEdge : FloatingEdge }}
+      edgeTypes={{ floating: options?.circleFloatingEdges ? CircleFloatingEdge : FloatingEdge }}
       connectionMode={ConnectionMode.Loose}
       fitView={true}
       onNodeDoubleClick={(e, node) => {
@@ -164,10 +154,10 @@ const CustomGraph = ({ graphNodes, graphEdges, options }: GraphProps) => {
           setSelectedNode(node.id);
         }
       }}
-      connectionLineComponent={options?.circlefloatingEdges ? FloatingConnectionLine : undefined}
+      connectionLineComponent={options?.circleFloatingEdges ? FloatingConnectionLine : undefined}
     >
-      <Controls />
-      <MiniMap />
+      {options?.controls !== false && <Controls />}
+      {options?.minimap !== false && <MiniMap />}
       <Background gap={12} size={1} />
       <Panel position='top-right'>
         <Flex direction='row' gap={1}>
@@ -206,13 +196,44 @@ const CustomGraph = ({ graphNodes, graphEdges, options }: GraphProps) => {
   );
 };
 
-const Graph = ({ graphNodes, graphEdges, options }: GraphProps) => {
+const Graph = ({ graphNodes, options }: GraphProps) => {
   return (
     <ReactFlowProvider>
-      <CustomGraph graphNodes={graphNodes} graphEdges={graphEdges} options={options} />
+      <CustomGraph graphNodes={graphNodes} options={options} />
     </ReactFlowProvider>
   );
 };
 Graph.displayName = 'Graph';
 
 export { Graph };
+
+function filterNodesBySelectedNode(graphNodes: Array<CustomNodeData>, selectedNode: string): Array<CustomNodeData> {
+  let filteredNodes = graphNodes;
+
+  if (selectedNode !== 'all') {
+    const selectedNodeIds = new Set<string>();
+
+    graphNodes.forEach(node => {
+      if (node.id === selectedNode) {
+        selectedNodeIds.add(node.id);
+
+        if (node.target && node.target.length > 0) {
+          node.target.forEach(target => {
+            const targetNode = graphNodes.find(n => n.id === target.id);
+            if (targetNode) {
+              selectedNodeIds.add(targetNode.id);
+            }
+          });
+        }
+      }
+
+      if (node.target && node.target.length > 0 && node.target.some(edge => edge.id === selectedNode)) {
+        selectedNodeIds.add(node.id);
+      }
+    });
+
+    filteredNodes = graphNodes.filter(node => selectedNodeIds.has(node.id));
+  }
+
+  return filteredNodes;
+}

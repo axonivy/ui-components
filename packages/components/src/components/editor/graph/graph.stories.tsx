@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Graph, type CustomNodeData } from '@/components/editor/graph/graph';
-import { dataClasses, dataClassRelations, type Field } from '@/components/editor/graph/data';
+import { dataClasses, type Field } from '@/components/editor/graph/data';
 import { useState } from 'react';
 import { Flex } from '@/components/common/flex/flex';
 import { Button } from '@/components/common/button/button';
@@ -22,6 +22,7 @@ export const Default: Story = {
         id: dataClass.id,
         label: dataClass.name,
         content: <CustomNodeFieldContent fields={dataClass.fields} />,
+        target: dataClass.relations,
         options: {
           controls: <Button variant='outline' icon={IvyIcons.DataClass} onClick={() => console.log('Open ' + dataClass.name)} />
         }
@@ -30,10 +31,9 @@ export const Default: Story = {
     return (
       <Graph
         graphNodes={transeFormedDataClasses}
-        graphEdges={dataClassRelations}
         options={{
           filter: true,
-          circlefloatingEdges: true
+          circleFloatingEdges: true
         }}
       />
     );
