@@ -12,7 +12,7 @@
     "generate": "npm run generate --workspace=@axonivy/ui-icons",
     "build": "lerna run build",
     "package": "lerna run package",
-    "clean": "lerna run clean",
+    "clean": "lerna run clean -- --glob",
     "type": "lerna run type",
     "lint": "eslint",
     "lint:ci": "eslint -o eslint.xml -f checkstyle",
