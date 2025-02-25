@@ -79,7 +79,13 @@ export const base = tseslint.config(
     ...playwright.configs['flat/recommended'],
     rules: {
       ...playwright.configs['flat/recommended'].rules,
-      'playwright/expect-expect': 'off'
+      'playwright/expect-expect': 'off',
+      'playwright/no-skipped-test': [
+        'warn',
+        {
+          allowConditional: true
+        }
+      ]
     }
   },
 
@@ -99,12 +105,18 @@ export const base = tseslint.config(
     name: 'ingored-files',
     ignores: [
       '**/node_modules/**',
-      'eslint.config.*',
+      '**/eslint.config.*',
       '**/vite*.config.*',
+      '**/vitest.workspace.ts',
       '**/playwright.config.*',
+      '**/playwright-report/**',
+      '**/webpack.config.*',
+      '**/orval.config.*',
       '**/*.d.ts',
       '**/lib/*',
       '**/build/*',
+      '**/dist/*',
+      '**/public/*',
       '**/schemaCodegen.cjs'
     ]
   }
