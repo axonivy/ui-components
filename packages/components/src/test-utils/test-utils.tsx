@@ -1,4 +1,3 @@
-/* eslint-disable import/export */
 import type { ReactElement, ReactNode } from 'react';
 import { render, renderHook } from '@testing-library/react';
 import type { queries, Queries, RenderHookOptions, RenderOptions } from '@testing-library/react';
