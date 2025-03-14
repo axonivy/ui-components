@@ -1,4 +1,5 @@
 import { SearchInput } from '@/components/common/input/input';
+import { ROW_VIRTUALIZE_INDEX_ATTRIBUTE } from '@/components/common/table/table';
 import { resetAndSetRowSelection, selectRow } from '@/utils/table/table';
 import {
   getFilteredRowModel,
@@ -200,7 +201,7 @@ export const useTableKeyHandler = <TData,>({ table, data, options }: TableKeyboa
       table.resetRowSelection();
       allRows[newReorderIndex].toggleSelected();
       setRootIndex(newReorderIndex);
-      event.currentTarget.rows[newReorderIndex].scrollIntoView({ block: 'center' });
+      scrollToNextRow(event, newReorderIndex);
     }
   };
 
@@ -232,6 +233,20 @@ export const useTableKeyHandler = <TData,>({ table, data, options }: TableKeyboa
   };
 
   return { handleKeyDown };
+};
+
+const scrollToNextRow = (event: React.KeyboardEvent<HTMLTableElement>, newReorderIndex: number) => {
+  let scrollRow = Array.from(event.currentTarget.rows).find(
+    row => row.getAttribute(ROW_VIRTUALIZE_INDEX_ATTRIBUTE) === `${newReorderIndex}`
+  );
+  if (!scrollRow) {
+    scrollRow = event.currentTarget.rows[newReorderIndex];
+  }
+  if (scrollRow) {
+    scrollRow.scrollIntoView({ block: 'center' });
+  } else {
+    event.currentTarget.scrollIntoView({ block: 'end' });
+  }
 };
 
 const toggleExpand = <TData,>(expand: boolean, row?: Row<TData>, loadChildren?: (row: Row<TData>) => void) => {
