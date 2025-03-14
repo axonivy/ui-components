@@ -28,8 +28,14 @@ const TableFooter = React.forwardRef<HTMLTableSectionElement, React.HTMLAttribut
 );
 TableFooter.displayName = 'TableFooter';
 
-const TableRow = React.forwardRef<HTMLTableRowElement, React.HTMLAttributes<HTMLTableRowElement>>(({ className, ...props }, ref) => (
-  <tr ref={ref} className={cn(row, className, 'ui-table-row')} {...props} />
+export const ROW_VIRTUALIZE_INDEX_ATTRIBUTE = 'data-vindex';
+
+type TableRowProps = React.HTMLAttributes<HTMLTableRowElement> & {
+  vindex?: number | string;
+};
+
+const TableRow = React.forwardRef<HTMLTableRowElement, TableRowProps>(({ className, vindex, ...props }, ref) => (
+  <tr ref={ref} className={cn(row, className, 'ui-table-row')} {...{ [ROW_VIRTUALIZE_INDEX_ATTRIBUTE]: vindex }} {...props} />
 ));
 TableRow.displayName = 'TableRow';
 
