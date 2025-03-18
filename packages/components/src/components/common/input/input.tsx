@@ -50,7 +50,7 @@ const SearchInput = React.forwardRef<HTMLInputElement, SearchInputProps>(({ valu
       <InputGroup>
         <IvyIcon icon={IvyIcons.Search} className={searchIcon} />
         <Input value={filter} onChange={e => updateValue(e.target.value)} {...props} ref={ref} />
-        {filter.length > 0 && <Button icon={IvyIcons.Close} onClick={() => updateValue('')} title='Clean' />}
+        {filter.length > 0 && <Button icon={IvyIcons.Close} onClick={() => updateValue('')} aria-label='Clean' />}
       </InputGroup>
     </ReadonlyProvider>
   );

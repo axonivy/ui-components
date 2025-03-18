@@ -87,7 +87,7 @@ const DefaultBrowser = ({ applyFn, applyBtn, initSearch, includeConditionBuilder
         if (applyFn) applyFn(result?.value);
         else if (result) alert(`Browser '${browserName}' apply: ${result.value}`);
       }}
-      applyBtn={applyBtn}
+      options={{ applyBtn }}
     />
   );
 };
