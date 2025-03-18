@@ -43,7 +43,7 @@ test('keyboard', async () => {
 test('state', async () => {
   userEvent.setup();
   render(<StateCollapsible />);
-  const state = screen.getByRole('tooltip');
+  const state = screen.getByRole('status');
   expect(state).toHaveAttribute('data-state', 'warning');
 });
 
