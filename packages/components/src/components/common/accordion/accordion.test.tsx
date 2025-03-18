@@ -47,7 +47,7 @@ test('keyboard', async () => {
 test('state', async () => {
   userEvent.setup();
   render(<StateAccordion />);
-  const states = screen.getAllByRole('tooltip');
+  const states = screen.getAllByRole('status');
   expect(states).toHaveLength(3);
   expect(states.at(0)).toHaveAttribute('data-state', 'configured');
   expect(states.at(1)).toHaveAttribute('data-state', 'warning');

@@ -30,7 +30,7 @@ const StateDot = React.forwardRef<HTMLDivElement, StateDotProps & React.HTMLAttr
               ref={ref}
               className={cn(dot({ state: dotState }), className, 'ui-state-dot')}
               data-state={dotState}
-              role='tooltip'
+              role='status'
               {...props}
             />
           </TooltipTrigger>
