@@ -18,10 +18,16 @@ export type OutlineNode = {
   children: Array<OutlineNode>;
 };
 
-export type OutlineProps = { outline: Array<OutlineNode>; selection?: string; onClick?: (id: string) => void; onDoubleClick?: () => void };
+export type OutlineProps = {
+  outline: Array<OutlineNode>;
+  selection?: string;
+  onClick?: (id: string) => void;
+  onDoubleClick?: () => void;
+  options?: { searchPlaceholder?: string };
+};
 
-const Outline = ({ outline, selection, onClick, onDoubleClick }: OutlineProps) => {
-  const globalFilter = useTableGlobalFilter({ searchAutoFocus: true });
+const Outline = ({ outline, selection, onClick, onDoubleClick, options }: OutlineProps) => {
+  const globalFilter = useTableGlobalFilter({ searchAutoFocus: true, searchPlaceholder: options?.searchPlaceholder });
   const expanded = useTableExpand<OutlineNode>();
   const select = useTableSelect<OutlineNode>();
   const columns: ColumnDef<OutlineNode, string>[] = [

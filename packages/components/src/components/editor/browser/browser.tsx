@@ -104,14 +104,22 @@ export type Browser = {
 export type BrowsersViewProps = {
   browsers: Array<Browser>;
   apply: (browserName: string, result?: BrowserResult) => void;
+  /** @deprecated use options instead */
   applyBtn?: { label?: string; icon?: IvyIcons };
+  options?: {
+    applyBtn?: { label?: string; icon?: IvyIcons };
+    search?: { placeholder?: string };
+    info?: { label?: string };
+    cancelBtn?: { label?: string };
+  };
 };
 
 function isUseBrowserResult(browser: Browser['browser']): browser is ReturnType<typeof useBrowser> {
   return (browser as ReturnType<typeof useBrowser>).table !== undefined;
 }
 
-const BrowsersView = ({ browsers, apply, applyBtn }: BrowsersViewProps) => {
+const BrowsersView = ({ browsers, apply, applyBtn, options }: BrowsersViewProps) => {
+  const applyButton = applyBtn ?? options?.applyBtn;
   const [tab, setTab] = React.useState(browsers[0].name);
   const selectedRow = () => {
     const browser = browsers.find(b => b.name === tab)?.browser;
@@ -171,7 +179,7 @@ const BrowsersView = ({ browsers, apply, applyBtn }: BrowsersViewProps) => {
                 {isUseBrowserResult(browser) ? (
                   <>
                     <SearchInput
-                      placeholder='Search'
+                      placeholder={options?.search?.placeholder ?? 'Search'}
                       autoFocus={true}
                       value={browser.globalFilter.filter}
                       onChange={browser.globalFilter.setFilter}
@@ -211,21 +219,21 @@ const BrowsersView = ({ browsers, apply, applyBtn }: BrowsersViewProps) => {
               </Flex>
             </TabsContent>
           ))}
-          <BasicCollapsible label='Info' style={{ maxHeight: 50 }}>
+          <BasicCollapsible label={options?.info?.label ?? 'Info'} style={{ maxHeight: 50 }}>
             {infoProvider(selectedRow())}
           </BasicCollapsible>
           <Flex direction='row' justifyContent='flex-end' gap={1}>
-            <Button aria-label='Cancel' onClick={() => apply(tab)} size='large'>
-              Cancel
+            <Button aria-label={options?.cancelBtn?.label ?? 'Cancel'} onClick={() => apply(tab)} size='large'>
+              {options?.cancelBtn?.label ?? 'Cancel'}
             </Button>
             <Button
-              aria-label={applyBtn?.label ?? 'Apply'}
-              icon={applyBtn?.icon}
+              aria-label={applyButton?.label ?? 'Apply'}
+              icon={applyButton?.icon}
               onClick={() => applyHandler()}
               size='large'
               variant='primary'
             >
-              {applyBtn?.label ?? 'Apply'}
+              {applyButton?.label ?? 'Apply'}
             </Button>
           </Flex>
         </Flex>
