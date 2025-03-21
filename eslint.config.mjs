@@ -20,12 +20,5 @@ export default tseslint.config(
   {
     name: 'ignored-files',
     ignores: ['**/dev-packages/**', '**/.storybook/**']
-  },
-  {
-    name: 'packages/core',
-    files: ['packages/core/**/*.{js,mjs,cjs,ts,jsx,tsx}'],
-    rules: {
-      '@typescript-eslint/no-explicit-any': 'off'
-    }
   }
 );
