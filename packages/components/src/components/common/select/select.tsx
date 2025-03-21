@@ -111,6 +111,7 @@ export type BasicSelectProps = SelectPrimitive.SelectProps &
     items: ReadonlyArray<{ value: string; label: string }>;
     emptyItem?: boolean;
     className?: string;
+    menuWidth?: string;
   };
 
 const BasicSelect = ({
@@ -122,6 +123,7 @@ const BasicSelect = ({
   onValueChange,
   defaultValue,
   onKeyDown,
+  menuWidth,
   ...props
 }: BasicSelectProps) => {
   const unknownValue = React.useMemo(() => {
@@ -147,7 +149,7 @@ const BasicSelect = ({
       <SelectTrigger className={className} onKeyDown={onKeyDown}>
         <SelectValue placeholder={placeholder} />
       </SelectTrigger>
-      <SelectContent>
+      <SelectContent style={{ width: menuWidth }}>
         <SelectGroup>
           {emptyItem && value && <SelectItem value=' '></SelectItem>}
           {unknownValue && <SelectItem value={unknownValue}>{unknownValue}</SelectItem>}
