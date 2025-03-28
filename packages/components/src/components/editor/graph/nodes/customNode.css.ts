@@ -4,7 +4,6 @@ import { vars } from '@/styles/theme.css';
 export const customNode = style({
   width: '100%',
   height: '100%',
-  // padding: '10px',
   textAlign: 'left',
   borderRadius: '5px',
   background: 'white',

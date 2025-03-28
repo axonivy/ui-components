@@ -22,7 +22,8 @@ export const Default: Story = {
         content: <CustomNodeFieldContent fields={dataClass.fields} />,
         target: dataClass.relations,
         options: {
-          controls: <Button icon={IvyIcons.DataClass} onClick={() => console.log('Open ' + dataClass.name)} />
+          controls: <Button icon={IvyIcons.DataClass} onClick={() => console.log('Open ' + dataClass.name)} />,
+          expandContent: true
         }
       };
     });

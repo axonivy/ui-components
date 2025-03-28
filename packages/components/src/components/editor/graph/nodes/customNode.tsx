@@ -33,14 +33,18 @@ export const CustomNode = ({ data, selected }: NodeProps<GraphNode>) => {
 
             <Flex direction='row' gap={1} alignItems='center' style={{ height: '20px' }}>
               {data.CustomNodeData.options?.controls}
-              <Separator decorative orientation='vertical' style={{ marginInline: 'var(--size-1)' }} />
-              <IvyIcon
-                icon={IvyIcons.Chevron}
-                className={`${expander} ${expanded ? expanderOpen : expanderClose}`}
-                onClick={() => {
-                  setExpanded(!expanded);
-                }}
-              />
+              {data.CustomNodeData.options?.expandContent && (
+                <>
+                  <Separator decorative orientation='vertical' style={{ marginInline: 'var(--size-1)' }} />
+                  <IvyIcon
+                    icon={IvyIcons.Chevron}
+                    className={`${expander} ${expanded ? expanderOpen : expanderClose}`}
+                    onClick={() => {
+                      setExpanded(!expanded);
+                    }}
+                  />
+                </>
+              )}
             </Flex>
           </Flex>
           {data.CustomNodeData.content && expanded && (
