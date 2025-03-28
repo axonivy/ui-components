@@ -1,9 +1,9 @@
 import '@xyflow/react/dist/style.css';
 import { Button } from '@/components/common/button/button';
 import { Flex } from '@/components/common/flex/flex';
-import { CustomNode } from '@/components/editor/graph/customNode';
-import FloatingEdge from '@/components/editor/graph/floatingEdge';
-import { getLayoutedElements, type Direction } from '@/components/editor/graph/getLayoutedElements';
+import { CustomNode } from '@/components/editor/graph/nodes/customNode';
+import FloatingEdge from '@/components/editor/graph/edges/floatingEdge';
+import { getLayoutedElements, type Direction } from '@/components/editor/graph/data/getLayoutedElements';
 import { IvyIcons } from '@axonivy/ui-icons';
 import {
   addEdge,
@@ -26,8 +26,8 @@ import {
 } from '@xyflow/react';
 import { useCallback, useEffect, useState } from 'react';
 import { BasicSelect } from '@/components/common/select/select';
-import FloatingConnectionLine from '@/components/editor/graph/FloatingConnectionLine';
-import CircleFloatingEdge from '@/components/editor/graph/circleFloatingEdge';
+import CircleFloatingEdge from '@/components/editor/graph/edges/circleFloatingEdge';
+import FloatingConnectionLine from '@/components/editor/graph/edges/FloatingConnectionLine';
 
 export type CustomNodeData = {
   id: string;
@@ -38,6 +38,7 @@ export type CustomNodeData = {
     highlightNode?: boolean;
     disableHandles?: boolean;
     controls?: React.ReactNode;
+    expandContent?: boolean;
   };
 };
 
@@ -166,11 +167,13 @@ const CustomGraph = ({ graphNodes, options }: GraphProps) => {
             rotate={90}
             size='large'
             onClick={() => onLayout('TB')}
+            title='horizontal alignment'
             style={{ background: 'white', boxShadow: 'var(--xy-controls-box-shadow, var(--xy-controls-box-shadow-default))' }}
           />
           <Button
             icon={IvyIcons.Process}
             size='large'
+            title='vertical alignment'
             onClick={() => onLayout('LR')}
             style={{ background: 'white', boxShadow: 'var(--xy-controls-box-shadow, var(--xy-controls-box-shadow-default))' }}
           />

@@ -13,10 +13,10 @@ export const getLayoutedElements = ({ nodes, edges, direction = 'TB' }: { nodes:
   nodes.forEach(node => {
     if (node.measured) {
       if (node.measured.height) {
-        nodeHeight = node.measured.height;
+        nodeHeight = node.measured.height + 30;
       }
       if (node.measured.width) {
-        nodeWidth = node.measured.width;
+        nodeWidth = node.measured.width + 30;
       }
     }
     dagreGraph.setNode(node.id, { width: nodeWidth, height: nodeHeight });

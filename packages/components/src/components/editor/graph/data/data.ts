@@ -39,7 +39,7 @@ export const dataClasses: Array<DataClass> = [
       { name: 'status', type: 'string' },
       { name: 'totalAmount', type: 'number' },
       { name: 'createdAt', type: 'date' },
-      { name: 'shippingAddress', type: 'address' }, // Reference to Address dataclass
+      { name: 'shippingAddresswerwerads.knsfadkljfödasfdajökldjsköldjskwerwerewwreewrerwewr', type: 'address' }, // Reference to Address dataclass
       { name: 'paymentStatus', type: 'string' }
     ],
     relations: [
