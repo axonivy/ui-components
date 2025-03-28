@@ -1,0 +1,55 @@
+.palette {
+  width: 320px;
+  max-height: 500px;
+  overflow-y: auto;
+  .ui-separator:last-child {
+    display: none;
+  }
+}
+
+@media (max-width: 500px) {
+  .palette {
+    width: 210px;
+  }
+}
+
+.palette-section-title {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.palette-button {
+  gap: 0.125rem;
+  justify-content: space-evenly;
+  .ui-button {
+    height: 24px;
+  }
+  i {
+    font-size: 14px;
+  }
+}
+
+.palette-item {
+  cursor: grab;
+  font-size: 10px;
+  .palette-item-icon {
+    background: var(--N50);
+    border-radius: var(--border-r2);
+    height: 32px;
+    width: 60px;
+    .ivy {
+      text-align: center;
+      font-size: 24px;
+    }
+    svg path {
+      stroke: var(--N600);
+    }
+  }
+}
+
+.category-label {
+  font-size: 10px;
+  color: var(--N900);
+  white-space: nowrap;
+}
