@@ -34,7 +34,7 @@
     "downshift": "9.0.9",
     "react-hotkeys-hook": "4.6.1",
     "react-resizable-panels": "2.1.7",
-    "sonner": "2.0.1"
+    "sonner": "2.0.2"
   },
   "peerDependencies": {
     "@axonivy/ui-icons": "~13.1.0-next",
@@ -58,7 +58,7 @@
     "@vanilla-extract/recipes": "^0.5.5",
     "@vanilla-extract/vite-plugin": "^5.0.0",
     "@vitejs/plugin-react": "^4.3.4",
-    "eslint-plugin-storybook": "^0.11.2",
+    "eslint-plugin-storybook": "^0.12.0",
     "happy-dom": "^17.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
