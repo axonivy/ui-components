@@ -1,4 +1,4 @@
-import type { Row, Table } from '@tanstack/react-table';
+import type { Table } from '@tanstack/react-table';
 
 export const selectRow = <TData>(table: Table<TData>, rowId?: string) => {
   if (!rowId || rowId === '') {
@@ -22,25 +22,24 @@ export const deleteFirstSelectedRow = <TData>(table: Table<TData>, data: Array<T
     return { newData };
   }
   newData.splice(selectedRow.index, 1);
-  const selection = adjustSelectionAfterDeletionOfRow(newData, table, selectedRow);
+  const selection = adjustSelectionAfterDeletionOfRow(newData, table, selectedRow.index);
   return { newData, selection };
 };
 
-const adjustSelectionAfterDeletionOfRow = <TData>(data: Array<TData>, table: Table<TData>, row: Row<TData>) => {
-  if (data.length === 0) {
+export const adjustSelectionAfterDeletionOfRow = <TData>(data: Array<TData>, table: Table<TData>, rowIndex: number) => {
+  if (!data || data.length === 0) {
     selectRow(table);
     return;
   }
 
-  if (row.index >= data.length) {
+  if (rowIndex >= data.length) {
     const selection = data.length - 1;
     selectRow(table, String(selection));
     return selection;
   }
 
-  const selection = row.index;
-  selectRow(table, String(selection));
-  return selection;
+  selectRow(table, String(rowIndex));
+  return rowIndex;
 };
 
 export const deleteAllSelectedRows = <TData>(table: Table<TData>, data: Array<TData>) => {
@@ -54,7 +53,7 @@ export const deleteAllSelectedRows = <TData>(table: Table<TData>, data: Array<TD
     newData.splice(rowIndex, 1);
   }
 
-  const selection = adjustSelectionAfterDeletionOfRow(newData, table, selectedRows[0]);
+  const selection = adjustSelectionAfterDeletionOfRow(newData, table, selectedRows[0].index);
   return { newData, selection };
 };
 
