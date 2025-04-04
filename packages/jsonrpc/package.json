@@ -21,7 +21,7 @@
   "main": "lib/jsonrpc.js",
   "module": "lib/jsonrpc.js",
   "scripts": {
-    "clean": "rimraf lib *.tsbuildinfo",
+    "clean": "rimraf --glob lib *.tsbuildinfo",
     "build": "tsc --build tsconfig.production.json",
     "package": "npm run clean && vite build && npm run build",
     "type": "tsc --noEmit",
