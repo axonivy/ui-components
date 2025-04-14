@@ -22,3 +22,8 @@ export const operatorField = style({
 export const logicalOperatorField = style({
   width: 70
 });
+
+export const conditionValue = style({
+  flex: 1,
+  minWidth: 0
+});

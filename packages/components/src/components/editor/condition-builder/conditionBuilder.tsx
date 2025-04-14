@@ -106,7 +106,7 @@ const ConditionBuilder = ({
   };
 
   const defaultInput = (value: string, onChange: (change: string) => void) => (
-    <BasicInput value={value} onChange={e => onChange(e.target.value)} style={{ flex: 1 }} />
+    <BasicInput value={value} onChange={e => onChange(e.target.value)} />
   );
 
   const typeOptions = useMemo(() => Object.entries(operators).map(([label]) => ({ label, value: label })), [operators]);
