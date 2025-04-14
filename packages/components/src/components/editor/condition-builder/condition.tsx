@@ -1,7 +1,7 @@
 import { Button } from '@/components/common/button/button';
 import { Flex } from '@/components/common/flex/flex';
 import { BasicSelect } from '@/components/common/select/select';
-import { conditionBorder, logicalOperatorField, operatorField } from './conditionBuilder.css';
+import { conditionBorder, conditionValue, logicalOperatorField, operatorField } from './conditionBuilder.css';
 import { useConditionContext, type Operator, type LogicOperator, type ConditionData } from './conditionContext';
 import { cn } from '@/utils/class-name';
 import { IvyIcons } from '@axonivy/ui-icons';
@@ -23,7 +23,9 @@ const Condition = ({ condition, conditionIndex, groupIndex, conditionsCount }: C
         <Button onClick={() => removeCondition(groupIndex, conditionIndex)} icon={IvyIcons.Trash} aria-label='Remove Condition' />
       </Flex>
       <Flex alignItems='center' gap={2} direction='row'>
-        {argumentInput(condition.argument1, val => updateCondition(groupIndex, conditionIndex, 'argument1', val))}
+        <div className={conditionValue}>
+          {argumentInput(condition.argument1, val => updateCondition(groupIndex, conditionIndex, 'argument1', val))}
+        </div>
         <BasicSelect
           className={operatorField}
           items={typeOptions}
@@ -33,8 +35,11 @@ const Condition = ({ condition, conditionIndex, groupIndex, conditionsCount }: C
         {condition.operator !== 'is true' &&
           condition.operator !== 'is false' &&
           condition.operator !== 'is empty' &&
-          condition.operator !== 'is not empty' &&
-          argumentInput(condition.argument2, val => updateCondition(groupIndex, conditionIndex, 'argument2', val))}
+          condition.operator !== 'is not empty' && (
+            <div className={conditionValue}>
+              {argumentInput(condition.argument2, val => updateCondition(groupIndex, conditionIndex, 'argument2', val))}
+            </div>
+          )}
         {conditionIndex < conditionsCount - 1 && (
           <BasicSelect
             className={logicalOperatorField}
