@@ -1,11 +1,11 @@
 import { composeStory } from '@storybook/react';
-import { render, screen, userEvent } from 'test-utils';
+import { customRender, screen, userEvent } from 'test-utils';
 import Meta, { FilterResizeSortTable } from './header.stories';
 
 const Table = composeStory(FilterResizeSortTable, Meta);
 
 test('filter', async () => {
-  render(<Table />);
+  customRender(<Table />);
   const search = screen.getByRole('textbox');
   expect(screen.getAllByRole('row')).toHaveLength(9);
 
@@ -22,7 +22,7 @@ test('filter', async () => {
 });
 
 test('no results', async () => {
-  render(<Table />);
+  customRender(<Table />);
   const search = screen.getByRole('textbox');
   await userEvent.type(search, 'adsf');
   expect(screen.getAllByRole('row')).toHaveLength(2);
@@ -30,7 +30,7 @@ test('no results', async () => {
 });
 
 test('sort', async () => {
-  render(<Table />);
+  customRender(<Table />);
   expectSort(['Status', 'success', 'success', 'processing', 'success', 'failed', 'pending', 'processing', 'NaN']);
   const statusSort = screen.getByRole('button', { name: 'Sort by Status' });
   await userEvent.click(statusSort);

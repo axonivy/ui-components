@@ -6,4 +6,7 @@ export const ReadonlyProvider = ({ readonly, children }: { readonly: boolean; ch
   return <ReadonlyContextInstance.Provider value={{ readonly }}>{children}</ReadonlyContextInstance.Provider>;
 };
 
-export const useReadonly = (): boolean => useContext(ReadonlyContextInstance).readonly;
+export const useReadonly = (): boolean => {
+  const context = useContext(ReadonlyContextInstance);
+  return context.readonly;
+};

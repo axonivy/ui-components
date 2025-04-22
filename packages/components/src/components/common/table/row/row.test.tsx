@@ -1,5 +1,5 @@
 import { composeStory } from '@storybook/react';
-import { render, screen, userEvent } from 'test-utils';
+import { customRender, screen, userEvent } from 'test-utils';
 import Meta, { Select, Message, Reorder, MultiSelectWithReorder } from './row.stories';
 
 const SelectTable = composeStory(Select, Meta);
@@ -8,7 +8,7 @@ const MessageTable = composeStory(Message, Meta);
 const ReorderTable = composeStory(Reorder, Meta);
 
 test('select', async () => {
-  render(<SelectTable />);
+  customRender(<SelectTable />);
   const row = screen.getAllByRole('row')[1];
   expect(row).toHaveAttribute('data-state', 'unselected');
   expect(screen.getByTitle('selected-row')).not.toHaveTextContent('Selected Row: ken99@yahoo.com');
@@ -18,7 +18,7 @@ test('select', async () => {
 });
 
 test('ctrl select', async () => {
-  render(<MultiSelectWithReorderTable />);
+  customRender(<MultiSelectWithReorderTable />);
   const rows = screen.getAllByRole('row');
   expect(rows[1]).toHaveAttribute('data-state', 'unselected');
   expect(rows[3]).toHaveAttribute('data-state', 'unselected');
@@ -35,7 +35,7 @@ test('ctrl select', async () => {
 });
 
 test('shift select', async () => {
-  render(<MultiSelectWithReorderTable />);
+  customRender(<MultiSelectWithReorderTable />);
   const rows = screen.getAllByRole('row');
   expect(rows[1]).toHaveAttribute('data-state', 'unselected');
   expect(rows[3]).toHaveAttribute('data-state', 'unselected');
@@ -57,7 +57,7 @@ test('shift select', async () => {
 });
 
 test('ctrl+shift select', async () => {
-  render(<MultiSelectWithReorderTable />);
+  customRender(<MultiSelectWithReorderTable />);
   const rows = screen.getAllByRole('row');
   const user = userEvent.setup();
   await user.click(rows[1]);
@@ -86,7 +86,7 @@ test('ctrl+shift select', async () => {
 });
 
 test('keyboard select', async () => {
-  render(<MultiSelectWithReorderTable />);
+  customRender(<MultiSelectWithReorderTable />);
   const rows = screen.getAllByRole('row');
   const user = userEvent.setup();
   await user.keyboard('[Tab]');
@@ -99,7 +99,7 @@ test('keyboard select', async () => {
 });
 
 test('keyboard shift select', async () => {
-  render(<MultiSelectWithReorderTable />);
+  customRender(<MultiSelectWithReorderTable />);
   const rows = screen.getAllByRole('row');
   const user = userEvent.setup();
   await user.keyboard('[Tab]');
@@ -112,7 +112,7 @@ test('keyboard shift select', async () => {
 });
 
 test('keyboard alt reorder', async () => {
-  render(<MultiSelectWithReorderTable />);
+  customRender(<MultiSelectWithReorderTable />);
   const rows = screen.getAllByRole('row');
   const user = userEvent.setup();
   await user.keyboard('[Tab]');
@@ -129,14 +129,14 @@ test('keyboard alt reorder', async () => {
 });
 
 test('message', async () => {
-  render(<MessageTable />);
+  customRender(<MessageTable />);
   const row = screen.getAllByRole('row')[4];
   expect(row).toHaveClass('ui-message-row');
   expect(row).toHaveTextContent('This is an error');
 });
 
 test('reorder', async () => {
-  render(<ReorderTable />);
+  customRender(<ReorderTable />);
   const row = screen.getAllByRole('row')[1];
   expect(row).toHaveAttribute('draggable', 'true');
   expect(row).toHaveAttribute('data-drag-state', 'false');

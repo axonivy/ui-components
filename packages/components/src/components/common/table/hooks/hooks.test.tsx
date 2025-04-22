@@ -1,7 +1,7 @@
 import { useMultiSelectRow, useTableGlobalFilter } from '@/components/common/table/hooks/hooks';
 import { setupTable } from '@/utils/table/test-utils/setup';
 import { act } from 'react';
-import { cleanup, render, renderHook, screen } from 'test-utils';
+import { cleanup, customRender, customRenderHook, screen } from 'test-utils';
 
 const TableSearch = ({ options }: { options?: Parameters<typeof useTableGlobalFilter>[0] }) => {
   const globalFilter = useTableGlobalFilter(options);
@@ -10,29 +10,29 @@ const TableSearch = ({ options }: { options?: Parameters<typeof useTableGlobalFi
 
 describe('useTableGlobalFilter', () => {
   test('no options', async () => {
-    const { result } = renderHook(() => useTableGlobalFilter());
+    const { result } = customRenderHook(() => useTableGlobalFilter());
     expect(result.current.filter).not.toBeNull();
     expect(result.current.tableState.globalFilter).toEqual('');
     expect(result.current.options.filterFromLeafRows).toBeTruthy();
   });
 
   test('option active', async () => {
-    const { result: active } = renderHook(() => useTableGlobalFilter({ searchActive: true }));
+    const { result: active } = customRenderHook(() => useTableGlobalFilter({ searchActive: true }));
     expect(active.current.filter).not.toBeNull();
-    const { result: inactive } = renderHook(() => useTableGlobalFilter({ searchActive: false }));
+    const { result: inactive } = customRenderHook(() => useTableGlobalFilter({ searchActive: false }));
     expect(inactive.current.filter).toBeNull();
   });
 
   test('option autofocus', async () => {
-    render(<TableSearch />);
+    customRender(<TableSearch />);
     expect(screen.getByRole('textbox')).not.toHaveFocus();
     cleanup();
-    render(<TableSearch options={{ searchAutoFocus: true }} />);
+    customRender(<TableSearch options={{ searchAutoFocus: true }} />);
     expect(screen.getByRole('textbox')).toHaveFocus();
   });
 
   test('option placeholder', async () => {
-    const view = render(<TableSearch />);
+    const view = customRender(<TableSearch />);
     expect(screen.getByRole('textbox')).toHaveAttribute('placeholder', 'Search');
     view.rerender(<TableSearch options={{ searchPlaceholder: 'blabla' }} />);
     expect(screen.getByRole('textbox')).toHaveAttribute('placeholder', 'blabla');
@@ -40,7 +40,7 @@ describe('useTableGlobalFilter', () => {
 
   test('selectOne', async () => {
     setupTable();
-    const { result } = renderHook(() => useTableGlobalFilter());
+    const { result } = customRenderHook(() => useTableGlobalFilter());
     expect(result.current.filter).not.toBeNull();
     expect(result.current.tableState.globalFilter).toEqual('');
     expect(result.current.options.filterFromLeafRows).toBeTruthy();
@@ -50,7 +50,7 @@ describe('useTableGlobalFilter', () => {
 describe('handleMultiSelectOnRowClick', () => {
   test('ctrl+click selects/deselects row', () => {
     const { table, onRowSelectionChangeValues } = setupTable();
-    const { result } = renderHook(() => useMultiSelectRow(table));
+    const { result } = customRenderHook(() => useMultiSelectRow(table));
     const row = table.getRowModel().rows[1];
     const event = { ctrlKey: true } as React.MouseEvent<HTMLTableRowElement, MouseEvent>;
 
@@ -63,7 +63,7 @@ describe('handleMultiSelectOnRowClick', () => {
 
   test('shift+click selects a range of rows', () => {
     const { table, onRowSelectionChangeValues } = setupTable();
-    const { result } = renderHook(() => useMultiSelectRow(table));
+    const { result } = customRenderHook(() => useMultiSelectRow(table));
     const rows = table.getRowModel().rows;
     const event = { shiftKey: true } as React.MouseEvent<HTMLTableRowElement, MouseEvent>;
     act(() => result.current.handleMultiSelectOnRow(rows[0], event));
@@ -73,7 +73,7 @@ describe('handleMultiSelectOnRowClick', () => {
 
   test('shift+click deselect a range of rows', () => {
     const { table, onRowSelectionChangeValues } = setupTable();
-    const { result } = renderHook(() => useMultiSelectRow(table));
+    const { result } = customRenderHook(() => useMultiSelectRow(table));
     const rows = table.getRowModel().rows;
     const event = { shiftKey: true } as React.MouseEvent<HTMLTableRowElement, MouseEvent>;
     act(() => result.current.handleMultiSelectOnRow(rows[0], event));
@@ -84,7 +84,7 @@ describe('handleMultiSelectOnRowClick', () => {
 
   test('ctrl+shift+click adds a range to the existing selection', () => {
     const { table, onRowSelectionChangeValues } = setupTable();
-    const { result } = renderHook(() => useMultiSelectRow(table));
+    const { result } = customRenderHook(() => useMultiSelectRow(table));
     const rows = table.getRowModel().rows;
     const ctrlEvent = { ctrlKey: true } as React.MouseEvent<HTMLTableRowElement, MouseEvent>;
     const ctrlShiftEvent = { shiftKey: true, ctrlKey: true } as React.MouseEvent<HTMLTableRowElement, MouseEvent>;
@@ -99,7 +99,7 @@ describe('handleMultiSelectOnRowClick', () => {
 
   test('ctrl+shift+click on selected row does nothing', () => {
     const { table, onRowSelectionChangeValues } = setupTable();
-    const { result } = renderHook(() => useMultiSelectRow(table));
+    const { result } = customRenderHook(() => useMultiSelectRow(table));
     const rows = table.getRowModel().rows;
     const event = { shiftKey: true, ctrlKey: true } as React.MouseEvent<HTMLTableRowElement, MouseEvent>;
     act(() => result.current.handleMultiSelectOnRow(rows[3], event));
@@ -110,7 +110,7 @@ describe('handleMultiSelectOnRowClick', () => {
 
   test('non-ctrl click selects single row', () => {
     const { table, onRowSelectionChangeValues } = setupTable();
-    const { result } = renderHook(() => useMultiSelectRow(table));
+    const { result } = customRenderHook(() => useMultiSelectRow(table));
     const row = table.getRowModel().rows[1];
     const event = { ctrlKey: false } as React.MouseEvent<HTMLTableRowElement, MouseEvent>;
     act(() => result.current.handleMultiSelectOnRow(row, event));

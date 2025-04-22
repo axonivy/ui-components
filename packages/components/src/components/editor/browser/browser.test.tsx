@@ -1,5 +1,5 @@
 import { composeStory } from '@storybook/react';
-import { render, screen, userEvent, waitFor } from 'test-utils';
+import { customRender, screen, userEvent, waitFor } from 'test-utils';
 import Meta, { Default, DialogBrowser, DialogBrowserWithTitle } from './browser.stories';
 
 const Browser = composeStory(Default, Meta);
@@ -13,27 +13,27 @@ afterEach(() => {
 });
 
 test('apply', async () => {
-  render(<Browser />);
+  customRender(<Browser />);
   await userEvent.click(screen.getAllByRole('row')[2]);
   await userEvent.click(screen.getByRole('button', { name: 'Apply' }));
   expect(window.alert).toBeCalledWith(`Browser 'Roles' apply: Teamleader`);
 });
 
 test('double click', async () => {
-  render(<Browser />);
+  customRender(<Browser />);
   await userEvent.dblClick(screen.getAllByRole('row')[0]);
   expect(window.alert).toBeCalledWith(`Browser 'Roles' apply: Everybody`);
 });
 
 test('apply modifier', async () => {
-  render(<Browser />);
+  customRender(<Browser />);
   await userEvent.click(screen.getByRole('tab', { name: 'CMS' }));
   await userEvent.dblClick(screen.getByRole('row', { name: 'Emails FOLDER' }));
   expect(window.alert).toBeCalledWith(`Browser 'CMS' apply: <%= ivy.co('Emails') %>`);
 });
 
 test('info provider', async () => {
-  render(<Browser />);
+  customRender(<Browser />);
   await userEvent.click(screen.getByRole('button', { name: 'Info' }));
   expect(screen.getByRole('region')).toHaveTextContent('Teamleader');
 
@@ -51,7 +51,7 @@ test('info provider', async () => {
 });
 
 test('info provider - more data', async () => {
-  render(<Browser />);
+  customRender(<Browser />);
   await userEvent.click(screen.getByRole('tab', { name: 'CMS' }));
   await userEvent.click(screen.getByRole('button', { name: 'Info' }));
   await userEvent.click(screen.getAllByRole('button', { name: 'Expand row' })[0]);
@@ -60,7 +60,7 @@ test('info provider - more data', async () => {
 });
 
 test('info provider - lazy loaded', async () => {
-  render(<Browser />);
+  customRender(<Browser />);
   await userEvent.click(screen.getByRole('tab', { name: 'Functions' }));
   await userEvent.click(screen.getByRole('button', { name: 'Info' }));
   await userEvent.click(screen.getByRole('row', { name: 'wf IWorkflowContext' }));
@@ -69,7 +69,7 @@ test('info provider - lazy loaded', async () => {
 });
 
 test('header', async () => {
-  render(<Browser />);
+  customRender(<Browser />);
   expect(screen.getAllByRole('checkbox')[0]).toHaveAccessibleName('You can also render a checkbox here');
   await userEvent.click(screen.getByRole('tab', { name: 'Attribute' }));
   expect(screen.queryByRole('checkbox')).not.toBeInTheDocument();
@@ -77,14 +77,14 @@ test('header', async () => {
 });
 
 test('footer', async () => {
-  render(<Browser />);
+  customRender(<Browser />);
   expect(screen.getAllByRole('checkbox')[1]).toHaveAccessibleName('You can also render a checkbox here');
   await userEvent.click(screen.getByRole('tab', { name: 'Attribute' }));
   expect(screen.queryByRole('checkbox')).not.toBeInTheDocument();
 });
 
 test('filter on different browsers', async () => {
-  render(<Browser />);
+  customRender(<Browser />);
   expect(screen.getAllByRole('row')).toHaveLength(4);
   await userEvent.type(screen.getByRole('textbox'), 'e');
   expect(screen.getAllByRole('row')).toHaveLength(3);
@@ -107,7 +107,7 @@ test('filter on different browsers', async () => {
 });
 
 test('dialog', async () => {
-  render(<Dialog />);
+  customRender(<Dialog />);
   expect(screen.getByRole('textbox')).toHaveValue('');
   await userEvent.click(screen.getByRole('button', { name: 'Browser' }));
   await userEvent.click(screen.getAllByRole('row')[2]);
@@ -116,7 +116,7 @@ test('dialog', async () => {
 });
 
 test('dialog with initial search', async () => {
-  render(<Dialog />);
+  customRender(<Dialog />);
   await userEvent.type(screen.getByRole('textbox'), 'team');
   await userEvent.click(screen.getByRole('button', { name: 'Browser' }));
   expect(screen.getAllByRole('row')).toHaveLength(2);
@@ -126,7 +126,7 @@ test('dialog with initial search', async () => {
 });
 
 test('dialog title', async () => {
-  render(<TitleDialog />);
+  customRender(<TitleDialog />);
   await userEvent.click(screen.getByRole('button', { name: 'Browser' }));
   expect(screen.getByRole('dialog')).toBeInTheDocument();
   expect(screen.getByRole('heading', { level: 2 })).toHaveTextContent('Choose a browser...');

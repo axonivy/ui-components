@@ -1,5 +1,5 @@
 import { composeStory } from '@storybook/react';
-import { render, screen, userEvent } from 'test-utils';
+import { customRender, screen, userEvent } from 'test-utils';
 import Meta, { Default, State, Controls } from './accordion.stories';
 
 const Accordion = composeStory(Default, Meta);
@@ -8,7 +8,7 @@ const ControlAccordion = composeStory(Controls, Meta);
 
 test('open', async () => {
   userEvent.setup();
-  render(<Accordion />);
+  customRender(<Accordion />);
   const items = screen.getAllByRole('button');
   expect(items).toHaveLength(3);
   expect(items.at(0)).toHaveAttribute('data-state', 'closed');
@@ -26,7 +26,7 @@ test('open', async () => {
 
 test('keyboard', async () => {
   userEvent.setup();
-  render(<Accordion />);
+  customRender(<Accordion />);
   const items = screen.getAllByRole('button');
   expect(screen.queryByRole('region')).not.toBeInTheDocument();
 
@@ -46,7 +46,7 @@ test('keyboard', async () => {
 
 test('state', async () => {
   userEvent.setup();
-  render(<StateAccordion />);
+  customRender(<StateAccordion />);
   const states = screen.getAllByRole('status');
   expect(states).toHaveLength(3);
   expect(states.at(0)).toHaveAttribute('data-state', 'configured');
@@ -55,7 +55,7 @@ test('state', async () => {
 });
 
 test('control', async () => {
-  render(<ControlAccordion />);
+  customRender(<ControlAccordion />);
   expect(screen.getByRole('button', { name: 'Reset' })).toBeVisible();
   expect(screen.getByRole('button', { name: 'With control' })).toBeVisible();
 });
