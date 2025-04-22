@@ -15,13 +15,13 @@ pipeline {
         script {
           catchError(buildResult: 'UNSTABLE', stageResult: 'UNSTABLE') {
             docker.build('node', '-f build/Dockerfile.node .').inside {
-              sh 'npm run ci && npm run build:storybook --workspace=@axonivy/ui-components'
+              sh 'npm run ci && npm run build:storybook'
             }
           }
           archiveArtifacts artifacts: 'packages/**/src-gen/**', allowEmptyArchive: true
-          archiveArtifacts artifacts: 'packages/**/storybook-static/**', allowEmptyArchive: true
+          archiveArtifacts artifacts: 'storybook-static/**', allowEmptyArchive: true
           currentBuild.description = "<a href=${BUILD_URL}artifact/packages/icons/src-gen/ivy-icons.html>&raquo; Icons</a><br>" + 
-            "<a href=${BUILD_URL}artifact/packages/components/storybook-static/index.html>&raquo; Components</a>"
+            "<a href=${BUILD_URL}artifact/storybook-static/index.html>&raquo; Components</a>"
 
           withChecks('ESLint') {
             recordIssues enabledForFailure: true, publishAllIssues: true, aggregatingResults: true, tools: [esLint(pattern: 'eslint.xml', skipSymbolicLinks: true)], qualityGates: [[threshold: 1, type: 'TOTAL', unstable: true]]
