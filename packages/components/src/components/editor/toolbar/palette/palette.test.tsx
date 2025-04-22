@@ -39,6 +39,11 @@ test('custom', async () => {
   expect(screen.getAllByRole('button')).toHaveLength(8);
   expect(screen.getAllByRole('button')[0]).toHaveAccessibleName('Input');
   expect(screen.getAllByRole('button')[0]).toHaveAttribute('draggable', 'true');
+
+  await userEvent.type(screen.getByRole('textbox'), 'custom');
+  expect(screen.getAllByRole('heading')).toHaveLength(1);
+  expect(screen.getAllByRole('button')).toHaveLength(2);
+  expect(screen.getAllByRole('button')[1]).toHaveAccessibleName('Textarea');
 });
 
 test('popover', async () => {

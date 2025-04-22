@@ -28,6 +28,7 @@ export type PaletteConfig<TItem extends PaletteItemConfig = PaletteItemConfig> =
   sections: Record<string, Array<TItem>>;
   options?: {
     searchPlaceholder?: string;
+    searchFilter?: (item: TItem, searchTerm: string) => boolean;
   };
 };
 
@@ -37,11 +38,13 @@ export type PaletteProps<TItem extends PaletteItemConfig = PaletteItemConfig> = 
 
 const Palette = <TItem extends PaletteItemConfig>({ sections, children, options }: PaletteProps<TItem>) => {
   const [searchTerm, setSearchTerm] = React.useState('');
+  const searchFilter =
+    options?.searchFilter ?? ((item: TItem, searchTerm: string) => item.name.toLowerCase().includes(searchTerm.toLowerCase()));
   return (
     <Flex direction='column' className={cn(palette, 'ui-palette')} gap={3}>
       <SearchInput placeholder={options?.searchPlaceholder ?? 'Search'} value={searchTerm} onChange={setSearchTerm} />
       {Object.entries(sections).map(([section, sectionItems]) => {
-        const filteredItems = sectionItems.filter(item => item.name.toLowerCase().includes(searchTerm.toLowerCase()));
+        const filteredItems = sectionItems.filter(item => searchFilter(item, searchTerm));
         if (filteredItems.length > 0) {
           return children(section, filteredItems);
         }
