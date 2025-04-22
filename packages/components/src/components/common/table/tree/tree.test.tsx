@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { composeStory } from '@storybook/react';
-import { render, screen, userEvent } from 'test-utils';
+import { customRender, screen, userEvent } from 'test-utils';
 import Meta, { Default, CustomValue, Lazy, Search } from './tree.stories';
 
 const Tree = composeStory(Default, Meta);
@@ -9,7 +9,7 @@ const LazyTree = composeStory(Lazy, Meta);
 const SearchTree = composeStory(Search, Meta);
 
 test('tree', async () => {
-  render(<Tree />);
+  customRender(<Tree />);
   expect(screen.getAllByRole('row')).toHaveLength(7);
   await userEvent.click(screen.getAllByRole('button', { name: 'Collapse row' })[0]);
   expect(screen.getAllByRole('row')).toHaveLength(3);
@@ -18,12 +18,12 @@ test('tree', async () => {
 });
 
 test('custom', async () => {
-  render(<CustomTree />);
+  customRender(<CustomTree />);
   expect(screen.getAllByRole('row')[1]).toHaveTextContent('rootScalarMore infovalue');
 });
 
 test('lazy', async () => {
-  render(<LazyTree />);
+  customRender(<LazyTree />);
   expect(screen.getAllByRole('row')).toHaveLength(8);
   await userEvent.click(screen.getAllByRole('button', { name: 'Expand row' }).at(-1)!);
   expect(screen.getAllByRole('row')).toHaveLength(9);
@@ -36,7 +36,7 @@ test('lazy', async () => {
 });
 
 test('search', async () => {
-  render(<SearchTree />);
+  customRender(<SearchTree />);
   expect(screen.getAllByRole('row')).toHaveLength(7);
   const search = screen.getByRole('textbox');
   await userEvent.type(search, 'user');

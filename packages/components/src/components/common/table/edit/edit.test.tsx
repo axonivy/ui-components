@@ -1,11 +1,11 @@
 import { composeStory } from '@storybook/react';
-import { render, screen, userEvent } from 'test-utils';
+import { customRender, screen, userEvent } from 'test-utils';
 import Meta, { Default } from './edit.stories';
 
 const Table = composeStory(Default, Meta);
 
 test('select', async () => {
-  render(<Table />);
+  customRender(<Table />);
   const select = screen.getAllByRole('combobox')[0];
   expect(select).toHaveTextContent('Success');
 
@@ -19,7 +19,7 @@ test('select', async () => {
 });
 
 test('input', async () => {
-  render(<Table />);
+  customRender(<Table />);
   const input = screen.getAllByRole('textbox')[0];
   expect(input).toHaveValue('ken99@yahoo.com');
 
@@ -31,7 +31,7 @@ test('input', async () => {
 });
 
 test('combobox', async () => {
-  render(<Table />);
+  customRender(<Table />);
   const combobox = screen.getAllByRole('combobox')[1];
   expect(combobox).toHaveValue('316');
 
@@ -45,7 +45,7 @@ test('combobox', async () => {
 });
 
 const setupTable = async () => {
-  render(<Table />);
+  customRender(<Table />);
   const rows = screen.getAllByRole('row');
   const user = userEvent.setup();
   expect(rows[1]).toHaveAttribute('data-state', 'unselected');

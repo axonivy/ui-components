@@ -30,7 +30,7 @@ const simpleConditionString = (conditionMode: ConditionMode, conditionGroups: Co
   return groupStrings.join('');
 };
 
-const renderConditionBuilderHook = (onChange: (change: string) => void = () => {}) =>
+const customRenderConditionBuilderHook = (onChange: (change: string) => void = () => {}) =>
   renderHook(() => useConditionContext(), {
     wrapper: props => (
       <ConditionBuilder
@@ -45,7 +45,7 @@ const renderConditionBuilderHook = (onChange: (change: string) => void = () => {
 
 describe('ConditionBuilderContext', () => {
   test('initialize with one condition group', () => {
-    const { result } = renderConditionBuilderHook();
+    const { result } = customRenderConditionBuilderHook();
 
     expect(result.current.conditionGroups.length).toBe(1);
     expect(result.current.conditionGroups[0].conditions.length).toBe(1);
@@ -53,14 +53,14 @@ describe('ConditionBuilderContext', () => {
   });
 
   test('add condition group', () => {
-    const { result } = renderConditionBuilderHook();
+    const { result } = customRenderConditionBuilderHook();
 
     act(() => result.current.addConditionGroup());
     expect(result.current.conditionGroups.length).toBe(2);
   });
 
   test('remove condition group', () => {
-    const { result } = renderConditionBuilderHook();
+    const { result } = customRenderConditionBuilderHook();
 
     act(() => result.current.addConditionGroup());
     expect(result.current.conditionGroups.length).toBe(2);
@@ -70,14 +70,14 @@ describe('ConditionBuilderContext', () => {
   });
 
   test('add condition to a group', () => {
-    const { result } = renderConditionBuilderHook();
+    const { result } = customRenderConditionBuilderHook();
 
     act(() => result.current.addCondition(0));
     expect(result.current.conditionGroups[0].conditions.length).toBe(2);
   });
 
   test('remove condition from group', () => {
-    const { result } = renderConditionBuilderHook();
+    const { result } = customRenderConditionBuilderHook();
 
     act(() => result.current.addCondition(0));
     expect(result.current.conditionGroups[0].conditions.length).toBe(2);
@@ -87,14 +87,14 @@ describe('ConditionBuilderContext', () => {
   });
 
   test('update condition in group', () => {
-    const { result } = renderConditionBuilderHook();
+    const { result } = customRenderConditionBuilderHook();
 
     act(() => result.current.updateCondition(0, 0, 'argument1', 'testArg'));
     expect(result.current.conditionGroups[0].conditions[0].argument1).toBe('testArg');
   });
 
   test('update logical operator of group', () => {
-    const { result } = renderConditionBuilderHook();
+    const { result } = customRenderConditionBuilderHook();
 
     act(() => result.current.updateLogicalOperator(0, 'or'));
     expect(result.current.conditionGroups[0].logicalOperator).toBe('or');
@@ -102,7 +102,7 @@ describe('ConditionBuilderContext', () => {
 
   test('generate correct condition string', () => {
     let condition = '';
-    const { result } = renderConditionBuilderHook(change => (condition = change));
+    const { result } = customRenderConditionBuilderHook(change => (condition = change));
 
     act(() => {
       result.current.updateCondition(0, 0, 'argument1', 'data.value');
@@ -114,7 +114,7 @@ describe('ConditionBuilderContext', () => {
   });
 
   test('toggle condition group enabled state', () => {
-    const { result } = renderConditionBuilderHook();
+    const { result } = customRenderConditionBuilderHook();
 
     act(() => result.current.setConditionMode('nested-condition'));
     expect(result.current.conditionMode).toBe('nested-condition');

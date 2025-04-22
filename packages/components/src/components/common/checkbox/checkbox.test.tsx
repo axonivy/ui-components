@@ -1,11 +1,11 @@
 import { composeStory } from '@storybook/react';
-import { render, screen, userEvent } from 'test-utils';
+import { customRender, screen, userEvent } from 'test-utils';
 import Meta, { Default } from './checkbox.stories';
 
 const Checkbox = composeStory(Default, Meta);
 
 test('toggled by box', async () => {
-  render(<Checkbox />);
+  customRender(<Checkbox />);
   const checkbox = screen.getByRole('checkbox');
   expect(checkbox).not.toBeChecked();
 
@@ -17,7 +17,7 @@ test('toggled by box', async () => {
 });
 
 test('toggled by label', async () => {
-  render(<Checkbox label='test checkbox' />);
+  customRender(<Checkbox label='test checkbox' />);
   const label = screen.getByLabelText('test checkbox');
   const checkbox = screen.getByRole('checkbox');
   expect(checkbox).not.toBeChecked();
@@ -27,7 +27,7 @@ test('toggled by label', async () => {
 });
 
 test('toggled with keyboard', async () => {
-  render(<Checkbox />);
+  customRender(<Checkbox />);
   const checkbox = screen.getByRole('checkbox');
   await userEvent.tab();
   expect(checkbox).toHaveFocus();
@@ -41,11 +41,11 @@ test('toggled with keyboard', async () => {
 });
 
 test('readonly mode', () => {
-  render(<Checkbox label='test checkbox' onChange={() => {}} />, { wrapperProps: { readonly: true } });
+  customRender(<Checkbox label='test checkbox' onChange={() => {}} />, { wrapperProps: { readonly: true } });
   expect(screen.getByRole('checkbox')).toBeDisabled();
 });
 
 test('disabled mode', () => {
-  render(<Checkbox label='test checkbox' checked={true} disabled={true} />);
+  customRender(<Checkbox label='test checkbox' checked={true} disabled={true} />);
   expect(screen.getByRole('checkbox')).toBeDisabled();
 });

@@ -1,11 +1,11 @@
 import { composeStory } from '@storybook/react';
-import { render, screen, userEvent } from 'test-utils';
+import { customRender, screen, userEvent } from 'test-utils';
 import Meta, { Default } from './tabs.stories';
 
 const Tabs = composeStory(Default, Meta);
 
 test('toggle', async () => {
-  render(<Tabs />);
+  customRender(<Tabs />);
   expect(screen.getByRole('tabpanel')).toHaveTextContent('Attribute list');
   const func = screen.getByRole('tab', { name: /Function/ });
   await userEvent.click(func);
@@ -17,7 +17,7 @@ test('toggle', async () => {
 });
 
 test('toggled with keyboard', async () => {
-  render(<Tabs />);
+  customRender(<Tabs />);
 
   const attr = screen.getByRole('tab', { name: /Attribute/ });
   const func = screen.getByRole('tab', { name: /Function/ });

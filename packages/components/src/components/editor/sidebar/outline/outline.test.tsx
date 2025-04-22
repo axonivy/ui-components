@@ -1,5 +1,5 @@
 import { composeStory } from '@storybook/react';
-import { render, screen, userEvent } from 'test-utils';
+import { customRender, screen, userEvent } from 'test-utils';
 import Meta, { Default } from './outline.stories';
 
 const Outline = composeStory(Default, Meta);
@@ -7,7 +7,7 @@ const Outline = composeStory(Default, Meta);
 test('click', async () => {
   let selection = undefined;
   let dblClick = false;
-  render(<Outline onClick={id => (selection = id)} onDoubleClick={() => (dblClick = true)} />);
+  customRender(<Outline onClick={id => (selection = id)} onDoubleClick={() => (dblClick = true)} />);
   await userEvent.click(screen.getByRole('row', { name: 'One Columns Container' }));
   expect(screen.getByRole('row', { name: 'One Columns Container' })).toHaveAttribute('data-state', 'selected');
   expect(selection).toBe('9');
@@ -20,7 +20,7 @@ test('click', async () => {
 });
 
 test('filter', async () => {
-  render(<Outline />);
+  customRender(<Outline />);
   expect(screen.getAllByRole('row')).toHaveLength(19);
 
   await userEvent.type(screen.getByRole('textbox'), 'First Name');
@@ -32,7 +32,7 @@ test('filter', async () => {
 });
 
 test('selection', async () => {
-  const view = render(<Outline selection='4' />);
+  const view = customRender(<Outline selection='4' />);
   expect(screen.getAllByRole('row')[3]).toHaveAttribute('data-state', 'selected');
 
   view.rerender(<Outline selection='5' />);

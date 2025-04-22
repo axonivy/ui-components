@@ -1,5 +1,5 @@
 import { composeStory } from '@storybook/react';
-import { render, screen, userEvent } from 'test-utils';
+import { customRender, screen, userEvent } from 'test-utils';
 import Meta, { Default, WithLabel, Search, Password } from './input.stories';
 
 const Input = composeStory(Default, Meta);
@@ -8,7 +8,7 @@ const SearchInput = composeStory(Search, Meta);
 const PasswordInput = composeStory(Password, Meta);
 
 test('by label', async () => {
-  render(<LabelInput />);
+  customRender(<LabelInput />);
   const label = screen.getByLabelText('Name');
   const input = screen.getByRole('textbox');
   expect(input).not.toHaveFocus();
@@ -18,17 +18,17 @@ test('by label', async () => {
 });
 
 test('readonly mode', () => {
-  render(<Input />, { wrapperProps: { readonly: true } });
+  customRender(<Input />, { wrapperProps: { readonly: true } });
   expect(screen.getByRole('textbox')).toBeDisabled();
 });
 
 test('disabled mode', () => {
-  render(<Input disabled={true} />);
+  customRender(<Input disabled={true} />);
   expect(screen.getByRole('textbox')).toBeDisabled();
 });
 
 test('search', async () => {
-  render(<SearchInput />);
+  customRender(<SearchInput />);
   const input = screen.getByRole('textbox');
   expect(screen.queryByRole('button', { name: 'Clean' })).not.toBeInTheDocument();
   expect(input).toHaveAttribute('placeholder', 'Search...');
@@ -43,12 +43,12 @@ test('search', async () => {
 });
 
 test('search readonly', async () => {
-  render(<SearchInput />, { wrapperProps: { readonly: true } });
+  customRender(<SearchInput />, { wrapperProps: { readonly: true } });
   expect(screen.getByRole('textbox')).not.toBeDisabled();
 });
 
 test('password', async () => {
-  render(<PasswordInput />);
+  customRender(<PasswordInput />);
   const input = screen.getByLabelText('Password');
   expect(input).toHaveAttribute('type', 'password');
   await userEvent.click(screen.getByRole('button', { name: 'Show password' }));

@@ -1,5 +1,5 @@
 import { composeStory } from '@storybook/react';
-import { render, screen } from 'test-utils';
+import { customRender, screen } from 'test-utils';
 import Meta, { BadgeArea, Default } from './inputBadge.stories';
 import { inputBadge, inputBadgeText } from './inputBadge.css';
 
@@ -7,7 +7,7 @@ const InputBadge = composeStory(Default, Meta);
 const InputBadgeArea = composeStory(BadgeArea, Meta);
 
 test('InputBadge', () => {
-  render(<InputBadge />);
+  customRender(<InputBadge />);
   expect(screen.getByText('<%= ivy.log.info() %>')).toHaveClass(inputBadge);
   expect(screen.getByText('demoData')).toHaveClass(inputBadge);
   expect(screen.getByText('logic.demoLogic')).toHaveClass(inputBadge);
@@ -19,7 +19,7 @@ test('InputBadge', () => {
 });
 
 test('InputBadgeArea', () => {
-  render(<InputBadgeArea />);
+  customRender(<InputBadgeArea />);
   expect(screen.getByText('<%= ivy.log.info() %>')).toHaveClass(inputBadge);
   expect(screen.getByText('demoData')).toHaveClass(inputBadge);
   expect(screen.getByText('logic.demoLogic')).toHaveClass(inputBadge);

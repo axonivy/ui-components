@@ -31,6 +31,6 @@ const customRenderHook = <
 
 export * from '@testing-library/react';
 export { default as userEvent } from '@testing-library/user-event';
-export { customRender as render };
-export { customRenderHook as renderHook };
+export { customRender };
+export { customRenderHook };
 export * from './type-utils';

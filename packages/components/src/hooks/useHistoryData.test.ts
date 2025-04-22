@@ -12,7 +12,7 @@ afterEach(() => {
 });
 
 test('undo', () => {
-  const view = renderHistoryHook(0);
+  const view = customRenderHistoryHook(0);
   pushHistory(view, 1);
   pushHistory(view, 2);
   pushHistory(view, 3);
@@ -35,7 +35,7 @@ test('undo', () => {
 });
 
 test('redo', () => {
-  const view = renderHistoryHook('');
+  const view = customRenderHistoryHook('');
   pushHistory(view, 'hi');
   pushHistory(view, 'hello');
   pushHistory(view, 'bye');
@@ -62,7 +62,7 @@ test('redo', () => {
 });
 
 test('undo and redo with new push', () => {
-  const view = renderHistoryHook({});
+  const view = customRenderHistoryHook({});
   const history1 = { a: 1 };
   const history2 = { b: 2 };
   const history3 = { c: 3 };
@@ -100,7 +100,7 @@ test('undo and redo with new push', () => {
 });
 
 test('max history', () => {
-  const view = renderHistoryHook(0, { maxHistory: 2 });
+  const view = customRenderHistoryHook(0, { maxHistory: 2 });
   pushHistory(view, 1);
   pushHistory(view, 2);
   pushHistory(view, 3);
@@ -117,7 +117,7 @@ test('logger', () => {
   const logger = vi.fn();
   expect(logger).toBeCalledTimes(0);
 
-  const view = renderHistoryHook(0, { logger });
+  const view = customRenderHistoryHook(0, { logger });
   expect(logger).toBeCalledTimes(1);
   expect(logger).toHaveBeenLastCalledWith('Index: 0 -> history: 0');
 
@@ -134,7 +134,7 @@ test('logger', () => {
   expect(logger).toHaveBeenLastCalledWith('Index: 1 -> history: 0,1');
 });
 
-const renderHistoryHook = <T>(init: T, options?: HistoryOptions) => {
+const customRenderHistoryHook = <T>(init: T, options?: HistoryOptions) => {
   const view = renderHook(() => useHistoryData<T>(options));
   act(() => view.result.current.push(init));
   view.rerender();
@@ -143,21 +143,21 @@ const renderHistoryHook = <T>(init: T, options?: HistoryOptions) => {
   return view;
 };
 
-const pushHistory = <T, U extends T>(view: ReturnType<typeof renderHistoryHook<T>>, data: U) => {
+const pushHistory = <T, U extends T>(view: ReturnType<typeof customRenderHistoryHook<T>>, data: U) => {
   act(() => view.result.current.push(data));
   view.rerender();
   expect(view.result.current.canUndo).toBeTruthy();
   expect(view.result.current.canRedo).toBeFalsy();
 };
 
-const undo = <T>(view: ReturnType<typeof renderHistoryHook<T>>, canUndo: boolean, canRedo: boolean) => {
+const undo = <T>(view: ReturnType<typeof customRenderHistoryHook<T>>, canUndo: boolean, canRedo: boolean) => {
   act(() => view.result.current.undo(updater));
   view.rerender();
   expect(view.result.current.canUndo).toEqual(canUndo);
   expect(view.result.current.canRedo).toEqual(canRedo);
 };
 
-const redo = <T>(view: ReturnType<typeof renderHistoryHook<T>>, canUndo: boolean, canRedo: boolean) => {
+const redo = <T>(view: ReturnType<typeof customRenderHistoryHook<T>>, canUndo: boolean, canRedo: boolean) => {
   act(() => view.result.current.redo(updater));
   view.rerender();
   expect(view.result.current.canUndo).toEqual(canUndo);
