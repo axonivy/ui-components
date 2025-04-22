@@ -1,5 +1,5 @@
 import { composeStory } from '@storybook/react';
-import { act, render, screen, userEvent } from 'test-utils';
+import { act, customRender, screen, userEvent } from 'test-utils';
 import Meta, { Default, UnknownValue, EmptyValue } from './select.stories';
 
 const Select = composeStory(Default, Meta);
@@ -7,7 +7,7 @@ const UnknownSelect = composeStory(UnknownValue, Meta);
 const EmptySelect = composeStory(EmptyValue, Meta);
 
 test('select', async () => {
-  render(<Select />);
+  customRender(<Select />);
   const input = screen.getByRole('combobox');
   expect(input).toHaveTextContent('Select a fruit');
   expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
@@ -22,7 +22,7 @@ test('select', async () => {
 });
 
 test('select can be handled with keyboard', async () => {
-  render(<Select />);
+  customRender(<Select />);
   const select = screen.getByRole('combobox');
   await userEvent.keyboard('[Tab]');
   expect(select).toHaveFocus();
@@ -51,7 +51,7 @@ test('select can be handled with keyboard', async () => {
 });
 
 test('unknown value', async () => {
-  render(<UnknownSelect />);
+  customRender(<UnknownSelect />);
   const input = screen.getByRole('combobox');
   expect(input).toHaveTextContent('grapes');
 
@@ -60,7 +60,7 @@ test('unknown value', async () => {
 });
 
 test('unknown value', async () => {
-  render(<EmptySelect />);
+  customRender(<EmptySelect />);
   const input = screen.getByRole('combobox');
   expect(input).toHaveTextContent('Placeholder');
 
@@ -76,11 +76,11 @@ test('unknown value', async () => {
 });
 
 test('readonly mode', () => {
-  render(<Select />, { wrapperProps: { readonly: true } });
+  customRender(<Select />, { wrapperProps: { readonly: true } });
   expect(screen.getByRole('combobox')).toBeDisabled();
 });
 
 test('disabled mode', () => {
-  render(<Select disabled={true} />);
+  customRender(<Select disabled={true} />);
   expect(screen.getByRole('combobox')).toBeDisabled();
 });

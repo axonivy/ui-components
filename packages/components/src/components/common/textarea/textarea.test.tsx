@@ -1,12 +1,12 @@
 import { composeStory } from '@storybook/react';
-import { act, render, screen, userEvent } from 'test-utils';
+import { act, customRender, screen, userEvent } from 'test-utils';
 import Meta, { Default, WithFieldset } from './textarea.stories';
 
 const Textarea = composeStory(Default, Meta);
 const LabelTextarea = composeStory(WithFieldset, Meta);
 
 test('by label', async () => {
-  render(<LabelTextarea />);
+  customRender(<LabelTextarea />);
   const label = screen.getByLabelText('Name');
   const input = screen.getByRole('textbox');
   expect(input).not.toHaveFocus();
@@ -17,23 +17,23 @@ test('by label', async () => {
 });
 
 test('readonly mode', () => {
-  render(<Textarea />, { wrapperProps: { readonly: true } });
+  customRender(<Textarea />, { wrapperProps: { readonly: true } });
   expect(screen.getByRole('textbox')).toBeDisabled();
 });
 
 test('disabled mode', () => {
-  render(<Textarea disabled={true} />);
+  customRender(<Textarea disabled={true} />);
   expect(screen.getByRole('textbox')).toBeDisabled();
 });
 
 test('auto resize off', async () => {
-  render(<Textarea />);
+  customRender(<Textarea />);
   const input = screen.getByRole('textbox');
   expect(input).not.toHaveAttribute('style');
 });
 
 test('auto resize on', async () => {
-  render(<Textarea autoResize={true} />);
+  customRender(<Textarea autoResize={true} />);
   const input = screen.getByRole('textbox');
   expect(input).toHaveAttribute('style', 'height: 14px;');
 

@@ -1,11 +1,11 @@
 import { composeStory } from '@storybook/react';
-import { act, render, screen, userEvent } from 'test-utils';
+import { act, customRender, screen, userEvent } from 'test-utils';
 import Meta, { AddRemove } from './footer.stories';
 
 const Table = composeStory(AddRemove, Meta);
 
 test('add', async () => {
-  render(<Table />);
+  customRender(<Table />);
   expect(screen.getAllByRole('row')).toHaveLength(9);
   expect(screen.queryByRole('button', { name: 'Remove row' })).not.toBeInTheDocument();
 
@@ -14,7 +14,7 @@ test('add', async () => {
 });
 
 test('remove', async () => {
-  render(<Table />);
+  customRender(<Table />);
   expect(screen.queryByRole('button', { name: 'Remove row' })).not.toBeInTheDocument();
   const row = screen.getAllByRole('row')[2];
   expect(row).toHaveTextContent('Abe45');

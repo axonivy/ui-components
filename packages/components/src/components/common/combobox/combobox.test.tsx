@@ -1,5 +1,5 @@
 import { composeStory } from '@storybook/react';
-import { act, render, screen, userEvent } from 'test-utils';
+import { act, customRender, screen, userEvent } from 'test-utils';
 import Meta, { Default, WithFieldset, WithExtendedItem } from './combobox.stories';
 
 const Combobox = composeStory(Default, Meta);
@@ -7,7 +7,7 @@ const CustomItemCombobox = composeStory(WithExtendedItem, Meta);
 const LabelCombobox = composeStory(WithFieldset, Meta);
 
 test('open / close', async () => {
-  render(<Combobox />);
+  customRender(<Combobox />);
   const input = screen.getByRole('combobox');
   const trigger = screen.getByRole('button', { name: 'toggle menu' });
   expect(input).toHaveAttribute('aria-expanded', 'false');
@@ -24,7 +24,7 @@ test('open / close', async () => {
 });
 
 test('select', async () => {
-  render(<Combobox />);
+  customRender(<Combobox />);
   const input = screen.getByRole('combobox');
   const trigger = screen.getByRole('button', { name: 'toggle menu' });
 
@@ -35,7 +35,7 @@ test('select', async () => {
 });
 
 test('keyboard', async () => {
-  render(<Combobox />);
+  customRender(<Combobox />);
   const input = screen.getByRole('combobox');
   await act(async () => await userEvent.tab());
   expect(input).toHaveFocus();
@@ -52,7 +52,7 @@ test('keyboard', async () => {
 });
 
 test('custom item and filter', async () => {
-  render(<CustomItemCombobox />);
+  customRender(<CustomItemCombobox />);
   const input = screen.getByRole('combobox');
   await act(async () => await userEvent.type(input, 'crazy'));
   expect(screen.getAllByRole('option')).toHaveLength(1);
@@ -63,7 +63,7 @@ test('custom item and filter', async () => {
 
 test('unknown input will not update', async () => {
   let data = 'test';
-  render(<Combobox value={data} onChange={(change: string) => (data = change)} />);
+  customRender(<Combobox value={data} onChange={(change: string) => (data = change)} />);
   const input = screen.getByRole('combobox');
   await act(async () => await userEvent.type(input, '123'));
   expect(input).toHaveValue('123');
@@ -71,17 +71,17 @@ test('unknown input will not update', async () => {
 });
 
 test('readonly mode', () => {
-  render(<Combobox />, { wrapperProps: { readonly: true } });
+  customRender(<Combobox />, { wrapperProps: { readonly: true } });
   expect(screen.getByRole('combobox')).toBeDisabled();
 });
 
 test('disabled mode', () => {
-  render(<Combobox disabled={true} />);
+  customRender(<Combobox disabled={true} />);
   expect(screen.getByRole('combobox')).toBeDisabled();
 });
 
 test('label', async () => {
-  render(<LabelCombobox />);
+  customRender(<LabelCombobox />);
   const input = screen.getByRole('combobox', { name: 'Many entries' });
   expect(input).toBeInTheDocument();
 });
