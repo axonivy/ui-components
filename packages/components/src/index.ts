@@ -46,6 +46,7 @@ export * from './components/editor/condition-builder/useConditionBuilder';
 export * from './components/editor/sidebar/header/header';
 export * from './components/editor/sidebar/outline/outline';
 export * from './components/editor/toolbar/toolbar';
+export * from './components/editor/toolbar/palette/palette';
 
 /* Context */
 export * from './context/useReadonly';
