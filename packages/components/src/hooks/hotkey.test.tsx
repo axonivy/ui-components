@@ -1,6 +1,6 @@
 import { composeStory } from '@storybook/react';
 import Meta, { Default, Global, Scoped } from '../hooks/hotkey.stories';
-import { act, render, screen, userEvent } from 'test-utils';
+import { act, customRender, screen, userEvent } from 'test-utils';
 
 const Hotkey = composeStory(Default, Meta);
 const GlobalHotkey = composeStory(Global, Meta);
@@ -8,7 +8,7 @@ const ScopedHotkey = composeStory(Scoped, Meta);
 
 test('hotkey', async () => {
   userEvent.setup();
-  render(<Hotkey />);
+  customRender(<Hotkey />);
   const text = screen.getByText(/Pressed the/);
   expect(text).toHaveTextContent('0 times');
 
@@ -18,7 +18,7 @@ test('hotkey', async () => {
 
 test('global', async () => {
   userEvent.setup();
-  render(<GlobalHotkey />);
+  customRender(<GlobalHotkey />);
   const text = screen.getByText(/Count:/);
   expect(text).toHaveTextContent('0');
   await act(async () => await userEvent.keyboard('q'));
@@ -31,7 +31,7 @@ test('global', async () => {
 
 test('scoped', async () => {
   userEvent.setup();
-  render(<ScopedHotkey />);
+  customRender(<ScopedHotkey />);
   const text = screen.getByText(/Count:/);
   expect(text).toHaveTextContent('0');
   await act(async () => await userEvent.keyboard('c'));
