@@ -9,6 +9,7 @@ import { Separator } from '@/components/common/separator/separator';
 import { Popover, PopoverArrow, PopoverContent, PopoverTrigger } from '@/components/common/popover/popover';
 import { Label } from '@/components/common/label/label';
 import { Switch } from '@/components/common/switch/switch';
+import { PopoverPalette } from '@/components/editor/toolbar/palette/palette.stories';
 
 const meta: Meta<typeof Toolbar> = {
   title: 'Editor/Toolbar',
@@ -42,6 +43,9 @@ export const Default = ({ sideBarCollapse }: { sideBarCollapse?: () => void }) =
           </Flex>
         </Flex>
       </ToolbarContainer>
+    </Flex>
+    <Flex>
+      <PopoverPalette />
     </Flex>
     <Flex>
       <Popover>
