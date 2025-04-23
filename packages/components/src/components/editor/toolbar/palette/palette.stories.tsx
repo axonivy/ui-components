@@ -54,7 +54,7 @@ const customSections: PaletteConfig<CustomPaletteItemConfig>['sections'] = {
         </svg>
       )
     },
-    { name: 'Textarea', description: 'Textarea', svgIcon: '' },
+    { name: 'Textarea', description: 'This is a custom textarea', svgIcon: '' },
     { name: 'DatePicker', description: 'DatePicker', svgIcon: '' },
     { name: 'Combobox', description: 'Combobox', svgIcon: '' },
     { name: 'DataTable', description: 'DataTable', svgIcon: '' }
@@ -67,7 +67,13 @@ const customSections: PaletteConfig<CustomPaletteItemConfig>['sections'] = {
 };
 
 export const CustomPalette = () => (
-  <Palette sections={customSections} options={{ searchPlaceholder: 'Search and drag an element' }}>
+  <Palette
+    sections={customSections}
+    options={{
+      searchPlaceholder: 'Search for description and drag an element',
+      searchFilter: (item, term) => item.description.toLocaleLowerCase().includes(term.toLocaleLowerCase())
+    }}
+  >
     {(title, items) => (
       <PaletteSection key={title} title={title} items={items}>
         {item => <CustomPaletteItem key={item.name} {...item} />}
