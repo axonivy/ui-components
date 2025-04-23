@@ -100,13 +100,16 @@ PaletteButtonLabel.displayName = 'PaletteButtonLabel';
 type PaletteButtonProps = ButtonProps & {
   label: string;
   icon: IvyIcons;
+  withoutChevron?: boolean;
 };
 
-const PaletteButton = React.forwardRef<HTMLButtonElement, PaletteButtonProps>(({ label, icon, className, ...props }, ref) => (
-  <Button ref={ref} aria-label={label} icon={icon} className={cn('ui-palette-button', paletteButtonButton, className)} {...props}>
-    <IvyIcon icon={IvyIcons.Chevron} rotate={90} />
-  </Button>
-));
+const PaletteButton = React.forwardRef<HTMLButtonElement, PaletteButtonProps>(
+  ({ label, icon, withoutChevron, className, ...props }, ref) => (
+    <Button ref={ref} aria-label={label} icon={icon} className={cn('ui-palette-button', paletteButtonButton, className)} {...props}>
+      {withoutChevron === true ? null : <IvyIcon icon={IvyIcons.Chevron} rotate={90} />}
+    </Button>
+  )
+);
 PaletteButton.displayName = 'PaletteButton';
 
 const BasicPalette = (props: PaletteConfig) => (

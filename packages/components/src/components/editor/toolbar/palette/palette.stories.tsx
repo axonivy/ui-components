@@ -109,7 +109,7 @@ export const PopoverPalette = () => (
     <Popover>
       <PaletteButtonLabel label='Custom Palette'>
         <PopoverTrigger asChild>
-          <PaletteButton label='Custom Palette' icon={IvyIcons.LaneSwimlanes} />
+          <PaletteButton label='Custom Palette' icon={IvyIcons.LaneSwimlanes} withoutChevron={true} />
         </PopoverTrigger>
       </PaletteButtonLabel>
       <PopoverContent sideOffset={7} collisionPadding={10}>
