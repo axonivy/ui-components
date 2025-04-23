@@ -18,6 +18,10 @@
     {
       "name": "package/jsonrpc",
       "path": "./packages/jsonrpc"
+    },
+    {
+      "name": "dev-package/eslint-config",
+      "path": "./dev-packages/eslint-config"
     }
   ],
   "settings": {
