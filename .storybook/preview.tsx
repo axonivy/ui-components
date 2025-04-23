@@ -1,9 +1,9 @@
 import type { Preview } from '@storybook/react';
 import './preview.css';
-import '../src/styles/global.css';
+import '../packages/components/src/styles/global.css';
 import '@axonivy/ui-icons/lib/ivy-icons.css';
 import React from 'react';
-import { ReadonlyProvider } from '../src/context/useReadonly';
+import { ReadonlyProvider } from '../packages/components/src/context/useReadonly';
 
 const preview: Preview = {
   parameters: {
