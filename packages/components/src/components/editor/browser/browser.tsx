@@ -153,7 +153,7 @@ const BrowsersView = ({ browsers, apply, applyBtn }: BrowsersViewProps) => {
   };
   return (
     <Tabs value={tab} onValueChange={setTab} className={cn(fullHeight, overflowHidden)}>
-      <Flex direction='column' gap={1} className={fullHeight}>
+      <Flex direction='column' gap={3} className={fullHeight}>
         <TabsList>
           {browsers.map(browser => (
             <TabsTrigger key={browser.name} value={browser.name}>
@@ -163,7 +163,7 @@ const BrowsersView = ({ browsers, apply, applyBtn }: BrowsersViewProps) => {
           ))}
         </TabsList>
 
-        <Flex direction='column' gap={1} justifyContent='space-between' className={cn(fullHeight, overflowAuto)}>
+        <Flex direction='column' gap={3} justifyContent='space-between' className={cn(fullHeight, overflowAuto)}>
           {browsers.map(({ name, header, footer, emptyMessage, browser }) => (
             <TabsContent key={name} value={name} asChild>
               <Flex direction='column' gap={1} className={cn(fullHeight, overflowAuto)}>
