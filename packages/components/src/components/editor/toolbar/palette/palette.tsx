@@ -7,6 +7,7 @@ import * as React from 'react';
 import {
   palette,
   paletteButton,
+  paletteButtonButton,
   paletteButtonLabel,
   paletteItem,
   paletteItemIcon,
@@ -102,7 +103,7 @@ type PaletteButtonProps = ButtonProps & {
 };
 
 const PaletteButton = React.forwardRef<HTMLButtonElement, PaletteButtonProps>(({ label, icon, className, ...props }, ref) => (
-  <Button ref={ref} aria-label={label} icon={icon} className={cn('ui-palette-button', className)} {...props}>
+  <Button ref={ref} aria-label={label} icon={icon} className={cn('ui-palette-button', paletteButtonButton, className)} {...props}>
     <IvyIcon icon={IvyIcons.Chevron} rotate={90} />
   </Button>
 ));

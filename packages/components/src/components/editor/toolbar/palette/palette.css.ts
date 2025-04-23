@@ -57,12 +57,25 @@ export const paletteItemIvyIcon = style({
   }
 });
 
-export const paletteButtonLabel = style({
-  fontSize: 10,
-  color: vars.color.n900,
-  whiteSpace: 'nowrap'
+export const paletteButton = style({
+  gap: '0.125rem',
+  justifyContent: 'space-evenly'
 });
 
-export const paletteButton = style({
-  gap: '0.125rem'
+export const paletteButtonLabel = style({
+  selectors: {
+    [`${paletteButton} &`]: {
+      fontSize: 10,
+      color: vars.color.n900,
+      whiteSpace: 'nowrap'
+    }
+  }
+});
+
+export const paletteButtonButton = style({
+  selectors: {
+    [`${paletteButton} &`]: {
+      height: 22
+    }
+  }
 });
