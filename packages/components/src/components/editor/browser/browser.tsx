@@ -1,4 +1,15 @@
-import * as React from 'react';
+import { Button } from '@/components/common/button/button';
+import { BasicCollapsible } from '@/components/common/collapsible/collapsible';
+import { Flex } from '@/components/common/flex/flex';
+import { IvyIcon } from '@/components/common/icon/icon';
+import { SearchInput } from '@/components/common/input/input';
+import { useTableExpand, useTableKeyHandler, useTableSelect } from '@/components/common/table/hooks/hooks';
+import { MessageRow, SelectRow } from '@/components/common/table/row/row';
+import { Table, TableBody, TableCell, TableRow } from '@/components/common/table/table';
+import { ExpandableCell } from '@/components/common/table/tree/tree';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/common/tabs/tabs';
+import { cn } from '@/utils/class-name';
+import type { IvyIcons } from '@axonivy/ui-icons';
 import {
   flexRender,
   getCoreRowModel,
@@ -9,19 +20,8 @@ import {
   type Row,
   type RowSelectionState
 } from '@tanstack/react-table';
-import type { IvyIcons } from '@axonivy/ui-icons';
+import * as React from 'react';
 import { fullHeight, info, overflowAuto, overflowHidden } from './browser.css';
-import { ExpandableCell } from '@/components/common/table/tree/tree';
-import { Button } from '@/components/common/button/button';
-import { BasicCollapsible } from '@/components/common/collapsible/collapsible';
-import { Flex } from '@/components/common/flex/flex';
-import { IvyIcon } from '@/components/common/icon/icon';
-import { SearchInput } from '@/components/common/input/input';
-import { useTableExpand, useTableKeyHandler, useTableSelect } from '@/components/common/table/hooks/hooks';
-import { MessageRow, SelectRow } from '@/components/common/table/row/row';
-import { Table, TableBody, TableCell, TableRow } from '@/components/common/table/table';
-import { cn } from '@/utils/class-name';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/common/tabs/tabs';
 
 export type BrowserNode<TData = unknown> = {
   value: string;
@@ -162,14 +162,16 @@ const BrowsersView = ({ browsers, apply, applyBtn, options }: BrowsersViewProps)
   return (
     <Tabs value={tab} onValueChange={setTab} className={cn(fullHeight, overflowHidden)}>
       <Flex direction='column' gap={3} className={fullHeight}>
-        <TabsList>
-          {browsers.map(browser => (
-            <TabsTrigger key={browser.name} value={browser.name}>
-              <IvyIcon icon={browser.icon} />
-              {browser.name}
-            </TabsTrigger>
-          ))}
-        </TabsList>
+        {browsers.length > 1 && (
+          <TabsList>
+            {browsers.map(browser => (
+              <TabsTrigger key={browser.name} value={browser.name}>
+                <IvyIcon icon={browser.icon} />
+                {browser.name}
+              </TabsTrigger>
+            ))}
+          </TabsList>
+        )}
 
         <Flex direction='column' gap={3} justifyContent='space-between' className={cn(fullHeight, overflowAuto)}>
           {browsers.map(({ name, header, footer, emptyMessage, browser }) => (

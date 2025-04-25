@@ -1,17 +1,17 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { BrowsersView, useBrowser } from './browser';
-import { cmsData, funcData, roleData, useAttrBrowser } from './data';
-import { IvyIcons } from '@axonivy/ui-icons';
-import { CmsInfoProvider, FunctionInfoProvider } from './browser-info-provider';
-import { useState } from 'react';
 import { Button } from '@/components/common/button/button';
 import { BasicCheckbox } from '@/components/common/checkbox/checkbox';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/common/dialog/dialog';
-import { InputGroup, Input } from '@/components/common/input/input';
-import { Popover, PopoverArrow, PopoverContent, PopoverTrigger } from '@radix-ui/react-popover';
 import { Flex } from '@/components/common/flex/flex';
+import { Input, InputGroup } from '@/components/common/input/input';
 import { generateConditionString, logicOperators, operators } from '@/components/editor/condition-builder/condition-builder-utils';
 import { useConditionBuilder } from '@/components/editor/condition-builder/useConditionBuilder';
+import { IvyIcons } from '@axonivy/ui-icons';
+import { Popover, PopoverArrow, PopoverContent, PopoverTrigger } from '@radix-ui/react-popover';
+import type { Meta, StoryObj } from '@storybook/react';
+import { useState } from 'react';
+import { BrowsersView, useBrowser } from './browser';
+import { CmsInfoProvider, FunctionInfoProvider } from './browser-info-provider';
+import { cmsData, funcData, roleData, useAttrBrowser } from './data';
 
 const meta: Meta<typeof BrowsersView> = {
   title: 'Editor/BrowsersView',
@@ -196,6 +196,26 @@ export const DialogBrowserWithTitle: Story = {
           />
         </DialogContent>
       </Dialog>
+    );
+  }
+};
+
+export const SingleBrowser: Story = {
+  render: () => {
+    const attrs = useAttrBrowser();
+    return (
+      <BrowsersView
+        browsers={[
+          {
+            name: 'Attribute',
+            icon: IvyIcons.Attribute,
+            browser: attrs
+          }
+        ]}
+        apply={(browserName, result) => {
+          console.log('apply', browserName, result);
+        }}
+      />
     );
   }
 };
