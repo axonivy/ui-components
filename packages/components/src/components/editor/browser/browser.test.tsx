@@ -1,10 +1,11 @@
 import { composeStory } from '@storybook/react';
 import { customRender, screen, userEvent, waitFor } from 'test-utils';
-import Meta, { Default, DialogBrowser, DialogBrowserWithTitle } from './browser.stories';
+import Meta, { Default, DialogBrowser, DialogBrowserWithTitle, SingleBrowser } from './browser.stories';
 
 const Browser = composeStory(Default, Meta);
 const Dialog = composeStory(DialogBrowser, Meta);
 const TitleDialog = composeStory(DialogBrowserWithTitle, Meta);
+const Single = composeStory(SingleBrowser, Meta);
 
 window.alert = vi.fn();
 
@@ -130,4 +131,9 @@ test('dialog title', async () => {
   await userEvent.click(screen.getByRole('button', { name: 'Browser' }));
   expect(screen.getByRole('dialog')).toBeInTheDocument();
   expect(screen.getByRole('heading', { level: 2 })).toHaveTextContent('Choose a browser...');
+});
+
+test('tab of single browser is hidden', async () => {
+  customRender(<Single />);
+  expect(screen.queryByRole('tab')).not.toBeInTheDocument();
 });
