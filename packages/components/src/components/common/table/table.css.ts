@@ -17,6 +17,7 @@ export const table = style({
   tableLayout: 'fixed',
   borderCollapse: 'collapse',
   fontSize: '12px',
+  cursor: 'default',
   ':focus-visible': {
     outline: 'none',
     border: vars.border.active
