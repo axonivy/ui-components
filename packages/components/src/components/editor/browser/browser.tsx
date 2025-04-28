@@ -26,7 +26,7 @@ import { fullHeight, info, overflowAuto, overflowHidden } from './browser.css';
 export type BrowserNode<TData = unknown> = {
   value: string;
   info: string;
-  icon: IvyIcons;
+  icon?: IvyIcons;
   children: Array<BrowserNode<TData>>;
   data?: TData;
   notSelectable?: boolean;
