@@ -87,7 +87,7 @@ test('footer', async () => {
 test('filter on different browsers', async () => {
   customRender(<Browser />);
   expect(screen.getAllByRole('row')).toHaveLength(4);
-  await userEvent.type(screen.getByRole('textbox'), 'e');
+  await userEvent.type(screen.getByRole('textbox'), 'team');
   expect(screen.getAllByRole('row')).toHaveLength(3);
 
   await userEvent.click(screen.getByRole('tab', { name: 'Attribute' }));
@@ -99,7 +99,7 @@ test('filter on different browsers', async () => {
   expect(screen.getAllByRole('row')[0]).toHaveTextContent('No attributes found');
 
   await userEvent.click(screen.getByRole('tab', { name: 'Roles' }));
-  expect(screen.getByRole('textbox')).toHaveValue('e');
+  expect(screen.getByRole('textbox')).toHaveValue('team');
   expect(screen.getAllByRole('row')).toHaveLength(3);
 
   await userEvent.type(screen.getByRole('textbox'), 'asdf');
@@ -120,9 +120,9 @@ test('dialog with initial search', async () => {
   customRender(<Dialog />);
   await userEvent.type(screen.getByRole('textbox'), 'team');
   await userEvent.click(screen.getByRole('button', { name: 'Browser' }));
-  expect(screen.getAllByRole('row')).toHaveLength(2);
+  expect(screen.getAllByRole('row')).toHaveLength(3);
 
-  await userEvent.dblClick(screen.getAllByRole('row')[1]);
+  await userEvent.dblClick(screen.getAllByRole('row')[2]);
   expect(screen.getByRole('textbox')).toHaveValue('Teamleader');
 });
 
