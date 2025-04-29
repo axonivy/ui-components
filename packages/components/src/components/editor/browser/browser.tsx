@@ -63,6 +63,11 @@ export const useBrowser = (
   ];
 
   const [filter, setFilter] = React.useState(options?.initialSearch ?? '');
+  const globalFilterFn = (row: Row<BrowserNode>, _columnId: string, filterValue: string) => {
+    filterValue = filterValue.toLowerCase();
+    return row.original.value.toLowerCase().includes(filterValue) || row.original.info.toLowerCase().includes(filterValue);
+  };
+
   const expanded = useTableExpand<BrowserNode>(options?.expandedState ? options.expandedState : { '0': true });
   const select = useTableSelect<BrowserNode>({ initialSelecteState: options?.initialSelecteState });
   const table = useReactTable({
@@ -72,6 +77,7 @@ export const useBrowser = (
     columns,
     getCoreRowModel: getCoreRowModel(),
     onGlobalFilterChange: setFilter,
+    globalFilterFn,
     getFilteredRowModel: getFilteredRowModel(),
     filterFromLeafRows: true,
     state: {
