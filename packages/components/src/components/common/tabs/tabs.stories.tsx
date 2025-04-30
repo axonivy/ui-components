@@ -8,10 +8,12 @@ const meta: Meta<typeof Tabs> = {
   title: 'Common/Tabs',
   component: Tabs,
   argTypes: {
-    orientation: { type: 'string', control: 'select', options: ['horizontal', 'vertical'] }
+    orientation: { type: 'string', control: 'select', options: ['horizontal', 'vertical'] },
+    variant: { type: 'string', control: 'select', options: ['slim', undefined] }
   },
   args: {
-    orientation: 'horizontal'
+    orientation: 'horizontal',
+    variant: undefined
   }
 };
 
