@@ -18,14 +18,17 @@ export type ResizableHandleProps = React.ComponentProps<typeof ResizablePrimitiv
   withHandle?: boolean;
 };
 
-const ResizableHandle = ({ withHandle, className, ...props }: ResizableHandleProps) => (
-  <ResizablePrimitive.PanelResizeHandle className={cn(resizableLine, className, 'ui-resizable-handle')} {...props}>
-    {withHandle && (
-      <div className={resizableHandle}>
-        <IvyIcon icon={IvyIcons.EditDots} />
-      </div>
-    )}
-  </ResizablePrimitive.PanelResizeHandle>
+const ResizableHandle = ({ withHandle, children, className, ...props }: ResizableHandleProps) => (
+  <>
+    <ResizablePrimitive.PanelResizeHandle className={cn(resizableLine, className, 'ui-resizable-handle')} {...props}>
+      {withHandle && (
+        <div className={resizableHandle}>
+          <IvyIcon icon={IvyIcons.EditDots} />
+        </div>
+      )}
+    </ResizablePrimitive.PanelResizeHandle>
+    {children}
+  </>
 );
 
 export type ImperativePanelHandle = ResizablePrimitive.ImperativePanelHandle;
