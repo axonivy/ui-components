@@ -5,8 +5,9 @@ import { style } from '@vanilla-extract/css';
 export const content = style({
   border: vars.border.basic,
   borderRadius: vars.border.r2,
-  maxWidth: `calc(var(--radix-popover-content-available-width) - 2 * ${vars.size.s2})`,
+  maxWidth: `calc(var(--radix-dropdown-menu-content-available-width) - 2 * var(--size-1) - 2px)`,
   minWidth: '8rem',
+  width: '12rem',
   backgroundColor: vars.color.background,
   boxShadow: vars.shadow.popover,
   animationDuration: '200ms',
@@ -43,6 +44,7 @@ export const menuItem = style({
   padding: `${vars.size.s1} ${vars.size.s2}`,
   borderRadius: vars.border.r1,
   backgroundColor: 'transparent',
+  fontSize: 12,
   outline: 0,
   ':focus': {
     backgroundColor: vars.color.p50
@@ -58,8 +60,20 @@ export const menuItem = style({
   }
 });
 
-export const menuItemSubTriggerChevron = style({
+export const shortcut = style({
+  opacity: '.4',
+  fontSize: 12,
+  lineHeight: '1rem',
   marginLeft: 'auto'
+});
+
+export const menuItemSubTriggerChevron = style({
+  marginLeft: 'auto',
+  selectors: {
+    [`${shortcut} ~ &`]: {
+      marginLeft: 0
+    }
+  }
 });
 
 export const menuItemWithIndicator = style({
@@ -79,8 +93,8 @@ export const menuItemRadioIndicator = style({
   '::after': {
     content: '',
     display: 'block',
-    width: 7,
-    height: 7,
+    width: 5,
+    height: 5,
     borderRadius: '50%',
     backgroundColor: vars.color.body
   }
@@ -97,12 +111,4 @@ export const separator = style({
   backgroundColor: vars.color.n200,
   marginBlock: vars.size.s1,
   marginInline: `calc(-1 * ${vars.size.s1})`
-});
-
-export const shortcut = style({
-  opacity: '.6',
-  letterSpacing: '.1em',
-  fontSize: '.75rem',
-  lineHeight: '1rem',
-  marginLeft: 'auto'
 });

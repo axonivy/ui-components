@@ -47,12 +47,12 @@ export const Default: Story = {
             <DropdownMenuItem>
               <IvyIcon icon={IvyIcons.User} />
               <span>Profile</span>
-              <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
+              <DropdownMenuShortcut>⇧+⌘+P</DropdownMenuShortcut>
             </DropdownMenuItem>
             <DropdownMenuItem>
               <IvyIcon icon={IvyIcons.Settings} />
               <span>Settings</span>
-              <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
+              <DropdownMenuShortcut>⌘+S</DropdownMenuShortcut>
             </DropdownMenuItem>
           </DropdownMenuGroup>
           <DropdownMenuSeparator />
@@ -65,6 +65,7 @@ export const Default: Story = {
               <DropdownMenuSubTrigger>
                 <IvyIcon icon={IvyIcons.UserOutline} />
                 <span>Invite users</span>
+                <DropdownMenuShortcut>⇧+⌘+U</DropdownMenuShortcut>
               </DropdownMenuSubTrigger>
               <DropdownMenuPortal>
                 <DropdownMenuSubContent>
@@ -89,7 +90,17 @@ export const Default: Story = {
               <span>New Team</span>
               <DropdownMenuShortcut>⌘+T</DropdownMenuShortcut>
             </DropdownMenuItem>
+            <DropdownMenuSub>
+              <DropdownMenuSubTrigger>
+                <IvyIcon icon={IvyIcons.UserOutline} />
+                <span>More tools</span>
+              </DropdownMenuSubTrigger>
+              <DropdownMenuPortal>
+                <DropdownMenuSubContent></DropdownMenuSubContent>
+              </DropdownMenuPortal>
+            </DropdownMenuSub>
           </DropdownMenuGroup>
+
           <DropdownMenuSeparator />
           <DropdownMenuCheckboxItem checked={showStatusBar} onCheckedChange={setShowStatusBar}>
             Enable
@@ -103,7 +114,7 @@ export const Default: Story = {
           <DropdownMenuSeparator />
           <DropdownMenuItem>
             <span>Log out</span>
-            <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
+            <DropdownMenuShortcut>⇧+⌘+Q</DropdownMenuShortcut>
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
