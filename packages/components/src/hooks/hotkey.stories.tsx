@@ -26,7 +26,7 @@ export const Default: StoryObj = {
 export const Scoped: StoryObj = {
   render: () => {
     const [count, setCount] = useState(0);
-    const ref = useHotkeys('c', () => setCount(prevCount => prevCount + 1));
+    const ref = useHotkeys<HTMLDivElement>('c', () => setCount(prevCount => prevCount + 1));
     return (
       <div ref={ref} tabIndex={-1} style={{ border: '2px solid #9e768f' }}>
         <h1>Scoped Hotkeys</h1>
