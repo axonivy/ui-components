@@ -148,7 +148,8 @@ export const Reorder: Story = {
   render: () => {
     const [data, setData] = React.useState(tableData);
     const updateDataArray = (fromIndex: number[], toIndex: number, data: Payment[]) => {
-      arraymove(data, fromIndex[0], toIndex);
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      arraymove(data, fromIndex[0]!, toIndex);
       setData([...data]);
     };
     const updateOrder = (moveId: string, targetId: string) => {

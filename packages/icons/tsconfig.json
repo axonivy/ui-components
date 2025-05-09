@@ -1,9 +1,11 @@
 {
-  "extends": "../../config/tsconfig.package.json",
+  "extends": "@axonivy/ts-config/package",
   "compilerOptions": {
     "baseUrl": ".",
     "rootDir": "src-gen",
-    "outDir": "lib"
+    "outDir": "lib",
+    "module": "nodenext",
+    "sourceMap": true
   },
   "include": ["src-gen"]
 }

@@ -14,14 +14,14 @@ afterEach(() => {
 
 test('apply', async () => {
   customRender(<Browser />);
-  await userEvent.click(screen.getAllByRole('row')[2]);
+  await userEvent.click(screen.getAllByRole('row')[2]!);
   await userEvent.click(screen.getByRole('button', { name: 'Apply' }));
   expect(window.alert).toBeCalledWith(`Browser 'Roles' apply: Teamleader`);
 });
 
 test('double click', async () => {
   customRender(<Browser />);
-  await userEvent.dblClick(screen.getAllByRole('row')[0]);
+  await userEvent.dblClick(screen.getAllByRole('row')[0]!);
   expect(window.alert).toBeCalledWith(`Browser 'Roles' apply: Everybody`);
 });
 
@@ -54,7 +54,7 @@ test('info provider - more data', async () => {
   customRender(<Browser />);
   await userEvent.click(screen.getByRole('tab', { name: 'CMS' }));
   await userEvent.click(screen.getByRole('button', { name: 'Info' }));
-  await userEvent.click(screen.getAllByRole('button', { name: 'Expand row' })[0]);
+  await userEvent.click(screen.getAllByRole('button', { name: 'Expand row' })[0]!);
   await userEvent.click(screen.getByRole('row', { name: 'accepted STRING' }));
   expect(screen.getByRole('region')).toHaveTextContent('acceptedde: akzeptierten: accepted');
 });
@@ -110,7 +110,7 @@ test('dialog', async () => {
   customRender(<Dialog />);
   expect(screen.getByRole('textbox')).toHaveValue('');
   await userEvent.click(screen.getByRole('button', { name: 'Browser' }));
-  await userEvent.click(screen.getAllByRole('row')[2]);
+  await userEvent.click(screen.getAllByRole('row')[2]!);
   await userEvent.click(screen.getByRole('button', { name: 'Apply' }));
   expect(screen.getByRole('textbox')).toHaveValue('Teamleader');
 });
@@ -121,7 +121,7 @@ test('dialog with initial search', async () => {
   await userEvent.click(screen.getByRole('button', { name: 'Browser' }));
   expect(screen.getAllByRole('row')).toHaveLength(3);
 
-  await userEvent.dblClick(screen.getAllByRole('row')[2]);
+  await userEvent.dblClick(screen.getAllByRole('row')[2]!);
   expect(screen.getByRole('textbox')).toHaveValue('Teamleader');
 });
 

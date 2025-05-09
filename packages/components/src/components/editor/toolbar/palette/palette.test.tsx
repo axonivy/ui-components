@@ -12,7 +12,7 @@ test('aciton', async () => {
   render(<Palette />);
   const userTask = screen.getAllByRole('button')[0];
   expect(userTask).toHaveAccessibleName('User Task');
-  await userEvent.click(userTask);
+  await userEvent.click(userTask!);
   expect(global.alert).toHaveBeenCalledWith('User Task');
 });
 
