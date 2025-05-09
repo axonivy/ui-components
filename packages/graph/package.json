@@ -1,5 +1,5 @@
 {
-  "name": "@axonivy/jsonrpc",
+  "name": "@axonivy/ui-graph",
   "version": "13.1.0-next",
   "private": false,
   "license": "(EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0)",
@@ -14,21 +14,30 @@
     "src"
   ],
   "dependencies": {
-    "vscode-jsonrpc": "^8.2.0"
+    "@xyflow/react": "12.4.3",
+    "@dagrejs/dagre": "^1.1.4"
+  },
+  "peerDependencies": {
+    "@axonivy/ui-icons": "~13.1.0-next",
+    "@axonivy/ui-components": "~13.1.0-next",
+    "react": "^18.2 || ^19.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.7",
+    "@vanilla-extract/css": "^1.17.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
   },
   "type": "module",
-  "types": "lib/index.d.ts",
-  "main": "lib/jsonrpc.js",
-  "module": "lib/jsonrpc.js",
+  "types": "./lib/index.d.ts",
+  "main": "./lib/graph.js",
+  "module": "./lib/graph.js",
   "scripts": {
     "clean": "rimraf --glob lib *.tsbuildinfo",
     "build": "tsc --build tsconfig.production.json",
     "package": "npm run clean && vite build && npm run build",
-    "type": "tsc --noEmit",
+    "type": "tsc --noEmit --emitDeclarationOnly false",
     "test": "vitest",
     "test:ci": "vitest --watch=false"
-  },
-  "devDependencies": {
-    "vitest-websocket-mock": "^0.5.0"
   }
 }
