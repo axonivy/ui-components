@@ -19,6 +19,6 @@ export default tseslint.config(
   // Project-specific overrides and custom rules
   {
     name: 'ignored-files',
-    ignores: ['**/dev-packages/**', '**/.storybook/**']
+    ignores: ['**/dev-packages/**', '**/.storybook/**', '**/storybook-static/**']
   }
 );
