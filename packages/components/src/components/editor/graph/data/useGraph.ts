@@ -11,10 +11,10 @@ import {
   type OnEdgesChange,
   type OnNodesChange
 } from '@xyflow/react';
-import type { CustomNodeData, GraphNode, GraphProps } from '@/components/editor/graph/graph';
+import type { NodeData, GraphNode, GraphProps } from '@/components/editor/graph/graph';
 import { getLayoutedElements, type Direction } from '@/components/editor/graph/data/getLayoutedElements';
 
-const useCustomGraph = ({ graphNodes, options }: GraphProps) => {
+const useGraph = ({ graphNodes, options }: GraphProps) => {
   const [nodes, setNodes] = useState<Node[]>([]);
   const [edges, setEdges] = useState<Edge[]>([]);
   const [selectedNode, setSelectedNode] = useState<string>('all');
@@ -80,9 +80,9 @@ const useCustomGraph = ({ graphNodes, options }: GraphProps) => {
   return { nodes, edges, selectedNode, onNodesChange, onEdgesChange, onConnect, onLayout, onFilterApply };
 };
 
-export default useCustomGraph;
+export { useGraph };
 
-function filterNodesBySelectedNode(graphNodes: Array<CustomNodeData>, selectedNode: string): Array<CustomNodeData> {
+function filterNodesBySelectedNode(graphNodes: Array<NodeData>, selectedNode: string): Array<NodeData> {
   let filteredNodes = graphNodes;
 
   if (selectedNode !== 'all') {
@@ -113,22 +113,17 @@ function filterNodesBySelectedNode(graphNodes: Array<CustomNodeData>, selectedNo
   return filteredNodes;
 }
 
-const mapNodesAndEdges = (
-  graphNodes: CustomNodeData[],
-  existingNodes: GraphNode[],
-  options?: GraphProps['options'],
-  selectedNode?: string
-) => {
+const mapNodesAndEdges = (graphNodes: NodeData[], existingNodes: GraphNode[], options?: GraphProps['options'], selectedNode?: string) => {
   const newNodes: GraphNode[] = graphNodes.map(node => ({
     id: node.id,
     position: { x: 0, y: 0 },
     data: {
-      CustomNodeData: {
+      nodeData: {
         ...node,
         options: {
           ...node.options,
           highlightNode: node.options?.highlightNode && !options?.filter ? node.options?.highlightNode : node.id === selectedNode,
-          disableHandles: options?.circleFloatingEdges || false
+          disableHandles: node.options?.disableHandles ?? options?.circleFloatingEdges ?? false
         }
       }
     },

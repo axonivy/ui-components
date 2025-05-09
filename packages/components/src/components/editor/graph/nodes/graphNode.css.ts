@@ -44,3 +44,27 @@ export const expanderClose = style({
   transform: 'rotate(90deg)',
   transition: 'transform 200ms cubic-bezier(0.87, 0, 0.13, 1)'
 });
+
+export const containerPadding = style({
+  padding: '10px'
+});
+
+export const minWidth = style({
+  minWidth: '150px'
+});
+
+export const iconHeight = style({
+  height: '20px'
+});
+
+export const handle = style({
+  pointerEvents: 'none',
+  selectors: {
+    '&[data-handles="true"]': {
+      opacity: 0
+    },
+    '&[data-handles="false"]': {
+      opacity: 1
+    }
+  }
+});

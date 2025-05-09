@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Graph, type CustomNodeData } from '@/components/editor/graph/graph';
+import { Graph, type NodeData } from '@/components/editor/graph/graph';
 import { Button } from '@/components/common/button/button';
 import { IvyIcons } from '@axonivy/ui-icons';
-import { dataClasses, type Field } from '@/components/editor/graph/data/data';
+import { dataClasses, type DataClass, type Field } from '@/components/editor/graph/data/data';
 
 const meta: Meta<typeof Graph> = {
   title: 'Editor/Graph',
@@ -15,22 +15,10 @@ type Story = StoryObj<typeof Graph>;
 
 export const Default: Story = {
   render: () => {
-    const transeFormedDataClasses: CustomNodeData[] = dataClasses.map(dataClass => {
-      return {
-        id: dataClass.id,
-        label: dataClass.name,
-        info: dataClass.fqName.long,
-        content: <CustomNodeFieldContent fields={dataClass.fields} />,
-        target: dataClass.relations,
-        options: {
-          controls: <Button icon={IvyIcons.DataClass} onClick={() => console.log('Open ' + dataClass.name)} />,
-          expandContent: true
-        }
-      };
-    });
+    const transformedDataClasses: NodeData[] = mapDataClassesToNodeData(dataClasses);
     return (
       <Graph
-        graphNodes={transeFormedDataClasses}
+        graphNodes={transformedDataClasses}
         options={{
           filter: true,
           circleFloatingEdges: true
@@ -39,7 +27,19 @@ export const Default: Story = {
     );
   }
 };
-
+export function mapDataClassesToNodeData(dataClasses: DataClass[]): NodeData[] {
+  return dataClasses.map(dataClass => ({
+    id: dataClass.id,
+    label: dataClass.name,
+    info: dataClass.fqName.long,
+    content: <CustomNodeFieldContent fields={dataClass.fields} />,
+    target: dataClass.relations,
+    options: {
+      controls: <Button icon={IvyIcons.DataClass} onClick={() => console.log('Open ' + dataClass.name)} />,
+      expandContent: true
+    }
+  }));
+}
 const CustomNodeFieldContent = ({ fields }: { fields: Field[] }) => {
   return (
     <ul style={{ padding: '0 10px', listStyle: 'none', margin: 0, overflow: 'auto' }}>

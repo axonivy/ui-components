@@ -1,16 +1,16 @@
 import '@xyflow/react/dist/style.css';
 import { Button } from '@/components/common/button/button';
 import { Flex } from '@/components/common/flex/flex';
-import { CustomNode } from '@/components/editor/graph/nodes/customNode';
-import FloatingEdge from '@/components/editor/graph/edges/floatingEdge';
+import { GraphNode } from '@/components/editor/graph/nodes/graphNode';
+import GraphFloatingEdge from '@/components/editor/graph/edges/graphFloatingEdge';
 import { IvyIcons } from '@axonivy/ui-icons';
 import { Background, ConnectionMode, Controls, MiniMap, Panel, ReactFlow, ReactFlowProvider, type Node } from '@xyflow/react';
 import { BasicSelect } from '@/components/common/select/select';
-import CircleFloatingEdge from '@/components/editor/graph/edges/circleFloatingEdge';
+import GraphCircleFloatingEdge from '@/components/editor/graph/edges/graphCircleFloatingEdge';
 import FloatingConnectionLine from '@/components/editor/graph/edges/FloatingConnectionLine';
-import useCustomGraph from '@/components/editor/graph/data/useCustomGraph';
+import { useGraph } from '@/components/editor/graph/data/useGraph';
 
-export type CustomNodeData = {
+export type NodeData = {
   id: string;
   label: string;
   info?: string;
@@ -29,10 +29,10 @@ export type EdgeData = {
   label?: string;
 };
 
-export type GraphNode = Node<{ CustomNodeData: CustomNodeData }, 'custom'>;
+export type GraphNode = Node<{ nodeData: NodeData }, 'custom'>;
 
 export type GraphProps = {
-  graphNodes: CustomNodeData[];
+  graphNodes: NodeData[];
   options?: {
     filter?: boolean;
     circleFloatingEdges?: boolean;
@@ -41,8 +41,8 @@ export type GraphProps = {
   };
 };
 
-const CustomGraph = ({ graphNodes, options }: GraphProps) => {
-  const { edges, nodes, onConnect, onEdgesChange, onFilterApply, onLayout, onNodesChange, selectedNode } = useCustomGraph({
+const GraphRoot = ({ graphNodes, options }: GraphProps) => {
+  const { edges, nodes, onConnect, onEdgesChange, onFilterApply, onLayout, onNodesChange, selectedNode } = useGraph({
     graphNodes,
     options
   });
@@ -54,8 +54,8 @@ const CustomGraph = ({ graphNodes, options }: GraphProps) => {
       onNodesChange={onNodesChange}
       onEdgesChange={onEdgesChange}
       onConnect={onConnect}
-      nodeTypes={{ custom: CustomNode }}
-      edgeTypes={{ floating: options?.circleFloatingEdges ? CircleFloatingEdge : FloatingEdge }}
+      nodeTypes={{ custom: GraphNode }}
+      edgeTypes={{ floating: options?.circleFloatingEdges ? GraphCircleFloatingEdge : GraphFloatingEdge }}
       connectionMode={ConnectionMode.Loose}
       fitView={true}
       onNodeDoubleClick={(e, node) => {
@@ -110,7 +110,7 @@ const CustomGraph = ({ graphNodes, options }: GraphProps) => {
 const Graph = ({ graphNodes, options }: GraphProps) => {
   return (
     <ReactFlowProvider>
-      <CustomGraph graphNodes={graphNodes} options={options} />
+      <GraphRoot graphNodes={graphNodes} options={options} />
     </ReactFlowProvider>
   );
 };

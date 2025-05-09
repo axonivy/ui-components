@@ -3,7 +3,7 @@ import { Position } from '@xyflow/react';
 
 type Params = [number, number, Position];
 type IntersectionPoint = { x: number; y: number };
-type EdgeParams = {
+export type EdgeParams = {
   sx: number;
   sy: number;
   tx: number;
@@ -12,7 +12,7 @@ type EdgeParams = {
   targetPos: Position;
 };
 
-function getParams(nodeA: InternalNode, nodeB: InternalNode): Params {
+const getParams = (nodeA: InternalNode, nodeB: InternalNode): Params => {
   const centerA = getNodeCenter(nodeA);
   const centerB = getNodeCenter(nodeB);
   const horizontalDiff = Math.abs(centerA.x - centerB.x);
@@ -27,13 +27,13 @@ function getParams(nodeA: InternalNode, nodeB: InternalNode): Params {
 
   const [x, y] = getHandleCoordsByPosition(nodeA, position);
   return [x, y, position];
-}
+};
 
-function getHandleCoordsByPosition(node: InternalNode, handlePosition: Position): [number, number] {
+const getHandleCoordsByPosition = (node: InternalNode, handlePosition: Position): [number, number] => {
   const handle = node.internals.handleBounds?.source?.find(h => h.position === handlePosition);
 
   if (!handle) {
-    throw new Error(`Handle not found for position: ${handlePosition}`);
+    return [0, 0];
   }
 
   let offsetX = handle.width / 2;
@@ -58,9 +58,9 @@ function getHandleCoordsByPosition(node: InternalNode, handlePosition: Position)
   const y = node.internals.positionAbsolute.y + handle.y + offsetY;
 
   return [x, y];
-}
+};
 
-function getNodeCenter(node: InternalNode): { x: number; y: number } {
+const getNodeCenter = (node: InternalNode): { x: number; y: number } => {
   const x = node.internals?.positionAbsolute?.x ?? 0;
   const y = node.internals?.positionAbsolute?.y ?? 0;
   const width = node.measured?.width ?? 0;
@@ -70,8 +70,8 @@ function getNodeCenter(node: InternalNode): { x: number; y: number } {
     x: x + width / 2,
     y: y + height / 2
   };
-}
-export function getEdgeParams(source: InternalNode, target: InternalNode): EdgeParams {
+};
+export const getEdgeParams = (source: InternalNode, target: InternalNode): EdgeParams => {
   const [sx, sy, sourcePos] = getParams(source, target);
   const [tx, ty, targetPos] = getParams(target, source);
 
@@ -83,13 +83,13 @@ export function getEdgeParams(source: InternalNode, target: InternalNode): EdgeP
     sourcePos,
     targetPos
   };
-}
+};
 
-function getNodeIntersection(intersectionNode: InternalNode, targetNode: InternalNode): IntersectionPoint {
+const getNodeIntersection = (intersectionNode: InternalNode, targetNode: InternalNode): IntersectionPoint => {
   const { width: intersectionNodeWidth, height: intersectionNodeHeight } = intersectionNode.measured;
   const intersectionNodePosition = intersectionNode.internals.positionAbsolute;
   const targetPosition = targetNode.internals.positionAbsolute;
-  if (intersectionNodeWidth === undefined || intersectionNodeHeight === undefined) return { x: 0, y: 0 };
+  if (!intersectionNodeWidth || !intersectionNodeHeight) return { x: 0, y: 0 };
   const w = intersectionNodeWidth / 2;
   const h = intersectionNodeHeight / 2;
 
@@ -107,9 +107,9 @@ function getNodeIntersection(intersectionNode: InternalNode, targetNode: Interna
   const y = h * (-xx3 + yy3) + y2;
 
   return { x, y };
-}
+};
 
-function getEdgePosition(node: InternalNode, intersectionPoint: IntersectionPoint): Position {
+const getEdgePosition = (node: InternalNode, intersectionPoint: IntersectionPoint): Position => {
   const n = { ...node.internals.positionAbsolute, ...node };
   const nx = Math.round(n.x);
   const ny = Math.round(n.y);
@@ -130,9 +130,9 @@ function getEdgePosition(node: InternalNode, intersectionPoint: IntersectionPoin
   }
 
   return Position.Top;
-}
+};
 
-export function getCircleEdgeParams(source: InternalNode, target: InternalNode): EdgeParams {
+export const getCircleEdgeParams = (source: InternalNode, target: InternalNode): EdgeParams => {
   const sourceIntersectionPoint = getNodeIntersection(source, target);
   const targetIntersectionPoint = getNodeIntersection(target, source);
 
@@ -147,4 +147,4 @@ export function getCircleEdgeParams(source: InternalNode, target: InternalNode):
     sourcePos,
     targetPos
   };
-}
+};
