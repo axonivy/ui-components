@@ -22,6 +22,10 @@
     {
       "name": "dev-package/eslint-config",
       "path": "./dev-packages/eslint-config"
+    },
+    {
+      "name": "dev-package/prettier-config",
+      "path": "./dev-packages/prettier-config"
     }
   ],
   "settings": {
