@@ -19,7 +19,7 @@ test('remove', async () => {
   const row = screen.getAllByRole('row')[2];
   expect(row).toHaveTextContent('Abe45');
 
-  await userEvent.click(row);
+  await userEvent.click(row!);
   const removeBtn = screen.getByRole('button', { name: 'Remove row' });
   expect(removeBtn).toBeInTheDocument();
 

@@ -9,7 +9,7 @@ test('select', async () => {
   const select = screen.getAllByRole('combobox')[0];
   expect(select).toHaveTextContent('Success');
 
-  await userEvent.click(select);
+  await userEvent.click(select!);
   expect(screen.getByRole('listbox')).toBeInTheDocument();
 
   await userEvent.keyboard('[ArrowDown]');
@@ -23,7 +23,7 @@ test('input', async () => {
   const input = screen.getAllByRole('textbox')[0];
   expect(input).toHaveValue('ken99@yahoo.com');
 
-  await userEvent.click(input);
+  await userEvent.click(input!);
   await userEvent.keyboard('1');
   await userEvent.tab();
   expect(screen.getAllByRole('row')[1]).toHaveAttribute('data-state', 'selected');
@@ -35,7 +35,7 @@ test('combobox', async () => {
   const combobox = screen.getAllByRole('combobox')[1];
   expect(combobox).toHaveValue('316');
 
-  await userEvent.click(combobox);
+  await userEvent.click(combobox!);
   expect(screen.getByRole('dialog')).toBeInTheDocument();
 
   await userEvent.keyboard('[ArrowDown]');
@@ -49,7 +49,7 @@ const setupTable = async () => {
   const rows = screen.getAllByRole('row');
   const user = userEvent.setup();
   expect(rows[1]).toHaveAttribute('data-state', 'unselected');
-  await user.click(rows[1]);
+  await user.click(rows[1]!);
   expect(rows[1]).toHaveAttribute('data-state', 'selected');
   expect(rows[2]).toHaveAttribute('data-state', 'unselected');
   return { rows, user };
@@ -61,7 +61,7 @@ const selectRowAndNavigate = async (rows: HTMLElement[], user: ReturnType<typeof
     await user.keyboard('[Tab]');
   }
   const tagName = colIndex === 0 ? 'button' : 'input';
-  expect(rows[1].getElementsByTagName('td')[colIndex].getElementsByTagName(tagName)[0]).toHaveFocus();
+  expect(rows[1]?.getElementsByTagName('td')[colIndex]?.getElementsByTagName(tagName)[0]).toHaveFocus();
 
   // Move down two rows
   await user.keyboard('[ArrowDown]');
@@ -69,7 +69,7 @@ const selectRowAndNavigate = async (rows: HTMLElement[], user: ReturnType<typeof
 
   expect(rows[1]).toHaveAttribute('data-state', 'unselected');
   expect(rows[3]).toHaveAttribute('data-state', 'selected');
-  expect(rows[3].getElementsByTagName('td')[colIndex].getElementsByTagName(tagName)[0]).toHaveFocus();
+  expect(rows[3]?.getElementsByTagName('td')[colIndex]?.getElementsByTagName(tagName)[0]).toHaveFocus();
 
   // Check jump over disabled select cell
   await user.keyboard('[ArrowDown]');
@@ -78,12 +78,12 @@ const selectRowAndNavigate = async (rows: HTMLElement[], user: ReturnType<typeof
 
   expect(rows[8]).toHaveAttribute('data-state', 'selected');
   expect(rows[3]).toHaveAttribute('data-state', 'unselected');
-  expect(rows[8].getElementsByTagName('td')[colIndex].getElementsByTagName(tagName)[0]).toHaveFocus();
+  expect(rows[8]?.getElementsByTagName('td')[colIndex]?.getElementsByTagName(tagName)[0]).toHaveFocus();
 
   await user.keyboard('[ArrowUp]');
   expect(rows[6]).toHaveAttribute('data-state', 'selected');
   expect(rows[8]).toHaveAttribute('data-state', 'unselected');
-  expect(rows[6].getElementsByTagName('td')[colIndex].getElementsByTagName(tagName)[0]).toHaveFocus();
+  expect(rows[6]?.getElementsByTagName('td')[colIndex]?.getElementsByTagName(tagName)[0]).toHaveFocus();
 };
 
 test('keyboard navigation with arrow for select cell', async () => {
@@ -106,7 +106,7 @@ test('open select menu with enter and nav with arrow', async () => {
   const select = screen.getAllByRole('combobox')[0];
   expect(select).toHaveTextContent('Success');
   await user.keyboard('[Tab]');
-  expect(rows[1].getElementsByTagName('td')[0].getElementsByTagName('button')[0]).toHaveFocus();
+  expect(rows[1]?.getElementsByTagName('td')[0]?.getElementsByTagName('button')[0]).toHaveFocus();
   await user.keyboard('[Enter]');
   expect(screen.getByRole('listbox')).toBeInTheDocument();
 
@@ -123,7 +123,7 @@ test('open combobox menu with enter and nav with arrow', async () => {
   await user.keyboard('[Tab]');
   await user.keyboard('[Tab]');
   await user.keyboard('[Tab]');
-  expect(rows[1].getElementsByTagName('td')[2].getElementsByTagName('input')[0]).toHaveFocus();
+  expect(rows[1]?.getElementsByTagName('td')[2]?.getElementsByTagName('input')[0]).toHaveFocus();
   await user.keyboard('[Enter]');
   expect(screen.getByRole('dialog')).toBeInTheDocument();
 

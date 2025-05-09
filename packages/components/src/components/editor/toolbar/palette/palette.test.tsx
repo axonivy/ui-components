@@ -18,7 +18,7 @@ test('search', async () => {
   expect(screen.getAllByRole('button')).toHaveLength(4);
   expect(screen.getAllByRole('button')[1]).toHaveAccessibleName('User Task');
 
-  await userEvent.click(screen.getAllByRole('button')[1]);
+  await userEvent.click(screen.getAllByRole('button')[1]!);
   expect(global.alert).toHaveBeenCalledWith('User Task');
 });
 

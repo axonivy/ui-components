@@ -126,14 +126,11 @@ function isUseBrowserResult(browser: Browser['browser']): browser is ReturnType<
 
 const BrowsersView = ({ browsers, apply, applyBtn, options }: BrowsersViewProps) => {
   const applyButton = applyBtn ?? options?.applyBtn;
-  const [tab, setTab] = React.useState(browsers[0].name);
+  const [tab, setTab] = React.useState(browsers[0]?.name ?? '');
   const selectedRow = () => {
     const browser = browsers.find(b => b.name === tab)?.browser;
     if (browser && isUseBrowserResult(browser)) {
-      const table = browser.table;
-      if (table) {
-        return table.getRowModel().rowsById[Object.keys(table.getState().rowSelection)[0]];
-      }
+      return browser.table?.getSelectedRowModel().flatRows[0];
     }
     return;
   };
