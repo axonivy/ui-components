@@ -1,24 +1,21 @@
 import { style } from '@vanilla-extract/css';
 
-export const customNode = style({
+export const node = style({
   width: '100%',
   height: '100%',
   textAlign: 'left',
   borderRadius: '5px',
   background: 'white',
-  display: 'inline-block'
-});
-
-export const selectedNode = style({
-  border: '2px solid var(--P500)'
-});
-
-export const originalNode = style({
-  border: '2px solid  var(--success-color)'
-});
-
-export const normalNode = style({
-  border: '1px solid  var(--body)'
+  display: 'inline-block',
+  border: '1px solid  var(--body)',
+  selectors: {
+    '&[data-highlight="true"]': {
+      border: '2px solid var(--success-color)'
+    },
+    '&[data-selected="true"]': {
+      border: '2px solid var(--P500)'
+    }
+  }
 });
 
 export const customNodeHeaderLabel = style({
@@ -58,12 +55,10 @@ export const iconHeight = style({
 
 export const handle = style({
   pointerEvents: 'none',
+  opacity: 1,
   selectors: {
     '&[data-handles="true"]': {
       opacity: 0
-    },
-    '&[data-handles="false"]': {
-      opacity: 1
     }
   }
 });

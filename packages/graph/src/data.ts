@@ -1,4 +1,4 @@
-import type { EdgeData } from '../graph';
+import type { EdgeData } from './graph';
 
 export interface DataClass {
   id: string;

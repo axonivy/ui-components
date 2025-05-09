@@ -1,7 +1,6 @@
 import { Handle, Position, type NodeProps } from '@xyflow/react';
 import {
   containerPadding,
-  customNode,
   customNodeHeaderInfo,
   customNodeHeaderLabel,
   expander,
@@ -10,9 +9,7 @@ import {
   handle,
   iconHeight,
   minWidth,
-  normalNode,
-  originalNode,
-  selectedNode
+  node
 } from './graphNode.css';
 import type { GraphNode as GraphNodeType } from '../graph';
 import { IvyIcons } from '@axonivy/ui-icons';
@@ -29,7 +26,7 @@ export const GraphNode = ({ data, selected }: NodeProps<GraphNodeType>) => {
       <Handle type='source' position={Position.Left} id='l' className={handle} data-handles={disableHandles} />
       <Handle type='source' position={Position.Right} id='r' className={handle} data-handles={disableHandles} />
       <Handle type='source' position={Position.Bottom} id='b' className={handle} data-handles={disableHandles} />
-      <div className={cn(customNode, selected ? selectedNode : data.nodeData.options?.highlightNode ? originalNode : normalNode)}>
+      <div className={node} data-selected={selected} data-highlight={data.nodeData.options?.highlightNode}>
         <div className={containerPadding}>
           <Flex direction='row' alignItems='center' justifyContent='space-between' gap={4} className={minWidth}>
             <Flex direction='column' gap={1}>

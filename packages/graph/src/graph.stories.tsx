@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Graph, type NodeData } from './graph';
 import { IvyIcons } from '@axonivy/ui-icons';
-import { dataClasses, type DataClass, type Field } from './data/data';
+import { dataClasses, type DataClass, type Field } from './data';
 import '@axonivy/ui-components/lib/components.css';
 import { Button } from '@axonivy/ui-components';
 
 const meta: Meta<typeof Graph> = {
-  title: 'Editor/Graph',
+  title: 'View/Graph',
   component: Graph
 };
 
