@@ -1,6 +1,6 @@
 import { vanillaExtractPlugin as veVitePlugin } from '@vanilla-extract/vite-plugin';
 import { resolve } from 'path';
-import { defineConfig } from 'vite';
+import { defineConfig } from 'vitest/config';
 import { visualizer } from 'rollup-plugin-visualizer';
 import react from '@vitejs/plugin-react';
 import dts from 'vite-plugin-dts';
@@ -23,5 +23,16 @@ export default defineConfig({
     rollupOptions: {
       external: ['@axonivy/ui-icons', 'react', 'react/jsx-runtime', 'react-dom']
     }
+  },
+  test: {
+    name: 'components',
+    include: ['src/**/*.test.ts?(x)'],
+    alias: {
+      'test-utils': resolve(__dirname, 'src/test-utils/test-utils.tsx')
+    },
+    globals: true,
+    environment: 'happy-dom',
+    setupFiles: ['src/test-utils/setupTests.tsx'],
+    css: false
   }
 });
