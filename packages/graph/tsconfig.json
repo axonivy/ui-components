@@ -1,5 +1,5 @@
 {
-  "extends": "../../config/tsconfig.package.json",
+  "extends": "@axonivy/ts-config/package",
   "compilerOptions": {
     "rootDir": "src",
     "outDir": "lib",
@@ -8,5 +8,8 @@
     "types": ["vitest/globals"]
   },
   "include": ["src"],
-  "references": [{ "path": "../icons/tsconfig.json" }]
+  "references": [
+    { "path": "../icons/tsconfig.json" },
+    { "path": "../components/tsconfig.production.json" }
+  ]
 }

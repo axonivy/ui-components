@@ -1,8 +1,9 @@
 export const capitalize = (s: string) => {
-  if (s.length === 0) {
+  const firstLetter = s.charAt(0);
+  if (firstLetter === undefined) {
     return '';
   }
-  return s[0].toUpperCase() + s.slice(1);
+  return firstLetter.toUpperCase() + s.slice(1);
 };
 
 export const splitByCamelCase = (s: string) => {

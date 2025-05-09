@@ -15,6 +15,12 @@ export const base = tseslint.config(
 
   // TypeScript recommended configs
   ...tseslint.configs.strict,
+  {
+    files: ['**/*.test.ts?(x)', '**/playwright/tests/**', '**/*.spec.{js,mjs,cjs,ts,jsx,tsx}'],
+    rules: {
+      '@typescript-eslint/no-non-null-assertion': 'off'
+    }
+  },
 
   // React recommended configs
   {

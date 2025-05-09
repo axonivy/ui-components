@@ -30,6 +30,10 @@
     {
       "name": "dev-package/prettier-config",
       "path": "./dev-packages/prettier-config"
+    },
+     {
+      "name": "dev-package/ts-config",
+      "path": "./dev-packages/ts-config"
     }
   ],
   "settings": {

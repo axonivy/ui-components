@@ -71,7 +71,7 @@ function EditTableDemo() {
         setData(old => {
           const newData = old.map((row, index) => {
             const rowIndex = parseInt(rowId);
-            if (index === rowIndex) {
+            if (index === rowIndex && data[rowIndex]) {
               return { ...data[rowIndex], [columnId]: value };
             }
             return row;
