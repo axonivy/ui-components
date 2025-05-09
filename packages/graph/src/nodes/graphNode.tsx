@@ -13,15 +13,11 @@ import {
   normalNode,
   originalNode,
   selectedNode
-} from '@/components/editor/graph/nodes/graphNode.css';
-import type { GraphNode as GraphNodeType } from '@/components/editor/graph/graph';
-import { Flex } from '@/components/common/flex/flex';
-import { Separator } from '@/components/common/separator/separator';
+} from './graphNode.css';
+import type { GraphNode as GraphNodeType } from '../graph';
 import { IvyIcons } from '@axonivy/ui-icons';
 import { useState } from 'react';
-import { IvyIcon } from '@/components/common/icon/icon';
-import { cn } from '@/utils/class-name';
-import { vars } from '@/styles/theme.css';
+import { cn, Flex, IvyIcon, Separator } from '@axonivy/ui-components';
 
 export const GraphNode = ({ data, selected }: NodeProps<GraphNodeType>) => {
   const disableHandles = data.nodeData.options?.disableHandles;
@@ -44,7 +40,7 @@ export const GraphNode = ({ data, selected }: NodeProps<GraphNodeType>) => {
               {data.nodeData.options?.controls}
               {data.nodeData.options?.expandContent && (
                 <>
-                  <Separator decorative orientation='vertical' style={{ marginInline: vars.size.s1 }} />
+                  <Separator decorative orientation='vertical' style={{ marginInline: 'var(--size-1)' }} />
                   <IvyIcon
                     icon={IvyIcons.Chevron}
                     className={cn(expander, expanded ? expanderOpen : expanderClose)}
@@ -56,7 +52,7 @@ export const GraphNode = ({ data, selected }: NodeProps<GraphNodeType>) => {
               )}
             </Flex>
           </Flex>
-          {data.nodeData.content && expanded && <Separator decorative orientation='horizontal' style={{ marginBlock: vars.size.s2 }} />}
+          {data.nodeData.content && expanded && <Separator decorative orientation='horizontal' style={{ marginBlock: 'var(--size-2)' }} />}
           {expanded && data.nodeData.content}
         </div>
       </div>

@@ -1,14 +1,12 @@
 import '@xyflow/react/dist/style.css';
-import { Button } from '@/components/common/button/button';
-import { Flex } from '@/components/common/flex/flex';
-import { GraphNode } from '@/components/editor/graph/nodes/graphNode';
-import GraphFloatingEdge from '@/components/editor/graph/edges/graphFloatingEdge';
 import { IvyIcons } from '@axonivy/ui-icons';
 import { Background, ConnectionMode, Controls, MiniMap, Panel, ReactFlow, ReactFlowProvider, type Node } from '@xyflow/react';
-import { BasicSelect } from '@/components/common/select/select';
-import GraphCircleFloatingEdge from '@/components/editor/graph/edges/graphCircleFloatingEdge';
-import FloatingConnectionLine from '@/components/editor/graph/edges/FloatingConnectionLine';
-import { useGraph } from '@/components/editor/graph/data/useGraph';
+import { BasicSelect, Button, Flex } from '@axonivy/ui-components';
+import { useGraph } from './data/useGraph';
+import GraphCircleFloatingEdge from './edges/graphCircleFloatingEdge';
+import FloatingConnectionLine from './edges/FloatingConnectionLine';
+import GraphFloatingEdge from './edges/graphFloatingEdge';
+import { GraphNode } from './nodes/graphNode';
 
 export type NodeData = {
   id: string;

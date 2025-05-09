@@ -1,4 +1,4 @@
-import type { EdgeParams } from '@/components/editor/graph/edges/graphEdgeUtils';
+import type { EdgeParams } from './graphEdgeUtils';
 import { getBezierPath, useInternalNode, type InternalNode } from '@xyflow/react';
 
 export const useGraphEdge = (source: string, target: string, getParamsFn: (source: InternalNode, target: InternalNode) => EdgeParams) => {

@@ -1,5 +1,4 @@
-import { getCircleEdgeParams } from '@/components/editor/graph/edges/graphEdgeUtils';
-import { vars } from '@/styles/theme.css';
+import { getCircleEdgeParams } from './graphEdgeUtils';
 import { getBezierPath, type ConnectionLineComponentProps, type InternalNode } from '@xyflow/react';
 
 const FloatingConnectionLine = ({ toX, toY, fromPosition, toPosition, fromNode }: ConnectionLineComponentProps) => {
@@ -30,8 +29,8 @@ const FloatingConnectionLine = ({ toX, toY, fromPosition, toPosition, fromNode }
 
   return (
     <g>
-      <path fill='none' stroke={vars.color.n900} strokeWidth={1.5} className='animated' d={edgePath} />
-      <circle cx={toX} cy={toY} fill={vars.color.background} r={3} stroke={vars.color.n900} strokeWidth={1.5} />
+      <path fill='none' stroke={'var(--N900)'} strokeWidth={1.5} className='animated' d={edgePath} />
+      <circle cx={toX} cy={toY} fill={'var(--background)'} r={3} stroke={'var(--N900)'} strokeWidth={1.5} />
     </g>
   );
 };

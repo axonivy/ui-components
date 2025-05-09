@@ -1,5 +1,4 @@
 import { style } from '@vanilla-extract/css';
-import { vars } from '@/styles/theme.css';
 
 export const customNode = style({
   width: '100%',
@@ -11,15 +10,15 @@ export const customNode = style({
 });
 
 export const selectedNode = style({
-  border: `2px solid ${vars.color.p500}`
+  border: '2px solid var(--P500)'
 });
 
 export const originalNode = style({
-  border: `2px solid ${vars.color.success}`
+  border: '2px solid  var(--success-color)'
 });
 
 export const normalNode = style({
-  border: `1px solid ${vars.color.body}`
+  border: '1px solid  var(--body)'
 });
 
 export const customNodeHeaderLabel = style({
@@ -27,7 +26,7 @@ export const customNodeHeaderLabel = style({
 });
 
 export const customNodeHeaderInfo = style({
-  color: `${vars.color.n700}`
+  color: 'var(--N700)'
 });
 
 export const expander = style({

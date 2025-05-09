@@ -1,4 +1,4 @@
-import type { GraphNode } from '@/components/editor/graph/graph';
+import type { GraphNode } from '../graph';
 import Dagre from '@dagrejs/dagre';
 import { type Edge } from '@xyflow/react';
 

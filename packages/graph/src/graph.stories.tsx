@@ -1,8 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Graph, type NodeData } from '@/components/editor/graph/graph';
-import { Button } from '@/components/common/button/button';
+import { Graph, type NodeData } from './graph';
 import { IvyIcons } from '@axonivy/ui-icons';
-import { dataClasses, type DataClass, type Field } from '@/components/editor/graph/data/data';
+import { dataClasses, type DataClass, type Field } from './data/data';
+import '@axonivy/ui-components/lib/components.css';
+import { Button } from '@axonivy/ui-components';
 
 const meta: Meta<typeof Graph> = {
   title: 'Editor/Graph',
@@ -27,7 +28,7 @@ export const Default: Story = {
     );
   }
 };
-export function mapDataClassesToNodeData(dataClasses: DataClass[]): NodeData[] {
+const mapDataClassesToNodeData = (dataClasses: DataClass[]): NodeData[] => {
   return dataClasses.map(dataClass => ({
     id: dataClass.id,
     label: dataClass.name,
@@ -39,7 +40,7 @@ export function mapDataClassesToNodeData(dataClasses: DataClass[]): NodeData[] {
       expandContent: true
     }
   }));
-}
+};
 const CustomNodeFieldContent = ({ fields }: { fields: Field[] }) => {
   return (
     <ul style={{ padding: '0 10px', listStyle: 'none', margin: 0, overflow: 'auto' }}>

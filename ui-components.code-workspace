@@ -12,6 +12,10 @@
       "path": "./packages/components"
     },
     {
+      "name": "package/graph",
+      "path": "./packages/graph"
+    },
+    {
       "name": "package/icons",
       "path": "./packages/icons"
     },

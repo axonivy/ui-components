@@ -1,7 +1,7 @@
 import { describe, expect } from 'vitest';
 import { Position } from '@xyflow/react';
 import type { InternalNode } from '@xyflow/react';
-import { getCircleEdgeParams, getEdgeParams } from '@/components/editor/graph/edges/graphEdgeUtils';
+import { getCircleEdgeParams, getEdgeParams } from './graphEdgeUtils';
 
 const createNode = (x: number, y: number, width = 100, height = 100) =>
   ({

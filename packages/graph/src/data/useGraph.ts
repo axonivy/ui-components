@@ -11,8 +11,8 @@ import {
   type OnEdgesChange,
   type OnNodesChange
 } from '@xyflow/react';
-import type { NodeData, GraphNode, GraphProps } from '@/components/editor/graph/graph';
-import { getLayoutedElements, type Direction } from '@/components/editor/graph/data/getLayoutedElements';
+import type { NodeData, GraphNode, GraphProps } from '../graph';
+import { getLayoutedElements, type Direction } from './getLayoutedElements';
 
 const useGraph = ({ graphNodes, options }: GraphProps) => {
   const [nodes, setNodes] = useState<Node[]>([]);

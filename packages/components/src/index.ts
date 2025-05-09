@@ -47,7 +47,6 @@ export * from './components/editor/sidebar/header/header';
 export * from './components/editor/sidebar/outline/outline';
 export * from './components/editor/toolbar/toolbar';
 export * from './components/editor/toolbar/palette/palette';
-export * from './components/editor/graph/graph';
 
 /* Context */
 export * from './context/useReadonly';
