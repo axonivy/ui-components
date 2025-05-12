@@ -23,7 +23,7 @@
     "fantasticon": "^1.2.3"
   },
   "scripts": {
-    "clean": "rimraf lib src-gen/ivy-icons.* tsconfig.tsbuildinfo",
+    "clean": "rimraf --glob lib src-gen/ivy-icons.* tsconfig.tsbuildinfo",
     "build": "tsc --build && tscp",
     "package": "tsc && tscp",
     "build:clean": "npm run clean && npm run build",

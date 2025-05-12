@@ -56,7 +56,7 @@
   "main": "./lib/components.js",
   "module": "./lib/components.js",
   "scripts": {
-    "clean": "rimraf lib *.tsbuildinfo",
+    "clean": "rimraf --glob lib *.tsbuildinfo",
     "build": "tsc --build tsconfig.production.json",
     "package": "npm run clean && vite build && npm run build",
     "type": "tsc --noEmit --emitDeclarationOnly false",
