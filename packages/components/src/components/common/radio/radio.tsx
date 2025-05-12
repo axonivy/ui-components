@@ -9,33 +9,20 @@ import { useReadonly } from '@/context/useReadonly';
 /**
  * RadioGroup, based on {@link https://www.radix-ui.com/docs/primitives/components/radio-group | Radix UI RadioGroup}
  */
-const RadioGroup = React.forwardRef<
-  React.ElementRef<typeof RadioGroupPrimitive.Root>,
-  React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Root>
->(({ disabled, className, ...props }, ref) => {
+const RadioGroup = ({ disabled, className, ...props }: React.ComponentProps<typeof RadioGroupPrimitive.Root>) => {
   const readonly = useReadonly();
-  return (
-    <RadioGroupPrimitive.Root
-      className={cn(radioGroup, className, 'ui-radio-group')}
-      disabled={readonly || disabled}
-      {...props}
-      ref={ref}
-    />
-  );
-});
+  return <RadioGroupPrimitive.Root className={cn(radioGroup, className, 'ui-radio-group')} disabled={readonly || disabled} {...props} />;
+};
 RadioGroup.displayName = RadioGroupPrimitive.Root.displayName;
 
-const RadioGroupItem = React.forwardRef<
-  React.ElementRef<typeof RadioGroupPrimitive.Item>,
-  React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Item>
->(({ className, ...props }, ref) => {
+const RadioGroupItem = ({ className, ...props }: React.ComponentProps<typeof RadioGroupPrimitive.Item>) => {
   const { inputProps } = useField();
   return (
-    <RadioGroupPrimitive.Item ref={ref} className={cn(radioGroupItem, className, 'ui-radio-group-item')} {...inputProps} {...props}>
+    <RadioGroupPrimitive.Item className={cn(radioGroupItem, className, 'ui-radio-group-item')} {...inputProps} {...props}>
       <RadioGroupPrimitive.Indicator className={cn(radioGroupIdicator)} />
     </RadioGroupPrimitive.Item>
   );
-});
+};
 RadioGroupItem.displayName = RadioGroupPrimitive.Item.displayName;
 
 export { RadioGroup, RadioGroupItem };

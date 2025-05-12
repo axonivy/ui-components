@@ -10,7 +10,7 @@ type ToasterProps = React.ComponentProps<typeof Sonner>;
 /**
  * Toaster, based on {@link https://sonner.emilkowal.ski/ | Sonner}
  */
-const Toaster = ({ ...props }: ToasterProps) => {
+const Toaster = (props: ToasterProps) => {
   const { theme = 'system' } = useTheme();
   return (
     <Sonner

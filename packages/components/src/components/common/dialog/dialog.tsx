@@ -18,52 +18,42 @@ const DialogPortal = DialogPrimitive.Portal;
 
 const DialogClose = DialogPrimitive.Close;
 
-const DialogOverlay = React.forwardRef<
-  React.ElementRef<typeof DialogPrimitive.Overlay>,
-  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Overlay>
->(({ className, ...props }, ref) => (
-  <DialogPrimitive.Overlay ref={ref} className={cn(overlay, className, 'ui-dialog-overlay')} {...props} />
-));
+const DialogOverlay = ({ className, ...props }: React.ComponentProps<typeof DialogPrimitive.Overlay>) => (
+  <DialogPrimitive.Overlay className={cn(overlay, className, 'ui-dialog-overlay')} {...props} />
+);
 DialogOverlay.displayName = DialogPrimitive.Overlay.displayName;
 
-const DialogContent = React.forwardRef<
-  React.ElementRef<typeof DialogPrimitive.Content>,
-  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content>
->(({ className, children, ...props }, ref) => (
+const DialogContent = ({ className, children, ...props }: React.ComponentProps<typeof DialogPrimitive.Content>) => (
   <DialogPortal>
     <DialogOverlay />
-    <DialogPrimitive.Content ref={ref} className={cn(content, className, 'ui-dialog-content')} {...props}>
+    <DialogPrimitive.Content className={cn(content, className, 'ui-dialog-content')} {...props}>
       {children}
       <DialogPrimitive.Close asChild>
         <Button icon={IvyIcons.Close} className={contentClose} />
       </DialogPrimitive.Close>
     </DialogPrimitive.Content>
   </DialogPortal>
-));
+);
 DialogContent.displayName = DialogPrimitive.Content.displayName;
 
-const DialogHeader = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => (
+const DialogHeader = ({ className, ...props }: React.ComponentProps<typeof Flex>) => (
   <Flex direction='column' gap={2} className={cn(header, className, 'ui-dialog-header')} {...props} />
 );
 DialogHeader.displayName = 'DialogHeader';
 
-const DialogFooter = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => (
+const DialogFooter = ({ className, ...props }: React.ComponentProps<typeof Flex>) => (
   <Flex direction='row-reverse' gap={2} className={cn(footer, className, 'ui-dialog-footer')} {...props} />
 );
 DialogFooter.displayName = 'DialogFooter';
 
-const DialogTitle = React.forwardRef<
-  React.ElementRef<typeof DialogPrimitive.Title>,
-  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Title>
->(({ className, ...props }, ref) => <DialogPrimitive.Title ref={ref} className={cn(title, className, 'ui-dialog-title')} {...props} />);
+const DialogTitle = ({ className, ...props }: React.ComponentProps<typeof DialogPrimitive.Title>) => (
+  <DialogPrimitive.Title className={cn(title, className, 'ui-dialog-title')} {...props} />
+);
 DialogTitle.displayName = DialogPrimitive.Title.displayName;
 
-const DialogDescription = React.forwardRef<
-  React.ElementRef<typeof DialogPrimitive.Description>,
-  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Description>
->(({ className, ...props }, ref) => (
-  <DialogPrimitive.Description ref={ref} className={cn(description, className, 'ui-dialog-description')} {...props} />
-));
+const DialogDescription = ({ className, ...props }: React.ComponentProps<typeof DialogPrimitive.Description>) => (
+  <DialogPrimitive.Description className={cn(description, className, 'ui-dialog-description')} {...props} />
+);
 DialogDescription.displayName = DialogPrimitive.Description.displayName;
 
 export {

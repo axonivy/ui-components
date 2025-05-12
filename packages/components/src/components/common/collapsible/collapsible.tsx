@@ -20,10 +20,9 @@ import { ButtonGroup, type ButtonGroupProps } from '@/components/common/button/b
 /**
  * Collapsible, based on {@link https://www.radix-ui.com/docs/primitives/components/collapsible | Radix UI Collapsible}
  */
-const Collapsible = React.forwardRef<
-  React.ElementRef<typeof CollapsiblePrimitive.Root>,
-  React.ComponentPropsWithoutRef<typeof CollapsiblePrimitive.Root>
->(({ className, ...props }, ref) => <CollapsiblePrimitive.Root ref={ref} className={cn(root, className, 'ui-collapsible')} {...props} />);
+const Collapsible = ({ className, ...props }: React.ComponentProps<typeof CollapsiblePrimitive.Root>) => (
+  <CollapsiblePrimitive.Root className={cn(root, className, 'ui-collapsible')} {...props} />
+);
 Collapsible.displayName = 'CollapsibleRoot';
 
 export type CollapsibleControlProps = { className: string };
@@ -33,12 +32,15 @@ type CollapsibleTriggerProps = {
   control?: (props: CollapsibleControlProps) => React.ReactNode;
 };
 
-const CollapsibleTrigger = React.forwardRef<
-  React.ElementRef<typeof CollapsiblePrimitive.CollapsibleTrigger>,
-  React.ComponentPropsWithoutRef<typeof CollapsiblePrimitive.CollapsibleTrigger> & CollapsibleTriggerProps
->(({ state, control, className, children, ...props }, ref) => (
+const CollapsibleTrigger = ({
+  state,
+  control,
+  className,
+  children,
+  ...props
+}: React.ComponentProps<typeof CollapsiblePrimitive.CollapsibleTrigger> & CollapsibleTriggerProps) => (
   <div className={cn(header)}>
-    <CollapsiblePrimitive.CollapsibleTrigger ref={ref} className={cn(trigger, className, 'ui-collapsible-trigger')} {...props}>
+    <CollapsiblePrimitive.CollapsibleTrigger className={cn(trigger, className, 'ui-collapsible-trigger')} {...props}>
       <Flex alignItems='center' gap={2}>
         {children}
         {state}
@@ -49,24 +51,22 @@ const CollapsibleTrigger = React.forwardRef<
       <IvyIcon icon={IvyIcons.Chevron} />
     </CollapsiblePrimitive.CollapsibleTrigger>
   </div>
-));
+);
 CollapsibleTrigger.displayName = 'CollapsibleTrigger';
 
-const CollapsibleState = React.forwardRef<React.ElementRef<typeof StateDot>, React.ComponentPropsWithoutRef<typeof StateDot>>(
-  ({ className, ...props }, ref) => <StateDot ref={ref} className={cn(stateClass, className)} {...props} />
+const CollapsibleState = ({ className, ...props }: React.ComponentProps<typeof StateDot>) => (
+  <StateDot className={cn(stateClass, className)} {...props} />
 );
 CollapsibleState.displayName = 'CollapsibleState';
 
-type CollapsibleContentProps = React.ComponentPropsWithoutRef<typeof CollapsiblePrimitive.Content>;
+type CollapsibleContentProps = React.ComponentProps<typeof CollapsiblePrimitive.Content>;
 
-const CollapsibleContent = React.forwardRef<React.ElementRef<typeof CollapsiblePrimitive.Content>, CollapsibleContentProps>(
-  ({ className, children, style, ...props }, ref) => (
-    <CollapsiblePrimitive.Content ref={ref} className={cn(content, className, 'ui-collapsible-content')} role='region' {...props}>
-      <div className={contentData} style={style}>
-        {children}
-      </div>
-    </CollapsiblePrimitive.Content>
-  )
+const CollapsibleContent = ({ className, children, style, ...props }: React.ComponentProps<typeof CollapsiblePrimitive.Content>) => (
+  <CollapsiblePrimitive.Content className={cn(content, className, 'ui-collapsible-content')} role='region' {...props}>
+    <div className={contentData} style={style}>
+      {children}
+    </div>
+  </CollapsiblePrimitive.Content>
 );
 CollapsibleContent.displayName = CollapsiblePrimitive.Content.displayName;
 

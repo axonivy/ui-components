@@ -38,7 +38,7 @@
   },
   "peerDependencies": {
     "@axonivy/ui-icons": "~13.1.0-next",
-    "react": "^18.2 || ^19.0"
+    "react": "^19.0"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.6.3",
