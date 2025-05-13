@@ -19,26 +19,19 @@ const ivyIconForSeverity = (variant: NonNullable<MessageVariants>['variant']) =>
 };
 export type MessageData = MessageVariants & { message?: string };
 
-export type MessageProps = React.HTMLAttributes<HTMLParagraphElement> & MessageData;
+export type MessageProps = React.ComponentProps<'p'> & MessageData;
 
-const Message = React.forwardRef<HTMLParagraphElement, MessageProps>(({ message, variant, className, children, ...props }, ref) => {
+const Message = ({ message, variant, className, children, ...props }: MessageProps) => {
   const { messageProps } = useField();
   const body = message ? message : children;
   const icon = ivyIconForSeverity(variant);
   return (
-    <p
-      ref={ref}
-      className={cn(messageClass({ variant }), className, 'ui-message')}
-      title={message}
-      data-state={variant}
-      {...messageProps}
-      {...props}
-    >
+    <p className={cn(messageClass({ variant }), className, 'ui-message')} title={message} data-state={variant} {...messageProps} {...props}>
       {icon && <IvyIcon icon={icon} />}
       {body}
     </p>
   );
-});
+};
 Message.displayName = 'Message';
 
 export { Message };

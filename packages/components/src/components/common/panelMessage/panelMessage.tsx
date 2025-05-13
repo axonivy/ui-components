@@ -9,15 +9,13 @@ type PanelMessageProps = {
   mode?: 'column' | 'row';
   icon?: IvyIcons;
   message: string;
-} & React.HTMLAttributes<HTMLDivElement>;
+} & React.ComponentProps<typeof Flex>;
 
-const PanelMessage = React.forwardRef<HTMLDivElement, PanelMessageProps>(
-  ({ message, mode = 'column', icon = IvyIcons.DragDrop, ...props }, ref) => (
-    <Flex justifyContent='center' alignItems='center' direction={mode} className={panel} ref={ref} {...props}>
-      <IvyIcon icon={icon} className={panelIcon({ mode })} />
-      <Message className={panelMessage}>{message}</Message>
-    </Flex>
-  )
+const PanelMessage = ({ message, mode = 'column', icon = IvyIcons.DragDrop, ...props }: PanelMessageProps) => (
+  <Flex justifyContent='center' alignItems='center' direction={mode} className={panel} {...props}>
+    <IvyIcon icon={icon} className={panelIcon({ mode })} />
+    <Message className={panelMessage}>{message}</Message>
+  </Flex>
 );
 PanelMessage.displayName = 'PanelMessage';
 

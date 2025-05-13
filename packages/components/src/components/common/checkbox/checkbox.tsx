@@ -13,15 +13,11 @@ import { Label } from '@/components/common/label/label';
  * Checkbox, based on {@link https://www.radix-ui.com/docs/primitives/components/checkbox | Radix UI Checkbox}
  * Use the {@link BasicCheckbox} component for a Checkbox with a label
  */
-const Checkbox = React.forwardRef<
-  React.ElementRef<typeof CheckboxPrimitive.Root>,
-  React.ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root>
->(({ disabled, className, ...props }, ref) => {
+const Checkbox = ({ disabled, className, ...props }: React.ComponentProps<typeof CheckboxPrimitive.Root>) => {
   const readonly = useReadonly();
   const { inputProps } = useField();
   return (
     <CheckboxPrimitive.Root
-      ref={ref}
       className={cn(checkboxRoot, className, 'ui-checkbox')}
       disabled={readonly || disabled}
       {...inputProps}
@@ -32,10 +28,10 @@ const Checkbox = React.forwardRef<
       </CheckboxPrimitive.Indicator>
     </CheckboxPrimitive.Root>
   );
-});
+};
 Checkbox.displayName = CheckboxPrimitive.Root.displayName;
 
-export type BasicCheckboxProps = React.ComponentPropsWithoutRef<typeof Checkbox> & {
+export type BasicCheckboxProps = React.ComponentProps<typeof Checkbox> & {
   label: string;
 };
 

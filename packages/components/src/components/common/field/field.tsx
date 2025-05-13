@@ -42,26 +42,24 @@ const createIds = (id: string) => {
  * Use the {@link useField} hook to access the FieldContext properties.
  * Use the {@link BasicField} component for a Field with predefined Label and Message block.
  */
-const Field = React.forwardRef<React.ElementRef<typeof Flex>, React.ComponentPropsWithoutRef<typeof Flex>>(
-  ({ direction = 'column', gap = 1, className, ...props }, ref) => {
-    const id = React.useId();
-    return (
-      <FieldContext.Provider value={{ id }}>
-        <Flex direction={direction} gap={gap} ref={ref} className={cn(className, 'ui-field')} {...props} />
-      </FieldContext.Provider>
-    );
-  }
-);
+const Field = ({ direction = 'column', gap = 1, className, ...props }: React.ComponentProps<typeof Flex>) => {
+  const id = React.useId();
+  return (
+    <FieldContext.Provider value={{ id }}>
+      <Flex direction={direction} gap={gap} className={cn(className, 'ui-field')} {...props} />
+    </FieldContext.Provider>
+  );
+};
 Field.displayName = 'Field';
 
-export type BasicFieldProps = React.HTMLAttributes<HTMLDivElement> & {
+export type BasicFieldProps = React.ComponentProps<typeof Field> & {
   label?: string;
   control?: React.ReactNode;
   message?: MessageData;
 };
 
-const BasicField = React.forwardRef<HTMLDivElement, BasicFieldProps>(({ label, control, message, className, children, ...props }, ref) => (
-  <Field ref={ref} className={cn(className, field, 'ui-fieldset')} data-message-state={message ? message.variant : undefined} {...props}>
+const BasicField = ({ label, control, message, className, children, ...props }: BasicFieldProps) => (
+  <Field className={cn(className, field, 'ui-fieldset')} data-message-state={message ? message.variant : undefined} {...props}>
     <Flex alignItems='center' justifyContent='space-between' className={cn('ui-fieldset-label')}>
       <Label>{label}</Label>
       {control}
@@ -69,7 +67,7 @@ const BasicField = React.forwardRef<HTMLDivElement, BasicFieldProps>(({ label, c
     {children}
     {message && <Message {...message} />}
   </Field>
-));
+);
 BasicField.displayName = 'BasicField';
 
 export { Field, BasicField };

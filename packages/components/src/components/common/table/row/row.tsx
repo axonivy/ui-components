@@ -100,7 +100,7 @@ const ReorderRow = <TData,>({ id, updateOrder, row, className, ...props }: Reord
 };
 ReorderRow.displayName = 'ReorderRow';
 
-const ReorderHandleWrapper = ({ children, className }: React.HTMLAttributes<HTMLTableCellElement>) => (
+const ReorderHandleWrapper = ({ children, className }: React.ComponentProps<typeof Flex>) => (
   <Flex direction='row' alignItems='center' gap={3} className={cn(reorderHandle, 'ui-dnd-row-handle', className)}>
     {children}
     <IvyIcon icon={IvyIcons.EditDots} className={cn(reorderHandleIcon, 'ui-dnd-row-handleicon')} />

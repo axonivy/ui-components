@@ -8,10 +8,10 @@ export type IvyIconProps = {
   spin?: boolean;
 };
 
-interface IconProps extends IvyIconProps, React.ButtonHTMLAttributes<HTMLElement> {}
+interface IconProps extends IvyIconProps, React.ComponentProps<'i'> {}
 
-const IvyIcon = React.forwardRef<HTMLElement, IconProps>(({ icon, rotate, spin, className, ...props }, ref) => (
-  <i className={cn('ivy', `ivy-${icon}`, rotate && `ivy-rotate-${rotate}`, spin && 'ivy-spin', className)} {...props} ref={ref} />
-));
+const IvyIcon = ({ icon, rotate, spin, className, ...props }: IconProps) => (
+  <i className={cn('ivy', `ivy-${icon}`, rotate && `ivy-rotate-${rotate}`, spin && 'ivy-spin', className)} {...props} />
+);
 
 export { IvyIcon };

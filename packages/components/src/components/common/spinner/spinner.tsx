@@ -1,7 +1,7 @@
 import { cn } from '@/utils/class-name';
 import { spinner, type SpinnerVariants } from './spinner.css';
 
-type SpinnerProps = React.HTMLAttributes<HTMLSpanElement> & SpinnerVariants;
+type SpinnerProps = React.ComponentProps<'span'> & SpinnerVariants;
 
 /* from https://cssloaders.github.io/, licensed under MIT */
 const Spinner = ({ size, className, ...props }: SpinnerProps) => <span className={cn(spinner({ size }), className)} {...props} />;

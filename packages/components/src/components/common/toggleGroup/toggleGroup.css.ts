@@ -1,5 +1,5 @@
 import { vars } from '@/styles/theme.css';
-import { recipe } from '@vanilla-extract/recipes';
+import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
 
 export const toggleGroup = recipe({
   base: {
@@ -16,3 +16,5 @@ export const toggleGroup = recipe({
     }
   }
 });
+
+export type ToggleGroupVariants = RecipeVariants<typeof toggleGroup>;

@@ -5,21 +5,19 @@ import { expandButton, resizer, resizerLine, sortButton, sortHead } from './head
 import { Button } from '@/components/common/button/button';
 import { Flex } from '@/components/common/flex/flex';
 
-const ColumnResizer = <TData,>({ header }: { header: HeaderContext<TData, unknown> }) => {
-  return (
-    <Flex
-      justifyContent='center'
-      onMouseDown={header.header.getResizeHandler()}
-      onTouchStart={header.header.getResizeHandler()}
-      className={resizer}
-      data-resize-state={header.column.getIsResizing() ? 'active' : 'inactive'}
-    >
-      <div className={resizerLine} />
-    </Flex>
-  );
-};
+const ColumnResizer = <TData,>({ header }: { header: HeaderContext<TData, unknown> }) => (
+  <Flex
+    justifyContent='center'
+    onMouseDown={header.header.getResizeHandler()}
+    onTouchStart={header.header.getResizeHandler()}
+    className={resizer}
+    data-resize-state={header.column.getIsResizing() ? 'active' : 'inactive'}
+  >
+    <div className={resizerLine} />
+  </Flex>
+);
 
-type TableResizableHeaderProps<TData> = React.HTMLAttributes<HTMLTableRowElement> & {
+type TableResizableHeaderProps<TData> = React.ComponentProps<typeof TableRow> & {
   headerGroups: Array<HeaderGroup<TData>>;
 };
 
