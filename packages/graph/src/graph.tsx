@@ -1,4 +1,5 @@
 import '@xyflow/react/dist/style.css';
+import './graph.css';
 import { IvyIcons } from '@axonivy/ui-icons';
 import { Background, ConnectionMode, Controls, MiniMap, Panel, ReactFlow, ReactFlowProvider, type Node } from '@xyflow/react';
 import { BasicSelect, Button, Flex } from '@axonivy/ui-components';
@@ -74,14 +75,14 @@ const GraphRoot = ({ graphNodes, options }: GraphProps) => {
             size='large'
             onClick={() => onLayout('TB')}
             title='horizontal alignment'
-            style={{ background: 'white', boxShadow: 'var(--xy-controls-box-shadow, var(--xy-controls-box-shadow-default))' }}
+            style={{ boxShadow: 'var(--xy-controls-box-shadow, var(--xy-controls-box-shadow-default))' }}
           />
           <Button
             icon={IvyIcons.Process}
             size='large'
             title='vertical alignment'
             onClick={() => onLayout('LR')}
-            style={{ background: 'white', boxShadow: 'var(--xy-controls-box-shadow, var(--xy-controls-box-shadow-default))' }}
+            style={{ boxShadow: 'var(--xy-controls-box-shadow, var(--xy-controls-box-shadow-default))' }}
           />
         </Flex>
       </Panel>
@@ -105,13 +106,11 @@ const GraphRoot = ({ graphNodes, options }: GraphProps) => {
   );
 };
 
-const Graph = ({ graphNodes, options }: GraphProps) => {
-  return (
-    <ReactFlowProvider>
-      <GraphRoot graphNodes={graphNodes} options={options} />
-    </ReactFlowProvider>
-  );
-};
+const Graph = ({ graphNodes, options }: GraphProps) => (
+  <ReactFlowProvider>
+    <GraphRoot graphNodes={graphNodes} options={options} />
+  </ReactFlowProvider>
+);
 Graph.displayName = 'Graph';
 
 export { Graph };

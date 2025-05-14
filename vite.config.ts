@@ -8,6 +8,8 @@ export default defineConfig({
   plugins: [veVitePlugin(), visualizer(), react()],
   resolve: {
     alias: {
+      '@axonivy/ui-components/lib': resolve(__dirname, './packages/components/lib'),
+      '@axonivy/ui-components': resolve(__dirname, './packages/components/src'),
       '@': resolve(__dirname, './packages/components/src')
     }
   }

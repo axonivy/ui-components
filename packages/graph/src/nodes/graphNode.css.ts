@@ -1,19 +1,20 @@
 import { style } from '@vanilla-extract/css';
+import { vars } from '@axonivy/ui-components';
 
 export const node = style({
   width: '100%',
   height: '100%',
   textAlign: 'left',
   borderRadius: '5px',
-  background: 'white',
+  background: vars.color.background,
   display: 'inline-block',
-  border: '1px solid  var(--body)',
+  border: `1px solid ${vars.color.body}`,
   selectors: {
     '&[data-highlight="true"]': {
-      border: '2px solid var(--success-color)'
+      borderColor: vars.color.success
     },
     '&[data-selected="true"]': {
-      border: '2px solid var(--P500)'
+      borderColor: vars.color.p300
     }
   }
 });
@@ -23,7 +24,7 @@ export const customNodeHeaderLabel = style({
 });
 
 export const customNodeHeaderInfo = style({
-  color: 'var(--N700)'
+  color: vars.color.n700
 });
 
 export const expander = style({
