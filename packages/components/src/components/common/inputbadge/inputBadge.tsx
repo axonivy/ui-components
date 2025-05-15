@@ -2,7 +2,7 @@ import { forwardRef, useMemo, type ElementRef, type ReactNode } from 'react';
 import { useField } from '../field/field';
 import { IvyIcon } from '../icon/icon';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../tooltip/tooltip';
-import { inputBadge, inputBadgeIcon, inputBadgeLine, inputBadgeOutput, inputBadgeText } from './inputBadge.css';
+import { inputBadge, inputBadgeIcon, inputBadgeLine, badgeOutput, inputBadgeText } from './inputBadge.css';
 import type { IvyIcons } from '@axonivy/ui-icons';
 import { Flex } from '../flex/flex';
 import { splitNewLine } from '@/utils/string';
@@ -50,8 +50,10 @@ export const InputBadge = forwardRef<ElementRef<'output'>, InputBadgeProps>(({ v
   const { inputProps } = useField();
   const items = useMemo(() => findBadges(value, badgeProps), [value, badgeProps]);
   return (
-    <output className={cn(inputBadgeOutput, className)} {...inputProps} {...props} ref={forwardRef}>
-      {items}
+    <output className={cn(badgeOutput, className)} {...inputProps} {...props} ref={forwardRef}>
+      <Flex className={inputBadgeLine} role='row'>
+        {items}
+      </Flex>
     </output>
   );
 });
@@ -61,7 +63,7 @@ export const InputBadgeArea = forwardRef<ElementRef<'output'>, InputBadgeProps>(
     const { inputProps } = useField();
     const lines = useMemo(() => splitNewLine(value).map(e => findBadges(e, badgeProps)), [value, badgeProps]);
     return (
-      <output className={cn(inputBadgeOutput, className)} {...inputProps} {...props} ref={forwardRef}>
+      <output className={cn(badgeOutput, className)} {...inputProps} {...props} ref={forwardRef}>
         {lines.map((line, index) => (
           <Flex key={index} className={inputBadgeLine} role='row'>
             {line}
