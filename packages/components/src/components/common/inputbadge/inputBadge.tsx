@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useField } from '../field/field';
 import { IvyIcon } from '../icon/icon';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../tooltip/tooltip';
-import { inputBadge, inputBadgeIcon, inputBadgeLine, inputBadgeOutput, inputBadgeText } from './inputBadge.css';
+import { inputBadge, inputBadgeIcon, inputBadgeLine, badgeOutput, inputBadgeText } from './inputBadge.css';
 import type { IvyIcons } from '@axonivy/ui-icons';
 import { Flex } from '../flex/flex';
 import { splitNewLine } from '@/utils/string';
@@ -50,8 +50,10 @@ export const InputBadge = ({ value, badgeProps, className, ...props }: InputBadg
   const { inputProps } = useField();
   const items = React.useMemo(() => findBadges(value, badgeProps), [value, badgeProps]);
   return (
-    <output className={cn(inputBadgeOutput, className)} {...inputProps} {...props}>
-      {items}
+    <output className={cn(badgeOutput, className)} {...inputProps} {...props}>
+      <Flex className={inputBadgeLine} role='row'>
+        {items}
+      </Flex>
     </output>
   );
 };
@@ -60,7 +62,7 @@ export const InputBadgeArea = ({ value, badgeProps, className, ...props }: Input
   const { inputProps } = useField();
   const lines = React.useMemo(() => splitNewLine(value).map(e => findBadges(e, badgeProps)), [value, badgeProps]);
   return (
-    <output className={cn(inputBadgeOutput, className)} {...inputProps} {...props}>
+    <output className={cn(badgeOutput, className)} {...inputProps} {...props}>
       {lines.map((line, index) => (
         <Flex key={index} className={inputBadgeLine} role='row'>
           {line}

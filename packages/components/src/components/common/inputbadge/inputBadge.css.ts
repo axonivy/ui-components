@@ -1,7 +1,7 @@
 import { vars } from '@/styles/theme.css';
 import { style } from '@vanilla-extract/css';
 
-export const inputBadgeOutput = style({
+export const badgeOutput = style({
   display: 'block',
   borderRadius: vars.border.r1,
   border: vars.dynamic.inputBorder,
@@ -12,7 +12,7 @@ export const inputBadgeOutput = style({
   textAlign: 'start',
   padding: vars.padding.input,
   whiteSpace: 'nowrap',
-  overflow: 'hidden',
+  overflow: 'auto',
   minHeight: '14px',
   width: `calc(100% - 2 * ${vars.padding.input} - 2px)`
 });
@@ -24,12 +24,13 @@ export const inputBadge = style({
   borderRadius: vars.border.r1,
   userSelect: 'none',
   border: vars.border.basic,
-  padding: '2px'
+  padding: '2px',
+  whiteSpace: 'nowrap'
 });
 
 export const inputBadgeLine = style({
   height: '20px',
-  whiteSpace: 'pre-wrap'
+  gap: 2
 });
 
 export const inputBadgeIcon = style({
