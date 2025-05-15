@@ -1,6 +1,16 @@
 import '@xyflow/react/dist/style.css';
 import { IvyIcons } from '@axonivy/ui-icons';
-import { Background, ConnectionMode, Controls, MiniMap, Panel, ReactFlow, ReactFlowProvider, type Node } from '@xyflow/react';
+import {
+  Background,
+  ConnectionMode,
+  Controls,
+  MiniMap,
+  Panel,
+  ReactFlow,
+  ReactFlowProvider,
+  type Node,
+  type Viewport
+} from '@xyflow/react';
 import { BasicSelect, Button, Flex } from '@axonivy/ui-components';
 import { useGraph } from './data/useGraph';
 import GraphCircleFloatingEdge from './edges/graphCircleFloatingEdge';
@@ -36,6 +46,7 @@ export type GraphProps = {
     circleFloatingEdges?: boolean;
     minimap?: boolean;
     controls?: boolean;
+    defaultViewport?: Viewport;
   };
 };
 
@@ -51,6 +62,8 @@ const GraphRoot = ({ graphNodes, options }: GraphProps) => {
       edges={edges}
       onNodesChange={onNodesChange}
       onEdgesChange={onEdgesChange}
+      proOptions={{ hideAttribution: true }}
+      defaultViewport={options?.defaultViewport}
       onConnect={onConnect}
       nodeTypes={{ custom: GraphNode }}
       edgeTypes={{ floating: options?.circleFloatingEdges ? GraphCircleFloatingEdge : GraphFloatingEdge }}
