@@ -36,12 +36,20 @@ export const ThemeProvider = ({
   const [theme, setTheme] = useState<Theme>(() => (storageKey && (localStorage.getItem(storageKey) as Theme)) || defaultTheme);
 
   useEffect(() => {
-    if (disabled) {
-      return;
+    changeTheme(theme, disabled, root);
+  }, [disabled, root, theme]);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    const handleChange = () => {
+      changeTheme(theme, disabled, root);
+    };
+    if (theme === 'system') {
+      mediaQuery.addEventListener('change', handleChange);
     }
-    root.classList.remove('light', 'dark');
-    root.classList.add(realTheme(theme));
-    root.classList.add(theme);
+    return () => {
+      mediaQuery.removeEventListener('change', handleChange);
+    };
   }, [disabled, root, theme]);
 
   const value = {
@@ -60,6 +68,14 @@ export const ThemeProvider = ({
       {children}
     </ThemeProviderContext.Provider>
   );
+};
+
+const changeTheme = (theme: Theme, disabled: boolean, root: HTMLElement) => {
+  if (disabled) {
+    return;
+  }
+  root.classList.remove('light', 'dark');
+  root.classList.add(realTheme(theme));
 };
 
 const realTheme = (theme: Theme) => {
