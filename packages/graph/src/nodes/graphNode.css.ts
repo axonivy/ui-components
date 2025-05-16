@@ -29,17 +29,14 @@ export const customNodeHeaderInfo = style({
 
 export const expander = style({
   cursor: 'pointer',
-  fontSize: '16px'
-});
-
-export const expanderOpen = style({
-  transform: 'rotate(270deg)',
-  transition: 'transform 200ms cubic-bezier(0.87, 0, 0.13, 1)'
-});
-
-export const expanderClose = style({
+  fontSize: '16px',
+  transition: 'transform 200ms cubic-bezier(0.87, 0, 0.13, 1)',
   transform: 'rotate(90deg)',
-  transition: 'transform 200ms cubic-bezier(0.87, 0, 0.13, 1)'
+  selectors: {
+    '&[aria-expanded="true"]': {
+      transform: 'rotate(270deg)'
+    }
+  }
 });
 
 export const containerPadding = style({
