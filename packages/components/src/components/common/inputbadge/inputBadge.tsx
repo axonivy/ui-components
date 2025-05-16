@@ -31,7 +31,7 @@ const Badge = ({ icon, text, originalText, tooltipGen }: BadgeProps) => (
   <TooltipProvider>
     <Tooltip>
       <TooltipTrigger asChild>
-        <Flex gap={1} alignItems='center' className={inputBadge}>
+        <Flex gap={1} alignItems='center' className={cn(inputBadge, 'ui-input-badge-item')}>
           <IvyIcon className={inputBadgeIcon} icon={icon} />
           {text}
         </Flex>
@@ -50,7 +50,7 @@ export const InputBadge = forwardRef<ElementRef<'output'>, InputBadgeProps>(({ v
   const { inputProps } = useField();
   const items = useMemo(() => findBadges(value, badgeProps), [value, badgeProps]);
   return (
-    <output className={cn(badgeOutput, className)} {...inputProps} {...props} ref={forwardRef}>
+    <output className={cn(badgeOutput, className, 'ui-input-badge')} {...inputProps} {...props} ref={forwardRef}>
       <Flex className={inputBadgeLine} role='row'>
         {items}
       </Flex>
@@ -63,7 +63,7 @@ export const InputBadgeArea = forwardRef<ElementRef<'output'>, InputBadgeProps>(
     const { inputProps } = useField();
     const lines = useMemo(() => splitNewLine(value).map(e => findBadges(e, badgeProps)), [value, badgeProps]);
     return (
-      <output className={cn(badgeOutput, className)} {...inputProps} {...props} ref={forwardRef}>
+      <output className={cn(badgeOutput, className, 'ui-input-badge-area')} {...inputProps} {...props} ref={forwardRef}>
         {lines.map((line, index) => (
           <Flex key={index} className={inputBadgeLine} role='row'>
             {line}

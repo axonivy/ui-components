@@ -12,7 +12,8 @@ export const badgeOutput = style({
   textAlign: 'start',
   padding: vars.padding.input,
   whiteSpace: 'nowrap',
-  overflow: 'auto',
+  overflowX: 'auto',
+  overflowY: 'hidden',
   minHeight: '14px',
   width: `calc(100% - 2 * ${vars.padding.input} - 2px)`
 });
