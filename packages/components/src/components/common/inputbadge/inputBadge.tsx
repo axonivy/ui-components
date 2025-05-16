@@ -31,7 +31,7 @@ const Badge = ({ icon, text, originalText, tooltipGen }: BadgeProps) => (
   <TooltipProvider>
     <Tooltip>
       <TooltipTrigger asChild>
-        <Flex gap={1} alignItems='center' className={inputBadge}>
+        <Flex gap={1} alignItems='center' className={cn(inputBadge, 'ui-input-badge-item')}>
           <IvyIcon className={inputBadgeIcon} icon={icon} />
           {text}
         </Flex>
@@ -50,7 +50,7 @@ export const InputBadge = ({ value, badgeProps, className, ...props }: InputBadg
   const { inputProps } = useField();
   const items = React.useMemo(() => findBadges(value, badgeProps), [value, badgeProps]);
   return (
-    <output className={cn(badgeOutput, className)} {...inputProps} {...props}>
+    <output className={cn(badgeOutput, className, 'ui-input-badge')} {...inputProps} {...props}>
       <Flex className={inputBadgeLine} role='row'>
         {items}
       </Flex>
@@ -62,7 +62,7 @@ export const InputBadgeArea = ({ value, badgeProps, className, ...props }: Input
   const { inputProps } = useField();
   const lines = React.useMemo(() => splitNewLine(value).map(e => findBadges(e, badgeProps)), [value, badgeProps]);
   return (
-    <output className={cn(badgeOutput, className)} {...inputProps} {...props}>
+    <output className={cn(badgeOutput, className, 'ui-input-badge-area')} {...inputProps} {...props}>
       {lines.map((line, index) => (
         <Flex key={index} className={inputBadgeLine} role='row'>
           {line}
