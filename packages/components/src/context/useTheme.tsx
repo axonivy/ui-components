@@ -40,11 +40,7 @@ export const ThemeProvider = ({
       return;
     }
     root.classList.remove('light', 'dark');
-    if (theme === 'system') {
-      const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-      root.classList.add(systemTheme);
-      return;
-    }
+    root.classList.add(realTheme(theme));
     root.classList.add(theme);
   }, [disabled, root, theme]);
 
@@ -66,8 +62,15 @@ export const ThemeProvider = ({
   );
 };
 
+const realTheme = (theme: Theme) => {
+  if (theme === 'system') {
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+  return theme;
+};
+
 export const useTheme = () => {
   const context = useContext(ThemeProviderContext);
   if (context === undefined) throw new Error('useTheme must be used within a ThemeProvider');
-  return context;
+  return { ...context, realTheme: realTheme(context.theme) };
 };
