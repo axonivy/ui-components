@@ -31,10 +31,12 @@ test('system theme', async () => {
   const { result } = renderHook(useTheme, { wrapper: props => <ThemeProvider {...props} defaultTheme='system' /> });
   expect(result.current.theme).toEqual('system');
   expect(result.current.disabled).toEqual(false);
+  expect(result.current.realTheme).toEqual('light');
   expect(window.document.documentElement.className).includes('light');
 });
 
 test('body element', async () => {
+  window.document.documentElement.className = '';
   const root = window.document.body;
   const { result } = renderHook(useTheme, { wrapper: props => <ThemeProvider {...props} root={root} /> });
   expect(result.current.theme).toEqual('system');
