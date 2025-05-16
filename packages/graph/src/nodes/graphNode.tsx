@@ -4,8 +4,6 @@ import {
   customNodeHeaderInfo,
   customNodeHeaderLabel,
   expander,
-  expanderClose,
-  expanderOpen,
   handle,
   iconHeight,
   minWidth,
@@ -14,7 +12,7 @@ import {
 import type { GraphNode as GraphNodeType } from '../graph';
 import { IvyIcons } from '@axonivy/ui-icons';
 import { useState } from 'react';
-import { cn, Flex, IvyIcon, Separator } from '@axonivy/ui-components';
+import { Button, Flex, Separator } from '@axonivy/ui-components';
 
 export const GraphNode = ({ data, selected }: NodeProps<GraphNodeType>) => {
   const disableHandles = data.nodeData.options?.disableHandles;
@@ -38,12 +36,12 @@ export const GraphNode = ({ data, selected }: NodeProps<GraphNodeType>) => {
               {data.nodeData.options?.expandContent && (
                 <>
                   <Separator decorative orientation='vertical' style={{ marginInline: 'var(--size-1)' }} />
-                  <IvyIcon
+                  <Button
                     icon={IvyIcons.Chevron}
-                    className={cn(expander, expanded ? expanderOpen : expanderClose)}
-                    onClick={() => {
-                      setExpanded(!expanded);
-                    }}
+                    aria-label='Expand node'
+                    aria-expanded={expanded}
+                    className={expander}
+                    onClick={() => setExpanded(!expanded)}
                   />
                 </>
               )}
