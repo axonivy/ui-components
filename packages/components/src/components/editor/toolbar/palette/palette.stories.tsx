@@ -36,7 +36,9 @@ const sections: PaletteConfig['sections'] = {
   'BPMN Activities': [{ name: 'Generic', description: 'Generic', icon: IvyIcons.CallOutline }]
 };
 
-export const Default = () => <BasicPalette sections={sections} options={{ searchPlaceholder: 'Search and click on an element' }} />;
+export const Default = () => (
+  <BasicPalette sections={sections} options={{ searchPlaceholder: 'Search and click on an element', emptyMessage: 'No elements found' }} />
+);
 
 type CustomPaletteItemConfig = PaletteItemConfig & {
   svgIcon: React.ReactNode;
