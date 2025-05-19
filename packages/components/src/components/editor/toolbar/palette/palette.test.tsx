@@ -8,6 +8,14 @@ const Popover = composeStory(PopoverPalette, Meta);
 
 global.alert = vi.fn();
 
+test('aciton', async () => {
+  render(<Palette />);
+  const userTask = screen.getAllByRole('button')[0];
+  expect(userTask).toHaveAccessibleName('User Task');
+  await userEvent.click(userTask);
+  expect(global.alert).toHaveBeenCalledWith('User Task');
+});
+
 test('search', async () => {
   render(<Palette />);
   expect(screen.getAllByRole('heading')).toHaveLength(3);
@@ -18,8 +26,10 @@ test('search', async () => {
   expect(screen.getAllByRole('button')).toHaveLength(4);
   expect(screen.getAllByRole('button')[1]).toHaveAccessibleName('User Task');
 
-  await userEvent.click(screen.getAllByRole('button')[1]);
-  expect(global.alert).toHaveBeenCalledWith('User Task');
+  await userEvent.type(screen.getByRole('textbox'), 'asdf');
+  expect(screen.queryByRole('heading')).not.toBeInTheDocument();
+  expect(screen.getAllByRole('button')).toHaveLength(1);
+  expect(screen.getByText('No elements found')).toBeInTheDocument();
 });
 
 test('keyboard', async () => {
