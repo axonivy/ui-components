@@ -45,10 +45,10 @@ const useGraph = ({ graphNodes, options }: GraphProps) => {
       setNodes([...layoutedNodes]);
       setEdges([...layoutedEdges]);
       window.requestAnimationFrame(() => {
-        fitView();
+        fitView({ maxZoom: options?.zoomOnInit?.applyOnLayoutAndFilter ? options.zoomOnInit.level : undefined });
       });
     },
-    [fitView, getEdges, getNodes]
+    [fitView, getEdges, getNodes, options?.zoomOnInit]
   );
 
   const onFilterApply = useCallback(
@@ -63,11 +63,11 @@ const useGraph = ({ graphNodes, options }: GraphProps) => {
       setEdges([...layoutedEdges]);
       setTimeout(() => {
         window.requestAnimationFrame(() => {
-          fitView();
+          fitView({ maxZoom: options?.zoomOnInit?.applyOnLayoutAndFilter ? options.zoomOnInit.level : undefined });
         });
       }, 0);
     },
-    [fitView, graphNodes, options, getNodes]
+    [fitView, getNodes, graphNodes, options]
   );
 
   // Initialize layouted nodes and edges
