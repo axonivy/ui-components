@@ -21,7 +21,7 @@ export const Default: Story = {
       <Graph
         graphNodes={transformedDataClasses}
         options={{
-          filter: true,
+          filter: { enabled: true },
           circleFloatingEdges: true,
           zoomOnInit: { level: 0.75 }
         }}

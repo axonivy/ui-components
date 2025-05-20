@@ -14,6 +14,10 @@ import {
 import type { NodeData, GraphNode, GraphProps } from '../graph';
 import { getLayoutedElements, type Direction } from './getLayoutedElements';
 
+export const CHAR_WIDTH = 7.5;
+export const DEFAULT_NODE_WIDTH = 172;
+export const DEFAULT_NODE_HEIGHT = 50;
+
 const useGraph = ({ graphNodes, options }: GraphProps) => {
   const [nodes, setNodes] = useState<Node[]>([]);
   const [edges, setEdges] = useState<Edge[]>([]);
@@ -112,6 +116,18 @@ function filterNodesBySelectedNode(graphNodes: Array<NodeData>, selectedNode: st
 
   return filteredNodes;
 }
+const getNodeSize = (node: NodeData, existingNodes: GraphNode[]): { width: number; height: number } => {
+  const measuredSize = existingNodes.find(n => n.id === node.id)?.measured;
+  if (measuredSize && typeof measuredSize.width === 'number' && typeof measuredSize.height === 'number') {
+    return measuredSize as { width: number; height: number };
+  }
+
+  const calculatedWidth = Math.max(node.label.length * CHAR_WIDTH, DEFAULT_NODE_WIDTH);
+  return {
+    width: calculatedWidth,
+    height: DEFAULT_NODE_HEIGHT
+  };
+};
 
 const mapNodesAndEdges = (graphNodes: NodeData[], existingNodes: GraphNode[], options?: GraphProps['options'], selectedNode?: string) => {
   const newNodes: GraphNode[] = graphNodes.map(node => ({
@@ -127,7 +143,7 @@ const mapNodesAndEdges = (graphNodes: NodeData[], existingNodes: GraphNode[], op
         }
       }
     },
-    measured: existingNodes.find(existingNode => existingNode.id === node.id)?.measured,
+    measured: getNodeSize(node, existingNodes),
     type: 'custom'
   }));
 

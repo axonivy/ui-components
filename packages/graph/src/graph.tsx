@@ -3,7 +3,7 @@ import './graph.css';
 import { IvyIcons } from '@axonivy/ui-icons';
 import { Background, ConnectionMode, Controls, MiniMap, Panel, ReactFlow, ReactFlowProvider, type Node } from '@xyflow/react';
 import { BasicSelect, Button, Flex } from '@axonivy/ui-components';
-import { useGraph } from './data/useGraph';
+import { CHAR_WIDTH, useGraph } from './data/useGraph';
 import GraphCircleFloatingEdge from './edges/graphCircleFloatingEdge';
 import FloatingConnectionLine from './edges/FloatingConnectionLine';
 import GraphFloatingEdge from './edges/graphFloatingEdge';
@@ -33,7 +33,10 @@ export type GraphNode = Node<{ nodeData: NodeData }, 'custom'>;
 export type GraphProps = {
   graphNodes: NodeData[];
   options?: {
-    filter?: boolean;
+    filter?: {
+      enabled: boolean;
+      allLabel?: string;
+    };
     circleFloatingEdges?: boolean;
     minimap?: boolean;
     controls?: boolean;
@@ -49,6 +52,17 @@ const GraphRoot = ({ graphNodes, options }: GraphProps) => {
     graphNodes,
     options
   });
+
+  const selectItems = [
+    { value: 'all', label: options?.filter?.allLabel ?? 'Show all' },
+    ...graphNodes.map(node => ({
+      value: node.id,
+      label: node.label
+    }))
+  ];
+
+  const longestLabelLength = Math.max(...selectItems.map(item => item.label.length));
+  const menuWidth = `${longestLabelLength * CHAR_WIDTH}px`;
 
   return (
     <ReactFlow
@@ -94,18 +108,7 @@ const GraphRoot = ({ graphNodes, options }: GraphProps) => {
       </Panel>
       {options?.filter && (
         <Panel position='top-left'>
-          <BasicSelect
-            value={selectedNode}
-            onValueChange={onFilterApply}
-            items={[
-              { value: 'all', label: 'Show all' },
-              ...graphNodes.map(node => ({
-                value: node.id,
-                label: node.label
-              }))
-            ]}
-            menuWidth='200px'
-          />
+          <BasicSelect value={selectedNode} onValueChange={onFilterApply} items={selectItems} menuWidth={menuWidth} />
         </Panel>
       )}
     </ReactFlow>

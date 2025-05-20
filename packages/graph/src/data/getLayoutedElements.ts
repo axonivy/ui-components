@@ -1,6 +1,7 @@
 import type { GraphNode } from '../graph';
 import Dagre from '@dagrejs/dagre';
 import { type Edge } from '@xyflow/react';
+import { DEFAULT_NODE_HEIGHT, DEFAULT_NODE_WIDTH } from './useGraph';
 
 const dagreGraph = new Dagre.graphlib.Graph().setDefaultEdgeLabel(() => ({}));
 export type Direction = 'TB' | 'LR';
@@ -8,8 +9,8 @@ export type Direction = 'TB' | 'LR';
 export const getLayoutedElements = ({ nodes, edges, direction = 'TB' }: { nodes: GraphNode[]; edges: Edge[]; direction: Direction }) => {
   dagreGraph.nodes().forEach(nodeId => dagreGraph.removeNode(nodeId));
   dagreGraph.edges().forEach(edge => dagreGraph.removeEdge(edge.v, edge.w));
-  let nodeWidth = 172;
-  let nodeHeight = 50;
+  let nodeWidth = DEFAULT_NODE_WIDTH;
+  let nodeHeight = DEFAULT_NODE_HEIGHT;
   dagreGraph.setGraph({ rankdir: direction });
 
   nodes.forEach(node => {
@@ -35,8 +36,8 @@ export const getLayoutedElements = ({ nodes, edges, direction = 'TB' }: { nodes:
     const newNode = {
       ...node,
       position: {
-        x: nodeWithPosition.x - (node.measured?.width ?? 172) / 2,
-        y: nodeWithPosition.y - (node.measured?.height ?? 50) / 2
+        x: nodeWithPosition.x - (node.measured?.width ?? DEFAULT_NODE_WIDTH) / 2,
+        y: nodeWithPosition.y - (node.measured?.height ?? DEFAULT_NODE_HEIGHT) / 2
       }
     };
 

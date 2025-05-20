@@ -56,7 +56,7 @@ export const dataClasses: Array<DataClass> = [
   },
   {
     id: 'order',
-    name: 'Order',
+    name: 'OrderAnotherVeryVeryVeryVeryVeryVeryVeryVeryLongLabel',
     fqName: { long: `${namespace}.Order`, short: 'Order' },
     fields: [
       { name: 'id', type: 'string' },
