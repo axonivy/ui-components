@@ -199,23 +199,3 @@ export const DialogBrowserWithTitle: Story = {
     );
   }
 };
-
-export const SingleBrowser: Story = {
-  render: () => {
-    const attrs = useAttrBrowser();
-    return (
-      <BrowsersView
-        browsers={[
-          {
-            name: 'Attribute',
-            icon: IvyIcons.Attribute,
-            browser: attrs
-          }
-        ]}
-        apply={(browserName, result) => {
-          console.log('apply', browserName, result);
-        }}
-      />
-    );
-  }
-};
