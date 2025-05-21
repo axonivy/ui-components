@@ -168,16 +168,14 @@ const BrowsersView = ({ browsers, apply, applyBtn, options }: BrowsersViewProps)
   return (
     <Tabs value={tab} onValueChange={setTab} className={cn(fullHeight, overflowHidden)}>
       <Flex direction='column' gap={3} className={fullHeight}>
-        {browsers.length > 1 && (
-          <TabsList>
-            {browsers.map(browser => (
-              <TabsTrigger key={browser.name} value={browser.name}>
-                <IvyIcon icon={browser.icon} />
-                {browser.name}
-              </TabsTrigger>
-            ))}
-          </TabsList>
-        )}
+        <TabsList>
+          {browsers.map(browser => (
+            <TabsTrigger key={browser.name} value={browser.name}>
+              <IvyIcon icon={browser.icon} />
+              {browser.name}
+            </TabsTrigger>
+          ))}
+        </TabsList>
 
         <Flex direction='column' gap={3} justifyContent='space-between' className={cn(fullHeight, overflowAuto)}>
           {browsers.map(({ name, header, footer, emptyMessage, browser }) => (
