@@ -52,6 +52,7 @@ export const Select: StoryObj<{ enableMultiRowSelection: boolean }> = {
     enableMultiRowSelection: false
   },
   render: ({ enableMultiRowSelection }) => {
+    const data = tableData();
     const [payment, setPayment] = React.useState<Payment | null>();
     const rowSelection = useTableSelect<Payment>({
       onSelect: selectedRows => {
@@ -63,7 +64,7 @@ export const Select: StoryObj<{ enableMultiRowSelection: boolean }> = {
     const table = useReactTable({
       ...rowSelection.options,
       enableMultiRowSelection,
-      data: tableData,
+      data,
       columns,
       getCoreRowModel: getCoreRowModel(),
       state: {
@@ -71,7 +72,7 @@ export const Select: StoryObj<{ enableMultiRowSelection: boolean }> = {
       }
     });
 
-    const { handleKeyDown } = useTableKeyHandler({ table, data: tableData });
+    const { handleKeyDown } = useTableKeyHandler({ table, data });
 
     return (
       <>
@@ -106,7 +107,7 @@ export const Select: StoryObj<{ enableMultiRowSelection: boolean }> = {
 export const Message: Story = {
   render: () => {
     const table = useReactTable({
-      data: tableData,
+      data: tableData(),
       columns,
       getCoreRowModel: getCoreRowModel()
     });

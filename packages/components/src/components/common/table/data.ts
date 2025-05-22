@@ -5,7 +5,7 @@ export type Payment = {
   email?: string;
 };
 
-export const tableData: Payment[] = [
+export const tableData = (): Payment[] => [
   {
     id: 'INV001',
     amount: 316,

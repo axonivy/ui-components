@@ -1,5 +1,6 @@
 import { SearchInput } from '@/components/common/input/input';
 import { ROW_VIRTUALIZE_INDEX_ATTRIBUTE } from '@/components/common/table/table';
+import { useReadonly } from '@/context/useReadonly';
 import { resetAndSetRowSelection, selectRow } from '@/utils/table/table';
 import {
   getFilteredRowModel,
@@ -156,6 +157,7 @@ interface TableKeyboardHandlerProps<TData> {
 
 export const useTableKeyHandler = <TData,>({ table, data, options }: TableKeyboardHandlerProps<TData>) => {
   const [rootIndex, setRootIndex] = React.useState<number | undefined>(undefined);
+  const readonly = useReadonly();
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLTableElement>, onEnterAction?: (row: Row<TData>) => void) => {
     const actions: Record<string, () => void> = {
@@ -188,7 +190,7 @@ export const useTableKeyHandler = <TData,>({ table, data, options }: TableKeyboa
       allRowsCount: allRows.length
     });
     const newSelectIndex = calculateNewSelectIndex(direction, newReorderIndex, allRows.length);
-    if (event.altKey && reorder?.updateOrder && reorder.getRowId) {
+    if (!readonly && event.altKey && reorder?.updateOrder && reorder.getRowId) {
       const moveIndexes = selectedRows.map(row => row.index);
       const rowId = reorder.getRowId;
       const moveIds = selectedRows.map(row => rowId(row.original));

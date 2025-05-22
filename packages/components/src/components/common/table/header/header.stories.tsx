@@ -52,7 +52,7 @@ function DataTableDemo() {
   const table = useReactTable({
     ...globalFilter.options,
     ...sorting.options,
-    data: tableData,
+    data: tableData(),
     columns,
     columnResizeMode: 'onChange',
     getCoreRowModel: getCoreRowModel(),
