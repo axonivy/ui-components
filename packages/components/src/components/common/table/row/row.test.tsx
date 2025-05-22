@@ -128,6 +128,23 @@ test('keyboard alt reorder', async () => {
   expect(rows[2]).toHaveTextContent('successken99@yahoo.com');
 });
 
+test('keyboard alt reorder disabled when readonly', async () => {
+  customRender(<MultiSelectWithReorderTable />, { wrapperProps: { readonly: true } });
+  const rows = screen.getAllByRole('row');
+  const user = userEvent.setup();
+  await user.keyboard('[Tab]');
+  await user.keyboard('[ArrowDown]');
+  expect(rows[1]).toHaveAttribute('data-state', 'selected');
+  expect(rows[1]).toHaveTextContent('successken99@yahoo.com');
+  expect(rows[2]).toHaveAttribute('data-state', 'unselected');
+  expect(rows[2]).toHaveTextContent('successAbe45@gmail.com');
+  await user.keyboard('[AltLeft>][ArrowDown]');
+  expect(rows[1]).toHaveAttribute('data-state', 'unselected');
+  expect(rows[1]).toHaveTextContent('successken99@yahoo.com');
+  expect(rows[2]).toHaveAttribute('data-state', 'selected');
+  expect(rows[2]).toHaveTextContent('successAbe45@gmail.com');
+});
+
 test('message', async () => {
   customRender(<MessageTable />);
   const row = screen.getAllByRole('row')[4];
@@ -141,4 +158,12 @@ test('reorder', async () => {
   expect(row).toHaveAttribute('draggable', 'true');
   expect(row).toHaveAttribute('data-drag-state', 'false');
   expect(row).toHaveAttribute('data-drop-target-state', 'false');
+});
+
+test('reorder disabled when readonly', async () => {
+  customRender(<ReorderTable />, { wrapperProps: { readonly: true } });
+  const row = screen.getAllByRole('row')[1];
+  expect(row).not.toHaveAttribute('draggable', 'true');
+  expect(row).not.toHaveAttribute('data-drag-state', 'false');
+  expect(row).not.toHaveAttribute('data-drop-target-state', 'false');
 });

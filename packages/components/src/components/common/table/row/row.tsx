@@ -8,6 +8,7 @@ import { Flex } from '@/components/common/flex/flex';
 import { IvyIcon } from '@/components/common/icon/icon';
 import { type MessageData, Message } from '@/components/common/message/message';
 import { TableRow, TableCell } from '@/components/common/table/table';
+import { useReadonly } from '@/context/useReadonly';
 
 type SelectRowProps<TData> = React.ComponentProps<typeof TableRow> & {
   row: Row<TData>;
@@ -59,15 +60,13 @@ export type ReorderRowProps<TData> = SelectRowProps<TData> & {
   updateOrder: (moveId: string, targetId: string) => void;
 };
 
-const ReorderRow = <TData,>({ id, updateOrder, row, className, ...props }: ReorderRowProps<TData>) => {
+const useRowDnD = <TData,>({ id, updateOrder, row }: ReorderRowProps<TData>) => {
   const DND_TYPE = 'text/id';
-
   const { dragProps, isDragging } = useDrag({
     getItems() {
       return [{ 'text/id': id }];
     }
   });
-
   const ref = React.useRef(null);
   const { dropProps, isDropTarget } = useDrop({
     ref,
@@ -85,27 +84,36 @@ const ReorderRow = <TData,>({ id, updateOrder, row, className, ...props }: Reord
       }
     }
   });
+  const readonly = useReadonly();
+  if (readonly) {
+    return {};
+  }
+  return {
+    ...dragProps,
+    ...dropProps,
+    'data-drag-state': isDragging,
+    'data-drop-target-state': isDropTarget
+  };
+};
 
-  return (
-    <SelectRow
-      {...dragProps}
-      {...dropProps}
-      row={row}
-      data-drag-state={isDragging}
-      data-drop-target-state={isDropTarget}
-      className={cn(dndRow, className, 'ui-dnd-row')}
-      {...props}
-    />
-  );
+const ReorderRow = <TData,>({ id, updateOrder, row, className, ...props }: ReorderRowProps<TData>) => {
+  const dndProps = useRowDnD({ id, updateOrder, row });
+  return <SelectRow {...dndProps} row={row} className={cn(dndRow, className, 'ui-dnd-row')} {...props} />;
 };
 ReorderRow.displayName = 'ReorderRow';
 
-const ReorderHandleWrapper = ({ children, className }: React.ComponentProps<typeof Flex>) => (
-  <Flex direction='row' alignItems='center' gap={3} className={cn(reorderHandle, 'ui-dnd-row-handle', className)}>
-    {children}
-    <IvyIcon icon={IvyIcons.EditDots} className={cn(reorderHandleIcon, 'ui-dnd-row-handleicon')} />
-  </Flex>
-);
+const ReorderHandleWrapper = ({ children, className }: React.ComponentProps<typeof Flex>) => {
+  const readonly = useReadonly();
+  if (readonly) {
+    return <>{children}</>;
+  }
+  return (
+    <Flex direction='row' alignItems='center' gap={3} className={cn(reorderHandle, 'ui-dnd-row-handle', className)}>
+      {children}
+      <IvyIcon icon={IvyIcons.EditDots} className={cn(reorderHandleIcon, 'ui-dnd-row-handleicon')} />
+    </Flex>
+  );
+};
 ReorderHandleWrapper.displayName = 'ReorderHandleWrapper';
 
 export { SelectRow, MessageRow, ReorderRow, ReorderHandleWrapper };
