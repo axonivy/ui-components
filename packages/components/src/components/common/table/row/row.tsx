@@ -104,13 +104,10 @@ ReorderRow.displayName = 'ReorderRow';
 
 const ReorderHandleWrapper = ({ children, className }: React.ComponentProps<typeof Flex>) => {
   const readonly = useReadonly();
-  if (readonly) {
-    return <>{children}</>;
-  }
   return (
     <Flex direction='row' alignItems='center' gap={3} className={cn(reorderHandle, 'ui-dnd-row-handle', className)}>
       {children}
-      <IvyIcon icon={IvyIcons.EditDots} className={cn(reorderHandleIcon, 'ui-dnd-row-handleicon')} />
+      {!readonly && <IvyIcon icon={IvyIcons.EditDots} className={cn(reorderHandleIcon, 'ui-dnd-row-handleicon')} />}
     </Flex>
   );
 };
