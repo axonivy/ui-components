@@ -14,7 +14,7 @@ import {
 import type { NodeData, GraphNode, GraphProps } from '../graph';
 import { getLayoutedElements, type Direction } from './getLayoutedElements';
 
-export const CHAR_WIDTH = 7.5;
+export const CHAR_WIDTH = 8;
 export const DEFAULT_NODE_WIDTH = 172;
 export const DEFAULT_NODE_HEIGHT = 50;
 
@@ -122,7 +122,7 @@ const getNodeSize = (node: NodeData, existingNodes: GraphNode[]): { width: numbe
     return measuredSize as { width: number; height: number };
   }
 
-  const calculatedWidth = Math.max(node.label.length * CHAR_WIDTH, DEFAULT_NODE_WIDTH);
+  const calculatedWidth = Math.max(node.label.length * CHAR_WIDTH + 90, DEFAULT_NODE_WIDTH);
   return {
     width: calculatedWidth,
     height: DEFAULT_NODE_HEIGHT
