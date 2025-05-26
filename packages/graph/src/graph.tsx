@@ -95,14 +95,20 @@ const GraphRoot = ({ graphNodes, options }: GraphProps) => {
             size='large'
             onClick={() => onLayout('TB')}
             title='horizontal alignment'
-            style={{ boxShadow: 'var(--xy-controls-box-shadow, var(--xy-controls-box-shadow-default))' }}
+            style={{
+              boxShadow: 'var(--xy-controls-box-shadow, var(--xy-controls-box-shadow-default))',
+              backgroundColor: 'var(--background)'
+            }}
           />
           <Button
             icon={IvyIcons.ArrowsSplitHorizontal}
             size='large'
             title='vertical alignment'
             onClick={() => onLayout('LR')}
-            style={{ boxShadow: 'var(--xy-controls-box-shadow, var(--xy-controls-box-shadow-default))' }}
+            style={{
+              boxShadow: 'var(--xy-controls-box-shadow, var(--xy-controls-box-shadow-default))',
+              backgroundColor: 'var(--background)'
+            }}
           />
         </Flex>
       </Panel>
