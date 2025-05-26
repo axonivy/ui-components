@@ -1,5 +1,4 @@
 import '@xyflow/react/dist/style.css';
-import './graph.css';
 import { IvyIcons } from '@axonivy/ui-icons';
 import { Background, ConnectionMode, Controls, MiniMap, Panel, ReactFlow, ReactFlowProvider, type Node } from '@xyflow/react';
 import { BasicSelect, Button, Flex } from '@axonivy/ui-components';
@@ -8,6 +7,7 @@ import GraphCircleFloatingEdge from './edges/graphCircleFloatingEdge';
 import FloatingConnectionLine from './edges/FloatingConnectionLine';
 import GraphFloatingEdge from './edges/graphFloatingEdge';
 import { GraphNode } from './nodes/graphNode';
+import './graph.css';
 
 export type NodeData = {
   id: string;
@@ -84,13 +84,13 @@ const GraphRoot = ({ graphNodes, options }: GraphProps) => {
       }}
       connectionLineComponent={options?.circleFloatingEdges ? FloatingConnectionLine : undefined}
     >
-      {options?.controls !== false && <Controls />}
-      {options?.minimap !== false && <MiniMap />}
-      <Background gap={12} size={1} />
+      {options?.controls !== false && <Controls position='bottom-right' orientation='horizontal' />}
+      {options?.minimap !== false && <MiniMap position='bottom-left' />}
+      <Background gap={12} size={1} bgColor='var(--N25)' style={{ borderRadius: 'var(--size-2)' }} />
       <Panel position='top-right'>
         <Flex direction='row' gap={1}>
           <Button
-            icon={IvyIcons.Process}
+            icon={IvyIcons.ArrowsSplitHorizontal}
             rotate={90}
             size='large'
             onClick={() => onLayout('TB')}
@@ -98,7 +98,7 @@ const GraphRoot = ({ graphNodes, options }: GraphProps) => {
             style={{ boxShadow: 'var(--xy-controls-box-shadow, var(--xy-controls-box-shadow-default))' }}
           />
           <Button
-            icon={IvyIcons.Process}
+            icon={IvyIcons.ArrowsSplitHorizontal}
             size='large'
             title='vertical alignment'
             onClick={() => onLayout('LR')}
