@@ -1,6 +1,6 @@
 {
   "name": "@axonivy/ui-graph",
-  "version": "13.1.0-next",
+  "version": "13.2.0-next",
   "private": false,
   "license": "(EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0)",
   "author": "Axon Ivy AG",
@@ -14,12 +14,12 @@
     "src"
   ],
   "dependencies": {
-    "@xyflow/react": "12.4.3",
-    "@dagrejs/dagre": "^1.1.4"
+    "@dagrejs/dagre": "^1.1.4",
+    "@xyflow/react": "12.4.3"
   },
   "peerDependencies": {
-    "@axonivy/ui-icons": "~13.1.0-next",
-    "@axonivy/ui-components": "~13.1.0-next",
+    "@axonivy/ui-components": "~13.2.0-next",
+    "@axonivy/ui-icons": "~13.2.0-next",
     "react": "^18.2 || ^19.0"
   },
   "devDependencies": {
