@@ -186,7 +186,11 @@ const BrowsersView = ({ browsers, apply, applyBtn, options }: BrowsersViewProps)
                   <>
                     <SearchInput
                       placeholder={options?.search?.placeholder ?? 'Search'}
-                      autoFocus={true}
+                      // if the browser is used as a dialog in another dialog, the autofocus is not working
+                      // this is a workaround to set the focus automatically in any case
+                      ref={input => {
+                        setTimeout(() => input?.focus(), 0);
+                      }}
                       value={browser.globalFilter.filter}
                       onChange={browser.globalFilter.setFilter}
                     />
