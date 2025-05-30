@@ -23,7 +23,7 @@ export const Default: Story = {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {tableData().map(row => (
+        {tableData.map(row => (
           <TableRow key={row.id}>
             <TableCell>{row.id}</TableCell>
             <TableCell>{row.status}</TableCell>
