@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Outline } from './outline';
 import { outlineData } from '@/components/editor/sidebar/outline/data';
 

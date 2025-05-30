@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { BasicCheckbox, Checkbox } from './checkbox';
 
 const meta: Meta<typeof BasicCheckbox> = {

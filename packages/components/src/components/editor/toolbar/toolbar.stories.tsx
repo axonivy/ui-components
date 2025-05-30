@@ -1,4 +1,4 @@
-import type { Meta } from '@storybook/react';
+import type { Meta } from '@storybook/react-vite';
 import { Toolbar, ToolbarContainer, ToolbarTitle } from './toolbar';
 import { IvyIcons } from '@axonivy/ui-icons';
 import { Button } from '@/components/common/button/button';

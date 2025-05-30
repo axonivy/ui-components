@@ -1,4 +1,4 @@
-import { composeStory } from '@storybook/react';
+import { composeStory } from '@storybook/react-vite';
 import { act, customRender, screen, userEvent, waitFor } from 'test-utils';
 import Meta, { Default, DialogBrowser, DialogBrowserWithTitle } from './browser.stories';
 

@@ -1,5 +1,5 @@
 import { hotkeyText } from '@/utils/hotkey';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
 

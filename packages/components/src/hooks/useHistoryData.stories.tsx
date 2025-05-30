@@ -1,5 +1,5 @@
 import { Button } from '@/components/common/button/button';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
 import { useHistoryData } from './useHistoryData';
 import { IvyIcons } from '@axonivy/ui-icons';
