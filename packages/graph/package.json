@@ -15,7 +15,7 @@
   ],
   "dependencies": {
     "@dagrejs/dagre": "^1.1.4",
-    "@xyflow/react": "12.4.3"
+    "@xyflow/react": "12.6.4"
   },
   "peerDependencies": {
     "@axonivy/ui-components": "~13.2.0-next",
