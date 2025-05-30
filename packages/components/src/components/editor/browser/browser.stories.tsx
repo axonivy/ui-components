@@ -7,7 +7,7 @@ import { generateConditionString, logicOperators, operators } from '@/components
 import { useConditionBuilder } from '@/components/editor/condition-builder/useConditionBuilder';
 import { IvyIcons } from '@axonivy/ui-icons';
 import { Popover, PopoverArrow, PopoverContent, PopoverTrigger } from '@radix-ui/react-popover';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
 import { BrowsersView, useBrowser } from './browser';
 import { CmsInfoProvider, FunctionInfoProvider } from './browser-info-provider';

@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
 import { generateConditionString, logicOperators, operators } from './condition-builder-utils';
 import { vars } from '@/styles/theme.css';

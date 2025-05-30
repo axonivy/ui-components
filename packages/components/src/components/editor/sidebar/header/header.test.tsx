@@ -1,4 +1,4 @@
-import { composeStory } from '@storybook/react';
+import { composeStory } from '@storybook/react-vite';
 import { customRender, screen } from 'test-utils';
 import Meta, { Default, WithMessages } from './header.stories';
 import { IvyIcons } from '@axonivy/ui-icons';
