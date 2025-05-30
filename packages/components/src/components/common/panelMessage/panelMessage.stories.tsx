@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { PanelMessage } from './panelMessage';
 import { IvyIcons } from '@axonivy/ui-icons';
 
