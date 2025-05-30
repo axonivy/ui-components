@@ -1,4 +1,4 @@
-import type { Preview } from '@storybook/react';
+import type { Preview } from '@storybook/react-vite';
 import './preview.css';
 import '../src/styles/global.css';
 import '@axonivy/ui-icons/lib/ivy-icons.css';
@@ -41,10 +41,8 @@ const preview: Preview = {
   decorators: [
     (StoryFn, context) => {
       const theme = context.globals.theme;
-      const color = context.parameters.backgrounds.values.find(t => t.name === theme).value;
-      const body = document.body;
-      body.classList.remove('dark', 'light');
-      body.classList.add(theme);
+      document.body.classList.remove('dark', 'light');
+      document.body.classList.add(theme);
       return (
         <ReadonlyProvider readonly={context.globals.readonly}>
           <StoryFn />

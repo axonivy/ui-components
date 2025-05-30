@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { BrowsersView, useBrowser } from './browser';
 import { cmsData, funcData, roleData, useAttrBrowser } from './data';
 import { IvyIcons } from '@axonivy/ui-icons';

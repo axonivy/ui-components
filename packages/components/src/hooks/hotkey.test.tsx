@@ -1,4 +1,4 @@
-import { composeStory } from '@storybook/react';
+import { composeStory } from '@storybook/react-vite';
 import Meta, { Default, Global, Scoped } from '../hooks/hotkey.stories';
 import { act, customRender, screen, userEvent } from 'test-utils';
 

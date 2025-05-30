@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { flexRender, type ColumnDef, useReactTable, getCoreRowModel, type Row, type Table as ReactTable } from '@tanstack/react-table';
 import { Table, TableBody, TableCell, TableRow } from '../table';
 import { ExpandableCell } from './tree';

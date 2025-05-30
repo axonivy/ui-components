@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from './resizable';
 import { vars } from '@/styles/theme.css';
 import { Flex } from '@/components/common/flex/flex';

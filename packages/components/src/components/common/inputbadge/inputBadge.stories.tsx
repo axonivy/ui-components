@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { InputBadge, InputBadgeArea } from './inputBadge';
 import { IvyIcons } from '@axonivy/ui-icons';
 import { BasicField } from '../field/field';
