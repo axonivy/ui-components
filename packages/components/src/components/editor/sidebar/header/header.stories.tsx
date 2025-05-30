@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { SidebarHeader, SidebarMessages } from './header';
 import { IvyIcons } from '@axonivy/ui-icons';
 import { Button } from '@/components/common/button/button';

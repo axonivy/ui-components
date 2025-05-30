@@ -1,5 +1,5 @@
 import * as React from 'react';
-import type { Meta } from '@storybook/react';
+import type { Meta } from '@storybook/react-vite';
 import { IvyIcons } from '@axonivy/ui-icons';
 import { Flex } from '@/components/common/flex/flex';
 import { SidebarHeader } from '@/components/editor/sidebar/header/header';

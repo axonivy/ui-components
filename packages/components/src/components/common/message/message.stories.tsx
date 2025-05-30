@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Message } from './message';
 import { Input } from '@/components/common/input/input';
 import { BasicField } from '@/components/common/field/field';

@@ -1,4 +1,4 @@
-import { type Meta, type StoryObj } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { Default as ToolbarStory } from './toolbar/toolbar.stories';
 import * as React from 'react';
 import { Flex } from '@/components/common/flex/flex';
