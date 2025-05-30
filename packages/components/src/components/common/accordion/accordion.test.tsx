@@ -1,4 +1,4 @@
-import { composeStory } from '@storybook/react';
+import { composeStory } from '@storybook/react-vite';
 import { customRender, screen, userEvent } from 'test-utils';
 import Meta, { Default, State, Controls } from './accordion.stories';
 

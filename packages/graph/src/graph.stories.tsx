@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Graph, type NodeData } from './graph';
 import { IvyIcons } from '@axonivy/ui-icons';
 import { dataClasses, type DataClass, type Field } from './data';

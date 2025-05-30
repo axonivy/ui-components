@@ -1,4 +1,4 @@
-import { composeStory } from '@storybook/react';
+import { composeStory } from '@storybook/react-vite';
 import { render, screen, userEvent } from 'test-utils';
 import Meta, { Default, CustomPalette, PopoverPalette } from './palette.stories';
 

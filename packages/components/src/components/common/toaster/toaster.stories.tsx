@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Toaster, toast } from './toaster';
 import { Button } from '../button/button';
 import { IvyIcon } from '../icon/icon';
