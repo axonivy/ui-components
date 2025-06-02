@@ -15,8 +15,8 @@
   "dependencies": {
     "@eslint/js": "9.27.0",
     "@tanstack/eslint-plugin-query": "5.78.0",
-    "@typescript-eslint/eslint-plugin": "8.32.1",
-    "@typescript-eslint/parser": "8.32.1",
+    "@typescript-eslint/eslint-plugin": "8.33.0",
+    "@typescript-eslint/parser": "8.33.0",
     "eslint": "9.27.0",
     "eslint-formatter-checkstyle": "8.40.0",
     "eslint-plugin-i18next": "6.1.1",
@@ -25,6 +25,6 @@
     "eslint-plugin-react-compiler": "19.1.0-rc.2",
     "eslint-plugin-react-hooks": "5.2.0",
     "eslint-plugin-testing-library": "7.2.2",
-    "typescript-eslint": "8.32.1"
+    "typescript-eslint": "8.33.0"
   }
 }
