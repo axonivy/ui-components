@@ -33,6 +33,16 @@ pipeline {
       }
     }
 
+    stage('Playwright') {
+      steps {
+        script {
+          docker.build('playwright', '-f build/Dockerfile.playwright .').inside {
+            sh 'npm run webtest'
+          }
+        }
+      }
+    }
+
     stage('Publish next') {
       when {
         expression { isReleasingBranch() && currentBuild.changeSets.size() > 0 }

@@ -12,5 +12,8 @@ export default defineConfig({
       '@axonivy/ui-components': resolve(__dirname, './packages/components/src'),
       '@': resolve(__dirname, './packages/components/src')
     }
+  },
+  optimizeDeps: {
+    include: ['@vanilla-extract/recipes/createRuntimeFn']
   }
 });

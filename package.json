@@ -22,6 +22,7 @@
     "dev": "storybook dev -p 6006 --no-open",
     "test": "vitest test",
     "test:ci": "vitest test --watch=false --reporter=default --reporter=junit --outputFile=report.xml",
+    "webtest": "playwright test",
     "publish:next": "lerna publish --exact --canary --preid next --pre-dist-tag next --no-git-tag-version --no-push --ignore-scripts --yes"
   },
   "devDependencies": {
@@ -33,6 +34,7 @@
     "@vitejs/plugin-react": "^4.3.4",
     "eslint-plugin-storybook": "^9.0.1",
     "lerna": "^8.1.9",
+    "@playwright/test": "1.52.0",
     "rimraf": "^6.0.1",
     "rollup-plugin-visualizer": "^6.0.0",
     "storybook": "^9.0.1",
