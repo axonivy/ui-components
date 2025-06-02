@@ -6,6 +6,9 @@ import { resolve } from 'path';
 
 export default defineConfig({
   plugins: [veVitePlugin(), visualizer(), react()],
+  optimizeDeps: {
+    include: ['@vanilla-extract/recipes/createRuntimeFn']
+  },
   resolve: {
     alias: {
       '@axonivy/ui-components/lib': resolve(__dirname, './packages/components/lib'),
