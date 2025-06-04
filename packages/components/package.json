@@ -1,6 +1,6 @@
 {
   "name": "@axonivy/ui-components",
-  "version": "12.0.6-next",
+  "version": "12.0.7-next",
   "private": false,
   "license": "(EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0)",
   "author": "Axon Ivy AG",
@@ -37,7 +37,7 @@
     "sonner": "1.7.4"
   },
   "peerDependencies": {
-    "@axonivy/ui-icons": "~12.0.6-next",
+    "@axonivy/ui-icons": "~12.0.7-next",
     "react": "^18.2 || ^19.0"
   },
   "devDependencies": {
