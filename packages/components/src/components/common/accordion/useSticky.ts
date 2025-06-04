@@ -13,7 +13,11 @@ export const useSticky = (options?: UseStickyProps) => {
       return;
     }
     const observer = new IntersectionObserver(
-      ([event]) => setIsSticky(event.intersectionRatio < 1),
+      ([event]) => {
+        if (event) {
+          setIsSticky(event.intersectionRatio < 1);
+        }
+      },
       options?.observerOptions ?? {
         threshold: [1],
         rootMargin: '50px 0px 0px 0px'
