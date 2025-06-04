@@ -165,6 +165,10 @@ const BrowsersView = ({ browsers, apply, applyBtn, options }: BrowsersViewProps)
     }
     apply(browser.name, result);
   };
+  const searchRef = React.useRef<HTMLInputElement>(null);
+  React.useEffect(() => {
+    setTimeout(() => searchRef.current?.focus(), 0);
+  }, []);
   return (
     <Tabs value={tab} onValueChange={setTab} className={cn(fullHeight, overflowHidden)}>
       <Flex direction='column' gap={3} className={fullHeight}>
@@ -186,7 +190,7 @@ const BrowsersView = ({ browsers, apply, applyBtn, options }: BrowsersViewProps)
                   <>
                     <SearchInput
                       placeholder={options?.search?.placeholder ?? 'Search'}
-                      autoFocus={true}
+                      ref={searchRef}
                       value={browser.globalFilter.filter}
                       onChange={browser.globalFilter.setFilter}
                     />

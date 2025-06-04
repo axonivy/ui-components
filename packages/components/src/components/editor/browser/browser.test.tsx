@@ -1,3 +1,4 @@
+import { Dialog as DialogComponent, DialogContent, DialogTrigger } from '@/components/common/dialog/dialog';
 import { composeStory } from '@storybook/react-vite';
 import { customRender, screen, userEvent, waitFor } from 'test-utils';
 import Meta, { Default, DialogBrowser, DialogBrowserWithTitle } from './browser.stories';
@@ -130,4 +131,21 @@ test('dialog title', async () => {
   await userEvent.click(screen.getByRole('button', { name: 'Browser' }));
   expect(screen.getByRole('dialog')).toBeInTheDocument();
   expect(screen.getByRole('heading', { level: 2 })).toHaveTextContent('Choose a browser...');
+});
+
+test('auto focus works in nested dialog browser', async () => {
+  customRender(
+    <DialogComponent>
+      <DialogTrigger>Open Dialog</DialogTrigger>
+      <DialogContent>
+        <Dialog />
+      </DialogContent>
+    </DialogComponent>
+  );
+  await userEvent.click(screen.getByRole('button', { name: 'Open Dialog' }));
+  await userEvent.click(screen.getByRole('button', { name: 'Browser' }));
+  expect(screen.getByRole('textbox')).toHaveFocus();
+  await userEvent.tab();
+  await userEvent.keyboard('[ArrowDown]');
+  expect(screen.getByRole('textbox')).not.toHaveFocus();
 });
