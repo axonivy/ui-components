@@ -14,6 +14,16 @@ export const dot = recipe({
       configured: { backgroundColor: vars.color.n400 },
       warning: { backgroundColor: vars.color.warning },
       error: { backgroundColor: vars.color.error }
+    },
+    size: {
+      normal: {
+        width: '0.5rem',
+        height: '0.5rem'
+      },
+      small: {
+        width: '0.4rem',
+        height: '0.4rem'
+      }
     }
   }
 });

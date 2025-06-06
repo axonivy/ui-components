@@ -1,15 +1,17 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from './tabs';
+import { BasicInscriptionTabs, Tabs, TabsContent, TabsList, TabsTrigger } from './tabs';
 import { IvyIcon } from '../icon/icon';
 import { IvyIcons } from '@axonivy/ui-icons';
 import { Flex } from '@/components/common/flex/flex';
+import { insciptionTabsData } from '@/components/common/tabs/inscriptionTabData';
+import React from 'react';
 
 const meta: Meta<typeof Tabs> = {
   title: 'Common/Tabs',
   component: Tabs,
   argTypes: {
     orientation: { type: 'string', control: 'select', options: ['horizontal', 'vertical'] },
-    variant: { type: 'string', control: 'select', options: ['slim', undefined] }
+    variant: { type: 'string', control: 'select', options: ['slim', 'inscription', undefined] }
   },
   args: {
     orientation: 'horizontal',
@@ -40,4 +42,11 @@ export const Default: Story = {
       </Flex>
     </Tabs>
   )
+};
+
+export const InscriptionTabs: Story = {
+  render: () => {
+    const [tab, setTab] = React.useState('General');
+    return <BasicInscriptionTabs value={tab} onChange={setTab} tabs={insciptionTabsData} />;
+  }
 };

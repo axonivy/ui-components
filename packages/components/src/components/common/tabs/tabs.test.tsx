@@ -1,6 +1,6 @@
 import { composeStory } from '@storybook/react-vite';
 import { customRender, screen, userEvent } from 'test-utils';
-import Meta, { Default } from './tabs.stories';
+import Meta, { Default, InscriptionTabs } from './tabs.stories';
 
 const Tabs = composeStory(Default, Meta);
 
@@ -33,4 +33,18 @@ test('toggled with keyboard', async () => {
   await userEvent.keyboard('[ArrowLeft]');
   expect(attr).toHaveFocus();
   expect(screen.getByRole('tabpanel')).toHaveTextContent('Attribute list');
+});
+
+const BasicTabs = composeStory(InscriptionTabs, Meta);
+
+test('toggle basic inscription tabs', async () => {
+  customRender(<BasicTabs />);
+  expect(screen.getByRole('tabpanel')).toHaveTextContent('General Content');
+  const header = screen.getByRole('tab', { name: 'Header' });
+  await userEvent.click(header);
+  expect(screen.getByRole('tabpanel')).toHaveTextContent('Header Content');
+
+  const general = screen.getByRole('tab', { name: /General/ });
+  await userEvent.click(general);
+  expect(screen.getByRole('tabpanel')).toHaveTextContent('General Content');
 });

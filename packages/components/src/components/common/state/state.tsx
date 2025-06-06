@@ -19,13 +19,13 @@ export const evalDotState = (messages: Array<MessageData>, state: State) => {
 
 export type StateDotProps = DotVariants & { messages?: Array<MessageData> };
 
-const StateDot = ({ state, messages = [], className, ...props }: StateDotProps & React.ComponentProps<'div'>) => {
+const StateDot = ({ state, messages = [], size = 'normal', className, ...props }: StateDotProps & React.ComponentProps<'div'>) => {
   const dotState = evalDotState(messages, state);
   return (
     <TooltipProvider>
       <Tooltip delayDuration={500}>
         <TooltipTrigger asChild>
-          <div className={cn(dot({ state: dotState }), className, 'ui-state-dot')} data-state={dotState} role='status' {...props} />
+          <div className={cn(dot({ state: dotState, size }), className, 'ui-state-dot')} data-state={dotState} role='status' {...props} />
         </TooltipTrigger>
         {messages.length > 0 && (
           <TooltipContent collisionPadding={10} sideOffset={10}>
