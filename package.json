@@ -20,8 +20,8 @@
     "lint:fix": "eslint --fix",
     "lint:inspect": "eslint --inspect-config",
     "dev": "storybook dev -p 6006 --no-open",
-    "test": "vitest test",
-    "test:ci": "vitest test --watch=false --reporter=default --reporter=junit --outputFile=report.xml",
+    "test": "vitest",
+    "test:ci": "vitest run --reporter=default --reporter=junit --outputFile=report.xml",
     "publish:next": "lerna publish --exact --canary --preid next --pre-dist-tag next --no-git-tag-version --no-push --ignore-scripts --yes"
   },
   "devDependencies": {
