@@ -1,10 +1,10 @@
-import * as React from 'react';
-import * as DialogPrimitive from '@radix-ui/react-dialog';
-import { IvyIcons } from '@axonivy/ui-icons';
-import { overlay, content, header, title, description, contentClose, footer } from './dialog.css';
-import { cn } from '@/utils/class-name';
 import { Button } from '@/components/common/button/button';
 import { Flex } from '@/components/common/flex/flex';
+import { cn } from '@/utils/class-name';
+import { IvyIcons } from '@axonivy/ui-icons';
+import * as DialogPrimitive from '@radix-ui/react-dialog';
+import * as React from 'react';
+import { content, contentClose, description, footer, header, overlay, title } from './dialog.css';
 
 /**
  * Dialog, based on {@link https://www.radix-ui.com/docs/primitives/components/dialog | Radix UI Dialog}
@@ -56,15 +56,57 @@ const DialogDescription = ({ className, ...props }: React.ComponentProps<typeof 
 );
 DialogDescription.displayName = DialogPrimitive.Description.displayName;
 
+type BasicDialoContentProps = React.ComponentProps<typeof DialogPrimitive.Root> & {
+  title: string;
+  description: React.ReactNode;
+  buttonClose: string;
+  buttonCustom?: React.ReactNode;
+};
+
+const BasicDialogContent = ({ title, description, buttonClose = 'Cancel', buttonCustom, children }: BasicDialoContentProps) => (
+  <DialogContent>
+    <DialogHeader>
+      <DialogTitle>{title}</DialogTitle>
+      <DialogDescription>{description}</DialogDescription>
+    </DialogHeader>
+    <Flex direction='column' gap={2}>
+      {children}
+    </Flex>
+    <DialogFooter>
+      <DialogClose asChild>{buttonCustom}</DialogClose>
+      <DialogClose asChild>
+        <Button variant='outline' size='large' aria-label={buttonClose}>
+          {buttonClose}
+        </Button>
+      </DialogClose>
+    </DialogFooter>
+  </DialogContent>
+);
+BasicDialogContent.displayName = 'BasicDialogContent';
+
+type BasicDialogProps = React.ComponentProps<typeof DialogPrimitive.Root> & {
+  dialogTrigger?: React.ReactNode;
+};
+
+const BasicDialog = ({ dialogTrigger, children, ...props }: BasicDialogProps & BasicDialoContentProps) => (
+  <Dialog {...props}>
+    {dialogTrigger}
+    <BasicDialogContent {...props}>{children}</BasicDialogContent>
+  </Dialog>
+);
+BasicDialog.displayName = 'BasicDialog';
+
 export {
+  BasicDialog,
+  BasicDialogContent,
   Dialog,
-  DialogPortal,
-  DialogOverlay,
   DialogClose,
-  DialogTrigger,
   DialogContent,
-  DialogHeader,
+  DialogDescription,
   DialogFooter,
+  DialogHeader,
+  DialogOverlay,
+  DialogPortal,
   DialogTitle,
-  DialogDescription
+  DialogTrigger
 };
