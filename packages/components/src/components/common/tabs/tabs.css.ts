@@ -36,6 +36,9 @@ export const tabsList = style({
       marginBottom: vars.size.s3,
       containerName: tabsListContainer,
       containerType: 'inline-size'
+    },
+    [`${tabs.classNames.variants.variant.inscription} &:has(.ui-inscription-tabs-trigger:focus-visible)`]: {
+      boxShadow: vars.shadow.focus
     }
   }
 });
@@ -135,12 +138,7 @@ export const inscriptionTabsRoot = style({
   flexDirection: 'column',
   padding: vars.size.s2,
   flex: 1,
-  overflow: 'hidden',
-  selectors: {
-    '&:has(.ui-inscription-tabs-trigger:focus-visible)': {
-      boxShadow: vars.shadow.focus
-    }
-  }
+  overflow: 'hidden'
 });
 
 export const inscriptionTabsTriggerLabel = style({
