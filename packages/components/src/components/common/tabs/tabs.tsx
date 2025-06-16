@@ -45,9 +45,9 @@ TabsContent.displayName = TabsPrimitive.Content.displayName;
 export type InscriptionTabProps = {
   id: string;
   name: string;
-  state: StateDotProps;
   content: React.ReactNode;
   icon: IvyIcons;
+  state?: StateDotProps;
 };
 
 export type BasicInscriptionTabsProps = {
@@ -71,12 +71,11 @@ const BasicInscriptionTabs = ({ tabs, onChange, value }: BasicInscriptionTabsPro
           <TabsTrigger
             key={`${index}-${tab.id}`}
             className='ui-inscription-tabs-trigger'
-            data-message={tab.state.messages}
             value={tab.id}
             aria-label={tab.name}
             title={tab.name}
           >
-            {tab.state.state !== undefined && (
+            {tab.state?.state !== undefined && (
               <StateDot state={tab.state.state} messages={tab.state.messages} size='small' className={inscriptionTabStateDot} />
             )}
             <IvyIcon icon={tab.icon} className='ivy-16' />
