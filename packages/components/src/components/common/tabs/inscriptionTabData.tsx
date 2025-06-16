@@ -24,14 +24,14 @@ export const insciptionTabsData: InscriptionTabProps[] = [
   {
     id: 'Content',
     name: 'Content',
-    state: { state: 'error', messages: [] },
+    state: { state: 'error', messages: [{ message: 'This is a error', variant: 'error' }] },
     content: <div>Content Content</div>,
     icon: IvyIcons.Note
   },
   {
     id: 'Attachments',
     name: 'Attachments',
-    state: { state: 'warning', messages: [] },
+    state: { state: 'warning', messages: [{ message: 'This is a warning', variant: 'warning' }] },
     content: <div>Attachments Content</div>,
     icon: IvyIcons.Attribute
   }

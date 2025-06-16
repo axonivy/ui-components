@@ -9,13 +9,17 @@ import {
   inscriptionTabsContentScrollArea,
   inscriptionTabsRoot,
   inscriptionTabStateDot,
-  inscriptionTabsTriggerLabel
+  inscriptionTabsTriggerLabel,
+  tabsTriggerSeparator,
+  tabsTriggerContent,
+  tabsListPlaceholder
 } from './tabs.css';
 import { cn } from '@/utils/class-name';
 import { StateDot, type StateDotProps } from '@/components/common/state/state';
 import type { IvyIcons } from '@axonivy/ui-icons';
 import { IvyIcon } from '@/components/common/icon/icon';
 import { Flex } from '@/components/common/flex/flex';
+import { Separator } from '@/components/common/separator/separator';
 
 export type TabsProps = React.ComponentProps<typeof TabsPrimitive.Root> & TabsVariants;
 
@@ -32,8 +36,13 @@ const TabsList = ({ className, ...props }: React.ComponentProps<typeof TabsPrimi
 );
 TabsList.displayName = TabsPrimitive.List.displayName;
 
-const TabsTrigger = ({ className, ...props }: React.ComponentProps<typeof TabsPrimitive.Trigger>) => (
-  <TabsPrimitive.Trigger className={cn(tabsTrigger, className, 'ui-tabs-trigger')} {...props} />
+const TabsTrigger = ({ className, children, ...props }: React.ComponentProps<typeof TabsPrimitive.Trigger>) => (
+  <TabsPrimitive.Trigger className={cn(tabsTrigger, className, 'ui-tabs-trigger')} {...props}>
+    <Flex className={cn(tabsTriggerContent, 'ui-tabs-trigger-content')} alignItems='center'>
+      {children}
+    </Flex>
+    <Separator decorative orientation='vertical' className={tabsTriggerSeparator} />
+  </TabsPrimitive.Trigger>
 );
 TabsTrigger.displayName = TabsPrimitive.Trigger.displayName;
 
@@ -58,6 +67,7 @@ export type BasicInscriptionTabsProps = {
 
 const BasicInscriptionTabs = ({ tabs, onChange, value }: BasicInscriptionTabsProps) => {
   const defaultTab = tabs.length > 0 ? tabs[0].id : '';
+
   return (
     <Tabs
       variant='inscription'
@@ -67,21 +77,19 @@ const BasicInscriptionTabs = ({ tabs, onChange, value }: BasicInscriptionTabsPro
       onValueChange={onChange}
     >
       <TabsList className={cn('ui-inscription-tabs-list', `tabs-${tabs.length >= 5 ? 'many' : 'few'}`)}>
+        <div className={tabsListPlaceholder} />
         {tabs.map((tab, index) => (
-          <TabsTrigger
-            key={`${index}-${tab.id}`}
-            className='ui-inscription-tabs-trigger'
-            value={tab.id}
-            aria-label={tab.name}
-            title={tab.name}
-          >
+          <TabsTrigger key={`${index}-${tab.id}`} className='ui-inscription-tabs-trigger' value={tab.id} aria-label={tab.name}>
             {tab.state?.state !== undefined && (
               <StateDot state={tab.state.state} messages={tab.state.messages} size='small' className={inscriptionTabStateDot} />
             )}
-            <IvyIcon icon={tab.icon} className='ivy-16' />
-            <div className={inscriptionTabsTriggerLabel}>{tab.name}</div>
+            <IvyIcon icon={tab.icon} className='ivy-16' title={tab.name} />
+            <div className={inscriptionTabsTriggerLabel} title={tab.name}>
+              {tab.name}
+            </div>
           </TabsTrigger>
         ))}
+        <div className={tabsListPlaceholder} />
       </TabsList>
       {tabs.map((tab, index) => (
         <TabsPrimitive.Content className={cn(inscriptionTabsContent, 'ui-inscription-tabs-content')} key={`${index}-${tab}`} value={tab.id}>
