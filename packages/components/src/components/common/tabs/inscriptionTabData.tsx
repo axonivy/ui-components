@@ -12,14 +12,12 @@ export const insciptionTabsData: InscriptionTabProps[] = [
   {
     id: 'Header',
     name: 'Header',
-    state: { state: undefined, messages: [] },
     content: <div>Header Content</div>,
     icon: IvyIcons.EMail
   },
   {
     id: 'Error',
     name: 'Error',
-    state: { state: undefined, messages: [] },
     content: <div>Error Content</div>,
     icon: IvyIcons.Error
   },
