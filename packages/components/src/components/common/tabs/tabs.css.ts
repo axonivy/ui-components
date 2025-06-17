@@ -28,6 +28,7 @@ export const tabsList = style({
       gap: vars.size.s4
     },
     [`${tabs.classNames.variants.variant.inscription} &`]: {
+      gap: 0,
       overflow: 'hidden',
       border: 'none',
       alignItems: 'flex-end',
