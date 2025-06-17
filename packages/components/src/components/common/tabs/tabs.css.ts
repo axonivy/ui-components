@@ -29,16 +29,42 @@ export const tabsList = style({
     },
     [`${tabs.classNames.variants.variant.inscription} &`]: {
       overflow: 'hidden',
-      padding: vars.size.s1,
+      border: 'none',
+      alignItems: 'flex-end',
+      borderTop: vars.border.basic,
+      paddingTop: vars.size.s1,
       backgroundColor: vars.color.n25,
-      border: vars.border.basic,
-      borderRadius: vars.border.r3,
-      marginBottom: vars.size.s3,
+      marginBottom: vars.size.s2,
       containerName: tabsListContainer,
       containerType: 'inline-size'
+    }
+  }
+});
+
+export const tabsListPlaceholder = style({
+  height: '100%',
+  width: vars.size.s1,
+  borderBottom: vars.border.basic
+});
+
+export const tabsTriggerSeparator = style({
+  display: 'none',
+  selectors: {
+    [`${tabs.classNames.variants.variant.inscription} &`]: {
+      display: 'block'
     },
-    [`${tabs.classNames.variants.variant.inscription} &:has(.ui-inscription-tabs-trigger:focus-visible)`]: {
-      boxShadow: vars.shadow.focus
+    '&.ui-separator[data-orientation="vertical"]': {
+      height: '1.2rem',
+      marginInline: 'unset'
+    },
+    '.ui-tabs-trigger[data-state="active"] &': {
+      display: 'none'
+    },
+    '.ui-tabs-trigger:nth-last-child(2) &': {
+      display: 'none'
+    },
+    '.ui-tabs-trigger:has(+ .ui-tabs-trigger[data-state="active"]) &': {
+      display: 'none'
     }
   }
 });
@@ -49,7 +75,6 @@ export const tabsTrigger = style({
   alignItems: 'center',
   justifyContent: 'center',
   flex: '0',
-  gap: vars.size.s1,
   padding: '0.5rem 1rem',
   fontSize: '14px',
   color: vars.color.n800,
@@ -83,35 +108,33 @@ export const tabsTrigger = style({
       borderBottom: '1px solid transparent'
     },
     [`${tabs.classNames.variants.variant.inscription} &`]: {
-      borderBottom: 'none',
-      height: vars.size.s2,
-      padding: `${vars.size.s3} ${vars.size.s1}`,
+      flex: 1,
+      padding: '0',
       whiteSpace: 'nowrap',
       fontSize: '12px',
       fontWeight: 'bold',
       lineHeight: '1',
-      color: vars.color.n700,
-      userSelect: 'none',
-      cursor: 'pointer',
-      flex: 1,
-      minWidth: '1.65rem',
-      position: 'relative',
-      containerType: 'inline-size',
-      containerName: tabsTriggerContainer
+      userSelect: 'none'
     },
-    [`${tabs.classNames.variants.variant.inscription} &:not([data-state="active"]):has(+ &:not([data-state="active"]))`]: {
-      borderRight: vars.border.basic
+    [`${tabs.classNames.variants.variant.inscription} &[data-state="active"]`]: {
+      backgroundColor: vars.color.background,
+      borderTop: vars.border.basic,
+      borderRadius: `${vars.border.r2} ${vars.border.r2} 0 0`,
+      borderLeft: vars.border.basic,
+      borderRight: vars.border.basic,
+      borderBottom: `1px solid ${vars.color.background}`,
+      color: vars.color.p300,
+      minWidth: '6.5rem',
+      fontWeight: 'bold'
+    },
+    [`${tabs.classNames.variants.variant.inscription} &:focus-visible`]: {
+      borderRadius: `${vars.border.r2} ${vars.border.r2} 0 0`
     },
     [`${tabs.classNames.variants.variant.inscription} &:hover`]: {
       color: vars.color.p300
     },
-    [`${tabs.classNames.variants.variant.inscription} &[data-state="active"]`]: {
-      border: `1px solid ${vars.color.p75}`,
-      borderRadius: vars.border.r2,
-      backgroundColor: vars.color.p50,
-      color: vars.color.p300,
-      minWidth: '6.5rem',
-      fontWeight: 'bold'
+    [`${tabs.classNames.variants.variant.inscription} &[data-state="inactive"]`]: {
+      borderBottom: vars.border.basic
     }
   },
   '@container': {
@@ -132,11 +155,30 @@ export const tabsTrigger = style({
   }
 });
 
+export const tabsTriggerContent = style({
+  all: 'unset',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  gap: vars.size.s1,
+  flex: '0',
+  selectors: {
+    [`${tabs.classNames.variants.variant.inscription} &`]: {
+      height: vars.size.s2,
+      padding: `${vars.size.s3} ${vars.size.s1}`,
+      flex: 1,
+      minWidth: '1.65rem',
+      position: 'relative',
+      containerType: 'inline-size',
+      containerName: tabsTriggerContainer
+    }
+  }
+});
+
 export const inscriptionTabsRoot = style({
   all: 'unset',
   display: 'flex',
   flexDirection: 'column',
-  padding: vars.size.s2,
   flex: 1,
   overflow: 'hidden'
 });
@@ -182,7 +224,8 @@ export const inscriptionTabsContent = style({
   overflow: 'hidden',
   selectors: {
     '&[data-state="active"]': {
-      flex: 1
+      flex: 1,
+      padding: vars.size.s2
     }
   }
 });
