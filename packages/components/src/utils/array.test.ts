@@ -1,4 +1,4 @@
-import { arraymove, groupBy, indexOf } from './array';
+import { arraymove, arrayMoveMultiple, groupBy, indexOf } from './array';
 
 test('indexOf', () => {
   const array = [{ a: 1 }, { a: 2 }];
@@ -7,11 +7,21 @@ test('indexOf', () => {
   expect(indexOf(array, obj => obj.a === 3)).toEqual(-1);
 });
 
-test('movearray', () => {
+test('arraymove', () => {
   const array = [{ a: 1 }, { a: 2 }];
   expect(array).toEqual(array);
   arraymove(array, 0, 1);
   expect(array).toEqual([{ a: 2 }, { a: 1 }]);
+});
+
+test('arrayMoveMultiple', () => {
+  const array = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+  expect(array).toEqual(array);
+  arrayMoveMultiple(array, [2, 3], 5);
+  expect(array).toEqual([0, 1, 4, 5, 2, 3, 6, 7, 8, 9]);
+
+  arrayMoveMultiple(array, [2, 3], 0);
+  expect(array).toEqual([4, 5, 0, 1, 2, 3, 6, 7, 8, 9]);
 });
 
 const car1 = { type: 'suv', vendor: 'bmw' } as const;
