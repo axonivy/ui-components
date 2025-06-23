@@ -73,7 +73,7 @@ describe('handler', () => {
     const { server } = await setupConnection({ onConnection, onReconnect }, { reconnectDelay: 100 });
     expect(onConnection).toHaveBeenCalled();
     expect(onReconnect).not.toHaveBeenCalled();
-    server.server.clients()[0]?.close();
+    server.server.clients()[0].close();
     await server.connected;
     await vi.waitFor(() => expect(onReconnect).toHaveBeenCalled());
   });
@@ -90,7 +90,7 @@ describe('reconnect', () => {
   test('reconnect', async () => {
     const { server } = await setupConnection({ ...testHandler, logger }, { reconnectDelay: 100 });
     expect(logger.log).toHaveBeenCalledWith('Connection established!');
-    server.server.clients()[0]?.close();
+    server.server.clients()[0].close();
     await server.connected;
     await vi.waitFor(() => expect(logger.warn).toHaveBeenCalledWith('Trying to reconnect...'));
     await vi.waitFor(() => expect(logger.info).toHaveBeenCalledWith('Reconnected!'));
@@ -99,14 +99,14 @@ describe('reconnect', () => {
   test('no reconnect', async () => {
     const { server } = await setupConnection({ ...testHandler, logger }, { reconnect: false });
     expect(logger.log).toHaveBeenCalledWith('Connection established!');
-    server.server.clients()[0]?.close();
+    server.server.clients()[0].close();
     await vi.waitFor(() => expect(logger.error).toHaveBeenCalledWith('Connection was closed, will not reconnect!'));
   });
 
   test('reconnect attempts', async () => {
     const { server } = await setupConnection({ ...testHandler, logger }, { reconnectAttempts: 0 });
     expect(logger.log).toHaveBeenCalledWith('Connection established!');
-    server.server.clients()[0]?.close();
+    server.server.clients()[0].close();
     await vi.waitFor(() => expect(logger.error).toHaveBeenCalledWith('Reconnection failed. Tried 0 times.'));
   });
 });

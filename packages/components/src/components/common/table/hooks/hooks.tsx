@@ -120,17 +120,11 @@ export const useMultiSelectRow = <TData,>(table: Table<TData>) => {
       const currentRowIndex = allRows.findIndex(r => r.id === row.id);
 
       if (lastSelectedRowIndex !== -1 && currentRowIndex !== -1) {
-        let [start, end] = [lastSelectedRowIndex, currentRowIndex];
-        if (start > end) {
-          [start, end] = [end, start];
-        }
+        const [start, end] = [lastSelectedRowIndex, currentRowIndex].sort((a, b) => a - b);
         const newSelection = isMultiSelect ? { ...currentSelection } : {};
 
         for (let i = start; i <= end; i++) {
-          const selectId = allRows.at(i)?.id;
-          if (selectId !== undefined) {
-            newSelection[selectId] = true;
-          }
+          newSelection[allRows[i].id] = true;
         }
         table.setRowSelection(newSelection);
       }
@@ -162,7 +156,7 @@ interface TableKeyboardHandlerProps<TData> {
 }
 
 export const useTableKeyHandler = <TData,>({ table, data, options }: TableKeyboardHandlerProps<TData>) => {
-  const [rootIndex, setRootIndex] = React.useState<number | undefined>();
+  const [rootIndex, setRootIndex] = React.useState<number | undefined>(undefined);
   const readonly = useReadonly();
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLTableElement>, onEnterAction?: (row: Row<TData>) => void) => {
@@ -172,19 +166,13 @@ export const useTableKeyHandler = <TData,>({ table, data, options }: TableKeyboa
       ArrowLeft: () => toggleExpand(false, table.getSelectedRowModel().flatRows[0], options?.lazyLoadChildren),
       ArrowRight: () => toggleExpand(true, table.getSelectedRowModel().flatRows[0], options?.lazyLoadChildren),
       Tab: () => options?.resetSelectionOnTab && table.resetRowSelection(),
-      Enter: () => handleEnter?.(onEnterAction, table.getSelectedRowModel().flatRows[0]),
+      Enter: () => onEnterAction?.(table.getSelectedRowModel().flatRows[0]),
       Escape: () => options?.resetSelectionOnEscape && table.resetRowSelection()
     };
     const action = actions[event.key];
     if (action) {
       event.stopPropagation();
       action();
-    }
-  };
-
-  const handleEnter = (onEnterAction?: (row: Row<TData>) => void, row?: Row<TData>) => {
-    if (row !== undefined) {
-      onEnterAction?.(row);
     }
   };
 
@@ -196,8 +184,10 @@ export const useTableKeyHandler = <TData,>({ table, data, options }: TableKeyboa
 
     const newReorderIndex = calculateNewReorderIndex({
       direction,
-      allRows,
-      selectedRows
+      firstSelectedRowIndex: allRows.indexOf(selectedRows[0]),
+      lastSelectedRowIndex: allRows.indexOf(selectedRows[selectedRows.length - 1]),
+      selectedRowsCount: selectedRows.length,
+      allRowsCount: allRows.length
     });
     const newSelectIndex = calculateNewSelectIndex(direction, newReorderIndex, allRows.length);
     if (!readonly && event.altKey && reorder?.updateOrder && reorder.getRowId) {
@@ -211,7 +201,7 @@ export const useTableKeyHandler = <TData,>({ table, data, options }: TableKeyboa
       toggleMultiRowSelection(direction, newSelectIndex, allRows, selectedRows);
     } else {
       table.resetRowSelection();
-      allRows[newReorderIndex]?.toggleSelected();
+      allRows[newReorderIndex].toggleSelected();
       setRootIndex(newReorderIndex);
       scrollToNextRow(event, newReorderIndex);
     }
@@ -227,21 +217,19 @@ export const useTableKeyHandler = <TData,>({ table, data, options }: TableKeyboa
       return;
     }
     if (rootIndex === undefined && selectedRows.length === 1) {
-      setRootIndex(selectedRows[0]?.index);
+      setRootIndex(selectedRows[0].index);
     }
     if (direction === 1) {
-      const firstSelectedRow = selectedRows.at(0);
-      if (firstSelectedRow === undefined || rootIndex === allRows.indexOf(firstSelectedRow) || selectedRows.length === 1) {
-        allRows.at(newIndex)?.toggleSelected();
+      if (rootIndex === allRows.indexOf(selectedRows[0]) || selectedRows.length === 1) {
+        allRows[newIndex].toggleSelected();
       } else {
-        firstSelectedRow.toggleSelected();
+        selectedRows[0].toggleSelected();
       }
     } else {
-      const lastSelectedRow = selectedRows.at(-1);
-      if (lastSelectedRow === undefined || rootIndex === allRows.indexOf(lastSelectedRow) || selectedRows.length === 1) {
-        allRows.at(newIndex)?.toggleSelected();
+      if (rootIndex === allRows.indexOf(selectedRows[selectedRows.length - 1]) || selectedRows.length === 1) {
+        allRows[newIndex].toggleSelected();
       } else {
-        lastSelectedRow.toggleSelected();
+        selectedRows[selectedRows.length - 1].toggleSelected();
       }
     }
   };
@@ -275,16 +263,21 @@ const toggleExpand = <TData,>(expand: boolean, row?: Row<TData>, loadChildren?: 
   }
 };
 
-interface CalculateNewReorderIndexProps<TData> {
+interface CalculateNewReorderIndexProps {
   direction: -1 | 1;
-  allRows: Array<Row<TData>>;
-  selectedRows: Array<Row<TData>>;
+  firstSelectedRowIndex: number;
+  lastSelectedRowIndex: number;
+  selectedRowsCount: number;
+  allRowsCount: number;
 }
-const calculateNewReorderIndex = <TData,>({ direction, allRows, selectedRows }: CalculateNewReorderIndexProps<TData>): number => {
-  const allRowsCount = allRows.length;
-  const lastSelectedRowIndex = selectedRows.at(-1)?.index;
-  const firstSelectedRowIndex = selectedRows.at(0)?.index;
-  if (lastSelectedRowIndex === undefined || firstSelectedRowIndex === undefined) {
+const calculateNewReorderIndex = ({
+  direction,
+  firstSelectedRowIndex,
+  lastSelectedRowIndex,
+  selectedRowsCount,
+  allRowsCount
+}: CalculateNewReorderIndexProps): number => {
+  if (selectedRowsCount === 0) {
     return direction === 1 ? 0 : allRowsCount - 1;
   }
   const baseIndex = direction === 1 ? lastSelectedRowIndex : firstSelectedRowIndex;

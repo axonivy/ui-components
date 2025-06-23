@@ -1,4 +1,3 @@
-import { isNotUndefined } from '@/utils/guards';
 import {
   ConditionContext,
   type ConditionData,
@@ -41,50 +40,44 @@ const ConditionBuilder = ({
 
   const updateConditionGroups = (updater: (old: Array<ConditionGroupData>) => Array<ConditionGroupData>) => {
     setConditionGroups(old => {
-      const groups = updater(old);
-      onChange(generateConditionString(conditionMode, groups));
-      return groups;
+      const newGroups = updater(old);
+      onChange(generateConditionString(conditionMode, newGroups));
+      return newGroups;
     });
   };
 
   const addConditionGroup = () => {
     updateConditionGroups(old => {
-      const groups = structuredClone(old);
-      groups.push({
+      const newGroups = structuredClone(old);
+      newGroups.push({
         conditions: [{ argument1: '', operator: 'equal to', argument2: '', logicalOperator: 'and' }],
         logicalOperator: 'and'
       });
-      return groups;
+      return newGroups;
     });
   };
 
-  const updateLogicalOperator = (groupIndex: number, newValue: LogicOperator) => {
+  const updateLogicalOperator = (index: number, newValue: LogicOperator) => {
     updateConditionGroups(old => {
-      const groups = structuredClone(old);
-      const group = groups.at(groupIndex);
-      if (isNotUndefined(group)) {
-        group.logicalOperator = newValue;
-      }
-      return groups;
+      const newGroups = structuredClone(old);
+      newGroups[index].logicalOperator = newValue;
+      return newGroups;
     });
   };
 
   const addCondition = (groupIndex: number) => {
     updateConditionGroups(old => {
-      const groups = structuredClone(old);
-      const group = groups.at(groupIndex);
-      if (isNotUndefined(group)) {
-        group.conditions.push({ argument1: '', operator: 'equal to', argument2: '', logicalOperator: 'and' });
-      }
-      return groups;
+      const newGroups = structuredClone(old);
+      newGroups[groupIndex].conditions.push({ argument1: '', operator: 'equal to', argument2: '', logicalOperator: 'and' });
+      return newGroups;
     });
   };
 
   const removeConditionGroup = (groupIndex: number) => {
     updateConditionGroups(old => {
-      const groups = structuredClone(old);
-      groups.splice(groupIndex, 1);
-      return groups;
+      const newGroups = structuredClone(old);
+      newGroups.splice(groupIndex, 1);
+      return newGroups;
     });
   };
 
@@ -95,23 +88,20 @@ const ConditionBuilder = ({
     newValue: ConditionData[TKey]
   ) => {
     updateConditionGroups(old => {
-      const groups = structuredClone(old);
-      const condition = groups.at(groupIndex)?.conditions.at(conditionIndex);
-      if (isNotUndefined(condition)) {
-        groups.at(groupIndex)?.conditions.splice(conditionIndex, 1, { ...condition, [key]: newValue });
-      }
-      return groups;
+      const newGroups = structuredClone(old);
+      newGroups[groupIndex].conditions[conditionIndex] = {
+        ...newGroups[groupIndex].conditions[conditionIndex],
+        [key]: newValue
+      };
+      return newGroups;
     });
   };
 
   const removeCondition = (groupIndex: number, conditionIndex: number) => {
     updateConditionGroups(old => {
-      const groups = structuredClone(old);
-      const group = groups.at(groupIndex);
-      if (isNotUndefined(group)) {
-        group.conditions.splice(conditionIndex, 1);
-      }
-      return groups;
+      const newGroups = structuredClone(old);
+      newGroups[groupIndex].conditions.splice(conditionIndex, 1);
+      return newGroups;
     });
   };
 

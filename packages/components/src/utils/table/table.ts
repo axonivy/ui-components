@@ -44,8 +44,7 @@ export const adjustSelectionAfterDeletionOfRow = <TData>(data: Array<TData>, tab
 
 export const deleteAllSelectedRows = <TData>(table: Table<TData>, data: Array<TData>) => {
   const selectedRows = table.getSelectedRowModel().flatRows;
-  const selectIndex = selectedRows.at(0)?.index;
-  if (selectIndex === undefined) {
+  if (selectedRows.length === 0) {
     return { newData: data };
   }
   const newData = structuredClone(data);
@@ -54,7 +53,7 @@ export const deleteAllSelectedRows = <TData>(table: Table<TData>, data: Array<TD
     newData.splice(rowIndex, 1);
   }
 
-  const selection = adjustSelectionAfterDeletionOfRow(newData, table, selectIndex);
+  const selection = adjustSelectionAfterDeletionOfRow(newData, table, selectedRows[0].index);
   return { newData, selection };
 };
 

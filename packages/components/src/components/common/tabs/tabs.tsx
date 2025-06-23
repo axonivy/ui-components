@@ -65,38 +65,42 @@ export type BasicInscriptionTabsProps = {
   onChange?: (change: string) => void;
 };
 
-const BasicInscriptionTabs = ({ tabs, onChange, value }: BasicInscriptionTabsProps) => (
-  <Tabs
-    variant='inscription'
-    className={cn(inscriptionTabsRoot, 'ui-inscription-tabs')}
-    defaultValue={tabs[0]?.id ?? ''}
-    value={value}
-    onValueChange={onChange}
-  >
-    <TabsList className={cn('ui-inscription-tabs-list', `tabs-${tabs.length >= 5 ? 'many' : 'few'}`)}>
-      <div className={tabsListPlaceholder} />
+const BasicInscriptionTabs = ({ tabs, onChange, value }: BasicInscriptionTabsProps) => {
+  const defaultTab = tabs.length > 0 ? tabs[0].id : '';
+
+  return (
+    <Tabs
+      variant='inscription'
+      className={cn(inscriptionTabsRoot, 'ui-inscription-tabs')}
+      defaultValue={defaultTab}
+      value={value}
+      onValueChange={onChange}
+    >
+      <TabsList className={cn('ui-inscription-tabs-list', `tabs-${tabs.length >= 5 ? 'many' : 'few'}`)}>
+        <div className={tabsListPlaceholder} />
+        {tabs.map((tab, index) => (
+          <TabsTrigger key={`${index}-${tab.id}`} className='ui-inscription-tabs-trigger' value={tab.id} aria-label={tab.name}>
+            {tab.state?.state !== undefined && (
+              <StateDot state={tab.state.state} messages={tab.state.messages} size='small' className={inscriptionTabStateDot} />
+            )}
+            <IvyIcon icon={tab.icon} className='ivy-16' title={tab.name} />
+            <div className={inscriptionTabsTriggerLabel} title={tab.name}>
+              {tab.name}
+            </div>
+          </TabsTrigger>
+        ))}
+        <div className={tabsListPlaceholder} />
+      </TabsList>
       {tabs.map((tab, index) => (
-        <TabsTrigger key={`${index}-${tab.id}`} className='ui-inscription-tabs-trigger' value={tab.id} aria-label={tab.name}>
-          {tab.state?.state !== undefined && (
-            <StateDot state={tab.state.state} messages={tab.state.messages} size='small' className={inscriptionTabStateDot} />
-          )}
-          <IvyIcon icon={tab.icon} className='ivy-16' title={tab.name} />
-          <div className={inscriptionTabsTriggerLabel} title={tab.name}>
-            {tab.name}
-          </div>
-        </TabsTrigger>
+        <TabsPrimitive.Content className={cn(inscriptionTabsContent, 'ui-inscription-tabs-content')} key={`${index}-${tab}`} value={tab.id}>
+          <Flex direction='column' gap={3} className={inscriptionTabsContentScrollArea}>
+            {tab.content}
+          </Flex>
+        </TabsPrimitive.Content>
       ))}
-      <div className={tabsListPlaceholder} />
-    </TabsList>
-    {tabs.map((tab, index) => (
-      <TabsPrimitive.Content className={cn(inscriptionTabsContent, 'ui-inscription-tabs-content')} key={`${index}-${tab}`} value={tab.id}>
-        <Flex direction='column' gap={3} className={inscriptionTabsContentScrollArea}>
-          {tab.content}
-        </Flex>
-      </TabsPrimitive.Content>
-    ))}
-  </Tabs>
-);
+    </Tabs>
+  );
+};
 BasicInscriptionTabs.displayName = 'BasicInscriptionTabs';
 
 export { Tabs, TabsList, TabsTrigger, TabsContent, BasicInscriptionTabs };

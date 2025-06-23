@@ -44,7 +44,7 @@ const Palette = <TItem extends PaletteItemConfig>({ sections, children, options 
     options?.searchFilter ?? ((item: TItem, searchTerm: string) => item.name.toLowerCase().includes(searchTerm.toLowerCase()));
   const filteredSections: Record<string, Array<TItem>> = {};
   for (const section of Object.keys(sections)) {
-    const filteredItems = sections[section]?.filter(item => searchFilter(item, searchTerm)) ?? [];
+    const filteredItems = sections[section].filter(item => searchFilter(item, searchTerm));
     if (filteredItems.length > 0) {
       filteredSections[section] = filteredItems;
     }

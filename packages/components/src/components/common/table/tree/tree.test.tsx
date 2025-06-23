@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { composeStory } from '@storybook/react-vite';
 import { customRender, screen, userEvent } from 'test-utils';
 import Meta, { Default, CustomValue, Lazy, Search } from './tree.stories';
@@ -10,7 +11,7 @@ const SearchTree = composeStory(Search, Meta);
 test('tree', async () => {
   customRender(<Tree />);
   expect(screen.getAllByRole('row')).toHaveLength(7);
-  await userEvent.click(screen.getAllByRole('button', { name: 'Collapse row' })[0]!);
+  await userEvent.click(screen.getAllByRole('button', { name: 'Collapse row' })[0]);
   expect(screen.getAllByRole('row')).toHaveLength(3);
   await userEvent.click(screen.getByRole('button', { name: 'Expand tree' }));
   expect(screen.getAllByRole('row')).toHaveLength(7);
