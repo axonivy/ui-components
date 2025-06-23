@@ -10,7 +10,7 @@
   "scripts": {
     "ci": "npm install && npm run generate && npm run package && npm run type && (npm run lint:ci || true) && npm run test:ci",
     "generate": "npm run -w @axonivy/ui-icons generate",
-    "build": "lerna run build",
+    "build": "tsc --build",
     "build:storybook": "storybook build",
     "package": "lerna run package",
     "clean": "lerna run clean",

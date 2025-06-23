@@ -4,7 +4,6 @@
     "composite": true,
     "declaration": true,
     "declarationMap": true,
-    "emitDecoratorMetadata": true,
     "jsx": "react-jsx"
   }
 }

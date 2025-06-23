@@ -59,8 +59,8 @@
     "clean": "rimraf --glob lib *.tsbuildinfo",
     "build": "tsc --build tsconfig.production.json",
     "package": "npm run clean && vite build && npm run build",
-    "type": "tsc --noEmit --emitDeclarationOnly false",
+    "type": "tsc",
     "test": "vitest",
-    "test:ci": "vitest --watch=false"
+    "test:ci": "vitest run"
   }
 }
