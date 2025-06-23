@@ -1,5 +1,5 @@
 {
-  "extends": "./config/tsconfig.base.json",
+  "extends": "@axonivy/ts-config/base",
   "files": [],
   "compilerOptions": {
     "noEmit": true

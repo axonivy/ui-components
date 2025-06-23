@@ -54,10 +54,10 @@ describe('handleMultiSelectOnRowClick', () => {
     const row = table.getRowModel().rows[1];
     const event = { ctrlKey: true } as React.MouseEvent<HTMLTableRowElement, MouseEvent>;
 
-    act(() => result.current.handleMultiSelectOnRow(row, event));
+    act(() => result.current.handleMultiSelectOnRow(row!, event));
     expect(onRowSelectionChangeValues).toEqual([{ '1': true }]);
     table.getState().rowSelection = { '1': true };
-    act(() => result.current.handleMultiSelectOnRow(row, event));
+    act(() => result.current.handleMultiSelectOnRow(row!, event));
     expect(onRowSelectionChangeValues).toEqual([{ '1': true }, { '1': false }]);
   });
 
@@ -66,8 +66,8 @@ describe('handleMultiSelectOnRowClick', () => {
     const { result } = customRenderHook(() => useMultiSelectRow(table));
     const rows = table.getRowModel().rows;
     const event = { shiftKey: true } as React.MouseEvent<HTMLTableRowElement, MouseEvent>;
-    act(() => result.current.handleMultiSelectOnRow(rows[0], event));
-    act(() => result.current.handleMultiSelectOnRow(rows[2], event));
+    act(() => result.current.handleMultiSelectOnRow(rows[0]!, event));
+    act(() => result.current.handleMultiSelectOnRow(rows[2]!, event));
     expect(onRowSelectionChangeValues[1]).toEqual({ '0': true, '1': true, '2': true });
   });
 
@@ -76,9 +76,9 @@ describe('handleMultiSelectOnRowClick', () => {
     const { result } = customRenderHook(() => useMultiSelectRow(table));
     const rows = table.getRowModel().rows;
     const event = { shiftKey: true } as React.MouseEvent<HTMLTableRowElement, MouseEvent>;
-    act(() => result.current.handleMultiSelectOnRow(rows[0], event));
-    act(() => result.current.handleMultiSelectOnRow(rows[3], event));
-    act(() => result.current.handleMultiSelectOnRow(rows[2], event));
+    act(() => result.current.handleMultiSelectOnRow(rows[0]!, event));
+    act(() => result.current.handleMultiSelectOnRow(rows[3]!, event));
+    act(() => result.current.handleMultiSelectOnRow(rows[2]!, event));
     expect(onRowSelectionChangeValues[2]).toEqual({ '0': true, '1': true, '2': true });
   });
 
@@ -88,12 +88,12 @@ describe('handleMultiSelectOnRowClick', () => {
     const rows = table.getRowModel().rows;
     const ctrlEvent = { ctrlKey: true } as React.MouseEvent<HTMLTableRowElement, MouseEvent>;
     const ctrlShiftEvent = { shiftKey: true, ctrlKey: true } as React.MouseEvent<HTMLTableRowElement, MouseEvent>;
-    act(() => result.current.handleMultiSelectOnRow(rows[0], ctrlEvent));
+    act(() => result.current.handleMultiSelectOnRow(rows[0]!, ctrlEvent));
     table.getState().rowSelection = { '0': true };
-    act(() => result.current.handleMultiSelectOnRow(rows[2], ctrlEvent));
+    act(() => result.current.handleMultiSelectOnRow(rows[2]!, ctrlEvent));
     expect(onRowSelectionChangeValues[1]).toEqual({ '0': true, '2': true });
     table.getState().rowSelection = { '0': true, '2': true };
-    act(() => result.current.handleMultiSelectOnRow(rows[4], ctrlShiftEvent));
+    act(() => result.current.handleMultiSelectOnRow(rows[4]!, ctrlShiftEvent));
     expect(onRowSelectionChangeValues[2]).toEqual({ '0': true, '2': true, '3': true, '4': true });
   });
 
@@ -102,9 +102,9 @@ describe('handleMultiSelectOnRowClick', () => {
     const { result } = customRenderHook(() => useMultiSelectRow(table));
     const rows = table.getRowModel().rows;
     const event = { shiftKey: true, ctrlKey: true } as React.MouseEvent<HTMLTableRowElement, MouseEvent>;
-    act(() => result.current.handleMultiSelectOnRow(rows[3], event));
+    act(() => result.current.handleMultiSelectOnRow(rows[3]!, event));
     table.getState().rowSelection = { '3': true };
-    act(() => result.current.handleMultiSelectOnRow(rows[3], event));
+    act(() => result.current.handleMultiSelectOnRow(rows[3]!, event));
     expect(onRowSelectionChangeValues[1]).toEqual({ '3': true });
   });
 
@@ -113,7 +113,7 @@ describe('handleMultiSelectOnRowClick', () => {
     const { result } = customRenderHook(() => useMultiSelectRow(table));
     const row = table.getRowModel().rows[1];
     const event = { ctrlKey: false } as React.MouseEvent<HTMLTableRowElement, MouseEvent>;
-    act(() => result.current.handleMultiSelectOnRow(row, event));
+    act(() => result.current.handleMultiSelectOnRow(row!, event));
     expect(onRowSelectionChangeValues).toEqual([{ '1': true }]);
   });
 });

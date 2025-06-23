@@ -47,6 +47,6 @@ test('sort', async () => {
 
 const expectSort = (textContent: string[]) => {
   screen.getAllByRole('row').forEach((row, index) => {
-    expect(row).toHaveTextContent(textContent[index]);
+    expect(row).toHaveTextContent(textContent[index]!);
   });
 };
