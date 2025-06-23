@@ -8,8 +8,5 @@
     "types": ["vitest/globals"]
   },
   "include": ["src"],
-  "references": [
-    { "path": "../icons/tsconfig.json" },
-    { "path": "../components/tsconfig.production.json" }
-  ]
+  "references": [{ "path": "../icons/tsconfig.json" }]
 }

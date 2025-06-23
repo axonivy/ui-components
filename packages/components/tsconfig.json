@@ -12,7 +12,7 @@
       "@/utils/*": ["./src/utils/*"]
     },
     "allowImportingTsExtensions": true,
-    "emitDeclarationOnly": true,
+    "noEmit": true,
     "types": ["vitest/globals"]
   },
   "include": ["src"],
