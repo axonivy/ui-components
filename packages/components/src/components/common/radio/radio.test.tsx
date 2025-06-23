@@ -11,12 +11,12 @@ test('toggle', async () => {
   expect(radios.at(1)).not.toBeChecked();
   expect(radios.at(2)).not.toBeChecked();
 
-  await userEvent.click(radios[1]!);
+  await userEvent.click(radios[1]);
   expect(radios.at(0)).not.toBeChecked();
   expect(radios.at(1)).toBeChecked();
   expect(radios.at(2)).not.toBeChecked();
 
-  await userEvent.click(radios[2]!);
+  await userEvent.click(radios[2]);
   expect(radios.at(0)).not.toBeChecked();
   expect(radios.at(1)).not.toBeChecked();
   expect(radios.at(2)).toBeChecked();

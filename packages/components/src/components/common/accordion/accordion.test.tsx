@@ -14,11 +14,11 @@ test('open', async () => {
   expect(items.at(0)).toHaveAttribute('data-state', 'closed');
   expect(screen.queryByRole('region')).not.toBeInTheDocument();
 
-  await userEvent.click(items[0]!);
+  await userEvent.click(items[0]);
   expect(items.at(0)).toHaveAttribute('data-state', 'open');
   expect(screen.getByRole('region')).toHaveTextContent('WAI-ARIA design pattern');
 
-  await userEvent.click(items[1]!);
+  await userEvent.click(items[1]);
   expect(items.at(0)).toHaveAttribute('data-state', 'closed');
   expect(items.at(1)).toHaveAttribute('data-state', 'open');
   expect(screen.getByRole('region')).toHaveTextContent('default styles');

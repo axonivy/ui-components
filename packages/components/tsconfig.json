@@ -1,5 +1,5 @@
 {
-  "extends": "@axonivy/ts-config/package",
+  "extends": "../../config/tsconfig.package.json",
   "compilerOptions": {
     "rootDir": "src",
     "outDir": "lib",
@@ -12,7 +12,7 @@
       "@/utils/*": ["./src/utils/*"]
     },
     "allowImportingTsExtensions": true,
-    "emitDeclarationOnly": true,
+    "noEmit": true,
     "types": ["vitest/globals"]
   },
   "include": ["src"],

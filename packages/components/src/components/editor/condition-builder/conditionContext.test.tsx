@@ -48,7 +48,7 @@ describe('ConditionBuilderContext', () => {
     const { result } = customRenderConditionBuilderHook();
 
     expect(result.current.conditionGroups.length).toBe(1);
-    expect(result.current.conditionGroups[0]?.conditions.length).toBe(1);
+    expect(result.current.conditionGroups[0].conditions.length).toBe(1);
     expect(result.current.conditionMode).toBe('basic-condition');
   });
 
@@ -73,31 +73,31 @@ describe('ConditionBuilderContext', () => {
     const { result } = customRenderConditionBuilderHook();
 
     act(() => result.current.addCondition(0));
-    expect(result.current.conditionGroups[0]?.conditions.length).toBe(2);
+    expect(result.current.conditionGroups[0].conditions.length).toBe(2);
   });
 
   test('remove condition from group', () => {
     const { result } = customRenderConditionBuilderHook();
 
     act(() => result.current.addCondition(0));
-    expect(result.current.conditionGroups[0]?.conditions.length).toBe(2);
+    expect(result.current.conditionGroups[0].conditions.length).toBe(2);
 
     act(() => result.current.removeCondition(0, 1));
-    expect(result.current.conditionGroups[0]?.conditions.length).toBe(1);
+    expect(result.current.conditionGroups[0].conditions.length).toBe(1);
   });
 
   test('update condition in group', () => {
     const { result } = customRenderConditionBuilderHook();
 
     act(() => result.current.updateCondition(0, 0, 'argument1', 'testArg'));
-    expect(result.current.conditionGroups[0]?.conditions[0]?.argument1).toBe('testArg');
+    expect(result.current.conditionGroups[0].conditions[0].argument1).toBe('testArg');
   });
 
   test('update logical operator of group', () => {
     const { result } = customRenderConditionBuilderHook();
 
     act(() => result.current.updateLogicalOperator(0, 'or'));
-    expect(result.current.conditionGroups[0]?.logicalOperator).toBe('or');
+    expect(result.current.conditionGroups[0].logicalOperator).toBe('or');
   });
 
   test('generate correct condition string', () => {

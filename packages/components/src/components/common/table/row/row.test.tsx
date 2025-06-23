@@ -12,7 +12,7 @@ test('select', async () => {
   const row = screen.getAllByRole('row')[1];
   expect(row).toHaveAttribute('data-state', 'unselected');
   expect(screen.getByTitle('selected-row')).not.toHaveTextContent('Selected Row: ken99@yahoo.com');
-  await userEvent.click(row!);
+  await userEvent.click(row);
   expect(row).toHaveAttribute('data-state', 'selected');
   expect(screen.getByTitle('selected-row')).toHaveTextContent('Selected Row: ken99@yahoo.com');
 });
@@ -23,11 +23,11 @@ test('ctrl select', async () => {
   expect(rows[1]).toHaveAttribute('data-state', 'unselected');
   expect(rows[3]).toHaveAttribute('data-state', 'unselected');
   const user = userEvent.setup();
-  await user.click(rows[1]!);
+  await user.click(rows[1]);
   expect(rows[1]).toHaveAttribute('data-state', 'selected');
 
   await user.keyboard('[ControlLeft>]');
-  await user.click(rows[3]!);
+  await user.click(rows[3]);
 
   expect(rows[1]).toHaveAttribute('data-state', 'selected');
   expect(rows[2]).toHaveAttribute('data-state', 'unselected');
@@ -40,17 +40,17 @@ test('shift select', async () => {
   expect(rows[1]).toHaveAttribute('data-state', 'unselected');
   expect(rows[3]).toHaveAttribute('data-state', 'unselected');
   const user = userEvent.setup();
-  await user.click(rows[1]!);
+  await user.click(rows[1]);
   expect(rows[1]).toHaveAttribute('data-state', 'selected');
 
   await user.keyboard('[ShiftLeft>]');
-  await user.click(rows[3]!);
+  await user.click(rows[3]);
 
   expect(rows[1]).toHaveAttribute('data-state', 'selected');
   expect(rows[2]).toHaveAttribute('data-state', 'selected');
   expect(rows[3]).toHaveAttribute('data-state', 'selected');
 
-  await user.click(rows[2]!);
+  await user.click(rows[2]);
   expect(rows[1]).toHaveAttribute('data-state', 'selected');
   expect(rows[2]).toHaveAttribute('data-state', 'selected');
   expect(rows[3]).toHaveAttribute('data-state', 'unselected');
@@ -60,15 +60,15 @@ test('ctrl+shift select', async () => {
   customRender(<MultiSelectWithReorderTable />);
   const rows = screen.getAllByRole('row');
   const user = userEvent.setup();
-  await user.click(rows[1]!);
+  await user.click(rows[1]);
   expect(rows[1]).toHaveAttribute('data-state', 'selected');
 
   await user.keyboard('[ControlLeft>]');
-  await user.click(rows[3]!);
+  await user.click(rows[3]);
   expect(rows[3]).toHaveAttribute('data-state', 'selected');
 
   await user.keyboard('[ShiftLeft>]');
-  await user.click(rows[5]!);
+  await user.click(rows[5]);
 
   expect(rows[1]).toHaveAttribute('data-state', 'selected');
   expect(rows[2]).toHaveAttribute('data-state', 'unselected');
@@ -76,7 +76,7 @@ test('ctrl+shift select', async () => {
   expect(rows[4]).toHaveAttribute('data-state', 'selected');
   expect(rows[5]).toHaveAttribute('data-state', 'selected');
 
-  await user.click(rows[4]!);
+  await user.click(rows[4]);
 
   expect(rows[1]).toHaveAttribute('data-state', 'selected');
   expect(rows[2]).toHaveAttribute('data-state', 'unselected');
