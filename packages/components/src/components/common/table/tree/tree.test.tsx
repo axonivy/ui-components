@@ -1,11 +1,12 @@
 import { composeStory } from '@storybook/react-vite';
 import { customRender, screen, userEvent } from 'test-utils';
-import Meta, { Default, CustomValue, Lazy, Search } from './tree.stories';
+import Meta, { Default, CustomValue, Lazy, Search, Select } from './tree.stories';
 
 const Tree = composeStory(Default, Meta);
 const CustomTree = composeStory(CustomValue, Meta);
 const LazyTree = composeStory(Lazy, Meta);
 const SearchTree = composeStory(Search, Meta);
+const SelectTree = composeStory(Select, Meta);
 
 test('tree', async () => {
   customRender(<Tree />);
@@ -48,4 +49,30 @@ test('search', async () => {
   await userEvent.clear(search);
   await userEvent.type(search, 'unknown');
   expect(screen.getAllByRole('row')).toHaveLength(1);
+});
+
+test('keyboard', async () => {
+  customRender(<SelectTree />);
+  const rows = screen.getAllByRole('row');
+  const user = userEvent.setup();
+  expect(rows[1]).toHaveAttribute('data-state', 'unselected');
+  await user.click(rows[1]!);
+  expect(rows[1]).toHaveAttribute('data-state', 'selected');
+  expect(rows[2]).toHaveAttribute('data-state', 'unselected');
+
+  await user.keyboard('[ArrowDown]');
+  await user.keyboard('[ArrowDown]');
+  expect(rows[1]).toHaveAttribute('data-state', 'unselected');
+  expect(rows[3]).toHaveAttribute('data-state', 'selected');
+
+  await user.keyboard('[ArrowDown]');
+  await user.keyboard('[ArrowDown]');
+  await user.keyboard('[ArrowDown]');
+  await user.keyboard('[ArrowDown]');
+  expect(rows[3]).toHaveAttribute('data-state', 'unselected');
+  expect(rows[1]).toHaveAttribute('data-state', 'selected');
+
+  await user.keyboard('[ArrowUp]');
+  expect(rows[1]).toHaveAttribute('data-state', 'unselected');
+  expect(rows[6]).toHaveAttribute('data-state', 'selected');
 });

@@ -280,13 +280,16 @@ interface CalculateNewReorderIndexProps<TData> {
   allRows: Array<Row<TData>>;
   selectedRows: Array<Row<TData>>;
 }
+
 const calculateNewReorderIndex = <TData,>({ direction, allRows, selectedRows }: CalculateNewReorderIndexProps<TData>): number => {
   const allRowsCount = allRows.length;
-  const lastSelectedRowIndex = selectedRows.at(-1)?.index;
-  const firstSelectedRowIndex = selectedRows.at(0)?.index;
-  if (lastSelectedRowIndex === undefined || firstSelectedRowIndex === undefined) {
+  const firstSelectedRow = selectedRows.at(0);
+  const lastSelectedRow = selectedRows.at(-1);
+  if (firstSelectedRow === undefined || lastSelectedRow === undefined) {
     return direction === 1 ? 0 : allRowsCount - 1;
   }
+  const firstSelectedRowIndex = allRows.indexOf(firstSelectedRow);
+  const lastSelectedRowIndex = allRows.indexOf(lastSelectedRow);
   const baseIndex = direction === 1 ? lastSelectedRowIndex : firstSelectedRowIndex;
   return (baseIndex + direction + allRowsCount) % allRowsCount;
 };
