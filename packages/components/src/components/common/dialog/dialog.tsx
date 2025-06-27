@@ -56,15 +56,15 @@ const DialogDescription = ({ className, ...props }: React.ComponentProps<typeof 
 );
 DialogDescription.displayName = DialogPrimitive.Description.displayName;
 
-type BasicDialoContentProps = React.ComponentProps<typeof DialogPrimitive.Root> & {
+type BasicDialoContentProps = React.ComponentProps<typeof DialogPrimitive.Content> & {
   title: string;
   description: React.ReactNode;
-  buttonClose: string;
+  buttonClose?: string;
   buttonCustom?: React.ReactNode;
 };
 
-const BasicDialogContent = ({ title, description, buttonClose = 'Cancel', buttonCustom, children }: BasicDialoContentProps) => (
-  <DialogContent>
+const BasicDialogContent = ({ title, description, buttonClose = 'Cancel', buttonCustom, children, ...props }: BasicDialoContentProps) => (
+  <DialogContent {...props}>
     <DialogHeader>
       <DialogTitle>{title}</DialogTitle>
       <DialogDescription>{description}</DialogDescription>
@@ -86,12 +86,13 @@ BasicDialogContent.displayName = 'BasicDialogContent';
 
 type BasicDialogProps = React.ComponentProps<typeof DialogPrimitive.Root> & {
   dialogTrigger?: React.ReactNode;
+  contentProps: BasicDialoContentProps;
 };
 
-const BasicDialog = ({ dialogTrigger, children, ...props }: BasicDialogProps & BasicDialoContentProps) => (
+const BasicDialog = ({ dialogTrigger, children, contentProps, ...props }: BasicDialogProps) => (
   <Dialog {...props}>
     {dialogTrigger}
-    <BasicDialogContent {...props}>{children}</BasicDialogContent>
+    <BasicDialogContent {...contentProps}>{children}</BasicDialogContent>
   </Dialog>
 );
 BasicDialog.displayName = 'BasicDialog';
