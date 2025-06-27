@@ -1,6 +1,6 @@
 {
   "name": "@axonivy/ui-graph",
-  "version": "13.1.1-next",
+  "version": "13.1.2-next",
   "private": false,
   "license": "(EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0)",
   "author": "Axon Ivy AG",
@@ -18,8 +18,8 @@
     "@xyflow/react": "12.6.4"
   },
   "peerDependencies": {
-    "@axonivy/ui-components": "~13.1.1-next",
-    "@axonivy/ui-icons": "~13.1.1-next",
+    "@axonivy/ui-components": "~13.1.2-next",
+    "@axonivy/ui-icons": "~13.1.2-next",
     "react": "^18.2 || ^19.0"
   },
   "devDependencies": {
