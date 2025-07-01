@@ -6,9 +6,9 @@ const BasicDialog = composeStory(Default, Meta);
 
 test('BasicDialog', async () => {
   customRender(<BasicDialog />);
-  expect(screen.queryByRole('button', { name: 'Close' })).not.toBeInTheDocument();
+  expect(screen.queryByRole('button', { name: 'Cancel' })).not.toBeInTheDocument();
   await userEvent.click(screen.getByRole('button', { name: 'Open Dialog' }));
-  expect(screen.getByRole('button', { name: 'Close' })).be.toBeInTheDocument();
-  await userEvent.click(screen.getByRole('button', { name: 'Close' }));
-  expect(screen.queryByRole('button', { name: 'Close' })).not.toBeInTheDocument();
+  expect(screen.getByRole('button', { name: 'Cancel' })).be.toBeInTheDocument();
+  await userEvent.click(screen.getByRole('button', { name: 'Cancel' }));
+  expect(screen.queryByRole('button', { name: 'Cancel' })).not.toBeInTheDocument();
 });
