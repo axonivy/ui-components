@@ -20,28 +20,35 @@ const description =
   'em Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown ' +
   'printer took a galley of type and scrambled it to make a type specimen book.';
 
+const buttonClose = (
+  <Button variant='outline' size='large'>
+    Cancel
+  </Button>
+);
+const buttonCustom = (
+  <Button variant='primary' size='large'>
+    Save
+  </Button>
+);
+
 const fruits: ReadonlyArray<{ value: string; label: string }> = [
   { value: 'apple', label: 'Apple' },
   { value: 'banana', label: 'Banana' }
 ];
 
 export default meta;
-
 type Story = StoryObj<typeof Dialog>;
 
 export const Default: Story = {
   render: props => {
     return (
       <BasicDialog
-        title={title}
-        description={description}
+        contentProps={{ title, description, buttonClose, buttonCustom }}
         dialogTrigger={
           <DialogTrigger asChild>
             <Button variant={'outline'}>Open Dialog</Button>
           </DialogTrigger>
         }
-        buttonClose='Close'
-        buttonCustom={<Button variant='primary'>Save</Button>}
         {...props}
       >
         <BasicField label='Name'>
@@ -68,7 +75,13 @@ export const WithBasicDialogContent: Story = {
         <DialogTrigger asChild>
           <Button variant={'outline'}>Open Dialog</Button>
         </DialogTrigger>
-        <BasicDialogContent title={title} description={description} buttonClose='cancel' {...props}>
+        <BasicDialogContent
+          title={title}
+          description={description}
+          buttonClose={<Button variant='outline'>Close</Button>}
+          buttonCustom={<Button variant='primary'>Save</Button>}
+          {...props}
+        >
           <BasicField label='Name'>
             <Input />
           </BasicField>
