@@ -54,6 +54,7 @@ export const content = style({
   padding: '20px',
   backgroundColor: vars.color.background,
   border: vars.border.basic,
+  maxHeight: '80vh',
   display: 'flex',
   flexDirection: 'column',
   gap: 20,

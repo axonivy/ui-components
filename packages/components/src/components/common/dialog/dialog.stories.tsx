@@ -48,8 +48,7 @@ export const Default: Story = {
           title,
           description,
           buttonClose: ButtonClose,
-          buttonCustom: ButtonCustom,
-          style: { maxHeight: '80vh' }
+          buttonCustom: ButtonCustom
         }}
         dialogTrigger={
           <DialogTrigger asChild>
@@ -84,14 +83,7 @@ export const WithBasicDialogContent: Story = {
         <DialogTrigger asChild>
           <Button variant={'outline'}>Open Dialog</Button>
         </DialogTrigger>
-        <BasicDialogContent
-          title={title}
-          description={description}
-          buttonClose={ButtonClose}
-          buttonCustom={ButtonCustom}
-          {...props}
-          style={{ maxHeight: '80vh' }}
-        >
+        <BasicDialogContent title={title} description={description} buttonClose={ButtonClose} buttonCustom={ButtonCustom} {...props}>
           <Flex direction='column' gap={2} style={{ overflow: 'auto' }}>
             <BasicField label='Name'>
               <Input />
