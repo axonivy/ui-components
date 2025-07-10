@@ -69,9 +69,7 @@ const BasicDialogContent = ({ title, description, buttonClose, buttonCustom, chi
       <DialogTitle>{title}</DialogTitle>
       <DialogDescription>{description}</DialogDescription>
     </DialogHeader>
-    <Flex direction='column' gap={2}>
-      {children}
-    </Flex>
+    {children}
     <DialogFooter>
       <DialogClose asChild>{buttonCustom}</DialogClose>
       <DialogClose asChild>{buttonClose}</DialogClose>

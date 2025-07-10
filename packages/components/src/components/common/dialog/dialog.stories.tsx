@@ -6,6 +6,7 @@ import { BasicSelect } from '@/components/common/select/select';
 import { Textarea } from '@/components/common/textarea/textarea';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { BasicDialog, BasicDialogContent, Dialog, DialogTrigger } from './dialog';
+import { Flex } from '@/components/common/flex/flex';
 
 const meta: Meta<typeof Dialog> = {
   title: 'Common/Dialog',
@@ -43,7 +44,13 @@ export const Default: Story = {
   render: props => {
     return (
       <BasicDialog
-        contentProps={{ title, description, buttonClose: ButtonClose, buttonCustom: ButtonCustom }}
+        contentProps={{
+          title,
+          description,
+          buttonClose: ButtonClose,
+          buttonCustom: ButtonCustom,
+          style: { maxHeight: '80vh' }
+        }}
         dialogTrigger={
           <DialogTrigger asChild>
             <Button variant={'outline'}>Open Dialog</Button>
@@ -51,31 +58,7 @@ export const Default: Story = {
         }
         {...props}
       >
-        <BasicField label='Name'>
-          <Input />
-        </BasicField>
-        <BasicField label='Comment'>
-          <Textarea />
-        </BasicField>
-        <BasicField label='Fruit'>
-          <BasicSelect items={fruits} />
-        </BasicField>
-        <BasicField label='Car'>
-          <Combobox value='' onChange={() => {}} options={[{ value: 'bmv' }, { value: 'volvo' }]} />
-        </BasicField>
-      </BasicDialog>
-    );
-  }
-};
-
-export const WithBasicDialogContent: Story = {
-  render: props => {
-    return (
-      <Dialog>
-        <DialogTrigger asChild>
-          <Button variant={'outline'}>Open Dialog</Button>
-        </DialogTrigger>
-        <BasicDialogContent title={title} description={description} buttonClose={ButtonClose} buttonCustom={ButtonCustom} {...props}>
+        <Flex direction='column' gap={2} style={{ overflow: 'auto' }}>
           <BasicField label='Name'>
             <Input />
           </BasicField>
@@ -88,6 +71,41 @@ export const WithBasicDialogContent: Story = {
           <BasicField label='Car'>
             <Combobox value='' onChange={() => {}} options={[{ value: 'bmv' }, { value: 'volvo' }]} />
           </BasicField>
+        </Flex>
+      </BasicDialog>
+    );
+  }
+};
+
+export const WithBasicDialogContent: Story = {
+  render: props => {
+    return (
+      <Dialog>
+        <DialogTrigger asChild>
+          <Button variant={'outline'}>Open Dialog</Button>
+        </DialogTrigger>
+        <BasicDialogContent
+          title={title}
+          description={description}
+          buttonClose={ButtonClose}
+          buttonCustom={ButtonCustom}
+          {...props}
+          style={{ maxHeight: '80vh' }}
+        >
+          <Flex direction='column' gap={2} style={{ overflow: 'auto' }}>
+            <BasicField label='Name'>
+              <Input />
+            </BasicField>
+            <BasicField label='Comment'>
+              <Textarea />
+            </BasicField>
+            <BasicField label='Fruit'>
+              <BasicSelect items={fruits} />
+            </BasicField>
+            <BasicField label='Car'>
+              <Combobox value='' onChange={() => {}} options={[{ value: 'bmv' }, { value: 'volvo' }]} />
+            </BasicField>
+          </Flex>
         </BasicDialogContent>
       </Dialog>
     );
