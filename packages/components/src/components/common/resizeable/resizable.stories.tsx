@@ -1,12 +1,12 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
-import { ResizableHandle, ResizablePanel, ResizablePanelGroup, type ImperativePanelHandle } from './resizable';
-import { vars } from '@/styles/theme.css';
-import { Flex } from '@/components/common/flex/flex';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/common/tabs/tabs';
-import { IvyIcon } from '@/components/common/icon/icon';
-import { IvyIcons } from '@axonivy/ui-icons';
 import { Button } from '@/components/common/button/button';
+import { Flex } from '@/components/common/flex/flex';
+import { IvyIcon } from '@/components/common/icon/icon';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/common/tabs/tabs';
+import { vars } from '@/styles/theme.css';
+import { IvyIcons } from '@axonivy/ui-icons';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useRef } from 'react';
+import { ResizableHandle, ResizablePanel, ResizablePanelGroup, type ImperativePanelHandle } from './resizable';
 
 const meta: Meta<typeof ResizablePanelGroup> = {
   title: 'Common/Resizeable',

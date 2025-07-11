@@ -1,6 +1,6 @@
 import { composeStory } from '@storybook/react-vite';
 import { customRender, screen, userEvent } from 'test-utils';
-import Meta, { Default, State, Controls } from './accordion.stories';
+import Meta, { Controls, Default, State } from './accordion.stories';
 
 const Accordion = composeStory(Default, Meta);
 const StateAccordion = composeStory(State, Meta);

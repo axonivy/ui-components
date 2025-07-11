@@ -1,15 +1,15 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
-import { flexRender, type ColumnDef, useReactTable, getCoreRowModel } from '@tanstack/react-table';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../table';
-import { tableData, type Payment } from '../data';
-import { useTableSelect } from '../hooks/hooks';
-import { SelectRow } from '../row/row';
-import { TableAddRow } from './footer';
-import * as React from 'react';
-import { IvyIcons } from '@axonivy/ui-icons';
 import { Button } from '@/components/common/button/button';
 import { BasicField } from '@/components/common/field/field';
 import { deleteAllSelectedRows } from '@/utils/table/table';
+import { IvyIcons } from '@axonivy/ui-icons';
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import { flexRender, getCoreRowModel, useReactTable, type ColumnDef } from '@tanstack/react-table';
+import * as React from 'react';
+import { tableData, type Payment } from '../data';
+import { useTableSelect } from '../hooks/hooks';
+import { SelectRow } from '../row/row';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../table';
+import { TableAddRow } from './footer';
 
 interface TableStoryProps {
   enableMultiselect: boolean;

@@ -1,8 +1,8 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
-import { IvyIcons } from '@axonivy/ui-icons';
 import { Button } from '@/components/common/button/button';
 import { ThemeProvider, useTheme } from '@/context/useTheme';
 import { capitalize } from '@/utils/string';
+import { IvyIcons } from '@axonivy/ui-icons';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 
 const meta: Meta<typeof ThemeProvider> = {
   title: 'Context/Theme',

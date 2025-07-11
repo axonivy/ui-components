@@ -1,10 +1,10 @@
-import { IvyIcons } from '@axonivy/ui-icons';
-import { BasicSelect } from '@/components/common/select/select';
-import { Flex } from '@/components/common/flex/flex';
-import { Label } from '@radix-ui/react-label';
 import { Button } from '@/components/common/button/button';
-import { conditionGroupBorder } from './conditionBuilder.css';
+import { Flex } from '@/components/common/flex/flex';
+import { BasicSelect } from '@/components/common/select/select';
+import { IvyIcons } from '@axonivy/ui-icons';
+import { Label } from '@radix-ui/react-label';
 import { Condition, type ConditionProps } from './condition';
+import { conditionGroupBorder } from './conditionBuilder.css';
 import { useConditionContext, type ConditionGroupData, type LogicOperator } from './conditionContext';
 
 interface ConditionGroupProps extends Pick<ConditionProps, 'groupIndex'> {

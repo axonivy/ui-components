@@ -1,9 +1,9 @@
+import { Flex } from '@/components/common/flex/flex';
+import { IvyIcons } from '@axonivy/ui-icons';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Toaster, toast } from './toaster';
 import { Button } from '../button/button';
 import { IvyIcon } from '../icon/icon';
-import { IvyIcons } from '@axonivy/ui-icons';
-import { Flex } from '@/components/common/flex/flex';
+import { Toaster, toast } from './toaster';
 
 const meta: Meta<typeof Toaster> = {
   title: 'Common/Toaster',

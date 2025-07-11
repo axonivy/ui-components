@@ -1,6 +1,6 @@
-import { style } from '@vanilla-extract/css';
 import { slideDownAndFade, slideLeftAndFade, slideRightAndFade, slideUpAndFade } from '@/styles/keyframes.css';
 import { vars } from '@/styles/theme.css';
+import { style } from '@vanilla-extract/css';
 
 export const tooltipContent = style({
   color: vars.color.body,

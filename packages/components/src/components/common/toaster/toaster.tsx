@@ -1,9 +1,9 @@
-import { Toaster as Sonner, toast } from 'sonner';
-import { toaster, description, error, success, warning, closeBtn } from './toaster.css';
-import { IvyIcon } from '../icon/icon';
-import { IvyIcons } from '@axonivy/ui-icons';
-import { Spinner } from '../spinner/spinner';
 import { useTheme } from '@/context/useTheme';
+import { IvyIcons } from '@axonivy/ui-icons';
+import { Toaster as Sonner, toast } from 'sonner';
+import { IvyIcon } from '../icon/icon';
+import { Spinner } from '../spinner/spinner';
+import { closeBtn, description, error, success, toaster, warning } from './toaster.css';
 
 type ToasterProps = React.ComponentProps<typeof Sonner>;
 
@@ -39,4 +39,4 @@ const Toaster = (props: ToasterProps) => {
 };
 Toaster.displayName = 'Toaster';
 
-export { Toaster, toast };
+export { toast, Toaster };

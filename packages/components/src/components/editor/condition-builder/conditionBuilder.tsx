@@ -1,4 +1,6 @@
+import { BasicInput } from '@/components/common/input/input';
 import { isNotUndefined } from '@/utils/guards';
+import { type ReactNode, useMemo, useState } from 'react';
 import {
   ConditionContext,
   type ConditionData,
@@ -9,8 +11,6 @@ import {
   type Operators
 } from './conditionContext';
 import { ConditionEditor } from './conditionEditor';
-import { BasicInput } from '@/components/common/input/input';
-import { type ReactNode, useState, useMemo } from 'react';
 
 export interface ConditionBuilderProps {
   onChange: (value: string) => void;

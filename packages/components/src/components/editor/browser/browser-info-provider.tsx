@@ -1,7 +1,7 @@
+import type { Row } from '@tanstack/react-table';
 import { useEffect, useState } from 'react';
 import type { BrowserNode } from './browser';
 import { isCmsBrowserNode } from './data';
-import type { Row } from '@tanstack/react-table';
 
 export const FunctionInfoProvider = ({ row }: { row?: Row<BrowserNode> }) => {
   // fake loading via network

@@ -1,6 +1,6 @@
+import { IvyIcons } from '@axonivy/ui-icons';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { PanelMessage } from './panelMessage';
-import { IvyIcons } from '@axonivy/ui-icons';
 
 const meta: Meta<typeof PanelMessage> = {
   title: 'Common/Message/PanelMessage',

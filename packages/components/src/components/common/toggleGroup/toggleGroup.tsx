@@ -1,7 +1,6 @@
-import * as React from 'react';
-import * as ToggleGroupPrimitive from '@radix-ui/react-toggle-group';
-
 import { cn } from '@/utils/class-name';
+import * as ToggleGroupPrimitive from '@radix-ui/react-toggle-group';
+import * as React from 'react';
 import { toggleGroup, type ToggleGroupVariants } from './toggleGroup.css';
 
 type ToggleGroupProps = React.ComponentProps<typeof ToggleGroupPrimitive.Root> & ToggleGroupVariants;

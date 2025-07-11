@@ -1,7 +1,6 @@
-import * as React from 'react';
-import * as PopoverPrimitive from '@radix-ui/react-popover';
-
 import { cn } from '@/utils/class-name';
+import * as PopoverPrimitive from '@radix-ui/react-popover';
+import * as React from 'react';
 import { arrow, close, content } from './popover.css';
 
 /**
@@ -36,4 +35,4 @@ const PopoverArrow = ({ className, ...props }: React.ComponentProps<typeof Popov
 );
 PopoverArrow.displayName = PopoverPrimitive.Arrow.displayName;
 
-export { Popover, PopoverTrigger, PopoverAnchor, PopoverContent, PopoverClose, PopoverArrow };
+export { Popover, PopoverAnchor, PopoverArrow, PopoverClose, PopoverContent, PopoverTrigger };

@@ -1,10 +1,10 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Combobox, type ComboboxOption } from './combobox';
-import { IvyIcons } from '@axonivy/ui-icons';
+import { BasicField } from '@/components/common/field/field';
 import { Flex } from '@/components/common/flex/flex';
 import { IvyIcon } from '@/components/common/icon/icon';
 import { vars } from '@/styles/theme.css';
-import { BasicField } from '@/components/common/field/field';
+import { IvyIcons } from '@axonivy/ui-icons';
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import { Combobox, type ComboboxOption } from './combobox';
 
 const meta: Meta<typeof Combobox> = {
   title: 'Common/Combobox',

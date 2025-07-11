@@ -1,9 +1,9 @@
-import * as React from 'react';
-import { header, headerIcon, headerLeft, headerMessage, headerTitle } from './header.css';
-import { cn } from '@/utils/class-name';
-import type { IvyIcons } from '@axonivy/ui-icons';
 import { Flex } from '@/components/common/flex/flex';
 import { IvyIcon } from '@/components/common/icon/icon';
+import { cn } from '@/utils/class-name';
+import type { IvyIcons } from '@axonivy/ui-icons';
+import * as React from 'react';
+import { header, headerIcon, headerLeft, headerMessage, headerTitle } from './header.css';
 
 export type SidebarHeaderProps = React.ComponentProps<typeof Flex> & {
   icon?: IvyIcons;

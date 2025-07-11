@@ -1,12 +1,12 @@
+import { cn } from '@/utils/class-name';
+import { splitNewLine } from '@/utils/string';
+import type { IvyIcons } from '@axonivy/ui-icons';
 import * as React from 'react';
 import { useField } from '../field/field';
+import { Flex } from '../flex/flex';
 import { IvyIcon } from '../icon/icon';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../tooltip/tooltip';
-import { inputBadge, inputBadgeIcon, inputBadgeLine, badgeOutput, inputBadgeText } from './inputBadge.css';
-import type { IvyIcons } from '@axonivy/ui-icons';
-import { Flex } from '../flex/flex';
-import { splitNewLine } from '@/utils/string';
-import { cn } from '@/utils/class-name';
+import { badgeOutput, inputBadge, inputBadgeIcon, inputBadgeLine, inputBadgeText } from './inputBadge.css';
 
 export type InputBadgeProps = React.ComponentProps<'output'> & {
   value: string;

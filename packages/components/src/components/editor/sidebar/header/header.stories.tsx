@@ -1,8 +1,8 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
-import { SidebarHeader, SidebarMessages } from './header';
-import { IvyIcons } from '@axonivy/ui-icons';
 import { Button } from '@/components/common/button/button';
 import { Message } from '@/components/common/message/message';
+import { IvyIcons } from '@axonivy/ui-icons';
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import { SidebarHeader, SidebarMessages } from './header';
 
 const meta: Meta<typeof SidebarHeader> = {
   title: 'Editor/Sidebar/Header',

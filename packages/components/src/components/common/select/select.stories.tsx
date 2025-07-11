@@ -1,4 +1,6 @@
+import { BasicField } from '@/components/common/field/field';
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { useState } from 'react';
 import {
   BasicSelect,
   Select,
@@ -10,8 +12,6 @@ import {
   SelectTrigger,
   SelectValue
 } from './select';
-import { useState } from 'react';
-import { BasicField } from '@/components/common/field/field';
 
 const meta: Meta<typeof BasicSelect> = {
   title: 'Common/Select',

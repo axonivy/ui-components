@@ -1,4 +1,9 @@
+import { Button } from '@/components/common/button/button';
+import { IvyIcon } from '@/components/common/icon/icon';
+import { IvyIcons } from '@axonivy/ui-icons';
+import type { DropdownMenuCheckboxItemProps } from '@radix-ui/react-dropdown-menu';
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { useState } from 'react';
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -16,11 +21,6 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger
 } from './dropdownmenu';
-import { IvyIcons } from '@axonivy/ui-icons';
-import { useState } from 'react';
-import type { DropdownMenuCheckboxItemProps } from '@radix-ui/react-dropdown-menu';
-import { Button } from '@/components/common/button/button';
-import { IvyIcon } from '@/components/common/icon/icon';
 
 const meta: Meta<typeof DropdownMenu> = {
   title: 'Common/DropdownMenu',

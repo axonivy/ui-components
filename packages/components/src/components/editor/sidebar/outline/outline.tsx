@@ -1,14 +1,14 @@
-import { outlineContainer } from './outline.css';
-import { cn } from '@/utils/class-name';
-import { flexRender, getCoreRowModel, useReactTable, type ColumnDef } from '@tanstack/react-table';
-import { useTableExpand, useTableGlobalFilter, useTableSelect } from '@/components/common/table/hooks/hooks';
-import { ExpandableCell } from '@/components/common/table/tree/tree';
-import { Table, TableBody, TableCell } from '@/components/common/table/table';
-import { SelectRow } from '@/components/common/table/row/row';
-import type { IvyIcons } from '@axonivy/ui-icons';
 import { Flex } from '@/components/common/flex/flex';
+import { useTableExpand, useTableGlobalFilter, useTableSelect } from '@/components/common/table/hooks/hooks';
+import { SelectRow } from '@/components/common/table/row/row';
+import { Table, TableBody, TableCell } from '@/components/common/table/table';
+import { ExpandableCell } from '@/components/common/table/tree/tree';
 import { vars } from '@/styles/theme.css';
+import { cn } from '@/utils/class-name';
+import type { IvyIcons } from '@axonivy/ui-icons';
+import { flexRender, getCoreRowModel, useReactTable, type ColumnDef } from '@tanstack/react-table';
 import { useEffect } from 'react';
+import { outlineContainer } from './outline.css';
 
 export type OutlineNode = {
   id: string;

@@ -1,7 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Switch, BasicSwitch } from './switch';
-
 import { IvyIcons } from '@axonivy/ui-icons';
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import { BasicSwitch, Switch } from './switch';
 
 const meta: Meta<typeof Switch> = {
   title: 'Common/Switch',

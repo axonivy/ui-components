@@ -1,9 +1,8 @@
-import * as ResizablePrimitive from 'react-resizable-panels';
-
+import { IvyIcon } from '@/components/common/icon/icon';
 import { cn } from '@/utils/class-name';
 import { IvyIcons } from '@axonivy/ui-icons';
+import * as ResizablePrimitive from 'react-resizable-panels';
 import { resizableHandle, resizableLine } from './resizable.css';
-import { IvyIcon } from '@/components/common/icon/icon';
 
 /**
  * ResizablePanelGroup, based on {@link https://github.com/bvaughn/react-resizable-panels | React Resizable Panels}
@@ -33,4 +32,4 @@ const ResizableHandle = ({ withHandle, children, className, ...props }: Resizabl
 
 export type ImperativePanelHandle = ResizablePrimitive.ImperativePanelHandle;
 
-export { ResizablePanelGroup, ResizablePanel, ResizableHandle };
+export { ResizableHandle, ResizablePanel, ResizablePanelGroup };

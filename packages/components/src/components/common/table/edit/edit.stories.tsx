@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import type { ColumnDef } from '@tanstack/react-table';
-import { useReactTable, getCoreRowModel, flexRender } from '@tanstack/react-table';
+import { flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table';
 import * as React from 'react';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../table';
 import { tableData, type Payment } from '../data';
-import { MessageRow, SelectRow } from '../row/row';
 import { useTableSelect } from '../hooks/hooks';
+import { MessageRow, SelectRow } from '../row/row';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../table';
 import { ComboCell, InputCell, SelectCell } from './edit';
 
 const meta: Meta<typeof Table> = {

@@ -1,5 +1,5 @@
-import { createGlobalThemeContract, createGlobalTheme } from '@vanilla-extract/css';
 import { vars } from '@axonivy/ui-components';
+import { createGlobalTheme, createGlobalThemeContract } from '@vanilla-extract/css';
 
 const reactFlow = createGlobalThemeContract({
   edge: {

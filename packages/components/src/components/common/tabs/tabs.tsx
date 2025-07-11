@@ -1,25 +1,25 @@
-import * as React from 'react';
+import { Flex } from '@/components/common/flex/flex';
+import { IvyIcon } from '@/components/common/icon/icon';
+import { Separator } from '@/components/common/separator/separator';
+import { StateDot, type StateDotProps } from '@/components/common/state/state';
+import { cn } from '@/utils/class-name';
+import type { IvyIcons } from '@axonivy/ui-icons';
 import * as TabsPrimitive from '@radix-ui/react-tabs';
+import * as React from 'react';
 import {
-  tabs,
-  tabsList,
-  tabsTrigger,
-  type TabsVariants,
   inscriptionTabsContent,
   inscriptionTabsContentScrollArea,
   inscriptionTabsRoot,
   inscriptionTabStateDot,
   inscriptionTabsTriggerLabel,
-  tabsTriggerSeparator,
+  tabs,
+  tabsList,
+  tabsListPlaceholder,
+  tabsTrigger,
   tabsTriggerContent,
-  tabsListPlaceholder
+  tabsTriggerSeparator,
+  type TabsVariants
 } from './tabs.css';
-import { cn } from '@/utils/class-name';
-import { StateDot, type StateDotProps } from '@/components/common/state/state';
-import type { IvyIcons } from '@axonivy/ui-icons';
-import { IvyIcon } from '@/components/common/icon/icon';
-import { Flex } from '@/components/common/flex/flex';
-import { Separator } from '@/components/common/separator/separator';
 
 export type TabsProps = React.ComponentProps<typeof TabsPrimitive.Root> & TabsVariants;
 
@@ -99,4 +99,4 @@ const BasicInscriptionTabs = ({ tabs, onChange, value }: BasicInscriptionTabsPro
 );
 BasicInscriptionTabs.displayName = 'BasicInscriptionTabs';
 
-export { Tabs, TabsList, TabsTrigger, TabsContent, BasicInscriptionTabs };
+export { BasicInscriptionTabs, Tabs, TabsContent, TabsList, TabsTrigger };

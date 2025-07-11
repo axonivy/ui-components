@@ -1,6 +1,6 @@
 import { composeStory } from '@storybook/react-vite';
 import { customRender, screen, userEvent } from 'test-utils';
-import Meta, { Select, Message, Reorder, MultiSelectWithReorder } from './row.stories';
+import Meta, { Message, MultiSelectWithReorder, Reorder, Select } from './row.stories';
 
 const SelectTable = composeStory(Select, Meta);
 const MultiSelectWithReorderTable = composeStory(MultiSelectWithReorder, Meta);

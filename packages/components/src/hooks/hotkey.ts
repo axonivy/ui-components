@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useHotkeysContext } from 'react-hotkeys-hook';
 
-export { useHotkeys, isHotkeyPressed, useHotkeysContext, HotkeysProvider } from 'react-hotkeys-hook';
+export { HotkeysProvider, isHotkeyPressed, useHotkeys, useHotkeysContext } from 'react-hotkeys-hook';
 
 export const useHotkeyLocalScopes = (scopes: string[]) => {
   const { enabledScopes, enableScope, disableScope } = useHotkeysContext();

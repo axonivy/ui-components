@@ -1,6 +1,6 @@
 import { composeStory } from '@storybook/react-vite';
 import { customRender, screen, userEvent } from 'test-utils';
-import Meta, { Default, CustomValue, Lazy, Search, Select } from './tree.stories';
+import Meta, { CustomValue, Default, Lazy, Search, Select } from './tree.stories';
 
 const Tree = composeStory(Default, Meta);
 const CustomTree = composeStory(CustomValue, Meta);

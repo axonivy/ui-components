@@ -1,7 +1,7 @@
 import { composeStory } from '@storybook/react-vite';
 import { customRender, screen } from 'test-utils';
-import Meta, { BadgeArea, Default } from './inputBadge.stories';
 import { inputBadge, inputBadgeText } from './inputBadge.css';
+import Meta, { BadgeArea, Default } from './inputBadge.stories';
 
 const InputBadge = composeStory(Default, Meta);
 const InputBadgeArea = composeStory(BadgeArea, Meta);

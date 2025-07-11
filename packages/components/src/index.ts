@@ -25,12 +25,12 @@ export * from './components/common/skeleton/skeleton';
 export * from './components/common/spinner/spinner';
 export * from './components/common/state/state';
 export * from './components/common/switch/switch';
-export * from './components/common/table/table';
 export * from './components/common/table/edit/edit';
 export * from './components/common/table/footer/footer';
 export * from './components/common/table/header/header';
 export * from './components/common/table/hooks/hooks';
 export * from './components/common/table/row/row';
+export * from './components/common/table/table';
 export * from './components/common/table/tree/tree';
 export * from './components/common/tabs/tabs';
 export * from './components/common/textarea/textarea';
@@ -45,8 +45,8 @@ export * from './components/editor/condition-builder/conditionContext';
 export * from './components/editor/condition-builder/useConditionBuilder';
 export * from './components/editor/sidebar/header/header';
 export * from './components/editor/sidebar/outline/outline';
-export * from './components/editor/toolbar/toolbar';
 export * from './components/editor/toolbar/palette/palette';
+export * from './components/editor/toolbar/toolbar';
 
 /* Context */
 export * from './context/useReadonly';

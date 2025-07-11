@@ -1,9 +1,9 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Graph, type NodeData } from './graph';
-import { IvyIcons } from '@axonivy/ui-icons';
-import { dataClasses, type DataClass, type Field } from './data';
-import '@axonivy/ui-components/lib/components.css';
 import { Button } from '@axonivy/ui-components';
+import '@axonivy/ui-components/lib/components.css';
+import { IvyIcons } from '@axonivy/ui-icons';
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import { dataClasses, type DataClass, type Field } from './data';
+import { Graph, type NodeData } from './graph';
 
 const meta: Meta<typeof Graph> = {
   title: 'View/Graph',

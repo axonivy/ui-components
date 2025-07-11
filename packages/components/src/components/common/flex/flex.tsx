@@ -1,5 +1,5 @@
-import * as React from 'react';
 import { cn } from '@/utils/class-name';
+import * as React from 'react';
 import type { FlexVariants } from './flex.css';
 import { flex } from './flex.css';
 

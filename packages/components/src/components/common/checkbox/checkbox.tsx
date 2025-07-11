@@ -1,13 +1,13 @@
-import * as React from 'react';
 import * as CheckboxPrimitive from '@radix-ui/react-checkbox';
+import * as React from 'react';
 
-import { cn } from '@/utils/class-name';
-import { checkboxIndicator, checkboxRoot } from './checkbox.css';
-import { IvyIcons } from '@axonivy/ui-icons';
-import { useField, Field } from '@/components/common/field/field';
+import { Field, useField } from '@/components/common/field/field';
 import { IvyIcon } from '@/components/common/icon/icon';
-import { useReadonly } from '@/context/useReadonly';
 import { Label } from '@/components/common/label/label';
+import { useReadonly } from '@/context/useReadonly';
+import { cn } from '@/utils/class-name';
+import { IvyIcons } from '@axonivy/ui-icons';
+import { checkboxIndicator, checkboxRoot } from './checkbox.css';
 
 /**
  * Checkbox, based on {@link https://www.radix-ui.com/docs/primitives/components/checkbox | Radix UI Checkbox}
@@ -43,4 +43,4 @@ const BasicCheckbox = ({ label, ...props }: BasicCheckboxProps) => (
 );
 BasicCheckbox.displayName = 'BasicCheckbox';
 
-export { Checkbox, BasicCheckbox };
+export { BasicCheckbox, Checkbox };

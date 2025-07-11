@@ -1,6 +1,6 @@
+import { cn } from '@/utils/class-name';
 import * as React from 'react';
 import { toolbar, toolbarContainer, toolbarHeader, toolbarTitle, type ToolbarContainerVariants } from './toolbar.css';
-import { cn } from '@/utils/class-name';
 
 const Toolbar = ({ className, children, ...props }: React.ComponentProps<'div'>) => (
   <div className={cn(toolbar, className)} {...props}>
@@ -32,4 +32,4 @@ const ToolbarContainer = ({
 
 ToolbarContainer.displayName = 'ToolbarContainer';
 
-export { Toolbar, ToolbarTitle, ToolbarContainer };
+export { Toolbar, ToolbarContainer, ToolbarTitle };

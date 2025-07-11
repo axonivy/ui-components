@@ -1,4 +1,3 @@
-import { useCallback, useEffect, useState } from 'react';
 import {
   addEdge,
   applyEdgeChanges,
@@ -11,7 +10,8 @@ import {
   type OnEdgesChange,
   type OnNodesChange
 } from '@xyflow/react';
-import type { NodeData, GraphNode, GraphProps } from '../graph';
+import { useCallback, useEffect, useState } from 'react';
+import type { GraphNode, GraphProps, NodeData } from '../graph';
 import { getLayoutedElements, type Direction } from './getLayoutedElements';
 
 export const CHAR_WIDTH = 8;

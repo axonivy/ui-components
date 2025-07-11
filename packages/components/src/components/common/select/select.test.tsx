@@ -1,6 +1,6 @@
 import { composeStory } from '@storybook/react-vite';
 import { customRender, screen, userEvent } from 'test-utils';
-import Meta, { Default, UnknownValue, EmptyValue } from './select.stories';
+import Meta, { Default, EmptyValue, UnknownValue } from './select.stories';
 
 const Select = composeStory(Default, Meta);
 const UnknownSelect = composeStory(UnknownValue, Meta);

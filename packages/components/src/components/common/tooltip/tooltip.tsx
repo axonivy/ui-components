@@ -1,7 +1,6 @@
-import * as React from 'react';
-import * as TooltipPrimitive from '@radix-ui/react-tooltip';
-
 import { cn } from '@/utils/class-name';
+import * as TooltipPrimitive from '@radix-ui/react-tooltip';
+import * as React from 'react';
 import { tooltipContent } from './tooltip.css';
 
 const TooltipProvider = TooltipPrimitive.Provider;
@@ -21,4 +20,4 @@ const TooltipContent = ({ className, sideOffset = 4, ...props }: React.Component
 );
 TooltipContent.displayName = TooltipPrimitive.Content.displayName;
 
-export { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider };
+export { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger };

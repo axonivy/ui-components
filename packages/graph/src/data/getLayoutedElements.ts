@@ -1,6 +1,6 @@
-import type { GraphNode } from '../graph';
 import Dagre from '@dagrejs/dagre';
 import { type Edge } from '@xyflow/react';
+import type { GraphNode } from '../graph';
 import { DEFAULT_NODE_HEIGHT, DEFAULT_NODE_WIDTH } from './useGraph';
 
 const dagreGraph = new Dagre.graphlib.Graph().setDefaultEdgeLabel(() => ({}));

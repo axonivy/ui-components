@@ -1,7 +1,7 @@
 import { IvyIcons } from '@axonivy/ui-icons';
-import { useBrowser, type BrowserNode } from './browser';
-import { useState } from 'react';
 import type { Row } from '@tanstack/react-table';
+import { useState } from 'react';
+import { useBrowser, type BrowserNode } from './browser';
 
 export const useAttrBrowser = () => {
   const [attr, setAttr] = useState<Array<BrowserNode>>([

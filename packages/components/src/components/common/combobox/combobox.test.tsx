@@ -1,6 +1,6 @@
 import { composeStory } from '@storybook/react-vite';
 import { customRender, screen, userEvent } from 'test-utils';
-import Meta, { Default, WithFieldset, WithExtendedItem } from './combobox.stories';
+import Meta, { Default, WithExtendedItem, WithFieldset } from './combobox.stories';
 
 const Combobox = composeStory(Default, Meta);
 const CustomItemCombobox = composeStory(WithExtendedItem, Meta);

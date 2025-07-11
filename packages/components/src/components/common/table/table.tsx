@@ -1,7 +1,7 @@
+import { Field } from '@/components/common/field/field';
 import { cn } from '@/utils/class-name';
 import * as React from 'react';
-import { table, root, header, body, cell, footer, head, row } from './table.css';
-import { Field } from '@/components/common/field/field';
+import { body, cell, footer, head, header, root, row, table } from './table.css';
 
 /**
  * Table, based on {@link https://tanstack.com/table/v8 | Tanstack Table}
@@ -49,4 +49,4 @@ const TableCell = ({ className, ...props }: React.ComponentProps<'td'>) => (
 );
 TableCell.displayName = 'TableCell';
 
-export { Table, TableHeader, TableBody, TableFooter, TableHead, TableRow, TableCell };
+export { Table, TableBody, TableCell, TableFooter, TableHead, TableHeader, TableRow };

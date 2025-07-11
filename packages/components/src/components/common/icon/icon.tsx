@@ -1,6 +1,6 @@
-import * as React from 'react';
-import type { IvyIcons } from '@axonivy/ui-icons';
 import { cn } from '@/utils/class-name';
+import type { IvyIcons } from '@axonivy/ui-icons';
+import * as React from 'react';
 
 export type IvyIconProps = {
   icon: IvyIcons;

@@ -1,7 +1,7 @@
 import { composeStory } from '@storybook/react-vite';
-import Meta, { Default, Global, Scoped, WithScopes } from '../hooks/hotkey.stories';
-import { customRender, screen, userEvent } from 'test-utils';
 import { act } from 'react';
+import { customRender, screen, userEvent } from 'test-utils';
+import Meta, { Default, Global, Scoped, WithScopes } from '../hooks/hotkey.stories';
 
 const Hotkey = composeStory(Default, Meta);
 const GlobalHotkey = composeStory(Global, Meta);

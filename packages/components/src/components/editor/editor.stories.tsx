@@ -1,10 +1,10 @@
-import { type Meta, type StoryObj } from '@storybook/react-vite';
-import { Default as ToolbarStory } from './toolbar/toolbar.stories';
-import * as React from 'react';
 import { Flex } from '@/components/common/flex/flex';
 import { PanelMessage } from '@/components/common/panelMessage/panelMessage';
-import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from '@/components/common/resizeable/resizable';
+import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from '@/components/common/resizeable/resizable';
 import { Default as Sidebar } from '@/components/editor/sidebar/sidebar.stories';
+import { type Meta, type StoryObj } from '@storybook/react-vite';
+import * as React from 'react';
+import { Default as ToolbarStory } from './toolbar/toolbar.stories';
 
 const meta: Meta = {
   title: 'Editor'

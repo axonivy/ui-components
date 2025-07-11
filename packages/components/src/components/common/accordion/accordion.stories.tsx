@@ -1,15 +1,15 @@
+import { ButtonGroup } from '@/components/common/button/button';
+import { IvyIcons } from '@axonivy/ui-icons';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import {
   Accordion,
-  AccordionItem,
   AccordionContent,
-  AccordionTrigger,
+  AccordionItem,
   AccordionState,
-  type AccordionControlProps,
-  BasicAccordionItem
+  AccordionTrigger,
+  BasicAccordionItem,
+  type AccordionControlProps
 } from './accordion';
-import { IvyIcons } from '@axonivy/ui-icons';
-import { ButtonGroup } from '@/components/common/button/button';
 
 const meta: Meta<typeof Accordion> = {
   title: 'Common/Accordion',

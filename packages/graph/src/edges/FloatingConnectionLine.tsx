@@ -1,5 +1,5 @@
-import { getCircleEdgeParams } from './graphEdgeUtils';
 import { getBezierPath, type ConnectionLineComponentProps, type InternalNode } from '@xyflow/react';
+import { getCircleEdgeParams } from './graphEdgeUtils';
 
 const FloatingConnectionLine = ({ toX, toY, fromPosition, toPosition, fromNode }: ConnectionLineComponentProps) => {
   if (!fromNode) {

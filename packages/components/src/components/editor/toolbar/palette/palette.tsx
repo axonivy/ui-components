@@ -1,7 +1,9 @@
+import { Button, type ButtonProps } from '@/components/common/button/button.tsx';
 import { Flex } from '@/components/common/flex/flex';
 import { IvyIcon } from '@/components/common/icon/icon';
 import { SearchInput } from '@/components/common/input/input';
 import { Separator } from '@/components/common/separator/separator';
+import { cn } from '@/utils/class-name.ts';
 import { IvyIcons } from '@axonivy/ui-icons';
 import * as React from 'react';
 import {
@@ -15,8 +17,6 @@ import {
   paletteSectionSeparator,
   paletteTitle
 } from './palette.css.ts';
-import { cn } from '@/utils/class-name.ts';
-import { Button, type ButtonProps } from '@/components/common/button/button.tsx';
 
 export type PaletteItemConfig = {
   name: string;
@@ -123,4 +123,4 @@ const BasicPalette = (props: PaletteConfig) => (
   </Palette>
 );
 
-export { Palette, PaletteSection, PaletteItem, BasicPalette, PaletteButtonLabel, PaletteButton };
+export { BasicPalette, Palette, PaletteButton, PaletteButtonLabel, PaletteItem, PaletteSection };

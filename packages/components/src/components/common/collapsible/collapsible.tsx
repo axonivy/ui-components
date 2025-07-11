@@ -1,21 +1,21 @@
-import * as CollapsiblePrimitive from '@radix-ui/react-collapsible';
-import * as React from 'react';
-import { cn } from '@/utils/class-name';
-import { IvyIcons } from '@axonivy/ui-icons';
-import {
-  root,
-  header,
-  trigger,
-  controls as controlsClass,
-  state as stateClass,
-  content,
-  contentData,
-  triggerChevron
-} from './collapsible.css';
+import { ButtonGroup, type ButtonGroupProps } from '@/components/common/button/button';
 import { Flex } from '@/components/common/flex/flex';
 import { IvyIcon } from '@/components/common/icon/icon';
 import { StateDot, type StateDotProps } from '@/components/common/state/state';
-import { ButtonGroup, type ButtonGroupProps } from '@/components/common/button/button';
+import { cn } from '@/utils/class-name';
+import { IvyIcons } from '@axonivy/ui-icons';
+import * as CollapsiblePrimitive from '@radix-ui/react-collapsible';
+import * as React from 'react';
+import {
+  content,
+  contentData,
+  controls as controlsClass,
+  header,
+  root,
+  state as stateClass,
+  trigger,
+  triggerChevron
+} from './collapsible.css';
 
 /**
  * Collapsible, based on {@link https://www.radix-ui.com/docs/primitives/components/collapsible | Radix UI Collapsible}
@@ -99,4 +99,4 @@ const BasicCollapsible = ({ label, open, defaultOpen, state, controls, ...props 
 };
 BasicCollapsible.displayName = 'BasicCollapsible';
 
-export { Collapsible, CollapsibleTrigger, CollapsibleState, CollapsibleContent, BasicCollapsible };
+export { BasicCollapsible, Collapsible, CollapsibleContent, CollapsibleState, CollapsibleTrigger };
