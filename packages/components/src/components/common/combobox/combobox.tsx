@@ -1,15 +1,14 @@
-import * as React from 'react';
-
-import { IvyIcons } from '@axonivy/ui-icons';
-import { useCombobox } from 'downshift';
-import { cn } from '@/utils/class-name';
-import { content, item as itemClass } from './combobox.css';
 import { Button } from '@/components/common/button/button';
 import { useField } from '@/components/common/field/field';
 import { Flex } from '@/components/common/flex/flex';
-import { InputGroup, Input } from '@/components/common/input/input';
-import { useReadonly } from '@/context/useReadonly';
+import { Input, InputGroup } from '@/components/common/input/input';
 import { Popover, PopoverAnchor, PopoverContent } from '@/components/common/popover/popover';
+import { useReadonly } from '@/context/useReadonly';
+import { cn } from '@/utils/class-name';
+import { IvyIcons } from '@axonivy/ui-icons';
+import { useCombobox } from 'downshift';
+import * as React from 'react';
+import { content, item as itemClass } from './combobox.css';
 
 export type ComboboxOption = {
   value: string;

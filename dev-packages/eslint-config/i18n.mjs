@@ -1,5 +1,5 @@
-import tseslint from 'typescript-eslint';
 import i18next from 'eslint-plugin-i18next';
+import tseslint from 'typescript-eslint';
 
 export const i18n = tseslint.config({
   name: 'eslint-plugin-i18next',

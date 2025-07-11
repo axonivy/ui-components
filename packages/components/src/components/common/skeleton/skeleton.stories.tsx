@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Skeleton } from './skeleton';
 import { Flex } from '../flex/flex';
+import { Skeleton } from './skeleton';
 
 const meta: Meta<typeof Skeleton> = {
   title: 'Common/Skeleton',

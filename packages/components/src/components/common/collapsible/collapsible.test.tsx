@@ -1,6 +1,6 @@
 import { composeStory } from '@storybook/react-vite';
 import { customRender, screen, userEvent } from 'test-utils';
-import Meta, { Default, State, Controls, Basic } from './collapsible.stories';
+import Meta, { Basic, Controls, Default, State } from './collapsible.stories';
 
 const Collapsible = composeStory(Default, Meta);
 const StateCollapsible = composeStory(State, Meta);

@@ -1,11 +1,11 @@
 import { Button } from '@/components/common/button/button';
 import { Flex } from '@/components/common/flex/flex';
 import { BasicSelect } from '@/components/common/select/select';
-import { conditionBorder, conditionValue, logicalOperatorField, operatorField } from './conditionBuilder.css';
-import { useConditionContext, type Operator, type LogicOperator, type ConditionData } from './conditionContext';
 import { cn } from '@/utils/class-name';
 import { IvyIcons } from '@axonivy/ui-icons';
 import { Label } from '@radix-ui/react-label';
+import { conditionBorder, conditionValue, logicalOperatorField, operatorField } from './conditionBuilder.css';
+import { useConditionContext, type ConditionData, type LogicOperator, type Operator } from './conditionContext';
 
 export interface ConditionProps {
   condition: ConditionData;

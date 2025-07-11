@@ -1,10 +1,10 @@
+import { type ComboboxOption, type ComboboxProps, Combobox } from '@/components/common/combobox/combobox';
+import { type InputProps, Input } from '@/components/common/input/input';
+import { type BasicSelectProps, BasicSelect } from '@/components/common/select/select';
+import { cn } from '@/utils/class-name';
 import type { CellContext, RowData } from '@tanstack/react-table';
 import * as React from 'react';
 import { editCell } from './edit.css';
-import { cn } from '@/utils/class-name';
-import { Input, type InputProps } from '@/components/common/input/input';
-import { type ComboboxOption, type ComboboxProps, Combobox } from '@/components/common/combobox/combobox';
-import { type BasicSelectProps, BasicSelect } from '@/components/common/select/select';
 
 declare module '@tanstack/react-table' {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -117,7 +117,7 @@ const ComboCell = <TData, TCombo extends ComboboxOption>({ cell, className, ...p
 };
 ComboCell.displayName = 'ComboCell';
 
-export { InputCell, SelectCell, ComboCell };
+export { ComboCell, InputCell, SelectCell };
 
 export const selectNextPreviousCell = <TData,>(
   htmlElement: HTMLButtonElement | HTMLInputElement | Element,

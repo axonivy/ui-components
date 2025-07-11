@@ -1,10 +1,10 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
-import { BasicInscriptionTabs, Tabs, TabsContent, TabsList, TabsTrigger } from './tabs';
-import { IvyIcon } from '../icon/icon';
-import { IvyIcons } from '@axonivy/ui-icons';
 import { Flex } from '@/components/common/flex/flex';
 import { insciptionTabsData } from '@/components/common/tabs/inscriptionTabData';
+import { IvyIcons } from '@axonivy/ui-icons';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
+import { IvyIcon } from '../icon/icon';
+import { BasicInscriptionTabs, Tabs, TabsContent, TabsList, TabsTrigger } from './tabs';
 
 const meta: Meta<typeof Tabs> = {
   title: 'Common/Tabs',

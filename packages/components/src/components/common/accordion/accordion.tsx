@@ -1,23 +1,23 @@
-import * as React from 'react';
-import * as AccordionPrimitive from '@radix-ui/react-accordion';
-import { IvyIcons } from '@axonivy/ui-icons';
-import { cn } from '@/utils/class-name';
-import {
-  root,
-  header,
-  trigger,
-  content,
-  contentData,
-  controls as controlsClass,
-  state as stateClass,
-  item,
-  triggerChevron
-} from './accordion.css';
+import { useSticky, type UseStickyProps } from '@/components/common/accordion/useSticky';
+import { ButtonGroup, type ButtonGroupProps } from '@/components/common/button/button';
 import { Flex } from '@/components/common/flex/flex';
 import { IvyIcon } from '@/components/common/icon/icon';
 import { StateDot, type StateDotProps } from '@/components/common/state/state';
-import { ButtonGroup, type ButtonGroupProps } from '@/components/common/button/button';
-import { useSticky, type UseStickyProps } from '@/components/common/accordion/useSticky';
+import { cn } from '@/utils/class-name';
+import { IvyIcons } from '@axonivy/ui-icons';
+import * as AccordionPrimitive from '@radix-ui/react-accordion';
+import * as React from 'react';
+import {
+  content,
+  contentData,
+  controls as controlsClass,
+  header,
+  item,
+  root,
+  state as stateClass,
+  trigger,
+  triggerChevron
+} from './accordion.css';
 
 /**
  * Accordion, based on {@link https://www.radix-ui.com/docs/primitives/components/accordion | Radix UI Accordion}
@@ -93,4 +93,4 @@ const BasicAccordionItem = ({ label, state, controls, stickyOptions, ...props }:
 };
 BasicAccordionItem.displayName = 'BasicAccordionItem';
 
-export { Accordion, AccordionItem, AccordionTrigger, AccordionState, AccordionContent, BasicAccordionItem };
+export { Accordion, AccordionContent, AccordionItem, AccordionState, AccordionTrigger, BasicAccordionItem };

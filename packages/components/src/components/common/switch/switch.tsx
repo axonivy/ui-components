@@ -1,11 +1,11 @@
-import * as React from 'react';
-import * as SwitchPrimitives from '@radix-ui/react-switch';
-import { cn } from '@/utils/class-name';
-import { root, thumb, type SwitchVariants, switchSize, thumbIcon } from './switch.css';
-import { useField, Field } from '@/components/common/field/field';
+import { Field, useField } from '@/components/common/field/field';
 import { type IvyIconProps, IvyIcon } from '@/components/common/icon/icon';
-import { useReadonly } from '@/context/useReadonly';
 import { Label } from '@/components/common/label/label';
+import { useReadonly } from '@/context/useReadonly';
+import { cn } from '@/utils/class-name';
+import * as SwitchPrimitives from '@radix-ui/react-switch';
+import * as React from 'react';
+import { type SwitchVariants, root, switchSize, thumb, thumbIcon } from './switch.css';
 
 /**
  * Switch, based on {@link https://www.radix-ui.com/docs/primitives/components/switch | Radix UI Switch}
@@ -46,4 +46,4 @@ const BasicSwitch = ({ label, ...props }: BasicSwitchProps) => (
 );
 BasicSwitch.displayName = 'BasicSwitch';
 
-export { Switch, BasicSwitch };
+export { BasicSwitch, Switch };

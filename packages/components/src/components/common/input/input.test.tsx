@@ -1,6 +1,6 @@
 import { composeStory } from '@storybook/react-vite';
 import { customRender, screen, userEvent } from 'test-utils';
-import Meta, { Default, WithLabel, Search, Password } from './input.stories';
+import Meta, { Default, Password, Search, WithLabel } from './input.stories';
 
 const Input = composeStory(Default, Meta);
 const LabelInput = composeStory(WithLabel, Meta);

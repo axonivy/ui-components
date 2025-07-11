@@ -1,3 +1,7 @@
+import { Flex } from '@/components/common/flex/flex';
+import { Popover, PopoverArrow, PopoverContent, PopoverTrigger } from '@/components/common/popover/popover';
+import { cn } from '@/utils/class-name';
+import { IvyIcons } from '@axonivy/ui-icons';
 import type { Meta } from '@storybook/react-vite';
 import {
   BasicPalette,
@@ -9,10 +13,6 @@ import {
   type PaletteItemConfig,
   type PaletteItemProps
 } from './palette';
-import { IvyIcons } from '@axonivy/ui-icons';
-import { Popover, PopoverArrow, PopoverContent, PopoverTrigger } from '@/components/common/popover/popover';
-import { Flex } from '@/components/common/flex/flex';
-import { cn } from '@/utils/class-name';
 
 const meta: Meta<typeof Palette> = {
   title: 'Editor/Toolbar/Palette',

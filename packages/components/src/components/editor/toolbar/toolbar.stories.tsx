@@ -1,15 +1,15 @@
-import type { Meta } from '@storybook/react-vite';
-import { Toolbar, ToolbarContainer, ToolbarTitle } from './toolbar';
-import { IvyIcons } from '@axonivy/ui-icons';
 import { Button } from '@/components/common/button/button';
 import { Field } from '@/components/common/field/field';
 import { Flex } from '@/components/common/flex/flex';
 import { IvyIcon } from '@/components/common/icon/icon';
-import { Separator } from '@/components/common/separator/separator';
-import { Popover, PopoverArrow, PopoverContent, PopoverTrigger } from '@/components/common/popover/popover';
 import { Label } from '@/components/common/label/label';
+import { Popover, PopoverArrow, PopoverContent, PopoverTrigger } from '@/components/common/popover/popover';
+import { Separator } from '@/components/common/separator/separator';
 import { Switch } from '@/components/common/switch/switch';
 import { PopoverPalette } from '@/components/editor/toolbar/palette/palette.stories';
+import { IvyIcons } from '@axonivy/ui-icons';
+import type { Meta } from '@storybook/react-vite';
+import { Toolbar, ToolbarContainer, ToolbarTitle } from './toolbar';
 
 const meta: Meta<typeof Toolbar> = {
   title: 'Editor/Toolbar',

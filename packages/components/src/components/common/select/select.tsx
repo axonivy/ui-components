@@ -1,12 +1,11 @@
-import * as React from 'react';
-import * as SelectPrimitive from '@radix-ui/react-select';
-
-import { cn } from '@/utils/class-name';
-import { IvyIcons } from '@axonivy/ui-icons';
-import { content, item, itemIcon, label, scrollButton, seperator, trigger, triggerIcon, viewport } from './select.css';
 import { useField } from '@/components/common/field/field';
 import { IvyIcon } from '@/components/common/icon/icon';
 import { useReadonly } from '@/context/useReadonly';
+import { cn } from '@/utils/class-name';
+import { IvyIcons } from '@axonivy/ui-icons';
+import * as SelectPrimitive from '@radix-ui/react-select';
+import * as React from 'react';
+import { content, item, itemIcon, label, scrollButton, seperator, trigger, triggerIcon, viewport } from './select.css';
 
 /**
  * Select, based on {@link https://www.radix-ui.com/docs/primitives/components/select | Radix UI Select}
@@ -147,15 +146,15 @@ const BasicSelect = ({
 BasicSelect.displayName = 'BasicSelect';
 
 export {
+  BasicSelect,
   Select,
-  SelectGroup,
-  SelectValue,
-  SelectTrigger,
   SelectContent,
-  SelectLabel,
+  SelectGroup,
   SelectItem,
-  SelectSeparator,
-  SelectScrollUpButton,
+  SelectLabel,
   SelectScrollDownButton,
-  BasicSelect
+  SelectScrollUpButton,
+  SelectSeparator,
+  SelectTrigger,
+  SelectValue
 };

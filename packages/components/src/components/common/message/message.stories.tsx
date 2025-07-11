@@ -1,7 +1,7 @@
+import { BasicField } from '@/components/common/field/field';
+import { Input } from '@/components/common/input/input';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Message } from './message';
-import { Input } from '@/components/common/input/input';
-import { BasicField } from '@/components/common/field/field';
 
 const meta: Meta<typeof Message> = {
   title: 'Common/Message',

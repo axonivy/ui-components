@@ -1,8 +1,8 @@
 import { expect } from 'vitest';
 import { WS } from 'vitest-websocket-mock';
-import { webSocketConnection, type Connection, type WebSocketConnectionHandler, type WebSocketOptions } from './ws-connection-provider';
 import { createMessageConnection } from 'vscode-jsonrpc';
 import { BaseRpcClient } from './base-rpc-client';
+import { webSocketConnection, type Connection, type WebSocketConnectionHandler, type WebSocketOptions } from './ws-connection-provider';
 
 afterEach(async () => {
   WS.clean();

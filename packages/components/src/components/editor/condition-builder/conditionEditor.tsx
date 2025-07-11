@@ -1,7 +1,7 @@
-import { IvyIcons } from '@axonivy/ui-icons';
-import { BasicSelect } from '@/components/common/select/select';
-import { Flex } from '@/components/common/flex/flex';
 import { Button } from '@/components/common/button/button';
+import { Flex } from '@/components/common/flex/flex';
+import { BasicSelect } from '@/components/common/select/select';
+import { IvyIcons } from '@axonivy/ui-icons';
 import { conditionModes, useConditionContext, type ConditionMode } from './conditionContext';
 import { ConditionGroup } from './conditionGroup';
 

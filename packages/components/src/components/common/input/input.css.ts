@@ -1,6 +1,6 @@
-import { style } from '@vanilla-extract/css';
 import { disabled } from '@/styles/disabled';
 import { vars } from '@/styles/theme.css';
+import { style } from '@vanilla-extract/css';
 import { editCell } from '../table/edit/edit.css';
 
 const base = style({

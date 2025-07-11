@@ -1,10 +1,9 @@
-import * as React from 'react';
-
+import { useField } from '@/components/common/field/field';
+import { useReadonly } from '@/context/useReadonly';
 import { cn } from '@/utils/class-name';
+import * as React from 'react';
 import { textarea } from './textarea.css';
 import { useAutoResize, type AutoResizeProps } from './useAutoResize';
-import { useReadonly } from '@/context/useReadonly';
-import { useField } from '@/components/common/field/field';
 
 export interface TextareaProps extends React.ComponentProps<'textarea'>, AutoResizeProps {}
 

@@ -1,8 +1,8 @@
-import { describe, expect } from 'vitest';
+import { ConditionBuilder } from '@/components/editor/condition-builder/conditionBuilder';
 import { renderHook } from '@testing-library/react';
 import { act } from 'react';
+import { describe, expect } from 'vitest';
 import { useConditionContext, type ConditionGroupData, type ConditionMode, type LogicOperators, type Operators } from './conditionContext';
-import { ConditionBuilder } from '@/components/editor/condition-builder/conditionBuilder';
 
 const operators: Operators = {
   'equal to': '==',

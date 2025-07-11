@@ -1,13 +1,13 @@
-import * as React from 'react';
-import type { Meta } from '@storybook/react-vite';
-import { IvyIcons } from '@axonivy/ui-icons';
-import { Flex } from '@/components/common/flex/flex';
-import { SidebarHeader } from '@/components/editor/sidebar/header/header';
-import { PanelMessage } from '@/components/common/panelMessage/panelMessage';
 import { Button } from '@/components/common/button/button';
+import { Flex } from '@/components/common/flex/flex';
+import { PanelMessage } from '@/components/common/panelMessage/panelMessage';
 import { Switch } from '@/components/common/switch/switch';
-import { Outline } from '@/components/editor/sidebar/outline/outline';
+import { SidebarHeader } from '@/components/editor/sidebar/header/header';
 import { outlineData } from '@/components/editor/sidebar/outline/data';
+import { Outline } from '@/components/editor/sidebar/outline/outline';
+import { IvyIcons } from '@axonivy/ui-icons';
+import type { Meta } from '@storybook/react-vite';
+import * as React from 'react';
 
 const meta: Meta = {
   title: 'Editor/Sidebar'

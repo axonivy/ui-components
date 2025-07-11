@@ -1,6 +1,6 @@
+import { BasicField } from '@/components/common/field/field';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Textarea } from './textarea';
-import { BasicField } from '@/components/common/field/field';
 
 const meta: Meta<typeof Textarea> = {
   title: 'Common/Textarea',

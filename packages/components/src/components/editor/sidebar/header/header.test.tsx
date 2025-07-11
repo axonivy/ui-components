@@ -1,7 +1,7 @@
+import { IvyIcons } from '@axonivy/ui-icons';
 import { composeStory } from '@storybook/react-vite';
 import { customRender, screen } from 'test-utils';
 import Meta, { Default, WithMessages } from './header.stories';
-import { IvyIcons } from '@axonivy/ui-icons';
 
 const Header = composeStory(Default, Meta);
 const MessageHeader = composeStory(WithMessages, Meta);

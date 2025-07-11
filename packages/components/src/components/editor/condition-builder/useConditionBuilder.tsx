@@ -1,6 +1,6 @@
 import type { Browser } from '@/components/editor/browser/browser';
-import { useState } from 'react';
 import { IvyIcons } from '@axonivy/ui-icons';
+import { useState } from 'react';
 import { ConditionBuilder, type ConditionBuilderProps } from './conditionBuilder';
 
 export const useConditionBuilder = (props: Omit<ConditionBuilderProps, 'onChange'>): Browser => {

@@ -1,8 +1,8 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
-import { IvyIcons } from '@axonivy/ui-icons';
 import { Button } from '@/components/common/button/button';
-import { BasicField, Field } from './field';
 import { Input } from '@/components/common/input/input';
+import { IvyIcons } from '@axonivy/ui-icons';
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import { BasicField, Field } from './field';
 
 const meta: Meta<typeof BasicField> = {
   title: 'Common/Field',

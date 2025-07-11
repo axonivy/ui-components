@@ -1,8 +1,8 @@
+import type { EdgeProps } from '@xyflow/react';
+import { EdgeLabelRenderer } from '@xyflow/react';
 import { customEdge } from './graphEdge.css';
 import { getCircleEdgeParams } from './graphEdgeUtils';
 import { useGraphEdge } from './useGraphEdge';
-import type { EdgeProps } from '@xyflow/react';
-import { EdgeLabelRenderer } from '@xyflow/react';
 
 const GraphCircleFloatingEdge = ({ id, source, target, markerEnd, style, label }: EdgeProps) => {
   const { edgePath, labelX, labelY } = useGraphEdge(source, target, getCircleEdgeParams);

@@ -1,4 +1,8 @@
+import { Button, Flex, Separator } from '@axonivy/ui-components';
+import { IvyIcons } from '@axonivy/ui-icons';
 import { Handle, Position, type NodeProps } from '@xyflow/react';
+import { useState } from 'react';
+import type { GraphNode as GraphNodeType } from '../graph';
 import {
   containerPadding,
   customNodeHeaderInfo,
@@ -9,10 +13,6 @@ import {
   minWidth,
   node
 } from './graphNode.css';
-import type { GraphNode as GraphNodeType } from '../graph';
-import { IvyIcons } from '@axonivy/ui-icons';
-import { useState } from 'react';
-import { Button, Flex, Separator } from '@axonivy/ui-components';
 
 export const GraphNode = ({ data, selected }: NodeProps<GraphNodeType>) => {
   const disableHandles = data.nodeData.options?.disableHandles;

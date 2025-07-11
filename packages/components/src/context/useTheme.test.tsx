@@ -1,5 +1,5 @@
-import { ThemeProvider, useTheme } from './useTheme';
 import { act, renderHook } from '@testing-library/react';
+import { ThemeProvider, useTheme } from './useTheme';
 
 afterEach(() => {
   window.document.documentElement.classList.remove('light', 'dark');

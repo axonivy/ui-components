@@ -1,9 +1,9 @@
-import { flexRender, type Column, type HeaderContext, type HeaderGroup } from '@tanstack/react-table';
-import { TableHead, TableHeader, TableRow } from '../table';
-import { IvyIcons } from '@axonivy/ui-icons';
-import { expandButton, resizer, resizerLine, sortButton, sortHead } from './header.css';
 import { Button } from '@/components/common/button/button';
 import { Flex } from '@/components/common/flex/flex';
+import { IvyIcons } from '@axonivy/ui-icons';
+import { flexRender, type Column, type HeaderContext, type HeaderGroup } from '@tanstack/react-table';
+import { TableHead, TableHeader, TableRow } from '../table';
+import { expandButton, resizer, resizerLine, sortButton, sortHead } from './header.css';
 
 const ColumnResizer = <TData,>({ header }: { header: HeaderContext<TData, unknown> }) => (
   <Flex
@@ -75,4 +75,4 @@ const ExpandableHeader = <TData,>({ header, name }: ExpandableHeaderProps<TData>
 );
 ExpandableHeader.displayName = 'ExpandableHeader';
 
-export { TableResizableHeader, SortableHeader, ExpandableHeader };
+export { ExpandableHeader, SortableHeader, TableResizableHeader };

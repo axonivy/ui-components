@@ -1,10 +1,9 @@
-import * as React from 'react';
-import * as RadioGroupPrimitive from '@radix-ui/react-radio-group';
-
-import { cn } from '@/utils/class-name';
-import { radioGroup, radioGroupIdicator, radioGroupItem } from './radio.css';
 import { useField } from '@/components/common/field/field';
 import { useReadonly } from '@/context/useReadonly';
+import { cn } from '@/utils/class-name';
+import * as RadioGroupPrimitive from '@radix-ui/react-radio-group';
+import * as React from 'react';
+import { radioGroup, radioGroupIdicator, radioGroupItem } from './radio.css';
 
 /**
  * RadioGroup, based on {@link https://www.radix-ui.com/docs/primitives/components/radio-group | Radix UI RadioGroup}

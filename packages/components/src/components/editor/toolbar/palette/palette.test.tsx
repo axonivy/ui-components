@@ -1,6 +1,6 @@
 import { composeStory } from '@storybook/react-vite';
 import { render, screen, userEvent } from 'test-utils';
-import Meta, { Default, CustomPalette, PopoverPalette } from './palette.stories';
+import Meta, { CustomPalette, Default, PopoverPalette } from './palette.stories';
 
 const Palette = composeStory(Default, Meta);
 const Custom = composeStory(CustomPalette, Meta);

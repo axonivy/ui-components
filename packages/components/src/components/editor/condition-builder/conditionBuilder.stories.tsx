@@ -1,7 +1,7 @@
+import { vars } from '@/styles/theme.css';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
 import { generateConditionString, logicOperators, operators } from './condition-builder-utils';
-import { vars } from '@/styles/theme.css';
 import { ConditionBuilder } from './conditionBuilder';
 
 const meta: Meta<typeof ConditionBuilder> = {

@@ -1,9 +1,9 @@
 import { Button } from '@/components/common/button/button';
+import { Flex } from '@/components/common/flex/flex';
+import { IvyIcons } from '@axonivy/ui-icons';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
 import { useHistoryData } from './useHistoryData';
-import { IvyIcons } from '@axonivy/ui-icons';
-import { Flex } from '@/components/common/flex/flex';
 
 const meta: Meta = {
   title: 'Hooks/useHistoryData',

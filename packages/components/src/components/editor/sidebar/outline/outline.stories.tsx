@@ -1,6 +1,6 @@
+import { outlineData } from '@/components/editor/sidebar/outline/data';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Outline } from './outline';
-import { outlineData } from '@/components/editor/sidebar/outline/data';
 
 const meta: Meta<typeof Outline> = {
   title: 'Editor/Sidebar/Outline',

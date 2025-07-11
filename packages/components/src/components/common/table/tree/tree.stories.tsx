@@ -1,14 +1,14 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
-import { flexRender, type ColumnDef, useReactTable, getCoreRowModel, type Row, type Table as ReactTable } from '@tanstack/react-table';
-import { Table, TableBody, TableCell, TableRow } from '../table';
-import { ExpandableCell } from './tree';
-import { treeData, type Variable } from './data';
-import { IvyIcons } from '@axonivy/ui-icons';
-import { useState } from 'react';
+import { Flex } from '@/components/common/flex/flex';
 import { ExpandableHeader, TableResizableHeader } from '@/components/common/table/header/header';
 import { useTableExpand, useTableGlobalFilter, useTableKeyHandler, useTableSelect } from '@/components/common/table/hooks/hooks';
-import { Flex } from '@/components/common/flex/flex';
 import { SelectRow } from '@/components/common/table/row/row';
+import { IvyIcons } from '@axonivy/ui-icons';
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import { flexRender, getCoreRowModel, useReactTable, type ColumnDef, type Table as ReactTable, type Row } from '@tanstack/react-table';
+import { useState } from 'react';
+import { Table, TableBody, TableCell, TableRow } from '../table';
+import { treeData, type Variable } from './data';
+import { ExpandableCell } from './tree';
 
 const meta: Meta<typeof Table> = {
   title: 'Common/Table/Tree',

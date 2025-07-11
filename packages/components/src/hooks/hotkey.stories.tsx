@@ -1,10 +1,10 @@
+import { Button } from '@/components/common/button/button';
+import { Flex } from '@/components/common/flex/flex';
 import { hotkeyText } from '@/utils/hotkey';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React, { useState } from 'react';
 import { HotkeysProvider, useHotkeys, useHotkeysContext } from 'react-hotkeys-hook';
 import { useHotkeyLocalScopes } from './hotkey';
-import { Button } from '@/components/common/button/button';
-import { Flex } from '@/components/common/flex/flex';
 
 const meta: Meta = {
   title: 'Hooks/Hotkey'

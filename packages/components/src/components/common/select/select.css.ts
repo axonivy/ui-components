@@ -1,7 +1,7 @@
-import { style } from '@vanilla-extract/css';
-import { slideDownAndFade, slideLeftAndFade, slideRightAndFade, slideUpAndFade } from '@/styles/keyframes.css';
 import { disabled } from '@/styles/disabled';
+import { slideDownAndFade, slideLeftAndFade, slideRightAndFade, slideUpAndFade } from '@/styles/keyframes.css';
 import { vars } from '@/styles/theme.css';
+import { style } from '@vanilla-extract/css';
 
 export const trigger = style({
   cursor: 'pointer',

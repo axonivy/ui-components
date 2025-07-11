@@ -1,9 +1,9 @@
-import * as React from 'react';
-import { cn } from '@/utils/class-name';
-import { dot, type DotVariants } from './state.css';
 import { Flex } from '@/components/common/flex/flex';
-import { type MessageData, Message } from '@/components/common/message/message';
+import { Message, type MessageData } from '@/components/common/message/message';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/common/tooltip/tooltip';
+import { cn } from '@/utils/class-name';
+import * as React from 'react';
+import { dot, type DotVariants } from './state.css';
 
 type State = NonNullable<DotVariants>['state'];
 

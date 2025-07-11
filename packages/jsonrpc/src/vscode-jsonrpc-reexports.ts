@@ -1,2 +1,2 @@
-export type { Disposable, MessageConnection, Logger, Message } from 'vscode-jsonrpc';
 export { createMessageConnection, Emitter } from 'vscode-jsonrpc';
+export type { Disposable, Logger, Message, MessageConnection } from 'vscode-jsonrpc';

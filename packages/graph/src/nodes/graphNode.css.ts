@@ -1,5 +1,5 @@
-import { style } from '@vanilla-extract/css';
 import { vars } from '@axonivy/ui-components';
+import { style } from '@vanilla-extract/css';
 
 export const node = style({
   width: '100%',

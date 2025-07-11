@@ -1,9 +1,9 @@
-import { IvyIcons } from '@axonivy/ui-icons';
-import { addRowLine, addRowBtn, addRowBlock } from './footer.css';
 import { Button } from '@/components/common/button/button';
 import { Flex } from '@/components/common/flex/flex';
 import { useReadonly } from '@/context/useReadonly';
+import { IvyIcons } from '@axonivy/ui-icons';
 import * as React from 'react';
+import { addRowBlock, addRowBtn, addRowLine } from './footer.css';
 
 const TableAddRow = ({ addRow, ...props }: { addRow: () => void } & React.ComponentProps<typeof Button>) => {
   const readonly = useReadonly();

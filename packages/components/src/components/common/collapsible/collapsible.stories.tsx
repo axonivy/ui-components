@@ -1,3 +1,6 @@
+import { ButtonGroup } from '@/components/common/button/button';
+import { Message, type MessageData } from '@/components/common/message/message';
+import { IvyIcons } from '@axonivy/ui-icons';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import {
   BasicCollapsible,
@@ -7,9 +10,6 @@ import {
   CollapsibleTrigger,
   type CollapsibleControlProps
 } from './collapsible';
-import { IvyIcons } from '@axonivy/ui-icons';
-import { ButtonGroup } from '@/components/common/button/button';
-import { Message, type MessageData } from '@/components/common/message/message';
 
 const meta: Meta<typeof Collapsible> = {
   title: 'Common/Collapsible',
