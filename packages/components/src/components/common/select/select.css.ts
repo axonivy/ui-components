@@ -64,7 +64,7 @@ export const content = style({
   },
   '@media': {
     '(prefers-reduced-motion)': {
-      animation: 'nome'
+      animation: 'none'
     }
   }
 });
