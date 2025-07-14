@@ -2,6 +2,7 @@
   "$schema": "node_modules/@lerna-lite/cli/schemas/lerna-schema.json",
   "version": "13.2.0-next",
   "npmClient": "pnpm",
+  "useWorkspaces": true,
   "command": {
     "run": {
       "stream": true
