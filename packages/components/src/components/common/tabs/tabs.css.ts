@@ -2,8 +2,8 @@ import { vars } from '@/styles/theme.css';
 import { createContainer, style } from '@vanilla-extract/css';
 import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
 
-export const tabsListContainer = createContainer();
-export const tabsTriggerContainer = createContainer();
+const tabsListContainer = createContainer();
+const tabsTriggerContainer = createContainer();
 
 export const tabs = recipe({
   variants: {
