@@ -1,16 +1,13 @@
 {
   "$schema": "node_modules/@lerna-lite/cli/schemas/lerna-schema.json",
   "version": "13.2.0-next",
-  "npmClient": "npm",
-  "useWorkspaces": true,
+  "npmClient": "pnpm",
   "command": {
-    "run": {
-      "stream": true
-    },
     "publish": {
       "forcePublish": true,
       "skipGit": true,
       "registry": "https://npmjs-registry.ivyteam.ch/"
     }
-  }
+  },
+  "packages": ["packages/*", "dev-packages/*"]
 }

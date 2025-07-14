@@ -16,6 +16,10 @@
   "dependencies": {
     "vscode-jsonrpc": "^8.2.0"
   },
+  "devDependencies": {
+    "@axonivy/ts-config": "workspace:*",
+    "vitest-websocket-mock": "^0.5.0"
+  },
   "type": "module",
   "types": "lib/index.d.ts",
   "main": "lib/jsonrpc.js",
@@ -23,12 +27,9 @@
   "scripts": {
     "clean": "rimraf --glob lib *.tsbuildinfo",
     "build": "tsc --build tsconfig.production.json",
-    "package": "npm run clean && vite build && npm run build",
+    "package": "pnpm run clean && vite build && pnpm run build",
     "type": "tsc",
     "test": "vitest",
     "test:ci": "vitest run"
-  },
-  "devDependencies": {
-    "vitest-websocket-mock": "^0.5.0"
   }
 }
