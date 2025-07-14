@@ -1,8 +1,6 @@
 import { vars } from '@/styles/theme.css';
 import { style } from '@vanilla-extract/css';
 
-export const resizableGroup = style({});
-
 export const resizableLine = style({
   width: 1,
   position: 'relative',

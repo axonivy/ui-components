@@ -1,27 +1,27 @@
 import { vars } from '@/styles/theme.css';
 import { keyframes, style } from '@vanilla-extract/css';
 
-export const enter = keyframes({
+const enter = keyframes({
   '0%': {
     opacity: 0,
     transform: 'translate3d(-50%, -48%, 0) scale3d(0.95, 0.95, 0.95)'
   }
 });
 
-export const exit = keyframes({
+const exit = keyframes({
   to: {
     opacity: 0,
     transform: 'translate3d(-50%, -48%, 0) scale3d(0.95, 0.95, 0.95)'
   }
 });
 
-export const enterOverlay = keyframes({
+const enterOverlay = keyframes({
   '0%': {
     opacity: 0
   }
 });
 
-export const exitOverlay = keyframes({
+const exitOverlay = keyframes({
   to: {
     opacity: 0
   }
