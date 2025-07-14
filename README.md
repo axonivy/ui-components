@@ -4,13 +4,13 @@ This repo contains the ui-components and icons for the Axon Ivy web-based UI's.
 
 ## Available Scripts
 
-`npm install`: Install all packages:
+`pnpm install`: Install all packages:
 
-`npm run generate`: Build the icon font
+`pnpm generate`: Build the icon font
 
-`npm run dev`: Start the storybook UI for the components
+`pnpm dev`: Start the storybook UI for the components
 
-`npm run package`: Build the lib output
+`pnpm package`: Build the lib output
 
 ## Inspect icon font
 

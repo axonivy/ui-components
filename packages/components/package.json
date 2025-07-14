@@ -41,6 +41,7 @@
     "react": "^19.0"
   },
   "devDependencies": {
+    "@axonivy/ts-config": "~13.2.0-next",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.2.0",
     "@testing-library/user-event": "^14.6.0",
@@ -58,7 +59,7 @@
   "scripts": {
     "clean": "rimraf --glob lib *.tsbuildinfo",
     "build": "tsc --build tsconfig.production.json",
-    "package": "npm run clean && vite build && npm run build",
+    "package": "pnpm clean && vite build && pnpm build",
     "type": "tsc",
     "test": "vitest",
     "test:ci": "vitest run"
