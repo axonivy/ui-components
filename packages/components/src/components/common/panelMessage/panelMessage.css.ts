@@ -2,10 +2,21 @@ import { vars } from '@/styles/theme.css';
 import { style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
-export const panel = style({
-  height: 'calc(100% - 40px)',
-  color: vars.color.n800,
-  margin: 20
+export const panel = recipe({
+  base: {
+    height: 'calc(100% - 40px)',
+    color: vars.color.n800
+  },
+  variants: {
+    mode: {
+      row: {
+        margin: 0
+      },
+      column: {
+        margin: 20
+      }
+    }
+  }
 });
 
 export const panelIcon = recipe({
@@ -23,5 +34,6 @@ export const panelIcon = recipe({
 
 export const panelMessage = style({
   fontSize: '14px',
-  textAlign: 'center'
+  textAlign: 'center',
+  padding: 0
 });

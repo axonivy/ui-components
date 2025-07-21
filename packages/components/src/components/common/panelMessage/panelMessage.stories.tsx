@@ -1,3 +1,4 @@
+import { Button } from '@/components/common/button/button';
 import { IvyIcons } from '@axonivy/ui-icons';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { PanelMessage } from './panelMessage';
@@ -33,4 +34,18 @@ export const ErrorMessage: Story = {
     icon: IvyIcons.ErrorXMark
   },
   render: props => <PanelMessage {...props} />
+};
+
+export const WithButton: Story = {
+  args: {
+    message: 'Nothing here yet, click button to add something',
+    mode: 'column'
+  },
+  render: props => (
+    <PanelMessage {...props}>
+      <Button icon={IvyIcons.Plus} size='large' variant='primary'>
+        Add Something
+      </Button>
+    </PanelMessage>
+  )
 };
