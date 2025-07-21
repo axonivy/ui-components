@@ -4,6 +4,7 @@ import { BasicField } from '@/components/common/field/field';
 import { Input } from '@/components/common/input/input';
 import { BasicSelect } from '@/components/common/select/select';
 import { Textarea } from '@/components/common/textarea/textarea';
+import { IvyIcons } from '@axonivy/ui-icons';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { BasicDialog, BasicDialogContent, Dialog, DialogTrigger } from './dialog';
 
@@ -26,7 +27,7 @@ const ButtonClose = (
   </Button>
 );
 const ButtonCustom = (
-  <Button variant='primary' size='large'>
+  <Button variant='primary' size='large' icon={IvyIcons.Check}>
     Save
   </Button>
 );
