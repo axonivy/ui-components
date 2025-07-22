@@ -5,8 +5,8 @@ import { Slot } from '@radix-ui/react-slot';
 import * as React from 'react';
 import { breadcrumbEllipsis, breadcrumbItem, breadcrumbLink, breadcrumbList, breadcrumbPage, breadcrumbSeparator } from './breadcrumb.css';
 
-function Breadcrumb({ ...props }: React.ComponentProps<'nav'>) {
-  return <nav aria-label='breadcrumb' data-slot='breadcrumb' {...props} />;
+function Breadcrumb({ className, ...props }: React.ComponentProps<'nav'>) {
+  return <nav aria-label='breadcrumb' data-slot='breadcrumb' className={cn('ui-breadcrumb', className)} {...props} />;
 }
 
 function BreadcrumbList({ className, ...props }: React.ComponentProps<'ol'>) {
