@@ -9,7 +9,7 @@ import { Table, TableBody, TableCell, TableRow } from '@/components/common/table
 import { ExpandableCell } from '@/components/common/table/tree/tree';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/common/tabs/tabs';
 import { cn } from '@/utils/class-name';
-import type { IvyIcons } from '@axonivy/ui-icons';
+import { IvyIcons } from '@axonivy/ui-icons';
 import {
   flexRender,
   getCoreRowModel,
@@ -110,8 +110,6 @@ export type Browser = {
 export type BrowsersViewProps = {
   browsers: Array<Browser>;
   apply: (browserName: string, result?: BrowserResult) => void;
-  /** @deprecated use options instead */
-  applyBtn?: { label?: string; icon?: IvyIcons };
   options?: {
     applyBtn?: { label?: string; icon?: IvyIcons };
     search?: { placeholder?: string };
@@ -124,8 +122,8 @@ function isUseBrowserResult(browser: Browser['browser']): browser is ReturnType<
   return (browser as ReturnType<typeof useBrowser>).table !== undefined;
 }
 
-const BrowsersView = ({ browsers, apply, applyBtn, options }: BrowsersViewProps) => {
-  const applyButton = applyBtn ?? options?.applyBtn;
+const BrowsersView = ({ browsers, apply, options }: BrowsersViewProps) => {
+  const applyButton = options?.applyBtn;
   const [tab, setTab] = React.useState(browsers[0]?.name ?? '');
   const selectedRow = () => {
     const browser = browsers.find(b => b.name === tab)?.browser;
@@ -229,13 +227,13 @@ const BrowsersView = ({ browsers, apply, applyBtn, options }: BrowsersViewProps)
           <BasicCollapsible label={options?.info?.label ?? 'Info'} style={{ maxHeight: 50 }}>
             {infoProvider(selectedRow())}
           </BasicCollapsible>
-          <Flex direction='row' justifyContent='flex-end' gap={1}>
-            <Button aria-label={options?.cancelBtn?.label ?? 'Cancel'} onClick={() => apply(tab)} size='large'>
+          <Flex direction='row' justifyContent='flex-end' gap={2}>
+            <Button aria-label={options?.cancelBtn?.label ?? 'Cancel'} onClick={() => apply(tab)} size='large' variant='outline'>
               {options?.cancelBtn?.label ?? 'Cancel'}
             </Button>
             <Button
               aria-label={applyButton?.label ?? 'Apply'}
-              icon={applyButton?.icon}
+              icon={applyButton?.icon ?? IvyIcons.Check}
               onClick={() => applyHandler()}
               size='large'
               variant='primary'
