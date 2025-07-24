@@ -18,8 +18,8 @@ const meta: Meta<typeof BrowsersView> = {
   component: BrowsersView,
   argTypes: {
     apply: { control: false },
-    applyBtn: { control: false },
-    browsers: { control: false }
+    browsers: { control: false },
+    options: { control: false }
   }
 };
 

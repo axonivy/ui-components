@@ -30,3 +30,17 @@ export const useHotkeyLocalScopes = (scopes: string[]) => {
 
   return { activateLocalScopes, restoreLocalScopes, restorableScopes };
 };
+
+export const useDialogHotkeys = (scopes: string[] = []) => {
+  const [open, setOpen] = useState(false);
+  const { activateLocalScopes, restoreLocalScopes } = useHotkeyLocalScopes(scopes);
+  const onOpenChange = (open: boolean) => {
+    setOpen(open);
+    if (open) {
+      activateLocalScopes();
+    } else {
+      restoreLocalScopes();
+    }
+  };
+  return { open, onOpenChange };
+};

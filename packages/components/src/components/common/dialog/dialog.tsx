@@ -28,9 +28,9 @@ const DialogContent = ({ className, children, ...props }: React.ComponentProps<t
     <DialogOverlay />
     <DialogPrimitive.Content className={cn(content, className, 'ui-dialog-content')} {...props}>
       {children}
-      <DialogPrimitive.Close asChild>
+      <DialogClose asChild>
         <Button icon={IvyIcons.Close} className={contentClose} />
-      </DialogPrimitive.Close>
+      </DialogClose>
     </DialogPrimitive.Content>
   </DialogPortal>
 );
@@ -42,7 +42,7 @@ const DialogHeader = ({ className, ...props }: React.ComponentProps<typeof Flex>
 DialogHeader.displayName = 'DialogHeader';
 
 const DialogFooter = ({ className, ...props }: React.ComponentProps<typeof Flex>) => (
-  <Flex direction='row-reverse' gap={2} className={cn(footer, className, 'ui-dialog-footer')} {...props} />
+  <Flex direction='row' justifyContent='flex-end' gap={2} className={cn(footer, className, 'ui-dialog-footer')} {...props} />
 );
 DialogFooter.displayName = 'DialogFooter';
 
@@ -56,46 +56,47 @@ const DialogDescription = ({ className, ...props }: React.ComponentProps<typeof 
 );
 DialogDescription.displayName = DialogPrimitive.Description.displayName;
 
-type BasicDialoContentProps = React.ComponentProps<typeof DialogPrimitive.Content> & {
+type BasicDialogHeaderProps = {
   title: string;
   description: React.ReactNode;
-  buttonClose?: React.ReactNode;
-  buttonCustom?: React.ReactNode;
 };
 
-const BasicDialogContent = ({ title, description, buttonClose, buttonCustom, children, ...props }: BasicDialoContentProps) => (
-  <DialogContent {...props}>
-    <DialogHeader>
-      <DialogTitle>{title}</DialogTitle>
-      <DialogDescription>{description}</DialogDescription>
-    </DialogHeader>
-    <Flex direction='column' gap={2}>
-      {children}
-    </Flex>
-    <DialogFooter>
-      <DialogClose asChild>{buttonCustom}</DialogClose>
-      <DialogClose asChild>{buttonClose}</DialogClose>
-    </DialogFooter>
-  </DialogContent>
+const BasicDialogHeader = ({ title, description }: BasicDialogHeaderProps) => (
+  <DialogHeader>
+    <DialogTitle>{title}</DialogTitle>
+    <DialogDescription>{description}</DialogDescription>
+  </DialogHeader>
+);
+BasicDialogHeader.displayName = 'BasicDialogHeader';
+
+type BasicDialogFooterProps = {
+  cancel: React.ReactNode;
+  submit: React.ReactNode;
+};
+
+const BasicDialogFooter = ({ cancel, submit }: BasicDialogFooterProps) => (
+  <DialogFooter>
+    <DialogClose asChild>{cancel}</DialogClose>
+    <DialogClose asChild>{submit}</DialogClose>
+  </DialogFooter>
+);
+BasicDialogFooter.displayName = 'BasicDialogFooter';
+
+type BasicDialoContentProps = BasicDialogHeaderProps & BasicDialogFooterProps & React.ComponentProps<typeof Flex>;
+
+const BasicDialogContent = ({ title, description, cancel, submit, ...props }: BasicDialoContentProps) => (
+  <Flex direction='column' gap={4}>
+    <BasicDialogHeader title={title} description={description} />
+    <Flex direction='column' gap={2} {...props} />
+    <BasicDialogFooter submit={submit} cancel={cancel} />
+  </Flex>
 );
 BasicDialogContent.displayName = 'BasicDialogContent';
 
-type BasicDialogProps = React.ComponentProps<typeof DialogPrimitive.Root> & {
-  dialogTrigger?: React.ReactNode;
-  contentProps: BasicDialoContentProps;
-};
-
-const BasicDialog = ({ dialogTrigger, children, contentProps, ...props }: BasicDialogProps) => (
-  <Dialog {...props}>
-    {dialogTrigger}
-    <BasicDialogContent {...contentProps}>{children}</BasicDialogContent>
-  </Dialog>
-);
-BasicDialog.displayName = 'BasicDialog';
-
 export {
-  BasicDialog,
   BasicDialogContent,
+  BasicDialogFooter,
+  BasicDialogHeader,
   Dialog,
   DialogClose,
   DialogContent,
