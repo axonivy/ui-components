@@ -41,7 +41,7 @@ export const menuItem = style({
   alignItems: 'center',
   gap: vars.size.s1,
   userSelect: 'none',
-  padding: `${vars.size.s1} ${vars.size.s2}`,
+  padding: `6px ${vars.size.s2}`,
   borderRadius: vars.border.r1,
   backgroundColor: 'transparent',
   fontSize: 12,
@@ -101,9 +101,11 @@ export const menuItemRadioIndicator = style({
 });
 
 export const label = style({
+  display: 'flex',
+  alignItems: 'center',
+  gap: vars.size.s1,
   fontWeight: 600,
-  paddingBlock: vars.size.s1,
-  paddingInline: vars.size.s2
+  padding: `6px ${vars.size.s2}`
 });
 
 export const separator = style({
