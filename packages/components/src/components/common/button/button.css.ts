@@ -54,6 +54,13 @@ export const button = recipe({
         },
         color: vars.color.background
       },
+      ['primary-outline']: {
+        vars: {
+          [buttonBg]: vars.color.p50
+        },
+        color: vars.color.p300,
+        border: `1px solid ${vars.color.p300}`
+      },
       outline: { border: vars.border.basic }
     },
     size: {
@@ -63,7 +70,8 @@ export const button = recipe({
         paddingInline: vars.size.s1,
         borderRadius: vars.border.r1
       },
-      large: { fontSize: '14px', height: 26, fontWeight: 500 }
+      large: { fontSize: '14px', height: 26, fontWeight: 500 },
+      xl: { fontSize: '14px', height: 32, fontWeight: 500 }
     }
   }
 });
@@ -80,7 +88,8 @@ export const iconOnly = recipe({
   variants: {
     size: {
       small: {},
-      large: { height: 26 }
+      large: { height: 26 },
+      xl: { height: 32 }
     }
   }
 });

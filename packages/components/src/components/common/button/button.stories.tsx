@@ -7,8 +7,8 @@ const meta: Meta<typeof Button> = {
   title: 'Common/Button',
   component: Button,
   argTypes: {
-    variant: { type: 'string', control: 'select', options: [undefined, 'primary', 'outline'] },
-    size: { type: 'string', control: 'select', options: [undefined, 'large', 'small'] },
+    variant: { type: 'string', control: 'select', options: [undefined, 'primary', 'primary-outline', 'outline'] },
+    size: { type: 'string', control: 'select', options: [undefined, 'xl', 'large', 'small'] },
     icon: { type: 'string', control: 'select', options: Object.values(IvyIcons) }
   },
   args: {
