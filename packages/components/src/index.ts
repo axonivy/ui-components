@@ -2,6 +2,7 @@ import './styles/global.css';
 
 /* Common Components */
 export * from './components/common/accordion/accordion';
+export * from './components/common/badge/badge';
 export * from './components/common/breadcrumb/breadcrumb';
 export * from './components/common/button/button';
 export * from './components/common/checkbox/checkbox';
