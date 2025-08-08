@@ -38,10 +38,12 @@
     "sonner": "2.0.6"
   },
   "peerDependencies": {
-    "@axonivy/ui-icons": "~13.2.0-next",
+    "@axonivy/ui-icons": "workspace:~13.2.0-next",
     "react": "^19.0"
   },
   "devDependencies": {
+    "@axonivy/ts-config": "workspace:*",
+    "@axonivy/ui-icons": "workspace:~13.2.0-next",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.2.0",
     "@testing-library/user-event": "^14.6.0",
@@ -59,7 +61,7 @@
   "scripts": {
     "clean": "rimraf --glob lib *.tsbuildinfo",
     "build": "tsc --build tsconfig.production.json",
-    "package": "npm run clean && vite build && npm run build",
+    "package": "pnpm run clean && vite build && pnpm run build",
     "type": "tsc",
     "test": "vitest",
     "test:ci": "vitest run"

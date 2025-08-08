@@ -1,8 +1,7 @@
-import tseslint from 'typescript-eslint';
-import storybook from 'eslint-plugin-storybook';
 import config from '@axonivy/eslint-config';
+import storybook from 'eslint-plugin-storybook';
 
-export default tseslint.config(
+export default config.defineConfig(
   ...config.base,
   // TypeScript configs
   {

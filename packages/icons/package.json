@@ -20,13 +20,14 @@
   "module": "./lib/index.js",
   "source": "src-gen",
   "devDependencies": {
+    "@axonivy/ts-config": "workspace:*",
     "fantasticon": "^1.2.3"
   },
   "scripts": {
     "clean": "rimraf --glob lib src-gen/ivy-icons.* tsconfig.tsbuildinfo",
     "build": "tsc --build && tscp",
     "package": "tsc && tscp",
-    "build:clean": "npm run clean && npm run build",
-    "generate": "fantasticon && npm run build"
+    "build:clean": "pnpm run clean && pnpm run build",
+    "generate": "fantasticon && pnpm run build"
   }
 }

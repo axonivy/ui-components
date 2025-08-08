@@ -8,13 +8,14 @@
     "node": "22.17.0"
   },
   "scripts": {
-    "ci": "npm install && npm run generate && npm run package && npm run type && (npm run lint:ci || true) && npm run test:ci",
-    "generate": "npm run -w @axonivy/ui-icons generate",
+    "preinstall": "npx only-allow pnpm",
+    "ci": "pnpm install && pnpm run generate && pnpm run package && pnpm run type && (pnpm run lint:ci || true) && pnpm run test:ci",
+    "generate": "pnpm run -r generate",
     "build": "tsc --build",
     "build:storybook": "storybook build",
-    "package": "lerna run package",
-    "clean": "lerna run clean",
-    "type": "lerna run type",
+    "package": "pnpm run -r package",
+    "clean": "pnpm run -r clean",
+    "type": "pnpm run -r type",
     "lint": "eslint",
     "lint:ci": "eslint -o eslint.xml -f checkstyle",
     "lint:fix": "eslint --fix",
@@ -22,20 +23,26 @@
     "dev": "storybook dev -p 6006 --no-open",
     "test": "vitest",
     "test:ci": "vitest run --reporter=default --reporter=junit --outputFile=report.xml",
+    "raise:version": "lerna version --allow-peer-dependencies-update --no-git-tag-version --no-push --ignore-scripts --exact --yes",
     "publish:next": "lerna publish --exact --canary --preid next --pre-dist-tag next --no-git-tag-version --no-push --ignore-scripts --yes"
   },
   "devDependencies": {
+    "@axonivy/eslint-config": "workspace:*",
+    "@axonivy/ts-config": "workspace:*",
+    "@axonivy/ui-components": "workspace:*",
+    "@axonivy/ui-icons": "workspace:*",
+    "@lerna-lite/cli": "^4.0.0",
+    "@lerna-lite/publish": "^4.0.0",
+    "@lerna-lite/version": "^4.0.0",
     "@storybook/addon-docs": "^9.0.1",
     "@storybook/addon-links": "^9.0.1",
     "@storybook/react-vite": "^9.0.1",
     "@types/node": "^22.10.7",
+    "@vanilla-extract/css": "^1.17.0",
     "@vanilla-extract/vite-plugin": "^5.0.0",
     "@vitejs/plugin-react": "^4.3.4",
     "eslint-plugin-storybook": "^9.0.1",
-    "@lerna-lite/cli": "^4.0.0",
-    "@lerna-lite/publish": "^4.0.0",
-    "@lerna-lite/run": "^4.0.0",
-    "@lerna-lite/version": "^4.0.0",
+    "prettier": "^3.6.2",
     "rimraf": "^6.0.1",
     "rollup-plugin-visualizer": "^6.0.0",
     "storybook": "^9.0.1",
@@ -45,14 +52,12 @@
     "vite-plugin-dts": "^4.5.0",
     "vitest": "^3.0.2"
   },
-  "type": "module",
   "workspaces": {
     "packages": [
       "packages/*",
       "dev-packages/*"
     ]
   },
-  "overrides": {
-    "storybook": "$storybook"
-  }
+  "type": "module",
+  "prettier": "@axonivy/prettier-config"
 }
