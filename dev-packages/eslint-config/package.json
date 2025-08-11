@@ -13,17 +13,17 @@
   "type": "module",
   "main": "index.mjs",
   "dependencies": {
-    "@eslint/js": "^9.17.0",
-    "@tanstack/eslint-plugin-query": "^5.62.9",
-    "@typescript-eslint/eslint-plugin": "^8.19.0",
-    "@typescript-eslint/parser": "^8.19.0",
-    "eslint": "^9.17.0",
-    "eslint-formatter-checkstyle": "^8.40.0",
-    "eslint-plugin-playwright": "^2.1.0",
-    "eslint-plugin-react": "^7.37.3",
-    "eslint-plugin-react-compiler": "^19.0.0-beta-55955c9-20241229",
-    "eslint-plugin-react-hooks": "^5.1.0",
-    "eslint-plugin-testing-library": "^7.1.1",
-    "typescript-eslint": "^8.19.0"
+    "@eslint/js": "9.33.0",
+    "@tanstack/eslint-plugin-query": "5.83.1",
+    "@typescript-eslint/eslint-plugin": "8.39.0",
+    "@typescript-eslint/parser": "8.39.0",
+    "eslint": "9.33.0",
+    "eslint-formatter-checkstyle": "8.40.0",
+    "eslint-plugin-playwright": "2.2.2",
+    "eslint-plugin-react": "7.37.5",
+    "eslint-plugin-react-compiler": "19.1.0-rc.2",
+    "eslint-plugin-react-hooks": "5.2.0",
+    "eslint-plugin-testing-library": "7.5.3",
+    "typescript-eslint": "8.39.0"
   }
 }
