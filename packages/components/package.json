@@ -35,7 +35,7 @@
     "downshift": "9.0.10",
     "react-hotkeys-hook": "4.6.2",
     "react-resizable-panels": "3.0.4",
-    "sonner": "2.0.6"
+    "sonner": "2.0.7"
   },
   "peerDependencies": {
     "@axonivy/ui-icons": "workspace:~13.2.0-next",
