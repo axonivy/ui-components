@@ -5,4 +5,4 @@ mvn --batch-mode -f packages/icons/pom.xml versions:set versions:commit -DnewVer
 
 pnpm install
 pnpm run raise:version ${1/SNAPSHOT/next}
-pnpm install
+pnpm install --frozen-lockfile=false
