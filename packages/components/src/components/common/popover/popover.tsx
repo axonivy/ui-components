@@ -17,9 +17,10 @@ const PopoverContent = ({
   className,
   align = 'center',
   sideOffset = 4,
+  container,
   ...props
-}: React.ComponentProps<typeof PopoverPrimitive.Content>) => (
-  <PopoverPrimitive.Portal>
+}: React.ComponentProps<typeof PopoverPrimitive.Content> & Pick<React.ComponentProps<typeof PopoverPrimitive.Portal>, 'container'>) => (
+  <PopoverPrimitive.Portal container={container}>
     <PopoverPrimitive.Content align={align} sideOffset={sideOffset} className={cn(content, className, 'ui-popover-content')} {...props} />
   </PopoverPrimitive.Portal>
 );

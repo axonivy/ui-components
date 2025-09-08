@@ -44,3 +44,21 @@ export const WithClose: Story = {
     </Popover>
   )
 };
+
+export const WithContainer: Story = {
+  render: () => (
+    <Popover>
+      <PopoverTrigger asChild>
+        <Button variant='outline'>Open popover</Button>
+      </PopoverTrigger>
+      <PopoverContent collisionPadding={20} container={document.getElementById('storybook-root')}>
+        helloasdfasdfasdfasdfasdfdsafadsfsadfdsafsahelloasdfasdfasdfas dfasdfdsafadsfsadfdsafsahelloasdfasdfasdfasdfasdfdsafadsfsadfdsaf
+        sahelloasdfasdfasdfasdfasdfdsafadsfsadfdsafsahelloasdfasdfasdfasdfasdfdsafadsfsadfdsafsa
+        <PopoverClose asChild>
+          <Button size='small' icon={IvyIcons.Close} />
+        </PopoverClose>
+        <PopoverArrow className='PopoverArrow' />
+      </PopoverContent>
+    </Popover>
+  )
+};
