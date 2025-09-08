@@ -11,6 +11,9 @@ importers:
       '@axonivy/eslint-config':
         specifier: workspace:*
         version: link:dev-packages/eslint-config
+      '@axonivy/prettier-config':
+        specifier: workspace:*
+        version: link:dev-packages/prettier-config
       '@axonivy/ts-config':
         specifier: workspace:*
         version: link:dev-packages/ts-config

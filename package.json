@@ -28,6 +28,7 @@
   },
   "devDependencies": {
     "@axonivy/eslint-config": "workspace:*",
+    "@axonivy/prettier-config": "workspace:*",
     "@axonivy/ts-config": "workspace:*",
     "@axonivy/ui-components": "workspace:*",
     "@axonivy/ui-icons": "workspace:*",
