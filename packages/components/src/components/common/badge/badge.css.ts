@@ -30,8 +30,33 @@ export const badge = recipe({
         color: vars.color.body,
         backgroundColor: vars.color.n100
       },
-      destructive: {
-        backgroundColor: vars.color.error
+      orange: {
+        color: vars.color.orange,
+        backgroundColor: vars.color.orangeBg
+      },
+      green: {
+        color: vars.color.green,
+        backgroundColor: vars.color.greenBg
+      },
+      blue: {
+        color: vars.color.blue,
+        backgroundColor: vars.color.blueBg
+      },
+      red: {
+        color: vars.color.red,
+        backgroundColor: vars.color.redBg
+      },
+      pink: {
+        color: vars.color.pink,
+        backgroundColor: vars.color.pinkBg
+      },
+      purple: {
+        color: vars.color.purple,
+        backgroundColor: vars.color.purpleBg
+      },
+      yellow: {
+        color: vars.color.yellow,
+        backgroundColor: vars.color.yellowBg
       },
       outline: {
         color: vars.color.body,

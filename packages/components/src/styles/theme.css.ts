@@ -22,7 +22,21 @@ const colors = createGlobalThemeContract({
     p500: 'P500',
     error: 'error-color',
     warning: 'warning-color',
-    success: 'success-color'
+    success: 'success-color',
+    orange: 'orange',
+    orangeBg: 'orange-bg',
+    green: 'green',
+    greenBg: 'green-bg',
+    blue: 'blue',
+    blueBg: 'blue-bg',
+    red: 'red',
+    redBg: 'red-bg',
+    pink: 'pink',
+    pinkBg: 'pink-bg',
+    purple: 'purple',
+    purpleBg: 'purple-bg',
+    yellow: 'yellow',
+    yellowBg: 'yellow-bg'
   }
 });
 
@@ -48,7 +62,21 @@ createGlobalTheme(':root', colors, {
     p500: '#004e69',
     error: '#e5151c',
     warning: '#ff7300',
-    success: '#47c46b'
+    success: '#47c46b',
+    orange: '#a84600',
+    orangeBg: '#fedcc5',
+    green: '#16694e',
+    greenBg: '#c3eddf',
+    blue: '#1c59ba',
+    blueBg: '#cee0fd',
+    red: '#9d1b1b',
+    redBg: '#fac7c7',
+    pink: '#a72063',
+    pinkBg: '#fbdaeb',
+    purple: '#6c40d4',
+    purpleBg: '#e2d6fd',
+    yellow: '#866d09',
+    yellowBg: '#fef5d0'
   }
 });
 
@@ -74,7 +102,21 @@ createGlobalTheme('.dark', colors, {
     p500: '#004e69',
     error: '#e5151c',
     warning: '#ff7300',
-    success: '#47c46b'
+    success: '#47c46b',
+    orange: '#ffa96b',
+    orangeBg: '#6a4125',
+    green: '#55d3a9',
+    greenBg: '#314f45',
+    blue: '#95bbf9',
+    blueBg: '#314669',
+    red: '#fd9b9b',
+    redBg: '#673333',
+    pink: '#ff99cc',
+    pinkBg: '#66344d',
+    purple: '#bb9eff',
+    purpleBg: '#493a69',
+    yellow: '#ffd83d',
+    yellowBg: '#6a5c25'
   }
 });
 

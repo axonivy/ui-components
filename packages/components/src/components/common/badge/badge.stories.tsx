@@ -20,7 +20,13 @@ export const Default: Story = {
         <Badge>Badge</Badge>
         <Badge variant='primary'>Primary</Badge>
         <Badge variant='secondary'>Secondary</Badge>
-        <Badge variant='destructive'>Destructive</Badge>
+        <Badge variant='orange'>Orange</Badge>
+        <Badge variant='green'>Green</Badge>
+        <Badge variant='blue'>Blue</Badge>
+        <Badge variant='red'>Red</Badge>
+        <Badge variant='pink'>Pink</Badge>
+        <Badge variant='purple'>Purple</Badge>
+        <Badge variant='yellow'>Yellow</Badge>
         <Badge variant='outline'>Outline</Badge>
       </Flex>
       <Flex direction='row' gap={2} alignItems='center'>
@@ -28,7 +34,7 @@ export const Default: Story = {
           <IvyIcon icon={IvyIcons.Check} />
           Verified
         </Badge>
-        <Badge variant='destructive' size='s'>
+        <Badge variant='primary' size='s'>
           <IvyIcon icon={IvyIcons.Close} />
           Declined
         </Badge>
@@ -39,7 +45,7 @@ export const Default: Story = {
       </Flex>
       <Flex direction='row' gap={2} alignItems='center'>
         <Badge round>9+</Badge>
-        <Badge round size='s' variant='destructive'>
+        <Badge round size='s' variant='primary'>
           9
         </Badge>
         <Badge round size='xs' variant='outline'>
