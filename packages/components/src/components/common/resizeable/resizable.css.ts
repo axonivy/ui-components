@@ -27,7 +27,6 @@ export const resizableHandle = style({
   justifyContent: 'center',
   alignItems: 'center',
   backgroundColor: vars.color.n200,
-  borderWidth: '1px',
   borderRadius: '3px',
   width: '.75rem',
   height: '1rem',
