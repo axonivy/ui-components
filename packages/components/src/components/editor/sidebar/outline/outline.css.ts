@@ -1,4 +1,3 @@
-import { flex } from '@/components/common/flex/flex.css';
 import { cell, root, row, table } from '@/components/common/table/table.css';
 import { vars } from '@/styles/theme.css';
 import { globalStyle, style } from '@vanilla-extract/css';
@@ -19,13 +18,14 @@ globalStyle(`${outlineContainer} ${table}`, {
 });
 
 globalStyle(`${outlineContainer} ${row}`, {
-  border: 'none'
+  border: 'none',
+  height: 28
 });
 
 globalStyle(`${outlineContainer} ${cell}`, {
   padding: 0
 });
 
-globalStyle(`${outlineContainer} ${cell} > ${flex()}`, {
+globalStyle(`${outlineContainer} ${cell} > .ui-flex`, {
   height: 28
 });

@@ -34,7 +34,8 @@ export const input = style([
     color: vars.color.body,
     textAlign: 'start',
     padding: vars.padding.input,
-    width: `calc(100% - 2 * ${vars.padding.input} - 2px)`,
+    // width: `calc(100% - 2 * ${vars.padding.input} - 2px)`,
+    width: '100%',
     ':disabled': disabled,
     ':focus': {
       outline: 'none',

@@ -21,7 +21,7 @@ export const Default: Story = {
       <PopoverContent collisionPadding={20}>
         helloasdfasdfasdfasdfasdfdsafadsfsadfdsafsahelloasdfasdfasdfas dfasdfdsafadsfsadfdsafsahelloasdfasdfasdfasdfasdfdsafadsfsadfdsaf
         sahelloasdfasdfasdfasdfasdfdsafadsfsadfdsafsahelloasdfasdfasdfasdfasdfdsafadsfsadfdsafsa
-        <PopoverArrow className='PopoverArrow' />
+        <PopoverArrow />
       </PopoverContent>
     </Popover>
   )
@@ -39,7 +39,7 @@ export const WithClose: Story = {
         <PopoverClose asChild>
           <Button size='small' icon={IvyIcons.Close} />
         </PopoverClose>
-        <PopoverArrow className='PopoverArrow' />
+        <PopoverArrow />
       </PopoverContent>
     </Popover>
   )
@@ -57,7 +57,7 @@ export const WithContainer: Story = {
         <PopoverClose asChild>
           <Button size='small' icon={IvyIcons.Close} />
         </PopoverClose>
-        <PopoverArrow className='PopoverArrow' />
+        <PopoverArrow />
       </PopoverContent>
     </Popover>
   )

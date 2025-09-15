@@ -39,16 +39,16 @@ const SelectRow = <TData,>({ row, className, onClick, ...props }: SelectRowProps
 };
 SelectRow.displayName = 'SelectRow';
 
-type MessageRowProps = React.ComponentProps<typeof TableRow> & { message?: MessageData; columnCount: number };
+type MessageRowProps = React.ComponentProps<typeof TableRow> & { message?: MessageData; singleLine?: boolean; columnCount: number };
 
-const MessageRow = ({ message, className, columnCount, ...props }: MessageRowProps) => {
+const MessageRow = ({ message, className, columnCount, singleLine, ...props }: MessageRowProps) => {
   if (message === undefined) {
     return null;
   }
   return (
     <TableRow className={cn(className, 'ui-message-row')} {...props}>
       <TableCell colSpan={columnCount}>
-        <Message message={message.message} variant={message.variant} />
+        <Message message={message?.message} variant={message?.variant} singleLine={singleLine} />
       </TableCell>
     </TableRow>
   );

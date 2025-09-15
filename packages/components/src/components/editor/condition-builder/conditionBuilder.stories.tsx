@@ -1,3 +1,4 @@
+import { Flex } from '@/components/common/flex/flex';
 import { vars } from '@/styles/theme.css';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
@@ -17,7 +18,7 @@ export const Default: Story = {
   render: () => {
     const [condition, setCondition] = useState<string>();
     return (
-      <>
+      <Flex direction='column' gap={2}>
         <ConditionBuilder
           onChange={setCondition}
           generateConditionString={generateConditionString}
@@ -27,7 +28,7 @@ export const Default: Story = {
         <pre style={{ border: vars.border.basic, maxHeight: '80px', padding: vars.padding.input, borderRadius: vars.border.r2 }}>
           {condition}
         </pre>
-      </>
+      </Flex>
     );
   }
 };

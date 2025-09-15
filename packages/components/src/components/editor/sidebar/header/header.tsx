@@ -11,7 +11,7 @@ export type SidebarHeaderProps = React.ComponentProps<typeof Flex> & {
 };
 
 const SidebarHeader = ({ icon, title, className, children, ...props }: SidebarHeaderProps) => (
-  <Flex gap={2} alignItems='center' justifyContent='space-between' className={cn(header, className)} {...props}>
+  <Flex gap={2} alignItems='center' justifyContent='space-between' className={cn(header, className, 'ui-sidebar-header')} {...props}>
     <Flex className={headerLeft} gap={3} alignItems='center'>
       {icon && <IvyIcon icon={icon} className={headerIcon} />}
       <div className={headerTitle}>{title}</div>

@@ -1,4 +1,5 @@
 import './styles/global.css';
+import './styles/globals.css';
 
 /* Common Components */
 export * from './components/common/accordion/accordion';
