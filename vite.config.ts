@@ -1,11 +1,12 @@
 import { vanillaExtractPlugin as veVitePlugin } from '@vanilla-extract/vite-plugin';
-import { defineConfig } from 'vitest/config';
-import { visualizer } from 'rollup-plugin-visualizer';
 import react from '@vitejs/plugin-react';
 import { resolve } from 'path';
+import { visualizer } from 'rollup-plugin-visualizer';
+import UnoCSS from 'unocss/vite';
+import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
-  plugins: [veVitePlugin(), visualizer(), react()],
+  plugins: [UnoCSS('./packages/components/uno.config.ts'), veVitePlugin(), visualizer(), react()],
   resolve: {
     alias: {
       '@axonivy/ui-components/lib': resolve(__dirname, './packages/components/lib'),

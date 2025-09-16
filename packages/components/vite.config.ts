@@ -1,12 +1,13 @@
 import { vanillaExtractPlugin as veVitePlugin } from '@vanilla-extract/vite-plugin';
-import { resolve } from 'path';
-import { defineConfig } from 'vitest/config';
-import { visualizer } from 'rollup-plugin-visualizer';
 import react from '@vitejs/plugin-react';
+import { resolve } from 'path';
+import { visualizer } from 'rollup-plugin-visualizer';
+import UnoCSS from 'unocss/vite';
 import dts from 'vite-plugin-dts';
+import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
-  plugins: [veVitePlugin(), visualizer(), react(), dts({ tsconfigPath: './tsconfig.production.json' })],
+  plugins: [UnoCSS(), veVitePlugin(), visualizer(), react(), dts({ tsconfigPath: './tsconfig.production.json' })],
   resolve: {
     alias: {
       '@': resolve(__dirname, './src')

@@ -124,7 +124,8 @@ export const base = tseslint.config(
       '**/dist/*',
       '**/public/*',
       '**/schemaCodegen.cjs',
-      '**/i18next-parser.config.*'
+      '**/i18next-parser.config.*',
+      '**/uno.config.*'
     ]
   }
 );
