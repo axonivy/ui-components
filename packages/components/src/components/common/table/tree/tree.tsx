@@ -55,12 +55,12 @@ const expanedButton = <TData,>(row: Row<TData>, lazy?: LazyExpand<TData>) => {
 const ExpandableCell = <TData,>({ cell, icon, lazy, children }: ExpandableCellProps<TData>) => {
   const expButton = expanedButton(cell.row, lazy);
   return (
-    <Flex direction='row' alignItems='center' gap={1} className={expandCell} style={expButton ? {} : { paddingLeft: 24 }}>
+    <Flex direction='row' alignItems='center' gap={1} className={expandCell} style={expButton || icon ? {} : { paddingLeft: 24 }}>
       {Array.from({ length: cell.row.depth }, (_, i) => (
         <div key={i} className={indent} />
       ))}
       {expButton}
-      {icon && <IvyIcon icon={icon} className={cellIcon} />}
+      {icon && <IvyIcon style={expButton ? {} : { paddingLeft: 24 }} icon={icon} className={cellIcon} />}
       {children ? children : <span>{cell.getValue()}</span>}
     </Flex>
   );
