@@ -1,7 +1,7 @@
 import i18next from 'eslint-plugin-i18next';
-import tseslint from 'typescript-eslint';
+import { defineConfig } from 'eslint/config';
 
-export const i18n = tseslint.config({
+export const i18n = defineConfig({
   name: 'eslint-plugin-i18next',
   ...i18next.configs['flat/recommended'],
   files: ['**/*.{ts,tsx}'],

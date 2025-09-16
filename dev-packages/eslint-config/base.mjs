@@ -6,10 +6,11 @@ import reactHooks from 'eslint-plugin-react-hooks';
 import reactJsxRuntime from 'eslint-plugin-react/configs/jsx-runtime.js';
 import reactRecommended from 'eslint-plugin-react/configs/recommended.js';
 import testingLibrary from 'eslint-plugin-testing-library';
+import { defineConfig } from 'eslint/config';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
 
-export const base = tseslint.config(
+export const base = defineConfig(
   // Base eslint recommended config
   eslint.configs.recommended,
 
