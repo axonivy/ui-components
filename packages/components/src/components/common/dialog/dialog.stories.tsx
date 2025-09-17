@@ -103,7 +103,13 @@ export const WithBasicDialogContent: Story = {
         <Button variant={'outline'}>Open Dialog</Button>
       </DialogTrigger>
       <DialogContent>
-        <BasicDialogContent title={title} description={description} cancel={<CancelButton />} submit={<SubmitButton />}>
+        <BasicDialogContent
+          title={title}
+          description={description}
+          cancel={<CancelButton />}
+          submit={<SubmitButton />}
+          style={{ overflow: 'auto' }}
+        >
           <BasicField label='Name'>
             <Input />
           </BasicField>
