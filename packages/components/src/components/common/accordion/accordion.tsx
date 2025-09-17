@@ -35,16 +35,14 @@ type AccordionTriggerProps = React.ComponentProps<typeof AccordionPrimitive.Trig
 const AccordionTrigger = ({ state, control, headerClassName, className, children, ...props }: AccordionTriggerProps) => (
   <AccordionPrimitive.Header
     className={cn(
-      'm-0 flex items-center gap-1 bg-background select-none data-[state=open]:border-b-0',
-      headerClassName,
-      'ui-accordion-header'
+      'ui-accordion-header m-0 flex items-center gap-1 bg-background select-none data-[state=open]:border-b-0',
+      headerClassName
     )}
   >
     <AccordionPrimitive.Trigger
       className={cn(
-        'flex h-full flex-1 cursor-pointer items-center gap-1 px-3 py-2 text-sm font-normal focus-visible:outline-2 data-[state=open]:font-semibold data-[state=open]:text-p300',
-        className,
-        'ui-accordion-trigger'
+        'ui-accordion-trigger flex h-full flex-1 cursor-pointer items-center gap-1 px-3 py-2 text-sm font-normal focus-visible:outline-2 data-[state=open]:font-semibold data-[state=open]:text-p300',
+        className
       )}
       {...props}
     >
@@ -71,9 +69,8 @@ type AccordionContentProps = React.ComponentProps<typeof AccordionPrimitive.Cont
 const AccordionContent = ({ className, children, ...props }: AccordionContentProps) => (
   <AccordionPrimitive.Content
     className={cn(
-      'overflow-hidden transition-all data-[state=closed]:motion-safe:animate-accordion-up data-[state=open]:motion-safe:animate-accordion-down',
-      className,
-      'ui-accordion-content'
+      'ui-accordion-content overflow-hidden transition-all data-[state=closed]:motion-safe:animate-accordion-up data-[state=open]:motion-safe:animate-accordion-down',
+      className
     )}
     {...props}
   >
