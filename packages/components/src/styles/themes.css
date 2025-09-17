@@ -21,7 +21,29 @@
   --color-p75: var(--P75);
   --color-p300: var(--P300);
   --color-p500: var(--P500);
+
   --color-error: var(--error-color);
   --color-warning: var(--warning-color);
   --color-success: var(--success-color);
+
+  --color-border-basic: var(--N200);
+
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  @keyframes accordion-up {
+    0% {
+      height: var(--radix-accordion-content-height);
+    }
+    100% {
+      height: 0;
+    }
+  }
+  @keyframes accordion-down {
+    0% {
+      height: 0;
+    }
+    100% {
+      height: var(--radix-accordion-content-height);
+    }
+  }
 }
