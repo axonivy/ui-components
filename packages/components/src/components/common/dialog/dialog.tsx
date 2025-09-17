@@ -84,10 +84,10 @@ BasicDialogFooter.displayName = 'BasicDialogFooter';
 
 type BasicDialoContentProps = BasicDialogHeaderProps & BasicDialogFooterProps & React.ComponentProps<typeof Flex>;
 
-const BasicDialogContent = ({ title, description, cancel, submit, ...props }: BasicDialoContentProps) => (
+const BasicDialogContent = ({ title, description, cancel, submit, className, ...props }: BasicDialoContentProps) => (
   <Flex direction='column' gap={4} className='overflow-hidden'>
     <BasicDialogHeader title={title} description={description} />
-    <Flex direction='column' gap={2} {...props} />
+    <Flex direction='column' gap={2} className={cn('overflow-auto', className)} {...props} />
     <BasicDialogFooter submit={submit} cancel={cancel} />
   </Flex>
 );
