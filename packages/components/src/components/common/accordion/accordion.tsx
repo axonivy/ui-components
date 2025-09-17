@@ -42,7 +42,7 @@ const AccordionTrigger = ({ state, control, headerClassName, className, children
   >
     <AccordionPrimitive.Trigger
       className={cn(
-        'flex h-4 flex-1 cursor-pointer items-center gap-1 p-3 text-sm font-normal focus-visible:outline-2 data-[state=open]:font-semibold data-[state=open]:text-p300',
+        'flex h-full flex-1 cursor-pointer items-center gap-1 px-3 py-2 text-sm font-normal focus-visible:outline-2 data-[state=open]:font-semibold data-[state=open]:text-p300',
         className,
         'ui-accordion-trigger'
       )}
@@ -55,7 +55,7 @@ const AccordionTrigger = ({ state, control, headerClassName, className, children
     </AccordionPrimitive.Trigger>
     {control && control({ className: 'group-has-data-[state=closed]:hidden' })}
     <AccordionPrimitive.Trigger asChild>
-      <IvyIcon icon={IvyIcons.Chevron} className='cursor-pointer p-3 text-base! data-[state=open]:rotate-90' />
+      <IvyIcon icon={IvyIcons.Chevron} className='cursor-pointer px-3 text-base! data-[state=open]:rotate-90' />
     </AccordionPrimitive.Trigger>
   </AccordionPrimitive.Header>
 );
@@ -97,7 +97,7 @@ const BasicAccordionItem = ({ label, state, controls, stickyOptions, ...props }:
         ref={ref}
         control={props => controls && <ButtonGroup controls={controls} {...props} />}
         state={<AccordionState {...state} />}
-        headerClassName={cn(isSticky && 'sticky -top-[10px] z-2 shadow')}
+        headerClassName={cn(isSticky && 'sticky -top-[1px] z-2 shadow')}
       >
         {label}
       </AccordionTrigger>
