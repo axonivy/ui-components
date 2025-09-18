@@ -7,7 +7,6 @@ import { Label } from '@/components/common/label/label';
 import { useReadonly } from '@/context/useReadonly';
 import { cn } from '@/utils/class-name';
 import { IvyIcons } from '@axonivy/ui-icons';
-import { checkboxIndicator, checkboxRoot } from './checkbox.css';
 
 /**
  * Checkbox, based on {@link https://www.radix-ui.com/docs/primitives/components/checkbox | Radix UI Checkbox}
@@ -18,12 +17,15 @@ const Checkbox = ({ disabled, className, ...props }: React.ComponentProps<typeof
   const { inputProps } = useField();
   return (
     <CheckboxPrimitive.Root
-      className={cn(checkboxRoot, className, 'ui-checkbox')}
+      className={cn(
+        'ui-checkbox flex h-[17px] w-[17px] shrink-0 cursor-pointer items-center justify-center rounded-xs border-1 border-border-basic bg-n25 enabled:hover:border-border-active enabled:hover:bg-p50 enabled:focus-visible:outline-2 disabled:cursor-not-allowed disabled:opacity-75 data-[state=checked]:border-border-active data-[state=checked]:bg-p50',
+        className
+      )}
       disabled={readonly || disabled}
       {...inputProps}
       {...props}
     >
-      <CheckboxPrimitive.Indicator className={cn(checkboxIndicator)}>
+      <CheckboxPrimitive.Indicator className={cn('flex items-center justify-center text-p300')}>
         <IvyIcon icon={IvyIcons.Check} />
       </CheckboxPrimitive.Indicator>
     </CheckboxPrimitive.Root>
