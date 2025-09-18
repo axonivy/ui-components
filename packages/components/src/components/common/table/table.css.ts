@@ -42,6 +42,7 @@ export const footer = style({
 
 export const row = style({
   borderBottom: vars.border.basic,
+  height: 32,
   ':last-child': {
     borderBottom: 'none'
   }
@@ -49,7 +50,7 @@ export const row = style({
 
 export const head = style({
   height: 20,
-  padding: vars.size.s2,
+  paddingInline: vars.size.s2,
   fontWeight: 'normal',
   verticalAlign: 'middle'
 });
@@ -57,7 +58,7 @@ export const head = style({
 export const cell = style({
   verticalAlign: 'middle',
   overflow: 'hidden',
-  padding: vars.size.s2,
+  paddingInline: vars.size.s2,
   selectors: {
     [`&:has(.ui-table-edit-cell)`]: {
       padding: 0

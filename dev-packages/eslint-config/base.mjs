@@ -125,7 +125,8 @@ export const base = defineConfig(
       '**/dist/*',
       '**/public/*',
       '**/schemaCodegen.cjs',
-      '**/i18next-parser.config.*'
+      '**/i18next-parser.config.*',
+      '**/prettier.config.*'
     ]
   }
 );

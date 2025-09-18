@@ -6,22 +6,12 @@ import { cn } from '@/utils/class-name';
 import { IvyIcons } from '@axonivy/ui-icons';
 import * as CollapsiblePrimitive from '@radix-ui/react-collapsible';
 import * as React from 'react';
-import {
-  content,
-  contentData,
-  controls as controlsClass,
-  header,
-  root,
-  state as stateClass,
-  trigger,
-  triggerChevron
-} from './collapsible.css';
 
 /**
  * Collapsible, based on {@link https://www.radix-ui.com/docs/primitives/components/collapsible | Radix UI Collapsible}
  */
 const Collapsible = ({ className, ...props }: React.ComponentProps<typeof CollapsiblePrimitive.Root>) => (
-  <CollapsiblePrimitive.Root className={cn(root, className, 'ui-collapsible')} {...props} />
+  <CollapsiblePrimitive.Root className={cn('group ui-collapsible rounded-sm border-1 border-solid border-n100', className)} {...props} />
 );
 Collapsible.displayName = 'CollapsibleRoot';
 
@@ -39,15 +29,21 @@ const CollapsibleTrigger = ({
   children,
   ...props
 }: React.ComponentProps<typeof CollapsiblePrimitive.CollapsibleTrigger> & CollapsibleTriggerProps) => (
-  <div className={cn(header)}>
-    <CollapsiblePrimitive.CollapsibleTrigger className={cn(trigger, className, 'ui-collapsible-trigger')} {...props}>
+  <div className={cn('ui-collapsible-header flex items-center gap-2 overflow-hidden')}>
+    <CollapsiblePrimitive.CollapsibleTrigger
+      className={cn(
+        'ui-collapsible-trigger flex-1 cursor-pointer p-2 focus-visible:outline-2 data-[state=open]:font-bold data-[state=open]:text-p300',
+        className
+      )}
+      {...props}
+    >
       <Flex alignItems='center' gap={2}>
         {children}
         {state}
       </Flex>
     </CollapsiblePrimitive.CollapsibleTrigger>
-    {control && control({ className: controlsClass })}
-    <CollapsiblePrimitive.CollapsibleTrigger asChild className={triggerChevron}>
+    {control && control({ className: 'group-has-data-[state=closed]:hidden' })}
+    <CollapsiblePrimitive.CollapsibleTrigger asChild className={cn('cursor-pointer p-2 data-[state=open]:rotate-90')}>
       <IvyIcon icon={IvyIcons.Chevron} />
     </CollapsiblePrimitive.CollapsibleTrigger>
   </div>
@@ -55,15 +51,22 @@ const CollapsibleTrigger = ({
 CollapsibleTrigger.displayName = 'CollapsibleTrigger';
 
 const CollapsibleState = ({ className, ...props }: React.ComponentProps<typeof StateDot>) => (
-  <StateDot className={cn(stateClass, className)} {...props} />
+  <StateDot className={cn('shrink-0 group-has-data-[state=open]:hidden', className)} {...props} />
 );
 CollapsibleState.displayName = 'CollapsibleState';
 
 type CollapsibleContentProps = React.ComponentProps<typeof CollapsiblePrimitive.Content>;
 
 const CollapsibleContent = ({ className, children, style, ...props }: React.ComponentProps<typeof CollapsiblePrimitive.Content>) => (
-  <CollapsiblePrimitive.Content className={cn(content, className, 'ui-collapsible-content')} role='region' {...props}>
-    <div className={contentData} style={style}>
+  <CollapsiblePrimitive.Content
+    className={cn(
+      'ui-collapsible-content overflow-hidden transition-all data-[state=closed]:motion-safe:animate-collapsible-up data-[state=open]:motion-safe:animate-collapsible-down',
+      className
+    )}
+    role='region'
+    {...props}
+  >
+    <div className={'overflow-auto p-2 pt-0'} style={style}>
       {children}
     </div>
   </CollapsiblePrimitive.Content>

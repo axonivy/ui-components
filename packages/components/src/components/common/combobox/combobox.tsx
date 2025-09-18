@@ -8,7 +8,6 @@ import { cn } from '@/utils/class-name';
 import { IvyIcons } from '@axonivy/ui-icons';
 import { useCombobox } from 'downshift';
 import * as React from 'react';
-import { content, item as itemClass } from './combobox.css';
 
 export type ComboboxOption = {
   value: string;
@@ -130,11 +129,18 @@ const Combobox = <T extends ComboboxOption>({
           </InputGroup>
         </PopoverAnchor>
         <div {...getMenuProps()}>
-          <PopoverContent onOpenAutoFocus={e => e.preventDefault()} className={cn(content, 'ui-combobox-menu')}>
+          <PopoverContent
+            onOpenAutoFocus={e => e.preventDefault()}
+            className={cn(
+              'ui-combobox-menu relative z-10 max-h-80 w-(--radix-popper-anchor-width) overflow-auto rounded-sm border-1 border-solid border-border-basic bg-background p-0 shadow-lg'
+            )}
+          >
             {filteredItems.map((item, index) => (
               <Flex
                 gap={2}
-                className={cn(itemClass, 'ui-combobox-item')}
+                className={cn(
+                  'ui-combobox-item p-2 outline-0 select-none data-[highlighted]:bg-p50 data-[state="checked"]:text-background data-[state=checked]:bg-p300'
+                )}
                 data-highlighted={highlightedIndex === index ? '' : undefined}
                 data-state={selectedItem?.value === item.value ? 'checked' : 'unchecked'}
                 key={`${item.value}${index}`}

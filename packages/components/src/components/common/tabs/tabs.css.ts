@@ -141,14 +141,14 @@ export const tabsTrigger = style({
   '@container': {
     [`${tabsListContainer} (width <= 16rem)`]: {
       selectors: {
-        '.tabs-many &[data-state="active"]': {
+        '[data-tabs="many"] &[data-state="active"]': {
           minWidth: '1.65rem'
         }
       }
     },
     [`${tabsListContainer} (width <= 13rem)`]: {
       selectors: {
-        '.tabs-few &[data-state="active"]': {
+        '[data-tabs="few"] &[data-state="active"]': {
           minWidth: '1.65rem'
         }
       }

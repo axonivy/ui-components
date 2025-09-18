@@ -67,7 +67,7 @@ export const Default: Story = {
             <DialogDescription>{description}</DialogDescription>
           </DialogHeader>
 
-          <Flex direction='column' gap={2}>
+          <Flex direction='column' gap={2} className='overflow-auto'>
             <BasicField label='Name'>
               <Input />
             </BasicField>
@@ -103,7 +103,13 @@ export const WithBasicDialogContent: Story = {
         <Button variant={'outline'}>Open Dialog</Button>
       </DialogTrigger>
       <DialogContent>
-        <BasicDialogContent title={title} description={description} cancel={<CancelButton />} submit={<SubmitButton />}>
+        <BasicDialogContent
+          title={title}
+          description={description}
+          cancel={<CancelButton />}
+          submit={<SubmitButton />}
+          style={{ overflow: 'auto' }}
+        >
           <BasicField label='Name'>
             <Input />
           </BasicField>

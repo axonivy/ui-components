@@ -16,16 +16,22 @@ const ivyIconForSeverity = (variant: NonNullable<MessageVariants>['variant']) =>
   }
   return undefined;
 };
-export type MessageData = MessageVariants & { message?: string };
+export type MessageData = MessageVariants & { message?: string; singleLine?: boolean };
 
 export type MessageProps = React.ComponentProps<'p'> & MessageData;
 
-const Message = ({ message, variant, className, children, ...props }: MessageProps) => {
+const Message = ({ message, variant, className, singleLine, children, ...props }: MessageProps) => {
   const { messageProps } = useField();
-  const body = message ? message : children;
+  const body = message ? <span className={cn(singleLine && 'truncate')}>{message}</span> : children;
   const icon = ivyIconForSeverity(variant);
   return (
-    <p className={cn(messageClass({ variant }), className, 'ui-message')} title={message} data-state={variant} {...messageProps} {...props}>
+    <p
+      className={cn('w-full', messageClass({ variant }), className, 'ui-message')}
+      title={message}
+      data-state={variant}
+      {...messageProps}
+      {...props}
+    >
       {icon && <IvyIcon icon={icon} />}
       {body}
     </p>

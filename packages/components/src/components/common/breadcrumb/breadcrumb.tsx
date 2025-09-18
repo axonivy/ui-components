@@ -3,18 +3,26 @@ import { cn } from '@/utils/class-name';
 import { IvyIcons } from '@axonivy/ui-icons';
 import { Slot } from '@radix-ui/react-slot';
 import * as React from 'react';
-import { breadcrumbEllipsis, breadcrumbItem, breadcrumbLink, breadcrumbList, breadcrumbPage, breadcrumbSeparator } from './breadcrumb.css';
 
 function Breadcrumb({ className, ...props }: React.ComponentProps<'nav'>) {
   return <nav aria-label='breadcrumb' data-slot='breadcrumb' className={cn('ui-breadcrumb', className)} {...props} />;
 }
 
 function BreadcrumbList({ className, ...props }: React.ComponentProps<'ol'>) {
-  return <ol data-slot='breadcrumb-list' className={cn(breadcrumbList, 'ui-breadcrumb-list', className)} {...props} />;
+  return (
+    <ol
+      data-slot='breadcrumb-list'
+      className={cn(
+        'ui-breadcrumb-list m-0 flex cursor-default list-none flex-wrap items-center gap-2 p-0 wrap-break-word text-n800',
+        className
+      )}
+      {...props}
+    />
+  );
 }
 
 function BreadcrumbItem({ className, ...props }: React.ComponentProps<'li'>) {
-  return <li data-slot='breadcrumb-item' className={cn(breadcrumbItem, 'ui-breadcrumb-item', className)} {...props} />;
+  return <li data-slot='breadcrumb-item' className={cn('ui-breadcrumb-item inline-flex items-center gap-1', className)} {...props} />;
 }
 
 function BreadcrumbLink({
@@ -25,7 +33,13 @@ function BreadcrumbLink({
   asChild?: boolean;
 }) {
   const Comp = asChild ? Slot : 'a';
-  return <Comp data-slot='breadcrumb-link' className={cn(breadcrumbLink, 'ui-breadcrumb-link', className)} {...props} />;
+  return (
+    <Comp
+      data-slot='breadcrumb-link'
+      className={cn('ui-breadcrumb-link text-inherit decoration-inherit transition-colors hover:text-body', className)}
+      {...props}
+    />
+  );
 }
 
 function BreadcrumbPage({ className, ...props }: React.ComponentProps<'span'>) {
@@ -35,7 +49,7 @@ function BreadcrumbPage({ className, ...props }: React.ComponentProps<'span'>) {
       role='link'
       aria-disabled='true'
       aria-current='page'
-      className={cn(breadcrumbPage, 'ui-breadcrumb-page', className)}
+      className={cn('ui-breadcrumb-page text-body', className)}
       {...props}
     />
   );
@@ -47,7 +61,7 @@ function BreadcrumbSeparator({ children, className, ...props }: React.ComponentP
       data-slot='breadcrumb-separator'
       role='presentation'
       aria-hidden='true'
-      className={cn(breadcrumbSeparator, 'ui-breadcrumb-seperator', className)}
+      className={cn('ui-breadcrumb-separator inline-flex items-center', className)}
       {...props}
     >
       {children ?? '/'}
@@ -61,7 +75,7 @@ function BreadcrumbEllipsis({ className, ...props }: React.ComponentProps<'span'
       data-slot='breadcrumb-ellipsis'
       role='presentation'
       aria-hidden='true'
-      className={cn(breadcrumbEllipsis, 'ui-breadcrumb-ellipsis', className)}
+      className={cn('ui-breadcrumb-ellipsis inline-flex cursor-pointer items-center justify-center hover:text-body', className)}
       {...props}
     >
       <IvyIcon icon={IvyIcons.Dots} />

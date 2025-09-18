@@ -3,6 +3,7 @@ import storybook from 'eslint-plugin-storybook';
 
 export default config.defineConfig(
   ...config.base,
+  ...config.tailwind('./packages/components/src/styles/globals.css'),
   // TypeScript configs
   {
     name: 'typescript-eslint',
