@@ -67,7 +67,7 @@ export const Default: Story = {
             <DialogDescription>{description}</DialogDescription>
           </DialogHeader>
 
-          <Flex direction='column' gap={2}>
+          <Flex direction='column' gap={2} className='overflow-auto'>
             <BasicField label='Name'>
               <Input />
             </BasicField>
