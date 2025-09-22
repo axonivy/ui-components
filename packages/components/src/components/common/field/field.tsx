@@ -59,7 +59,15 @@ export type BasicFieldProps = React.ComponentProps<typeof Field> & {
 };
 
 const BasicField = ({ label, control, message, className, children, ...props }: BasicFieldProps) => (
-  <Field className={cn(className, field, 'ui-fieldset')} data-message-state={message ? message.variant : undefined} {...props}>
+  <Field
+    className={cn(
+      className,
+      field,
+      'ui-fieldset data-[message-state=error]:[--input-border-color:var(--error-color)] data-[message-state=warning]:[--input-border-color:var(--warning-color)]'
+    )}
+    data-message-state={message ? message.variant : undefined}
+    {...props}
+  >
     <Flex alignItems='center' justifyContent='space-between' className={cn('ui-fieldset-label')}>
       <Label>{label}</Label>
       {control}

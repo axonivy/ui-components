@@ -28,6 +28,7 @@
 
   --color-border-basic: var(--N200);
   --color-border-active: var(--P300);
+  --color-border-input-color: var(--input-border-color, var(--N200));
 
   --animate-accordion-up: accordion-up 0.2s ease-out;
   --animate-accordion-down: accordion-down 0.2s ease-out;
