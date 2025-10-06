@@ -1,7 +1,6 @@
 import eslint from '@eslint/js';
 import pluginQuery from '@tanstack/eslint-plugin-query';
 import playwright from 'eslint-plugin-playwright';
-import reactCompiler from 'eslint-plugin-react-compiler';
 import reactHooks from 'eslint-plugin-react-hooks';
 import reactJsxRuntime from 'eslint-plugin-react/configs/jsx-runtime.js';
 import reactRecommended from 'eslint-plugin-react/configs/recommended.js';
@@ -55,21 +54,11 @@ export const base = defineConfig(
   },
   {
     name: 'eslint-plugin-react-hooks',
+    files: ['**/*.{js,jsx,ts,tsx}'],
     plugins: {
       'react-hooks': reactHooks
     },
-    rules: {
-      ...reactHooks.configs.recommended.rules
-    }
-  },
-  {
-    name: 'eslint-plugin-react-compiler',
-    plugins: {
-      'react-compiler': reactCompiler
-    },
-    rules: {
-      'react-compiler/react-compiler': 'error'
-    }
+    extends: ['react-hooks/recommended']
   },
 
   // Testing library recommended configs

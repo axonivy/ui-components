@@ -10,7 +10,7 @@ import {
   type OnEdgesChange,
   type OnNodesChange
 } from '@xyflow/react';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 import type { GraphNode, GraphProps, NodeData } from '../graph';
 import { getLayoutedElements, type Direction } from './getLayoutedElements';
 
@@ -19,11 +19,14 @@ export const DEFAULT_NODE_WIDTH = 172;
 export const DEFAULT_NODE_HEIGHT = 50;
 
 const useGraph = ({ graphNodes, options }: GraphProps) => {
-  const [nodes, setNodes] = useState<Node[]>([]);
-  const [edges, setEdges] = useState<Edge[]>([]);
-  const [selectedNode, setSelectedNode] = useState<string>('all');
-
   const { getNodes, getEdges, fitView } = useReactFlow<GraphNode>();
+  const [nodes, setNodes] = useState<Node[]>(
+    getLayoutedElements({ ...mapNodesAndEdges(graphNodes, getNodes(), options), direction: 'TB' }).nodes
+  );
+  const [edges, setEdges] = useState<Edge[]>(
+    getLayoutedElements({ ...mapNodesAndEdges(graphNodes, getNodes(), options), direction: 'TB' }).edges
+  );
+  const [selectedNode, setSelectedNode] = useState<string>('all');
 
   const onNodesChange: OnNodesChange = useCallback(changes => setNodes(nds => applyNodeChanges(changes, nds)), [setNodes]);
   const onEdgesChange: OnEdgesChange = useCallback(changes => setEdges(eds => applyEdgeChanges(changes, eds)), [setEdges]);
@@ -52,7 +55,7 @@ const useGraph = ({ graphNodes, options }: GraphProps) => {
         fitView({ maxZoom: options?.zoomOnInit?.applyOnLayoutAndFilter ? options.zoomOnInit.level : undefined });
       });
     },
-    [fitView, getEdges, getNodes, options?.zoomOnInit]
+    [fitView, getEdges, getNodes, options]
   );
 
   const onFilterApply = useCallback(
@@ -73,13 +76,6 @@ const useGraph = ({ graphNodes, options }: GraphProps) => {
     },
     [fitView, getNodes, graphNodes, options]
   );
-
-  // Initialize layouted nodes and edges
-  useEffect(() => {
-    setSelectedNode('all');
-    setNodes(getLayoutedElements({ ...mapNodesAndEdges(graphNodes, getNodes(), options), direction: 'TB' }).nodes);
-    setEdges(getLayoutedElements({ ...mapNodesAndEdges(graphNodes, getNodes(), options), direction: 'TB' }).edges);
-  }, [graphNodes, options, getNodes]);
 
   return { nodes, edges, selectedNode, onNodesChange, onEdgesChange, onConnect, onLayout, onFilterApply };
 };

@@ -88,7 +88,7 @@ export const funcData: Array<BrowserNode> = [
         icon: IvyIcons.FolderOpen,
         children: [
           {
-            value: 'currnt()',
+            value: 'current()',
             info: 'IWorkflowContext',
             icon: IvyIcons.Function,
             children: []
