@@ -28,7 +28,7 @@
     "@radix-ui/react-tabs": "1.1.13",
     "@radix-ui/react-toggle-group": "1.1.11",
     "@radix-ui/react-tooltip": "1.2.8",
-    "@react-aria/dnd": "3.11.2",
+    "@react-aria/dnd": "3.11.3",
     "@tanstack/react-table": "8.21.3",
     "clsx": "2.1.1",
     "downshift": "9.0.10",
