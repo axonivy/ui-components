@@ -8,7 +8,9 @@ export const FunctionInfoProvider = ({ row }: { row?: Row<BrowserNode> }) => {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     if (row?.getIsSelected()) {
-      setLoading(true);
+      setTimeout(() => {
+        setLoading(true);
+      }, 0);
     }
   }, [row]);
   useEffect(() => {
@@ -24,7 +26,13 @@ export const FunctionInfoProvider = ({ row }: { row?: Row<BrowserNode> }) => {
   return (
     <>
       <div>{row?.original.value}</div>
-      <pre dangerouslySetInnerHTML={{ __html: `Gets the data from bla...<dl><dt>Returns:</dt><dd> ${row?.original.info}</dd></dl></>` }} />
+      <pre>
+        Gets the data from bla...{' '}
+        <dl>
+          <dt>Returns:</dt>
+          <dd> {row?.original.info}</dd>
+        </dl>
+      </pre>
     </>
   );
 };

@@ -13,6 +13,7 @@ export default config.defineConfig(
       }
     }
   },
+  ...config.reactHooksLatest,
   // Storybook configs
   ...storybook.configs['flat/recommended'],
   // Project-specific overrides and custom rules
