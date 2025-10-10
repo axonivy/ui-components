@@ -4,7 +4,7 @@ import { useReadonly } from '@/context/useReadonly';
 import { cn } from '@/utils/class-name';
 import { IvyIcons } from '@axonivy/ui-icons';
 import * as SelectPrimitive from '@radix-ui/react-select';
-import * as React from 'react';
+import { useMemo, type ComponentProps } from 'react';
 import { content, item, itemIcon, label, scrollButton, seperator, trigger, triggerIcon, viewport } from './select.css';
 
 /**
@@ -21,7 +21,7 @@ const SelectGroup = SelectPrimitive.Group;
 
 const SelectValue = SelectPrimitive.Value;
 
-const SelectTrigger = ({ className, children, ...props }: React.ComponentProps<typeof SelectPrimitive.Trigger>) => {
+const SelectTrigger = ({ className, children, ...props }: ComponentProps<typeof SelectPrimitive.Trigger>) => {
   const { inputProps } = useField();
   return (
     <SelectPrimitive.Trigger className={cn(trigger, className, 'ui-select-trigger')} {...inputProps} {...props}>
@@ -34,14 +34,14 @@ const SelectTrigger = ({ className, children, ...props }: React.ComponentProps<t
 };
 SelectTrigger.displayName = SelectPrimitive.Trigger.displayName;
 
-const SelectScrollUpButton = ({ className, ...props }: React.ComponentProps<typeof SelectPrimitive.ScrollUpButton>) => (
+const SelectScrollUpButton = ({ className, ...props }: ComponentProps<typeof SelectPrimitive.ScrollUpButton>) => (
   <SelectPrimitive.ScrollUpButton className={cn(scrollButton, className)} {...props}>
     <IvyIcon icon={IvyIcons.Chevron} rotate={270} />
   </SelectPrimitive.ScrollUpButton>
 );
 SelectScrollUpButton.displayName = SelectPrimitive.ScrollUpButton.displayName;
 
-const SelectScrollDownButton = ({ className, ...props }: React.ComponentProps<typeof SelectPrimitive.ScrollDownButton>) => (
+const SelectScrollDownButton = ({ className, ...props }: ComponentProps<typeof SelectPrimitive.ScrollDownButton>) => (
   <SelectPrimitive.ScrollDownButton className={cn(scrollButton, className)} {...props}>
     <IvyIcon icon={IvyIcons.Chevron} rotate={90} />
   </SelectPrimitive.ScrollDownButton>
@@ -54,7 +54,7 @@ const SelectContent = ({
   position = 'popper',
   sideOffset = 4,
   ...props
-}: React.ComponentProps<typeof SelectPrimitive.Content>) => (
+}: ComponentProps<typeof SelectPrimitive.Content>) => (
   <SelectPrimitive.Portal>
     <SelectPrimitive.Content className={cn(content, className, 'ui-select-content')} position={position} sideOffset={sideOffset} {...props}>
       <SelectScrollUpButton />
@@ -65,12 +65,12 @@ const SelectContent = ({
 );
 SelectContent.displayName = SelectPrimitive.Content.displayName;
 
-const SelectLabel = ({ className, ...props }: React.ComponentProps<typeof SelectPrimitive.Label>) => (
+const SelectLabel = ({ className, ...props }: ComponentProps<typeof SelectPrimitive.Label>) => (
   <SelectPrimitive.Label className={cn(label, className, 'ui-select-label')} {...props} />
 );
 SelectLabel.displayName = SelectPrimitive.Label.displayName;
 
-const SelectItem = ({ className, children, ...props }: React.ComponentProps<typeof SelectPrimitive.Item>) => (
+const SelectItem = ({ className, children, ...props }: ComponentProps<typeof SelectPrimitive.Item>) => (
   <SelectPrimitive.Item className={cn(item, className, 'ui-select-item')} {...props}>
     <SelectPrimitive.ItemIndicator className={itemIcon}>
       <IvyIcon icon={IvyIcons.Check} />
@@ -81,7 +81,7 @@ const SelectItem = ({ className, children, ...props }: React.ComponentProps<type
 );
 SelectItem.displayName = SelectPrimitive.Item.displayName;
 
-const SelectSeparator = ({ className, ...props }: React.ComponentProps<typeof SelectPrimitive.Separator>) => (
+const SelectSeparator = ({ className, ...props }: ComponentProps<typeof SelectPrimitive.Separator>) => (
   <SelectPrimitive.Separator className={cn(seperator, className, 'ui-select-separator')} {...props} />
 );
 SelectSeparator.displayName = SelectPrimitive.Separator.displayName;
@@ -106,7 +106,7 @@ const BasicSelect = ({
   menuWidth,
   ...props
 }: BasicSelectProps) => {
-  const unknownValue = React.useMemo(() => {
+  const unknownValue = useMemo(() => {
     if (defaultValue && items.find(item => item.value === defaultValue) === undefined) {
       return defaultValue;
     }

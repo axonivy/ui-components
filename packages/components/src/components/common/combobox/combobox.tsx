@@ -7,20 +7,20 @@ import { useReadonly } from '@/context/useReadonly';
 import { cn } from '@/utils/class-name';
 import { IvyIcons } from '@axonivy/ui-icons';
 import { useCombobox } from 'downshift';
-import * as React from 'react';
+import { useEffect, useState, type ComponentPropsWithoutRef, type KeyboardEvent, type ReactNode } from 'react';
 import { content, item as itemClass } from './combobox.css';
 
 export type ComboboxOption = {
   value: string;
 };
 
-export type ComboboxProps<T extends ComboboxOption> = Omit<React.ComponentPropsWithoutRef<'input'>, 'value' | 'onChange' | 'onKeyDown'> & {
+export type ComboboxProps<T extends ComboboxOption> = Omit<ComponentPropsWithoutRef<'input'>, 'value' | 'onChange' | 'onKeyDown'> & {
   value: string;
   onChange: (change: string) => void;
   options: T[];
   optionFilter?: (item: T, input?: string) => boolean;
-  itemRender?: (item: T) => React.ReactNode;
-  onKeyDownExtended?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+  itemRender?: (item: T) => ReactNode;
+  onKeyDownExtended?: (e: KeyboardEvent<HTMLInputElement>) => void;
 };
 
 const defaultFilter = (option: ComboboxOption, input?: string): boolean => {
@@ -45,8 +45,8 @@ const Combobox = <T extends ComboboxOption>({
   onKeyDownExtended,
   ...props
 }: ComboboxProps<T>) => {
-  const [filteredItems, setFilteredItems] = React.useState(options);
-  React.useEffect(() => setFilteredItems(options), [options]);
+  const [filteredItems, setFilteredItems] = useState(options);
+  useEffect(() => setFilteredItems(options), [options]);
 
   const { inputProps } = useField();
 
@@ -91,7 +91,7 @@ const Combobox = <T extends ComboboxOption>({
     initialSelectedItem: { value }
   });
 
-  React.useEffect(() => {
+  useEffect(() => {
     selectItem({ value });
     setFilteredItems(options);
   }, [options, selectItem, value]);

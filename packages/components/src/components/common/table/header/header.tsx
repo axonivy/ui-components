@@ -2,6 +2,7 @@ import { Button } from '@/components/common/button/button';
 import { Flex } from '@/components/common/flex/flex';
 import { IvyIcons } from '@axonivy/ui-icons';
 import { flexRender, type Column, type HeaderContext, type HeaderGroup } from '@tanstack/react-table';
+import type { ComponentProps } from 'react';
 import { TableHead, TableHeader, TableRow } from '../table';
 import { expandButton, resizer, resizerLine, sortButton, sortHead } from './header.css';
 
@@ -17,7 +18,7 @@ const ColumnResizer = <TData,>({ header }: { header: HeaderContext<TData, unknow
   </Flex>
 );
 
-type TableResizableHeaderProps<TData> = React.ComponentProps<typeof TableRow> & {
+type TableResizableHeaderProps<TData> = ComponentProps<typeof TableRow> & {
   headerGroups: Array<HeaderGroup<TData>>;
 };
 

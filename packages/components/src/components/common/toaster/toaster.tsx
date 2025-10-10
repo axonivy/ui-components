@@ -1,11 +1,12 @@
 import { useTheme } from '@/context/useTheme';
 import { IvyIcons } from '@axonivy/ui-icons';
+import type { ComponentProps } from 'react';
 import { Toaster as Sonner, toast } from 'sonner';
 import { IvyIcon } from '../icon/icon';
 import { Spinner } from '../spinner/spinner';
 import { closeBtn, description, error, success, toaster, warning } from './toaster.css';
 
-type ToasterProps = React.ComponentProps<typeof Sonner>;
+type ToasterProps = ComponentProps<typeof Sonner>;
 
 /**
  * Toaster, based on {@link https://sonner.emilkowal.ski/ | Sonner}

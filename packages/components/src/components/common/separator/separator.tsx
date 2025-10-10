@@ -1,6 +1,6 @@
 import { cn } from '@/utils/class-name';
 import * as SeparatorPrimitive from '@radix-ui/react-separator';
-import * as React from 'react';
+import type { ComponentProps } from 'react';
 import { seperator } from './separator.css';
 
 /**
@@ -11,7 +11,7 @@ const Separator = ({
   orientation = 'horizontal',
   decorative = true,
   ...props
-}: React.ComponentProps<typeof SeparatorPrimitive.Root>) => (
+}: ComponentProps<typeof SeparatorPrimitive.Root>) => (
   <SeparatorPrimitive.Root
     decorative={decorative}
     orientation={orientation}

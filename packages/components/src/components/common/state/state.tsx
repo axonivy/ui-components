@@ -2,7 +2,7 @@ import { Flex } from '@/components/common/flex/flex';
 import { Message, type MessageData } from '@/components/common/message/message';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/common/tooltip/tooltip';
 import { cn } from '@/utils/class-name';
-import * as React from 'react';
+import type { ComponentProps } from 'react';
 import { dot, type DotVariants } from './state.css';
 
 type State = NonNullable<DotVariants>['state'];
@@ -19,7 +19,7 @@ export const evalDotState = (messages: Array<MessageData>, state: State) => {
 
 export type StateDotProps = DotVariants & { messages?: Array<MessageData> };
 
-const StateDot = ({ state, messages = [], size = 'normal', className, ...props }: StateDotProps & React.ComponentProps<'div'>) => {
+const StateDot = ({ state, messages = [], size = 'normal', className, ...props }: StateDotProps & ComponentProps<'div'>) => {
   const dotState = evalDotState(messages, state);
   return (
     <TooltipProvider>

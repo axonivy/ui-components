@@ -3,7 +3,7 @@ import { type InputProps, Input } from '@/components/common/input/input';
 import { type BasicSelectProps, BasicSelect } from '@/components/common/select/select';
 import { cn } from '@/utils/class-name';
 import type { CellContext, RowData } from '@tanstack/react-table';
-import * as React from 'react';
+import { useEffect, useState } from 'react';
 import { editCell } from './edit.css';
 
 declare module '@tanstack/react-table' {
@@ -15,8 +15,8 @@ declare module '@tanstack/react-table' {
 
 export const useEditCell = <TData,>(cell: CellContext<TData, string>) => {
   const initialValue = cell.getValue();
-  const [value, setValue] = React.useState(initialValue);
-  React.useEffect(() => {
+  const [value, setValue] = useState(initialValue);
+  useEffect(() => {
     setValue(initialValue);
   }, [initialValue]);
   const updateValue = (value: string) => {
@@ -61,7 +61,7 @@ type SelectCellProps<TData> = BasicSelectProps & {
 
 const SelectCell = <TData,>({ cell, className, ...props }: SelectCellProps<TData>) => {
   const { value, updateValue, className: editCell } = useEditCell(cell);
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   return (
     <BasicSelect
       value={value}

@@ -1,10 +1,10 @@
 import { Flex } from '@/components/common/flex/flex';
 import { IvyIcon, type IvyIconProps } from '@/components/common/icon/icon';
 import { cn } from '@/utils/class-name';
-import * as React from 'react';
+import type { ComponentProps } from 'react';
 import { button, iconOnly, type ButtonVariants } from './button.css';
 
-export type ButtonProps = React.ComponentProps<'button'> &
+export type ButtonProps = ComponentProps<'button'> &
   ButtonVariants &
   Partial<IvyIconProps> & {
     toggle?: boolean;
@@ -35,7 +35,7 @@ const Button = ({ className, icon, rotate, spin, variant, size, toggle, children
 };
 Button.displayName = 'Button';
 
-export type ButtonGroupProps = React.ComponentProps<typeof Flex> & { controls: Array<ButtonProps> };
+export type ButtonGroupProps = ComponentProps<typeof Flex> & { controls: Array<ButtonProps> };
 
 const ButtonGroup = ({ controls, className, ...props }: ButtonGroupProps) => (
   <Flex gap={1} className={cn(className, 'ui-button-group')} {...props}>

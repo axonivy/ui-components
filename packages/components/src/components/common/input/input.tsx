@@ -5,11 +5,11 @@ import { IvyIcon } from '@/components/common/icon/icon';
 import { ReadonlyProvider, useReadonly } from '@/context/useReadonly';
 import { cn } from '@/utils/class-name';
 import { IvyIcons } from '@axonivy/ui-icons';
-import * as React from 'react';
+import { useState, type ChangeEvent, type ComponentProps } from 'react';
 import { input, inputGroup, searchIcon } from './input.css';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type
-export interface InputProps extends React.ComponentProps<'input'> {}
+export interface InputProps extends ComponentProps<'input'> {}
 
 const Input = ({ disabled, className, type, ...props }: InputProps) => {
   const readonly = useReadonly();
@@ -19,11 +19,11 @@ const Input = ({ disabled, className, type, ...props }: InputProps) => {
 Input.displayName = 'Input';
 
 const BasicInput = ({ value, onChange, defaultValue, ...props }: InputProps) => {
-  const [currentValue, setCurrentValue] = React.useState(value ?? defaultValue ?? '');
-  React.useEffect(() => {
-    setCurrentValue(value ?? defaultValue ?? '');
-  }, [value, defaultValue]);
-  const updateValue = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const [currentValue, setCurrentValue] = useState(value ?? defaultValue ?? '');
+  if (value && value !== currentValue) {
+    setCurrentValue(value);
+  }
+  const updateValue = (event: ChangeEvent<HTMLInputElement>) => {
     setCurrentValue(event.target.value);
     onChange?.(event);
   };
@@ -34,20 +34,20 @@ BasicInput.displayName = 'BasicInput';
 type SearchInputProps = Omit<InputProps, 'value' | 'onChange'> & { value?: string; onChange?: (change: string) => void };
 
 const SearchInput = ({ value, onChange, ...props }: SearchInputProps) => {
-  const [filter, setFilter] = React.useState(value ?? '');
-  React.useEffect(() => {
-    setFilter(value ?? '');
-  }, [value]);
+  const [currentValue, setCurrentValue] = useState(value ?? '');
+  if (value && value !== currentValue) {
+    setCurrentValue(value);
+  }
   const updateValue = (change: string) => {
-    setFilter(change);
+    setCurrentValue(change);
     onChange?.(change);
   };
   return (
     <ReadonlyProvider readonly={false}>
       <InputGroup>
         <IvyIcon icon={IvyIcons.Search} className={searchIcon} />
-        <Input value={filter} onChange={e => updateValue(e.target.value)} {...props} />
-        {filter.length > 0 && <Button icon={IvyIcons.Close} onClick={() => updateValue('')} aria-label='Clean' />}
+        <Input value={currentValue} onChange={e => updateValue(e.target.value)} {...props} />
+        {currentValue.length > 0 && <Button icon={IvyIcons.Close} onClick={() => updateValue('')} aria-label='Clean' />}
       </InputGroup>
     </ReadonlyProvider>
   );
@@ -57,7 +57,7 @@ SearchInput.displayName = 'SearchInput';
 type PasswordInputProps = Omit<InputProps, 'value' | 'onChange' | 'type'> & { value?: string; onChange?: (change: string) => void };
 
 const PasswordInput = ({ onChange, ...props }: PasswordInputProps) => {
-  const [showPassword, setShowPassword] = React.useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   return (
     <InputGroup>
       <BasicInput type={showPassword ? 'text' : 'password'} onChange={e => onChange?.(e.target.value)} {...props} />
@@ -67,7 +67,7 @@ const PasswordInput = ({ onChange, ...props }: PasswordInputProps) => {
 };
 PasswordInput.displayName = 'PasswordInput';
 
-const InputGroup = ({ className, ...props }: React.ComponentProps<typeof Flex>) => (
+const InputGroup = ({ className, ...props }: ComponentProps<typeof Flex>) => (
   <Flex direction='row' gap={1} alignItems='center' className={cn(inputGroup, className, 'ui-inputgroup')} {...props} />
 );
 InputGroup.displayName = 'InputGroup';

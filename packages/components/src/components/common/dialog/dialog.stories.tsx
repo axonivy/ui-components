@@ -7,6 +7,7 @@ import { BasicSelect } from '@/components/common/select/select';
 import { Textarea } from '@/components/common/textarea/textarea';
 import { IvyIcons } from '@axonivy/ui-icons';
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import type { ComponentProps } from 'react';
 import {
   BasicDialogContent,
   Dialog,
@@ -34,13 +35,13 @@ const description =
   'em Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown ' +
   'printer took a galley of type and scrambled it to make a type specimen book.';
 
-const CancelButton = (props: React.ComponentProps<typeof Button>) => (
+const CancelButton = (props: ComponentProps<typeof Button>) => (
   <Button variant='outline' size='large' {...props}>
     Cancel
   </Button>
 );
 
-const SubmitButton = (props: React.ComponentProps<typeof Button>) => (
+const SubmitButton = (props: ComponentProps<typeof Button>) => (
   <Button variant='primary' size='large' icon={IvyIcons.Check} {...props}>
     Save
   </Button>

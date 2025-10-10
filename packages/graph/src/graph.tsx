@@ -2,6 +2,7 @@ import { BasicSelect, Button, Flex } from '@axonivy/ui-components';
 import { IvyIcons } from '@axonivy/ui-icons';
 import { Background, ConnectionMode, Controls, MiniMap, Panel, ReactFlow, ReactFlowProvider, type Node } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
+import type { ReactNode } from 'react';
 import { CHAR_WIDTH, useGraph } from './data/useGraph';
 import FloatingConnectionLine from './edges/FloatingConnectionLine';
 import GraphCircleFloatingEdge from './edges/graphCircleFloatingEdge';
@@ -13,12 +14,12 @@ export type NodeData = {
   id: string;
   label: string;
   info?: string;
-  content?: React.ReactNode;
+  content?: ReactNode;
   target?: Array<EdgeData>;
   options?: {
     highlightNode?: boolean;
     disableHandles?: boolean;
-    controls?: React.ReactNode;
+    controls?: ReactNode;
     expandContent?: boolean;
   };
 };

@@ -4,7 +4,7 @@ import { Label } from '@/components/common/label/label';
 import { useReadonly } from '@/context/useReadonly';
 import { cn } from '@/utils/class-name';
 import * as SwitchPrimitives from '@radix-ui/react-switch';
-import * as React from 'react';
+import type { ComponentProps } from 'react';
 import { type SwitchVariants, root, switchSize, thumb, thumbIcon } from './switch.css';
 
 /**
@@ -16,7 +16,7 @@ const Switch = ({
   disabled,
   className,
   ...props
-}: React.ComponentProps<typeof SwitchPrimitives.Root> & SwitchVariants & { icon?: IvyIconProps }) => {
+}: ComponentProps<typeof SwitchPrimitives.Root> & SwitchVariants & { icon?: IvyIconProps }) => {
   const readonly = useReadonly();
   const { inputProps } = useField();
   return (
@@ -34,7 +34,7 @@ const Switch = ({
 };
 Switch.displayName = SwitchPrimitives.Root.displayName;
 
-export type BasicSwitchProps = React.ComponentProps<typeof Switch> & {
+export type BasicSwitchProps = ComponentProps<typeof Switch> & {
   label: string;
 };
 

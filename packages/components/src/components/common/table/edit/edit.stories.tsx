@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import type { ColumnDef } from '@tanstack/react-table';
 import { flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table';
-import * as React from 'react';
+import { Fragment, useState } from 'react';
 import { tableData, type Payment } from '../data';
 import { useTableSelect } from '../hooks/hooks';
 import { MessageRow, SelectRow } from '../row/row';
@@ -55,7 +55,7 @@ const columns: ColumnDef<Payment, string>[] = [
 ];
 
 function EditTableDemo() {
-  const [data, setData] = React.useState(tableData);
+  const [data, setData] = useState(tableData);
 
   const tableSelection = useTableSelect<Payment>();
   const table = useReactTable({
@@ -98,7 +98,7 @@ function EditTableDemo() {
       </TableHeader>
       <TableBody>
         {table.getRowModel().rows.map((row, index) => (
-          <React.Fragment key={row.id}>
+          <Fragment key={row.id}>
             <SelectRow row={row}>
               {row.getVisibleCells().map(cell => (
                 <TableCell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
@@ -108,7 +108,7 @@ function EditTableDemo() {
               message={index === 2 ? { message: 'This is an error', variant: 'error' } : undefined}
               columnCount={columns.length}
             />
-          </React.Fragment>
+          </Fragment>
         ))}
       </TableBody>
     </Table>
