@@ -10,7 +10,7 @@ import {
   type OnEdgesChange,
   type OnNodesChange
 } from '@xyflow/react';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import type { GraphNode, GraphProps, NodeData } from '../graph';
 import { getLayoutedElements, type Direction } from './getLayoutedElements';
 
@@ -76,6 +76,14 @@ const useGraph = ({ graphNodes, options }: GraphProps) => {
     },
     [fitView, getNodes, graphNodes, options]
   );
+
+  // Initialize layouted nodes and edges
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setSelectedNode('all');
+    setNodes(getLayoutedElements({ ...mapNodesAndEdges(graphNodes, getNodes(), options), direction: 'TB' }).nodes);
+    setEdges(getLayoutedElements({ ...mapNodesAndEdges(graphNodes, getNodes(), options), direction: 'TB' }).edges);
+  }, [graphNodes, options, getNodes]);
 
   return { nodes, edges, selectedNode, onNodesChange, onEdgesChange, onConnect, onLayout, onFilterApply };
 };
