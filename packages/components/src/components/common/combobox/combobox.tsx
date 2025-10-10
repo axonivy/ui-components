@@ -46,7 +46,11 @@ const Combobox = <T extends ComboboxOption>({
   ...props
 }: ComboboxProps<T>) => {
   const [filteredItems, setFilteredItems] = useState(options);
-  useEffect(() => setFilteredItems(options), [options]);
+  const [prevItems, setPrevItems] = useState(options);
+  if (prevItems !== options) {
+    setFilteredItems(options);
+    setPrevItems(options);
+  }
 
   const { inputProps } = useField();
 
@@ -93,7 +97,6 @@ const Combobox = <T extends ComboboxOption>({
 
   useEffect(() => {
     selectItem({ value });
-    setFilteredItems(options);
   }, [options, selectItem, value]);
 
   const readonly = useReadonly();
