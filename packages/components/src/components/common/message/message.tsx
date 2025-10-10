@@ -2,7 +2,7 @@ import { useField } from '@/components/common/field/field';
 import { IvyIcon } from '@/components/common/icon/icon';
 import { cn } from '@/utils/class-name';
 import { IvyIcons } from '@axonivy/ui-icons';
-import * as React from 'react';
+import type { ComponentProps } from 'react';
 import { message as messageClass, type MessageVariants } from './message.css';
 
 const ivyIconForSeverity = (variant: NonNullable<MessageVariants>['variant']) => {
@@ -18,7 +18,7 @@ const ivyIconForSeverity = (variant: NonNullable<MessageVariants>['variant']) =>
 };
 export type MessageData = MessageVariants & { message?: string };
 
-export type MessageProps = React.ComponentProps<'p'> & MessageData;
+export type MessageProps = ComponentProps<'p'> & MessageData;
 
 const Message = ({ message, variant, className, children, ...props }: MessageProps) => {
   const { messageProps } = useField();

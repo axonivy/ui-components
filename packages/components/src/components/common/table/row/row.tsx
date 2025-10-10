@@ -7,10 +7,10 @@ import { cn } from '@/utils/class-name';
 import { IvyIcons } from '@axonivy/ui-icons';
 import { useDrag, useDrop, type TextDropItem } from '@react-aria/dnd';
 import type { Row } from '@tanstack/react-table';
-import * as React from 'react';
+import { useRef, type ComponentProps } from 'react';
 import { dndRow, reorderHandle, reorderHandleIcon, selectedRow } from './row.css';
 
-type SelectRowProps<TData> = React.ComponentProps<typeof TableRow> & {
+type SelectRowProps<TData> = ComponentProps<typeof TableRow> & {
   row: Row<TData>;
 };
 
@@ -39,7 +39,7 @@ const SelectRow = <TData,>({ row, className, onClick, ...props }: SelectRowProps
 };
 SelectRow.displayName = 'SelectRow';
 
-type MessageRowProps = React.ComponentProps<typeof TableRow> & { message?: MessageData; columnCount: number };
+type MessageRowProps = ComponentProps<typeof TableRow> & { message?: MessageData; columnCount: number };
 
 const MessageRow = ({ message, className, columnCount, ...props }: MessageRowProps) => {
   if (message === undefined) {
@@ -67,7 +67,7 @@ const useRowDnD = <TData,>({ id, updateOrder, row }: ReorderRowProps<TData>) => 
       return [{ 'text/id': id }];
     }
   });
-  const ref = React.useRef(null);
+  const ref = useRef(null);
   const { dropProps, isDropTarget } = useDrop({
     ref,
     getDropOperation(types) {
@@ -102,7 +102,7 @@ const ReorderRow = <TData,>({ id, updateOrder, row, className, ...props }: Reord
 };
 ReorderRow.displayName = 'ReorderRow';
 
-const ReorderHandleWrapper = ({ children, className }: React.ComponentProps<typeof Flex>) => {
+const ReorderHandleWrapper = ({ children, className }: ComponentProps<typeof Flex>) => {
   const readonly = useReadonly();
   return (
     <Flex direction='row' alignItems='center' gap={3} className={cn(reorderHandle, 'ui-dnd-row-handle', className)}>

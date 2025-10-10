@@ -2,7 +2,7 @@ import { Flex } from '@/components/common/flex/flex';
 import { insciptionTabsData } from '@/components/common/tabs/inscriptionTabData';
 import { IvyIcons } from '@axonivy/ui-icons';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import React from 'react';
+import { useState } from 'react';
 import { IvyIcon } from '../icon/icon';
 import { BasicInscriptionTabs, Tabs, TabsContent, TabsList, TabsTrigger } from './tabs';
 
@@ -46,7 +46,7 @@ export const Default: Story = {
 
 export const InscriptionTabs: Story = {
   render: () => {
-    const [tab, setTab] = React.useState('General');
+    const [tab, setTab] = useState('General');
     return <BasicInscriptionTabs value={tab} onChange={setTab} tabs={insciptionTabsData} />;
   }
 };

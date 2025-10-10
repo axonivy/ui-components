@@ -3,6 +3,7 @@ import { Popover, PopoverArrow, PopoverContent, PopoverTrigger } from '@/compone
 import { cn } from '@/utils/class-name';
 import { IvyIcons } from '@axonivy/ui-icons';
 import type { Meta } from '@storybook/react-vite';
+import type { ReactNode } from 'react';
 import {
   BasicPalette,
   Palette,
@@ -41,7 +42,7 @@ export const Default = () => (
 );
 
 type CustomPaletteItemConfig = PaletteItemConfig & {
-  svgIcon: React.ReactNode;
+  svgIcon: ReactNode;
 };
 
 const customSections: PaletteConfig<CustomPaletteItemConfig>['sections'] = {

@@ -2,7 +2,7 @@ import { arraymove, arrayMoveMultiple, indexOf } from '@/utils/array';
 import { resetAndSetRowSelection } from '@/utils/table/table';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { flexRender, getCoreRowModel, useReactTable, type ColumnDef } from '@tanstack/react-table';
-import * as React from 'react';
+import { useState } from 'react';
 import { Fragment } from 'react/jsx-runtime';
 import { tableData, type Payment } from '../data';
 import { useMultiSelectRow, useTableKeyHandler, useTableSelect } from '../hooks/hooks';
@@ -52,7 +52,7 @@ export const Select: StoryObj<{ enableMultiRowSelection: boolean }> = {
     enableMultiRowSelection: false
   },
   render: ({ enableMultiRowSelection }) => {
-    const [payment, setPayment] = React.useState<Payment | null>();
+    const [payment, setPayment] = useState<Payment | null>();
     const rowSelection = useTableSelect<Payment>({
       onSelect: selectedRows => {
         const selectedRowId = Object.keys(selectedRows).find(key => selectedRows[key]);
@@ -146,7 +146,7 @@ export const Message: Story = {
 
 export const Reorder: Story = {
   render: () => {
-    const [data, setData] = React.useState(tableData);
+    const [data, setData] = useState(tableData);
     const updateDataArray = (fromIndex: number[], toIndex: number, data: Payment[]) => {
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       arraymove(data, fromIndex[0]!, toIndex);
@@ -221,7 +221,7 @@ export const Reorder: Story = {
 
 export const MultiSelectWithReorder: Story = {
   render: () => {
-    const [data, setData] = React.useState(structuredClone(tableData));
+    const [data, setData] = useState(structuredClone(tableData));
 
     const reorderColumns: ColumnDef<Payment>[] = [
       {

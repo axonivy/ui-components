@@ -4,7 +4,7 @@ import { deleteAllSelectedRows } from '@/utils/table/table';
 import { IvyIcons } from '@axonivy/ui-icons';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { flexRender, getCoreRowModel, useReactTable, type ColumnDef } from '@tanstack/react-table';
-import * as React from 'react';
+import { useState } from 'react';
 import { tableData, type Payment } from '../data';
 import { useTableSelect } from '../hooks/hooks';
 import { SelectRow } from '../row/row';
@@ -63,7 +63,7 @@ const columns: ColumnDef<Payment>[] = [
 ];
 
 function AddRemoveTableDemo({ enableMultiselect }: { enableMultiselect: boolean }) {
-  const [data, setData] = React.useState(tableData);
+  const [data, setData] = useState(tableData);
 
   const addRow = () => {
     const newData = [...data];

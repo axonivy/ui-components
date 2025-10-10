@@ -15,10 +15,10 @@ import {
   type TableOptions,
   type TableState
 } from '@tanstack/react-table';
-import * as React from 'react';
+import { useCallback, useState, type KeyboardEvent, type ReactNode } from 'react';
 
 type UseTableGlobalFilterRetunValue<TData> = {
-  filter: React.ReactNode;
+  filter: ReactNode;
   options: Required<Pick<TableOptions<TData>, 'onGlobalFilterChange' | 'getFilteredRowModel' | 'filterFromLeafRows'>>;
   tableState: Partial<TableState>;
 };
@@ -26,7 +26,7 @@ type UseTableGlobalFilterRetunValue<TData> = {
 type UseTableGlobalFilterOptions = { searchActive?: boolean; searchPlaceholder?: string; searchAutoFocus?: boolean };
 
 export const useTableGlobalFilter = <TData,>(options?: UseTableGlobalFilterOptions): UseTableGlobalFilterRetunValue<TData> => {
-  const [globalFilter, setGlobalFilter] = React.useState('');
+  const [globalFilter, setGlobalFilter] = useState('');
   const searchActive = options?.searchActive === undefined || options?.searchActive;
   return {
     filter: searchActive ? (
@@ -55,8 +55,8 @@ type TableSelectOptions = {
 };
 
 export const useTableSelect = <TData,>(options?: TableSelectOptions): UseTableSelectRetunValue<TData> => {
-  const [rowSelection, setRowSelection] = React.useState(options?.initialSelecteState ?? {});
-  const handleRowSelectionChange: OnChangeFn<RowSelectionState> = React.useCallback(
+  const [rowSelection, setRowSelection] = useState(options?.initialSelecteState ?? {});
+  const handleRowSelectionChange: OnChangeFn<RowSelectionState> = useCallback(
     updaterOrValue => {
       setRowSelection(old => {
         const newSelection = typeof updaterOrValue === 'function' ? updaterOrValue(old) : updaterOrValue;
@@ -86,7 +86,7 @@ type UseTableSortRetunValue<TData> = {
 };
 
 export const useTableSort = <TData,>(): UseTableSortRetunValue<TData> => {
-  const [sorting, setSorting] = React.useState<SortingState>([]);
+  const [sorting, setSorting] = useState<SortingState>([]);
   return {
     options: { onSortingChange: setSorting, getSortedRowModel: getSortedRowModel() },
     tableState: { sorting }
@@ -99,7 +99,7 @@ type UseTableExpandReturnValue<TData> = {
 };
 
 export const useTableExpand = <TData extends { children: Array<TData> }>(initState?: ExpandedState): UseTableExpandReturnValue<TData> => {
-  const [expanded, setExpanded] = React.useState<ExpandedState>(initState ?? true);
+  const [expanded, setExpanded] = useState<ExpandedState>(initState ?? true);
   return {
     options: { onExpandedChange: setExpanded, getSubRows: row => row.children, getExpandedRowModel: getExpandedRowModel() },
     tableState: { expanded }
@@ -107,7 +107,7 @@ export const useTableExpand = <TData extends { children: Array<TData> }>(initSta
 };
 
 export const useMultiSelectRow = <TData,>(table: Table<TData>) => {
-  const [lastSelectedRowId, setLastSelectedRowId] = React.useState<string | null>(null);
+  const [lastSelectedRowId, setLastSelectedRowId] = useState<string | null>(null);
 
   const handleMultiSelectOnRow = (row: Row<TData>, event: React.MouseEvent<HTMLTableRowElement, MouseEvent>) => {
     const isMultiSelect = event.ctrlKey || event.metaKey;
@@ -162,10 +162,10 @@ interface TableKeyboardHandlerProps<TData> {
 }
 
 export const useTableKeyHandler = <TData,>({ table, data, options }: TableKeyboardHandlerProps<TData>) => {
-  const [rootIndex, setRootIndex] = React.useState<number | undefined>();
+  const [rootIndex, setRootIndex] = useState<number | undefined>();
   const readonly = useReadonly();
 
-  const handleKeyDown = (event: React.KeyboardEvent<HTMLTableElement>, onEnterAction?: (row: Row<TData>) => void) => {
+  const handleKeyDown = (event: KeyboardEvent<HTMLTableElement>, onEnterAction?: (row: Row<TData>) => void) => {
     const actions: Record<string, () => void> = {
       ArrowUp: () => handleArrowKeyUpDown(event, -1),
       ArrowDown: () => handleArrowKeyUpDown(event, 1),
@@ -188,7 +188,7 @@ export const useTableKeyHandler = <TData,>({ table, data, options }: TableKeyboa
     }
   };
 
-  const handleArrowKeyUpDown = (event: React.KeyboardEvent<HTMLTableElement>, direction: -1 | 1) => {
+  const handleArrowKeyUpDown = (event: KeyboardEvent<HTMLTableElement>, direction: -1 | 1) => {
     event.preventDefault();
     const { multiSelect = false, reorder } = options || {};
     const allRows = table.getRowModel().rows;
@@ -249,7 +249,7 @@ export const useTableKeyHandler = <TData,>({ table, data, options }: TableKeyboa
   return { handleKeyDown };
 };
 
-const scrollToNextRow = (event: React.KeyboardEvent<HTMLTableElement>, newReorderIndex: number) => {
+const scrollToNextRow = (event: KeyboardEvent<HTMLTableElement>, newReorderIndex: number) => {
   let scrollRow = Array.from(event.currentTarget.rows).find(
     row => row.getAttribute(ROW_VIRTUALIZE_INDEX_ATTRIBUTE) === `${newReorderIndex}`
   );

@@ -1,19 +1,19 @@
 import { Flex } from '@/components/common/flex/flex';
 import { Label } from '@/components/common/label/label';
-import { type MessageData, Message } from '@/components/common/message/message';
+import { Message, type MessageData } from '@/components/common/message/message';
 import { cn } from '@/utils/class-name';
-import * as React from 'react';
+import { createContext, useContext, useId, type ComponentProps, type ReactNode } from 'react';
 import { field } from './field.css';
 
 type FieldContextValue = {
   id: string;
 };
 
-const FieldContext = React.createContext<FieldContextValue>({} as FieldContextValue);
+const FieldContext = createContext<FieldContextValue>({} as FieldContextValue);
 
 export const useField = () => {
-  const { id } = React.useContext(FieldContext);
-  const newId = React.useId();
+  const { id } = useContext(FieldContext);
+  const newId = useId();
   return createIds(id ?? newId);
 };
 
@@ -42,8 +42,8 @@ const createIds = (id: string) => {
  * Use the {@link useField} hook to access the FieldContext properties.
  * Use the {@link BasicField} component for a Field with predefined Label and Message block.
  */
-const Field = ({ direction = 'column', gap = 1, className, ...props }: React.ComponentProps<typeof Flex>) => {
-  const id = React.useId();
+const Field = ({ direction = 'column', gap = 1, className, ...props }: ComponentProps<typeof Flex>) => {
+  const id = useId();
   return (
     <FieldContext.Provider value={{ id }}>
       <Flex direction={direction} gap={gap} className={cn(className, 'ui-field')} {...props} />
@@ -52,9 +52,9 @@ const Field = ({ direction = 'column', gap = 1, className, ...props }: React.Com
 };
 Field.displayName = 'Field';
 
-export type BasicFieldProps = React.ComponentProps<typeof Field> & {
+export type BasicFieldProps = ComponentProps<typeof Field> & {
   label?: string;
-  control?: React.ReactNode;
+  control?: ReactNode;
   message?: MessageData;
 };
 

@@ -1,36 +1,36 @@
 import { Field } from '@/components/common/field/field';
 import { cn } from '@/utils/class-name';
-import * as React from 'react';
+import type { ComponentProps } from 'react';
 import { body, cell, footer, head, header, root, row, table } from './table.css';
 
 /**
  * Table, based on {@link https://tanstack.com/table/v8 | Tanstack Table}
  */
-const Table = ({ className, ...props }: React.ComponentProps<'table'>) => (
+const Table = ({ className, ...props }: ComponentProps<'table'>) => (
   <Field className={cn(root, 'ui-table-root')}>
     <table className={cn(table, className, 'ui-table')} tabIndex={0} {...props} />
   </Field>
 );
 Table.displayName = 'Table';
 
-const TableHeader = ({ className, ...props }: React.ComponentProps<'thead'>) => (
+const TableHeader = ({ className, ...props }: ComponentProps<'thead'>) => (
   <thead className={cn(header, className, 'ui-table-header')} {...props} />
 );
 TableHeader.displayName = 'TableHeader';
 
-const TableBody = ({ className, ...props }: React.ComponentProps<'tbody'>) => (
+const TableBody = ({ className, ...props }: ComponentProps<'tbody'>) => (
   <tbody className={cn(body, className, 'ui-table-body')} {...props} />
 );
 TableBody.displayName = 'TableBody';
 
-const TableFooter = ({ className, ...props }: React.ComponentProps<'tfoot'>) => (
+const TableFooter = ({ className, ...props }: ComponentProps<'tfoot'>) => (
   <tfoot className={cn(footer, className, 'ui-table-footer')} {...props} />
 );
 TableFooter.displayName = 'TableFooter';
 
 export const ROW_VIRTUALIZE_INDEX_ATTRIBUTE = 'data-vindex';
 
-type TableRowProps = React.ComponentProps<'tr'> & {
+type TableRowProps = ComponentProps<'tr'> & {
   vindex?: number | string;
 };
 
@@ -39,14 +39,10 @@ const TableRow = ({ className, vindex, ...props }: TableRowProps) => (
 );
 TableRow.displayName = 'TableRow';
 
-const TableHead = ({ className, ...props }: React.ComponentProps<'th'>) => (
-  <th className={cn(head, className, 'ui-table-head')} {...props} />
-);
+const TableHead = ({ className, ...props }: ComponentProps<'th'>) => <th className={cn(head, className, 'ui-table-head')} {...props} />;
 TableHead.displayName = 'TableHead';
 
-const TableCell = ({ className, ...props }: React.ComponentProps<'td'>) => (
-  <td className={cn(cell, className, 'ui-table-cell')} {...props} />
-);
+const TableCell = ({ className, ...props }: ComponentProps<'td'>) => <td className={cn(cell, className, 'ui-table-cell')} {...props} />;
 TableCell.displayName = 'TableCell';
 
 export { Table, TableBody, TableCell, TableFooter, TableHead, TableHeader, TableRow };

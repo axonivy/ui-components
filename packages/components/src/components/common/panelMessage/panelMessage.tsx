@@ -3,14 +3,14 @@ import { IvyIcon } from '@/components/common/icon/icon';
 import { Message } from '@/components/common/message/message';
 import { cn } from '@/utils/class-name';
 import { IvyIcons } from '@axonivy/ui-icons';
-import * as React from 'react';
+import type { ComponentProps } from 'react';
 import { panel, panelIcon, panelMessage } from './panelMessage.css';
 
 type PanelMessageProps = {
   mode?: 'column' | 'row';
   icon?: IvyIcons;
   message: string;
-} & React.ComponentProps<typeof Flex>;
+} & ComponentProps<typeof Flex>;
 
 const PanelMessage = ({ message, mode = 'column', icon = IvyIcons.DragDrop, className, children, ...props }: PanelMessageProps) => (
   <Flex

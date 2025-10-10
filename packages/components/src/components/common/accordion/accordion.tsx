@@ -6,7 +6,7 @@ import { StateDot, type StateDotProps } from '@/components/common/state/state';
 import { cn } from '@/utils/class-name';
 import { IvyIcons } from '@axonivy/ui-icons';
 import * as AccordionPrimitive from '@radix-ui/react-accordion';
-import * as React from 'react';
+import type { ComponentProps, ReactNode } from 'react';
 import {
   content,
   contentData,
@@ -22,21 +22,21 @@ import {
 /**
  * Accordion, based on {@link https://www.radix-ui.com/docs/primitives/components/accordion | Radix UI Accordion}
  */
-const Accordion = ({ className, ...props }: React.ComponentProps<typeof AccordionPrimitive.Root>) => (
+const Accordion = ({ className, ...props }: ComponentProps<typeof AccordionPrimitive.Root>) => (
   <AccordionPrimitive.Root className={cn(root, className, 'ui-accordion')} {...props} />
 );
 Accordion.displayName = 'AccordionRoot';
 
-const AccordionItem = ({ className, ...props }: React.ComponentProps<typeof AccordionPrimitive.Item>) => (
+const AccordionItem = ({ className, ...props }: ComponentProps<typeof AccordionPrimitive.Item>) => (
   <AccordionPrimitive.Item className={cn(item, className, 'ui-accordion-item')} {...props} />
 );
 AccordionItem.displayName = 'AccordionItem';
 
 export type AccordionControlProps = { className: string };
 
-type AccordionTriggerProps = React.ComponentProps<typeof AccordionPrimitive.Trigger> & {
-  state?: React.ReactNode;
-  control?: (props: AccordionControlProps) => React.ReactNode;
+type AccordionTriggerProps = ComponentProps<typeof AccordionPrimitive.Trigger> & {
+  state?: ReactNode;
+  control?: (props: AccordionControlProps) => ReactNode;
 };
 
 const AccordionTrigger = ({ state, control, className, children, ...props }: AccordionTriggerProps) => (
@@ -55,12 +55,12 @@ const AccordionTrigger = ({ state, control, className, children, ...props }: Acc
 );
 AccordionTrigger.displayName = AccordionPrimitive.Trigger.displayName;
 
-const AccordionState = ({ className, ...props }: React.ComponentProps<typeof StateDot>) => (
+const AccordionState = ({ className, ...props }: ComponentProps<typeof StateDot>) => (
   <StateDot className={cn(stateClass, className)} {...props} />
 );
 AccordionState.displayName = 'AccordionState';
 
-type AccordionContentProps = React.ComponentProps<typeof AccordionPrimitive.Content>;
+type AccordionContentProps = ComponentProps<typeof AccordionPrimitive.Content>;
 
 const AccordionContent = ({ className, children, ...props }: AccordionContentProps) => (
   <AccordionPrimitive.Content className={cn(content, className, 'ui-accordion-content')} {...props}>

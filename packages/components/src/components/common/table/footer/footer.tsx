@@ -2,10 +2,10 @@ import { Button } from '@/components/common/button/button';
 import { Flex } from '@/components/common/flex/flex';
 import { useReadonly } from '@/context/useReadonly';
 import { IvyIcons } from '@axonivy/ui-icons';
-import * as React from 'react';
+import type { ComponentProps } from 'react';
 import { addRowBlock, addRowBtn, addRowLine } from './footer.css';
 
-const TableAddRow = ({ addRow, ...props }: { addRow: () => void } & React.ComponentProps<typeof Button>) => {
+const TableAddRow = ({ addRow, ...props }: { addRow: () => void } & ComponentProps<typeof Button>) => {
   const readonly = useReadonly();
   return (
     <Flex alignItems='center' direction='row' gap={1} className={addRowBlock}>

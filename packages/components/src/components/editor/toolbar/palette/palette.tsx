@@ -5,7 +5,7 @@ import { SearchInput } from '@/components/common/input/input';
 import { Separator } from '@/components/common/separator/separator';
 import { cn } from '@/utils/class-name.ts';
 import { IvyIcons } from '@axonivy/ui-icons';
-import * as React from 'react';
+import { useState, type ReactNode } from 'react';
 import {
   palette,
   paletteButton,
@@ -30,16 +30,16 @@ export type PaletteConfig<TItem extends PaletteItemConfig = PaletteItemConfig> =
   options?: {
     searchPlaceholder?: string;
     searchFilter?: (item: TItem, searchTerm: string) => boolean;
-    emptyMessage?: React.ReactNode;
+    emptyMessage?: ReactNode;
   };
 };
 
 export type PaletteProps<TItem extends PaletteItemConfig = PaletteItemConfig> = PaletteConfig<TItem> & {
-  children: (title: string, items: Array<TItem>) => React.ReactNode;
+  children: (title: string, items: Array<TItem>) => ReactNode;
 };
 
 const Palette = <TItem extends PaletteItemConfig>({ sections, children, options }: PaletteProps<TItem>) => {
-  const [searchTerm, setSearchTerm] = React.useState('');
+  const [searchTerm, setSearchTerm] = useState('');
   const searchFilter =
     options?.searchFilter ?? ((item: TItem, searchTerm: string) => item.name.toLowerCase().includes(searchTerm.toLowerCase()));
   const filteredSections: Record<string, Array<TItem>> = {};
@@ -62,7 +62,7 @@ Palette.displayName = 'Palette';
 export type PaletteSectionProps<TItem extends PaletteItemConfig = PaletteItemConfig> = {
   title: string;
   items: Array<TItem>;
-  children: (props: PaletteItemProps<TItem>) => React.ReactNode;
+  children: (props: PaletteItemProps<TItem>) => ReactNode;
 };
 
 const PaletteSection = <TItem extends PaletteItemConfig>({ items, title, children }: PaletteSectionProps<TItem>) => (
@@ -92,7 +92,7 @@ const PaletteItem = <TItem extends PaletteItemConfig>({ name, description, icon,
 );
 PaletteItem.displayName = 'PaletteItem';
 
-const PaletteButtonLabel = ({ label, children }: { label: string; children: React.ReactNode }) => (
+const PaletteButtonLabel = ({ label, children }: { label: string; children: ReactNode }) => (
   <Flex direction='column' alignItems='center' className={paletteButton}>
     <span className={cn(paletteButtonLabel, 'ui-palette-button-label')}>{label}</span>
     {children}

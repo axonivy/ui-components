@@ -1,14 +1,14 @@
 import { cn } from '@/utils/class-name';
 import { splitNewLine } from '@/utils/string';
 import type { IvyIcons } from '@axonivy/ui-icons';
-import * as React from 'react';
+import { useMemo, type ComponentProps, type ReactNode } from 'react';
 import { useField } from '../field/field';
 import { Flex } from '../flex/flex';
 import { IvyIcon } from '../icon/icon';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../tooltip/tooltip';
 import { badgeOutput, inputBadge, inputBadgeIcon, inputBadgeLine, inputBadgeText } from './inputBadge.css';
 
-export type InputBadgeProps = React.ComponentProps<'output'> & {
+export type InputBadgeProps = ComponentProps<'output'> & {
   value: string;
   badgeProps: Array<BadgeType>;
 };
@@ -17,14 +17,14 @@ export type BadgeType = {
   regex: RegExp;
   icon: IvyIcons;
   badgeTextGen: (text: string) => string;
-  tooltip?: (value: string) => React.ReactNode;
+  tooltip?: (value: string) => ReactNode;
 };
 
 type BadgeProps = {
   icon: IvyIcons;
   text: string;
   originalText: string;
-  tooltipGen?: (text: string) => React.ReactNode;
+  tooltipGen?: (text: string) => ReactNode;
 };
 
 const Badge = ({ icon, text, originalText, tooltipGen }: BadgeProps) => (
@@ -48,7 +48,7 @@ const BadgeTooltip = ({ originalText, tooltipGen }: Pick<BadgeProps, 'originalTe
 
 export const InputBadge = ({ value, badgeProps, className, ...props }: InputBadgeProps) => {
   const { inputProps } = useField();
-  const items = React.useMemo(() => findBadges(value, badgeProps), [value, badgeProps]);
+  const items = useMemo(() => findBadges(value, badgeProps), [value, badgeProps]);
   return (
     <output className={cn(badgeOutput, className, 'ui-input-badge')} {...inputProps} {...props}>
       <Flex className={inputBadgeLine} role='row'>
@@ -60,7 +60,7 @@ export const InputBadge = ({ value, badgeProps, className, ...props }: InputBadg
 
 export const InputBadgeArea = ({ value, badgeProps, className, ...props }: InputBadgeProps) => {
   const { inputProps } = useField();
-  const lines = React.useMemo(() => splitNewLine(value).map(e => findBadges(e, badgeProps)), [value, badgeProps]);
+  const lines = useMemo(() => splitNewLine(value).map(e => findBadges(e, badgeProps)), [value, badgeProps]);
   return (
     <output className={cn(badgeOutput, className, 'ui-input-badge-area')} {...inputProps} {...props}>
       {lines.map((line, index) => (
@@ -72,7 +72,7 @@ export const InputBadgeArea = ({ value, badgeProps, className, ...props }: Input
   );
 };
 
-const findBadges = (value: string, badgeProps: Array<BadgeType>): Array<React.ReactNode> => {
+const findBadges = (value: string, badgeProps: Array<BadgeType>): Array<ReactNode> => {
   const separated = value.split(new RegExp(`(${badgeProps.map(p => p.regex.source).join('|')})`));
   return separated.map((text, index) => {
     if (!text) return;

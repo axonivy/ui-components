@@ -7,7 +7,7 @@ import { outlineData } from '@/components/editor/sidebar/outline/data';
 import { Outline } from '@/components/editor/sidebar/outline/outline';
 import { IvyIcons } from '@axonivy/ui-icons';
 import type { Meta } from '@storybook/react-vite';
-import * as React from 'react';
+import { useState } from 'react';
 
 const meta: Meta = {
   title: 'Editor/Sidebar'
@@ -16,8 +16,8 @@ const meta: Meta = {
 export default meta;
 
 export const Default = () => {
-  const [outline, setOutline] = React.useState(false);
-  const [element, setElement] = React.useState<string>();
+  const [outline, setOutline] = useState(false);
+  const [element, setElement] = useState<string>();
   return (
     <Flex direction='column' style={{ height: '100%' }}>
       <SidebarHeader icon={IvyIcons.Script} title='Script'>

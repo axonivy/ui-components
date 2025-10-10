@@ -1,6 +1,6 @@
 import { cn } from '@/utils/class-name';
 import type { IvyIcons } from '@axonivy/ui-icons';
-import * as React from 'react';
+import type { ComponentProps } from 'react';
 
 export type IvyIconProps = {
   icon: IvyIcons;
@@ -8,7 +8,7 @@ export type IvyIconProps = {
   spin?: boolean;
 };
 
-interface IconProps extends IvyIconProps, React.ComponentProps<'i'> {}
+interface IconProps extends IvyIconProps, ComponentProps<'i'> {}
 
 const IvyIcon = ({ icon, rotate, spin, className, ...props }: IconProps) => (
   <i className={cn('ivy', `ivy-${icon}`, rotate && `ivy-rotate-${rotate}`, spin && 'ivy-spin', className)} {...props} />

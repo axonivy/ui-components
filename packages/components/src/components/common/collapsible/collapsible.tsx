@@ -5,7 +5,7 @@ import { StateDot, type StateDotProps } from '@/components/common/state/state';
 import { cn } from '@/utils/class-name';
 import { IvyIcons } from '@axonivy/ui-icons';
 import * as CollapsiblePrimitive from '@radix-ui/react-collapsible';
-import * as React from 'react';
+import { type ComponentProps, type ReactNode, useState } from 'react';
 import {
   content,
   contentData,
@@ -20,7 +20,7 @@ import {
 /**
  * Collapsible, based on {@link https://www.radix-ui.com/docs/primitives/components/collapsible | Radix UI Collapsible}
  */
-const Collapsible = ({ className, ...props }: React.ComponentProps<typeof CollapsiblePrimitive.Root>) => (
+const Collapsible = ({ className, ...props }: ComponentProps<typeof CollapsiblePrimitive.Root>) => (
   <CollapsiblePrimitive.Root className={cn(root, className, 'ui-collapsible')} {...props} />
 );
 Collapsible.displayName = 'CollapsibleRoot';
@@ -28,8 +28,8 @@ Collapsible.displayName = 'CollapsibleRoot';
 export type CollapsibleControlProps = { className: string };
 
 type CollapsibleTriggerProps = {
-  state?: React.ReactNode;
-  control?: (props: CollapsibleControlProps) => React.ReactNode;
+  state?: ReactNode;
+  control?: (props: CollapsibleControlProps) => ReactNode;
 };
 
 const CollapsibleTrigger = ({
@@ -38,7 +38,7 @@ const CollapsibleTrigger = ({
   className,
   children,
   ...props
-}: React.ComponentProps<typeof CollapsiblePrimitive.CollapsibleTrigger> & CollapsibleTriggerProps) => (
+}: ComponentProps<typeof CollapsiblePrimitive.CollapsibleTrigger> & CollapsibleTriggerProps) => (
   <div className={cn(header)}>
     <CollapsiblePrimitive.CollapsibleTrigger className={cn(trigger, className, 'ui-collapsible-trigger')} {...props}>
       <Flex alignItems='center' gap={2}>
@@ -54,14 +54,14 @@ const CollapsibleTrigger = ({
 );
 CollapsibleTrigger.displayName = 'CollapsibleTrigger';
 
-const CollapsibleState = ({ className, ...props }: React.ComponentProps<typeof StateDot>) => (
+const CollapsibleState = ({ className, ...props }: ComponentProps<typeof StateDot>) => (
   <StateDot className={cn(stateClass, className)} {...props} />
 );
 CollapsibleState.displayName = 'CollapsibleState';
 
-type CollapsibleContentProps = React.ComponentProps<typeof CollapsiblePrimitive.Content>;
+type CollapsibleContentProps = ComponentProps<typeof CollapsiblePrimitive.Content>;
 
-const CollapsibleContent = ({ className, children, style, ...props }: React.ComponentProps<typeof CollapsiblePrimitive.Content>) => (
+const CollapsibleContent = ({ className, children, style, ...props }: ComponentProps<typeof CollapsiblePrimitive.Content>) => (
   <CollapsiblePrimitive.Content className={cn(content, className, 'ui-collapsible-content')} role='region' {...props}>
     <div className={contentData} style={style}>
       {children}
@@ -79,12 +79,10 @@ export type BasicCollapsibleProps = CollapsibleContentProps &
   };
 
 const BasicCollapsible = ({ label, open, defaultOpen, state, controls, ...props }: BasicCollapsibleProps) => {
-  const [openState, setOpenState] = React.useState(open || (state?.messages?.length ?? 0) > 0 || defaultOpen);
-  React.useEffect(() => {
-    if (open !== undefined) {
-      setOpenState(open);
-    }
-  }, [open]);
+  const [openState, setOpenState] = useState(open || (state?.messages?.length ?? 0) > 0 || defaultOpen);
+  if (open && open !== openState) {
+    setOpenState(open);
+  }
   return (
     <Collapsible open={openState} onOpenChange={setOpenState}>
       <CollapsibleTrigger

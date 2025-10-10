@@ -2,7 +2,7 @@ import { Button } from '@/components/common/button/button';
 import { Flex } from '@/components/common/flex/flex';
 import { hotkeyText } from '@/utils/hotkey';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import React, { useState } from 'react';
+import { Fragment, useState } from 'react';
 import { HotkeysProvider, useHotkeys, useHotkeysContext } from 'react-hotkeys-hook';
 import { useHotkeyLocalScopes } from './hotkey';
 
@@ -116,10 +116,10 @@ const Comp = () => {
         Active Scopes:{' '}
         <b title='active-scopes'>
           {enabledScopes.map((s, index) => (
-            <React.Fragment key={index}>
+            <Fragment key={index}>
               {index !== 0 ? ' | ' : ''}
               {s}
-            </React.Fragment>
+            </Fragment>
           ))}
         </b>
       </p>
@@ -127,10 +127,10 @@ const Comp = () => {
         Restorable Scopes:{' '}
         <b title='restorable-scopes'>
           {restorableScopes.map((s, index) => (
-            <React.Fragment key={index}>
+            <Fragment key={index}>
               {index !== 0 ? ' | ' : ''}
               {s}
-            </React.Fragment>
+            </Fragment>
           ))}
         </b>
       </p>

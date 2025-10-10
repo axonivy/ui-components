@@ -3,7 +3,7 @@ import { Flex } from '@/components/common/flex/flex';
 import { IvyIcon } from '@/components/common/icon/icon';
 import { IvyIcons } from '@axonivy/ui-icons';
 import type { CellContext, Row } from '@tanstack/react-table';
-import type * as React from 'react';
+import type { KeyboardEvent, ReactNode } from 'react';
 import { cellIcon, expandButton, expandCell, indent } from './tree.css';
 
 type LazyExpand<TData> = { isLoaded: boolean; loadChildren: (row: Row<TData>) => void };
@@ -12,13 +12,13 @@ type ExpandableCellProps<TData> = {
   cell: CellContext<TData, string>;
   icon?: IvyIcons;
   lazy?: LazyExpand<TData>;
-  children?: React.ReactNode;
+  children?: ReactNode;
 };
 
 const expanedButton = <TData,>(row: Row<TData>, lazy?: LazyExpand<TData>) => {
   const expandHandlerProps = (handler: () => void) => ({
     onMouseDown: handler,
-    onKeyDown: (e: React.KeyboardEvent<HTMLButtonElement>) => {
+    onKeyDown: (e: KeyboardEvent<HTMLButtonElement>) => {
       if (e.key === 'Enter' || e.key === ' ') handler();
     }
   });

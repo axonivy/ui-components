@@ -3,13 +3,13 @@ import { Flex } from '@/components/common/flex/flex';
 import { cn } from '@/utils/class-name';
 import { IvyIcons } from '@axonivy/ui-icons';
 import * as DialogPrimitive from '@radix-ui/react-dialog';
-import * as React from 'react';
+import type { ComponentProps, ReactNode } from 'react';
 import { content, contentClose, description, footer, header, overlay, title } from './dialog.css';
 
 /**
  * Dialog, based on {@link https://www.radix-ui.com/docs/primitives/components/dialog | Radix UI Dialog}
  */
-const Dialog = (props: React.ComponentProps<typeof DialogPrimitive.Root>) => <DialogPrimitive.Root {...props} />;
+const Dialog = (props: ComponentProps<typeof DialogPrimitive.Root>) => <DialogPrimitive.Root {...props} />;
 Dialog.displayName = DialogPrimitive.Root.displayName;
 
 const DialogTrigger = DialogPrimitive.Trigger;
@@ -18,12 +18,12 @@ const DialogPortal = DialogPrimitive.Portal;
 
 const DialogClose = DialogPrimitive.Close;
 
-const DialogOverlay = ({ className, ...props }: React.ComponentProps<typeof DialogPrimitive.Overlay>) => (
+const DialogOverlay = ({ className, ...props }: ComponentProps<typeof DialogPrimitive.Overlay>) => (
   <DialogPrimitive.Overlay className={cn(overlay, className, 'ui-dialog-overlay')} {...props} />
 );
 DialogOverlay.displayName = DialogPrimitive.Overlay.displayName;
 
-const DialogContent = ({ className, children, ...props }: React.ComponentProps<typeof DialogPrimitive.Content>) => (
+const DialogContent = ({ className, children, ...props }: ComponentProps<typeof DialogPrimitive.Content>) => (
   <DialogPortal>
     <DialogOverlay />
     <DialogPrimitive.Content className={cn(content, className, 'ui-dialog-content')} {...props}>
@@ -36,29 +36,29 @@ const DialogContent = ({ className, children, ...props }: React.ComponentProps<t
 );
 DialogContent.displayName = DialogPrimitive.Content.displayName;
 
-const DialogHeader = ({ className, ...props }: React.ComponentProps<typeof Flex>) => (
+const DialogHeader = ({ className, ...props }: ComponentProps<typeof Flex>) => (
   <Flex direction='column' gap={2} className={cn(header, className, 'ui-dialog-header')} {...props} />
 );
 DialogHeader.displayName = 'DialogHeader';
 
-const DialogFooter = ({ className, ...props }: React.ComponentProps<typeof Flex>) => (
+const DialogFooter = ({ className, ...props }: ComponentProps<typeof Flex>) => (
   <Flex direction='row' justifyContent='flex-end' gap={2} className={cn(footer, className, 'ui-dialog-footer')} {...props} />
 );
 DialogFooter.displayName = 'DialogFooter';
 
-const DialogTitle = ({ className, ...props }: React.ComponentProps<typeof DialogPrimitive.Title>) => (
+const DialogTitle = ({ className, ...props }: ComponentProps<typeof DialogPrimitive.Title>) => (
   <DialogPrimitive.Title className={cn(title, className, 'ui-dialog-title')} {...props} />
 );
 DialogTitle.displayName = DialogPrimitive.Title.displayName;
 
-const DialogDescription = ({ className, ...props }: React.ComponentProps<typeof DialogPrimitive.Description>) => (
+const DialogDescription = ({ className, ...props }: ComponentProps<typeof DialogPrimitive.Description>) => (
   <DialogPrimitive.Description className={cn(description, className, 'ui-dialog-description')} {...props} />
 );
 DialogDescription.displayName = DialogPrimitive.Description.displayName;
 
 type BasicDialogHeaderProps = {
   title: string;
-  description: React.ReactNode;
+  description: ReactNode;
 };
 
 const BasicDialogHeader = ({ title, description }: BasicDialogHeaderProps) => (
@@ -70,8 +70,8 @@ const BasicDialogHeader = ({ title, description }: BasicDialogHeaderProps) => (
 BasicDialogHeader.displayName = 'BasicDialogHeader';
 
 type BasicDialogFooterProps = {
-  cancel: React.ReactNode;
-  submit: React.ReactNode;
+  cancel: ReactNode;
+  submit: ReactNode;
 };
 
 const BasicDialogFooter = ({ cancel, submit }: BasicDialogFooterProps) => (
@@ -82,7 +82,7 @@ const BasicDialogFooter = ({ cancel, submit }: BasicDialogFooterProps) => (
 );
 BasicDialogFooter.displayName = 'BasicDialogFooter';
 
-type BasicDialoContentProps = BasicDialogHeaderProps & BasicDialogFooterProps & React.ComponentProps<typeof Flex>;
+type BasicDialoContentProps = BasicDialogHeaderProps & BasicDialogFooterProps & ComponentProps<typeof Flex>;
 
 const BasicDialogContent = ({ title, description, cancel, submit, ...props }: BasicDialoContentProps) => (
   <Flex direction='column' gap={4}>

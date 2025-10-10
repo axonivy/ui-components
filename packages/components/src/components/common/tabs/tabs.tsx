@@ -5,7 +5,7 @@ import { StateDot, type StateDotProps } from '@/components/common/state/state';
 import { cn } from '@/utils/class-name';
 import type { IvyIcons } from '@axonivy/ui-icons';
 import * as TabsPrimitive from '@radix-ui/react-tabs';
-import * as React from 'react';
+import type { ComponentProps, ReactNode } from 'react';
 import {
   inscriptionTabsContent,
   inscriptionTabsContentScrollArea,
@@ -21,7 +21,7 @@ import {
   type TabsVariants
 } from './tabs.css';
 
-export type TabsProps = React.ComponentProps<typeof TabsPrimitive.Root> & TabsVariants;
+export type TabsProps = ComponentProps<typeof TabsPrimitive.Root> & TabsVariants;
 
 /**
  * Tabs, based on {@link https://www.radix-ui.com/docs/primitives/components/tabs | Radix UI Tabs}
@@ -31,12 +31,12 @@ const Tabs = ({ className, variant, ...props }: TabsProps) => (
 );
 Tabs.displayName = TabsPrimitive.Root.displayName;
 
-const TabsList = ({ className, ...props }: React.ComponentProps<typeof TabsPrimitive.List>) => (
+const TabsList = ({ className, ...props }: ComponentProps<typeof TabsPrimitive.List>) => (
   <TabsPrimitive.List className={cn(tabsList, className, 'ui-tabs-list')} {...props} />
 );
 TabsList.displayName = TabsPrimitive.List.displayName;
 
-const TabsTrigger = ({ className, children, ...props }: React.ComponentProps<typeof TabsPrimitive.Trigger>) => (
+const TabsTrigger = ({ className, children, ...props }: ComponentProps<typeof TabsPrimitive.Trigger>) => (
   <TabsPrimitive.Trigger className={cn(tabsTrigger, className, 'ui-tabs-trigger')} {...props}>
     <Flex className={cn(tabsTriggerContent, 'ui-tabs-trigger-content')} alignItems='center'>
       {children}
@@ -46,7 +46,7 @@ const TabsTrigger = ({ className, children, ...props }: React.ComponentProps<typ
 );
 TabsTrigger.displayName = TabsPrimitive.Trigger.displayName;
 
-const TabsContent = ({ className, ...props }: React.ComponentProps<typeof TabsPrimitive.Content>) => (
+const TabsContent = ({ className, ...props }: ComponentProps<typeof TabsPrimitive.Content>) => (
   <TabsPrimitive.Content className={cn(className, 'ui-tabs-content')} {...props} />
 );
 TabsContent.displayName = TabsPrimitive.Content.displayName;
@@ -54,7 +54,7 @@ TabsContent.displayName = TabsPrimitive.Content.displayName;
 export type InscriptionTabProps = {
   id: string;
   name: string;
-  content: React.ReactNode;
+  content: ReactNode;
   icon: IvyIcons;
   state?: StateDotProps;
 };

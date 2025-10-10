@@ -20,7 +20,7 @@ import {
   type Row,
   type RowSelectionState
 } from '@tanstack/react-table';
-import * as React from 'react';
+import { Fragment, useEffect, useRef, useState, type ReactNode } from 'react';
 import { fullHeight, info, overflowAuto, overflowHidden } from './browser.css';
 
 export type BrowserNode<TData = unknown> = {
@@ -62,7 +62,7 @@ export const useBrowser = (
     }
   ];
 
-  const [filter, setFilter] = React.useState(options?.initialSearch ?? '');
+  const [filter, setFilter] = useState(options?.initialSearch ?? '');
   const globalFilterFn = (row: Row<BrowserNode>, _columnId: string, filterValue: string) => {
     const filter = filterValue.toLowerCase();
     return row.original.value.toLowerCase().includes(filter) || row.original.info.toLowerCase().includes(filter);
@@ -99,11 +99,11 @@ export type BrowserResult<TData = unknown> = {
 export type Browser = {
   name: string;
   icon: IvyIcons;
-  browser: ReturnType<typeof useBrowser> | React.ReactNode;
-  header?: React.ReactNode;
-  footer?: React.ReactNode;
+  browser: ReturnType<typeof useBrowser> | ReactNode;
+  header?: ReactNode;
+  footer?: ReactNode;
   emptyMessage?: string;
-  infoProvider?: (row?: Row<BrowserNode>) => React.ReactNode;
+  infoProvider?: (row?: Row<BrowserNode>) => ReactNode;
   applyModifier?: (row?: Row<BrowserNode>) => BrowserResult;
 };
 
@@ -124,7 +124,7 @@ function isUseBrowserResult(browser: Browser['browser']): browser is ReturnType<
 
 const BrowsersView = ({ browsers, apply, options }: BrowsersViewProps) => {
   const applyButton = options?.applyBtn;
-  const [tab, setTab] = React.useState(browsers[0]?.name ?? '');
+  const [tab, setTab] = useState(browsers[0]?.name ?? '');
   const selectedRow = () => {
     const browser = browsers.find(b => b.name === tab)?.browser;
     if (browser && isUseBrowserResult(browser)) {
@@ -160,8 +160,8 @@ const BrowsersView = ({ browsers, apply, options }: BrowsersViewProps) => {
     }
     apply(browser.name, result);
   };
-  const searchRef = React.useRef<HTMLInputElement>(null);
-  React.useEffect(() => {
+  const searchRef = useRef<HTMLInputElement>(null);
+  useEffect(() => {
     setTimeout(() => searchRef.current?.focus(), 0);
   }, []);
   return (
@@ -194,7 +194,7 @@ const BrowsersView = ({ browsers, apply, options }: BrowsersViewProps) => {
                         <TableBody>
                           {browser.table.getRowModel().rows?.length ? (
                             browser.table.getRowModel().rows.map(row => (
-                              <React.Fragment key={row.id}>
+                              <Fragment key={row.id}>
                                 {row.original.notSelectable ? (
                                   <TableRow>
                                     {row.getVisibleCells().map(cell => (
@@ -208,7 +208,7 @@ const BrowsersView = ({ browsers, apply, options }: BrowsersViewProps) => {
                                     ))}
                                   </SelectRow>
                                 )}
-                              </React.Fragment>
+                              </Fragment>
                             ))
                           ) : (
                             <MessageRow message={{ message: emptyMessage ?? 'No results', variant: 'info' }} columnCount={1} />
