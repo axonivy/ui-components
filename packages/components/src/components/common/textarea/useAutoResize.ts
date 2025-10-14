@@ -1,5 +1,5 @@
 import { splitNewLine } from '@/utils/string';
-import { useEffect, useMemo, useState, type ChangeEvent, type CSSProperties, type TextareaHTMLAttributes } from 'react';
+import { useMemo, useState, type ChangeEvent, type CSSProperties, type TextareaHTMLAttributes } from 'react';
 
 type TextAreaValueProps = Pick<TextareaHTMLAttributes<HTMLTextAreaElement>, 'value' | 'onChange'>;
 
@@ -16,9 +16,11 @@ type AutoResizeReturn = TextAreaValueProps & {
 
 export const useAutoResize = ({ autoResize, value, onChange, maxRows }: AutoResizeProps): AutoResizeReturn => {
   const [currentValue, setCurrentValue] = useState(value);
-  useEffect(() => {
+  const [prevValue, setPrevValue] = useState(value);
+  if (prevValue !== value) {
     setCurrentValue(value);
-  }, [value]);
+    setPrevValue(value);
+  }
   const updateValue = (event: ChangeEvent<HTMLTextAreaElement>) => {
     const update = event.target.value;
     setCurrentValue(update);
