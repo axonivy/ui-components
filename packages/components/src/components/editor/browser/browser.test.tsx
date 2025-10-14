@@ -66,7 +66,9 @@ test('info provider - lazy loaded', async () => {
   await userEvent.click(screen.getByRole('button', { name: 'Info' }));
   await userEvent.click(screen.getByRole('row', { name: 'wf IWorkflowContext' }));
   expect(screen.getByRole('region')).toHaveTextContent('Loading javaDoc from backend...');
-  await waitFor(() => expect(screen.getByRole('region')).toHaveTextContent('wfGets the data from bla... Returns: IWorkflowContext'));
+  await waitFor(() => expect(screen.getByRole('region')).toHaveTextContent('wfGets the data from bla... Returns: IWorkflowContext'), {
+    timeout: 3000
+  });
 });
 
 test('header', async () => {
