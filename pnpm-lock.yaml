@@ -82,7 +82,7 @@ importers:
         version: 4.5.4(@types/node@22.18.9)(rollup@4.52.4)(typescript@5.9.3)(vite@7.1.9(@types/node@22.18.9)(yaml@2.8.1))
       vitest:
         specifier: ^3.0.2
-        version: 3.2.4(@types/node@22.18.9)(happy-dom@19.0.2)(yaml@2.8.1)
+        version: 3.2.4(@types/node@22.18.9)(happy-dom@20.0.0)(yaml@2.8.1)
 
   dev-packages/eslint-config:
     dependencies:
@@ -228,8 +228,8 @@ importers:
         specifier: ^0.5.5
         version: 0.5.7(@vanilla-extract/css@1.17.4)
       happy-dom:
-        specifier: ^19.0.0
-        version: 19.0.2
+        specifier: ^20.0.0
+        version: 20.0.0
       react:
         specifier: ^19.0.0
         version: 19.2.0
@@ -288,7 +288,7 @@ importers:
         version: link:../../dev-packages/ts-config
       vitest-websocket-mock:
         specifier: ^0.5.0
-        version: 0.5.0(vitest@3.2.4(@types/node@22.18.9)(happy-dom@19.0.2)(yaml@2.8.1))
+        version: 0.5.0(vitest@3.2.4(@types/node@22.18.9)(happy-dom@20.0.0)(yaml@2.8.1))
 
 packages:
 
@@ -1895,8 +1895,8 @@ packages:
   '@types/mdx@2.0.13':
     resolution: {integrity: sha512-+OWZQfAYyio6YkJb3HLxDrvnx6SWWDbC0zVPfBRzUk0/nqoDyf6dNxQi3eArPe8rJ473nobTMQ/8Zk+LxJ+Yuw==}
 
-  '@types/node@20.19.14':
-    resolution: {integrity: sha512-gqiKWld3YIkmtrrg9zDvg9jfksZCcPywXVN7IauUGhilwGV/yOyeUsvpR796m/Jye0zUzMXPKe8Ct1B79A7N5Q==}
+  '@types/node@20.19.21':
+    resolution: {integrity: sha512-CsGG2P3I5y48RPMfprQGfy4JPRZ6csfC3ltBZSRItG3ngggmNY/qs2uZKp4p9VbrpqNNSMzUZNFZKzgOGnd/VA==}
 
   '@types/node@22.18.9':
     resolution: {integrity: sha512-5yBtK0k/q8PjkMXbTfeIEP/XVYnz1R9qZJ3yUicdEW7ppdDJfe+MqXEhpqDL3mtn4Wvs1u0KLEG0RXzCgNpsSg==}
@@ -3130,8 +3130,8 @@ packages:
     engines: {node: '>=0.4.7'}
     hasBin: true
 
-  happy-dom@19.0.2:
-    resolution: {integrity: sha512-831CLbgDyjRbd2lApHZFsBDe56onuFcjsCBPodzWpzedTpeDr8CGZjs7iEIdNW1DVwSFRecfwzLpVyGBPamwGA==}
+  happy-dom@20.0.0:
+    resolution: {integrity: sha512-GkWnwIFxVGCf2raNrxImLo397RdGhLapj5cT3R2PT7FwL62Ze1DROhzmYW7+J3p9105DYMVenEejEbnq5wA37w==}
     engines: {node: '>=20.0.0'}
 
   has-bigints@1.1.0:
@@ -6950,7 +6950,7 @@ snapshots:
 
   '@types/mdx@2.0.13': {}
 
-  '@types/node@20.19.14':
+  '@types/node@20.19.21':
     dependencies:
       undici-types: 6.21.0
 
@@ -8570,9 +8570,9 @@ snapshots:
     optionalDependencies:
       uglify-js: 3.19.3
 
-  happy-dom@19.0.2:
+  happy-dom@20.0.0:
     dependencies:
-      '@types/node': 20.19.14
+      '@types/node': 20.19.21
       '@types/whatwg-mimetype': 3.0.2
       whatwg-mimetype: 3.0.0
 
@@ -10507,13 +10507,13 @@ snapshots:
       fsevents: 2.3.3
       yaml: 2.8.1
 
-  vitest-websocket-mock@0.5.0(vitest@3.2.4(@types/node@22.18.9)(happy-dom@19.0.2)(yaml@2.8.1)):
+  vitest-websocket-mock@0.5.0(vitest@3.2.4(@types/node@22.18.9)(happy-dom@20.0.0)(yaml@2.8.1)):
     dependencies:
       '@vitest/utils': 3.2.4
       mock-socket: 9.3.1
-      vitest: 3.2.4(@types/node@22.18.9)(happy-dom@19.0.2)(yaml@2.8.1)
+      vitest: 3.2.4(@types/node@22.18.9)(happy-dom@20.0.0)(yaml@2.8.1)
 
-  vitest@3.2.4(@types/node@22.18.9)(happy-dom@19.0.2)(yaml@2.8.1):
+  vitest@3.2.4(@types/node@22.18.9)(happy-dom@20.0.0)(yaml@2.8.1):
     dependencies:
       '@types/chai': 5.2.2
       '@vitest/expect': 3.2.4
@@ -10540,7 +10540,7 @@ snapshots:
       why-is-node-running: 2.3.0
     optionalDependencies:
       '@types/node': 22.18.9
-      happy-dom: 19.0.2
+      happy-dom: 20.0.0
     transitivePeerDependencies:
       - jiti
       - less
