@@ -54,11 +54,11 @@ export const base = defineConfig(
   },
   {
     name: 'eslint-plugin-react-hooks',
-    files: ['**/*.{js,jsx,ts,tsx}'],
-    plugins: {
-      'react-hooks': reactHooks
-    },
-    extends: ['react-hooks/recommended']
+    ...reactHooks.configs.flat.recommended,
+    rules: {
+      ...reactHooks.configs.flat.recommended.rules,
+      'react-hooks/incompatible-library': 'off'
+    }
   },
 
   // Testing library recommended configs
