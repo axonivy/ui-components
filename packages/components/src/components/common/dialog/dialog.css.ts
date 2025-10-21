@@ -92,3 +92,11 @@ export const description = style({
 export const footer = style({
   margin: 0
 });
+
+export const basicContentContainer = style({
+  maxHeight: '80vh'
+});
+
+export const basicContent = style({
+  overflow: 'auto'
+})

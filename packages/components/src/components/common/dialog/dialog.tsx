@@ -4,7 +4,7 @@ import { cn } from '@/utils/class-name';
 import { IvyIcons } from '@axonivy/ui-icons';
 import * as DialogPrimitive from '@radix-ui/react-dialog';
 import type { ComponentProps, ReactNode } from 'react';
-import { content, contentClose, description, footer, header, overlay, title } from './dialog.css';
+import { basicContent, basicContentContainer, content, contentClose, description, footer, header, overlay, title } from './dialog.css';
 
 /**
  * Dialog, based on {@link https://www.radix-ui.com/docs/primitives/components/dialog | Radix UI Dialog}
@@ -85,9 +85,9 @@ BasicDialogFooter.displayName = 'BasicDialogFooter';
 type BasicDialoContentProps = BasicDialogHeaderProps & BasicDialogFooterProps & ComponentProps<typeof Flex>;
 
 const BasicDialogContent = ({ title, description, cancel, submit, ...props }: BasicDialoContentProps) => (
-  <Flex direction='column' gap={4}>
+  <Flex direction='column' gap={4} className={basicContentContainer}>
     <BasicDialogHeader title={title} description={description} />
-    <Flex direction='column' gap={2} {...props} />
+    <Flex direction='column' gap={2} className={basicContent} {...props} />
     <BasicDialogFooter submit={submit} cancel={cancel} />
   </Flex>
 );
