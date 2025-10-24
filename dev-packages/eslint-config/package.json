@@ -13,17 +13,17 @@
   "type": "module",
   "main": "index.mjs",
   "dependencies": {
-    "@eslint/js": "9.37.0",
+    "@eslint/js": "9.38.0",
     "@tanstack/eslint-plugin-query": "5.91.2",
-    "@typescript-eslint/eslint-plugin": "8.46.1",
-    "@typescript-eslint/parser": "8.46.1",
-    "eslint": "9.37.0",
+    "@typescript-eslint/eslint-plugin": "8.46.2",
+    "@typescript-eslint/parser": "8.46.2",
+    "eslint": "9.38.0",
     "eslint-formatter-checkstyle": "8.40.0",
     "eslint-plugin-playwright": "2.2.2",
     "eslint-plugin-react": "7.37.5",
     "eslint-plugin-react-compiler": "19.1.0-rc.2",
     "eslint-plugin-react-hooks": "5.2.0",
     "eslint-plugin-testing-library": "7.13.3",
-    "typescript-eslint": "8.46.1"
+    "typescript-eslint": "8.46.2"
   }
 }
