@@ -50,6 +50,7 @@ export const content = style({
   animationDuration: '.15s',
   borderRadius: vars.border.r3,
   maxWidth: 425,
+  maxHeight: '80vh',
   boxShadow: vars.shadow.popover,
   padding: '20px',
   backgroundColor: vars.color.background,
@@ -94,9 +95,9 @@ export const footer = style({
 });
 
 export const basicContentContainer = style({
-  maxHeight: '80vh'
+  overflow: 'auto'
 });
 
 export const basicContent = style({
   overflow: 'auto'
-})
+});
