@@ -102,8 +102,8 @@ importers:
         specifier: 9.38.0
         version: 9.38.0
       eslint-formatter-checkstyle:
-        specifier: 8.40.0
-        version: 8.40.0
+        specifier: 9.0.1
+        version: 9.0.1
       eslint-plugin-i18next:
         specifier: 6.1.3
         version: 6.1.3
@@ -2795,9 +2795,9 @@ packages:
     resolution: {integrity: sha512-TtpcNJ3XAzx3Gq8sWRzJaVajRs0uVxA2YAkdb1jm2YkPz4G6egUFAyA3n5vtEIZefPk5Wa4UXbKuS5fKkJWdgA==}
     engines: {node: '>=10'}
 
-  eslint-formatter-checkstyle@8.40.0:
-    resolution: {integrity: sha512-OpYAiI2yejMPUlB1O2pkfyNfBQrKNWrMK6X2eOn2vg/q94roDiHnOYExK0isdNglKeaYHA5JtgmuBtokFdj0AA==}
-    engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+  eslint-formatter-checkstyle@9.0.1:
+    resolution: {integrity: sha512-DeD1XkqFr22ZK+KsREcW3YFUsYtS5hTZb52m+fLVeAHMnTtgtLP9xiA55b5qiNvNxDf/hbTN+9X8lZl9jHH/cQ==}
+    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
   eslint-plugin-i18next@6.1.3:
     resolution: {integrity: sha512-z/h4oBRd9wI1ET60HqcLSU6XPeAh/EPOrBBTyCdkWeMoYrWAaUVA+DOQkWTiNIyCltG4NTmy62SQisVXxoXurw==}
@@ -8162,7 +8162,7 @@ snapshots:
 
   escape-string-regexp@4.0.0: {}
 
-  eslint-formatter-checkstyle@8.40.0: {}
+  eslint-formatter-checkstyle@9.0.1: {}
 
   eslint-plugin-i18next@6.1.3:
     dependencies:
