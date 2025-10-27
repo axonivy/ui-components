@@ -13,8 +13,7 @@ const FieldContext = createContext<FieldContextValue>({} as FieldContextValue);
 
 export const useField = () => {
   const { id } = useContext(FieldContext);
-  const newId = useId();
-  return createIds(id ?? newId);
+  return createIds(id ?? 'unknown');
 };
 
 const createIds = (id: string) => {
