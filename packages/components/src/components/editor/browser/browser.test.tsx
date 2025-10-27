@@ -73,7 +73,7 @@ test('info provider - lazy loaded', async () => {
 
 test('header', async () => {
   customRender(<Browser />);
-  expect(screen.getAllByRole('checkbox')[0]).toHaveAccessibleName('You can also render a checkbox here');
+  expect(screen.getByRole('checkbox', { name: 'You can also render a checkbox in the header' })).toBeVisible();
   await userEvent.click(screen.getByRole('tab', { name: 'Attribute' }));
   expect(screen.queryByRole('checkbox')).not.toBeInTheDocument();
   expect(screen.getByText(`Info: Lazy loaded row 'requester (User)'`)).toBeInTheDocument();
@@ -81,7 +81,7 @@ test('header', async () => {
 
 test('footer', async () => {
   customRender(<Browser />);
-  expect(screen.getAllByRole('checkbox')[1]).toHaveAccessibleName('You can also render a checkbox here');
+  expect(screen.getByRole('checkbox', { name: 'You can also render a checkbox in the footer' })).toBeVisible();
   await userEvent.click(screen.getByRole('tab', { name: 'Attribute' }));
   expect(screen.queryByRole('checkbox')).not.toBeInTheDocument();
 });
