@@ -90,7 +90,7 @@ export const Basic: StoryObj<typeof BasicCollapsible> = {
   },
   render: props => {
     return (
-      <BasicCollapsible {...props} label='Basic' defaultOpen={false}>
+      <BasicCollapsible {...props} label='Basic'>
         <Message variant='warning' message='there is a warning in here' />
       </BasicCollapsible>
     );
