@@ -78,11 +78,8 @@ export type BasicCollapsibleProps = CollapsibleContentProps &
     state?: StateDotProps;
   };
 
-const BasicCollapsible = ({ label, open, defaultOpen, state, controls, ...props }: BasicCollapsibleProps) => {
-  const [openState, setOpenState] = useState(open || (state?.messages?.length ?? 0) > 0 || defaultOpen);
-  if (open !== undefined && open !== openState) {
-    setOpenState(open);
-  }
+const BasicCollapsible = ({ label, defaultOpen, state, controls, ...props }: BasicCollapsibleProps) => {
+  const [openState, setOpenState] = useState(defaultOpen !== undefined ? defaultOpen : (state?.messages?.length ?? 0) > 0);
   return (
     <Collapsible open={openState} onOpenChange={setOpenState}>
       <CollapsibleTrigger
