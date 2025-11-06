@@ -54,8 +54,8 @@ const DefaultBrowser = ({ applyFn, applyBtn, initSearch, includeConditionBuilder
           name: 'Roles',
           icon: IvyIcons.Users,
           browser: roles,
-          header: <BasicCheckbox checked={true} label='You can also render a checkbox here' />,
-          footer: <BasicCheckbox checked={true} label='You can also render a checkbox here' />
+          header: <BasicCheckbox checked={true} label='You can also render a checkbox in the header' />,
+          footer: <BasicCheckbox checked={true} label='You can also render a checkbox in the footer' />
         },
         {
           name: 'Attribute',

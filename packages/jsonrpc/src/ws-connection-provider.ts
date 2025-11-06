@@ -54,7 +54,7 @@ export const webSocketConnection = <TConnection = Connection>(url: string | URL,
   const options = { ...defaultOptions, ...initOptions };
   let webSocket: WebSocket | undefined;
   let connection: TConnection | undefined;
-  let reconnectTimeout: NodeJS.Timeout;
+  let reconnectTimeout: number | undefined;
   let reconnectAttempts = 0;
 
   const listen = async (handler: WebSocketConnectionHandler<TConnection>, isReconnecting = false): Promise<TConnection> => {
