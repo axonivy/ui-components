@@ -125,9 +125,9 @@ export const Lazy: Story = {
       });
     };
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const loadLazy = (row: Row<Variable>) => {
       setData(old => loadChildrenFor(old));
-      console.log('lazy laod on row', row.id);
     };
 
     const columns: ColumnDef<Variable, string>[] = [

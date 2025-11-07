@@ -83,7 +83,6 @@ const DefaultBrowser = ({ applyFn, applyBtn, initSearch, includeConditionBuilder
         ...(includeConditionBuilder ? [condition] : [])
       ]}
       apply={(browserName, result) => {
-        console.log('apply', browserName, result);
         if (applyFn) applyFn(result?.value);
         else if (result) alert(`Browser '${browserName}' apply: ${result.value}`);
       }}

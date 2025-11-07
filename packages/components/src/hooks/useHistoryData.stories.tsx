@@ -17,10 +17,7 @@ export const Default: StoryObj = {
     const [count, setCount] = useState(0);
     const [logs, setLogs] = useState<string[]>([]);
     const history = useHistoryData<number>({
-      logger: msg => {
-        console.log(msg);
-        setLogs([msg, ...logs]);
-      }
+      logger: msg => setLogs([msg, ...logs])
     });
 
     return (
