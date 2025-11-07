@@ -102,7 +102,7 @@ export const Controls: Story = {
         {...props}
         controls={[
           { icon: IvyIcons.Undo, onClick: () => alert('Reset'), title: 'Reset' },
-          { icon: IvyIcons.Search, onClick: () => console.log('yey'), title: 'Search', toggle: true }
+          { icon: IvyIcons.Search, onClick: () => alert('yey'), title: 'Search', toggle: true }
         ]}
       />
     );
@@ -138,7 +138,7 @@ export const Basic: StoryObj<typeof BasicAccordionItem> = {
         label='With controls'
         controls={[
           { icon: IvyIcons.ArrowsMaximize, onClick: () => alert('Maximize'), title: 'Maximize' },
-          { icon: IvyIcons.Search, onClick: () => console.log('yey'), title: 'Search', toggle: true }
+          { icon: IvyIcons.Search, onClick: () => alert('yey'), title: 'Search', toggle: true }
         ]}
       >
         <div style={{ height: '100vh' }}>Yes. It&apos;s animated by default, but you can disable it if you prefer.</div>

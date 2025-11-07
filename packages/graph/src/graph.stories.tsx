@@ -37,7 +37,7 @@ const mapDataClassesToNodeData = (dataClasses: DataClass[]): NodeData[] => {
     content: <CustomNodeFieldContent fields={dataClass.fields} />,
     target: dataClass.relations,
     options: {
-      controls: <Button icon={IvyIcons.DataClass} onClick={() => console.log('Open ' + dataClass.name)} />,
+      controls: <Button icon={IvyIcons.DataClass} onClick={() => alert('Open ' + dataClass.name)} />,
       expandContent: true
     }
   }));

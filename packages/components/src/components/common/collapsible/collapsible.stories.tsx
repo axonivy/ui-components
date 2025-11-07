@@ -63,7 +63,7 @@ export const Controls: Story = {
         {...props}
         controls={[
           { icon: IvyIcons.ArrowsMaximize, onClick: () => alert('Maximize'), title: 'Maximize' },
-          { icon: IvyIcons.Search, onClick: () => console.log('yey'), title: 'Search', toggle: true }
+          { icon: IvyIcons.Search, onClick: () => alert('yey'), title: 'Search', toggle: true }
         ]}
       />
     );
@@ -85,7 +85,7 @@ export const Basic: StoryObj<typeof BasicCollapsible> = {
     state: { messages: [{ variant: 'warning', message: 'there is a warning in here' }] },
     controls: [
       { icon: IvyIcons.ArrowsMaximize, onClick: () => alert('Maximize'), title: 'Maximize' },
-      { icon: IvyIcons.Search, onClick: () => console.log('yey'), title: 'Search', toggle: true }
+      { icon: IvyIcons.Search, onClick: () => alert('yey'), title: 'Search', toggle: true }
     ]
   },
   render: props => {

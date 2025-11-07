@@ -48,9 +48,9 @@ export const useAttrBrowser = () => {
     });
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const loadLazy = (row: Row<BrowserNode>) => {
     setAttr(old => loadChildrenFor(old));
-    console.log('lazy load attrs for ', row.original.value);
   };
 
   return useBrowser(attr, { loadChildren: loadLazy });
