@@ -31,7 +31,7 @@
     "@react-aria/dnd": "3.11.3",
     "@tanstack/react-table": "8.21.3",
     "clsx": "2.1.1",
-    "downshift": "9.0.12",
+    "downshift": "9.0.13",
     "react-hotkeys-hook": "^4.6.1",
     "react-resizable-panels": "2.1.9",
     "sonner": "1.7.4"
