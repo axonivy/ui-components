@@ -207,7 +207,7 @@ importers:
         specifier: workspace:*
         version: link:../../dev-packages/ts-config
       '@axonivy/ui-icons':
-        specifier: workspace:~13.2.0-next
+        specifier: workspace:~14.0.0-next
         version: link:../icons
       '@testing-library/jest-dom':
         specifier: ^6.6.3
@@ -250,10 +250,10 @@ importers:
         specifier: workspace:*
         version: link:../../dev-packages/ts-config
       '@axonivy/ui-components':
-        specifier: workspace:~13.2.0-next
+        specifier: workspace:~14.0.0-next
         version: link:../components
       '@axonivy/ui-icons':
-        specifier: workspace:~13.2.0-next
+        specifier: workspace:~14.0.0-next
         version: link:../icons
       '@types/react':
         specifier: ^19.0.7
