@@ -10,7 +10,7 @@ const optKey = (): string => (isMac() ? '⌥' : 'ALT');
 export const hotkeyText = (hotkey: string): string => hotkey.replace('mod', modKey()).replace('alt', optKey()).replace('shift', '⇧');
 
 export const hotkeyUndoFix = (e: KeyboardEvent, undo: () => void) => {
-  if (isWindows() && e.code === 'KeyZ' && e.key === 'y') {
+  if (e.code === 'KeyZ' && e.key === 'y') {
     return;
   }
   undo();
