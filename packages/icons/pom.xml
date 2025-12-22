@@ -6,7 +6,7 @@
 
   <groupId>ch.ivyteam.ui.icons</groupId>
   <artifactId>ui-icons</artifactId>
-  <version>13.2.0-SNAPSHOT</version>
+  <version>13.2.1-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <distributionManagement>

@@ -1,6 +1,6 @@
 {
   "name": "@axonivy/ui-components",
-  "version": "13.2.0-next",
+  "version": "13.2.1-next",
   "private": false,
   "license": "(EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0)",
   "author": "Axon Ivy AG",
@@ -38,12 +38,12 @@
     "sonner": "2.0.7"
   },
   "peerDependencies": {
-    "@axonivy/ui-icons": "workspace:~13.2.0-next",
+    "@axonivy/ui-icons": "workspace:~13.2.1-next",
     "react": "^19.0"
   },
   "devDependencies": {
     "@axonivy/ts-config": "workspace:*",
-    "@axonivy/ui-icons": "workspace:~13.2.0-next",
+    "@axonivy/ui-icons": "workspace:~13.2.1-next",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.2.0",
     "@testing-library/user-event": "^14.6.0",
