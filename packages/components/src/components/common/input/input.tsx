@@ -20,8 +20,10 @@ Input.displayName = 'Input';
 
 const BasicInput = ({ value, onChange, defaultValue, ...props }: InputProps) => {
   const [currentValue, setCurrentValue] = useState(value ?? defaultValue ?? '');
-  if (value !== undefined && value !== currentValue) {
+  const [prevValue, setPrevValue] = useState(value);
+  if (value !== undefined && prevValue !== value) {
     setCurrentValue(value);
+    setPrevValue(value);
   }
   const updateValue = (event: ChangeEvent<HTMLInputElement>) => {
     setCurrentValue(event.target.value);
@@ -35,8 +37,10 @@ type SearchInputProps = Omit<InputProps, 'value' | 'onChange'> & { value?: strin
 
 const SearchInput = ({ value, onChange, ...props }: SearchInputProps) => {
   const [currentValue, setCurrentValue] = useState(value ?? '');
-  if (value !== undefined && value !== currentValue) {
+  const [prevValue, setPrevValue] = useState(value);
+  if (value !== undefined && prevValue !== value) {
     setCurrentValue(value);
+    setPrevValue(value);
   }
   const updateValue = (change: string) => {
     setCurrentValue(change);
