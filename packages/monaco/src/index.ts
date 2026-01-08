@@ -1,5 +1,3 @@
-export * from './ivy-script-client';
-export * from './monaco-util';
 export * from './monaco-editor-util';
 
 export * from './utils/console-util';

@@ -7,7 +7,7 @@ export const IvyScriptArea = () => {
   return (
     <BasicField label='IvyScriptArea' message={{ variant: 'description', message: 'This editor can be resized.' }}>
       <ResizableCodeEditor
-        contextPath='designer/workflow-demos/15254DCE818AD7A2-f0/task.code/'
+        contextPath='Developer-Test/workflow-demos/15254DC87A1B183B-f3/output.code/'
         language='ivyScript'
         value={value}
         onChange={setValue}

@@ -52,6 +52,6 @@ export namespace URLParams {
     if (href.includes('/process-inscription')) {
       return href.substring(protocol.length + 2, href.indexOf('/process-inscription'));
     }
-    return 'localhost:8081';
+    return 'localhost:8080';
   };
 }

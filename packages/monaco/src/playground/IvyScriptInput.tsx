@@ -10,7 +10,7 @@ export const IvyScriptInput = () => {
       message={{ variant: 'description', message: 'This editor is single line for expressions. Currently it checks for a boolean type.' }}
     >
       <SingleLineCodeEditor
-        contextPath='designer/workflow-demos/15254DCE818AD7A2-f0/task.code/Boolean'
+        contextPath='Developer-Test/workflow-demos/15254DC87A1B183B-f3/output.code/Boolean'
         language='ivyScript'
         value={value}
         onChange={setValue}

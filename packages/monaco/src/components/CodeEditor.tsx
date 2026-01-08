@@ -1,5 +1,5 @@
 import './CodeEditor.css';
-import type * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
+import type * as monaco from 'monaco-editor';
 import { Suspense, lazy, useState } from 'react';
 import { useReadonly } from '@axonivy/ui-components';
 import { MonacoEditorUtil, MONACO_OPTIONS } from '../monaco-editor-util';

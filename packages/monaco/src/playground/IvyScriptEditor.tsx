@@ -8,7 +8,7 @@ export const IvyScriptEditor = () => {
   return (
     <BasicField label='IvyScriptEditor' message={{ variant: 'description', message: 'This editor has line numbers and folding enabled.' }}>
       <CodeEditor
-        contextPath='designer/workflow-demos/15254DCE818AD7A2-f0/task.code/'
+        contextPath='Developer-Test/workflow-demos/15254DC87A1B183B-f3/output.code/'
         language='ivyScript'
         value={value}
         onChange={setValue}

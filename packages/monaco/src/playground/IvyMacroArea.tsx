@@ -7,7 +7,7 @@ export const IvyMacroArea = () => {
   return (
     <BasicField label='IvyMacroArea' message={{ variant: 'description', message: 'This editor can be resized.' }}>
       <ResizableCodeEditor
-        contextPath='designer/workflow-demos/15254DCE818AD7A2-f0/task.description/'
+        contextPath='Developer-Test/workflow-demos/15254DC87A1B183B-f3/output.code/'
         language='ivyMacro'
         value={value}
         onChange={setValue}

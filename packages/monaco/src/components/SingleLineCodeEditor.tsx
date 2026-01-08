@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import type * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
+import type * as monaco from 'monaco-editor';
 import type { CodeEditorProps } from './CodeEditor';
 import { CodeEditor } from './CodeEditor';
 import { MonacoEditorUtil, SINGLE_LINE_MONACO_OPTIONS } from '../monaco-editor-util';
