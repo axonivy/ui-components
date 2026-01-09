@@ -24,6 +24,10 @@
       "path": "./packages/jsonrpc"
     },
     {
+      "name": "package/monaco",
+      "path": "./packages/monaco"
+    },
+    {
       "name": "dev-package/eslint-config",
       "path": "./dev-packages/eslint-config"
     },

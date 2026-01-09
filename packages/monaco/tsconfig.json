@@ -1,0 +1,10 @@
+{
+  "extends": "@axonivy/ts-config/package",
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "lib",
+    "noEmit": true,
+    "types": ["vite/client"]
+  },
+  "include": ["src"]
+}
