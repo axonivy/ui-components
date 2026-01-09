@@ -4,6 +4,7 @@ node_modules
 # production
 lib
 dist
+build
 src-gen
 storybook-static
 eslint.xml

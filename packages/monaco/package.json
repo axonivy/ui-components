@@ -1,0 +1,48 @@
+{
+  "name": "@axonivy/monaco",
+  "version": "13.1.0-next",
+  "private": false,
+  "license": "(EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0)",
+  "author": "Axon Ivy AG",
+  "homepage": "https://developer.axonivy.com/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/axonivy/ui-components"
+  },
+  "files": [
+    "lib",
+    "src"
+  ],
+  "dependencies": {
+    "@monaco-editor/react": "4.8.0-rc.3",
+    "@react-aria/interactions": "^3.22.2",
+    "monaco-editor": "0.55.1"
+  },
+  "peerDependencies": {
+    "@axonivy/ui-components": "workspace:~14.0.0-next",
+    "@axonivy/ui-icons": "workspace:~14.0.0-next",
+    "react": "^18.2 || ^19.0"
+  },
+  "devDependencies": {
+    "@axonivy/ts-config": "workspace:*",
+    "@axonivy/ui-components": "workspace:~14.0.0-next",
+    "@axonivy/ui-icons": "workspace:~14.0.0-next",
+    "@types/react": "^19.0.7",
+    "@types/react-dom": "^19.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "type": "module",
+  "types": "lib/index.d.ts",
+  "main": "lib/monaco.js",
+  "module": "lib/monaco.js",
+  "scripts": {
+    "clean": "rimraf lib *.tsbuildinfo",
+    "build": "tsc --build",
+    "package": "npm run clean && vite build && npm run build",
+    "package:playground": "vite build --config vite.playground.config.ts",
+    "dev": "vite",
+    "serve": "vite preview --config vite.playground.config.ts",
+    "type": "tsc --noEmit"
+  }
+}

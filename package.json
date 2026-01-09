@@ -21,6 +21,7 @@
     "lint:fix": "eslint --fix",
     "lint:inspect": "eslint --inspect-config",
     "dev": "storybook dev -p 6006 --no-open",
+    "dev:monaco": "npm run dev --workspace=@axonivy/monaco",
     "test": "vitest",
     "test:ci": "vitest run --reporter=default --reporter=junit --outputFile=report.xml",
     "raise:version": "lerna version --allow-peer-dependencies-update --no-git-tag-version --no-push --ignore-scripts --exact --yes",
