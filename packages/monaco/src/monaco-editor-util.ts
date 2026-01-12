@@ -156,7 +156,7 @@ export async function configureMonacoReactEditor() {
   monacoApi.languages.setMonarchTokensProvider('ivyMacro', ivyMacroLang);
   monacoApi.editor.defineTheme(MonacoEditorUtil.DEFAULT_THEME_NAME, MonacoEditorUtil.themeData('light'));
   const transport = await monacoApi.lsp.WebSocketTransport.connectTo({
-    address: `ws://localhost:8081/designer/ivy-script-lsp`
+    address: `ws://localhost:8081/ivy-script-lsp`
     // address: `ws://localhost:8080/~Developer-test/ivy-script-lsp`
     // address: `wss://neo.ivyteam.io/~Developer-workflow-demos/ivy-script-lsp`
   });
