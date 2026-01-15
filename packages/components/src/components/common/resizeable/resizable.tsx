@@ -8,29 +8,31 @@ import { resizableHandle, resizableLine } from './resizable.css';
 /**
  * ResizablePanelGroup, based on {@link https://github.com/bvaughn/react-resizable-panels | React Resizable Panels}
  */
-const ResizablePanelGroup = ({ className, ...props }: ComponentProps<typeof ResizablePrimitive.PanelGroup>) => (
-  <ResizablePrimitive.PanelGroup className={cn(className, 'ui-resizable')} {...props} />
+const ResizableGroup = ({ className, ...props }: ComponentProps<typeof ResizablePrimitive.Group>) => (
+  <ResizablePrimitive.Group className={cn(className, 'ui-resizable')} {...props} />
 );
 
 const ResizablePanel = ResizablePrimitive.Panel;
 
-export type ResizableHandleProps = ComponentProps<typeof ResizablePrimitive.PanelResizeHandle> & {
+export type ResizableHandleProps = ComponentProps<typeof ResizablePrimitive.Separator> & {
   withHandle?: boolean;
 };
 
 const ResizableHandle = ({ withHandle, children, className, ...props }: ResizableHandleProps) => (
   <>
-    <ResizablePrimitive.PanelResizeHandle className={cn(resizableLine, className, 'ui-resizable-handle')} {...props}>
+    <ResizablePrimitive.Separator className={cn(resizableLine, className, 'ui-resizable-handle')} {...props}>
       {withHandle && (
         <div className={resizableHandle}>
           <IvyIcon icon={IvyIcons.EditDots} />
         </div>
       )}
-    </ResizablePrimitive.PanelResizeHandle>
+    </ResizablePrimitive.Separator>
     {children}
   </>
 );
 
-export type ImperativePanelHandle = ResizablePrimitive.ImperativePanelHandle;
+const useGroupRef = ResizablePrimitive.useGroupRef;
+const usePanelRef = ResizablePrimitive.usePanelRef;
+const useDefaultLayout = ResizablePrimitive.useDefaultLayout;
 
-export { ResizableHandle, ResizablePanel, ResizablePanelGroup };
+export { ResizableGroup, ResizableHandle, ResizablePanel, useDefaultLayout, useGroupRef, usePanelRef };
