@@ -52,7 +52,7 @@ export const UndoRedo: StoryObj = {
 export const Scoped: StoryObj = {
   render: () => {
     const [count, setCount] = useState(0);
-    const ref = useHotkeys('c', () => setCount(prevCount => prevCount + 1));
+    const ref = useHotkeys<HTMLDivElement>('c', () => setCount(prevCount => prevCount + 1));
     return (
       <div ref={ref} tabIndex={-1} style={{ border: '2px solid #9e768f' }}>
         <h1>Scoped Hotkeys</h1>
@@ -93,7 +93,7 @@ export const WithScopes: StoryObj = {
 const Comp = () => {
   const [count, setCount] = useState(1);
 
-  const { enabledScopes, enableScope, disableScope } = useHotkeysContext();
+  const { activeScopes, enableScope, disableScope } = useHotkeysContext();
   const { activateLocalScopes, restoreLocalScopes, restorableScopes } = useHotkeyLocalScopes(['count']);
   useHotkeys('q', () => setCount(prevCount => prevCount + 1), { scopes: ['count'] });
   useHotkeys('w', () => setCount(prevCount => prevCount - 1), { scopes: ['count'] });
@@ -113,23 +113,23 @@ const Comp = () => {
       </p>
       <p>Count: {count}</p>
       <Flex direction='column' gap={2}>
-        {enabledScopes.includes('count') && (
+        {activeScopes.includes('count') && (
           <Button variant='outline' onClick={restoreLocalScopes}>
             restore local scope
           </Button>
         )}
-        {!enabledScopes.includes('count') && (
+        {!activeScopes.includes('count') && (
           <Button variant='outline' onClick={activateLocalScopes}>
             activate count scope
           </Button>
         )}
 
-        {!enabledScopes.includes('something') && (
+        {!activeScopes.includes('something') && (
           <Button variant='outline' onClick={() => enableScope('something')}>
             enable something scope
           </Button>
         )}
-        {enabledScopes.includes('something') && (
+        {activeScopes.includes('something') && (
           <Button variant='outline' onClick={() => disableScope('something')}>
             disable something scope
           </Button>
@@ -138,7 +138,7 @@ const Comp = () => {
       <p>
         Active Scopes:{' '}
         <b title='active-scopes'>
-          {enabledScopes.map((s, index) => (
+          {activeScopes.map((s, index) => (
             <Fragment key={index}>
               {index !== 0 ? ' | ' : ''}
               {s}
