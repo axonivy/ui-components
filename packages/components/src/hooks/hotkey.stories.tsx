@@ -1,10 +1,10 @@
 import { Button } from '@/components/common/button/button';
 import { Flex } from '@/components/common/flex/flex';
-import { hotkeyRedoFix, hotkeyText, hotkeyUndoFix, isWindows } from '@/utils/hotkey';
+import { hotkeyText } from '@/utils/hotkey';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Fragment, useState } from 'react';
 import { HotkeysProvider, useHotkeys, useHotkeysContext } from 'react-hotkeys-hook';
-import { useHotkeyLocalScopes } from './hotkey';
+import { redoHotkey, undoHotkey, useHotkeyLocalScopes, useRedoHotkey, useUndoHotkey } from './hotkey';
 
 const meta: Meta = {
   title: 'Hooks/Hotkey'
@@ -30,19 +30,19 @@ export const UndoRedo: StoryObj = {
   render: () => {
     const [undoCount, setUndoCount] = useState(0);
     const [redoCount, setRedoCount] = useState(0);
-    useHotkeys('mod+z', e => hotkeyUndoFix(e, () => setUndoCount(prevCount => prevCount + 1)));
-    useHotkeys(isWindows() ? 'mod+y' : 'mod+shift+z', e => hotkeyRedoFix(e, () => setRedoCount(prevCount => prevCount + 1)));
-    const hotkeyUndo = hotkeyText('mod+z');
-    const hotkeyRedo = hotkeyText(isWindows() ? 'mod+y' : 'mod+shift+z');
+    useUndoHotkey(() => setUndoCount(prevCount => prevCount + 1));
+    useRedoHotkey(() => setRedoCount(prevCount => prevCount + 1));
+    const undoHotkeyLabel = hotkeyText(undoHotkey());
+    const redoHotkeyLabel = hotkeyText(redoHotkey());
 
     return (
       <>
         <span>
-          Pressed the <b>{hotkeyUndo}</b> key {undoCount} times.
+          Pressed the <b>{undoHotkeyLabel}</b> key {undoCount} times.
         </span>
         <br />
         <span>
-          Pressed the <b>{hotkeyRedo}</b> key {redoCount} times.
+          Pressed the <b>{redoHotkeyLabel}</b> key {redoCount} times.
         </span>
       </>
     );
