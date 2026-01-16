@@ -1,6 +1,6 @@
 import { Flex } from '@/components/common/flex/flex';
 import { PanelMessage } from '@/components/common/panelMessage/panelMessage';
-import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from '@/components/common/resizeable/resizable';
+import { ResizableGroup, ResizableHandle, ResizablePanel } from '@/components/common/resizeable/resizable';
 import { Default as Sidebar } from '@/components/editor/sidebar/sidebar.stories';
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
@@ -17,7 +17,7 @@ type Story = StoryObj;
 const EditorStory = () => {
   const [sideBar, setSideBar] = useState(true);
   return (
-    <ResizablePanelGroup direction='horizontal' style={{ minHeight: 200 }}>
+    <ResizableGroup orientation='horizontal' style={{ minHeight: 200 }}>
       <ResizablePanel defaultSize={75} minSize={50}>
         <Flex direction='column' style={{ height: '100%' }}>
           <ToolbarStory sideBarCollapse={() => setSideBar(old => !old)} />
@@ -32,7 +32,7 @@ const EditorStory = () => {
           </ResizablePanel>
         </>
       )}
-    </ResizablePanelGroup>
+    </ResizableGroup>
   );
 };
 

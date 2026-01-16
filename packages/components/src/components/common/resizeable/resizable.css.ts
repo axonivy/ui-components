@@ -9,14 +9,14 @@ export const resizableLine = style({
   alignItems: 'center',
   backgroundColor: vars.color.n200,
   selectors: {
-    '&[data-panel-group-direction="vertical"]': {
+    '&[aria-orientation="horizontal"]': {
       width: '100%',
       height: 1
     },
-    '&[data-resize-handle-state=hover]': {
+    '&[data-separator=hover]': {
       backgroundColor: vars.color.p300
     },
-    '&[data-resize-handle-active]': {
+    '&[data-separator=active]': {
       backgroundColor: vars.color.p300
     }
   }
@@ -33,7 +33,7 @@ export const resizableHandle = style({
   height: '1rem',
   zIndex: 10,
   selectors: {
-    [`${resizableLine}[data-panel-group-direction="vertical"] &`]: {
+    [`${resizableLine}[aria-orientation="horizontal"] &`]: {
       transform: 'rotate(90deg)'
     }
   }

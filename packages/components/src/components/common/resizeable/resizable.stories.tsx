@@ -5,47 +5,53 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/common/ta
 import { vars } from '@/styles/theme.css';
 import { IvyIcons } from '@axonivy/ui-icons';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { useRef } from 'react';
-import { ResizableHandle, ResizablePanel, ResizablePanelGroup, type ImperativePanelHandle } from './resizable';
+import { ResizableGroup, ResizableHandle, ResizablePanel, useDefaultLayout, usePanelRef } from './resizable';
 
-const meta: Meta<typeof ResizablePanelGroup> = {
+const meta: Meta<typeof ResizableGroup> = {
   title: 'Common/Resizeable',
-  component: ResizablePanelGroup
+  component: ResizableGroup
 };
 
 export default meta;
 
-type Story = StoryObj<{ direction: 'horizontal' | 'vertical'; withHandle: boolean }>;
+type Story = StoryObj<{ orientation: 'horizontal' | 'vertical'; withHandle: boolean }>;
 
 export const Default: Story = {
   argTypes: {
-    direction: { control: 'select', options: ['horizontal', 'vertical'] }
+    orientation: { control: 'select', options: ['horizontal', 'vertical'] }
   },
   args: {
-    direction: 'horizontal',
+    orientation: 'horizontal',
     withHandle: true
   },
-  render: ({ direction, withHandle }) => (
-    <Flex justifyContent='center' alignItems='center'>
-      <ResizablePanelGroup
-        autoSaveId='ivy-resizable'
-        direction={direction}
-        style={{ minHeight: '200px', border: vars.border.basic, borderRadius: vars.border.r2 }}
-      >
-        <ResizablePanel defaultSize={75} minSize={50}>
-          <Flex justifyContent='center' alignItems='center' style={{ height: '100%' }}>
-            <span>Content</span>
-          </Flex>
-        </ResizablePanel>
-        <ResizableHandle withHandle={withHandle} />
-        <ResizablePanel defaultSize={25} minSize={10}>
-          <Flex justifyContent='center' alignItems='center' style={{ height: '100%' }}>
-            <span>Sidebar</span>
-          </Flex>
-        </ResizablePanel>
-      </ResizablePanelGroup>
-    </Flex>
-  )
+  render: ({ orientation, withHandle }) => {
+    const { defaultLayout, onLayoutChanged } = useDefaultLayout({
+      groupId: 'resizable-default',
+      storage: localStorage
+    });
+    return (
+      <Flex justifyContent='center' alignItems='center'>
+        <ResizableGroup
+          defaultLayout={defaultLayout}
+          onLayoutChanged={onLayoutChanged}
+          orientation={orientation}
+          style={{ minHeight: '200px', border: vars.border.basic, borderRadius: vars.border.r2 }}
+        >
+          <ResizablePanel defaultSize={75} minSize={50}>
+            <Flex justifyContent='center' alignItems='center' style={{ height: '100%' }}>
+              <span>Content</span>
+            </Flex>
+          </ResizablePanel>
+          <ResizableHandle withHandle={withHandle} />
+          <ResizablePanel defaultSize={25} minSize={10}>
+            <Flex justifyContent='center' alignItems='center' style={{ height: '100%' }}>
+              <span>Sidebar</span>
+            </Flex>
+          </ResizablePanel>
+        </ResizableGroup>
+      </Flex>
+    );
+  }
 };
 
 export const Conditional: StoryObj<{ showLeftPanel: boolean; showRightPanel: boolean }> = {
@@ -53,52 +59,65 @@ export const Conditional: StoryObj<{ showLeftPanel: boolean; showRightPanel: boo
     showLeftPanel: true,
     showRightPanel: true
   },
-  render: ({ showLeftPanel, showRightPanel }) => (
-    <Flex justifyContent='center' alignItems='center'>
-      <ResizablePanelGroup
-        autoSaveId='conditional'
-        direction='horizontal'
-        style={{ minHeight: '200px', border: vars.border.basic, borderRadius: vars.border.r2 }}
-      >
-        {showLeftPanel && (
-          <>
-            <ResizablePanel id='left' order={1}>
-              <Flex justifyContent='center' alignItems='center' style={{ height: '100%' }}>
-                <span>Left</span>
-              </Flex>
-            </ResizablePanel>
-            <ResizableHandle />
-          </>
-        )}
-        <ResizablePanel id='center' order={2}>
-          <Flex justifyContent='center' alignItems='center' style={{ height: '100%' }}>
-            <span>Middle</span>
-          </Flex>
-        </ResizablePanel>
-        {showRightPanel && (
-          <>
-            <ResizableHandle />
-            <ResizablePanel id='right' order={3}>
-              <Flex justifyContent='center' alignItems='center' style={{ height: '100%' }}>
-                <span>Right</span>
-              </Flex>
-            </ResizablePanel>
-          </>
-        )}
-      </ResizablePanelGroup>
-    </Flex>
-  )
+  render: ({ showLeftPanel, showRightPanel }) => {
+    const { defaultLayout, onLayoutChanged } = useDefaultLayout({
+      groupId: 'resizable-conditional',
+      storage: localStorage
+    });
+
+    return (
+      <Flex justifyContent='center' alignItems='center'>
+        <ResizableGroup
+          defaultLayout={defaultLayout}
+          onLayoutChanged={onLayoutChanged}
+          orientation='horizontal'
+          style={{ minHeight: '200px', border: vars.border.basic, borderRadius: vars.border.r2 }}
+        >
+          {showLeftPanel && (
+            <>
+              <ResizablePanel id='left'>
+                <Flex justifyContent='center' alignItems='center' style={{ height: '100%' }}>
+                  <span>Left</span>
+                </Flex>
+              </ResizablePanel>
+              <ResizableHandle />
+            </>
+          )}
+          <ResizablePanel id='center'>
+            <Flex justifyContent='center' alignItems='center' style={{ height: '100%' }}>
+              <span>Middle</span>
+            </Flex>
+          </ResizablePanel>
+          {showRightPanel && (
+            <>
+              <ResizableHandle />
+              <ResizablePanel id='right'>
+                <Flex justifyContent='center' alignItems='center' style={{ height: '100%' }}>
+                  <span>Right</span>
+                </Flex>
+              </ResizablePanel>
+            </>
+          )}
+        </ResizableGroup>
+      </Flex>
+    );
+  }
 };
 
 export const ContentHandle: Story = {
   render: () => {
-    const bottomRef = useRef<ImperativePanelHandle>(null);
+    const { defaultLayout, onLayoutChanged } = useDefaultLayout({
+      groupId: 'resizable-content-handle',
+      storage: localStorage
+    });
+    const bottomRef = usePanelRef();
     return (
       <Tabs variant='slim'>
         <Flex justifyContent='center' alignItems='center'>
-          <ResizablePanelGroup
-            autoSaveId='ivy-resizable'
-            direction='vertical'
+          <ResizableGroup
+            defaultLayout={defaultLayout}
+            onLayoutChanged={onLayoutChanged}
+            orientation='vertical'
             style={{ minHeight: '200px', border: vars.border.basic, borderRadius: vars.border.r2 }}
           >
             <ResizablePanel defaultSize={75} minSize={50}>
@@ -125,13 +144,13 @@ export const ContentHandle: Story = {
                 />
               </Flex>
             </ResizableHandle>
-            <ResizablePanel ref={bottomRef} defaultSize={25} minSize={10} collapsible>
+            <ResizablePanel panelRef={bottomRef} defaultSize={25} minSize={10} collapsible>
               <Flex justifyContent='center' alignItems='center' style={{ height: '100%' }}>
                 <TabsContent value='Log'>Log</TabsContent>
                 <TabsContent value='Mail'>Mail</TabsContent>
               </Flex>
             </ResizablePanel>
-          </ResizablePanelGroup>
+          </ResizableGroup>
         </Flex>
       </Tabs>
     );
