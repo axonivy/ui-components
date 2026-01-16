@@ -1,17 +1,18 @@
+import { hotkeyRedoFix, hotkeyUndoFix, isWindows } from '@/utils/hotkey';
 import { useState } from 'react';
-import { useHotkeysContext } from 'react-hotkeys-hook';
+import { useHotkeys, useHotkeysContext, type Options } from 'react-hotkeys-hook';
 
 export { HotkeysProvider, isHotkeyPressed, useHotkeys, useHotkeysContext } from 'react-hotkeys-hook';
 
 export const useHotkeyLocalScopes = (scopes: string[]) => {
-  const { enabledScopes, enableScope, disableScope } = useHotkeysContext();
-  const [restorableScopes, setRestorableScopes] = useState(enabledScopes);
+  const { activeScopes, enableScope, disableScope } = useHotkeysContext();
+  const [restorableScopes, setRestorableScopes] = useState(activeScopes);
 
   const activateLocalScopes = () => {
-    setRestorableScopes(enabledScopes);
+    setRestorableScopes(activeScopes);
     scopes.forEach(scope => enableScope(scope));
 
-    enabledScopes.forEach(scope => {
+    activeScopes.forEach(scope => {
       if (!scopes.includes(scope)) {
         disableScope(scope);
       }
@@ -21,7 +22,7 @@ export const useHotkeyLocalScopes = (scopes: string[]) => {
   const restoreLocalScopes = () => {
     restorableScopes.forEach(scope => enableScope(scope));
 
-    enabledScopes.forEach(scope => {
+    activeScopes.forEach(scope => {
       if (!restorableScopes.includes(scope)) {
         disableScope(scope);
       }
@@ -43,4 +44,16 @@ export const useDialogHotkeys = (scopes: string[] = []) => {
     }
   };
   return { open, onOpenChange };
+};
+
+export const undoHotkey = () => 'mod+Z';
+
+export const useUndoHotkey = (undo: () => void, options?: Omit<Options, 'useKey'>) => {
+  return useHotkeys(undoHotkey(), e => hotkeyUndoFix(e, undo), { useKey: true, ...options });
+};
+
+export const redoHotkey = () => (isWindows() ? 'mod+Y' : 'mod+shift+Z');
+
+export const useRedoHotkey = (redo: () => void, options?: Omit<Options, 'useKey'>) => {
+  return useHotkeys(redoHotkey(), e => hotkeyRedoFix(e, redo), { useKey: true, ...options });
 };
