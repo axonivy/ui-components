@@ -14,7 +14,7 @@
     "src"
   ],
   "dependencies": {
-    "@dagrejs/dagre": "^1.1.4",
+    "@dagrejs/dagre": "^2.0.0",
     "@xyflow/react": "12.10.0"
   },
   "peerDependencies": {

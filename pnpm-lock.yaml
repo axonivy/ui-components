@@ -240,8 +240,8 @@ importers:
   packages/graph:
     dependencies:
       '@dagrejs/dagre':
-        specifier: ^1.1.4
-        version: 1.1.8
+        specifier: ^2.0.0
+        version: 2.0.3
       '@xyflow/react':
         specifier: 12.10.0
         version: 12.10.0(@types/react@19.2.8)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
@@ -400,8 +400,8 @@ packages:
       conventional-commits-parser:
         optional: true
 
-  '@dagrejs/dagre@1.1.8':
-    resolution: {integrity: sha512-5SEDlndt4W/LaVzPYJW+bSmSEZc9EzTf8rJ20WCKvjS5EAZAN0b+x0Yww7VMT4R3Wootkg+X9bUfUxazYw6Blw==}
+  '@dagrejs/dagre@2.0.3':
+    resolution: {integrity: sha512-ig9Vg52tsijTIKNgW9BAeUVBhDRvqlZ2a6FQ6i41YcPpoAy7VXXt2qye22PXRecGSjAp0OEEVUBhJ4oS9BnBzQ==}
 
   '@dagrejs/graphlib@2.2.4':
     resolution: {integrity: sha512-mepCf/e9+SKYy1d02/UkvSy6+6MoyXhVxP8lLDfA7BPE1X1d4dR0sZznmbM8/XVJ1GPM+Svnx7Xj6ZweByWUkw==}
@@ -5368,7 +5368,7 @@ snapshots:
       conventional-commits-filter: 5.0.0
       conventional-commits-parser: 6.2.1
 
-  '@dagrejs/dagre@1.1.8':
+  '@dagrejs/dagre@2.0.3':
     dependencies:
       '@dagrejs/graphlib': 2.2.4
 
