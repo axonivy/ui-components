@@ -286,6 +286,9 @@ importers:
       '@axonivy/ts-config':
         specifier: workspace:*
         version: link:../../dev-packages/ts-config
+      vitest:
+        specifier: ^4.0.0
+        version: 4.0.18(@types/node@25.0.10)(happy-dom@20.3.7)(yaml@2.8.2)
       vitest-websocket-mock:
         specifier: ^0.5.0
         version: 0.5.0(vitest@4.0.18(@types/node@25.0.10)(happy-dom@20.3.7)(yaml@2.8.2))
@@ -7332,6 +7335,14 @@ snapshots:
     optionalDependencies:
       vite: 7.3.1(@types/node@24.10.9)(yaml@2.8.2)
 
+  '@vitest/mocker@4.0.18(vite@7.3.1(@types/node@25.0.10)(yaml@2.8.2))':
+    dependencies:
+      '@vitest/spy': 4.0.18
+      estree-walker: 3.0.3
+      magic-string: 0.30.21
+    optionalDependencies:
+      vite: 7.3.1(@types/node@25.0.10)(yaml@2.8.2)
+
   '@vitest/pretty-format@3.2.4':
     dependencies:
       tinyrainbow: 2.0.0
@@ -10713,7 +10724,7 @@ snapshots:
   vitest@4.0.18(@types/node@25.0.10)(happy-dom@20.3.7)(yaml@2.8.2):
     dependencies:
       '@vitest/expect': 4.0.18
-      '@vitest/mocker': 4.0.18(vite@7.3.1(@types/node@24.10.9)(yaml@2.8.2))
+      '@vitest/mocker': 4.0.18(vite@7.3.1(@types/node@25.0.10)(yaml@2.8.2))
       '@vitest/pretty-format': 4.0.18
       '@vitest/runner': 4.0.18
       '@vitest/snapshot': 4.0.18
