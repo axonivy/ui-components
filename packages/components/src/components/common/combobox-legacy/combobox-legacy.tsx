@@ -8,13 +8,13 @@ import { cn } from '@/utils/class-name';
 import { IvyIcons } from '@axonivy/ui-icons';
 import { useCombobox } from 'downshift';
 import { useEffect, useState, type ComponentPropsWithoutRef, type KeyboardEvent, type ReactNode } from 'react';
-import { content, item as itemClass } from './combobox.css';
+import { content, item as itemClass } from './combobox-legacy.css';
 
-export type ComboboxOption = {
+export type ComboboxOldOption = {
   value: string;
 };
 
-export type ComboboxProps<T extends ComboboxOption> = Omit<ComponentPropsWithoutRef<'input'>, 'value' | 'onChange' | 'onKeyDown'> & {
+export type ComboboxOldProps<T extends ComboboxOldOption> = Omit<ComponentPropsWithoutRef<'input'>, 'value' | 'onChange' | 'onKeyDown'> & {
   value: string;
   onChange: (change: string) => void;
   options: T[];
@@ -23,7 +23,7 @@ export type ComboboxProps<T extends ComboboxOption> = Omit<ComponentPropsWithout
   onKeyDownExtended?: (e: KeyboardEvent<HTMLInputElement>) => void;
 };
 
-const defaultFilter = (option: ComboboxOption, input?: string): boolean => {
+const defaultFilter = (option: ComboboxOldOption, input?: string): boolean => {
   if (!input) {
     return true;
   }
@@ -32,9 +32,9 @@ const defaultFilter = (option: ComboboxOption, input?: string): boolean => {
 };
 
 /**
- * Combobox, based on {@link https://base-ui.com/react/components/combobox | Base UI Combobox}
+ * ComboboxOld, based on {@link https://www.downshift-js.com/use-combobox | Downshift JS useCombobox}
  */
-const Combobox = <T extends ComboboxOption>({
+const ComboboxOld = <T extends ComboboxOldOption>({
   value,
   onChange,
   options,
@@ -44,7 +44,7 @@ const Combobox = <T extends ComboboxOption>({
   className,
   onKeyDownExtended,
   ...props
-}: ComboboxProps<T>) => {
+}: ComboboxOldProps<T>) => {
   const [filteredItems, setFilteredItems] = useState(options);
   const [prevItems, setPrevItems] = useState(options);
   if (prevItems !== options) {
@@ -152,6 +152,6 @@ const Combobox = <T extends ComboboxOption>({
     </Popover>
   );
 };
-Combobox.displayName = 'Combobox';
+ComboboxOld.displayName = 'ComboboxOld';
 
-export { Combobox };
+export { ComboboxOld };
