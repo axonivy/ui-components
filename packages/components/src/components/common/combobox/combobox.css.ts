@@ -101,19 +101,14 @@ export const item = style({
   display: 'flex',
   width: '100%',
   alignItems: 'center',
-  gap: vars.size.s2,
-  borderRadius: vars.border.r1,
-  padding: `${vars.size.s1} ${vars.size.s2}`,
-  paddingRight: 32,
-  paddingLeft: 6,
-  fontSize: '14px',
+  padding: vars.size.s2,
+  paddingLeft: '2rem',
+  height: 15,
   outline: 'none',
   userSelect: 'none',
-  cursor: 'default',
   selectors: {
     '&[data-highlighted]': {
-      backgroundColor: vars.color.p50,
-      color: vars.color.body
+      backgroundColor: vars.color.p50
     },
     '&[data-disabled]': {
       pointerEvents: 'none',
@@ -134,10 +129,10 @@ globalStyle(`${item} svg`, {
 
 export const itemIndicator = style({
   position: 'absolute',
-  right: vars.size.s2,
+  left: '0.5rem',
   display: 'flex',
-  width: 16,
-  height: 16,
+  width: '0.875rem',
+  height: '0.875rem',
   alignItems: 'center',
   justifyContent: 'center',
   pointerEvents: 'none'

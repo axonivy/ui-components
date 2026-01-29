@@ -115,7 +115,6 @@ function ComboboxList({ className, ...props }: ComboboxPrimitive.List.Props) {
 function ComboboxItem({ className, children, ...props }: ComboboxPrimitive.Item.Props) {
   return (
     <ComboboxPrimitive.Item data-slot='combobox-item' className={cn(item, className)} {...props}>
-      {children}
       <ComboboxPrimitive.ItemIndicator
         render={
           <span className={itemIndicator}>
@@ -123,6 +122,7 @@ function ComboboxItem({ className, children, ...props }: ComboboxPrimitive.Item.
           </span>
         }
       />
+      {children}
     </ComboboxPrimitive.Item>
   );
 }
