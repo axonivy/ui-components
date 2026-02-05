@@ -51,7 +51,7 @@ export const UnknownValue: StoryObj<typeof BasicSelect> = {
       defaultValue='grapes'
       items={[
         { value: 'apple', label: 'Apple' },
-        { value: 'banana', label: 'Banana' }
+        { value: 'banana', label: 'Bananaasf as fsa fasf asdfda fsadfasdf sadf dsfs f. fas fas fs f dfas   ads dfsd f' }
       ]}
     />
   )

@@ -5,7 +5,18 @@ import { cn } from '@/utils/class-name';
 import { IvyIcons } from '@axonivy/ui-icons';
 import * as SelectPrimitive from '@radix-ui/react-select';
 import { useMemo, type ComponentProps } from 'react';
-import { content, item, itemIcon, label, scrollButton, seperator, trigger, triggerIcon, viewport } from './select.css';
+import {
+  basicSelectItemLabel,
+  content,
+  item,
+  itemIcon,
+  label,
+  scrollButton,
+  seperator,
+  trigger,
+  triggerIcon,
+  viewport
+} from './select.css';
 
 /**
  * Select, based on {@link https://www.radix-ui.com/docs/primitives/components/select | Radix UI Select}
@@ -70,13 +81,12 @@ const SelectLabel = ({ className, ...props }: ComponentProps<typeof SelectPrimit
 );
 SelectLabel.displayName = SelectPrimitive.Label.displayName;
 
-const SelectItem = ({ className, children, ...props }: ComponentProps<typeof SelectPrimitive.Item>) => (
+const SelectItem = ({ className, children, asChild, ...props }: ComponentProps<typeof SelectPrimitive.Item>) => (
   <SelectPrimitive.Item className={cn(item, className, 'ui-select-item')} {...props}>
     <SelectPrimitive.ItemIndicator className={itemIcon}>
       <IvyIcon icon={IvyIcons.Check} />
     </SelectPrimitive.ItemIndicator>
-
-    <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
+    <SelectPrimitive.ItemText asChild={asChild}>{children}</SelectPrimitive.ItemText>
   </SelectPrimitive.Item>
 );
 SelectItem.displayName = SelectPrimitive.Item.displayName;
@@ -134,8 +144,10 @@ const BasicSelect = ({
           {emptyItem && value && <SelectItem value=' '></SelectItem>}
           {unknownValue && <SelectItem value={unknownValue}>{unknownValue}</SelectItem>}
           {items.map(item => (
-            <SelectItem key={item.value} value={item.value}>
-              {item.label}
+            <SelectItem key={item.value} value={item.value} asChild>
+              <span className={basicSelectItemLabel} title={item.label}>
+                {item.label}
+              </span>
             </SelectItem>
           ))}
         </SelectGroup>

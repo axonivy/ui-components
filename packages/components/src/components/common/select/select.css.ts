@@ -116,3 +116,9 @@ export const seperator = style({
   height: 1,
   backgroundColor: vars.color.n200
 });
+
+export const basicSelectItemLabel = style({
+  whiteSpace: 'nowrap',
+  overflow: 'hidden',
+  textOverflow: 'ellipsis'
+});
