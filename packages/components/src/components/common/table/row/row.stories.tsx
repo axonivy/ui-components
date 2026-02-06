@@ -133,7 +133,28 @@ export const Message: Story = {
                 ))}
               </TableRow>
               <MessageRow
-                message={index === 2 ? { message: 'This is an error', variant: 'error' } : undefined}
+                message={
+                  index === 2
+                    ? {
+                        message:
+                          'This is an error: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+                        variant: 'error'
+                      }
+                    : undefined
+                }
+                columnCount={columns.length}
+              />
+              <MessageRow
+                message={
+                  index === 5
+                    ? {
+                        message:
+                          'This is an warning: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+                        variant: 'warning'
+                      }
+                    : undefined
+                }
+                singleLine
                 columnCount={columns.length}
               />
             </Fragment>

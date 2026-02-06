@@ -47,7 +47,7 @@ export const Default: Story = {
           </DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
-            <DropdownMenuItem>
+            <DropdownMenuItem disabled>
               <IvyIcon icon={IvyIcons.User} />
               <span>Profile</span>
               <DropdownMenuShortcut>⇧+⌘+P</DropdownMenuShortcut>

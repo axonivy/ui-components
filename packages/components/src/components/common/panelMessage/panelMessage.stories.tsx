@@ -14,7 +14,11 @@ type Story = StoryObj<typeof PanelMessage>;
 
 export const Default: Story = {
   args: {
-    message: 'Nothing there yet. Select an Element to edit its properties.'
+    message: 'Nothing there yet. Select an Element to edit its properties.',
+    mode: 'column'
+  },
+  argTypes: {
+    mode: { type: 'string', control: 'select', defaultValue: 'default', options: ['column', 'row'] }
   },
   render: props => <PanelMessage {...props} />
 };

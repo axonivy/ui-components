@@ -1,0 +1,69 @@
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme inline {
+  /* --color-*: initial; disable default colors */
+
+  --color-body: var(--body);
+  --color-background: var(--background);
+  --color-n25: var(--N25);
+  --color-n50: var(--N50);
+  --color-n75: var(--N75);
+  --color-n100: var(--N100);
+  --color-n200: var(--N200);
+  --color-n300: var(--N300);
+  --color-n400: var(--N400);
+  --color-n500: var(--N500);
+  --color-n600: var(--N600);
+  --color-n700: var(--N700);
+  --color-n800: var(--N800);
+  --color-n900: var(--N900);
+  --color-p50: var(--P50);
+  --color-p75: var(--P75);
+  --color-p300: var(--P300);
+  --color-p500: var(--P500);
+
+  --color-error: var(--error-color);
+  --color-warning: var(--warning-color);
+  --color-success: var(--success-color);
+
+  --color-border-basic: var(--N200);
+  --color-border-active: var(--P300);
+  --color-border-input-color: var(--input-border-color, var(--N200));
+
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  @keyframes accordion-up {
+    0% {
+      height: var(--radix-accordion-content-height);
+    }
+    100% {
+      height: 0;
+    }
+  }
+  @keyframes accordion-down {
+    0% {
+      height: 0;
+    }
+    100% {
+      height: var(--radix-accordion-content-height);
+    }
+  }
+  --animate-collapsible-up: collapsible-up 0.2s ease-out;
+  --animate-collapsible-down: collapsible-down 0.2s ease-out;
+  @keyframes collapsible-up {
+    0% {
+      height: var(--radix-collapsible-content-height);
+    }
+    100% {
+      height: 0;
+    }
+  }
+  @keyframes collapsible-down {
+    0% {
+      height: 0;
+    }
+    100% {
+      height: var(--radix-collapsible-content-height);
+    }
+  }
+}

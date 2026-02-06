@@ -37,13 +37,14 @@ Button.displayName = 'Button';
 
 export type ButtonGroupProps = ComponentProps<typeof Flex> & { controls: Array<ButtonProps> };
 
-const ButtonGroup = ({ controls, className, ...props }: ButtonGroupProps) => (
-  <Flex gap={1} className={cn(className, 'ui-button-group')} {...props}>
-    {controls.map(control => (
-      <Button key={control.title} {...control} />
-    ))}
-  </Flex>
-);
-ButtonGroup.displayName = 'ButtonGroup';
+function ButtonGroup({ controls, className, ...props }: ButtonGroupProps) {
+  return (
+    <div data-slot='button-group' className={cn('flex flex-row gap-1', className, 'ui-button-group')} {...props}>
+      {controls.map(control => (
+        <Button key={control.title} {...control} />
+      ))}
+    </div>
+  );
+}
 
 export { Button, ButtonGroup };

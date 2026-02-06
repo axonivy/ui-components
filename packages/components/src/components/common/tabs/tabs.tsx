@@ -73,7 +73,7 @@ const BasicInscriptionTabs = ({ tabs, onChange, value }: BasicInscriptionTabsPro
     value={value}
     onValueChange={onChange}
   >
-    <TabsList className={cn('ui-inscription-tabs-list', `tabs-${tabs.length >= 5 ? 'many' : 'few'}`)}>
+    <TabsList className={cn('ui-inscription-tabs-list')} data-tabs={tabs.length >= 5 ? 'many' : 'few'}>
       <div className={tabsListPlaceholder} />
       {tabs.map((tab, index) => (
         <TabsTrigger key={`${index}-${tab.id}`} className='ui-inscription-tabs-trigger' value={tab.id} aria-label={tab.name}>

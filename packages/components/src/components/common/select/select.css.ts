@@ -85,7 +85,7 @@ export const item = style({
   padding: vars.size.s2,
   paddingLeft: '2rem',
   alignItems: 'center',
-  height: 15,
+  height: 31,
   outline: 0,
   userSelect: 'none',
   selectors: {
