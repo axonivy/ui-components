@@ -1,6 +1,12 @@
 {
   "extensions": {
-    "recommendations": ["esbenp.prettier-vscode", "dbaeumer.vscode-eslint", "vitest.explorer", "ms-playwright.playwright"]
+    "recommendations": [
+      "esbenp.prettier-vscode",
+      "dbaeumer.vscode-eslint",
+      "bradlc.vscode-tailwindcss",
+      "vitest.explorer",
+      "ms-playwright.playwright"
+    ]
   },
   "folders": [
     {
@@ -31,7 +37,7 @@
       "name": "dev-package/prettier-config",
       "path": "./dev-packages/prettier-config"
     },
-     {
+    {
       "name": "dev-package/ts-config",
       "path": "./dev-packages/ts-config"
     }
@@ -49,6 +55,12 @@
       "**/node_modules": true,
       "**/lib": true
     },
+    "files.associations": {
+      "*.css": "tailwindcss"
+    },
+    "tailwindCSS.classFunctions": ["clsx", "cn", "cva"],
+    "testing.automaticallyOpenPeekView": "never",
+    "typescript.preferences.importModuleSpecifier": "non-relative",
     "[css]": {
       "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
@@ -72,8 +84,6 @@
     },
     "[yaml]": {
       "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "testing.automaticallyOpenPeekView": "never",
-    "typescript.preferences.importModuleSpecifier": "non-relative"
+    }
   }
 }

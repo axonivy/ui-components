@@ -2,6 +2,7 @@ import '@axonivy/ui-icons/src-gen/ivy-icons.css';
 import type { Preview } from '@storybook/react-vite';
 import { ReadonlyProvider } from '../packages/components/src/context/useReadonly';
 import '../packages/components/src/styles/global.css';
+import '../packages/components/src/styles/globals.css';
 import './preview.css';
 
 const preview: Preview = {
@@ -20,21 +21,19 @@ const preview: Preview = {
         title: 'Theme',
         icon: 'circlehollow',
         items: [
-          { value: 'light', title: 'light' },
-          { value: 'dark', title: 'dark' }
-        ],
-        showName: true
+          { value: 'light', icon: 'sun', title: 'Light' },
+          { value: 'dark', icon: 'moon', title: 'Dark' }
+        ]
       }
     },
     readonly: {
-      defaultValue: false,
+      defaultValue: 'false',
       toolbar: {
         icon: 'unlock',
         items: [
-          { value: false, icon: 'unlock', title: 'Read & Write' },
-          { value: true, icon: 'lock', title: 'Readonly' }
-        ],
-        showName: false
+          { value: 'false', icon: 'unlock', title: 'Read & Write' },
+          { value: 'true', icon: 'lock', title: 'Readonly' }
+        ]
       }
     }
   },
@@ -45,7 +44,7 @@ const preview: Preview = {
       document.body.classList.remove('dark', 'light');
       document.body.classList.add(theme);
       return (
-        <ReadonlyProvider readonly={context.globals.readonly}>
+        <ReadonlyProvider readonly={context.globals.readonly === 'true'}>
           <StoryFn />
         </ReadonlyProvider>
       );

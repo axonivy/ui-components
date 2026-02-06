@@ -29,7 +29,7 @@ const FloatingConnectionLine = ({ toX, toY, fromPosition, toPosition, fromNode }
 
   return (
     <g>
-      <path fill='none' stroke={'var(--N900)'} strokeWidth={1.5} className='animated' d={edgePath} />
+      <path fill='none' stroke={'var(--N900)'} strokeWidth={1.5} d={edgePath} />
       <circle cx={toX} cy={toY} fill={'var(--background)'} r={3} stroke={'var(--N900)'} strokeWidth={1.5} />
     </g>
   );
