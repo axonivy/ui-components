@@ -1,35 +1,40 @@
-import { IvyIcon } from '@/components/common/icon/icon';
 import { cn } from '@/utils/class-name';
-import { IvyIcons } from '@axonivy/ui-icons';
 import type { ComponentProps } from 'react';
 import * as ResizablePrimitive from 'react-resizable-panels';
-import { resizableHandle, resizableLine } from './resizable.css';
 
 /**
  * ResizablePanelGroup, based on {@link https://github.com/bvaughn/react-resizable-panels | React Resizable Panels}
  */
-const ResizableGroup = ({ className, ...props }: ComponentProps<typeof ResizablePrimitive.Group>) => (
-  <ResizablePrimitive.Group className={cn(className, 'ui-resizable')} {...props} />
-);
+function ResizableGroup({ className, ...props }: ComponentProps<typeof ResizablePrimitive.Group>) {
+  return <ResizablePrimitive.Group data-slot='resizable-panel-group' className={cn(className, 'ui-resizable')} {...props} />;
+}
 
-const ResizablePanel = ResizablePrimitive.Panel;
+function ResizablePanel(props: ComponentProps<typeof ResizablePrimitive.Panel>) {
+  return <ResizablePrimitive.Panel data-slot='resizable-panel' {...props} />;
+}
 
 export type ResizableHandleProps = ComponentProps<typeof ResizablePrimitive.Separator> & {
   withHandle?: boolean;
 };
 
-const ResizableHandle = ({ withHandle, children, className, ...props }: ResizableHandleProps) => (
-  <>
-    <ResizablePrimitive.Separator className={cn(resizableLine, className, 'ui-resizable-handle')} {...props}>
-      {withHandle && (
-        <div className={resizableHandle}>
-          <IvyIcon icon={IvyIcons.EditDots} />
-        </div>
-      )}
-    </ResizablePrimitive.Separator>
-    {children}
-  </>
-);
+function ResizableHandle({ withHandle, children, className, ...props }: ResizableHandleProps) {
+  return (
+    <>
+      <ResizablePrimitive.Separator
+        data-slot='resizable-handle'
+        className={cn(
+          'relative flex w-px items-center justify-center bg-n200 ring-offset-background after:absolute after:inset-y-0 after:left-1/2 after:w-1 after:-translate-x-1/2 focus-visible:bg-p300 focus-visible:outline-hidden aria-[orientation=horizontal]:h-px aria-[orientation=horizontal]:w-full aria-[orientation=horizontal]:after:left-0 aria-[orientation=horizontal]:after:h-1 aria-[orientation=horizontal]:after:w-full aria-[orientation=horizontal]:after:translate-x-0 aria-[orientation=horizontal]:after:-translate-y-1/2 [&[aria-orientation=horizontal]>div]:rotate-90',
+          className,
+          'ui-resizable-handle'
+        )}
+        {...props}
+      >
+        {withHandle && <div className='z-10 flex h-6 w-1 shrink-0 rounded-lg bg-n200' />}
+      </ResizablePrimitive.Separator>
+      {children}
+    </>
+  );
+}
 
 const useGroupRef = ResizablePrimitive.useGroupRef;
 const usePanelRef = ResizablePrimitive.usePanelRef;

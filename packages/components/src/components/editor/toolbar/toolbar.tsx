@@ -3,7 +3,7 @@ import type { ComponentProps } from 'react';
 import { toolbar, toolbarContainer, toolbarHeader, toolbarTitle, type ToolbarContainerVariants } from './toolbar.css';
 
 const Toolbar = ({ className, children, ...props }: ComponentProps<'div'>) => (
-  <div className={cn(toolbar, className)} {...props}>
+  <div className={cn(toolbar, className, 'ui-toolbar')} {...props}>
     <div className={cn(toolbarHeader)}>{children}</div>
   </div>
 );

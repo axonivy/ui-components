@@ -3,111 +3,164 @@ import { IvyIcons } from '@axonivy/ui-icons';
 import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
 import type { ComponentProps } from 'react';
 import { IvyIcon } from '../icon/icon';
-import {
-  content,
-  label,
-  menuItem,
-  menuItemIndicator,
-  menuItemRadioIndicator,
-  menuItemSubTriggerChevron,
-  menuItemWithIndicator,
-  separator,
-  shortcut
-} from './dropdownmenu.css';
+
+// !!! Todo: move icons to the right side
 
 /**
  * DropdownMenu, based on {@link https://www.radix-ui.com/docs/primitives/components/dropdown-menu | Radix UI DropdownMenu}
  */
-const DropdownMenu = (props: ComponentProps<typeof DropdownMenuPrimitive.Root>) => <DropdownMenuPrimitive.Root {...props} />;
-DropdownMenu.displayName = DropdownMenuPrimitive.Root.displayName;
+function DropdownMenu(props: ComponentProps<typeof DropdownMenuPrimitive.Root>) {
+  return <DropdownMenuPrimitive.Root data-slot='dropdown-menu' {...props} />;
+}
 
-const DropdownMenuTrigger = DropdownMenuPrimitive.Trigger;
+function DropdownMenuPortal(props: ComponentProps<typeof DropdownMenuPrimitive.Portal>) {
+  return <DropdownMenuPrimitive.Portal {...props} />;
+}
 
-const DropdownMenuGroup = DropdownMenuPrimitive.Group;
+function DropdownMenuTrigger(props: ComponentProps<typeof DropdownMenuPrimitive.Trigger>) {
+  return <DropdownMenuPrimitive.Trigger data-slot='dropdown-menu-trigger' {...props} />;
+}
 
-const DropdownMenuPortal = DropdownMenuPrimitive.Portal;
-
-const DropdownMenuSub = DropdownMenuPrimitive.Sub;
-
-const DropdownMenuRadioGroup = DropdownMenuPrimitive.RadioGroup;
-
-const DropdownMenuSubTrigger = ({ className, children, ...props }: ComponentProps<typeof DropdownMenuPrimitive.SubTrigger>) => (
-  <DropdownMenuPrimitive.SubTrigger className={cn(menuItem, className)} {...props}>
-    {children}
-    <IvyIcon icon={IvyIcons.Chevron} className={menuItemSubTriggerChevron} />
-  </DropdownMenuPrimitive.SubTrigger>
-);
-DropdownMenuSubTrigger.displayName = DropdownMenuPrimitive.SubTrigger.displayName;
-
-const DropdownMenuSubContent = ({
-  className,
-  sideOffset = 6,
-  collisionPadding = 4,
-  ...props
-}: ComponentProps<typeof DropdownMenuPrimitive.SubContent>) => (
-  <DropdownMenuPrimitive.SubContent
-    sideOffset={sideOffset}
-    collisionPadding={collisionPadding}
-    className={cn(content, className)}
-    {...props}
-  />
-);
-DropdownMenuSubContent.displayName = DropdownMenuPrimitive.SubContent.displayName;
-
-const DropdownMenuContent = ({
+function DropdownMenuContent({
   className,
   sideOffset = 4,
   collisionPadding = 4,
   ...props
-}: ComponentProps<typeof DropdownMenuPrimitive.Content>) => (
-  <DropdownMenuPrimitive.Portal>
-    <DropdownMenuPrimitive.Content
-      sideOffset={sideOffset}
-      collisionPadding={collisionPadding}
-      className={cn(content, className)}
+}: ComponentProps<typeof DropdownMenuPrimitive.Content>) {
+  return (
+    <DropdownMenuPrimitive.Portal>
+      <DropdownMenuPrimitive.Content
+        data-slot='dropdown-menu-content'
+        sideOffset={sideOffset}
+        collisionPadding={collisionPadding}
+        className={cn(
+          'w-48 max-w-(--radix-dropdown-menu-content-available-width) min-w-32 rounded-sm border border-solid border-border-basic bg-background p-1 text-body shadow-lg data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 motion-safe:animate-in',
+          className
+        )}
+        {...props}
+      />
+    </DropdownMenuPrimitive.Portal>
+  );
+}
+
+function DropdownMenuGroup(props: ComponentProps<typeof DropdownMenuPrimitive.Group>) {
+  return <DropdownMenuPrimitive.Group data-slot='dropdown-menu-group' {...props} />;
+}
+
+function DropdownMenuItem({ className, ...props }: ComponentProps<typeof DropdownMenuPrimitive.Item>) {
+  return (
+    <DropdownMenuPrimitive.Item
+      data-slot='dropdown-menu-item'
+      className={cn(
+        'flex items-center gap-1 rounded-xs bg-transparent px-2 py-1.5 text-xs outline-0 select-none focus:bg-p50 data-disabled:pointer-events-none data-disabled:opacity-50',
+        className
+      )}
       {...props}
     />
-  </DropdownMenuPrimitive.Portal>
-);
-DropdownMenuContent.displayName = DropdownMenuPrimitive.Content.displayName;
+  );
+}
 
-const DropdownMenuItem = ({ className, ...props }: ComponentProps<typeof DropdownMenuPrimitive.Item>) => (
-  <DropdownMenuPrimitive.Item className={cn(menuItem, className)} {...props} />
-);
-DropdownMenuItem.displayName = DropdownMenuPrimitive.Item.displayName;
+function DropdownMenuCheckboxItem({ className, children, ...props }: ComponentProps<typeof DropdownMenuPrimitive.CheckboxItem>) {
+  return (
+    <DropdownMenuPrimitive.CheckboxItem
+      data-slot='dropdown-menu-checkbox-item'
+      className={cn(
+        'flex items-center gap-1 rounded-xs bg-transparent px-2 py-1.5 ps-6 text-xs outline-0 select-none focus:bg-p50 data-disabled:pointer-events-none data-disabled:opacity-50',
+        className
+      )}
+      {...props}
+    >
+      <span data-slot='dropdown-menu-checkbox-item-indicator' className='absolute left-2.5 flex size-4 items-center justify-center'>
+        <DropdownMenuPrimitive.ItemIndicator asChild>
+          <IvyIcon icon={IvyIcons.Check} />
+        </DropdownMenuPrimitive.ItemIndicator>
+      </span>
+      {children}
+    </DropdownMenuPrimitive.CheckboxItem>
+  );
+}
 
-const DropdownMenuCheckboxItem = ({ className, children, ...props }: ComponentProps<typeof DropdownMenuPrimitive.CheckboxItem>) => (
-  <DropdownMenuPrimitive.CheckboxItem className={cn(menuItem, menuItemWithIndicator, className)} {...props}>
-    <DropdownMenuPrimitive.ItemIndicator className={menuItemIndicator}>
-      <IvyIcon icon={IvyIcons.Check} />
-    </DropdownMenuPrimitive.ItemIndicator>
-    {children}
-  </DropdownMenuPrimitive.CheckboxItem>
-);
-DropdownMenuCheckboxItem.displayName = DropdownMenuPrimitive.CheckboxItem.displayName;
+function DropdownMenuRadioGroup({ ...props }) {
+  return <DropdownMenuPrimitive.RadioGroup data-slot='dropdown-menu-radio-group' {...props} />;
+}
 
-const DropdownMenuRadioItem = ({ className, children, ...props }: ComponentProps<typeof DropdownMenuPrimitive.RadioItem>) => (
-  <DropdownMenuPrimitive.RadioItem className={cn(menuItem, menuItemWithIndicator, className)} {...props}>
-    <DropdownMenuPrimitive.ItemIndicator className={cn(menuItemIndicator, menuItemRadioIndicator)} />
-    {children}
-  </DropdownMenuPrimitive.RadioItem>
-);
-DropdownMenuRadioItem.displayName = DropdownMenuPrimitive.RadioItem.displayName;
+function DropdownMenuRadioItem({ className, children, ...props }: ComponentProps<typeof DropdownMenuPrimitive.RadioItem>) {
+  return (
+    <DropdownMenuPrimitive.RadioItem
+      data-slot='dropdown-menu-radio-item'
+      className={cn(
+        'flex items-center gap-1 rounded-xs bg-transparent px-2 py-1.5 ps-6 text-xs outline-0 select-none focus:bg-p50 data-disabled:pointer-events-none data-disabled:opacity-50',
+        className
+      )}
+      {...props}
+    >
+      <span data-slot='dropdown-menu-radio-item-indicator' className='absolute left-2.5 flex size-4 items-center justify-center'>
+        <DropdownMenuPrimitive.ItemIndicator className={cn('after:block after:size-1.5 after:rounded-full after:bg-current')} />
+      </span>
+      {children}
+    </DropdownMenuPrimitive.RadioItem>
+  );
+}
 
-const DropdownMenuLabel = ({ className, ...props }: ComponentProps<typeof DropdownMenuPrimitive.Label>) => (
-  <DropdownMenuPrimitive.Label className={cn(label, className)} {...props} />
-);
-DropdownMenuLabel.displayName = DropdownMenuPrimitive.Label.displayName;
+function DropdownMenuLabel({ className, ...props }: ComponentProps<typeof DropdownMenuPrimitive.Label>) {
+  return (
+    <DropdownMenuPrimitive.Label
+      data-slot='dropdown-menu-label'
+      className={cn('flex items-center gap-1 px-2 py-1.5 font-semibold', className)}
+      {...props}
+    />
+  );
+}
 
-const DropdownMenuSeparator = ({ className, ...props }: ComponentProps<typeof DropdownMenuPrimitive.Separator>) => (
-  <DropdownMenuPrimitive.Separator className={cn(separator, className)} {...props} />
-);
-DropdownMenuSeparator.displayName = DropdownMenuPrimitive.Separator.displayName;
+function DropdownMenuSeparator({ className, ...props }: ComponentProps<typeof DropdownMenuPrimitive.Separator>) {
+  return (
+    <DropdownMenuPrimitive.Separator data-slot='dropdown-menu-separator' className={cn('-mx-1 my-1 h-px bg-n200', className)} {...props} />
+  );
+}
 
-const DropdownMenuShortcut = ({ className, ...props }: ComponentProps<'span'>) => {
-  return <span className={cn(shortcut, className)} {...props} />;
-};
-DropdownMenuShortcut.displayName = 'DropdownMenuShortcut';
+function DropdownMenuShortcut({ className, ...props }: ComponentProps<'span'>) {
+  return <span data-slot='dropdown-menu-shortcut' className={cn('peer ml-auto text-xs opacity-40', className)} {...props} />;
+}
+
+function DropdownMenuSub({ ...props }: ComponentProps<typeof DropdownMenuPrimitive.Sub>) {
+  return <DropdownMenuPrimitive.Sub data-slot='dropdown-menu-sub' {...props} />;
+}
+
+function DropdownMenuSubTrigger({ className, children, ...props }: ComponentProps<typeof DropdownMenuPrimitive.SubTrigger>) {
+  return (
+    <DropdownMenuPrimitive.SubTrigger
+      data-slot='dropdown-menu-sub-trigger'
+      className={cn(
+        'group flex items-center gap-1 rounded-xs bg-transparent px-2 py-1.5 text-xs outline-0 select-none focus:bg-p50 data-disabled:pointer-events-none data-disabled:opacity-50',
+        className
+      )}
+      {...props}
+    >
+      {children}
+      <IvyIcon icon={IvyIcons.Chevron} className='ml-auto group-has-data-[slot="dropdown-menu-shortcut"]:ml-0' />
+    </DropdownMenuPrimitive.SubTrigger>
+  );
+}
+
+function DropdownMenuSubContent({
+  className,
+  sideOffset = 6,
+  collisionPadding = 4,
+  ...props
+}: ComponentProps<typeof DropdownMenuPrimitive.SubContent>) {
+  return (
+    <DropdownMenuPrimitive.SubContent
+      data-slot='dropdown-menu-sub-content'
+      sideOffset={sideOffset}
+      collisionPadding={collisionPadding}
+      className={cn(
+        'w-48 max-w-(--radix-dropdown-menu-content-available-width) min-w-32 rounded-sm border border-solid border-border-basic bg-background p-1 text-body shadow-lg data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 motion-safe:animate-in',
+        className
+      )}
+      {...props}
+    />
+  );
+}
 
 export {
   DropdownMenu,

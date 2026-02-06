@@ -34,7 +34,20 @@ export const WithInput: Story = {
 export const WithLink: Story = {
   render: () => (
     <Message>
-      This is an <a href='#'>embedded</a> link.
+      This is an{' '}
+      <a href='#' className='text-blue-600'>
+        embedded
+      </a>{' '}
+      link.
     </Message>
   )
+};
+
+export const MultiOrSingleLine: Story = {
+  args: {
+    singleLine: false,
+    message:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
+  },
+  render: props => <Message {...props} />
 };
