@@ -32,7 +32,7 @@ export const Default: Story = {
         <BreadcrumbItem>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <BreadcrumbEllipsis />
+              <BreadcrumbEllipsis tabIndex={0} />
             </DropdownMenuTrigger>
             <DropdownMenuContent align='start'>
               <DropdownMenuItem>Documentation</DropdownMenuItem>

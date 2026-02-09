@@ -1,39 +1,63 @@
+import { Button } from '@/components/common/button/button';
 import { cn } from '@/utils/class-name';
+import { IvyIcons } from '@axonivy/ui-icons';
 import * as PopoverPrimitive from '@radix-ui/react-popover';
 import type { ComponentProps } from 'react';
-import { arrow, close, content } from './popover.css';
 
 /**
  * Popover, based on {@link https://www.radix-ui.com/docs/primitives/components/popover | Radix UI Popover}
  */
-const Popover = (props: ComponentProps<typeof PopoverPrimitive.Root>) => <PopoverPrimitive.Root {...props} />;
-Popover.displayName = PopoverPrimitive.Root.displayName;
+function Popover(props: ComponentProps<typeof PopoverPrimitive.Root>) {
+  return <PopoverPrimitive.Root data-slot='popover' {...props} />;
+}
 
-const PopoverTrigger = PopoverPrimitive.Trigger;
+function PopoverTrigger(props: ComponentProps<typeof PopoverPrimitive.Trigger>) {
+  return <PopoverPrimitive.Trigger data-slot='popover-trigger' {...props} />;
+}
 
-const PopoverAnchor = PopoverPrimitive.Anchor;
+function PopoverAnchor(props: ComponentProps<typeof PopoverPrimitive.Anchor>) {
+  return <PopoverPrimitive.Anchor data-slot='popover-anchor' {...props} />;
+}
 
-const PopoverContent = ({
+function PopoverContent({
   className,
   align = 'center',
   sideOffset = 4,
   container,
   ...props
-}: ComponentProps<typeof PopoverPrimitive.Content> & Pick<ComponentProps<typeof PopoverPrimitive.Portal>, 'container'>) => (
-  <PopoverPrimitive.Portal container={container}>
-    <PopoverPrimitive.Content align={align} sideOffset={sideOffset} className={cn(content, className, 'ui-popover-content')} {...props} />
-  </PopoverPrimitive.Portal>
-);
-PopoverContent.displayName = PopoverPrimitive.Content.displayName;
+}: ComponentProps<typeof PopoverPrimitive.Content> & Pick<ComponentProps<typeof PopoverPrimitive.Portal>, 'container'>) {
+  return (
+    <PopoverPrimitive.Portal container={container}>
+      <PopoverPrimitive.Content
+        data-slot='popover-content'
+        align={align}
+        sideOffset={sideOffset}
+        className={cn(
+          'max-w-(--radix-popover-content-available-width) overflow-auto rounded-sm border border-n100 bg-background p-2 text-body shadow-lg data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 motion-safe:animate-in',
+          className,
+          'ui-popover-content'
+        )}
+        {...props}
+      />
+    </PopoverPrimitive.Portal>
+  );
+}
 
-const PopoverClose = ({ className, ...props }: ComponentProps<typeof PopoverPrimitive.Close>) => (
-  <PopoverPrimitive.Close className={cn(close, className, 'ui-popover-close')} {...props} />
-);
-PopoverClose.displayName = PopoverPrimitive.Close.displayName;
+function PopoverClose({ className, ...props }: ComponentProps<typeof PopoverPrimitive.Close>) {
+  return (
+    <PopoverPrimitive.Close
+      data-slot='popover-close'
+      className={cn('ui-popover-close absolute top-2 right-2 rounded-sm', className, 'ui-popover-close')}
+      asChild
+      {...props}
+    >
+      <Button icon={IvyIcons.Close} size='small' />
+    </PopoverPrimitive.Close>
+  );
+}
 
-const PopoverArrow = ({ className, ...props }: ComponentProps<typeof PopoverPrimitive.Arrow>) => (
-  <PopoverPrimitive.Arrow className={cn(arrow, className)} {...props} />
-);
-PopoverArrow.displayName = PopoverPrimitive.Arrow.displayName;
+function PopoverArrow({ className, ...props }: ComponentProps<typeof PopoverPrimitive.Arrow>) {
+  return <PopoverPrimitive.Arrow data-slot='popover-arrow' className={cn('fill-n100', className)} {...props} />;
+}
 
 export { Popover, PopoverAnchor, PopoverArrow, PopoverClose, PopoverContent, PopoverTrigger };

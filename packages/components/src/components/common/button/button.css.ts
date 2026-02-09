@@ -13,6 +13,7 @@ export const button = recipe({
       borderRadius: vars.border.r2,
       fontWeight: 500,
       fontSize: '14px',
+      height: 26,
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
@@ -66,6 +67,7 @@ export const button = recipe({
     size: {
       small: {
         fontSize: '12px',
+        height: 16,
         paddingBlock: 0,
         paddingInline: vars.size.s1,
         borderRadius: vars.border.r1

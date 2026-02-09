@@ -18,7 +18,7 @@ pipeline {
               sh 'pnpm run ci && pnpm run build:storybook'
             }
           }
-          archiveArtifacts artifacts: 'packages/**/src-gen/**', allowEmptyArchive: true
+          archiveArtifacts artifacts: 'packages/icons/src-gen/**', allowEmptyArchive: true
           archiveArtifacts artifacts: 'storybook-static/**', allowEmptyArchive: true
           currentBuild.description = "<a href=${BUILD_URL}artifact/packages/icons/src-gen/ivy-icons.html>&raquo; Icons</a><br>" + 
             "<a href=${BUILD_URL}artifact/storybook-static/index.html>&raquo; Components</a>"

@@ -34,6 +34,6 @@ export const headerIcon = style({
 export const headerMessage = style({
   padding: `${vars.size.s1} ${vars.size.s4}`,
   borderBottom: vars.border.basic,
-  maxHeight: `calc(2em + 3 * ${vars.size.s1})`,
+  maxHeight: '4em',
   overflow: 'auto'
 });

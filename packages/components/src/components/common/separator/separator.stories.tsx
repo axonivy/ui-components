@@ -13,17 +13,15 @@ type Story = StoryObj<typeof Separator>;
 export const Default: Story = {
   render: () => (
     <div style={{ width: '100%', maxWidth: 300, margin: '0 15px' }}>
-      <div className='Text' style={{ fontWeight: 500 }}>
-        Radix Primitives
-      </div>
-      <div className='Text'>An open-source UI component library.</div>
+      <div style={{ fontWeight: 500 }}>Radix Primitives</div>
+      <div>An open-source UI component library.</div>
       <Separator />
       <div style={{ display: 'flex', height: 20, alignItems: 'center' }}>
-        <div className='Text'>Blog</div>
+        <div>Blog</div>
         <Separator decorative orientation='vertical' />
-        <div className='Text'>Docs</div>
+        <div>Docs</div>
         <Separator decorative orientation='vertical' />
-        <div className='Text'>Source</div>
+        <div>Source</div>
       </div>
     </div>
   )
