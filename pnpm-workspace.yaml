@@ -1,6 +1,8 @@
 packages:
-  - 'packages/*'
-  - 'dev-packages/*'
+  - packages/*
+  - dev-packages/*
+
 preferWorkspacePackages: true
+
 publicHoistPattern:
-  - 'eslint'
+  - eslint
