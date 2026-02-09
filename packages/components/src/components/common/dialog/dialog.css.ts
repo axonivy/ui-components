@@ -84,7 +84,9 @@ export const contentClose = style({
 export const header = style({});
 
 export const title = style({
-  margin: 0
+  margin: 0,
+  fontSize: '18px',
+  fontWeight: 'bold'
 });
 
 export const description = style({
