@@ -1,7 +1,7 @@
 import type { Preview } from '@storybook/react-vite';
 import './preview.css';
 import '../src/styles/global.css';
-import '@axonivy/ui-icons/lib/ivy-icons.css';
+import '@axonivy/ui-icons/src-gen/ivy-icons.css';
 import React from 'react';
 import { ReadonlyProvider } from '../src/context/useReadonly';
 
