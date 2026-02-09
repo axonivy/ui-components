@@ -28,8 +28,8 @@ test('select', async () => {
   const input = screen.getByRole('combobox');
   const trigger = screen.getByRole('button', { name: 'toggle menu' });
 
-  await act(async () => await userEvent.click(trigger));
-  await act(async () => await userEvent.click(screen.getByRole('option', { name: 'fr' })));
+  await userEvent.click(trigger);
+  await userEvent.click(screen.getByRole('option', { name: 'fr' }));
   expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
   expect(input).toHaveValue('fr');
 });
