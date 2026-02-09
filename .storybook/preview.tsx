@@ -1,4 +1,4 @@
-import '@axonivy/ui-icons/lib/ivy-icons.css';
+import '@axonivy/ui-icons/src-gen/ivy-icons.css';
 import type { Preview } from '@storybook/react-vite';
 import { ReadonlyProvider } from '../packages/components/src/context/useReadonly';
 import '../packages/components/src/styles/global.css';
