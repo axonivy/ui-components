@@ -78,7 +78,7 @@ const Combobox = <T extends ComboboxOption>({
       switch (actionAndChanges.type) {
         case useCombobox.stateChangeTypes.InputBlur:
         case useCombobox.stateChangeTypes.InputKeyDownEnter:
-          selectItem({ value: actionAndChanges.changes.inputValue ?? '' });
+          return { ...actionAndChanges.changes, inputValue: actionAndChanges.changes.inputValue ?? '' };
       }
       return actionAndChanges.changes;
     },
