@@ -25,8 +25,8 @@
   },
   "scripts": {
     "clean": "rimraf --glob lib src-gen/ivy-icons.* tsconfig.tsbuildinfo",
-    "build": "tsc --build && tscp",
-    "package": "tsc && tscp",
+    "build": "tsc --build",
+    "package": "tsc",
     "build:clean": "pnpm run clean && pnpm run build",
     "generate": "fantasticon && pnpm run build"
   }

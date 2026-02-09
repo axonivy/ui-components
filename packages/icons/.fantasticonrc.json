@@ -3,7 +3,7 @@
   "prefix": "ivy",
   "inputDir": "./src/icons",
   "outputDir": "./src-gen",
-  "fontTypes": ["ttf"],
+  "fontTypes": ["woff2"],
   "normalize": true,
   "assetTypes": ["ts", "css", "html"],
   "templates": {
@@ -11,11 +11,11 @@
     "css": "./src/templates/styles.hbs"
   },
   "formatOptions": {
-    "ttf": {
-      "url": "https://github.com/axonivy/inscription-client",
+    "woff2": {
+      "url": "https://github.com/axonivy/ui-components",
       "description": "The icon font for the Axon Ivy Editors",
       "version": "1.0",
-      "metadata": "Licence by Streamline Icons (https://streamlinehq.com/), Provided by Axon Ivy AG"
+      "metadata": "Licence by Axon Ivy AG"
     }
   }
 }
