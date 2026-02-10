@@ -14,8 +14,8 @@ export const badgeOutput = style({
   whiteSpace: 'nowrap',
   overflowX: 'auto',
   overflowY: 'hidden',
-  minHeight: '14px',
-  width: `calc(100% - 2 * ${vars.padding.input} - 2px)`
+  minHeight: '42px',
+  width: '100%'
 });
 
 export const inputBadge = style({

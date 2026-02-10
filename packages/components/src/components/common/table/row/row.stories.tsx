@@ -142,6 +142,7 @@ export const Message: Story = {
                       }
                     : undefined
                 }
+                singleLine={false}
                 columnCount={columns.length}
               />
               <MessageRow
@@ -154,7 +155,6 @@ export const Message: Story = {
                       }
                     : undefined
                 }
-                singleLine
                 columnCount={columns.length}
               />
             </Fragment>

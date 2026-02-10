@@ -80,7 +80,7 @@ function DropdownMenuCheckboxItem({ className, children, ...props }: ComponentPr
   );
 }
 
-function DropdownMenuRadioGroup({ ...props }) {
+function DropdownMenuRadioGroup({ ...props }: ComponentProps<typeof DropdownMenuPrimitive.RadioGroup>) {
   return <DropdownMenuPrimitive.RadioGroup data-slot='dropdown-menu-radio-group' {...props} />;
 }
 
