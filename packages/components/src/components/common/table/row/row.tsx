@@ -41,7 +41,7 @@ SelectRow.displayName = 'SelectRow';
 
 type MessageRowProps = ComponentProps<typeof TableRow> & { message?: MessageData; singleLine?: boolean; columnCount: number };
 
-const MessageRow = ({ message, className, columnCount, singleLine, ...props }: MessageRowProps) => {
+const MessageRow = ({ message, className, columnCount, singleLine = true, ...props }: MessageRowProps) => {
   if (message === undefined) {
     return null;
   }
