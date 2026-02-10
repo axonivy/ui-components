@@ -14,7 +14,7 @@ function Collapsible({ className, ...props }: ComponentProps<typeof CollapsibleP
   return (
     <CollapsiblePrimitive.Root
       data-slot='collapsible'
-      className={cn('group rounded-sm border border-solid border-n100', className, 'ui-collapsible')}
+      className={cn('rounded-sm border border-solid border-n100', className, 'ui-collapsible')}
       {...props}
     />
   );
@@ -35,11 +35,11 @@ function CollapsibleTrigger({
   ...props
 }: ComponentProps<typeof CollapsiblePrimitive.CollapsibleTrigger> & CollapsibleTriggerProps) {
   return (
-    <div className={cn('flex items-center gap-2 overflow-hidden')}>
+    <div className={cn('group/collapsible flex items-center gap-2 overflow-hidden')}>
       <CollapsiblePrimitive.CollapsibleTrigger
         data-slot='collapsible-trigger'
         className={cn(
-          'flex-1 cursor-pointer p-2 focus-visible:outline-2 data-[state=open]:font-bold data-[state=open]:text-p300',
+          'peer flex-1 cursor-pointer p-2 focus-visible:outline-2 data-[state=open]:font-bold data-[state=open]:text-p300',
           className,
           'ui-collapsible-trigger'
         )}
@@ -50,7 +50,7 @@ function CollapsibleTrigger({
           {state}
         </Flex>
       </CollapsiblePrimitive.CollapsibleTrigger>
-      {control && control({ className: 'group-has-data-[state=closed]:hidden' })}
+      {control && control({ className: 'group-has-data-[state=closed]/collapsible:hidden' })}
       <CollapsiblePrimitive.CollapsibleTrigger asChild className={cn('cursor-pointer p-2 data-[state=open]:rotate-90')}>
         <IvyIcon icon={IvyIcons.Chevron} />
       </CollapsiblePrimitive.CollapsibleTrigger>
@@ -59,7 +59,7 @@ function CollapsibleTrigger({
 }
 
 const CollapsibleState = ({ className, ...props }: ComponentProps<typeof StateDot>) => (
-  <StateDot data-slot='collapsible-state' className={cn('shrink-0 group-has-data-[state=open]:hidden', className)} {...props} />
+  <StateDot data-slot='collapsible-state' className={cn('shrink-0 group-has-data-[state=open]/collapsible:hidden', className)} {...props} />
 );
 CollapsibleState.displayName = 'CollapsibleState';
 
