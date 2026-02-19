@@ -5,5 +5,12 @@
     "group:allNonMajor",
     "security:minimumReleaseAgeNpm"
   ],
-  "rebaseWhen": "conflicted"
+  "rebaseWhen": "conflicted",
+  "packageRules": [
+    {
+      "description": "Downshift has breaking changes since ^9.1",
+      "matchPackageNames": ["downshift"],
+      "enabled": false
+    }
+  ]
 }
