@@ -113,7 +113,7 @@ export type BrowsersViewProps = {
   options?: {
     applyBtn?: { label?: string; icon?: IvyIcons };
     search?: { placeholder?: string };
-    info?: { label?: string };
+    info?: { label?: string; defaultOpen?: boolean };
     cancelBtn?: { label?: string };
   };
 };
@@ -224,7 +224,7 @@ const BrowsersView = ({ browsers, apply, options }: BrowsersViewProps) => {
               </Flex>
             </TabsContent>
           ))}
-          <BasicCollapsible label={options?.info?.label ?? 'Info'} style={{ maxHeight: 50 }}>
+          <BasicCollapsible label={options?.info?.label ?? 'Info'} defaultOpen={options?.info?.defaultOpen} style={{ maxHeight: 50 }}>
             {infoProvider(selectedRow())}
           </BasicCollapsible>
           <Flex direction='row' justifyContent='flex-end' gap={2}>
