@@ -18,8 +18,8 @@ const panelStyles = cva('h-full text-n800', {
 const panelIconStyles = cva('text-center', {
   variants: {
     mode: {
-      row: 'text-[20px]',
-      column: 'text-[54px]'
+      row: 'flex text-[20px]',
+      column: 'flex text-[54px]'
     }
   }
 });
@@ -42,7 +42,9 @@ function PanelMessage({ message, mode = 'column', icon = IvyIcons.DragDrop, clas
       className={cn(panelStyles({ mode }), className, 'ui-panel-message')}
       {...props}
     >
-      <IvyIcon icon={icon} className={panelIconStyles({ mode })} />
+      <div className={panelIconStyles({ mode })}>
+        <IvyIcon icon={icon} />
+      </div>
       <Message className={panelMessageStyles}>{message}</Message>
       {children}
     </Flex>
