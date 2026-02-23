@@ -11,6 +11,12 @@
       "description": "Downshift has breaking changes since ^9.1",
       "matchPackageNames": ["downshift"],
       "enabled": false
+    },
+    {
+      "description": "React Hotkeys Hook has a bug on v5.2.4",
+      "matchPackageNames": ["react-hotkeys-hook"],
+      "matchNewValue": "5.2.4",
+      "enabled": false
     }
   ]
 }
