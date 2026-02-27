@@ -18,6 +18,7 @@ export type ComboboxProps<T extends ComboboxOption> = Omit<ComponentPropsWithout
   value: string;
   onChange: (change: string) => void;
   options: T[];
+  optionsLimit?: number;
   optionFilter?: (item: T, input?: string) => boolean;
   itemRender?: (item: T) => ReactNode;
   onKeyDownExtended?: (e: KeyboardEvent<HTMLInputElement>) => void;
@@ -39,6 +40,7 @@ const Combobox = <T extends ComboboxOption>({
   onChange,
   options,
   optionFilter = defaultFilter,
+  optionsLimit,
   itemRender = option => <span>{option.value}</span>,
   disabled,
   className,
@@ -47,8 +49,17 @@ const Combobox = <T extends ComboboxOption>({
 }: ComboboxProps<T>) => {
   const [filteredItems, setFilteredItems] = useState(options);
   const [prevItems, setPrevItems] = useState(options);
+
+  const updateFilteredItems = (items: T[]) => {
+    if (optionsLimit !== undefined) {
+      setFilteredItems(items.slice(0, optionsLimit));
+    } else {
+      setFilteredItems(items);
+    }
+  };
+
   if (prevItems !== options) {
-    setFilteredItems(options);
+    updateFilteredItems(options);
     setPrevItems(options);
   }
 
@@ -69,7 +80,7 @@ const Combobox = <T extends ComboboxOption>({
     inputId: inputProps.id,
     labelId: inputProps['aria-labelledby'],
     onSelectedItemChange(change) {
-      setFilteredItems(options);
+      updateFilteredItems(options);
       if (change.inputValue !== value) {
         onChange(change.inputValue ?? '');
       }
@@ -85,7 +96,7 @@ const Combobox = <T extends ComboboxOption>({
 
     onInputValueChange(change) {
       if (change.type !== useCombobox.stateChangeTypes.FunctionSelectItem) {
-        setFilteredItems(options.filter(option => optionFilter(option, change.inputValue)));
+        updateFilteredItems(options.filter(option => optionFilter(option, change.inputValue)));
       }
     },
     items: filteredItems,
