@@ -3,7 +3,7 @@ import { Slot } from '@radix-ui/react-slot';
 import { cva, type VariantProps } from 'class-variance-authority';
 import type { ComponentProps } from 'react';
 
-const badgeVariants = cva('inline-flex shrink-0 items-center gap-1 border p-1 text-xs whitespace-nowrap', {
+const badgeVariants = cva('inline-flex shrink-0 items-center justify-center gap-1 border p-1 text-xs whitespace-nowrap', {
   variants: {
     variant: {
       default: 'border-transparent bg-p300 text-background',
@@ -24,7 +24,7 @@ const badgeVariants = cva('inline-flex shrink-0 items-center gap-1 border p-1 te
       xs: 'h-4'
     },
     round: {
-      true: 'aspect-square rounded-full',
+      true: 'aspect-square rounded-full p-0',
       false: 'rounded-md'
     }
   },
