@@ -46,7 +46,7 @@ export const Default: Story = {
       <Flex direction='row' gap={2} alignItems='center'>
         <Badge round>9+</Badge>
         <Badge round size='s' variant='primary'>
-          9
+          <IvyIcon icon={IvyIcons.Check} />
         </Badge>
         <Badge round size='xs' variant='outline'>
           8
