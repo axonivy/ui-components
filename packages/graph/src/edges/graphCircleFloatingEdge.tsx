@@ -11,7 +11,8 @@ const GraphCircleFloatingEdge = ({ id, source, target, markerEnd, style, label }
 
   return (
     <>
-      <path id={id} className='ui-graph-edge-path' d={edgePath} strokeWidth={2} markerEnd={markerEnd} style={style} />
+      {/* eslint-disable-next-line better-tailwindcss/no-unknown-classes */}
+      <path id={id} className='react-flow__edge-path' d={edgePath} strokeWidth={2} markerEnd={markerEnd} style={style} />
 
       {label && (
         <EdgeLabelRenderer>
