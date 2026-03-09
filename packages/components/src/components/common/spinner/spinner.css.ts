@@ -15,8 +15,7 @@ export const spinner = recipe({
   base: {
     width: 36,
     height: 36,
-    border: `4px solid ${vars.color.n800}`,
-    borderBottomColor: 'transparent',
+    border: `4px solid`,
     borderRadius: '50%',
     display: 'inline-block',
     boxSizing: 'border-box',
@@ -35,7 +34,37 @@ export const spinner = recipe({
         borderWidth: 3
       },
       large: {}
+    },
+    color: {
+      neutral: {
+        borderColor: vars.color.n800,
+        borderBottomColor: 'transparent'
+      },
+      background: {
+        borderColor: vars.color.background,
+        borderBottomColor: 'transparent'
+      },
+      body: {
+        borderColor: vars.color.body,
+        borderBottomColor: 'transparent'
+      },
+      success: {
+        borderColor: vars.color.success,
+        borderBottomColor: 'transparent'
+      },
+      error: {
+        borderColor: vars.color.error,
+        borderBottomColor: 'transparent'
+      },
+      warning: {
+        borderColor: vars.color.warning,
+        borderBottomColor: 'transparent'
+      }
     }
+  },
+
+  defaultVariants: {
+    color: 'neutral'
   }
 });
 
