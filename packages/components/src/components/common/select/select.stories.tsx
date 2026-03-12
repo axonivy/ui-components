@@ -57,6 +57,18 @@ export const UnknownValue: StoryObj<typeof BasicSelect> = {
   )
 };
 
+export const AdditionalInfo: StoryObj<typeof BasicSelect> = {
+  render: () => (
+    <BasicSelect
+      defaultValue='apple'
+      items={[
+        { value: 'apple', label: 'Apple', info: 'This is an apple' },
+        { value: 'banana', label: 'Banana', info: 'This is a banana' }
+      ]}
+    />
+  )
+};
+
 export const EmptyValue: StoryObj<typeof BasicSelect> = {
   render: () => {
     const [value, setValue] = useState('');
