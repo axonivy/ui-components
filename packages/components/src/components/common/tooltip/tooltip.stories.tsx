@@ -1,6 +1,6 @@
 import { Button } from '@/components/common/button/button';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './tooltip';
+import { BasicTooltip, Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './tooltip';
 
 const meta: Meta<typeof Tooltip> = {
   title: 'Common/Tooltip',
@@ -24,5 +24,13 @@ export const Default: StoryObj<typeof Tooltip> = {
         </TooltipContent>
       </Tooltip>
     </TooltipProvider>
+  )
+};
+
+export const Basic_Tooltip: StoryObj<typeof BasicTooltip> = {
+  render: ({ delayDuration }) => (
+    <BasicTooltip content='Add to library' delayDuration={delayDuration}>
+      <Button variant={'outline'}>Hover</Button>
+    </BasicTooltip>
   )
 };

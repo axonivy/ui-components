@@ -1,6 +1,6 @@
 import { cn } from '@/utils/class-name';
 import * as TooltipPrimitive from '@radix-ui/react-tooltip';
-import type { ComponentProps } from 'react';
+import type { ComponentProps, ReactNode } from 'react';
 import { tooltipContent } from './tooltip.css';
 
 const TooltipProvider = TooltipPrimitive.Provider;
@@ -20,4 +20,20 @@ const TooltipContent = ({ className, sideOffset = 4, ...props }: ComponentProps<
 );
 TooltipContent.displayName = TooltipPrimitive.Content.displayName;
 
-export { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger };
+type BasicTooltipProps = {
+  content: ReactNode;
+  children: ReactNode;
+  delayDuration?: number;
+} & ComponentProps<typeof TooltipPrimitive.Content>;
+
+const BasicTooltip = ({ children, content, delayDuration, ...contentProps }: BasicTooltipProps) => (
+  <TooltipProvider>
+    <Tooltip delayDuration={delayDuration}>
+      <TooltipTrigger asChild>{children}</TooltipTrigger>
+      <TooltipContent {...contentProps}>{content}</TooltipContent>
+    </Tooltip>
+  </TooltipProvider>
+);
+BasicTooltip.displayName = 'BasicTooltip';
+
+export { BasicTooltip, Tooltip, TooltipContent, TooltipProvider, TooltipTrigger };
