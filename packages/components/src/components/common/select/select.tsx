@@ -98,7 +98,7 @@ SelectSeparator.displayName = SelectPrimitive.Separator.displayName;
 
 export type BasicSelectProps = SelectPrimitive.SelectProps &
   Pick<SelectPrimitive.SelectValueProps, 'placeholder' | 'tabIndex' | 'onKeyDown'> & {
-    items: ReadonlyArray<{ value: string; label: string }>;
+    items: ReadonlyArray<{ value: string; label: string; info?: string }>;
     emptyItem?: boolean;
     className?: string;
     menuWidth?: string;
@@ -145,7 +145,7 @@ const BasicSelect = ({
           {unknownValue && <SelectItem value={unknownValue}>{unknownValue}</SelectItem>}
           {items.map(item => (
             <SelectItem key={item.value} value={item.value} asChild>
-              <span className={basicSelectItemLabel} title={item.label}>
+              <span className={basicSelectItemLabel} title={item.info ?? item.label}>
                 {item.label}
               </span>
             </SelectItem>
