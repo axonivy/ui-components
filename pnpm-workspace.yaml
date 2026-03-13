@@ -1,6 +1,8 @@
 packages:
   - packages/*
   - dev-packages/*
+patchedDependencies:
+  fantasticon: patches/fantasticon.patch
 
 preferWorkspacePackages: true
 
