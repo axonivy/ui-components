@@ -24,11 +24,11 @@ export default meta;
 
 const sections: PaletteConfig['sections'] = {
   'Workflow Activities': [
-    { name: 'User Task', description: 'User Task', icon: IvyIcons.UserTaskOutline, onClick: () => alert('User Task') },
-    { name: 'User Dialog', description: 'User Dialog', icon: IvyIcons.UserDialogOutline },
-    { name: 'Script', description: 'Script', icon: IvyIcons.ScriptFileOutline },
+    { name: 'User Task', description: 'User Task', icon: IvyIcons.UserTask, onClick: () => alert('User Task') },
+    { name: 'User Dialog', description: 'User Dialog', icon: IvyIcons.UserDialog },
+    { name: 'Script', description: 'Script', icon: IvyIcons.Script },
     { name: 'Call', description: 'Call', icon: IvyIcons.CallOutline },
-    { name: 'Trigger', description: 'Trigger', icon: IvyIcons.TriggerOutline }
+    { name: 'Trigger', description: 'Trigger', icon: IvyIcons.Trigger }
   ],
   'Interface Events': [
     { name: 'Database', description: 'Database', icon: IvyIcons.DatabaseOutline },

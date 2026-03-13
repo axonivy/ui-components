@@ -19,7 +19,7 @@ export default meta;
 type Story = StoryObj<typeof Combobox>;
 
 const languages = [
-  { label: 'English', value: 'en', icon: IvyIcons.SubReceiveOutline, info: 'this is additional info' },
+  { label: 'English', value: 'en', icon: IvyIcons.Receive, info: 'this is additional info' },
   { label: 'French', value: 'fr', icon: IvyIcons.Check, info: 'crazy language' },
   { label: 'German', value: 'de' },
   { label: 'Spanish', value: 'es' },

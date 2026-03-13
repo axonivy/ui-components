@@ -66,7 +66,7 @@ export const Default: Story = {
             </DropdownMenuItem>
             <DropdownMenuSub>
               <DropdownMenuSubTrigger>
-                <IvyIcon icon={IvyIcons.UserOutline} />
+                <IvyIcon icon={IvyIcons.User} />
                 <span>Invite users</span>
                 <DropdownMenuShortcut>⇧+⌘+U</DropdownMenuShortcut>
               </DropdownMenuSubTrigger>
@@ -95,7 +95,7 @@ export const Default: Story = {
             </DropdownMenuItem>
             <DropdownMenuSub>
               <DropdownMenuSubTrigger>
-                <IvyIcon icon={IvyIcons.UserOutline} />
+                <IvyIcon icon={IvyIcons.User} />
                 <span>More tools</span>
               </DropdownMenuSubTrigger>
               <DropdownMenuPortal>
