@@ -49,11 +49,11 @@ export const useDialogHotkeys = (scopes: string[] = []) => {
 export const undoHotkey = () => 'mod+Z';
 
 export const useUndoHotkey = (undo: () => void, options?: Omit<Options, 'useKey'>) => {
-  return useHotkeys(undoHotkey(), e => hotkeyUndoFix(e, undo), { useKey: true, ...options });
+  return useHotkeys(undoHotkey(), e => hotkeyUndoFix(e, undo), { useKey: true, enableOnFormTags: true, preventDefault: true, ...options });
 };
 
 export const redoHotkey = () => (isWindows() ? 'mod+Y' : 'mod+shift+Z');
 
 export const useRedoHotkey = (redo: () => void, options?: Omit<Options, 'useKey'>) => {
-  return useHotkeys(redoHotkey(), e => hotkeyRedoFix(e, redo), { useKey: true, ...options });
+  return useHotkeys(redoHotkey(), e => hotkeyRedoFix(e, redo), { useKey: true, enableOnFormTags: true, preventDefault: true, ...options });
 };
