@@ -1,9 +1,9 @@
 import { vanillaExtractPlugin as veVitePlugin } from '@vanilla-extract/vite-plugin';
-import { resolve } from 'path';
-import { defineConfig } from 'vitest/config';
-import { visualizer } from 'rollup-plugin-visualizer';
 import react from '@vitejs/plugin-react';
+import { resolve } from 'path';
+import { visualizer } from 'rollup-plugin-visualizer';
 import dts from 'vite-plugin-dts';
+import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
   plugins: [veVitePlugin(), visualizer(), react(), dts({ tsconfigPath: './tsconfig.production.json' })],
@@ -15,8 +15,8 @@ export default defineConfig({
       fileName: 'graph',
       formats: ['es']
     },
-    rollupOptions: {
-      external: ['@axonivy/ui-icons', '@axonivy/ui-components', 'react', 'react/jsx-runtime', 'react-dom']
+    rolldownOptions: {
+      external: ['@axonivy/ui-icons', '@axonivy/ui-components', 'react', 'react/jsx-runtime', 'react-dom', '@xyflow/react']
     }
   },
   test: {

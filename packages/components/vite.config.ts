@@ -21,7 +21,7 @@ export default defineConfig({
       fileName: 'components',
       formats: ['es']
     },
-    rollupOptions: {
+    rolldownOptions: {
       external: ['@axonivy/ui-icons', 'react', 'react/jsx-runtime', 'react-dom']
     }
   },
