@@ -19,7 +19,7 @@ function Checkbox({ disabled, className, ...props }: ComponentProps<typeof Check
     <CheckboxPrimitive.Root
       data-slot='checkbox'
       className={cn(
-        'flex h-4.25 w-4.25 shrink-0 cursor-pointer items-center justify-center rounded-sm border border-border-basic bg-n25 enabled:hover:border-border-active enabled:hover:bg-p50 enabled:focus-visible:outline-2 disabled:cursor-not-allowed disabled:opacity-75 data-[state=checked]:border-border-active data-[state=checked]:bg-p50',
+        'flex size-4.25 shrink-0 cursor-pointer items-center justify-center rounded-sm border border-border-basic bg-n25 enabled:hover:border-border-active enabled:hover:bg-p50 enabled:focus-visible:outline-2 disabled:cursor-not-allowed disabled:opacity-75 data-[state=checked]:border-border-active data-[state=checked]:bg-p50',
         className,
         'ui-checkbox'
       )}
