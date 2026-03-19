@@ -39,7 +39,7 @@ pipeline {
       }
       steps {
         script {
-          docker.build('node', '-f build/Dockerfile.node .').inside {
+          docker.build('node', '-f build/Dockerfile.playwright .').inside {
             sh 'pnpm run build'
             sh 'git checkout .'
             withCredentials([string(credentialsId: 'npmjs-registry.ivyteam.ch-auth-token', variable: 'NPM_AUTH_TOKEN')]) {
