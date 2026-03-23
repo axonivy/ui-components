@@ -92,7 +92,15 @@ export const base = defineConfig(
       '@tanstack/query': pluginQuery
     },
     rules: {
-      ...pluginQuery.configs.recommended.rules
+      ...pluginQuery.configs.recommended.rules,
+      '@tanstack/query/exhaustive-deps': [
+        'error',
+        {
+          allowlist: {
+            variables: ['client']
+          }
+        }
+      ]
     }
   },
 
