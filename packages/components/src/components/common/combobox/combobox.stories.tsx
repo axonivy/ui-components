@@ -27,7 +27,10 @@ const languages = [
   { label: 'Russian', value: 'ru' },
   { label: 'Japanese', value: 'ja' },
   { label: 'Korean', value: 'ko' },
-  { label: 'Chinese', value: 'zh' }
+  { label: 'Chinese', value: 'zh' },
+  { label: 'Italian', value: 'it' },
+  { label: 'Dutch', value: 'nl' },
+  { label: 'Swedish', value: 'sv' }
 ];
 
 export const Default: Story = {

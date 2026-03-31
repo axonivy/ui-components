@@ -16,7 +16,7 @@ test('open / close', async () => {
   await userEvent.click(trigger);
   expect(input).toHaveAttribute('aria-expanded', 'true');
   expect(screen.getByRole('dialog')).toHaveTextContent('en');
-  expect(screen.getAllByRole('option')).toHaveLength(9);
+  expect(screen.getAllByRole('option')).toHaveLength(12);
 
   await userEvent.click(trigger);
   expect(input).toHaveAttribute('aria-expanded', 'false');
