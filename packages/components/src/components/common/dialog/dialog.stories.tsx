@@ -49,26 +49,103 @@ const SubmitButton = (props: ComponentProps<typeof Button>) => (
 
 const fruits: ReadonlyArray<{ value: string; label: string }> = [
   { value: 'apple', label: 'Apple' },
-  { value: 'banana', label: 'Banana' }
+  { value: 'banana', label: 'Banana' },
+  { value: 'orange', label: 'Orange' },
+  { value: 'grape', label: 'Grape' },
+  { value: 'kiwi', label: 'Kiwi' },
+  { value: 'mango', label: 'Mango' },
+  { value: 'strawberry', label: 'Strawberry' },
+  { value: 'watermelon', label: 'Watermelon' },
+  { value: 'pineapple', label: 'Pineapple' },
+  { value: 'peach', label: 'Peach' },
+  { value: 'pear', label: 'Pear' },
+  { value: 'plum', label: 'Plum' },
+  { value: 'raspberry', label: 'Raspberry' },
+  { value: 'blueberry', label: 'Blueberry' },
+  { value: 'blackberry', label: 'Blackberry' }
 ];
 
 export default meta;
 type Story = StoryObj<typeof Dialog>;
 
 export const Default: Story = {
-  render: props => (
-    <Dialog {...props}>
-      <DialogTrigger asChild>
-        <Button variant={'outline'}>Open Dialog</Button>
-      </DialogTrigger>
-      <DialogContent>
-        <Flex direction='column' gap={4}>
-          <DialogHeader>
-            <DialogTitle>{title}</DialogTitle>
-            <DialogDescription>{description}</DialogDescription>
-          </DialogHeader>
+  render: props => {
+    return (
+      <Dialog {...props}>
+        <DialogTrigger asChild>
+          <Button variant={'outline'}>Open Dialog</Button>
+        </DialogTrigger>
+        <DialogContent>
+          <Flex direction='column' gap={4}>
+            <DialogHeader>
+              <DialogTitle>{title}</DialogTitle>
+              <DialogDescription>{description}</DialogDescription>
+            </DialogHeader>
 
-          <Flex direction='column' gap={2}>
+            <Flex direction='column' gap={2}>
+              <BasicField label='Name'>
+                <Input />
+              </BasicField>
+              <BasicField label='Comment'>
+                <Textarea />
+              </BasicField>
+              <BasicField label='Fruit'>
+                <BasicSelect items={fruits} />
+              </BasicField>
+              <BasicField label='Car'>
+                <Combobox
+                  value=''
+                  onChange={() => {}}
+                  renderInContainer={true}
+                  options={[
+                    { value: 'bmv' },
+                    { value: 'volvo' },
+                    { value: 'audi' },
+                    { value: 'mercedes' },
+                    { value: 'ferrari' },
+                    { value: 'lamborghini' },
+                    { value: 'porsche' },
+                    { value: 'tesla' },
+                    { value: 'bugatti' },
+                    { value: 'koenigsegg' },
+                    { value: 'pagani' },
+                    { value: 'mclaren' },
+                    { value: 'aston martin' },
+                    { value: 'jaguar' },
+                    { value: 'land rover' },
+                    { value: 'mini' },
+                    { value: 'subaru' },
+                    { value: 'mazda' },
+                    { value: 'nissan' }
+                  ]}
+                />
+              </BasicField>
+            </Flex>
+
+            <DialogFooter>
+              <DialogClose asChild>
+                <CancelButton />
+              </DialogClose>
+              <DialogClose asChild>
+                <SubmitButton />
+              </DialogClose>
+            </DialogFooter>
+          </Flex>
+        </DialogContent>
+      </Dialog>
+    );
+  }
+};
+
+export const WithBasicDialogContent: Story = {
+  render: props => {
+    return (
+      <Dialog {...props}>
+        <DialogTrigger asChild>
+          <Button variant={'outline'}>Open Dialog</Button>
+        </DialogTrigger>
+        <DialogContent>
+          <BasicDialogContent title={title} description={description} cancel={<CancelButton />} submit={<SubmitButton />}>
             <BasicField label='Name'>
               <Input />
             </BasicField>
@@ -79,46 +156,11 @@ export const Default: Story = {
               <BasicSelect items={fruits} />
             </BasicField>
             <BasicField label='Car'>
-              <Combobox value='' onChange={() => {}} options={[{ value: 'bmv' }, { value: 'volvo' }]} />
+              <Combobox value='' onChange={() => {}} renderInContainer={true} options={[{ value: 'bmv' }, { value: 'volvo' }]} />
             </BasicField>
-          </Flex>
-
-          <DialogFooter>
-            <DialogClose asChild>
-              <CancelButton />
-            </DialogClose>
-            <DialogClose asChild>
-              <SubmitButton />
-            </DialogClose>
-          </DialogFooter>
-        </Flex>
-      </DialogContent>
-    </Dialog>
-  )
-};
-
-export const WithBasicDialogContent: Story = {
-  render: props => (
-    <Dialog {...props}>
-      <DialogTrigger asChild>
-        <Button variant={'outline'}>Open Dialog</Button>
-      </DialogTrigger>
-      <DialogContent>
-        <BasicDialogContent title={title} description={description} cancel={<CancelButton />} submit={<SubmitButton />}>
-          <BasicField label='Name'>
-            <Input />
-          </BasicField>
-          <BasicField label='Comment'>
-            <Textarea />
-          </BasicField>
-          <BasicField label='Fruit'>
-            <BasicSelect items={fruits} />
-          </BasicField>
-          <BasicField label='Car'>
-            <Combobox value='' onChange={() => {}} options={[{ value: 'bmv' }, { value: 'volvo' }]} />
-          </BasicField>
-        </BasicDialogContent>
-      </DialogContent>
-    </Dialog>
-  )
+          </BasicDialogContent>
+        </DialogContent>
+      </Dialog>
+    );
+  }
 };

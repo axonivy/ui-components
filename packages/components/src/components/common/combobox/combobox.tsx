@@ -7,7 +7,7 @@ import { useReadonly } from '@/context/useReadonly';
 import { cn } from '@/utils/class-name';
 import { IvyIcons } from '@axonivy/ui-icons';
 import { useCombobox } from 'downshift';
-import { useEffect, useState, type ComponentPropsWithoutRef, type KeyboardEvent, type ReactNode } from 'react';
+import { useEffect, useRef, useState, type ComponentPropsWithoutRef, type KeyboardEvent, type ReactNode } from 'react';
 import { content, item as itemClass } from './combobox.css';
 
 export type ComboboxOption = {
@@ -22,6 +22,7 @@ export type ComboboxProps<T extends ComboboxOption> = Omit<ComponentPropsWithout
   optionFilter?: (item: T, input?: string) => boolean;
   itemRender?: (item: T) => ReactNode;
   onKeyDownExtended?: (e: KeyboardEvent<HTMLInputElement>) => void;
+  renderInContainer?: boolean;
 };
 
 const defaultFilter = (option: ComboboxOption, input?: string): boolean => {
@@ -45,10 +46,12 @@ const Combobox = <T extends ComboboxOption>({
   disabled,
   className,
   onKeyDownExtended,
+  renderInContainer = false,
   ...props
 }: ComboboxProps<T>) => {
   const [filteredItems, setFilteredItems] = useState(options);
   const [prevItems, setPrevItems] = useState(options);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const updateFilteredItems = (items: T[]) => {
     if (optionsLimit !== undefined) {
@@ -109,11 +112,10 @@ const Combobox = <T extends ComboboxOption>({
   useEffect(() => {
     selectItem({ value });
   }, [options, selectItem, value]);
-
   const readonly = useReadonly();
   return (
     <Popover open={isOpen}>
-      <div className='ui-combobox'>
+      <div className='ui-combobox' ref={containerRef}>
         <PopoverAnchor asChild>
           <InputGroup className={className}>
             <Input
@@ -144,7 +146,12 @@ const Combobox = <T extends ComboboxOption>({
           </InputGroup>
         </PopoverAnchor>
         <div {...getMenuProps()}>
-          <PopoverContent onOpenAutoFocus={e => e.preventDefault()} className={cn(content, 'ui-combobox-menu')}>
+          <PopoverContent
+            onOpenAutoFocus={e => e.preventDefault()}
+            onMouseDown={e => e.preventDefault()}
+            className={cn(content, 'ui-combobox-menu')}
+            container={renderInContainer ? containerRef.current : undefined}
+          >
             {filteredItems.map((item, index) => (
               <Flex
                 gap={2}
