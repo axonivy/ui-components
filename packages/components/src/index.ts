@@ -65,6 +65,7 @@ export * from './types/lambda';
 /* Utils */
 export * from './utils/array';
 export * from './utils/class-name';
+export * from './utils/config-key';
 export * from './utils/equals';
 export * from './utils/guards';
 export * from './utils/hotkey';
