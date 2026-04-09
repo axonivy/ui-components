@@ -10,3 +10,4 @@ preferWorkspacePackages: true
 
 publicHoistPattern:
   - eslint
+trustPolicy: no-downgrade
