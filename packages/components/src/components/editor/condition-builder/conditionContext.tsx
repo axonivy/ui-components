@@ -1,4 +1,4 @@
-import { createContext, use, type ReactNode } from 'react';
+import { createContext, useContext, type ReactNode } from 'react';
 
 export const conditionModes = [
   { label: 'Basic Condition', value: 'basic-condition' },
@@ -66,7 +66,7 @@ interface ConditionContextType {
 export const ConditionContext = createContext<ConditionContextType | undefined>(undefined);
 
 export const useConditionContext = () => {
-  const context = use(ConditionContext);
+  const context = useContext(ConditionContext);
   if (!context) {
     throw new Error('useConditionContext must be used within a ConditionContext');
   }

@@ -53,6 +53,14 @@ export const WithExtendedItem: Story = {
       return filterIncludes(value) || filterIncludes(label) || filterIncludes(info);
     };
 
+    const ExtendedComboboxItem = ({ icon, label, info }: ExtendedComboboxOption) => (
+      <Flex gap={1} alignItems='center'>
+        {icon && <IvyIcon icon={icon} />}
+        <span>{label}</span>
+        <span style={{ color: vars.color.n700 }}>{info}</span>
+      </Flex>
+    );
+
     return (
       <Combobox
         value=''
@@ -65,14 +73,6 @@ export const WithExtendedItem: Story = {
     );
   }
 };
-
-const ExtendedComboboxItem = ({ icon, label, info }: ExtendedComboboxOption) => (
-  <Flex gap={1} alignItems='center'>
-    {icon && <IvyIcon icon={icon} />}
-    <span>{label}</span>
-    <span style={{ color: vars.color.n700 }}>{info}</span>
-  </Flex>
-);
 
 export const WithFieldset: Story = {
   render: ({ disabled }) => (

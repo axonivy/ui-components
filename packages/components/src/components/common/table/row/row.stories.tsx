@@ -242,7 +242,7 @@ export const Reorder: Story = {
 
 export const MultiSelectWithReorder: Story = {
   render: () => {
-    const [data, setData] = useState(() => structuredClone(tableData));
+    const [data, setData] = useState(structuredClone(tableData));
 
     const reorderColumns: ColumnDef<Payment>[] = [
       {

@@ -22,10 +22,10 @@ const useGraph = ({ graphNodes, options }: GraphProps) => {
   const [prevGraphNodes, setPrevGraphNodes] = useState<NodeData[]>(graphNodes);
   const { getNodes, getEdges, fitView } = useReactFlow<GraphNode>();
   const [nodes, setNodes] = useState<Node[]>(
-    () => getLayoutedElements({ ...mapNodesAndEdges(graphNodes, getNodes(), options), direction: 'TB' }).nodes
+    getLayoutedElements({ ...mapNodesAndEdges(graphNodes, getNodes(), options), direction: 'TB' }).nodes
   );
   const [edges, setEdges] = useState<Edge[]>(
-    () => getLayoutedElements({ ...mapNodesAndEdges(graphNodes, getNodes(), options), direction: 'TB' }).edges
+    getLayoutedElements({ ...mapNodesAndEdges(graphNodes, getNodes(), options), direction: 'TB' }).edges
   );
   const [selectedNode, setSelectedNode] = useState<string>('all');
   if (graphNodes !== prevGraphNodes) {

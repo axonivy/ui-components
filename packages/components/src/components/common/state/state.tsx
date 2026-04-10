@@ -30,8 +30,8 @@ const StateDot = ({ state, messages = [], size = 'normal', className, ...props }
         {messages.length > 0 && (
           <TooltipContent collisionPadding={10} sideOffset={10}>
             <Flex direction='column'>
-              {messages.map(msg => (
-                <Message key={msg.message} {...msg} />
+              {messages.map((msg, index) => (
+                <Message key={index} {...msg} />
               ))}
             </Flex>
           </TooltipContent>

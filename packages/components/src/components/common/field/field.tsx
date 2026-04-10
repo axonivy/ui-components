@@ -2,7 +2,7 @@ import { Flex } from '@/components/common/flex/flex';
 import { Label } from '@/components/common/label/label';
 import { Message, type MessageData } from '@/components/common/message/message';
 import { cn } from '@/utils/class-name';
-import { createContext, use, useId, type ComponentProps, type ReactNode } from 'react';
+import { createContext, useContext, useId, type ComponentProps, type ReactNode } from 'react';
 import { field } from './field.css';
 
 type FieldContextValue = {
@@ -12,7 +12,7 @@ type FieldContextValue = {
 const FieldContext = createContext<FieldContextValue>({} as FieldContextValue);
 
 export const useField = () => {
-  const { id } = use(FieldContext);
+  const { id } = useContext(FieldContext);
   const newId = useId();
   return createIds(id ?? newId);
 };
@@ -45,9 +45,9 @@ const createIds = (id: string) => {
 const Field = ({ direction = 'column', gap = 1, className, ...props }: ComponentProps<typeof Flex>) => {
   const id = useId();
   return (
-    <FieldContext value={{ id }}>
+    <FieldContext.Provider value={{ id }}>
       <Flex direction={direction} gap={gap} className={cn(className, 'ui-field')} {...props} />
-    </FieldContext>
+    </FieldContext.Provider>
   );
 };
 Field.displayName = 'Field';
