@@ -64,6 +64,7 @@ export const InputBadgeArea = ({ value, badgeProps, className, ...props }: Input
   return (
     <output className={cn(badgeOutput, className, 'ui-input-badge-area')} {...inputProps} {...props}>
       {lines.map((line, index) => (
+        // eslint-disable-next-line @eslint-react/no-array-index-key
         <Flex key={index} className={inputBadgeLine} role='row'>
           {line}
         </Flex>
@@ -78,10 +79,12 @@ const findBadges = (value: string, badgeProps: Array<BadgeType>): Array<ReactNod
     if (!text) return;
     for (const prop of badgeProps) {
       if (text.match(new RegExp(prop.regex))) {
+        // eslint-disable-next-line @eslint-react/no-array-index-key
         return <Badge key={index} text={prop.badgeTextGen(text)} icon={prop.icon} originalText={text} tooltipGen={prop.tooltip} />;
       }
     }
     return (
+      // eslint-disable-next-line @eslint-react/no-array-index-key
       <span key={index} className={inputBadgeText}>
         {text}
       </span>

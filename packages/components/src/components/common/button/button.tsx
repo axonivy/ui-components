@@ -10,7 +10,7 @@ export type ButtonProps = ComponentProps<'button'> &
     toggle?: boolean;
   };
 
-const useToggle = (toggle?: boolean) => {
+const toggleProps = (toggle?: boolean) => {
   if (toggle === undefined) {
     return {};
   }
@@ -21,11 +21,10 @@ const useToggle = (toggle?: boolean) => {
 };
 
 const Button = ({ className, icon, rotate, spin, variant, size, toggle, children, ...props }: ButtonProps) => {
-  const toggleProps = useToggle(toggle);
   return (
     <button
       className={cn(button({ variant, size }), className, children === undefined && iconOnly({ size }), 'ui-button')}
-      {...toggleProps}
+      {...toggleProps(toggle)}
       {...props}
     >
       {icon && <IvyIcon icon={icon} rotate={rotate} spin={spin} />}

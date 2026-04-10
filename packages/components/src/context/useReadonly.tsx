@@ -1,12 +1,12 @@
-import { createContext, useContext, type ReactNode } from 'react';
+import { createContext, use, type ReactNode } from 'react';
 
-const ReadonlyContextInstance = createContext({ readonly: false });
+const ReadonlyContext = createContext({ readonly: false });
 
 export const ReadonlyProvider = ({ readonly, children }: { readonly: boolean; children: ReactNode }) => {
-  return <ReadonlyContextInstance.Provider value={{ readonly }}>{children}</ReadonlyContextInstance.Provider>;
+  return <ReadonlyContext value={{ readonly }}>{children}</ReadonlyContext>;
 };
 
 export const useReadonly = (): boolean => {
-  const context = useContext(ReadonlyContextInstance);
+  const context = use(ReadonlyContext);
   return context.readonly;
 };
