@@ -162,7 +162,8 @@ const BrowsersView = ({ browsers, apply, options }: BrowsersViewProps) => {
   };
   const searchRef = useRef<HTMLInputElement>(null);
   useEffect(() => {
-    setTimeout(() => searchRef.current?.focus(), 0);
+    const timeoutId = setTimeout(() => searchRef.current?.focus(), 0);
+    return () => clearTimeout(timeoutId);
   }, []);
   return (
     <Tabs value={tab} onValueChange={setTab} className={cn(fullHeight, overflowHidden)}>
