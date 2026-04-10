@@ -158,7 +158,7 @@ const Combobox = <T extends ComboboxOption>({
                 className={cn(itemClass, 'ui-combobox-item')}
                 data-highlighted={highlightedIndex === index ? '' : undefined}
                 data-state={selectedItem?.value === item.value ? 'checked' : 'unchecked'}
-                key={item.value}
+                key={`${item.value}${index}`}
                 {...getItemProps({ item, index })}
               >
                 {itemRender(item)}

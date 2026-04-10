@@ -72,7 +72,9 @@ function AddRemoveTableDemo({ enableMultiselect }: { enableMultiselect: boolean 
   };
 
   const removeRow = () => {
-    const { newData } = deleteAllSelectedRows(table, data);
+    const { newData: newFields } = deleteAllSelectedRows(table, data);
+    let newData = structuredClone(data);
+    newData = newFields;
     setData(newData);
   };
 

@@ -55,9 +55,11 @@ export const Default: StoryObj = {
         </Flex>
         <h4>History Log</h4>
         <div>
-          <pre>
-            <code>{logs.join('\n')}</code>
-          </pre>
+          {logs.map((log, index) => (
+            <code style={{ display: 'block' }} key={index}>
+              {log}
+            </code>
+          ))}
         </div>
       </Flex>
     );

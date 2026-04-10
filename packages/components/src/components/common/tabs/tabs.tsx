@@ -75,8 +75,8 @@ const BasicInscriptionTabs = ({ tabs, onChange, value }: BasicInscriptionTabsPro
   >
     <TabsList className={cn('ui-inscription-tabs-list')} data-tabs={tabs.length >= 5 ? 'many' : 'few'}>
       <div className={tabsListPlaceholder} />
-      {tabs.map(tab => (
-        <TabsTrigger key={tab.id} className='ui-inscription-tabs-trigger' value={tab.id} aria-label={tab.name}>
+      {tabs.map((tab, index) => (
+        <TabsTrigger key={`${index}-${tab.id}`} className='ui-inscription-tabs-trigger' value={tab.id} aria-label={tab.name}>
           {tab.state?.state !== undefined && (
             <StateDot state={tab.state.state} messages={tab.state.messages} size='small' className={inscriptionTabStateDot} />
           )}
@@ -88,8 +88,8 @@ const BasicInscriptionTabs = ({ tabs, onChange, value }: BasicInscriptionTabsPro
       ))}
       <div className={tabsListPlaceholder} />
     </TabsList>
-    {tabs.map(tab => (
-      <TabsPrimitive.Content className={cn(inscriptionTabsContent, 'ui-inscription-tabs-content')} key={tab.id} value={tab.id}>
+    {tabs.map((tab, index) => (
+      <TabsPrimitive.Content className={cn(inscriptionTabsContent, 'ui-inscription-tabs-content')} key={`${index}-${tab}`} value={tab.id}>
         <Flex direction='column' gap={3} className={inscriptionTabsContentScrollArea}>
           {tab.content}
         </Flex>

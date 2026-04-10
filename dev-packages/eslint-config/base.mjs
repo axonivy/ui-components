@@ -1,9 +1,12 @@
-import eslintReact from '@eslint-react/eslint-plugin';
 import eslint from '@eslint/js';
 import pluginQuery from '@tanstack/eslint-plugin-query';
 import playwright from 'eslint-plugin-playwright';
+import reactHooks from 'eslint-plugin-react-hooks';
+import reactJsxRuntime from 'eslint-plugin-react/configs/jsx-runtime.js';
+import reactRecommended from 'eslint-plugin-react/configs/recommended.js';
 import testingLibrary from 'eslint-plugin-testing-library';
 import { defineConfig } from 'eslint/config';
+import globals from 'globals';
 import tseslint from 'typescript-eslint';
 
 export const base = defineConfig(
@@ -20,7 +23,43 @@ export const base = defineConfig(
   },
 
   // React recommended configs
-  eslintReact.configs.recommended,
+  {
+    name: 'eslint-plugin-react/configs/recommended',
+    ...reactRecommended
+  },
+  {
+    name: 'eslint-plugin-react/configs/jsx-runtime',
+    ...reactJsxRuntime
+  },
+  {
+    name: 'eslint-plugin-react',
+    languageOptions: {
+      parserOptions: {
+        ecmaFeatures: {
+          jsx: true
+        }
+      },
+      globals: {
+        ...globals.browser
+      }
+    },
+    settings: {
+      react: {
+        version: 'detect'
+      }
+    },
+    rules: {
+      'react/display-name': 'off'
+    }
+  },
+  {
+    name: 'eslint-plugin-react-hooks',
+    ...reactHooks.configs.flat.recommended,
+    rules: {
+      ...reactHooks.configs.flat.recommended.rules,
+      'react-hooks/incompatible-library': 'off'
+    }
+  },
 
   // Testing library recommended configs
   {
