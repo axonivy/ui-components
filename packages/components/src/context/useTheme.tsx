@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, use, useEffect, useState } from 'react';
 
 export type Theme = 'dark' | 'light' | 'system';
 
@@ -64,9 +64,9 @@ export const ThemeProvider = ({
   };
 
   return (
-    <ThemeProviderContext.Provider {...props} value={value}>
+    <ThemeProviderContext {...props} value={value}>
       {children}
-    </ThemeProviderContext.Provider>
+    </ThemeProviderContext>
   );
 };
 
@@ -86,7 +86,7 @@ const realTheme = (theme: Theme) => {
 };
 
 export const useTheme = () => {
-  const context = useContext(ThemeProviderContext);
+  const context = use(ThemeProviderContext);
   if (context === undefined) throw new Error('useTheme must be used within a ThemeProvider');
   return { ...context, realTheme: realTheme(context.theme) };
 };

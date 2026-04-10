@@ -1,6 +1,10 @@
 packages:
   - packages/*
   - dev-packages/*
+blockExoticSubdeps: true
+minimumReleaseAge: 1440
+minimumReleaseAgeExclude:
+  - '@axonivy/*'
 overrides:
   '@xmldom/xmldom@<0.8.12': '>=0.8.12'
 patchedDependencies:
@@ -11,8 +15,4 @@ preferWorkspacePackages: true
 publicHoistPattern:
   - eslint
 trustPolicy: no-downgrade
-trustPolicyIgnoreAfter: 43200  # minutes (30 days)
-minimumReleaseAge: 1440
-minimumReleaseAgeExclude:
-- '@axonivy/*'
-blockExoticSubdeps: true
+trustPolicyIgnoreAfter: 43200 # minutes (30 days)

@@ -1,7 +1,7 @@
 import tailwindcssPlugin from 'eslint-plugin-better-tailwindcss';
 import { defineConfig } from 'eslint/config';
 
-export const tailwind = tailwindEntryPoint =>
+export const tailwind = (entryPoint, cwd) =>
   defineConfig({
     name: 'eslint-plugin-better-tailwindcss',
     plugins: {
@@ -19,7 +19,8 @@ export const tailwind = tailwindEntryPoint =>
     },
     settings: {
       'better-tailwindcss': {
-        entryPoint: tailwindEntryPoint
+        entryPoint,
+        cwd
       }
     }
   });
