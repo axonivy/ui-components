@@ -126,7 +126,7 @@ const ConditionBuilder = ({
   );
 
   return (
-    <ConditionContext.Provider
+    <ConditionContext
       value={{
         conditionMode,
         setConditionMode: updateConditionMode,
@@ -144,7 +144,7 @@ const ConditionBuilder = ({
     >
       <ConditionEditor />
       {children}
-    </ConditionContext.Provider>
+    </ConditionContext>
   );
 };
 ConditionBuilder.displayName = 'ConditionBuilder';

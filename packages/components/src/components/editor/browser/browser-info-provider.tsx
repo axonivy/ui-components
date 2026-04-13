@@ -1,5 +1,5 @@
 import type { Row } from '@tanstack/react-table';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { BrowserNode } from './browser';
 import { isCmsBrowserNode } from './data';
 
@@ -11,11 +11,18 @@ export const FunctionInfoProvider = ({ row }: { row?: Row<BrowserNode> }) => {
     setPrevRow(row);
     if (row?.getIsSelected()) {
       setLoaded(false);
-      setTimeout(() => {
-        setLoaded(true);
-      }, 1000);
     }
   }
+  useEffect(() => {
+    if (loaded) {
+      return;
+    }
+    const timeoutId = setTimeout(() => {
+      setLoaded(true);
+    }, 1000);
+    return () => clearTimeout(timeoutId);
+  }, [loaded]);
+
   if (!loaded) {
     return <div>Loading javaDoc from backend...</div>;
   }

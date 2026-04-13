@@ -25,6 +25,7 @@ const ConditionGroup = ({ group, groupIndex, groupCount }: ConditionGroupProps) 
         )}
         {group.conditions.map((condition, conditionIndex) => (
           <Condition
+            // eslint-disable-next-line @eslint-react/no-array-index-key
             key={conditionIndex}
             condition={condition}
             conditionIndex={conditionIndex}

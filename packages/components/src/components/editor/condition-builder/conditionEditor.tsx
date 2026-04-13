@@ -15,6 +15,7 @@ const ConditionEditor = () => {
         conditionGroups
           .filter((group, groupIndex) => !(conditionMode === 'basic-condition' && groupIndex > 0))
           .map((group, groupIndex) => (
+            // eslint-disable-next-line @eslint-react/no-array-index-key
             <ConditionGroup key={groupIndex} group={group} groupIndex={groupIndex} groupCount={conditionGroups.length} />
           ))}
       {conditionMode === 'nested-condition' && (
