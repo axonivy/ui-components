@@ -1,9 +1,12 @@
+import { fixupPluginRules } from '@eslint/compat';
 import i18next from 'eslint-plugin-i18next';
 import { defineConfig } from 'eslint/config';
 
 export const i18n = defineConfig({
   name: 'eslint-plugin-i18next',
-  ...i18next.configs['flat/recommended'],
+  plugins: {
+    i18next: fixupPluginRules(i18next)
+  },
   files: ['**/*.{ts,tsx}'],
   ignores: ['**/*.{test,spec}.{ts,tsx}'],
   rules: {
