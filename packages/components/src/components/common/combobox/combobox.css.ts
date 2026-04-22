@@ -4,7 +4,7 @@ import { disabled } from '@/styles/disabled';
 import { vars } from '@/styles/theme.css';
 
 export const content = style({
-  maxHeight: '20rem',
+  maxHeight: 'min(var(--radix-popover-content-available-height), 20rem)',
   width: 'var(--radix-popper-anchor-width)',
   backgroundColor: vars.color.background,
   padding: 0,

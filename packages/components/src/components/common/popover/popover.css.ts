@@ -10,6 +10,8 @@ export const content = style({
   },
   borderRadius: vars.border.r2,
   maxWidth: `calc(var(--radix-popover-content-available-width) - 2 * ${vars.size.s2})`,
+  maxHeight: `calc(var(--radix-popover-content-available-height) - 2 * ${vars.size.s2})`,
+  overflow: 'auto',
   backgroundColor: contentBg,
   boxShadow: vars.shadow.popover,
   animationDuration: '200ms',
