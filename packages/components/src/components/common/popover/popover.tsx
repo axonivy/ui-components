@@ -33,7 +33,7 @@ function PopoverContent({
         align={align}
         sideOffset={sideOffset}
         className={cn(
-          'max-w-(--radix-popover-content-available-width) overflow-auto rounded-sm border border-n100 bg-background p-2 text-body shadow-lg data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 motion-safe:animate-in',
+          'max-h-(--radix-popover-content-available-height) max-w-(--radix-popover-content-available-width) overflow-auto rounded-sm border border-n100 bg-background p-2 text-body shadow-lg data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 motion-safe:animate-in',
           className,
           'ui-popover-content'
         )}

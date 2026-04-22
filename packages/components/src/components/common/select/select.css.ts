@@ -37,7 +37,7 @@ export const scrollButton = style({
 });
 
 export const content = style({
-  maxHeight: '20rem',
+  maxHeight: 'min(var(--radix-popper-available-height), 20rem)',
   width: 'var(--radix-popper-anchor-width)',
   backgroundColor: vars.color.background,
   padding: 0,
