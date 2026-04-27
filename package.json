@@ -47,7 +47,7 @@
     "@vanilla-extract/recipes": "^0.5.7",
     "@vanilla-extract/vite-plugin": "^5.2.0",
     "@vitejs/plugin-react": "^6.0.0",
-    "@vitest/browser-playwright": "4.1.4",
+    "@vitest/browser-playwright": "4.1.5",
     "eslint-plugin-storybook": "^10.3.0",
     "playwright": "^1.58.2",
     "prettier": "^3.6.2",
