@@ -1,17 +1,17 @@
 packages:
   - packages/*
   - dev-packages/*
-blockExoticSubdeps: true
-minimumReleaseAge: 1440
+allowBuilds:
+  es5-ext: false
+  esbuild: false
+  ttf2woff2: false
 minimumReleaseAgeExclude:
   - '@axonivy/*'
 overrides:
   '@xmldom/xmldom@<0.8.12': '>=0.8.12'
 patchedDependencies:
   fantasticon: patches/fantasticon.patch
-
 preferWorkspacePackages: true
-
 publicHoistPattern:
   - eslint
 trustPolicy: no-downgrade

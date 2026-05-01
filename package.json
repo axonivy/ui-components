@@ -9,7 +9,7 @@
   },
   "scripts": {
     "preinstall": "npx only-allow pnpm",
-    "ci": "pnpm install && pnpm run generate && pnpm run package && pnpm run type && (pnpm run lint:ci || true) && pnpm run test:ci",
+    "check": "pnpm run type && (pnpm run lint:ci || true) && pnpm run test:ci",
     "generate": "pnpm run -r generate",
     "build": "tsc --build",
     "build:storybook": "storybook build",
