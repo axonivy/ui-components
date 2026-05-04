@@ -2,8 +2,9 @@ import { Button } from '@axonivy/ui-components';
 import '@axonivy/ui-components/lib/components.css';
 import { IvyIcons } from '@axonivy/ui-icons';
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { useState } from 'react';
 import { dataClasses, type DataClass, type Field } from './data';
-import { Graph, type NodeData } from './graph';
+import { Graph, type GraphEdgeActionPayload, type NodeData } from './graph';
 
 const meta: Meta<typeof Graph> = {
   title: 'View/Graph',
@@ -22,12 +23,50 @@ export const Default: Story = {
         graphNodes={transformedDataClasses}
         options={{
           filter: { enabled: true },
-          circleFloatingEdges: true,
           zoomOnInit: { level: 0.75 }
         }}
       />
     );
   }
+};
+
+const EditableGraph = () => {
+  const [classes, setClasses] = useState<DataClass[]>(dataClasses);
+
+  const onEdgeCreate = ({ sourceNodeId, targetNodeId }: GraphEdgeActionPayload) => {
+    setClasses(prev =>
+      prev.map(dc =>
+        dc.id === sourceNodeId
+          ? { ...dc, relations: [...(dc.relations ?? []), { id: targetNodeId }] }
+          : dc
+      )
+    );
+  };
+
+  const onEdgeDelete = ({ sourceNodeId, targetNodeId }: GraphEdgeActionPayload) => {
+    setClasses(prev =>
+      prev.map(dc =>
+        dc.id === sourceNodeId
+          ? { ...dc, relations: (dc.relations ?? []).filter(r => r.id !== targetNodeId) }
+          : dc
+      )
+    );
+  };
+
+  return (
+    <Graph
+      graphNodes={mapDataClassesToNodeData(classes)}
+      options={{
+        filter: { enabled: true },
+        editable: { enabled: true, onEdgeCreate, onEdgeDelete },
+        zoomOnInit: { level: 0.75 }
+      }}
+    />
+  );
+};
+
+export const Editable: Story = {
+  render: () => <EditableGraph />
 };
 const mapDataClassesToNodeData = (dataClasses: DataClass[]): NodeData[] => {
   return dataClasses.map(dataClass => ({

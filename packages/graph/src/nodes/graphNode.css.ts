@@ -54,6 +54,11 @@ export const iconHeight = style({
 export const handle = style({
   pointerEvents: 'none',
   opacity: 1,
+  width: '8px',
+  height: '8px',
+  borderRadius: '50%',
+  border: '1.5px solid var(--N900)',
+  background: vars.color.background,
   selectors: {
     '&[data-handles="true"]': {
       opacity: 0

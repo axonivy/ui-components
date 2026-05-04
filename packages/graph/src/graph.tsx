@@ -29,6 +29,11 @@ export type EdgeData = {
   label?: string;
 };
 
+export type GraphEdgeActionPayload = {
+  sourceNodeId: string;
+  targetNodeId: string;
+};
+
 export type GraphNode = Node<{ nodeData: NodeData }, 'custom'>;
 
 export type GraphProps = {
@@ -38,9 +43,13 @@ export type GraphProps = {
       enabled: boolean;
       allLabel?: string;
     };
-    circleFloatingEdges?: boolean;
     minimap?: boolean;
     controls?: boolean;
+    editable?: {
+      enabled?: boolean;
+      onEdgeCreate?: (payload: GraphEdgeActionPayload) => void;
+      onEdgeDelete?: (payload: GraphEdgeActionPayload) => void;
+    };
     zoomOnInit?: {
       level: number;
       applyOnLayoutAndFilter?: boolean;
@@ -49,10 +58,11 @@ export type GraphProps = {
 };
 
 const GraphRoot = ({ graphNodes, options }: GraphProps) => {
-  const { edges, nodes, onConnect, onEdgesChange, onFilterApply, onLayout, onNodesChange, selectedNode } = useGraph({
+  const { edges, nodes, onConnect, onEdgesChange, onEdgesDelete, onFilterApply, onLayout, onNodesChange, selectedNode } = useGraph({
     graphNodes,
     options
   });
+  const isEditable = options?.editable?.enabled ?? false;
 
   const selectItems = [
     { value: 'all', label: options?.filter?.allLabel ?? 'Show all' },
@@ -71,10 +81,15 @@ const GraphRoot = ({ graphNodes, options }: GraphProps) => {
       edges={edges}
       onNodesChange={onNodesChange}
       onEdgesChange={onEdgesChange}
+      onEdgesDelete={onEdgesDelete}
       proOptions={{ hideAttribution: true }}
       onConnect={onConnect}
+      nodesConnectable={isEditable}
+      edgesFocusable={isEditable}
+      elementsSelectable={isEditable}
+      deleteKeyCode={isEditable ? ['Backspace', 'Delete'] : null}
       nodeTypes={{ custom: GraphNode }}
-      edgeTypes={{ floating: options?.circleFloatingEdges ? GraphCircleFloatingEdge : GraphFloatingEdge }}
+      edgeTypes={{ floating: !isEditable ? GraphCircleFloatingEdge : GraphFloatingEdge }}
       connectionMode={ConnectionMode.Loose}
       fitView={true}
       fitViewOptions={{ maxZoom: options?.zoomOnInit?.level }}
@@ -83,7 +98,7 @@ const GraphRoot = ({ graphNodes, options }: GraphProps) => {
           onFilterApply(node.id);
         }
       }}
-      connectionLineComponent={options?.circleFloatingEdges ? FloatingConnectionLine : undefined}
+      connectionLineComponent={!isEditable ? FloatingConnectionLine : undefined}
     >
       {options?.controls !== false && <Controls position='bottom-right' orientation='horizontal' />}
       {options?.minimap !== false && <MiniMap position='bottom-left' />}
