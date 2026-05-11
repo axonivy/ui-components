@@ -13,9 +13,8 @@
       "enabled": false
     },
     {
-      "description": "React Hotkeys Hook has a bug on v5.2.4",
+      "description": "React Hotkeys Hook has a bug >= v5.2.4. https://github.com/JohannesKlauss/react-hotkeys-hook/issues/1316",
       "matchPackageNames": ["react-hotkeys-hook"],
-      "matchNewValue": "5.2.4",
       "enabled": false
     }
   ]
