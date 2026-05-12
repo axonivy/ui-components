@@ -37,10 +37,11 @@
     "sonner": "1.7.4"
   },
   "peerDependencies": {
-    "@axonivy/ui-icons": "~12.0.15-next",
+    "@axonivy/ui-icons": "workspace:~12.0.15-next",
     "react": "^18.2 || ^19.0"
   },
   "devDependencies": {
+    "@axonivy/ui-icons": "workspace:~12.0.15-next",
     "@storybook/addon-docs": "^9.0.1",
     "@storybook/addon-links": "^9.0.1",
     "@storybook/react-vite": "^9.0.1",
@@ -65,7 +66,7 @@
   "scripts": {
     "clean": "rimraf lib *.tsbuildinfo",
     "build": "tsc --build tsconfig.production.json",
-    "package": "npm run clean && vite build && npm run build",
+    "package": "pnpm run clean && vite build && pnpm run build",
     "build:storybook": "storybook build",
     "dev": "storybook dev -p 6006 --no-open",
     "type": "tsc --noEmit --emitDeclarationOnly false",

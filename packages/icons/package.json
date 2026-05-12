@@ -20,13 +20,13 @@
   "module": "./lib/index.js",
   "source": "src-gen",
   "devDependencies": {
-    "fantasticon": "^1.2.3"
+    "fantasticon": "^4.1.0"
   },
   "scripts": {
     "clean": "rimraf lib src-gen/ivy-icons.* tsconfig.tsbuildinfo",
     "build": "tsc --build",
     "package": "tsc",
-    "build:clean": "npm run clean && npm run build",
-    "generate": "fantasticon && npm run build"
+    "build:clean": "pnpm run clean && pnpm run build",
+    "generate": "fantasticon && pnpm run build"
   }
 }

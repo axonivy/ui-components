@@ -1,0 +1,54 @@
+diff --git a/dist/chunk-I73JJ2KG.js b/dist/chunk-I73JJ2KG.js
+index 3c7ba017785cc1d6ea00bc7ae95c2c7af903695a..0619cb9eee97d97a18bd4949491f1f6299c1eebb 100644
+--- a/dist/chunk-I73JJ2KG.js
++++ b/dist/chunk-I73JJ2KG.js
+@@ -177,11 +177,11 @@ import { resolve as resolve3, relative, join as join2 } from "path";
+ var ASSETS_EXTENSION = "svg";
+ var loadPaths = async (dir) => {
+   const globPath = join2(dir, `**/*.${ASSETS_EXTENSION}`);
+-  const files = await glob(globPath, {});
++  const files = await glob(globPath, { windowsPathsNoEscape: true, posix: true });
+   if (!files.length) {
+     throw new Error(`No SVGs found in ${dir}`);
+   }
+-  return files;
++  return files.sort((a, b) => a.localeCompare(b));
+ };
+ var failForConflictingId = ({ relativePath: pathA, id }, { relativePath: pathB }) => {
+   throw new Error(
+diff --git a/dist/cli/index.cjs b/dist/cli/index.cjs
+index d37fa5246d4c8ab2c8c221d09601ab7c89204d12..fc663fe92b0fed8eaa72646ca1fe8b7090865b32 100644
+--- a/dist/cli/index.cjs
++++ b/dist/cli/index.cjs
+@@ -283,11 +283,11 @@ var import_path6 = require("path");
+ var ASSETS_EXTENSION = "svg";
+ var loadPaths = async (dir) => {
+   const globPath = (0, import_path6.join)(dir, `**/*.${ASSETS_EXTENSION}`);
+-  const files = await (0, import_glob.glob)(globPath, {});
++  const files = await (0, import_glob.glob)(globPath, { windowsPathsNoEscape: true, posix: true });
+   if (!files.length) {
+     throw new Error(`No SVGs found in ${dir}`);
+   }
+-  return files;
++  return files.sort((a, b) => a.localeCompare(b));
+ };
+ var failForConflictingId = ({ relativePath: pathA, id }, { relativePath: pathB }) => {
+   throw new Error(
+diff --git a/dist/index.cjs b/dist/index.cjs
+index 744da25ae9a7a38ea5a6a5979d856751e4ddeb4f..b55e08513fb7281642bd3195a08db1aac4ecabee 100644
+--- a/dist/index.cjs
++++ b/dist/index.cjs
+@@ -147,11 +147,11 @@ var checkPath = async (filepath, type) => {
+ var ASSETS_EXTENSION = "svg";
+ var loadPaths = async (dir) => {
+   const globPath = (0, import_path5.join)(dir, `**/*.${ASSETS_EXTENSION}`);
+-  const files = await (0, import_glob.glob)(globPath, {});
++  const files = await (0, import_glob.glob)(globPath, { windowsPathsNoEscape: true, posix: true });
+   if (!files.length) {
+     throw new Error(`No SVGs found in ${dir}`);
+   }
+-  return files;
++  return files.sort((a, b) => a.localeCompare(b));
+ };
+ var failForConflictingId = ({ relativePath: pathA, id }, { relativePath: pathB }) => {
+   throw new Error(
