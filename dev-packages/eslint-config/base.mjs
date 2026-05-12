@@ -1,4 +1,5 @@
 import eslint from '@eslint/js';
+import { defineConfig } from 'eslint/config';
 import tseslint from 'typescript-eslint';
 import reactRecommended from 'eslint-plugin-react/configs/recommended.js';
 import reactJsxRuntime from 'eslint-plugin-react/configs/jsx-runtime.js';
@@ -9,7 +10,7 @@ import playwright from 'eslint-plugin-playwright';
 import pluginQuery from '@tanstack/eslint-plugin-query';
 import globals from 'globals';
 
-export const base = tseslint.config(
+export const base = defineConfig(
   // Base eslint recommended config
   eslint.configs.recommended,
 
