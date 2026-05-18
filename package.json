@@ -27,10 +27,10 @@
   },
   "devDependencies": {
     "@axonivy/eslint-config": "workspace:*",
-    "@types/node": "^24.10.0",
     "@lerna-lite/cli": "^4.0.0",
     "@lerna-lite/publish": "^4.0.0",
     "@lerna-lite/version": "^4.0.0",
+    "@types/node": "^24.10.0",
     "rimraf": "^6.0.1",
     "rollup-plugin-visualizer": "^5.12.0",
     "typescript": "~5.9.0",
