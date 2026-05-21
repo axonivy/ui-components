@@ -1,6 +1,6 @@
 {
   "name": "@axonivy/ui-components",
-  "version": "12.0.15-next",
+  "version": "12.0.16-next",
   "private": false,
   "license": "(EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0)",
   "author": "Axon Ivy AG",
@@ -37,11 +37,11 @@
     "sonner": "1.7.4"
   },
   "peerDependencies": {
-    "@axonivy/ui-icons": "workspace:~12.0.15-next",
+    "@axonivy/ui-icons": "workspace:~12.0.16-next",
     "react": "^18.2 || ^19.0"
   },
   "devDependencies": {
-    "@axonivy/ui-icons": "workspace:~12.0.15-next",
+    "@axonivy/ui-icons": "workspace:~12.0.16-next",
     "@storybook/addon-docs": "^9.0.1",
     "@storybook/addon-links": "^9.0.1",
     "@storybook/react-vite": "^9.0.1",
