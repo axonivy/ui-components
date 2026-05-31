@@ -13,18 +13,18 @@
   "type": "module",
   "main": "index.mjs",
   "dependencies": {
-    "@eslint-react/eslint-plugin": "5.8.4",
+    "@eslint-react/eslint-plugin": "5.8.6",
     "@eslint/compat": "2.1.0",
     "@eslint/js": "10.0.1",
-    "@tanstack/eslint-plugin-query": "5.100.13",
-    "@typescript-eslint/eslint-plugin": "8.59.4",
-    "@typescript-eslint/parser": "8.59.4",
+    "@tanstack/eslint-plugin-query": "5.100.14",
+    "@typescript-eslint/eslint-plugin": "8.60.0",
+    "@typescript-eslint/parser": "8.60.0",
     "eslint": "10.4.0",
     "eslint-formatter-checkstyle": "9.0.1",
     "eslint-plugin-better-tailwindcss": "4.5.0",
     "eslint-plugin-i18next": "6.1.4",
     "eslint-plugin-playwright": "2.10.4",
     "eslint-plugin-testing-library": "7.16.2",
-    "typescript-eslint": "8.59.4"
+    "typescript-eslint": "8.60.0"
   }
 }
