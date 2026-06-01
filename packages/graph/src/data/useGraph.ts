@@ -8,6 +8,7 @@ import {
   type Node,
   type OnConnect,
   type OnEdgesChange,
+  type OnEdgesDelete,
   type OnNodesChange
 } from '@xyflow/react';
 import { useCallback, useState } from 'react';
@@ -19,6 +20,7 @@ export const DEFAULT_NODE_WIDTH = 172;
 export const DEFAULT_NODE_HEIGHT = 50;
 
 const useGraph = ({ graphNodes, options }: GraphProps) => {
+  const isEditable = options?.editable?.enabled ?? true;
   const [prevGraphNodes, setPrevGraphNodes] = useState<NodeData[]>(graphNodes);
   const { getNodes, getEdges, fitView } = useReactFlow<GraphNode>();
   const [nodes, setNodes] = useState<Node[]>(
@@ -30,16 +32,36 @@ const useGraph = ({ graphNodes, options }: GraphProps) => {
   const [selectedNode, setSelectedNode] = useState<string>('all');
   if (graphNodes !== prevGraphNodes) {
     setPrevGraphNodes(graphNodes);
-    setSelectedNode('all');
-    setNodes(getLayoutedElements({ ...mapNodesAndEdges(graphNodes, getNodes(), options), direction: 'TB' }).nodes);
-    setEdges(getLayoutedElements({ ...mapNodesAndEdges(graphNodes, getNodes(), options), direction: 'TB' }).edges);
+    const isEditableUpdate = Boolean(options?.editable?.onEdgeCreate ?? options?.editable?.onEdgeDelete);
+    if (isEditableUpdate) {
+      setEdges(mapNodesAndEdges(graphNodes, getNodes(), options, selectedNode).edges);
+    } else {
+      setSelectedNode('all');
+      setNodes(getLayoutedElements({ ...mapNodesAndEdges(graphNodes, getNodes(), options), direction: 'TB' }).nodes);
+      setEdges(getLayoutedElements({ ...mapNodesAndEdges(graphNodes, getNodes(), options), direction: 'TB' }).edges);
+    }
   }
 
   const onNodesChange: OnNodesChange = useCallback(changes => setNodes(nds => applyNodeChanges(changes, nds)), [setNodes]);
-  const onEdgesChange: OnEdgesChange = useCallback(changes => setEdges(eds => applyEdgeChanges(changes, eds)), [setEdges]);
+
+  const onEdgesChange: OnEdgesChange = useCallback(
+    changes => {
+      const filtered = options?.editable?.onEdgeDelete ? changes.filter(c => c.type !== 'remove') : changes;
+      setEdges(eds => applyEdgeChanges(filtered, eds));
+    },
+    [options?.editable, setEdges]
+  );
 
   const onConnect: OnConnect = useCallback(
-    params =>
+    params => {
+      if (!isEditable || !params.source || !params.target) {
+        return;
+      }
+
+      if (options?.editable?.onEdgeCreate) {
+        options.editable.onEdgeCreate({  sourceNodeId: params.source, targetNodeId: params.target });
+        return;
+      }
       setEdges(eds =>
         addEdge(
           {
@@ -49,8 +71,18 @@ const useGraph = ({ graphNodes, options }: GraphProps) => {
           },
           eds
         )
-      ),
-    [setEdges]
+      );
+    },
+    [isEditable, options?.editable, setEdges]
+  );
+
+  const onEdgesDelete: OnEdgesDelete = useCallback(
+    deletedEdges => {
+      deletedEdges.forEach(edge => {
+        options?.editable?.onEdgeDelete?.({ sourceNodeId: edge.source, targetNodeId: edge.target });
+      });
+    },
+    [options?.editable]
   );
 
   const onLayout = useCallback(
@@ -84,7 +116,7 @@ const useGraph = ({ graphNodes, options }: GraphProps) => {
     [fitView, getNodes, graphNodes, options]
   );
 
-  return { nodes, edges, selectedNode, onNodesChange, onEdgesChange, onConnect, onLayout, onFilterApply };
+  return { nodes, edges, selectedNode, onNodesChange, onEdgesChange, onEdgesDelete, onConnect, onLayout, onFilterApply };
 };
 
 export { useGraph };
@@ -142,7 +174,7 @@ const mapNodesAndEdges = (graphNodes: NodeData[], existingNodes: GraphNode[], op
         options: {
           ...node.options,
           highlightNode: node.options?.highlightNode && !options?.filter ? node.options?.highlightNode : node.id === selectedNode,
-          disableHandles: node.options?.disableHandles ?? options?.circleFloatingEdges ?? false
+          disableHandles: node.options?.disableHandles ?? !isGraphEditable(options)
         }
       }
     },
@@ -166,3 +198,5 @@ const mapNodesAndEdges = (graphNodes: NodeData[], existingNodes: GraphNode[], op
   );
   return { nodes: newNodes, edges: newEdges };
 };
+
+const isGraphEditable = (options?: GraphProps['options']): boolean => options?.editable?.enabled ?? false;
