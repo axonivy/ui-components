@@ -14,12 +14,12 @@
     "src"
   ],
   "dependencies": {
-    "vscode-jsonrpc": "^8.2.0"
+    "vscode-jsonrpc": "^8.2.1"
   },
   "devDependencies": {
     "@axonivy/ts-config": "workspace:*",
-    "vitest-websocket-mock": "^0.5.0",
-    "vitest": "^4.0.0"
+    "vitest": "^4.1.7",
+    "vitest-websocket-mock": "^0.5.0"
   },
   "type": "module",
   "types": "lib/index.d.ts",
