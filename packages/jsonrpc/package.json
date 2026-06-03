@@ -14,7 +14,7 @@
     "src"
   ],
   "dependencies": {
-    "vscode-jsonrpc": "^8.2.0"
+    "vscode-jsonrpc": "^8.2.1"
   },
   "type": "module",
   "types": "lib/index.d.ts",
@@ -29,6 +29,7 @@
     "test:ci": "vitest --watch=false"
   },
   "devDependencies": {
-    "vitest-websocket-mock": "^0.5.0"
+    "vitest-websocket-mock": "^0.5.0",
+    "vitest": "^4.0.0"
   }
 }
