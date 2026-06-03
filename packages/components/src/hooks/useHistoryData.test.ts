@@ -8,7 +8,7 @@ beforeEach(() => {
 });
 
 afterEach(() => {
-  vi.restoreAllMocks();
+  updater.mockReset();
 });
 
 test('undo', () => {

@@ -13,7 +13,7 @@ export default defineConfig({
     include: ['**/*.test.ts?(x)'],
     globals: true,
     css: false,
-    reporters: process.env.CI ? ['basic', 'junit'] : ['default'],
+    reporters: process.env.CI ? ['default', 'junit'] : ['default'],
     outputFile: 'report.xml'
   }
 });

@@ -20,7 +20,7 @@ export default defineConfig({
     environment: 'happy-dom',
     setupFiles: ['src/test-utils/setupTests.tsx'],
     css: false,
-    reporters: process.env.CI ? ['basic', 'junit'] : ['default'],
+    reporters: process.env.CI ? ['default', 'junit'] : ['default'],
     outputFile: 'report.xml'
   }
 });
