@@ -25,7 +25,7 @@
     "test": "vitest",
     "test:ci": "vitest run --reporter=default --reporter=junit --outputFile=report.xml",
     "raise:version": "lerna version --allow-peer-dependencies-update --no-git-tag-version --no-push --ignore-scripts --exact --yes",
-    "publish:next": "lerna publish --exact --canary --preid next --pre-dist-tag next --no-git-tag-version --no-push --ignore-scripts --yes"
+    "publish:next": "lerna publish --exact --canary --preid next --pre-dist-tag next-14.0 --no-git-tag-version --no-push --ignore-scripts --yes"
   },
   "devDependencies": {
     "@axonivy/eslint-config": "workspace:*",
