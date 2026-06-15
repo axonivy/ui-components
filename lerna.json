@@ -9,8 +9,5 @@
       "registry": "https://npmjs-registry.ivyteam.ch/"
     }
   },
-  "packages": [
-    "packages/*",
-    "dev-packages/*"
-  ]
+  "packages": ["packages/*", "dev-packages/*"]
 }
