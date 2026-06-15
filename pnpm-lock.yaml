@@ -160,7 +160,7 @@ importers:
         version: 1.7.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
     devDependencies:
       '@axonivy/ui-icons':
-        specifier: workspace:~
+        specifier: workspace:~12.0.16-next
         version: link:../icons
       '@storybook/addon-docs':
         specifier: ^9.1.20
