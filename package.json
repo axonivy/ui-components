@@ -2,7 +2,7 @@
   "private": true,
   "name": "@axonivy/ui-components-root",
   "engines": {
-    "node": ">=20.10.0"
+    "node": ">=24.11"
   },
   "scripts": {
     "preinstall": "npx only-allow pnpm",
