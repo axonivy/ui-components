@@ -17,5 +17,5 @@ mvn --batch-mode -f packages/icons/pom.xml versions:set versions:commit -DnewVer
 
 pnpm install
 pnpm run raise:version "$NEXT_VERSION"
-sed -i -E "s/(--pre-dist-tag )next-[0-9]+\.[0-9]+/\1$NEXT_TAG/" package.json
+sed -i -E "s/(--pre-dist-tag )next-[0-9]+\.[0-9]+\.[0-9]+/\1$NEXT_TAG/" package.json
 pnpm install --frozen-lockfile=false
