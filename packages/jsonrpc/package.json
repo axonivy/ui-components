@@ -18,7 +18,7 @@
   },
   "devDependencies": {
     "@axonivy/ts-config": "workspace:*",
-    "vitest": "^4.1.7",
+    "vitest": "^4.1.9",
     "vitest-websocket-mock": "^0.5.0"
   },
   "type": "module",
