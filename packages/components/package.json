@@ -32,12 +32,11 @@
     "@react-aria/dnd": "3.12.1",
     "@tanstack/react-table": "8.21.3",
     "class-variance-authority": "^0.7.1",
-    "clsx": "2.1.1",
+    "cnfast": "0.0.8",
     "downshift": "9.0.13",
     "react-hotkeys-hook": "5.2.3",
     "react-resizable-panels": "4.12.0",
-    "sonner": "2.0.7",
-    "tailwind-merge": "3.6.0"
+    "sonner": "2.0.7"
   },
   "peerDependencies": {
     "@axonivy/ui-icons": "workspace:~14.0.0-next",
