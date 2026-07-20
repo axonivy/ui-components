@@ -30,6 +30,6 @@
   },
   "devDependencies": {
     "vitest": "^4.1.8",
-    "vitest-websocket-mock": "^0.7.0"
+    "vitest-websocket-mock": "0.5.0"
   }
 }

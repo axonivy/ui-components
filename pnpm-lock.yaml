@@ -224,8 +224,8 @@ importers:
         specifier: ^4.1.8
         version: 4.1.10(@types/node@24.13.3)(happy-dom@20.10.6)(vite@7.3.6(@types/node@24.13.3)(lightningcss@1.32.0)(yaml@2.9.0))
       vitest-websocket-mock:
-        specifier: ^0.7.0
-        version: 0.7.0(vitest@4.1.10(@types/node@24.13.3)(happy-dom@20.10.6)(vite@7.3.6(@types/node@24.13.3)(lightningcss@1.32.0)(yaml@2.9.0)))
+        specifier: 0.5.0
+        version: 0.5.0(vitest@4.1.10(@types/node@24.13.3)(happy-dom@20.10.6)(vite@7.3.6(@types/node@24.13.3)(lightningcss@1.32.0)(yaml@2.9.0)))
 
 packages:
 
@@ -4808,10 +4808,10 @@ packages:
       yaml:
         optional: true
 
-  vitest-websocket-mock@0.7.0:
-    resolution: {integrity: sha512-OrDWs/FiZl8MfcCjvxLri1Uq2NpFcqbQdFHuotmU5FgA9Z5PHRxCyHdmu/xSPgBzbxO9pz3ZdHtokFELCT7AOg==}
+  vitest-websocket-mock@0.5.0:
+    resolution: {integrity: sha512-vzBWeuF/kD/OCOFzB7WAclb7PxfI105qPkZtdOkPMwZdilBskQjJL4l319JtPtmeovDU7ZVhO3hTfGPjM4txQQ==}
     peerDependencies:
-      vitest: '>=4'
+      vitest: '>=3'
 
   vitest@4.1.10:
     resolution: {integrity: sha512-R9jUTe5S4Qb0HCd4TNqpC7oGcrMssMRGXLW80ubjWsW9VH5GF8y1Y0SFLY9AbqSk6nt0PnOx4H4WNJYZ13GUPw==}
@@ -10032,8 +10032,9 @@ snapshots:
       fsevents: 2.3.3
       yaml: 2.9.0
 
-  vitest-websocket-mock@0.7.0(vitest@4.1.10(@types/node@24.13.3)(happy-dom@20.10.6)(vite@7.3.6(@types/node@24.13.3)(lightningcss@1.32.0)(yaml@2.9.0))):
+  vitest-websocket-mock@0.5.0(vitest@4.1.10(@types/node@24.13.3)(happy-dom@20.10.6)(vite@7.3.6(@types/node@24.13.3)(lightningcss@1.32.0)(yaml@2.9.0))):
     dependencies:
+      '@vitest/utils': 3.2.4
       mock-socket: 9.3.1
       vitest: 4.1.10(@types/node@24.13.3)(happy-dom@20.10.6)(vite@7.3.6(@types/node@24.13.3)(lightningcss@1.32.0)(yaml@2.9.0))
 
