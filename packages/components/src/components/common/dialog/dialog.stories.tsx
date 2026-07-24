@@ -1,5 +1,5 @@
 import { Button } from '@/components/common/button/button';
-import { Combobox } from '@/components/common/combobox/combobox';
+import { Combobox } from '@/components/common/combobox-ds/combobox';
 import { BasicField } from '@/components/common/field/field';
 import { Flex } from '@/components/common/flex/flex';
 import { Input } from '@/components/common/input/input';
