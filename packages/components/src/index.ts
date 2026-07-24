@@ -8,6 +8,7 @@ export * from './components/common/breadcrumb/breadcrumb';
 export * from './components/common/button/button';
 export * from './components/common/checkbox/checkbox';
 export * from './components/common/collapsible/collapsible';
+export * from './components/common/combobox-ds/combobox.tsx';
 export * from './components/common/combobox/combobox';
 export * from './components/common/dialog/dialog';
 export * from './components/common/dropdownmenu/dropdownmenu';

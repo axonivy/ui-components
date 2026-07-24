@@ -1,4 +1,4 @@
-import { type ComboboxOption, type ComboboxProps, Combobox } from '@/components/common/combobox/combobox';
+import { type ComboboxOption, type ComboboxProps, Combobox } from '@/components/common/combobox-ds/combobox';
 import { type InputProps, Input } from '@/components/common/input/input';
 import { type BasicSelectProps, BasicSelect } from '@/components/common/select/select';
 import { cn } from '@/utils/class-name';
