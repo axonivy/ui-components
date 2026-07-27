@@ -146,7 +146,7 @@ export type BasicComboboxProps<
 > = ComboboxPrimitive.Root.Props<TItem, Multiple> & {
   placeholder?: string;
   emptyLabel?: string;
-  itemRenderer?: (item: BasicComboboxItem) => React.ReactNode;
+  itemRenderer?: (item: TItem) => React.ReactNode;
 };
 
 function BasicCombobox<TItem extends BasicComboboxItem>({
@@ -167,7 +167,7 @@ function BasicCombobox<TItem extends BasicComboboxItem>({
       <ComboboxContent>
         <ComboboxEmpty>{emptyLabel}</ComboboxEmpty>
         <ComboboxList>
-          {(item: BasicComboboxItem) => (
+          {(item: TItem) => (
             <ComboboxItem key={item.value} value={item}>
               {itemRenderer ? itemRenderer(item) : <div className='truncate'>{item.label}</div>}
             </ComboboxItem>
