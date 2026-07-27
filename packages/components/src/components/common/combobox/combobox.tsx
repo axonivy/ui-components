@@ -147,17 +147,19 @@ export type BasicComboboxProps<
   placeholder?: string;
   emptyLabel?: string;
   itemRenderer?: (item: TItem) => React.ReactNode;
+  className?: string;
 };
 
 function BasicCombobox<TItem extends BasicComboboxItem>({
   placeholder,
   emptyLabel,
   itemRenderer,
+  className,
   ...props
 }: BasicComboboxProps<TItem, false>) {
   return (
     <ComboboxRoot {...props}>
-      <ComboboxInputGroup>
+      <ComboboxInputGroup className={className}>
         <ComboboxInput placeholder={placeholder} />
         <div className='flex h-full items-center justify-center text-neutral-500 dark:text-neutral-400'>
           <ComboboxClear />
@@ -189,11 +191,12 @@ function BasicMultiCombobox<TItem extends BasicComboboxItem>({
   itemRenderer,
   chipRenderer,
   chipRemoveLabel,
+  className,
   ...props
 }: BasicMultiComboboxProps<TItem>) {
   return (
     <ComboboxRoot {...props} multiple>
-      <ComboboxInputGroup>
+      <ComboboxInputGroup className={className}>
         <ComboboxChips>
           <ComboboxValue>
             {(value: TItem[]) => (
