@@ -138,9 +138,10 @@ export type BasicComboboxItem = {
 export type BasicComboboxProps<Multiple extends boolean | undefined = false> = ComboboxPrimitive.Root.Props<BasicComboboxItem, Multiple> & {
   placeholder?: string;
   emptyLabel?: string;
+  comboboxItemRenderer?: (item: BasicComboboxItem) => React.ReactNode;
 };
 
-function BasicCombobox({ placeholder, emptyLabel, ...props }: BasicComboboxProps<false>) {
+function BasicCombobox({ placeholder, emptyLabel, comboboxItemRenderer, ...props }: BasicComboboxProps<false>) {
   return (
     <ComboboxRoot {...props}>
       <ComboboxInputGroup>
@@ -155,7 +156,7 @@ function BasicCombobox({ placeholder, emptyLabel, ...props }: BasicComboboxProps
         <ComboboxList>
           {(item: BasicComboboxItem) => (
             <ComboboxItem key={item.value} value={item}>
-              {item.label}
+              {comboboxItemRenderer ? comboboxItemRenderer(item) : <div className='truncate'>{item.label}</div>}
             </ComboboxItem>
           )}
         </ComboboxList>
@@ -164,7 +165,11 @@ function BasicCombobox({ placeholder, emptyLabel, ...props }: BasicComboboxProps
   );
 }
 
-function BasicMultiCombobox({ placeholder, emptyLabel, ...props }: BasicComboboxProps<true>) {
+type BasicMultiComboboxProps = BasicComboboxProps<true> & {
+  comboboxChipRenderer?: (item: BasicComboboxItem) => React.ReactNode;
+};
+
+function BasicMultiCombobox({ placeholder, emptyLabel, comboboxItemRenderer, comboboxChipRenderer, ...props }: BasicMultiComboboxProps) {
   return (
     <ComboboxRoot {...props} multiple>
       <ComboboxInputGroup>
@@ -174,7 +179,7 @@ function BasicMultiCombobox({ placeholder, emptyLabel, ...props }: BasicCombobox
               <>
                 {value.map(item => (
                   <ComboboxChip key={item.value} aria-label={item.label}>
-                    {item.label}
+                    {comboboxChipRenderer ? comboboxChipRenderer(item) : item.label}
                     <ComboboxChipRemove />
                   </ComboboxChip>
                 ))}
@@ -192,7 +197,7 @@ function BasicMultiCombobox({ placeholder, emptyLabel, ...props }: BasicCombobox
         <ComboboxList>
           {(item: BasicComboboxItem) => (
             <ComboboxItem key={item.value} value={item}>
-              <div className='truncate'>{item.label}</div>
+              {comboboxItemRenderer ? comboboxItemRenderer(item) : <div className='truncate'>{item.label}</div>}
             </ComboboxItem>
           )}
         </ComboboxList>
