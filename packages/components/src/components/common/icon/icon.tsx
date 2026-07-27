@@ -11,6 +11,7 @@ export type IvyIconProps = {
 interface IconProps extends IvyIconProps, ComponentProps<'i'> {}
 
 const IvyIcon = ({ icon, rotate, spin, className, ...props }: IconProps) => (
+  // eslint-disable-next-line better-tailwindcss/no-concatenated-classes
   <i className={cn('ivy', `ivy-${icon}`, rotate && `ivy-rotate-${rotate}`, spin && 'ivy-spin', className)} {...props} />
 );
 
