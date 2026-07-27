@@ -68,7 +68,7 @@ function ComboboxInput({ className, ...props }: ComboboxPrimitive.Input.Props) {
 
 function ComboboxClear(props: ComboboxPrimitive.Clear.Props) {
   return (
-    <ComboboxPrimitive.Clear {...props}>
+    <ComboboxPrimitive.Clear render={<span />} {...props}>
       <Button icon={IvyIcons.Close} />
     </ComboboxPrimitive.Clear>
   );
