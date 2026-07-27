@@ -140,13 +140,21 @@ export type BasicComboboxItem = {
   label: string;
 };
 
-export type BasicComboboxProps<Multiple extends boolean | undefined = false> = ComboboxPrimitive.Root.Props<BasicComboboxItem, Multiple> & {
+export type BasicComboboxProps<
+  TItem extends BasicComboboxItem = BasicComboboxItem,
+  Multiple extends boolean | undefined = false
+> = ComboboxPrimitive.Root.Props<TItem, Multiple> & {
   placeholder?: string;
   emptyLabel?: string;
   itemRenderer?: (item: BasicComboboxItem) => React.ReactNode;
 };
 
-function BasicCombobox({ placeholder, emptyLabel, itemRenderer, ...props }: BasicComboboxProps<false>) {
+function BasicCombobox<TItem extends BasicComboboxItem>({
+  placeholder,
+  emptyLabel,
+  itemRenderer,
+  ...props
+}: BasicComboboxProps<TItem, false>) {
   return (
     <ComboboxRoot {...props}>
       <ComboboxInputGroup>
@@ -170,18 +178,25 @@ function BasicCombobox({ placeholder, emptyLabel, itemRenderer, ...props }: Basi
   );
 }
 
-type BasicMultiComboboxProps = BasicComboboxProps<true> & {
-  chipRenderer?: (item: BasicComboboxItem) => React.ReactNode;
+type BasicMultiComboboxProps<TItem extends BasicComboboxItem = BasicComboboxItem> = BasicComboboxProps<TItem, true> & {
+  chipRenderer?: (item: TItem) => React.ReactNode;
   chipRemoveLabel?: string;
 };
 
-function BasicMultiCombobox({ placeholder, emptyLabel, itemRenderer, chipRenderer, chipRemoveLabel, ...props }: BasicMultiComboboxProps) {
+function BasicMultiCombobox<TItem extends BasicComboboxItem>({
+  placeholder,
+  emptyLabel,
+  itemRenderer,
+  chipRenderer,
+  chipRemoveLabel,
+  ...props
+}: BasicMultiComboboxProps<TItem>) {
   return (
     <ComboboxRoot {...props} multiple>
       <ComboboxInputGroup>
         <ComboboxChips>
           <ComboboxValue>
-            {(value: BasicComboboxItem[]) => (
+            {(value: TItem[]) => (
               <>
                 {value.map(item => (
                   <ComboboxChip key={item.value} aria-label={item.label}>
@@ -201,7 +216,7 @@ function BasicMultiCombobox({ placeholder, emptyLabel, itemRenderer, chipRendere
       <ComboboxContent>
         <ComboboxEmpty>{emptyLabel}</ComboboxEmpty>
         <ComboboxList>
-          {(item: BasicComboboxItem) => (
+          {(item: TItem) => (
             <ComboboxItem key={item.value} value={item}>
               {itemRenderer ? itemRenderer(item) : <div className='truncate'>{item.label}</div>}
             </ComboboxItem>
