@@ -29,7 +29,7 @@ function ComboboxInputGroup({ className, ...props }: ComboboxPrimitive.InputGrou
 }
 
 function ComboboxChips({ className, ...props }: ComboboxPrimitive.Chips.Props) {
-  return <ComboboxPrimitive.Chips className={cn('flex w-full flex-wrap items-center gap-1', className)} {...props} />;
+  return <ComboboxPrimitive.Chips className={cn('flex w-full flex-wrap items-center gap-1', 'ui-combobox-chips', className)} {...props} />;
 }
 
 function ComboboxChip({ className, ...props }: ComboboxPrimitive.Chip.Props) {
@@ -37,6 +37,7 @@ function ComboboxChip({ className, ...props }: ComboboxPrimitive.Chip.Props) {
     <ComboboxPrimitive.Chip
       className={cn(
         'flex h-5 cursor-default items-center gap-1 overflow-hidden rounded-sm bg-n100 p-0.5 ps-1 text-body outline-none focus-within:bg-p75 [@media(hover:hover)]:data-highlighted:bg-p75',
+        'ui-combobox-chip',
         className
       )}
       {...props}
@@ -54,7 +55,11 @@ function ComboboxInput({ className, ...props }: ComboboxPrimitive.Input.Props) {
   const { inputProps } = useField();
   return (
     <ComboboxPrimitive.Input
-      className={cn('m-0 w-full min-w-0 flex-1 shrink-0 basis-12 border-none bg-transparent text-body focus:outline-none', className)}
+      className={cn(
+        'm-0 w-full min-w-0 flex-1 shrink-0 basis-12 border-none bg-transparent text-body focus:outline-none',
+        'ui-combobox-input',
+        className
+      )}
       {...inputProps}
       {...props}
     />
