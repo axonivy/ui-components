@@ -138,10 +138,10 @@ export type BasicComboboxItem = {
 export type BasicComboboxProps<Multiple extends boolean | undefined = false> = ComboboxPrimitive.Root.Props<BasicComboboxItem, Multiple> & {
   placeholder?: string;
   emptyLabel?: string;
-  comboboxItemRenderer?: (item: BasicComboboxItem) => React.ReactNode;
+  itemRenderer?: (item: BasicComboboxItem) => React.ReactNode;
 };
 
-function BasicCombobox({ placeholder, emptyLabel, comboboxItemRenderer, ...props }: BasicComboboxProps<false>) {
+function BasicCombobox({ placeholder, emptyLabel, itemRenderer, ...props }: BasicComboboxProps<false>) {
   return (
     <ComboboxRoot {...props}>
       <ComboboxInputGroup>
@@ -156,7 +156,7 @@ function BasicCombobox({ placeholder, emptyLabel, comboboxItemRenderer, ...props
         <ComboboxList>
           {(item: BasicComboboxItem) => (
             <ComboboxItem key={item.value} value={item}>
-              {comboboxItemRenderer ? comboboxItemRenderer(item) : <div className='truncate'>{item.label}</div>}
+              {itemRenderer ? itemRenderer(item) : <div className='truncate'>{item.label}</div>}
             </ComboboxItem>
           )}
         </ComboboxList>
@@ -166,10 +166,11 @@ function BasicCombobox({ placeholder, emptyLabel, comboboxItemRenderer, ...props
 }
 
 type BasicMultiComboboxProps = BasicComboboxProps<true> & {
-  comboboxChipRenderer?: (item: BasicComboboxItem) => React.ReactNode;
+  chipRenderer?: (item: BasicComboboxItem) => React.ReactNode;
+  chipRemoveLabel?: string;
 };
 
-function BasicMultiCombobox({ placeholder, emptyLabel, comboboxItemRenderer, comboboxChipRenderer, ...props }: BasicMultiComboboxProps) {
+function BasicMultiCombobox({ placeholder, emptyLabel, itemRenderer, chipRenderer, chipRemoveLabel, ...props }: BasicMultiComboboxProps) {
   return (
     <ComboboxRoot {...props} multiple>
       <ComboboxInputGroup>
@@ -179,8 +180,8 @@ function BasicMultiCombobox({ placeholder, emptyLabel, comboboxItemRenderer, com
               <>
                 {value.map(item => (
                   <ComboboxChip key={item.value} aria-label={item.label}>
-                    {comboboxChipRenderer ? comboboxChipRenderer(item) : item.label}
-                    <ComboboxChipRemove />
+                    {chipRenderer ? chipRenderer(item) : item.label}
+                    <ComboboxChipRemove aria-label={chipRemoveLabel} />
                   </ComboboxChip>
                 ))}
                 <Flex alignItems='center' gap={1} className='flex-1'>
@@ -197,7 +198,7 @@ function BasicMultiCombobox({ placeholder, emptyLabel, comboboxItemRenderer, com
         <ComboboxList>
           {(item: BasicComboboxItem) => (
             <ComboboxItem key={item.value} value={item}>
-              {comboboxItemRenderer ? comboboxItemRenderer(item) : <div className='truncate'>{item.label}</div>}
+              {itemRenderer ? itemRenderer(item) : <div className='truncate'>{item.label}</div>}
             </ComboboxItem>
           )}
         </ComboboxList>
