@@ -158,7 +158,7 @@ function BasicCombobox<TItem extends BasicComboboxItem>({
   ...props
 }: BasicComboboxProps<TItem, false>) {
   return (
-    <ComboboxRoot {...props}>
+    <ComboboxRoot isItemEqualToValue={(itemValue, value) => itemValue.value === value.value} {...props}>
       <ComboboxInputGroup className={className}>
         <ComboboxInput placeholder={placeholder} />
         <div className='flex h-full items-center justify-center text-neutral-500 dark:text-neutral-400'>
@@ -195,7 +195,7 @@ function BasicMultiCombobox<TItem extends BasicComboboxItem>({
   ...props
 }: BasicMultiComboboxProps<TItem>) {
   return (
-    <ComboboxRoot {...props} multiple>
+    <ComboboxRoot isItemEqualToValue={(itemValue, value) => itemValue.value === value.value} {...props} multiple>
       <ComboboxInputGroup className={className}>
         <ComboboxChips>
           <ComboboxValue>
