@@ -29,7 +29,7 @@
     "test:ci": "vitest --watch=false"
   },
   "devDependencies": {
-    "vitest": "^4.1.8",
+    "vitest": "^4.1.10",
     "vitest-websocket-mock": "0.7.0"
   }
 }
