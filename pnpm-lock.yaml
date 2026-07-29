@@ -160,7 +160,7 @@ importers:
         version: 1.7.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
     devDependencies:
       '@axonivy/ui-icons':
-        specifier: workspace:~
+        specifier: workspace:~12.0.17-next
         version: link:../icons
       '@storybook/addon-docs':
         specifier: ^9.1.20
@@ -181,22 +181,22 @@ importers:
         specifier: ^14.6.1
         version: 14.6.1(@testing-library/dom@10.4.0)
       '@types/react':
-        specifier: ^18.3.31
+        specifier: ^18.3.29
         version: 18.3.31
       '@vanilla-extract/css':
-        specifier: ^1.21.1
+        specifier: ^1.20.1
         version: 1.21.1
       '@vanilla-extract/recipes':
         specifier: ^0.5.7
         version: 0.5.7(@vanilla-extract/css@1.21.1)
       '@vanilla-extract/vite-plugin':
-        specifier: ^5.2.5
+        specifier: ^5.2.2
         version: 5.2.5(@types/node@24.13.3)(esbuild@0.25.1)(lightningcss@1.32.0)(supports-color@8.1.1)(vite@7.3.6(@types/node@24.13.3)(lightningcss@1.32.0)(yaml@2.9.0))(yaml@2.9.0)
       '@vitejs/plugin-react':
         specifier: ^4.7.0
         version: 4.7.0(supports-color@8.1.1)(vite@7.3.6(@types/node@24.13.3)(lightningcss@1.32.0)(yaml@2.9.0))
       happy-dom:
-        specifier: ^20.11.1
+        specifier: ^20.9.0
         version: 20.11.1
       react:
         specifier: ^18.3.1
