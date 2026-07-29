@@ -27,7 +27,7 @@ importers:
         specifier: ^4.11.5
         version: 4.11.5(@lerna-lite/publish@4.11.5(@types/node@24.13.3)(conventional-commits-filter@5.0.0)(supports-color@8.1.1))(@types/node@24.13.3)(conventional-commits-filter@5.0.0)
       '@types/node':
-        specifier: ^24.12.4
+        specifier: ^24.13.3
         version: 24.13.3
       eslint-plugin-storybook:
         specifier: ^9.1.20
@@ -42,13 +42,13 @@ importers:
         specifier: ~5.9.3
         version: 5.9.3
       vite:
-        specifier: ^7.3.5
+        specifier: ^7.3.6
         version: 7.3.6(@types/node@24.13.3)(lightningcss@1.32.0)(yaml@2.9.0)
       vite-plugin-dts:
         specifier: ^4.5.4
         version: 4.5.4(@types/node@24.13.3)(rollup@4.62.2)(supports-color@8.1.1)(typescript@5.9.3)(vite@7.3.6(@types/node@24.13.3)(lightningcss@1.32.0)(yaml@2.9.0))
       vitest:
-        specifier: ^4.1.8
+        specifier: ^4.1.10
         version: 4.1.10(@types/node@24.13.3)(happy-dom@20.11.1)(vite@7.3.6(@types/node@24.13.3)(lightningcss@1.32.0)(yaml@2.9.0))
 
   dev-packages/eslint-config:
@@ -87,7 +87,7 @@ importers:
         specifier: 7.16.2
         version: 7.16.2(eslint@9.39.5(supports-color@8.1.1))(supports-color@8.1.1)(typescript@5.9.3)
       globals:
-        specifier: ^17.6.0
+        specifier: ^17.7.0
         version: 17.7.0
       typescript-eslint:
         specifier: 8.65.0
@@ -160,7 +160,7 @@ importers:
         version: 1.7.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
     devDependencies:
       '@axonivy/ui-icons':
-        specifier: workspace:~12.0.17-next
+        specifier: workspace:~
         version: link:../icons
       '@storybook/addon-docs':
         specifier: ^9.1.20
@@ -181,22 +181,22 @@ importers:
         specifier: ^14.6.1
         version: 14.6.1(@testing-library/dom@10.4.0)
       '@types/react':
-        specifier: ^18.3.29
+        specifier: ^18.3.31
         version: 18.3.31
       '@vanilla-extract/css':
-        specifier: ^1.20.1
+        specifier: ^1.21.1
         version: 1.21.1
       '@vanilla-extract/recipes':
         specifier: ^0.5.7
         version: 0.5.7(@vanilla-extract/css@1.21.1)
       '@vanilla-extract/vite-plugin':
-        specifier: ^5.2.2
+        specifier: ^5.2.5
         version: 5.2.5(@types/node@24.13.3)(esbuild@0.25.1)(lightningcss@1.32.0)(supports-color@8.1.1)(vite@7.3.6(@types/node@24.13.3)(lightningcss@1.32.0)(yaml@2.9.0))(yaml@2.9.0)
       '@vitejs/plugin-react':
         specifier: ^4.7.0
         version: 4.7.0(supports-color@8.1.1)(vite@7.3.6(@types/node@24.13.3)(lightningcss@1.32.0)(yaml@2.9.0))
       happy-dom:
-        specifier: ^20.9.0
+        specifier: ^20.11.1
         version: 20.11.1
       react:
         specifier: ^18.3.1
@@ -221,7 +221,7 @@ importers:
         version: 8.2.1
     devDependencies:
       vitest:
-        specifier: ^4.1.8
+        specifier: ^4.1.10
         version: 4.1.10(@types/node@24.13.3)(happy-dom@20.11.1)(vite@7.3.6(@types/node@24.13.3)(lightningcss@1.32.0)(yaml@2.9.0))
       vitest-websocket-mock:
         specifier: 0.7.0
@@ -1840,8 +1840,8 @@ packages:
     resolution: {integrity: sha512-NwCl5Y0V6Di0NexvkTqdoVfmjTaQwoLM236r89KEojGmq/jMls8S+zb7yOwAPdXvbwfKDlP+lmXgAL4vKSQT+A==}
     engines: {node: ^20.17.0 || >=22.9.0}
 
-  '@sigstore/core@3.2.0':
-    resolution: {integrity: sha512-kxHrDQ9YgfrWUSXU0cjsQGv8JykOFZQ9ErNKbFPWzk3Hgpwu8x2hHrQ9IdA8yl+j9RTLTC3sAF3Tdq1IQCP4oA==}
+  '@sigstore/core@3.2.1':
+    resolution: {integrity: sha512-qRsxPnCrbC/puegGxKuynfnxgLiHqWStrSjxkoB4YKqq3Z3s4cyZyj42ZdWFAEblNP65C+rBH8EuREHIXoi83g==}
     engines: {node: ^20.17.0 || >=22.9.0}
 
   '@sigstore/protobuf-specs@0.5.1':
@@ -1856,8 +1856,8 @@ packages:
     resolution: {integrity: sha512-TCAzTy0xzdP79EnxSjq9KQ3eaR7+FmudLC6eRKknVKZbV7ZNlGLClAAQb/HMNJ5n2OBNk2GT1tEmU0xuPr+SLQ==}
     engines: {node: ^20.17.0 || >=22.9.0}
 
-  '@sigstore/verify@3.1.0':
-    resolution: {integrity: sha512-mNe0Iigql08YupSOGv197YdHpPPr+EzDZmfCgMc7RPNaZTw5aLN01nBl6CHJOh3BGtnMIj83EeN4butBchc8Ag==}
+  '@sigstore/verify@3.1.1':
+    resolution: {integrity: sha512-qv7+G3J2cc6wwFj3yKvXOamzqhMwSk1ogPGmhpS8iXllcPrJaIIBA+4HbttlHVu1pqWTdmaCH/WE7UOC51kdoA==}
     engines: {node: ^20.17.0 || >=22.9.0}
 
   '@simple-libs/child-process-utils@1.0.2':
@@ -2407,12 +2407,12 @@ packages:
   brace-expansion@1.1.13:
     resolution: {integrity: sha512-9ZLprWS6EENmhEOpjCYW2c8VkmOvckIJZfkr7rBW6dObmfgJ/L1GpSYW5Hpo9lDz4D1+n0Ckz8rU7FwHDQiG/w==}
 
-  brace-expansion@2.0.3:
-    resolution: {integrity: sha512-MCV/fYJEbqx68aE58kv2cA/kiky1G8vux3OR6/jbS+jIMe/6fJWa0DTzJU7dqijOWYwHi1t29FlfYI9uytqlpA==}
+  brace-expansion@2.1.2:
+    resolution: {integrity: sha512-w5JZcKgdhDOgOwm8H+KgbosopHMuGcl6qbulwjtz3SM7I7P3yW1eAjzMPLrIE+NQ9vjgANKHWeMHnrT0OXW1oA==}
 
-  brace-expansion@5.0.6:
-    resolution: {integrity: sha512-kLpxurY4Z4r9sgMsyG0Z9uzsBlgiU/EFKhj/h91/8yHu0edo7XuixOIH3VcJ8kkxs6/jPzoI6U9Vj3WqbMQ94g==}
-    engines: {node: 18 || 20 || >=22}
+  brace-expansion@5.0.8:
+    resolution: {integrity: sha512-JZyDyq3D4AUifKTPOB7DELf6XsB3WdPuNxCtob1vFXPsSXhdAiHBWJ/tJ8HAc9aH84BK+5JFZLNkJKx3G9kzQg==}
+    engines: {node: 20 || >=22}
 
   browserslist@4.28.2:
     resolution: {integrity: sha512-48xSriZYYg+8qXna9kwqjIVzuQxi+KYWp2+5nCYnYKPTr0LvD89Jqk2Or5ogxz0NUMfIjhh2lIUX/LyX9B4oIg==}
@@ -2996,8 +2996,8 @@ packages:
   fast-string-width@3.0.2:
     resolution: {integrity: sha512-gX8LrtNEI5hq8DVUfRQMbr5lpaS4nMIWV+7XEbXk2b8kiQIizgnlr12B4dA3ZEx3308ze0O4Q1R+cHts8kyUJg==}
 
-  fast-uri@3.1.2:
-    resolution: {integrity: sha512-rVjf7ArG3LTk+FS6Yw81V1DLuZl1bRbNrev6Tmd/9RaroeeRRJhAt7jg/6YFxbvAQXUCavSoZhPPj6oOx+5KjQ==}
+  fast-uri@3.1.4:
+    resolution: {integrity: sha512-8JnbkQ4juDyvYs4mgFGQqg4yCYtFDtUtmp2QIQq11ZZe5CFQ5wcqm1rqDgAh/QdMySuBnPzMUiJUNZG5N/AiQw==}
 
   fd-package-json@2.0.0:
     resolution: {integrity: sha512-jKmm9YtsNXN789RS/0mSzOC1NUq9mkVd65vbSSVsKdjGvYXBuE4oWe2QOEoFeRmJg+lPuZxpmrfFclNhoRMneQ==}
@@ -4330,8 +4330,8 @@ packages:
     resolution: {integrity: sha512-bzyZ1e88w9O1iNJbKnOlvYTrWPDl46O1bG0D3XInv+9tkPrxrN8jUUTiFlDkkmKWgn1M6CfIA13SuGqOa9Korw==}
     engines: {node: '>=14'}
 
-  sigstore@4.1.0:
-    resolution: {integrity: sha512-/fUgUhYghuLzVT/gaJoeVehLCgZiUxPCPMcyVNY0lIf/cTCz58K/WTI7PefDarXxp9nUKpEwg1yyz3eSBMTtgA==}
+  sigstore@4.1.1:
+    resolution: {integrity: sha512-endqECJkfhozrXMK5ngu/UAA0xVcVEFdnHJCElGaExypjW+HK5i6zu3NteLoaX/iFbRUbC3+DjttQs0GARr+5w==}
     engines: {node: ^20.17.0 || >=22.9.0}
 
   slugify@1.6.9:
@@ -4507,8 +4507,8 @@ packages:
   svgpath@2.6.0:
     resolution: {integrity: sha512-OIWR6bKzXvdXYyO4DK/UWa1VA1JeKq8E+0ug2DG98Y/vOmMpfZNj+TIG988HjfYSqtcy/hFOtZq/n/j5GSESNg==}
 
-  tar@7.5.16:
-    resolution: {integrity: sha512-56adEpPMouktRlBLXiaYFFzZ/3+JXa8P9n7WbR+ibIjtviN55mEaOkiysCnPnWm+7kkui1Dn8J9l+g6zV8731w==}
+  tar@7.5.22:
+    resolution: {integrity: sha512-MFO/QzvtAOmJbkhOaCTvbGcFN9L9b+JunIsDwaKljSOdcLMea3NJ1k9Usz/rjdfSXTq4dfzfeS7W4p4YOAAHeA==}
     engines: {node: '>=18'}
 
   timers-ext@0.1.8:
@@ -4636,8 +4636,8 @@ packages:
   undici-types@7.18.2:
     resolution: {integrity: sha512-AsuCzffGHJybSaRrmr5eHr81mwJU3kjw6M+uprWvCXiNeN9SOGwQ3Jn8jb8m3Z6izVgknn1R0FTCEAP2QrLY/w==}
 
-  undici@6.25.0:
-    resolution: {integrity: sha512-ZgpWDC5gmNiuY9CnLVXEH8rl50xhRCuLNA97fAUnKi8RRuV4E6KG31pDTsLVUKnohJE0I3XDrTeEydAXRw47xg==}
+  undici@6.28.0:
+    resolution: {integrity: sha512-LIY910g9TI13YS95lrMFrs8Rm/u/irgHeTWoKCoteeJ04CUJ92eEfj0rVn+7VKMPBpUPiUoBKfhNyLI23EE/KA==}
     engines: {node: '>=18.17'}
 
   unicorn-magic@0.1.0:
@@ -5650,7 +5650,7 @@ snapshots:
       pacote: 21.5.0(supports-color@8.1.1)
       semver: 7.7.4
       ssri: 13.0.1
-      tar: 7.5.16
+      tar: 7.5.22
       tinyglobby: 0.2.17
       tinyrainbow: 3.1.0
     transitivePeerDependencies:
@@ -6614,7 +6614,7 @@ snapshots:
     dependencies:
       '@sigstore/protobuf-specs': 0.5.1
 
-  '@sigstore/core@3.2.0': {}
+  '@sigstore/core@3.2.1': {}
 
   '@sigstore/protobuf-specs@0.5.1': {}
 
@@ -6622,7 +6622,7 @@ snapshots:
     dependencies:
       '@gar/promise-retry': 1.0.3
       '@sigstore/bundle': 4.0.0
-      '@sigstore/core': 3.2.0
+      '@sigstore/core': 3.2.1
       '@sigstore/protobuf-specs': 0.5.1
       make-fetch-happen: 15.0.5(supports-color@8.1.1)
       proc-log: 6.1.0
@@ -6636,10 +6636,10 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@sigstore/verify@3.1.0':
+  '@sigstore/verify@3.1.1':
     dependencies:
       '@sigstore/bundle': 4.0.0
-      '@sigstore/core': 3.2.0
+      '@sigstore/core': 3.2.1
       '@sigstore/protobuf-specs': 0.5.1
 
   '@simple-libs/child-process-utils@1.0.2':
@@ -7204,7 +7204,7 @@ snapshots:
   ajv@8.18.0:
     dependencies:
       fast-deep-equal: 3.1.3
-      fast-uri: 3.1.2
+      fast-uri: 3.1.4
       json-schema-traverse: 1.0.0
       require-from-string: 2.0.2
 
@@ -7338,11 +7338,11 @@ snapshots:
       balanced-match: 1.0.2
       concat-map: 0.0.1
 
-  brace-expansion@2.0.3:
+  brace-expansion@2.1.2:
     dependencies:
       balanced-match: 1.0.2
 
-  brace-expansion@5.0.6:
+  brace-expansion@5.0.8:
     dependencies:
       balanced-match: 4.0.4
 
@@ -7379,7 +7379,7 @@ snapshots:
       minipass-pipeline: 1.2.4
       p-map: 7.0.4
       ssri: 12.0.0
-      tar: 7.5.16
+      tar: 7.5.22
       unique-filename: 4.0.0
 
   cacache@20.0.4:
@@ -8093,7 +8093,7 @@ snapshots:
     dependencies:
       fast-string-truncated-width: 3.0.3
 
-  fast-uri@3.1.2: {}
+  fast-uri@3.1.4: {}
 
   fd-package-json@2.0.0:
     dependencies:
@@ -8610,7 +8610,7 @@ snapshots:
       npm-registry-fetch: 19.1.1(supports-color@8.1.1)
       proc-log: 6.1.0
       semver: 7.7.4
-      sigstore: 4.1.0(supports-color@8.1.1)
+      sigstore: 4.1.1(supports-color@8.1.1)
       ssri: 13.0.1
     transitivePeerDependencies:
       - supports-color
@@ -8776,11 +8776,11 @@ snapshots:
 
   minimatch@10.2.3:
     dependencies:
-      brace-expansion: 5.0.6
+      brace-expansion: 5.0.8
 
   minimatch@10.2.4:
     dependencies:
-      brace-expansion: 5.0.6
+      brace-expansion: 5.0.8
 
   minimatch@3.1.5:
     dependencies:
@@ -8788,7 +8788,7 @@ snapshots:
 
   minimatch@9.0.9:
     dependencies:
-      brace-expansion: 2.0.3
+      brace-expansion: 2.1.2
 
   minimist@1.2.8: {}
 
@@ -8880,7 +8880,7 @@ snapshots:
       nopt: 8.1.0
       proc-log: 5.0.0
       semver: 7.7.4
-      tar: 7.5.16
+      tar: 7.5.22
       tinyglobby: 0.2.17
       which: 5.0.0
     transitivePeerDependencies:
@@ -8894,9 +8894,9 @@ snapshots:
       nopt: 9.0.0
       proc-log: 6.1.0
       semver: 7.7.4
-      tar: 7.5.16
+      tar: 7.5.22
       tinyglobby: 0.2.17
-      undici: 6.25.0
+      undici: 6.28.0
       which: 6.0.1
 
   node-releases@2.0.47: {}
@@ -9080,9 +9080,9 @@ snapshots:
       npm-pick-manifest: 11.0.3
       npm-registry-fetch: 19.1.1(supports-color@8.1.1)
       proc-log: 6.1.0
-      sigstore: 4.1.0(supports-color@8.1.1)
+      sigstore: 4.1.1(supports-color@8.1.1)
       ssri: 13.0.1
-      tar: 7.5.16
+      tar: 7.5.22
     transitivePeerDependencies:
       - supports-color
 
@@ -9540,14 +9540,14 @@ snapshots:
 
   signal-exit@4.1.0: {}
 
-  sigstore@4.1.0(supports-color@8.1.1):
+  sigstore@4.1.1(supports-color@8.1.1):
     dependencies:
       '@sigstore/bundle': 4.0.0
-      '@sigstore/core': 3.2.0
+      '@sigstore/core': 3.2.1
       '@sigstore/protobuf-specs': 0.5.1
       '@sigstore/sign': 4.1.1(supports-color@8.1.1)
       '@sigstore/tuf': 4.0.2(supports-color@8.1.1)
-      '@sigstore/verify': 3.1.0
+      '@sigstore/verify': 3.1.1
     transitivePeerDependencies:
       - supports-color
 
@@ -9762,7 +9762,7 @@ snapshots:
 
   svgpath@2.6.0: {}
 
-  tar@7.5.16:
+  tar@7.5.22:
     dependencies:
       '@isaacs/fs-minipass': 4.0.1
       chownr: 3.0.0
@@ -9906,7 +9906,7 @@ snapshots:
 
   undici-types@7.18.2: {}
 
-  undici@6.25.0: {}
+  undici@6.28.0: {}
 
   unicorn-magic@0.1.0: {}
 
