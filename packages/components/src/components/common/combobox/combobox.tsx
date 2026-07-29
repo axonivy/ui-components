@@ -86,10 +86,13 @@ function ComboboxContent({
   alignOffset,
   side,
   sideOffset = 4,
+  container,
   ...props
-}: ComboboxPrimitive.Popup.Props & Pick<ComboboxPrimitive.Positioner.Props, 'anchor' | 'align' | 'alignOffset' | 'side' | 'sideOffset'>) {
+}: ComboboxPrimitive.Popup.Props &
+  Pick<ComboboxPrimitive.Positioner.Props, 'anchor' | 'align' | 'alignOffset' | 'side' | 'sideOffset'> &
+  Pick<ComboboxPrimitive.Portal.Props, 'container'>) {
   return (
-    <ComboboxPrimitive.Portal>
+    <ComboboxPrimitive.Portal container={container}>
       <ComboboxPrimitive.Positioner
         className='z-50 outline-none'
         anchor={anchor}
@@ -143,18 +146,20 @@ export type BasicComboboxItem = {
 export type BasicComboboxProps<
   TItem extends BasicComboboxItem = BasicComboboxItem,
   Multiple extends boolean | undefined = false
-> = ComboboxPrimitive.Root.Props<TItem, Multiple> & {
-  placeholder?: string;
-  emptyLabel?: string;
-  itemRenderer?: (item: TItem) => React.ReactNode;
-  className?: string;
-};
+> = ComboboxPrimitive.Root.Props<TItem, Multiple> &
+  Pick<ComboboxPrimitive.Portal.Props, 'container'> & {
+    placeholder?: string;
+    emptyLabel?: string;
+    itemRenderer?: (item: TItem) => React.ReactNode;
+    className?: string;
+  };
 
 function BasicCombobox<TItem extends BasicComboboxItem>({
   placeholder,
   emptyLabel,
   itemRenderer,
   className,
+  container,
   ...props
 }: BasicComboboxProps<TItem, false>) {
   return (
@@ -166,7 +171,7 @@ function BasicCombobox<TItem extends BasicComboboxItem>({
           <ComboboxTrigger />
         </div>
       </ComboboxInputGroup>
-      <ComboboxContent>
+      <ComboboxContent container={container}>
         <ComboboxEmpty>{emptyLabel}</ComboboxEmpty>
         <ComboboxList>
           {(item: TItem) => (
@@ -192,6 +197,7 @@ function BasicMultiCombobox<TItem extends BasicComboboxItem>({
   chipRenderer,
   chipRemoveLabel,
   className,
+  container,
   ...props
 }: BasicMultiComboboxProps<TItem>) {
   return (
@@ -216,7 +222,7 @@ function BasicMultiCombobox<TItem extends BasicComboboxItem>({
           </ComboboxValue>
         </ComboboxChips>
       </ComboboxInputGroup>
-      <ComboboxContent>
+      <ComboboxContent container={container}>
         <ComboboxEmpty>{emptyLabel}</ComboboxEmpty>
         <ComboboxList>
           {(item: TItem) => (
