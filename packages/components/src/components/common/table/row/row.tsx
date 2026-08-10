@@ -2,19 +2,20 @@ import { Flex } from '@/components/common/flex/flex';
 import { IvyIcon } from '@/components/common/icon/icon';
 import { Message, type MessageData } from '@/components/common/message/message';
 import { TableCell, TableRow } from '@/components/common/table/table';
+import type { DataTableFeatures } from '@/components/common/table/utils';
 import { useReadonly } from '@/context/useReadonly';
 import { cn } from '@/utils/class-name';
 import { IvyIcons } from '@axonivy/ui-icons';
 import { useDrag, useDrop, type TextDropItem } from '@react-aria/dnd';
-import type { Row } from '@tanstack/react-table';
+import { type Row, type RowData } from '@tanstack/react-table';
 import { useRef, type ComponentProps } from 'react';
 import { dndRow, reorderHandle, reorderHandleIcon, selectedRow } from './row.css';
 
-type SelectRowProps<TData> = ComponentProps<typeof TableRow> & {
-  row: Row<TData>;
+type SelectRowProps<TData extends RowData> = ComponentProps<typeof TableRow> & {
+  row: Row<DataTableFeatures, TData>;
 };
 
-const SelectRow = <TData,>({ row, className, onClick, ...props }: SelectRowProps<TData>) => {
+function SelectRow<TData extends RowData>({ row, className, onClick, ...props }: SelectRowProps<TData>) {
   const selectRow = () => {
     if (row.getCanMultiSelect() || !row.getIsSelected()) {
       row.toggleSelected();
@@ -36,12 +37,11 @@ const SelectRow = <TData,>({ row, className, onClick, ...props }: SelectRowProps
       {...props}
     />
   );
-};
-SelectRow.displayName = 'SelectRow';
+}
 
 type MessageRowProps = ComponentProps<typeof TableRow> & { message?: MessageData; singleLine?: boolean; columnCount: number };
 
-const MessageRow = ({ message, className, columnCount, singleLine = true, ...props }: MessageRowProps) => {
+function MessageRow({ message, className, columnCount, singleLine = true, ...props }: MessageRowProps) {
   if (message === undefined) {
     return null;
   }
@@ -54,15 +54,14 @@ const MessageRow = ({ message, className, columnCount, singleLine = true, ...pro
       </TableCell>
     </TableRow>
   );
-};
-MessageRow.displayName = 'MessageRow';
+}
 
-export type ReorderRowProps<TData> = SelectRowProps<TData> & {
+export type ReorderRowProps<TData extends RowData> = SelectRowProps<TData> & {
   id: string;
   updateOrder: (moveId: string, targetId: string) => void;
 };
 
-const useRowDnD = <TData,>({ id, updateOrder, row }: ReorderRowProps<TData>) => {
+const useRowDnD = <TData extends RowData>({ id, updateOrder, row }: ReorderRowProps<TData>) => {
   const DND_TYPE = 'text/id';
   const { dragProps, isDragging } = useDrag({
     getItems() {
@@ -98,13 +97,12 @@ const useRowDnD = <TData,>({ id, updateOrder, row }: ReorderRowProps<TData>) => 
   };
 };
 
-const ReorderRow = <TData,>({ id, updateOrder, row, className, ...props }: ReorderRowProps<TData>) => {
+function ReorderRow<TData extends RowData>({ id, updateOrder, row, className, ...props }: ReorderRowProps<TData>) {
   const dndProps = useRowDnD({ id, updateOrder, row });
   return <SelectRow {...dndProps} row={row} className={cn(dndRow, className, 'ui-dnd-row')} {...props} />;
-};
-ReorderRow.displayName = 'ReorderRow';
+}
 
-const ReorderHandleWrapper = ({ children, className }: ComponentProps<typeof Flex>) => {
+function ReorderHandleWrapper({ children, className }: ComponentProps<typeof Flex>) {
   const readonly = useReadonly();
   return (
     <Flex direction='row' alignItems='center' gap={3} className={cn(reorderHandle, 'ui-dnd-row-handle', className)}>
@@ -112,7 +110,6 @@ const ReorderHandleWrapper = ({ children, className }: ComponentProps<typeof Fle
       {!readonly && <IvyIcon icon={IvyIcons.EditDots} className={cn(reorderHandleIcon, 'ui-dnd-row-handleicon')} />}
     </Flex>
   );
-};
-ReorderHandleWrapper.displayName = 'ReorderHandleWrapper';
+}
 
 export { MessageRow, ReorderHandleWrapper, ReorderRow, SelectRow };

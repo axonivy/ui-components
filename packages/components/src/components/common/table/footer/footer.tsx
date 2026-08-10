@@ -5,7 +5,7 @@ import { IvyIcons } from '@axonivy/ui-icons';
 import type { ComponentProps } from 'react';
 import { addRowBlock, addRowBtn, addRowLine } from './footer.css';
 
-const TableAddRow = ({ addRow, ...props }: { addRow: () => void } & ComponentProps<typeof Button>) => {
+function TableAddRow({ addRow, ...props }: { addRow: () => void } & ComponentProps<typeof Button>) {
   const readonly = useReadonly();
   return (
     <Flex alignItems='center' direction='row' gap={1} className={addRowBlock}>
@@ -21,7 +21,6 @@ const TableAddRow = ({ addRow, ...props }: { addRow: () => void } & ComponentPro
       <div className={addRowLine} />
     </Flex>
   );
-};
-TableAddRow.displayName = 'TableAddRow';
+}
 
 export { TableAddRow };

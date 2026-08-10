@@ -1,5 +1,5 @@
-import { setupTable } from '@/utils/table/test-utils/setup';
-import { addRow, deleteAllSelectedRows, deleteFirstSelectedRow, resetAndSetRowSelection, selectRow } from './table';
+import { setupTable } from '@/components/common/table/test-utils/setup';
+import { addRow, deleteAllSelectedRows, deleteFirstSelectedRow, resetAndSetRowSelection, selectRow } from '@/components/common/table/utils';
 
 const newRowData = { name: 'newDataName', value: 'newDataValue' };
 
@@ -38,9 +38,9 @@ test('addRow', () => {
 
 describe('deleteFirstSelectedRow', () => {
   test('default', () => {
-    const { data, table, onRowSelectionChangeValues } = setupTable();
+    const { data, table, onRowSelectionChangeValues, setRowSelectionState } = setupTable();
     const originalData = structuredClone(data);
-    table.getState().rowSelection = { '1': true };
+    setRowSelectionState({ '1': true });
     const { newData, selection } = deleteFirstSelectedRow(table, data);
     expect(data).toEqual(originalData);
     expect(newData).not.toBe(data);
@@ -52,9 +52,9 @@ describe('deleteFirstSelectedRow', () => {
   });
 
   test('lastElementInList', () => {
-    const { data, table, onRowSelectionChangeValues } = setupTable();
+    const { data, table, onRowSelectionChangeValues, setRowSelectionState } = setupTable();
     const originalData = structuredClone(data);
-    table.getState().rowSelection = { '2': true };
+    setRowSelectionState({ '2': true });
     const { newData, selection } = deleteFirstSelectedRow(table, data);
     expect(data).toEqual(originalData);
     expect(newData).not.toBe(data);
@@ -66,10 +66,10 @@ describe('deleteFirstSelectedRow', () => {
   });
 
   test('lastRemainingElement', () => {
-    const { table, onRowSelectionChangeValues } = setupTable();
+    const { table, onRowSelectionChangeValues, setRowSelectionState } = setupTable();
     const data = [{ name: 'NameData0', value: 'ValueData0' }];
     const originalData = structuredClone(data);
-    table.getState().rowSelection = { '0': true };
+    setRowSelectionState({ '0': true });
     const { newData, selection } = deleteFirstSelectedRow(table, data);
     expect(data).toEqual(originalData);
     expect(newData).not.toBe(data);
@@ -79,9 +79,9 @@ describe('deleteFirstSelectedRow', () => {
   });
 
   test('noSelection', () => {
-    const { data, table, onRowSelectionChangeValues } = setupTable();
+    const { data, table, onRowSelectionChangeValues, setRowSelectionState } = setupTable();
     const originalData = structuredClone(data);
-    table.getState().rowSelection = {};
+    setRowSelectionState({});
     const { newData, selection } = deleteFirstSelectedRow(table, data);
     expect(data).toEqual(originalData);
     expect(newData).not.toBe(data);
@@ -93,8 +93,8 @@ describe('deleteFirstSelectedRow', () => {
 
 describe('deleteAllSelectedRows', () => {
   test('delete multiple selected rows', () => {
-    const { data, table, onRowSelectionChangeValues } = setupTable();
-    table.getState().rowSelection = { '0': true, '1': true };
+    const { data, table, onRowSelectionChangeValues, setRowSelectionState } = setupTable();
+    setRowSelectionState({ '0': true, '1': true });
     const { newData, selection } = deleteAllSelectedRows(table, data);
     expect(newData).not.toBe(data);
     expect(newData).toHaveLength(3);

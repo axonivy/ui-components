@@ -36,6 +36,7 @@ export * from './components/common/table/hooks/hooks';
 export * from './components/common/table/row/row';
 export * from './components/common/table/table';
 export * from './components/common/table/tree/tree';
+export * from './components/common/table/utils.ts';
 export * from './components/common/tabs/tabs';
 export * from './components/common/textarea/textarea';
 export * from './components/common/toaster/toaster';
@@ -71,8 +72,6 @@ export * from './utils/equals';
 export * from './utils/guards';
 export * from './utils/hotkey';
 export * from './utils/string';
-export * from './utils/table/table';
-export * from './utils/table/table-data';
 
 /* Theme */
 export * from './styles/theme.css.ts';

@@ -22,7 +22,7 @@ export default defineConfig({
       formats: ['es']
     },
     rolldownOptions: {
-      external: ['@axonivy/ui-icons', 'react', 'react/jsx-runtime', 'react-dom', /@base-ui\/react/]
+      external: ['@axonivy/ui-icons', 'react', 'react/jsx-runtime', 'react-dom', /@base-ui\/react/, /@tanstack\/react-table/]
     }
   },
   test: {

@@ -1,118 +1,16 @@
-import { SearchInput } from '@/components/common/input/input';
 import { ROW_VIRTUALIZE_INDEX_ATTRIBUTE } from '@/components/common/table/table';
+import { resetAndSetRowSelection, selectRow, type DataTableFeatures } from '@/components/common/table/utils';
 import { useReadonly } from '@/context/useReadonly';
-import { resetAndSetRowSelection, selectRow } from '@/utils/table/table';
-import {
-  getExpandedRowModel,
-  getFilteredRowModel,
-  getSortedRowModel,
-  type ExpandedState,
-  type OnChangeFn,
-  type Row,
-  type RowSelectionState,
-  type SortingState,
-  type Table,
-  type TableOptions,
-  type TableState
-} from '@tanstack/react-table';
-import { useCallback, useState, type KeyboardEvent, type ReactNode } from 'react';
+import { type ReactTable, type Row, type RowData, type RowSelectionState, type Table } from '@tanstack/react-table';
+import { useState, type KeyboardEvent } from 'react';
 
-type UseTableGlobalFilterRetunValue<TData> = {
-  filter: ReactNode;
-  options: Required<Pick<TableOptions<TData>, 'onGlobalFilterChange' | 'getFilteredRowModel' | 'filterFromLeafRows'>>;
-  tableState: Partial<TableState>;
-};
-
-type UseTableGlobalFilterOptions = { searchActive?: boolean; searchPlaceholder?: string; searchAutoFocus?: boolean };
-
-export const useTableGlobalFilter = <TData,>(options?: UseTableGlobalFilterOptions): UseTableGlobalFilterRetunValue<TData> => {
-  const [globalFilter, setGlobalFilter] = useState('');
-  const searchActive = options?.searchActive === undefined || options?.searchActive;
-  return {
-    filter: searchActive ? (
-      <SearchInput
-        placeholder={options?.searchPlaceholder ?? 'Search'}
-        value={globalFilter}
-        onChange={setGlobalFilter}
-        autoFocus={options?.searchAutoFocus}
-      />
-    ) : null,
-    options: { onGlobalFilterChange: setGlobalFilter, getFilteredRowModel: getFilteredRowModel(), filterFromLeafRows: true },
-    tableState: { globalFilter }
-  };
-};
-
-type UseTableSelectRetunValue<TData> = {
-  options: Required<
-    Pick<TableOptions<TData>, 'onRowSelectionChange' | 'enableRowSelection' | 'enableMultiRowSelection' | 'enableSubRowSelection'>
-  >;
-  tableState: Partial<TableState>;
-};
-
-type TableSelectOptions = {
-  initialSelecteState?: RowSelectionState;
-  onSelect?: (selectedRows: RowSelectionState) => void;
-};
-
-export const useTableSelect = <TData,>(options?: TableSelectOptions): UseTableSelectRetunValue<TData> => {
-  const [rowSelection, setRowSelection] = useState(options?.initialSelecteState ?? {});
-  const handleRowSelectionChange: OnChangeFn<RowSelectionState> = useCallback(
-    updaterOrValue => {
-      setRowSelection(old => {
-        const newSelection = typeof updaterOrValue === 'function' ? updaterOrValue(old) : updaterOrValue;
-        if (options?.onSelect) {
-          options.onSelect(newSelection);
-        }
-        return newSelection;
-      });
-    },
-    [options]
-  );
-
-  return {
-    options: {
-      onRowSelectionChange: handleRowSelectionChange,
-      enableRowSelection: true,
-      enableMultiRowSelection: false,
-      enableSubRowSelection: false
-    },
-    tableState: { rowSelection }
-  };
-};
-
-type UseTableSortRetunValue<TData> = {
-  options: Required<Pick<TableOptions<TData>, 'onSortingChange' | 'getSortedRowModel'>>;
-  tableState: Partial<TableState>;
-};
-
-export const useTableSort = <TData,>(): UseTableSortRetunValue<TData> => {
-  const [sorting, setSorting] = useState<SortingState>([]);
-  return {
-    options: { onSortingChange: setSorting, getSortedRowModel: getSortedRowModel() },
-    tableState: { sorting }
-  };
-};
-
-type UseTableExpandReturnValue<TData> = {
-  options: Required<Pick<TableOptions<TData>, 'onExpandedChange' | 'getSubRows' | 'getExpandedRowModel'>>;
-  tableState: Partial<TableState>;
-};
-
-export const useTableExpand = <TData extends { children: Array<TData> }>(initState?: ExpandedState): UseTableExpandReturnValue<TData> => {
-  const [expanded, setExpanded] = useState<ExpandedState>(initState ?? true);
-  return {
-    options: { onExpandedChange: setExpanded, getSubRows: row => row.children, getExpandedRowModel: getExpandedRowModel() },
-    tableState: { expanded }
-  };
-};
-
-export const useMultiSelectRow = <TData,>(table: Table<TData>) => {
+export const useMultiSelectRow = <TData extends RowData>(table: ReactTable<DataTableFeatures, TData>) => {
   const [lastSelectedRowId, setLastSelectedRowId] = useState<string | null>(null);
 
-  const handleMultiSelectOnRow = (row: Row<TData>, event: React.MouseEvent<HTMLTableRowElement, MouseEvent>) => {
+  const handleMultiSelectOnRow = (row: Row<DataTableFeatures, TData>, event: React.MouseEvent<HTMLTableRowElement, MouseEvent>) => {
     const isMultiSelect = event.ctrlKey || event.metaKey;
     const isRangeSelect = event.shiftKey;
-    const currentSelection = table.getState().rowSelection;
+    const currentSelection = table.state.rowSelection;
 
     if (isRangeSelect && lastSelectedRowId !== null) {
       const allRows = table.getRowModel().rows;
@@ -135,7 +33,9 @@ export const useMultiSelectRow = <TData,>(table: Table<TData>) => {
         table.setRowSelection(newSelection);
       }
     } else if (isMultiSelect) {
-      const newSelection = { ...currentSelection, [row.id]: !currentSelection[row.id] };
+      const newSelection: RowSelectionState = currentSelection[row.id]
+        ? Object.fromEntries(Object.entries(currentSelection).filter(([selectedRowId]) => selectedRowId !== row.id))
+        : { ...currentSelection, [row.id]: true };
       table.setRowSelection(newSelection);
       setLastSelectedRowId(row.id);
     } else {
@@ -147,25 +47,25 @@ export const useMultiSelectRow = <TData,>(table: Table<TData>) => {
   return { handleMultiSelectOnRow };
 };
 
-interface KeyHandlerOptions<TData> {
+interface KeyHandlerOptions<TData extends RowData> {
   multiSelect?: boolean;
   reorder?: { updateOrder?: (moveIndexes: number[], toIndex: number, data: TData[]) => void; getRowId?: (row: TData) => string };
-  lazyLoadChildren?: (row: Row<TData>) => void;
+  lazyLoadChildren?: (row: Row<DataTableFeatures, TData>) => void;
   resetSelectionOnTab?: boolean;
   resetSelectionOnEscape?: boolean;
 }
 
-interface TableKeyboardHandlerProps<TData> {
-  table: Table<TData>;
+interface TableKeyboardHandlerProps<TData extends RowData> {
+  table: Table<DataTableFeatures, TData>;
   data: Array<TData>;
   options?: KeyHandlerOptions<TData>;
 }
 
-export const useTableKeyHandler = <TData,>({ table, data, options }: TableKeyboardHandlerProps<TData>) => {
+export const useTableKeyHandler = <TData extends RowData>({ table, data, options }: TableKeyboardHandlerProps<TData>) => {
   const [rootIndex, setRootIndex] = useState<number | undefined>();
   const readonly = useReadonly();
 
-  const handleKeyDown = (event: KeyboardEvent<HTMLTableElement>, onEnterAction?: (row: Row<TData>) => void) => {
+  const handleKeyDown = (event: KeyboardEvent<HTMLTableElement>, onEnterAction?: (row: Row<DataTableFeatures, TData>) => void) => {
     const actions: Record<string, () => void> = {
       ArrowUp: () => handleArrowKeyUpDown(event, -1),
       ArrowDown: () => handleArrowKeyUpDown(event, 1),
@@ -182,7 +82,7 @@ export const useTableKeyHandler = <TData,>({ table, data, options }: TableKeyboa
     }
   };
 
-  const handleEnter = (onEnterAction?: (row: Row<TData>) => void, row?: Row<TData>) => {
+  const handleEnter = (onEnterAction?: (row: Row<DataTableFeatures, TData>) => void, row?: Row<DataTableFeatures, TData>) => {
     if (row !== undefined) {
       onEnterAction?.(row);
     }
@@ -217,11 +117,11 @@ export const useTableKeyHandler = <TData,>({ table, data, options }: TableKeyboa
     }
   };
 
-  const toggleMultiRowSelection = <TData,>(
+  const toggleMultiRowSelection = <TData extends RowData>(
     direction: -1 | 1,
     newIndex: number | undefined,
-    allRows: Array<Row<TData>>,
-    selectedRows: Array<Row<TData>>
+    allRows: Array<Row<DataTableFeatures, TData>>,
+    selectedRows: Array<Row<DataTableFeatures, TData>>
   ): void => {
     if (newIndex === undefined) {
       return;
@@ -263,7 +163,11 @@ const scrollToNextRow = (event: KeyboardEvent<HTMLTableElement>, newReorderIndex
   }
 };
 
-const toggleExpand = <TData,>(expand: boolean, row?: Row<TData>, loadChildren?: (row: Row<TData>) => void) => {
+const toggleExpand = <TData extends RowData>(
+  expand: boolean,
+  row?: Row<DataTableFeatures, TData>,
+  loadChildren?: (row: Row<DataTableFeatures, TData>) => void
+) => {
   if (row === undefined || !row.getCanExpand()) {
     return;
   }
@@ -275,13 +179,17 @@ const toggleExpand = <TData,>(expand: boolean, row?: Row<TData>, loadChildren?: 
   }
 };
 
-interface CalculateNewReorderIndexProps<TData> {
+interface CalculateNewReorderIndexProps<TData extends RowData> {
   direction: -1 | 1;
-  allRows: Array<Row<TData>>;
-  selectedRows: Array<Row<TData>>;
+  allRows: Array<Row<DataTableFeatures, TData>>;
+  selectedRows: Array<Row<DataTableFeatures, TData>>;
 }
 
-const calculateNewReorderIndex = <TData,>({ direction, allRows, selectedRows }: CalculateNewReorderIndexProps<TData>): number => {
+const calculateNewReorderIndex = <TData extends RowData>({
+  direction,
+  allRows,
+  selectedRows
+}: CalculateNewReorderIndexProps<TData>): number => {
   const allRowsCount = allRows.length;
   const firstSelectedRow = selectedRows.at(0);
   const lastSelectedRow = selectedRows.at(-1);

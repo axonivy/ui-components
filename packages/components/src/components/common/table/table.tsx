@@ -4,7 +4,7 @@ import type { ComponentProps } from 'react';
 import { body, cell, footer, head, header, root, row, table } from './table.css';
 
 /**
- * Table, based on {@link https://tanstack.com/table/v8 | Tanstack Table}
+ * Table, based on {@link https://tanstack.com/table/v9 | Tanstack Table}
  */
 const Table = ({ className, ...props }: ComponentProps<'table'>) => (
   <Field className={cn(root, 'ui-table-root')}>

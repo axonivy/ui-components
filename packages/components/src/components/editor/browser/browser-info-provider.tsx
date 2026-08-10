@@ -1,9 +1,10 @@
+import type { DataTableFeatures } from '@/components/common/table/utils';
 import type { Row } from '@tanstack/react-table';
 import { useEffect, useState } from 'react';
 import type { BrowserNode } from './browser';
 import { isCmsBrowserNode } from './data';
 
-export const FunctionInfoProvider = ({ row }: { row?: Row<BrowserNode> }) => {
+export const FunctionInfoProvider = ({ row }: { row?: Row<DataTableFeatures, BrowserNode> }) => {
   // fake loading via network
   const [loaded, setLoaded] = useState(false);
   const [prevRow, setPrevRow] = useState(row);
@@ -40,7 +41,7 @@ export const FunctionInfoProvider = ({ row }: { row?: Row<BrowserNode> }) => {
   );
 };
 
-export const CmsInfoProvider = ({ row }: { row?: Row<BrowserNode> }) => {
+export const CmsInfoProvider = ({ row }: { row?: Row<DataTableFeatures, BrowserNode> }) => {
   const node = row?.original;
   if (node && isCmsBrowserNode(node)) {
     return (

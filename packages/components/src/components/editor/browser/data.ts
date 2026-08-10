@@ -1,3 +1,4 @@
+import type { DataTableFeatures } from '@/components/common/table/utils';
 import { IvyIcons } from '@axonivy/ui-icons';
 import type { Row } from '@tanstack/react-table';
 import { useState } from 'react';
@@ -49,7 +50,7 @@ export const useAttrBrowser = () => {
   };
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const loadLazy = (row: Row<BrowserNode>) => {
+  const loadLazy = (row: Row<DataTableFeatures, BrowserNode>) => {
     setAttr(old => loadChildrenFor(old));
   };
 
