@@ -11,7 +11,7 @@ export default defineConfig({
     outDir: 'lib',
     sourcemap: true,
     lib: {
-      entry: resolve(__dirname, 'src/index.ts'),
+      entry: resolve(import.meta.dirname, 'src/index.ts'),
       fileName: 'graph',
       formats: ['es']
     },
