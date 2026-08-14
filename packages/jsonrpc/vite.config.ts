@@ -7,14 +7,14 @@ export default defineConfig({
   plugins: [visualizer(), dts({ tsconfigPath: './tsconfig.production.json' })],
   resolve: {
     alias: {
-      '@': resolve(__dirname, './src')
+      '@': resolve(import.meta.dirname, './src')
     }
   },
   build: {
     outDir: 'lib',
     sourcemap: true,
     lib: {
-      entry: resolve(__dirname, 'src/index.ts'),
+      entry: resolve(import.meta.dirname, 'src/index.ts'),
       fileName: 'jsonrpc',
       formats: ['es']
     }

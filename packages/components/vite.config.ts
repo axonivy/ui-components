@@ -10,14 +10,14 @@ export default defineConfig({
   plugins: [tailwindcss(), veVitePlugin(), visualizer(), react(), dts({ tsconfigPath: './tsconfig.production.json' })],
   resolve: {
     alias: {
-      '@': resolve(__dirname, './src')
+      '@': resolve(import.meta.dirname, './src')
     }
   },
   build: {
     outDir: 'lib',
     sourcemap: true,
     lib: {
-      entry: resolve(__dirname, 'src/index.ts'),
+      entry: resolve(import.meta.dirname, 'src/index.ts'),
       fileName: 'components',
       formats: ['es']
     },
@@ -29,7 +29,7 @@ export default defineConfig({
     name: 'components',
     include: ['src/**/*.test.ts?(x)'],
     alias: {
-      'test-utils': resolve(__dirname, 'src/test-utils/test-utils.tsx')
+      'test-utils': resolve(import.meta.dirname, 'src/test-utils/test-utils.tsx')
     },
     globals: true,
     environment: 'happy-dom',

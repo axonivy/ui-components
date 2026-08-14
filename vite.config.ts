@@ -8,7 +8,7 @@ import { fileURLToPath } from 'node:url';
 import { resolve } from 'path';
 import { visualizer } from 'rollup-plugin-visualizer';
 import { defineConfig } from 'vitest/config';
-const dirname = typeof __dirname !== 'undefined' ? __dirname : path.dirname(fileURLToPath(import.meta.url));
+const dirname = typeof import.meta.dirname !== 'undefined' ? import.meta.dirname : path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
   plugins: [tailwindcss(), veVitePlugin(), visualizer(), react()],
@@ -17,9 +17,9 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      '@axonivy/ui-components/lib': resolve(__dirname, './packages/components/lib'),
-      '@axonivy/ui-components': resolve(__dirname, './packages/components/src'),
-      '@': resolve(__dirname, './packages/components/src')
+      '@axonivy/ui-components/lib': resolve(import.meta.dirname, './packages/components/lib'),
+      '@axonivy/ui-components': resolve(import.meta.dirname, './packages/components/src'),
+      '@': resolve(import.meta.dirname, './packages/components/src')
     }
   },
   test: {
