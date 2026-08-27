@@ -1,9 +1,8 @@
+import { dataTableHelper } from '@/components/common/table/utils';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import type { ColumnDef } from '@tanstack/react-table';
-import { flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table';
+import { flexRender, useTable } from '@tanstack/react-table';
 import { Fragment, useState } from 'react';
 import { tableData, type Payment } from '../data';
-import { useTableSelect } from '../hooks/hooks';
 import { MessageRow, SelectRow } from '../row/row';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../table';
 import { ComboCell, InputCell, SelectCell } from './edit';
@@ -17,9 +16,9 @@ type Story = StoryObj<typeof Table>;
 
 export default meta;
 
-const columns: ColumnDef<Payment, string>[] = [
-  {
-    accessorKey: 'status',
+const { columnHelper, tableOptions } = dataTableHelper<Payment>();
+const columns = columnHelper.columns([
+  columnHelper.accessor('status', {
     header: () => <span>Select</span>,
     cell: cell => (
       <SelectCell
@@ -34,14 +33,12 @@ const columns: ColumnDef<Payment, string>[] = [
         disabled={cell.row.original.id === 'INV006'}
       />
     )
-  },
-  {
-    accessorKey: 'email',
+  }),
+  columnHelper.accessor('email', {
     header: () => <span>Input</span>,
     cell: cell => <InputCell cell={cell} placeholder='Enter an email address' disabled={cell.row.original.id === 'INV006'} />
-  },
-  {
-    accessorKey: 'amount',
+  }),
+  columnHelper.accessor('amount', {
     header: () => <span>Combobox</span>,
     cell: cell => (
       <ComboCell
@@ -51,21 +48,16 @@ const columns: ColumnDef<Payment, string>[] = [
         disabled={cell.row.original.id === 'INV006'}
       />
     )
-  }
-];
+  })
+]);
 
 function EditTableDemo() {
   const [data, setData] = useState(tableData);
 
-  const tableSelection = useTableSelect<Payment>();
-  const table = useReactTable({
-    ...tableSelection.options,
+  const table = useTable({
+    ...tableOptions,
     data,
     columns,
-    getCoreRowModel: getCoreRowModel(),
-    state: {
-      ...tableSelection.tableState
-    },
     meta: {
       updateData: (rowId, columnId, value) => {
         setData(old =>
@@ -85,7 +77,7 @@ function EditTableDemo() {
     <Table>
       <TableHeader>
         {table.getHeaderGroups().map(headerGroup => (
-          <TableRow key={headerGroup.id} onClick={() => tableSelection.options.onRowSelectionChange({})}>
+          <TableRow key={headerGroup.id} onClick={() => table.setRowSelection({})}>
             {headerGroup.headers.map(header => (
               <TableHead key={header.id} colSpan={header.colSpan}>
                 {flexRender(header.column.columnDef.header, header.getContext())}

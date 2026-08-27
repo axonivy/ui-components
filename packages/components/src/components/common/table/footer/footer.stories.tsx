@@ -1,12 +1,11 @@
 import { Button } from '@/components/common/button/button';
 import { BasicField } from '@/components/common/field/field';
-import { deleteAllSelectedRows } from '@/utils/table/table';
+import { dataTableHelper, deleteAllSelectedRows } from '@/components/common/table/utils';
 import { IvyIcons } from '@axonivy/ui-icons';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { flexRender, getCoreRowModel, useReactTable, type ColumnDef } from '@tanstack/react-table';
+import { flexRender, useTable } from '@tanstack/react-table';
 import { useState } from 'react';
 import { tableData, type Payment } from '../data';
-import { useTableSelect } from '../hooks/hooks';
 import { SelectRow } from '../row/row';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../table';
 import { TableAddRow } from './footer';
@@ -33,20 +32,18 @@ export default meta;
 
 type Story = StoryObj<TableStoryProps>;
 
-const columns: ColumnDef<Payment>[] = [
-  {
-    accessorKey: 'status',
+const { columnHelper, tableOptions } = dataTableHelper<Payment>();
+const columns = columnHelper.columns([
+  columnHelper.accessor('status', {
     header: () => <span>Status</span>,
     cell: ({ row }) => <div>{row.getValue('status')}</div>,
     minSize: 50
-  },
-  {
-    accessorKey: 'email',
+  }),
+  columnHelper.accessor('email', {
     header: () => <span>Email</span>,
     cell: ({ row }) => <div>{row.getValue('email')}</div>
-  },
-  {
-    accessorKey: 'amount',
+  }),
+  columnHelper.accessor('amount', {
     header: () => <span>Amount</span>,
     cell: ({ row }) => {
       const amount = parseFloat(row.getValue('amount'));
@@ -59,15 +56,15 @@ const columns: ColumnDef<Payment>[] = [
 
       return <div>{formatted}</div>;
     }
-  }
-];
+  })
+]);
 
 function AddRemoveTableDemo({ enableMultiselect }: { enableMultiselect: boolean }) {
   const [data, setData] = useState(tableData);
 
   const addRow = () => {
     const newData = [...data];
-    newData.push({ id: 'new', amount: 0, email: '', status: 'pending' });
+    newData.push({ id: 'new', amount: '0', email: '', status: 'pending' });
     setData(newData);
   };
 
@@ -76,16 +73,11 @@ function AddRemoveTableDemo({ enableMultiselect }: { enableMultiselect: boolean 
     setData(newData);
   };
 
-  const tableSelection = useTableSelect<Payment>();
-  const table = useReactTable({
-    ...tableSelection.options,
+  const table = useTable({
+    ...tableOptions,
     enableMultiRowSelection: enableMultiselect,
     data,
-    columns,
-    getCoreRowModel: getCoreRowModel(),
-    state: {
-      ...tableSelection.tableState
-    }
+    columns
   });
 
   return (
@@ -96,7 +88,7 @@ function AddRemoveTableDemo({ enableMultiselect }: { enableMultiselect: boolean 
       <Table>
         <TableHeader>
           {table.getHeaderGroups().map(headerGroup => (
-            <TableRow key={headerGroup.id} onClick={() => tableSelection.options.onRowSelectionChange({})}>
+            <TableRow key={headerGroup.id} onClick={() => table.setRowSelection({})}>
               {headerGroup.headers.map(header => (
                 <TableHead key={header.id} colSpan={header.colSpan}>
                   {flexRender(header.column.columnDef.header, header.getContext())}

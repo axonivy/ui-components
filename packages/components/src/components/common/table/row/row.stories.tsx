@@ -1,11 +1,11 @@
+import { useMultiSelectRow, useTableKeyHandler } from '@/components/common/table/hooks/hooks';
+import { dataTableHelper, resetAndSetRowSelection } from '@/components/common/table/utils';
 import { arraymove, arrayMoveMultiple, indexOf } from '@/utils/array';
-import { resetAndSetRowSelection } from '@/utils/table/table';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { flexRender, getCoreRowModel, useReactTable, type ColumnDef } from '@tanstack/react-table';
-import { useState } from 'react';
+import { flexRender, useTable } from '@tanstack/react-table';
+import { useEffect, useState } from 'react';
 import { Fragment } from 'react/jsx-runtime';
 import { tableData, type Payment } from '../data';
-import { useMultiSelectRow, useTableKeyHandler, useTableSelect } from '../hooks/hooks';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../table';
 import { MessageRow, ReorderHandleWrapper, ReorderRow, SelectRow } from './row';
 
@@ -18,20 +18,18 @@ export default meta;
 
 type Story = StoryObj<typeof Table>;
 
-const columns: ColumnDef<Payment>[] = [
-  {
-    accessorKey: 'status',
+const { columnHelper, tableOptions } = dataTableHelper<Payment>();
+const columns = columnHelper.columns([
+  columnHelper.accessor('status', {
     header: () => <span>Status</span>,
     cell: ({ row }) => <div>{row.getValue('status')}</div>,
     minSize: 50
-  },
-  {
-    accessorKey: 'email',
+  }),
+  columnHelper.accessor('email', {
     header: () => <span>Email</span>,
     cell: ({ row }) => <div>{row.getValue('email')}</div>
-  },
-  {
-    accessorKey: 'amount',
+  }),
+  columnHelper.accessor('amount', {
     header: () => <span>Amount</span>,
     cell: ({ row }) => {
       const amount = parseFloat(row.getValue('amount'));
@@ -44,32 +42,26 @@ const columns: ColumnDef<Payment>[] = [
 
       return <div>{formatted}</div>;
     }
-  }
-];
+  })
+]);
 
 export const Select: StoryObj<{ enableMultiRowSelection: boolean }> = {
   args: {
     enableMultiRowSelection: false
   },
   render: ({ enableMultiRowSelection }) => {
-    const [payment, setPayment] = useState<Payment | null>();
-    const rowSelection = useTableSelect<Payment>({
-      onSelect: selectedRows => {
-        const selectedRowId = Object.keys(selectedRows).find(key => selectedRows[key]);
-        const selectedPayment = table.getRowModel().flatRows.find(row => row.id === selectedRowId)?.original;
-        setPayment(selectedPayment || null);
-      }
-    });
-    const table = useReactTable({
-      ...rowSelection.options,
+    const [payment, setPayment] = useState<Payment>();
+    const table = useTable({
+      ...tableOptions,
       enableMultiRowSelection,
       data: tableData,
-      columns,
-      getCoreRowModel: getCoreRowModel(),
-      state: {
-        ...rowSelection.tableState
-      }
+      columns
     });
+
+    useEffect(() => {
+      const subscription = table.atoms.rowSelection.subscribe(() => setPayment(table.getSelectedRowModel().flatRows.at(0)?.original));
+      return () => subscription.unsubscribe();
+    }, [table]);
 
     const { handleKeyDown } = useTableKeyHandler({ table, data: tableData });
 
@@ -78,7 +70,7 @@ export const Select: StoryObj<{ enableMultiRowSelection: boolean }> = {
         <Table onKeyDown={handleKeyDown}>
           <TableHeader>
             {table.getHeaderGroups().map(headerGroup => (
-              <TableRow key={headerGroup.id} onClick={() => rowSelection.options.onRowSelectionChange({})}>
+              <TableRow key={headerGroup.id} onClick={() => table.setRowSelection({})}>
                 {headerGroup.headers.map(header => (
                   <TableHead key={header.id} colSpan={header.colSpan}>
                     {flexRender(header.column.columnDef.header, header.getContext())}
@@ -105,10 +97,10 @@ export const Select: StoryObj<{ enableMultiRowSelection: boolean }> = {
 
 export const Message: Story = {
   render: () => {
-    const table = useReactTable({
+    const table = useTable({
+      ...tableOptions,
       data: tableData,
-      columns,
-      getCoreRowModel: getCoreRowModel()
+      columns
     });
     return (
       <Table>
@@ -178,32 +170,25 @@ export const Reorder: Story = {
       const toIndex = indexOf(data, obj => obj.id === targetId);
       updateDataArray([fromIndex], toIndex, data);
     };
-    const reorderColumns: ColumnDef<Payment>[] = [
-      {
-        accessorKey: 'status',
+    const reorderColumns = columnHelper.columns([
+      columnHelper.accessor('status', {
         header: () => <span>Status</span>,
         cell: ({ row }) => <div>{row.getValue('status')}</div>,
         minSize: 50
-      },
-      {
-        accessorKey: 'email',
+      }),
+      columnHelper.accessor('email', {
         header: () => <span>Email</span>,
         cell: ({ row }) => (
           <ReorderHandleWrapper>
             <div>{row.getValue('email')}</div>
           </ReorderHandleWrapper>
         )
-      }
-    ];
-    const rowSelection = useTableSelect<Payment>();
-    const table = useReactTable({
-      ...rowSelection.options,
+      })
+    ]);
+    const table = useTable({
+      ...tableOptions,
       data,
-      columns: reorderColumns,
-      getCoreRowModel: getCoreRowModel(),
-      state: {
-        ...rowSelection.tableState
-      }
+      columns: reorderColumns
     });
     const { handleKeyDown } = useTableKeyHandler({
       table,
@@ -244,33 +229,26 @@ export const MultiSelectWithReorder: Story = {
   render: () => {
     const [data, setData] = useState(() => structuredClone(tableData));
 
-    const reorderColumns: ColumnDef<Payment>[] = [
-      {
-        accessorKey: 'status',
+    const reorderColumns = columnHelper.columns([
+      columnHelper.accessor('status', {
         header: () => <span>Status</span>,
         cell: ({ row }) => <div>{row.getValue('status')}</div>,
         minSize: 50
-      },
-      {
-        accessorKey: 'email',
+      }),
+      columnHelper.accessor('email', {
         header: () => <span>Email</span>,
         cell: ({ row }) => (
           <ReorderHandleWrapper>
             <div>{row.getValue('email')}</div>
           </ReorderHandleWrapper>
         )
-      }
-    ];
-    const rowSelection = useTableSelect<Payment>();
-    const table = useReactTable({
-      ...rowSelection.options,
-      enableMultiRowSelection: true,
+      })
+    ]);
+    const table = useTable({
+      ...tableOptions,
       data,
       columns: reorderColumns,
-      getCoreRowModel: getCoreRowModel(),
-      state: {
-        ...rowSelection.tableState
-      }
+      enableMultiRowSelection: true
     });
     const { handleMultiSelectOnRow } = useMultiSelectRow(table);
     const updateDataArray = (moveIndexes: number[], toIndex: number, data: Payment[]) => {

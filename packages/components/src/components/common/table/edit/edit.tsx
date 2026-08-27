@@ -1,19 +1,13 @@
 import { type ComboboxOption, type ComboboxProps, Combobox } from '@/components/common/combobox-ds/combobox';
 import { type InputProps, Input } from '@/components/common/input/input';
 import { type BasicSelectProps, BasicSelect } from '@/components/common/select/select';
+import type { DataTableFeatures } from '@/components/common/table/utils';
 import { cn } from '@/utils/class-name';
-import type { CellContext, RowData } from '@tanstack/react-table';
+import { type CellContext, type RowData } from '@tanstack/react-table';
 import { useState } from 'react';
 import { editCell } from './edit.css';
 
-declare module '@tanstack/react-table' {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  interface TableMeta<TData extends RowData> {
-    updateData: (rowId: string, columnId: string, value: string) => void;
-  }
-}
-
-export const useEditCell = <TData,>(cell: CellContext<TData, string>) => {
+export const useEditCell = <TData extends RowData, TValue = unknown>(cell: CellContext<DataTableFeatures, TData, TValue>) => {
   const initialValue = cell.getValue();
   const [value, setValue] = useState(initialValue);
   const [prevValue, setPrevValue] = useState(initialValue);
@@ -21,7 +15,7 @@ export const useEditCell = <TData,>(cell: CellContext<TData, string>) => {
     setValue(initialValue);
     setPrevValue(initialValue);
   }
-  const updateValue = (value: string) => {
+  const updateValue = (value: TValue) => {
     setValue(value);
     cell.table.options.meta?.updateData(cell.row.id, cell.column.id, value);
   };
@@ -29,11 +23,11 @@ export const useEditCell = <TData,>(cell: CellContext<TData, string>) => {
   return { value, setValue, updateValue, onBlur, className: cn(editCell, 'ui-table-edit-cell') };
 };
 
-type InputCellProps<TData> = InputProps & {
-  cell: CellContext<TData, string>;
+type InputCellProps<TData extends RowData> = InputProps & {
+  cell: CellContext<DataTableFeatures, TData, string | undefined>;
 };
 
-const InputCell = <TData,>({ cell, className, ...props }: InputCellProps<TData>) => {
+function InputCell<TData extends RowData>({ cell, className, ...props }: InputCellProps<TData>) {
   const { value, setValue, onBlur, className: editCell } = useEditCell(cell);
   return (
     <Input
@@ -54,14 +48,13 @@ const InputCell = <TData,>({ cell, className, ...props }: InputCellProps<TData>)
       {...props}
     />
   );
-};
-InputCell.displayName = 'InputCell';
+}
 
-type SelectCellProps<TData> = BasicSelectProps & {
-  cell: CellContext<TData, string>;
+type SelectCellProps<TData extends RowData> = BasicSelectProps & {
+  cell: CellContext<DataTableFeatures, TData, string | undefined>;
 };
 
-const SelectCell = <TData,>({ cell, className, ...props }: SelectCellProps<TData>) => {
+function SelectCell<TData extends RowData>({ cell, className, ...props }: SelectCellProps<TData>) {
   const { value, updateValue, className: editCell } = useEditCell(cell);
   const [open, setOpen] = useState(false);
   return (
@@ -87,19 +80,18 @@ const SelectCell = <TData,>({ cell, className, ...props }: SelectCellProps<TData
       {...props}
     />
   );
-};
-SelectCell.displayName = 'SelectCell';
+}
 
-type ComboCellProps<TData, TCombo extends ComboboxOption> = Omit<ComboboxProps<TCombo>, 'value' | 'onChange'> & {
-  cell: CellContext<TData, string>;
+type ComboCellProps<TData extends RowData, TCombo extends ComboboxOption> = Omit<ComboboxProps<TCombo>, 'value' | 'onChange'> & {
+  cell: CellContext<DataTableFeatures, TData, string | undefined>;
 };
 
-const ComboCell = <TData, TCombo extends ComboboxOption>({ cell, className, ...props }: ComboCellProps<TData, TCombo>) => {
+function ComboCell<TData extends RowData, TCombo extends ComboboxOption>({ cell, className, ...props }: ComboCellProps<TData, TCombo>) {
   const { value, updateValue, className: editCell } = useEditCell(cell);
   return (
     <Combobox
       {...props}
-      value={value}
+      value={value ?? ''}
       onChange={updateValue}
       className={cn(editCell, className)}
       onKeyDownExtended={e => {
@@ -116,14 +108,13 @@ const ComboCell = <TData, TCombo extends ComboboxOption>({ cell, className, ...p
       }}
     />
   );
-};
-ComboCell.displayName = 'ComboCell';
+}
 
 export { ComboCell, InputCell, SelectCell };
 
-export const selectNextPreviousCell = <TData,>(
+export const selectNextPreviousCell = <TData extends RowData, TValue = unknown>(
   htmlElement: HTMLButtonElement | HTMLInputElement | Element,
-  cell: CellContext<TData, unknown>,
+  cell: CellContext<DataTableFeatures, TData, TValue>,
   direction: -1 | 1
 ) => {
   const focusedCell = htmlElement.closest('td');

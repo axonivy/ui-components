@@ -3,23 +3,15 @@ import { BasicCollapsible } from '@/components/common/collapsible/collapsible';
 import { Flex } from '@/components/common/flex/flex';
 import { IvyIcon } from '@/components/common/icon/icon';
 import { SearchInput } from '@/components/common/input/input';
-import { useTableExpand, useTableKeyHandler, useTableSelect } from '@/components/common/table/hooks/hooks';
+import { useTableKeyHandler } from '@/components/common/table/hooks/hooks';
 import { MessageRow, SelectRow } from '@/components/common/table/row/row';
 import { Table, TableBody, TableCell, TableRow } from '@/components/common/table/table';
 import { ExpandableCell } from '@/components/common/table/tree/tree';
+import { dataTreeHelper, type DataTableFeatures } from '@/components/common/table/utils';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/common/tabs/tabs';
 import { cn } from '@/utils/class-name';
 import { IvyIcons } from '@axonivy/ui-icons';
-import {
-  flexRender,
-  getCoreRowModel,
-  getFilteredRowModel,
-  useReactTable,
-  type ColumnDef,
-  type ExpandedState,
-  type Row,
-  type RowSelectionState
-} from '@tanstack/react-table';
+import { flexRender, useTable, type ExpandedState, type Row, type RowSelectionState } from '@tanstack/react-table';
 import { Fragment, useEffect, useRef, useState, type ReactNode } from 'react';
 import { fullHeight, info, overflowAuto, overflowHidden } from './browser.css';
 
@@ -33,16 +25,18 @@ export type BrowserNode<TData = unknown> = {
   isLoaded?: boolean;
 };
 
+const { columnHelper, tableOptions } = dataTreeHelper<BrowserNode>();
+
 export const useBrowser = (
   data: Array<BrowserNode>,
   options?: {
-    loadChildren?: (row: Row<BrowserNode>) => void;
+    loadChildren?: (row: Row<DataTableFeatures, BrowserNode>) => void;
     initialSearch?: string;
     expandedState?: ExpandedState;
     initialSelecteState?: RowSelectionState;
   }
 ) => {
-  const columns: ColumnDef<BrowserNode, string>[] = [
+  const columns = columnHelper.columns([
     {
       accessorKey: 'value',
       cell: cell => (
@@ -60,34 +54,24 @@ export const useBrowser = (
         </ExpandableCell>
       )
     }
-  ];
+  ]);
 
-  const [filter, setFilter] = useState(options?.initialSearch ?? '');
-  const globalFilterFn = (row: Row<BrowserNode>, _columnId: string, filterValue: string) => {
-    const filter = filterValue.toLowerCase();
-    return row.original.value.toLowerCase().includes(filter) || row.original.info.toLowerCase().includes(filter);
-  };
-
-  const expanded = useTableExpand<BrowserNode>(options?.expandedState ? options.expandedState : { '0': true });
-  const select = useTableSelect<BrowserNode>({ initialSelecteState: options?.initialSelecteState });
-  const table = useReactTable({
-    ...expanded.options,
-    ...select.options,
+  const table = useTable({
+    ...tableOptions,
     data,
     columns,
-    getCoreRowModel: getCoreRowModel(),
-    onGlobalFilterChange: setFilter,
-    globalFilterFn,
-    getFilteredRowModel: getFilteredRowModel(),
-    filterFromLeafRows: true,
-    state: {
-      globalFilter: filter,
-      ...expanded.tableState,
-      ...select.tableState
+    initialState: {
+      expanded: options?.expandedState ?? { 0: true },
+      globalFilter: options?.initialSearch ?? '',
+      rowSelection: options?.initialSelecteState ?? {}
+    },
+    globalFilterFn: (row, _columnId, filterValue) => {
+      const filter = filterValue.toLowerCase();
+      return row.original.value.toLowerCase().includes(filter) || row.original.info.toLowerCase().includes(filter);
     }
   });
   const { handleKeyDown } = useTableKeyHandler({ table, data, options: { lazyLoadChildren: options?.loadChildren } });
-  return { table, globalFilter: { filter, setFilter }, handleKeyDown };
+  return { table, handleKeyDown };
 };
 
 export type BrowserResult<TData = unknown> = {
@@ -103,8 +87,8 @@ export type Browser = {
   header?: ReactNode;
   footer?: ReactNode;
   emptyMessage?: string;
-  infoProvider?: (row?: Row<BrowserNode>) => ReactNode;
-  applyModifier?: (row?: Row<BrowserNode>) => BrowserResult;
+  infoProvider?: (row?: Row<DataTableFeatures, BrowserNode>) => ReactNode;
+  applyModifier?: (row?: Row<DataTableFeatures, BrowserNode>) => BrowserResult;
 };
 
 export type BrowsersViewProps = {
@@ -132,14 +116,14 @@ const BrowsersView = ({ browsers, apply, options }: BrowsersViewProps) => {
     }
     return;
   };
-  const infoProvider = (row?: Row<BrowserNode>) => {
+  const infoProvider = (row?: Row<DataTableFeatures, BrowserNode>) => {
     const info = browsers.find(b => b.name === tab)?.infoProvider;
     if (info) {
       return info(row);
     }
     return row?.original.value;
   };
-  const applyHandler = (doubleClickRow?: Row<BrowserNode>) => {
+  const applyHandler = (doubleClickRow?: Row<DataTableFeatures, BrowserNode>) => {
     const browser = browsers.find(b => b.name === tab);
     if (!browser) {
       return;
@@ -187,8 +171,8 @@ const BrowsersView = ({ browsers, apply, options }: BrowsersViewProps) => {
                     <SearchInput
                       placeholder={options?.search?.placeholder ?? 'Search'}
                       ref={searchRef}
-                      value={browser.globalFilter.filter}
-                      onChange={browser.globalFilter.setFilter}
+                      value={browser.table.state.globalFilter}
+                      onChange={browser.table.setGlobalFilter}
                     />
                     <div className={overflowAuto}>
                       <Table onKeyDown={e => browser.handleKeyDown(e, applyHandler)}>

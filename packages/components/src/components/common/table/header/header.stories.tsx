@@ -1,11 +1,11 @@
 import { Flex } from '@/components/common/flex/flex';
 import { MessageRow } from '@/components/common/table/row/row';
+import { dataTableHelper } from '@/components/common/table/utils';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { flexRender, getCoreRowModel, useReactTable, type ColumnDef } from '@tanstack/react-table';
+import { flexRender, useTable } from '@tanstack/react-table';
 import { tableData, type Payment } from '../data';
-import { useTableGlobalFilter, useTableSort } from '../hooks/hooks';
 import { Table, TableBody, TableCell, TableRow } from '../table';
-import { SortableHeader, TableResizableHeader } from './header';
+import { SortableHeader, TableGlobalFilter, TableResizableHeader } from './header';
 
 const meta: Meta<typeof Table> = {
   title: 'Common/Table/Header',
@@ -16,20 +16,18 @@ export default meta;
 
 type Story = StoryObj<typeof Table>;
 
-const columns: ColumnDef<Payment>[] = [
-  {
-    accessorKey: 'status',
+const { columnHelper, tableOptions } = dataTableHelper<Payment>();
+const columns = columnHelper.columns([
+  columnHelper.accessor('status', {
     header: ({ column }) => <SortableHeader column={column} name='Status' />,
     cell: ({ row }) => <div>{row.getValue('status')}</div>,
     minSize: 50
-  },
-  {
-    accessorKey: 'email',
+  }),
+  columnHelper.accessor('email', {
     header: ({ column }) => <SortableHeader column={column} name='Email' />,
     cell: ({ row }) => <div>{row.getValue('email')}</div>
-  },
-  {
-    accessorKey: 'amount',
+  }),
+  columnHelper.accessor('amount', {
     header: ({ column }) => <SortableHeader column={column} name='Amount' />,
     cell: ({ row }) => {
       const amount = parseFloat(row.getValue('amount'));
@@ -42,29 +40,20 @@ const columns: ColumnDef<Payment>[] = [
 
       return <div>{formatted}</div>;
     }
-  }
-];
+  })
+]);
 
 function DataTableDemo() {
-  const globalFilter = useTableGlobalFilter();
-  const sorting = useTableSort();
-
-  const table = useReactTable({
-    ...globalFilter.options,
-    ...sorting.options,
+  const table = useTable({
+    ...tableOptions,
     data: tableData,
     columns,
-    columnResizeMode: 'onChange',
-    getCoreRowModel: getCoreRowModel(),
-    state: {
-      ...globalFilter.tableState,
-      ...sorting.tableState
-    }
+    columnResizeMode: 'onChange'
   });
 
   return (
     <Flex direction='column' gap={1}>
-      {globalFilter.filter}
+      <TableGlobalFilter table={table} />
       <Table>
         <TableResizableHeader headerGroups={table.getHeaderGroups()} />
         <TableBody>
