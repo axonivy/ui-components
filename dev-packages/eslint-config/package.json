@@ -14,9 +14,9 @@
   "main": "index.mjs",
   "dependencies": {
     "@eslint/js": "9.39.5",
-    "@tanstack/eslint-plugin-query": "5.101.4",
-    "@typescript-eslint/eslint-plugin": "8.67.0",
-    "@typescript-eslint/parser": "8.67.0",
+    "@tanstack/eslint-plugin-query": "5.102.8",
+    "@typescript-eslint/eslint-plugin": "8.68.0",
+    "@typescript-eslint/parser": "8.68.0",
     "eslint": "9.39.5",
     "eslint-formatter-checkstyle": "8.40.0",
     "eslint-plugin-playwright": "2.11.0",
@@ -25,6 +25,6 @@
     "eslint-plugin-react-hooks": "5.2.0",
     "eslint-plugin-testing-library": "7.16.2",
     "globals": "^17.8.0",
-    "typescript-eslint": "8.67.0"
+    "typescript-eslint": "8.68.0"
   }
 }
