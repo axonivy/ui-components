@@ -47,7 +47,7 @@
     "@vitejs/plugin-react": "^6.1.0",
     "@vitest/browser-playwright": "^4.1.11",
     "eslint-plugin-storybook": "^10.5.10",
-    "playwright": "^1.62.1",
+    "playwright": "^1.63.0",
     "prettier": "^3.9.6",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
