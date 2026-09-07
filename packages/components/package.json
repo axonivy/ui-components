@@ -33,7 +33,7 @@
     "@react-aria/dnd": "3.12.1",
     "@tanstack/react-table": "9.2.4",
     "class-variance-authority": "^0.7.1",
-    "cnfast": "0.2.0",
+    "cn": "0.2.5",
     "downshift": "9.0.13",
     "react-hotkeys-hook": "5.2.3",
     "react-resizable-panels": "4.12.3",
