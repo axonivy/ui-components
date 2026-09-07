@@ -31,7 +31,6 @@
     "@radix-ui/react-toggle-group": "1.1.19",
     "@radix-ui/react-tooltip": "1.2.16",
     "@react-aria/dnd": "3.12.1",
-    "@tanstack/react-table": "9.2.4",
     "class-variance-authority": "^0.7.1",
     "cn": "0.2.5",
     "downshift": "9.0.13",
@@ -41,12 +40,14 @@
   },
   "peerDependencies": {
     "@axonivy/ui-icons": "workspace:~14.0.0-next",
+    "@tanstack/react-table": "^9.2",
     "react": "^19.0"
   },
   "devDependencies": {
     "@axonivy/ts-config": "workspace:*",
     "@axonivy/ui-icons": "workspace:~",
     "@tailwindcss/vite": "^4.3.3",
+    "@tanstack/react-table": "9.2.4",
     "@testing-library/jest-dom": "^7.0.1",
     "@testing-library/react": "^16.3.3",
     "@testing-library/user-event": "^14.6.6",
