@@ -1,6 +1,6 @@
 {
   "name": "@axonivy/ui-components",
-  "version": "14.0.0-next",
+  "version": "15.1.0-next",
   "private": false,
   "license": "(EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0)",
   "author": "Axon Ivy AG",
@@ -39,13 +39,13 @@
     "sonner": "2.0.8"
   },
   "peerDependencies": {
-    "@axonivy/ui-icons": "workspace:~14.0.0-next",
+    "@axonivy/ui-icons": "workspace:~15.1.0-next",
     "@tanstack/react-table": "^9.2",
     "react": "^19.0"
   },
   "devDependencies": {
     "@axonivy/ts-config": "workspace:*",
-    "@axonivy/ui-icons": "workspace:~",
+    "@axonivy/ui-icons": "workspace:~15.1.0-next",
     "@tailwindcss/vite": "^4.3.3",
     "@tanstack/react-table": "9.2.4",
     "@testing-library/jest-dom": "^7.0.1",
