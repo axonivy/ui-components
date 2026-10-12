@@ -1,5 +1,5 @@
-FROM mcr.microsoft.com/playwright:v1.63.0
+FROM mcr.microsoft.com/playwright:v1.64.0
 
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
-RUN npm install -g pnpm@12.8.2
+RUN npm install -g pnpm@12.10.1
