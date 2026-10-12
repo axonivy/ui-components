@@ -32,9 +32,12 @@ export const useHotkeyLocalScopes = (scopes: string[]) => {
   return { activateLocalScopes, restoreLocalScopes, restorableScopes };
 };
 
-export const useDialogHotkeys = (scopes: string[] = []) => {
-  const [open, setOpen] = useState(false);
+export const useDialogHotkeys = (scopes: string[] = [], initialOpenState = false) => {
+  const [open, setOpen] = useState(initialOpenState);
   const { activateLocalScopes, restoreLocalScopes } = useHotkeyLocalScopes(scopes);
+  if (initialOpenState) {
+    activateLocalScopes();
+  }
   const onOpenChange = (open: boolean) => {
     setOpen(open);
     if (open) {
