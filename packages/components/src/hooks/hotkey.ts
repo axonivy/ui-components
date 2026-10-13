@@ -1,5 +1,5 @@
 import { hotkeyRedoFix, hotkeyUndoFix, isWindows } from '@/utils/hotkey';
-import { useState } from 'react';
+import { useEffect, useEffectEvent, useState } from 'react';
 import { useHotkeys, useHotkeysContext, type Options } from 'react-hotkeys-hook';
 
 export { HotkeysProvider, isHotkeyPressed, useHotkeys, useHotkeysContext } from 'react-hotkeys-hook';
@@ -35,18 +35,15 @@ export const useHotkeyLocalScopes = (scopes: string[]) => {
 export const useDialogHotkeys = (scopes: string[] = [], initialOpenState = false) => {
   const [open, setOpen] = useState(initialOpenState);
   const { activateLocalScopes, restoreLocalScopes } = useHotkeyLocalScopes(scopes);
-  if (initialOpenState) {
-    activateLocalScopes();
-  }
-  const onOpenChange = (open: boolean) => {
-    setOpen(open);
+  const activate = useEffectEvent(activateLocalScopes);
+  const restore = useEffectEvent(restoreLocalScopes);
+  useEffect(() => {
     if (open) {
-      activateLocalScopes();
-    } else {
-      restoreLocalScopes();
+      activate();
+      return () => restore();
     }
-  };
-  return { open, onOpenChange };
+  }, [open]);
+  return { open, onOpenChange: setOpen };
 };
 
 export const undoHotkey = () => 'mod+Z';

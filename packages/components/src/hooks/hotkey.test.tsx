@@ -1,12 +1,67 @@
 import { composeStory } from '@storybook/react-vite';
-import { act } from 'react';
+import { renderHook } from '@testing-library/react';
+import { act, StrictMode, type PropsWithChildren } from 'react';
 import { customRender, screen, userEvent } from 'test-utils';
 import Meta, { Default, Global, Scoped, WithScopes } from '../hooks/hotkey.stories';
+import { HotkeysProvider, useDialogHotkeys, useHotkeysContext } from './hotkey';
 
 const Hotkey = composeStory(Default, Meta);
 const GlobalHotkey = composeStory(Global, Meta);
 const ScopedHotkey = composeStory(Scoped, Meta);
 const WithScopesHotkey = composeStory(WithScopes, Meta);
+
+const DialogHotkeysWrapper = ({ children }: PropsWithChildren) => (
+  <StrictMode>
+    <HotkeysProvider initiallyActiveScopes={['global', 'multiply']}>{children}</HotkeysProvider>
+  </StrictMode>
+);
+
+test.each([false, true])('dialog scopes with initial open state %s', initialOpenState => {
+  const { result, rerender } = renderHook(
+    ({ initialOpenState }) => ({ ...useDialogHotkeys(['dialog'], initialOpenState), ...useHotkeysContext() }),
+    { initialProps: { initialOpenState }, wrapper: DialogHotkeysWrapper }
+  );
+
+  expect(result.current.open).toBe(initialOpenState);
+  expect(result.current.activeScopes).toEqual(initialOpenState ? ['dialog'] : ['global', 'multiply']);
+
+  act(() => result.current.onOpenChange(true));
+  expect(result.current.activeScopes).toEqual(['dialog']);
+  act(() => result.current.onOpenChange(true));
+  rerender({ initialOpenState: !initialOpenState });
+  expect(result.current.open).toBe(true);
+  expect(result.current.activeScopes).toEqual(['dialog']);
+
+  act(() => result.current.enableScope('temporary'));
+  act(() => result.current.onOpenChange(false));
+  expect(result.current.open).toBe(false);
+  expect(result.current.activeScopes).toEqual(['global', 'multiply']);
+
+  act(() => result.current.enableScope('additional'));
+  act(() => result.current.onOpenChange(true));
+  act(() => result.current.onOpenChange(false));
+  expect(result.current.activeScopes).toEqual(['global', 'multiply', 'additional']);
+});
+
+test('dialog scopes are restored on unmount', () => {
+  let showDialog = true;
+  const Dialog = () => {
+    useDialogHotkeys(['dialog'], true);
+    return null;
+  };
+  const Wrapper = ({ children }: PropsWithChildren) => (
+    <DialogHotkeysWrapper>
+      {showDialog && <Dialog />}
+      {children}
+    </DialogHotkeysWrapper>
+  );
+  const { result, rerender } = renderHook(useHotkeysContext, { wrapper: Wrapper });
+
+  expect(result.current.activeScopes).toEqual(['dialog']);
+  showDialog = false;
+  rerender();
+  expect(result.current.activeScopes).toEqual(['global', 'multiply']);
+});
 
 test('hotkey', async () => {
   userEvent.setup();

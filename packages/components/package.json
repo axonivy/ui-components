@@ -41,7 +41,7 @@
   "peerDependencies": {
     "@axonivy/ui-icons": "workspace:~14.0.1-next",
     "@tanstack/react-table": "^9.2",
-    "react": "^19.0"
+    "react": "^19.2"
   },
   "devDependencies": {
     "@axonivy/ts-config": "workspace:*",
