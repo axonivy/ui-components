@@ -10,7 +10,7 @@ const preview: Preview = {
     controls: {
       exclude: ['asChild', 'className']
     },
-    backgrounds: { disable: true }
+    backgrounds: { disabled: true }
   },
   globalTypes: {
     theme: {
