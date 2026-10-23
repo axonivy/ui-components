@@ -246,7 +246,7 @@ importers:
         specifier: workspace:*
         version: link:../../dev-packages/ts-config
       '@axonivy/ui-icons':
-        specifier: workspace:~14.0.1-next
+        specifier: workspace:~14.0.2-next
         version: link:../icons
       '@tailwindcss/vite':
         specifier: ^4.3.3
@@ -304,10 +304,10 @@ importers:
         specifier: workspace:*
         version: link:../../dev-packages/ts-config
       '@axonivy/ui-components':
-        specifier: workspace:~14.0.1-next
+        specifier: workspace:~14.0.2-next
         version: link:../components
       '@axonivy/ui-icons':
-        specifier: workspace:~14.0.1-next
+        specifier: workspace:~14.0.2-next
         version: link:../icons
       '@types/react':
         specifier: ^19.2.18
@@ -3634,6 +3634,7 @@ packages:
 
   jsonparse@1.3.1:
     resolution: {integrity: sha512-POQXvpdL69+CluYsillJ7SUhKvytYjW9vG/GKpnf+xP8UWgYEM/RaMzHHofbALDiKbbP1W8UEYmgGl39WkPZsg==}
+    engines: {'0': node >= 0.2.0}
 
   just-diff-apply@5.5.0:
     resolution: {integrity: sha512-OYTthRfSh55WOItVqwpefPtNt2VdKsq5AnAK6apdtR6yCH8pr0CmSr710J0Mf+WdQy7K/OzMy7K2MgAfdQURDw==}
