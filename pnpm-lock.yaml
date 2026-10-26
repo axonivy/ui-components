@@ -6,6 +6,7 @@ settings:
 
 overrides:
   '@xmldom/xmldom@<0.8.12': '>=0.8.12'
+  happy-dom@<=21.0.3: '>=21.0.4'
 
 patchedDependencies:
   fantasticon: 2b9fd0334ba0416a968e964a71328b6164ca4675f4d3d8b21d5cf1017b517c2b
@@ -27,7 +28,7 @@ importers:
         specifier: ^4.11.5
         version: 4.11.5(@lerna-lite/publish@4.11.5(@types/node@24.19.2)(conventional-commits-filter@5.0.0)(supports-color@7.2.0))(@types/node@24.19.2)(conventional-commits-filter@5.0.0)
       '@types/node':
-        specifier: ^24.19.1
+        specifier: ^24.19.2
         version: 24.19.2
       eslint-plugin-storybook:
         specifier: ^10.6.3
@@ -49,7 +50,7 @@ importers:
         version: 5.1.2(esbuild@0.28.2)(rolldown@1.2.12)(rollup@4.64.0)(supports-color@7.2.0)(typescript@5.9.3)(vite@7.3.7(@types/node@24.19.2)(lightningcss@1.33.0)(yaml@2.9.1))
       vitest:
         specifier: ^4.1.12
-        version: 4.1.12(@types/node@24.19.2)(happy-dom@20.14.6)(vite@7.3.7(@types/node@24.19.2)(lightningcss@1.33.0)(yaml@2.9.1))
+        version: 4.1.12(@types/node@24.19.2)(happy-dom@21.0.4)(vite@7.3.7(@types/node@24.19.2)(lightningcss@1.33.0)(yaml@2.9.1))
 
   dev-packages/eslint-config:
     dependencies:
@@ -193,8 +194,8 @@ importers:
         specifier: ^5.2.0
         version: 5.2.0(supports-color@7.2.0)(vite@7.3.7(@types/node@24.19.2)(lightningcss@1.33.0)(yaml@2.9.1))
       happy-dom:
-        specifier: ^20.11.12
-        version: 20.14.6
+        specifier: ^21.0.4
+        version: 21.0.4
       react:
         specifier: ^18.3.1
         version: 18.3.1
@@ -219,10 +220,10 @@ importers:
     devDependencies:
       vitest:
         specifier: ^4.1.12
-        version: 4.1.12(@types/node@24.19.2)(happy-dom@20.14.6)(vite@7.3.7(@types/node@24.19.2)(lightningcss@1.33.0)(yaml@2.9.1))
+        version: 4.1.12(@types/node@24.19.2)(happy-dom@21.0.4)(vite@7.3.7(@types/node@24.19.2)(lightningcss@1.33.0)(yaml@2.9.1))
       vitest-websocket-mock:
         specifier: 0.8.0
-        version: 0.8.0(vitest@4.1.12(@types/node@24.19.2)(happy-dom@20.14.6)(vite@7.3.7(@types/node@24.19.2)(lightningcss@1.33.0)(yaml@2.9.1)))
+        version: 0.8.0(vitest@4.1.12(@types/node@24.19.2)(happy-dom@21.0.4)(vite@7.3.7(@types/node@24.19.2)(lightningcss@1.33.0)(yaml@2.9.1)))
 
 packages:
 
@@ -3129,8 +3130,8 @@ packages:
     engines: {node: '>=0.4.7'}
     hasBin: true
 
-  happy-dom@20.14.6:
-    resolution: {integrity: sha512-5DDsf4QmEIlRL6NkCv/fxSjYHHkZceL/IaYQdJc2h3G7DRTEai++VTjbfL0LB9geW2VrA3+vrjF3Efx+OTtX0Q==}
+  happy-dom@21.0.4:
+    resolution: {integrity: sha512-tFm+GaLBgo6o0awHnvHaNoraVo27qJ+2tZEtZ+cIa08hXbeitrxAJajLI05hsUy/2/YTKcUjQYzHe5mCcraLBw==}
     engines: {node: '>=20.0.0'}
 
   has-bigints@1.1.0:
@@ -4601,8 +4602,8 @@ packages:
   undici-types@7.24.6:
     resolution: {integrity: sha512-WRNW+sJgj5OBN4/0JpHFqtqzhpbnV0GuB+OozA9gCL7a993SmU+1JBZCzLNxYsbMfIeDL+lTsphD5jN5N+n0zg==}
 
-  undici@6.29.0:
-    resolution: {integrity: sha512-R+RODBqp6i2pPflGdq+xIOUkl+RNfGgHwoinecKu/JCuf2uO06cOKoDbI2P7Dn6KcswdKwrczbU6IYJ6K8X+wg==}
+  undici@6.29.1:
+    resolution: {integrity: sha512-EvRlUt/QqAEvXdQeRMYUfwOQsfzpDztykrG2owGEE/rBOBoYv9uF39ZzsNDh4lTFHhTr2XOZjKkYgueD12ZmGA==}
     engines: {node: '>=18.17'}
 
   unicorn-magic@0.3.0:
@@ -4823,7 +4824,7 @@ packages:
       '@vitest/coverage-istanbul': 4.1.12
       '@vitest/coverage-v8': 4.1.12
       '@vitest/ui': 4.1.12
-      happy-dom: '*'
+      happy-dom: '>=21.0.4'
       jsdom: '*'
       vite: ^6.0.0 || ^7.0.0 || ^8.0.0
     peerDependenciesMeta:
@@ -8129,7 +8130,7 @@ snapshots:
     optionalDependencies:
       uglify-js: 3.19.3
 
-  happy-dom@20.14.6:
+  happy-dom@21.0.4:
     dependencies:
       '@types/node': 24.19.2
       '@types/whatwg-mimetype': 3.0.2
@@ -8761,7 +8762,7 @@ snapshots:
       semver: 7.8.5
       tar: 7.5.22
       tinyglobby: 0.2.17
-      undici: 6.29.0
+      undici: 6.29.1
       which: 6.0.1
 
   node-releases@2.0.57: {}
@@ -9822,7 +9823,7 @@ snapshots:
 
   undici-types@7.24.6: {}
 
-  undici@6.29.0: {}
+  undici@6.29.1: {}
 
   unicorn-magic@0.3.0: {}
 
@@ -9966,12 +9967,12 @@ snapshots:
       fsevents: 2.3.3
       yaml: 2.9.1
 
-  vitest-websocket-mock@0.8.0(vitest@4.1.12(@types/node@24.19.2)(happy-dom@20.14.6)(vite@7.3.7(@types/node@24.19.2)(lightningcss@1.33.0)(yaml@2.9.1))):
+  vitest-websocket-mock@0.8.0(vitest@4.1.12(@types/node@24.19.2)(happy-dom@21.0.4)(vite@7.3.7(@types/node@24.19.2)(lightningcss@1.33.0)(yaml@2.9.1))):
     dependencies:
       mock-socket: 9.3.1
-      vitest: 4.1.12(@types/node@24.19.2)(happy-dom@20.14.6)(vite@7.3.7(@types/node@24.19.2)(lightningcss@1.33.0)(yaml@2.9.1))
+      vitest: 4.1.12(@types/node@24.19.2)(happy-dom@21.0.4)(vite@7.3.7(@types/node@24.19.2)(lightningcss@1.33.0)(yaml@2.9.1))
 
-  vitest@4.1.12(@types/node@24.19.2)(happy-dom@20.14.6)(vite@7.3.7(@types/node@24.19.2)(lightningcss@1.33.0)(yaml@2.9.1)):
+  vitest@4.1.12(@types/node@24.19.2)(happy-dom@21.0.4)(vite@7.3.7(@types/node@24.19.2)(lightningcss@1.33.0)(yaml@2.9.1)):
     dependencies:
       '@vitest/expect': 4.1.12
       '@vitest/mocker': 4.1.12(vite@7.3.7(@types/node@24.19.2)(lightningcss@1.33.0)(yaml@2.9.1))
@@ -9995,7 +9996,7 @@ snapshots:
       why-is-node-running: 2.3.0
     optionalDependencies:
       '@types/node': 24.19.2
-      happy-dom: 20.14.6
+      happy-dom: 21.0.4
     transitivePeerDependencies:
       - msw
 
