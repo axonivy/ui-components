@@ -9,6 +9,7 @@ minimumReleaseAgeExclude:
   - '@axonivy/*'
 overrides:
   '@xmldom/xmldom@<0.8.12': '>=0.8.12'
+  happy-dom@<=21.0.3: '>=21.0.4'
 patchedDependencies:
   fantasticon: patches/fantasticon.patch
 preferWorkspacePackages: true
