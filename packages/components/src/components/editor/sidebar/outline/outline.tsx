@@ -47,6 +47,7 @@ const Outline = ({ outline, selection, onClick, onDoubleClick, options }: Outlin
     columns: outlineColumns,
     globalFilterFn: ({ original }, _, filter) =>
       original.title.toLowerCase().includes(filter.toLowerCase()) ||
+      original.id.toLowerCase().includes(filter.toLowerCase()) ||
       (original.info?.toLowerCase().includes(filter.toLowerCase()) as boolean)
   });
   const [prevSelection, setPrevSelection] = useState<string | undefined>();
