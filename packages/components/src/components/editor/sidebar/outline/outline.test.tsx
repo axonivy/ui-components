@@ -29,6 +29,10 @@ test('filter', async () => {
   await act(async () => await userEvent.clear(screen.getByRole('textbox')));
   await act(async () => await userEvent.type(screen.getByRole('textbox'), 'info'));
   expect(screen.getAllByRole('row')).toHaveLength(2);
+  await act(async () => await userEvent.clear(screen.getByRole('textbox')));
+
+  await act(async () => await userEvent.type(screen.getByRole('textbox'), '14'));
+  expect(screen.getAllByRole('row')).toHaveLength(4);
 });
 
 test('selection', async () => {
