@@ -46,6 +46,7 @@ const Outline = ({ outline, selection, onClick, onDoubleClick }: OutlineProps) =
     getCoreRowModel: getCoreRowModel(),
     globalFilterFn: ({ original }, _, filter) =>
       original.title.toLowerCase().includes(filter.toLowerCase()) ||
+      original.id?.toLowerCase().includes(filter.toLowerCase()) ||
       (original.info?.toLowerCase().includes(filter.toLowerCase()) as boolean),
     state: {
       ...expanded.tableState,
