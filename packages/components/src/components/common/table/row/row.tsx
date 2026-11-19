@@ -49,7 +49,7 @@ function MessageRow({ message, className, columnCount, singleLine = true, ...pro
     <TableRow className={cn(className, 'ui-message-row')} {...props}>
       <TableCell colSpan={columnCount}>
         <div className='flex items-center'>
-          <Message message={message.message} variant={message.variant} singleLine={singleLine} />
+          <Message {...message} singleLine={singleLine} />
         </div>
       </TableCell>
     </TableRow>

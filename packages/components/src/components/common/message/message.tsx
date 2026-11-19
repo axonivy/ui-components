@@ -1,5 +1,6 @@
 import { useField } from '@/components/common/field/field';
 import { IvyIcon } from '@/components/common/icon/icon';
+import { BasicTooltip } from '@/components/common/tooltip/tooltip';
 import { cn } from '@/utils/class-name';
 import { IvyIcons } from '@axonivy/ui-icons';
 import { cva, type VariantProps } from 'class-variance-authority';
@@ -29,13 +30,18 @@ const ivyIconForSeverity = (variant: NonNullable<MessageVariants>['variant']) =>
   }
   return undefined;
 };
-export type MessageData = MessageVariants & { message?: string; singleLine?: boolean };
+export type MessageData = MessageVariants & {
+  message?: string;
+  singleLine?: boolean;
+  reference?: { tooltip: string; openUrl: () => void };
+};
 
 export type MessageProps = ComponentProps<'p'> & MessageData;
 
-function Message({ message, variant, className, singleLine, children, ...props }: MessageProps) {
+function Message({ message, variant, className, singleLine, reference, children, ...props }: MessageProps) {
   const { messageProps } = useField();
   const icon = ivyIconForSeverity(variant);
+  const content = message ? <span className={cn(singleLine && 'truncate')}>{message}</span> : children;
   return (
     <p
       data-slot='message'
@@ -46,7 +52,24 @@ function Message({ message, variant, className, singleLine, children, ...props }
       {...props}
     >
       {icon && <IvyIcon icon={icon} />}
-      {message ? <span className={cn(singleLine && 'truncate')}>{message}</span> : children}
+      {reference ? (
+        <span className={cn(singleLine && 'inline-flex min-w-0 items-center gap-1')}>
+          {content}{' '}
+          <BasicTooltip content={reference.tooltip}>
+            <button
+              type='button'
+              aria-label={reference.tooltip}
+              title=''
+              className='inline-flex h-lh shrink-0 cursor-pointer items-center align-bottom text-inherit hover:*:underline'
+              onClick={reference.openUrl}
+            >
+              <IvyIcon icon={IvyIcons.ExitEnd} aria-hidden='true' />
+            </button>
+          </BasicTooltip>
+        </span>
+      ) : (
+        content
+      )}
     </p>
   );
 }
