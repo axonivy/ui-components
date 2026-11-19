@@ -43,6 +43,29 @@ export const WithLink: Story = {
   )
 };
 
+export const WithReference: Story = {
+  args: {
+    variant: 'warning',
+    reference: {
+      tooltip: 'ivy.dataclass.persistent-type-not-whitelisted',
+      openUrl: () =>
+        window.open(
+          'https://developer.axonivy.com/doc/14.0/en/reference/validation/codes/ivy.dataclass.persistent-type-not-whitelisted.html',
+          '_blank',
+          'noopener,noreferrer'
+        )
+    }
+  }
+};
+
+export const WithWrappedReference: Story = {
+  args: {
+    ...WithReference.args,
+    className: 'w-40',
+    message: 'This message wraps onto multiple lines before the reference icon.'
+  }
+};
+
 export const MultiOrSingleLine: Story = {
   args: {
     singleLine: false,
