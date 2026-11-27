@@ -247,7 +247,7 @@ importers:
         specifier: workspace:*
         version: link:../../dev-packages/ts-config
       '@axonivy/ui-icons':
-        specifier: workspace:~14.0.2-next
+        specifier: workspace:~14.0.3-next
         version: link:../icons
       '@tailwindcss/vite':
         specifier: ^4.3.3
@@ -305,10 +305,10 @@ importers:
         specifier: workspace:*
         version: link:../../dev-packages/ts-config
       '@axonivy/ui-components':
-        specifier: workspace:~14.0.2-next
+        specifier: workspace:~14.0.3-next
         version: link:../components
       '@axonivy/ui-icons':
-        specifier: workspace:~14.0.2-next
+        specifier: workspace:~14.0.3-next
         version: link:../icons
       '@types/react':
         specifier: ^19.2.18
